@@ -1,0 +1,587 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CFBACFF827E88F0800851E20 /* Slipstream WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = CFBACFF727E88F0800851E20 /* Slipstream WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CFBACFFD27E88F0900851E20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFBACFFC27E88F0900851E20 /* Assets.xcassets */; };
+		CFBAD00327E88F0900851E20 /* Slipstream WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CFBAD00227E88F0900851E20 /* Slipstream WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CFBAD00827E88F0900851E20 /* SlipstreamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAD00727E88F0900851E20 /* SlipstreamApp.swift */; };
+		CFBAD00A27E88F0900851E20 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAD00927E88F0900851E20 /* ContentView.swift */; };
+		CFBAD00C27E88F0900851E20 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAD00B27E88F0900851E20 /* NotificationController.swift */; };
+		CFBAD00E27E88F0900851E20 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAD00D27E88F0900851E20 /* NotificationView.swift */; };
+		CFBAD01027E88F0900851E20 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAD00F27E88F0900851E20 /* ComplicationController.swift */; };
+		CFBAD01227E88F0A00851E20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFBAD01127E88F0A00851E20 /* Assets.xcassets */; };
+		CFBAD01527E88F0A00851E20 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFBAD01427E88F0A00851E20 /* Preview Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CFBACFF927E88F0800851E20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CFBACFED27E88F0800851E20 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFBACFF627E88F0800851E20;
+			remoteInfo = "Slipstream WatchKit App";
+		};
+		CFBAD00427E88F0900851E20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CFBACFED27E88F0800851E20 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFBAD00127E88F0900851E20;
+			remoteInfo = "Slipstream WatchKit Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CFBAD01D27E88F0A00851E20 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				CFBAD00327E88F0900851E20 /* Slipstream WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFBAD02127E88F0A00851E20 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				CFBACFF827E88F0800851E20 /* Slipstream WatchKit App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		CFBACFF327E88F0800851E20 /* Slipstream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Slipstream.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFBACFF727E88F0800851E20 /* Slipstream WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Slipstream WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFBACFFC27E88F0900851E20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CFBAD00227E88F0900851E20 /* Slipstream WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Slipstream WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFBAD00727E88F0900851E20 /* SlipstreamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlipstreamApp.swift; sourceTree = "<group>"; };
+		CFBAD00927E88F0900851E20 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CFBAD00B27E88F0900851E20 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		CFBAD00D27E88F0900851E20 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		CFBAD00F27E88F0900851E20 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		CFBAD01127E88F0A00851E20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CFBAD01427E88F0A00851E20 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CFBAD01627E88F0A00851E20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CFBAD01727E88F0A00851E20 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CFBACFFF27E88F0900851E20 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CFBACFEC27E88F0800851E20 = {
+			isa = PBXGroup;
+			children = (
+				CFBACFFB27E88F0800851E20 /* Slipstream WatchKit App */,
+				CFBAD00627E88F0900851E20 /* Slipstream WatchKit Extension */,
+				CFBACFF427E88F0800851E20 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CFBACFF427E88F0800851E20 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CFBACFF327E88F0800851E20 /* Slipstream.app */,
+				CFBACFF727E88F0800851E20 /* Slipstream WatchKit App.app */,
+				CFBAD00227E88F0900851E20 /* Slipstream WatchKit Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CFBACFFB27E88F0800851E20 /* Slipstream WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				CFBACFFC27E88F0900851E20 /* Assets.xcassets */,
+			);
+			path = "Slipstream WatchKit App";
+			sourceTree = "<group>";
+		};
+		CFBAD00627E88F0900851E20 /* Slipstream WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CFBAD00727E88F0900851E20 /* SlipstreamApp.swift */,
+				CFBAD00927E88F0900851E20 /* ContentView.swift */,
+				CFBAD00B27E88F0900851E20 /* NotificationController.swift */,
+				CFBAD00D27E88F0900851E20 /* NotificationView.swift */,
+				CFBAD00F27E88F0900851E20 /* ComplicationController.swift */,
+				CFBAD01127E88F0A00851E20 /* Assets.xcassets */,
+				CFBAD01627E88F0A00851E20 /* Info.plist */,
+				CFBAD01727E88F0A00851E20 /* PushNotificationPayload.apns */,
+				CFBAD01327E88F0A00851E20 /* Preview Content */,
+			);
+			path = "Slipstream WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		CFBAD01327E88F0A00851E20 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				CFBAD01427E88F0A00851E20 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CFBACFF227E88F0800851E20 /* Slipstream */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFBAD02227E88F0A00851E20 /* Build configuration list for PBXNativeTarget "Slipstream" */;
+			buildPhases = (
+				CFBACFF127E88F0800851E20 /* Resources */,
+				CFBAD02127E88F0A00851E20 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CFBACFFA27E88F0800851E20 /* PBXTargetDependency */,
+			);
+			name = Slipstream;
+			productName = Slipstream;
+			productReference = CFBACFF327E88F0800851E20 /* Slipstream.app */;
+			productType = "com.apple.product-type.application.watchapp2-container";
+		};
+		CFBACFF627E88F0800851E20 /* Slipstream WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFBAD01E27E88F0A00851E20 /* Build configuration list for PBXNativeTarget "Slipstream WatchKit App" */;
+			buildPhases = (
+				CFBACFF527E88F0800851E20 /* Resources */,
+				CFBAD01D27E88F0A00851E20 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CFBAD00527E88F0900851E20 /* PBXTargetDependency */,
+			);
+			name = "Slipstream WatchKit App";
+			productName = "Slipstream WatchKit App";
+			productReference = CFBACFF727E88F0800851E20 /* Slipstream WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		CFBAD00127E88F0900851E20 /* Slipstream WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFBAD01A27E88F0A00851E20 /* Build configuration list for PBXNativeTarget "Slipstream WatchKit Extension" */;
+			buildPhases = (
+				CFBACFFE27E88F0900851E20 /* Sources */,
+				CFBACFFF27E88F0900851E20 /* Frameworks */,
+				CFBAD00027E88F0900851E20 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Slipstream WatchKit Extension";
+			productName = "Slipstream WatchKit Extension";
+			productReference = CFBAD00227E88F0900851E20 /* Slipstream WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CFBACFED27E88F0800851E20 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1330;
+				LastUpgradeCheck = 1330;
+				TargetAttributes = {
+					CFBACFF227E88F0800851E20 = {
+						CreatedOnToolsVersion = 13.3;
+					};
+					CFBACFF627E88F0800851E20 = {
+						CreatedOnToolsVersion = 13.3;
+					};
+					CFBAD00127E88F0900851E20 = {
+						CreatedOnToolsVersion = 13.3;
+					};
+				};
+			};
+			buildConfigurationList = CFBACFF027E88F0800851E20 /* Build configuration list for PBXProject "Slipstream" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CFBACFEC27E88F0800851E20;
+			productRefGroup = CFBACFF427E88F0800851E20 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CFBACFF227E88F0800851E20 /* Slipstream */,
+				CFBACFF627E88F0800851E20 /* Slipstream WatchKit App */,
+				CFBAD00127E88F0900851E20 /* Slipstream WatchKit Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CFBACFF127E88F0800851E20 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFBACFF527E88F0800851E20 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFBACFFD27E88F0900851E20 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFBAD00027E88F0900851E20 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFBAD01527E88F0A00851E20 /* Preview Assets.xcassets in Resources */,
+				CFBAD01227E88F0A00851E20 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CFBACFFE27E88F0900851E20 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFBAD00C27E88F0900851E20 /* NotificationController.swift in Sources */,
+				CFBAD00A27E88F0900851E20 /* ContentView.swift in Sources */,
+				CFBAD01027E88F0900851E20 /* ComplicationController.swift in Sources */,
+				CFBAD00827E88F0900851E20 /* SlipstreamApp.swift in Sources */,
+				CFBAD00E27E88F0900851E20 /* NotificationView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CFBACFFA27E88F0800851E20 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFBACFF627E88F0800851E20 /* Slipstream WatchKit App */;
+			targetProxy = CFBACFF927E88F0800851E20 /* PBXContainerItemProxy */;
+		};
+		CFBAD00527E88F0900851E20 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFBAD00127E88F0900851E20 /* Slipstream WatchKit Extension */;
+			targetProxy = CFBAD00427E88F0900851E20 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		CFBAD01827E88F0A00851E20 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CFBAD01927E88F0A00851E20 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CFBAD01B27E88F0A00851E20 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Slipstream WatchKit Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = Y4642869FB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Slipstream WatchKit Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Slipstream WatchKit Extension";
+				INFOPLIST_KEY_CLKComplicationPrincipalClass = "$(PRODUCT_MODULE_NAME).ComplicationController";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_WKWatchOnly = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomas.mamede.Slipstream.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+			};
+			name = Debug;
+		};
+		CFBAD01C27E88F0A00851E20 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Slipstream WatchKit Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = Y4642869FB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Slipstream WatchKit Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Slipstream WatchKit Extension";
+				INFOPLIST_KEY_CLKComplicationPrincipalClass = "$(PRODUCT_MODULE_NAME).ComplicationController";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_WKWatchOnly = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomas.mamede.Slipstream.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+			};
+			name = Release;
+		};
+		CFBAD01F27E88F0A00851E20 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y4642869FB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IBSC_MODULE = Slipstream_WatchKit_Extension;
+				INFOPLIST_KEY_CFBundleDisplayName = "Slipstream WatchKit App";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomas.mamede.Slipstream.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+			};
+			name = Debug;
+		};
+		CFBAD02027E88F0A00851E20 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y4642869FB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IBSC_MODULE = Slipstream_WatchKit_Extension;
+				INFOPLIST_KEY_CFBundleDisplayName = "Slipstream WatchKit App";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomas.mamede.Slipstream.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+			};
+			name = Release;
+		};
+		CFBAD02327E88F0A00851E20 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y4642869FB;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomas.mamede.Slipstream;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		CFBAD02427E88F0A00851E20 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y4642869FB;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomas.mamede.Slipstream;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CFBACFF027E88F0800851E20 /* Build configuration list for PBXProject "Slipstream" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFBAD01827E88F0A00851E20 /* Debug */,
+				CFBAD01927E88F0A00851E20 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFBAD01A27E88F0A00851E20 /* Build configuration list for PBXNativeTarget "Slipstream WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFBAD01B27E88F0A00851E20 /* Debug */,
+				CFBAD01C27E88F0A00851E20 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFBAD01E27E88F0A00851E20 /* Build configuration list for PBXNativeTarget "Slipstream WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFBAD01F27E88F0A00851E20 /* Debug */,
+				CFBAD02027E88F0A00851E20 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFBAD02227E88F0A00851E20 /* Build configuration list for PBXNativeTarget "Slipstream" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFBAD02327E88F0A00851E20 /* Debug */,
+				CFBAD02427E88F0A00851E20 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CFBACFED27E88F0800851E20 /* Project object */;
+}
