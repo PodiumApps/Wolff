@@ -7,16 +7,48 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF315FA227F12254003C26D7 /* season_schedule.json in Resources */ = {isa = PBXBuildFile; fileRef = CF315FA127F12254003C26D7 /* season_schedule.json */; };
+		CF315FA627F12873003C26D7 /* EventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF315FA527F12873003C26D7 /* EventsList.swift */; };
+		CF315FA827F1288D003C26D7 /* TrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF315FA727F1288D003C26D7 /* TrackInfo.swift */; };
+		CF3440D2282B190A0077F506 /* FavoriteDriverSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3440D1282B190A0077F506 /* FavoriteDriverSelector.swift */; };
+		CF3440D5282D8BC30077F506 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3440D4282D8BC30077F506 /* NotificationView.swift */; };
+		CF3440D8282DB93B0077F506 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3440D7282DB93B0077F506 /* ExtensionDelegate.swift */; };
+		CF478A8F27EE688600555CCE /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF478A8E27EE688600555CCE /* Team.swift */; };
+		CF478A9727EE906F00555CCE /* TeamStandings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF478A9627EE906F00555CCE /* TeamStandings.swift */; };
+		CF5373BC27F3195D009C3F46 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5373BB27F3195D009C3F46 /* WebView.swift */; };
+		CF5373C027F327C7009C3F46 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5373BF27F327C7009C3F46 /* Settings.swift */; };
+		CF610E7A27F1F5AC0076421B /* news.json in Resources */ = {isa = PBXBuildFile; fileRef = CF610E7927F1F5AC0076421B /* news.json */; };
+		CF610E7D27F1F5CA0076421B /* NewsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF610E7C27F1F5CA0076421B /* NewsList.swift */; };
+		CF610E7F27F1F60D0076421B /* NewsArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF610E7E27F1F60D0076421B /* NewsArticle.swift */; };
+		CF610E8127F202560076421B /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF610E8027F202560076421B /* Article.swift */; };
+		CF610E8427F24E450076421B /* Standings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF610E8327F24E450076421B /* Standings.swift */; };
+		CF610E8627F25E440076421B /* EventMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF610E8527F25E440076421B /* EventMenu.swift */; };
+		CF678B4A27EC7AFD0078BCA1 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF678B4927EC7AFD0078BCA1 /* Event.swift */; };
+		CF88DC4B27EF8C1300C08AC6 /* DriverStandings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF88DC4A27EF8C1300C08AC6 /* DriverStandings.swift */; };
+		CF9E874628136000005815D4 /* SessionGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E874528136000005815D4 /* SessionGrid.swift */; };
+		CF9E874828136089005815D4 /* SessionDriverDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E874728136089005815D4 /* SessionDriverDetails.swift */; };
+		CF9E874A28142C9B005815D4 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E874928142C9B005815D4 /* Session.swift */; };
+		CF9E874C28142F77005815D4 /* sessions.json in Resources */ = {isa = PBXBuildFile; fileRef = CF9E874B28142F77005815D4 /* sessions.json */; };
+		CF9E874E281430B0005815D4 /* DriverDetailsForSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E874D281430B0005815D4 /* DriverDetailsForSession.swift */; };
 		CFBACFF827E88F0800851E20 /* Slipstream WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = CFBACFF727E88F0800851E20 /* Slipstream WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CFBACFFD27E88F0900851E20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFBACFFC27E88F0900851E20 /* Assets.xcassets */; };
 		CFBAD00327E88F0900851E20 /* Slipstream WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CFBAD00227E88F0900851E20 /* Slipstream WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CFBAD00827E88F0900851E20 /* SlipstreamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAD00727E88F0900851E20 /* SlipstreamApp.swift */; };
-		CFBAD00A27E88F0900851E20 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAD00927E88F0900851E20 /* ContentView.swift */; };
+		CFBAD00A27E88F0900851E20 /* AppEntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAD00927E88F0900851E20 /* AppEntryPoint.swift */; };
 		CFBAD00C27E88F0900851E20 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAD00B27E88F0900851E20 /* NotificationController.swift */; };
-		CFBAD00E27E88F0900851E20 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAD00D27E88F0900851E20 /* NotificationView.swift */; };
 		CFBAD01027E88F0900851E20 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAD00F27E88F0900851E20 /* ComplicationController.swift */; };
 		CFBAD01227E88F0A00851E20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFBAD01127E88F0A00851E20 /* Assets.xcassets */; };
 		CFBAD01527E88F0A00851E20 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFBAD01427E88F0A00851E20 /* Preview Assets.xcassets */; };
+		CFD7F29927F4D5B6005A63C8 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CFD7F29827F4D5B6005A63C8 /* FirebaseDatabase */; };
+		CFD7F29B27F4D61E005A63C8 /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD7F29A27F4D61E005A63C8 /* Firebase.swift */; };
+		CFD7F29D27F4DC3F005A63C8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFD7F29C27F4DC3F005A63C8 /* GoogleService-Info.plist */; };
+		CFD7F29E27F4DC3F005A63C8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFD7F29C27F4DC3F005A63C8 /* GoogleService-Info.plist */; };
+		CFD7F29F27F4DC3F005A63C8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFD7F29C27F4DC3F005A63C8 /* GoogleService-Info.plist */; };
+		CFD970FB27EDE11B00B11C54 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD970FA27EDE11B00B11C54 /* Driver.swift */; };
+		CFD970FD27EDE19F00B11C54 /* DriverDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD970FC27EDE19F00B11C54 /* DriverDetails.swift */; };
+		CFDDF1CE27EE9CF00032FD9F /* TeamDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDDF1CD27EE9CF00032FD9F /* TeamDetails.swift */; };
+		CFDDF1DA27EF69D80032FD9F /* driver_standings.json in Resources */ = {isa = PBXBuildFile; fileRef = CFDDF1D927EF69D80032FD9F /* driver_standings.json */; };
+		CFDDF1DC27EF74990032FD9F /* team_standings.json in Resources */ = {isa = PBXBuildFile; fileRef = CFDDF1DB27EF74990032FD9F /* team_standings.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,19 +94,49 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CF315FA127F12254003C26D7 /* season_schedule.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = season_schedule.json; sourceTree = "<group>"; };
+		CF315FA527F12873003C26D7 /* EventsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsList.swift; sourceTree = "<group>"; };
+		CF315FA727F1288D003C26D7 /* TrackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfo.swift; sourceTree = "<group>"; };
+		CF3440D1282B190A0077F506 /* FavoriteDriverSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDriverSelector.swift; sourceTree = "<group>"; };
+		CF3440D4282D8BC30077F506 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		CF3440D6282DB7FB0077F506 /* Slipstream WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Slipstream WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		CF3440D7282DB93B0077F506 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		CF478A8E27EE688600555CCE /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		CF478A9627EE906F00555CCE /* TeamStandings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamStandings.swift; sourceTree = "<group>"; };
+		CF5373BB27F3195D009C3F46 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		CF5373BF27F327C7009C3F46 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		CF610E7927F1F5AC0076421B /* news.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = news.json; sourceTree = "<group>"; };
+		CF610E7C27F1F5CA0076421B /* NewsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsList.swift; sourceTree = "<group>"; };
+		CF610E7E27F1F60D0076421B /* NewsArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticle.swift; sourceTree = "<group>"; };
+		CF610E8027F202560076421B /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		CF610E8327F24E450076421B /* Standings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Standings.swift; sourceTree = "<group>"; };
+		CF610E8527F25E440076421B /* EventMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMenu.swift; sourceTree = "<group>"; };
+		CF678B4927EC7AFD0078BCA1 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		CF88DC4A27EF8C1300C08AC6 /* DriverStandings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverStandings.swift; sourceTree = "<group>"; };
+		CF9E874528136000005815D4 /* SessionGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionGrid.swift; sourceTree = "<group>"; };
+		CF9E874728136089005815D4 /* SessionDriverDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDriverDetails.swift; sourceTree = "<group>"; };
+		CF9E874928142C9B005815D4 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		CF9E874B28142F77005815D4 /* sessions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sessions.json; sourceTree = "<group>"; };
+		CF9E874D281430B0005815D4 /* DriverDetailsForSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverDetailsForSession.swift; sourceTree = "<group>"; };
 		CFBACFF327E88F0800851E20 /* Slipstream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Slipstream.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFBACFF727E88F0800851E20 /* Slipstream WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Slipstream WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFBACFFC27E88F0900851E20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CFBAD00227E88F0900851E20 /* Slipstream WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Slipstream WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFBAD00727E88F0900851E20 /* SlipstreamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlipstreamApp.swift; sourceTree = "<group>"; };
-		CFBAD00927E88F0900851E20 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CFBAD00927E88F0900851E20 /* AppEntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntryPoint.swift; sourceTree = "<group>"; };
 		CFBAD00B27E88F0900851E20 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
-		CFBAD00D27E88F0900851E20 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		CFBAD00F27E88F0900851E20 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		CFBAD01127E88F0A00851E20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CFBAD01427E88F0A00851E20 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CFBAD01627E88F0A00851E20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CFBAD01727E88F0A00851E20 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		CFD7F29A27F4D61E005A63C8 /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
+		CFD7F29C27F4DC3F005A63C8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CFD970FA27EDE11B00B11C54 /* Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
+		CFD970FC27EDE19F00B11C54 /* DriverDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverDetails.swift; sourceTree = "<group>"; };
+		CFDDF1CD27EE9CF00032FD9F /* TeamDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetails.swift; sourceTree = "<group>"; };
+		CFDDF1D927EF69D80032FD9F /* driver_standings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = driver_standings.json; path = ../../../../Desktop/scraping/driver_standings.json; sourceTree = "<group>"; };
+		CFDDF1DB27EF74990032FD9F /* team_standings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = team_standings.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,15 +144,117 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFD7F29927F4D5B6005A63C8 /* FirebaseDatabase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF315FA427F12834003C26D7 /* Season */ = {
+			isa = PBXGroup;
+			children = (
+				CF9E874428135FDD005815D4 /* Session */,
+				CF315FA527F12873003C26D7 /* EventsList.swift */,
+				CF315FA727F1288D003C26D7 /* TrackInfo.swift */,
+				CF610E8527F25E440076421B /* EventMenu.swift */,
+			);
+			path = Season;
+			sourceTree = "<group>";
+		};
+		CF3440D3282D8B980077F506 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				CF3440D4282D8BC30077F506 /* NotificationView.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		CF5373BA27F31946009C3F46 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				CF5373BB27F3195D009C3F46 /* WebView.swift */,
+			);
+			path = WebView;
+			sourceTree = "<group>";
+		};
+		CF5373BE27F327B4009C3F46 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				CF5373BF27F327C7009C3F46 /* Settings.swift */,
+				CF3440D1282B190A0077F506 /* FavoriteDriverSelector.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		CF610E7B27F1F5B80076421B /* News */ = {
+			isa = PBXGroup;
+			children = (
+				CF610E7C27F1F5CA0076421B /* NewsList.swift */,
+				CF610E8027F202560076421B /* Article.swift */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		CF610E8227F24E340076421B /* Standings */ = {
+			isa = PBXGroup;
+			children = (
+				CF610E8327F24E450076421B /* Standings.swift */,
+				CFDDF1CC27EE9CC30032FD9F /* Teams */,
+				CFD970F527EDDE2800B11C54 /* Drivers */,
+			);
+			path = Standings;
+			sourceTree = "<group>";
+		};
+		CF678B4627EC7ACC0078BCA1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CF678B4927EC7AFD0078BCA1 /* Event.swift */,
+				CFD970FA27EDE11B00B11C54 /* Driver.swift */,
+				CF478A8E27EE688600555CCE /* Team.swift */,
+				CF610E7E27F1F60D0076421B /* NewsArticle.swift */,
+				CF9E874928142C9B005815D4 /* Session.swift */,
+				CF9E874D281430B0005815D4 /* DriverDetailsForSession.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CF678B5327ED37FF0078BCA1 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				CF5373BE27F327B4009C3F46 /* Settings */,
+				CF610E8227F24E340076421B /* Standings */,
+				CF610E7B27F1F5B80076421B /* News */,
+				CF315FA427F12834003C26D7 /* Season */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		CF678B5A27ED441E0078BCA1 /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				CFDDF1D927EF69D80032FD9F /* driver_standings.json */,
+				CF9E874B28142F77005815D4 /* sessions.json */,
+				CFDDF1DB27EF74990032FD9F /* team_standings.json */,
+				CF610E7927F1F5AC0076421B /* news.json */,
+				CF315FA127F12254003C26D7 /* season_schedule.json */,
+			);
+			path = Files;
+			sourceTree = "<group>";
+		};
+		CF9E874428135FDD005815D4 /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				CF9E874528136000005815D4 /* SessionGrid.swift */,
+				CF9E874728136089005815D4 /* SessionDriverDetails.swift */,
+			);
+			path = Session;
+			sourceTree = "<group>";
+		};
 		CFBACFEC27E88F0800851E20 = {
 			isa = PBXGroup;
 			children = (
+				CFD7F29C27F4DC3F005A63C8 /* GoogleService-Info.plist */,
 				CFBACFFB27E88F0800851E20 /* Slipstream WatchKit App */,
 				CFBAD00627E88F0900851E20 /* Slipstream WatchKit Extension */,
 				CFBACFF427E88F0800851E20 /* Products */,
@@ -118,15 +282,22 @@
 		CFBAD00627E88F0900851E20 /* Slipstream WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				CF3440D6282DB7FB0077F506 /* Slipstream WatchKit Extension.entitlements */,
+				CF3440D3282D8B980077F506 /* Notifications */,
+				CF5373BA27F31946009C3F46 /* WebView */,
+				CF678B5A27ED441E0078BCA1 /* Files */,
+				CF678B5327ED37FF0078BCA1 /* Screens */,
+				CF678B4627EC7ACC0078BCA1 /* Model */,
 				CFBAD00727E88F0900851E20 /* SlipstreamApp.swift */,
-				CFBAD00927E88F0900851E20 /* ContentView.swift */,
+				CFD7F29A27F4D61E005A63C8 /* Firebase.swift */,
+				CFBAD00927E88F0900851E20 /* AppEntryPoint.swift */,
 				CFBAD00B27E88F0900851E20 /* NotificationController.swift */,
-				CFBAD00D27E88F0900851E20 /* NotificationView.swift */,
 				CFBAD00F27E88F0900851E20 /* ComplicationController.swift */,
 				CFBAD01127E88F0A00851E20 /* Assets.xcassets */,
 				CFBAD01627E88F0A00851E20 /* Info.plist */,
 				CFBAD01727E88F0A00851E20 /* PushNotificationPayload.apns */,
 				CFBAD01327E88F0A00851E20 /* Preview Content */,
+				CF3440D7282DB93B0077F506 /* ExtensionDelegate.swift */,
 			);
 			path = "Slipstream WatchKit Extension";
 			sourceTree = "<group>";
@@ -137,6 +308,24 @@
 				CFBAD01427E88F0A00851E20 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CFD970F527EDDE2800B11C54 /* Drivers */ = {
+			isa = PBXGroup;
+			children = (
+				CFD970FC27EDE19F00B11C54 /* DriverDetails.swift */,
+				CF88DC4A27EF8C1300C08AC6 /* DriverStandings.swift */,
+			);
+			path = Drivers;
+			sourceTree = "<group>";
+		};
+		CFDDF1CC27EE9CC30032FD9F /* Teams */ = {
+			isa = PBXGroup;
+			children = (
+				CF478A9627EE906F00555CCE /* TeamStandings.swift */,
+				CFDDF1CD27EE9CF00032FD9F /* TeamDetails.swift */,
+			);
+			path = Teams;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,6 +344,8 @@
 				CFBACFFA27E88F0800851E20 /* PBXTargetDependency */,
 			);
 			name = Slipstream;
+			packageProductDependencies = (
+			);
 			productName = Slipstream;
 			productReference = CFBACFF327E88F0800851E20 /* Slipstream.app */;
 			productType = "com.apple.product-type.application.watchapp2-container";
@@ -189,6 +380,9 @@
 			dependencies = (
 			);
 			name = "Slipstream WatchKit Extension";
+			packageProductDependencies = (
+				CFD7F29827F4D5B6005A63C8 /* FirebaseDatabase */,
+			);
 			productName = "Slipstream WatchKit Extension";
 			productReference = CFBAD00227E88F0900851E20 /* Slipstream WatchKit Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
@@ -223,6 +417,9 @@
 				Base,
 			);
 			mainGroup = CFBACFEC27E88F0800851E20;
+			packageReferences = (
+				CFD7F29727F4D5B6005A63C8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = CFBACFF427E88F0800851E20 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -239,6 +436,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFD7F29D27F4DC3F005A63C8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +445,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFBACFFD27E88F0900851E20 /* Assets.xcassets in Resources */,
+				CFD7F29E27F4DC3F005A63C8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,8 +453,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF610E7A27F1F5AC0076421B /* news.json in Resources */,
+				CFDDF1DC27EF74990032FD9F /* team_standings.json in Resources */,
 				CFBAD01527E88F0A00851E20 /* Preview Assets.xcassets in Resources */,
 				CFBAD01227E88F0A00851E20 /* Assets.xcassets in Resources */,
+				CF9E874C28142F77005815D4 /* sessions.json in Resources */,
+				CF315FA227F12254003C26D7 /* season_schedule.json in Resources */,
+				CFDDF1DA27EF69D80032FD9F /* driver_standings.json in Resources */,
+				CFD7F29F27F4DC3F005A63C8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,10 +472,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFBAD00C27E88F0900851E20 /* NotificationController.swift in Sources */,
-				CFBAD00A27E88F0900851E20 /* ContentView.swift in Sources */,
+				CF610E8427F24E450076421B /* Standings.swift in Sources */,
+				CF315FA827F1288D003C26D7 /* TrackInfo.swift in Sources */,
+				CF9E874828136089005815D4 /* SessionDriverDetails.swift in Sources */,
+				CF3440D2282B190A0077F506 /* FavoriteDriverSelector.swift in Sources */,
+				CF610E8127F202560076421B /* Article.swift in Sources */,
+				CF610E7D27F1F5CA0076421B /* NewsList.swift in Sources */,
+				CFDDF1CE27EE9CF00032FD9F /* TeamDetails.swift in Sources */,
+				CF5373BC27F3195D009C3F46 /* WebView.swift in Sources */,
+				CFBAD00A27E88F0900851E20 /* AppEntryPoint.swift in Sources */,
 				CFBAD01027E88F0900851E20 /* ComplicationController.swift in Sources */,
+				CF9E874A28142C9B005815D4 /* Session.swift in Sources */,
+				CF478A9727EE906F00555CCE /* TeamStandings.swift in Sources */,
+				CF610E8627F25E440076421B /* EventMenu.swift in Sources */,
+				CFD970FB27EDE11B00B11C54 /* Driver.swift in Sources */,
+				CF315FA627F12873003C26D7 /* EventsList.swift in Sources */,
+				CF610E7F27F1F60D0076421B /* NewsArticle.swift in Sources */,
 				CFBAD00827E88F0900851E20 /* SlipstreamApp.swift in Sources */,
-				CFBAD00E27E88F0900851E20 /* NotificationView.swift in Sources */,
+				CF678B4A27EC7AFD0078BCA1 /* Event.swift in Sources */,
+				CFD970FD27EDE19F00B11C54 /* DriverDetails.swift in Sources */,
+				CF88DC4B27EF8C1300C08AC6 /* DriverStandings.swift in Sources */,
+				CFD7F29B27F4D61E005A63C8 /* Firebase.swift in Sources */,
+				CF3440D8282DB93B0077F506 /* ExtensionDelegate.swift in Sources */,
+				CF9E874628136000005815D4 /* SessionGrid.swift in Sources */,
+				CF3440D5282D8BC30077F506 /* NotificationView.swift in Sources */,
+				CF5373C027F327C7009C3F46 /* Settings.swift in Sources */,
+				CF9E874E281430B0005815D4 /* DriverDetailsForSession.swift in Sources */,
+				CF478A8F27EE688600555CCE /* Team.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +634,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "Slipstream WatchKit Extension/Slipstream WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Slipstream WatchKit Extension/Preview Content\"";
@@ -414,7 +643,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Slipstream WatchKit Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Slipstream WatchKit Extension";
-				INFOPLIST_KEY_CLKComplicationPrincipalClass = "$(PRODUCT_MODULE_NAME).ComplicationController";
+				INFOPLIST_KEY_CLKComplicationPrincipalClass = Slipstream_WatchKit_Extension.ComplicationController;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -438,6 +667,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "Slipstream WatchKit Extension/Slipstream WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Slipstream WatchKit Extension/Preview Content\"";
@@ -446,7 +676,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Slipstream WatchKit Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Slipstream WatchKit Extension";
-				INFOPLIST_KEY_CLKComplicationPrincipalClass = "$(PRODUCT_MODULE_NAME).ComplicationController";
+				INFOPLIST_KEY_CLKComplicationPrincipalClass = Slipstream_WatchKit_Extension.ComplicationController;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -582,6 +812,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CFD7F29727F4D5B6005A63C8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CFD7F29827F4D5B6005A63C8 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFD7F29727F4D5B6005A63C8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CFBACFED27E88F0800851E20 /* Project object */;
 }

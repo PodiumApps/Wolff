@@ -12,7 +12,7 @@ import UserNotifications
 class NotificationController: WKUserNotificationHostingController<NotificationView> {
 
     override var body: NotificationView {
-        return NotificationView()
+        return NotificationView(message: "Miami Qualifying (Q3): Red Flag!")
     }
 
     override func willActivate() {
