@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseDatabase
 import CoreText
-import UserNotifications
+//import UserNotifications
 
 struct AppData: Codable {
     var timestamp: String
@@ -89,74 +89,6 @@ class DataManager: ObservableObject {
         }
     }
     
-    private func checkForNewNotifications(localData: AppData, newData: AppData) {
-        let localDataSessions = localData.sessions
-        let newDataSessions = newData.sessions
-        
-        if localData.seasonSchedule.currentEvent.count > 0 {
-            if newData.seasonSchedule.currentEvent.count > 0 {
-                let localDataCurrentEventName = localData.seasonSchedule.currentEvent[0].eventName
-                let newDataCurrentEventName = localData.seasonSchedule.currentEvent[0].eventName
-                
-                if localDataCurrentEventName == newDataCurrentEventName {
-                    checkForRedFlagNotification(currentSessions: localDataSessions, newSessions: newDataSessions, event: localDataCurrentEventName)
-                    checkForEventHasStartedNotification(currentSessions: localDataSessions, newSessions: newDataSessions, event: localDataCurrentEventName)
-                    checkForEventHasEndedNotification(currentSessions: localDataSessions, newSessions: newDataSessions, event: localDataCurrentEventName)
-                }
-            }
-        }
-    }
-    
-    private func checkForRedFlagNotification(currentSessions: [Session], newSessions: [Session], event: String) {
-        var currentSessions = currentSessions
-        currentSessions.sort(by: { $0.timestamp > $1.timestamp })
-        
-        var newSessions = newSessions
-        newSessions.sort(by: { $0.timestamp > $1.timestamp })
-        
-        if currentSessions.count != newSessions.count { return }
-        
-        if currentSessions[0].status.description != newSessions[0].status.description {
-            if !currentSessions[0].status.contains("Red Flag") && newSessions[0].status.contains("Red Flag") {
-                let notificationString = "\(event) \(newSessions[0].eventTitle): Red Flag! 🔴"
-            }
-        }
-        
-        print("Checked for Red Flag notification")
-    }
-    
-    private func checkForEventHasStartedNotification(currentSessions: [Session], newSessions: [Session], event: String) {
-        var currentSessions = currentSessions
-        currentSessions.sort(by: { $0.timestamp > $1.timestamp })
-        
-        var newSessions = newSessions
-        newSessions.sort(by: { $0.timestamp > $1.timestamp })
-        
-        if newSessions.count > currentSessions.count {
-            let notificationString = "\(event) \(newSessions[0].eventTitle) has started! 🏎"
-        }
-        
-        print("Checked for new event notification")
-    }
-    
-    private func checkForEventHasEndedNotification(currentSessions: [Session], newSessions: [Session], event: String) {
-        var currentSessions = currentSessions
-        currentSessions.sort(by: { $0.timestamp > $1.timestamp })
-        
-        var newSessions = newSessions
-        newSessions.sort(by: { $0.timestamp > $1.timestamp })
-        
-        if currentSessions.count != newSessions.count { return }
-        
-        if currentSessions[0].status.description != newSessions[0].status.description {
-            if !currentSessions[0].status.contains("FINISHED") && newSessions[0].status.contains("FINISHED") {
-                let notificationString = "\(event) \(newSessions[0].eventTitle) has ended! 🏁"
-            }
-        }
-        
-        print("Checked for finished event notification.")
-    }
-    
     func startAppDataListener() {
 
         databaseHandle = databaseReference.observe(DataEventType.value, with: { snapshop in
@@ -173,7 +105,6 @@ class DataManager: ObservableObject {
                             
                             if self.appData != nil {
                                 print("Checking for notifications")
-                                self.checkForNewNotifications(localData: self.appData!, newData: newData)
                             }
                             else {
                                 print("Could not check for notifications because local app data does not exist.")
@@ -215,27 +146,5 @@ class DataManager: ObservableObject {
         }
         
         return nil
-    }
-    
-    func triggerNotification(message: String) {
-        let notification = UNMutableNotificationContent()
-        notification.subtitle = message
-        notification.sound = .defaultCritical
-        notification.categoryIdentifier = "notification"
-        
-        let category = UNNotificationCategory(identifier: "notification", actions: [], intentIdentifiers: [])
-        UNUserNotificationCenter.current().setNotificationCategories([category])
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0, repeats: false)
-        let request = UNNotificationRequest(identifier: "notification", content: notification, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            else {
-                print("Sent notification with success.")
-            }
-        }
     }
 }

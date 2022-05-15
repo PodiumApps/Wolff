@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF0785512831086800D9F9E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0785502831086800D9F9E2 /* AppDelegate.swift */; };
 		CF315FA227F12254003C26D7 /* season_schedule.json in Resources */ = {isa = PBXBuildFile; fileRef = CF315FA127F12254003C26D7 /* season_schedule.json */; };
 		CF315FA627F12873003C26D7 /* EventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF315FA527F12873003C26D7 /* EventsList.swift */; };
 		CF315FA827F1288D003C26D7 /* TrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF315FA727F1288D003C26D7 /* TrackInfo.swift */; };
@@ -40,7 +41,7 @@
 		CFBAD01227E88F0A00851E20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFBAD01127E88F0A00851E20 /* Assets.xcassets */; };
 		CFBAD01527E88F0A00851E20 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFBAD01427E88F0A00851E20 /* Preview Assets.xcassets */; };
 		CFD7F29927F4D5B6005A63C8 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CFD7F29827F4D5B6005A63C8 /* FirebaseDatabase */; };
-		CFD7F29B27F4D61E005A63C8 /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD7F29A27F4D61E005A63C8 /* Firebase.swift */; };
+		CFD7F29B27F4D61E005A63C8 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD7F29A27F4D61E005A63C8 /* DataManager.swift */; };
 		CFD7F29D27F4DC3F005A63C8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFD7F29C27F4DC3F005A63C8 /* GoogleService-Info.plist */; };
 		CFD7F29E27F4DC3F005A63C8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFD7F29C27F4DC3F005A63C8 /* GoogleService-Info.plist */; };
 		CFD7F29F27F4DC3F005A63C8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFD7F29C27F4DC3F005A63C8 /* GoogleService-Info.plist */; };
@@ -94,6 +95,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CF0785502831086800D9F9E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF315FA127F12254003C26D7 /* season_schedule.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = season_schedule.json; sourceTree = "<group>"; };
 		CF315FA527F12873003C26D7 /* EventsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsList.swift; sourceTree = "<group>"; };
 		CF315FA727F1288D003C26D7 /* TrackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfo.swift; sourceTree = "<group>"; };
@@ -130,7 +132,7 @@
 		CFBAD01427E88F0A00851E20 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CFBAD01627E88F0A00851E20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CFBAD01727E88F0A00851E20 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
-		CFD7F29A27F4D61E005A63C8 /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
+		CFD7F29A27F4D61E005A63C8 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		CFD7F29C27F4DC3F005A63C8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CFD970FA27EDE11B00B11C54 /* Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
 		CFD970FC27EDE19F00B11C54 /* DriverDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverDetails.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				CF3440D4282D8BC30077F506 /* NotificationView.swift */,
+				CF0785502831086800D9F9E2 /* AppDelegate.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -289,7 +292,7 @@
 				CF678B5327ED37FF0078BCA1 /* Screens */,
 				CF678B4627EC7ACC0078BCA1 /* Model */,
 				CFBAD00727E88F0900851E20 /* SlipstreamApp.swift */,
-				CFD7F29A27F4D61E005A63C8 /* Firebase.swift */,
+				CFD7F29A27F4D61E005A63C8 /* DataManager.swift */,
 				CFBAD00927E88F0900851E20 /* AppEntryPoint.swift */,
 				CFBAD00B27E88F0900851E20 /* NotificationController.swift */,
 				CFBAD00F27E88F0900851E20 /* ComplicationController.swift */,
@@ -475,6 +478,7 @@
 				CF610E8427F24E450076421B /* Standings.swift in Sources */,
 				CF315FA827F1288D003C26D7 /* TrackInfo.swift in Sources */,
 				CF9E874828136089005815D4 /* SessionDriverDetails.swift in Sources */,
+				CF0785512831086800D9F9E2 /* AppDelegate.swift in Sources */,
 				CF3440D2282B190A0077F506 /* FavoriteDriverSelector.swift in Sources */,
 				CF610E8127F202560076421B /* Article.swift in Sources */,
 				CF610E7D27F1F5CA0076421B /* NewsList.swift in Sources */,
@@ -492,7 +496,7 @@
 				CF678B4A27EC7AFD0078BCA1 /* Event.swift in Sources */,
 				CFD970FD27EDE19F00B11C54 /* DriverDetails.swift in Sources */,
 				CF88DC4B27EF8C1300C08AC6 /* DriverStandings.swift in Sources */,
-				CFD7F29B27F4D61E005A63C8 /* Firebase.swift in Sources */,
+				CFD7F29B27F4D61E005A63C8 /* DataManager.swift in Sources */,
 				CF3440D8282DB93B0077F506 /* ExtensionDelegate.swift in Sources */,
 				CF9E874628136000005815D4 /* SessionGrid.swift in Sources */,
 				CF3440D5282D8BC30077F506 /* NotificationView.swift in Sources */,
