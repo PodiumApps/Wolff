@@ -12,7 +12,24 @@ import Firebase
 
 class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelegate {
     
+    var ref: DatabaseReference!
+    
     func applicationDidFinishLaunching() {
+        
+        //UserDefaults.standard.removeObject(forKey: "id")
+        
+        let uuid = UserDefaults.standard.object(forKey: "id") as? String
+        
+        if uuid == nil {
+            let newUUID = UUID().description
+            UserDefaults.standard.set(newUUID, forKey: "id")
+            
+            FirebaseApp.configure()
+            
+            var ref: DatabaseReference!
+            ref = Database.database().reference().ref.child("/")
+            ref.child("users/\(newUUID)/token").setValue("sfdsmdodmas")
+        }
         
         UNUserNotificationCenter.current().delegate = self
         
@@ -35,6 +52,29 @@ class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelega
     }
     
     func didRegisterForRemoteNotifications(withDeviceToken deviceToken: Data) {
-        <#code#>
+        
+        FirebaseApp.configure()
+        
+        var ref: DatabaseReference!
+        ref = Database.database().reference().ref.child("/")
+        
+        let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
+        let token = tokenParts.joined()
+        
+        if let userID = UserDefaults.standard.object(forKey: "id") as? String {
+            ref.child("users/\(userID)/token").setValue(token)
+        }
+    }
+    
+    func didFailToRegisterForRemoteNotificationsWithError(_ error: Error) {
+        print(error.localizedDescription)
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
+        // TODO
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        // TODO
     }
 }
