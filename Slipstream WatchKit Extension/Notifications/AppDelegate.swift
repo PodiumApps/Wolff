@@ -71,10 +71,20 @@ class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelega
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
-        // TODO
+        return UNNotificationPresentationOptions([.sound, .badge, .list])
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        // TODO
-    }
+//    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+//    }
+    
+//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
+//        // Do something with the notification
+//        // Go to the correct place in the app.
+//    }
+    
+//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+//        //let content = response.notification.request.content.title
+//
+//        //completionHandler()
+//    }
 }
