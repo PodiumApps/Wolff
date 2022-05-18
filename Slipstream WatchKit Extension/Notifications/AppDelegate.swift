@@ -16,7 +16,7 @@ class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelega
     
     func applicationDidFinishLaunching() {
         
-        //UserDefaults.standard.removeObject(forKey: "id")
+        UserDefaults.standard.removeObject(forKey: "id")
         
         let uuid = UserDefaults.standard.object(forKey: "id") as? String
         
@@ -24,11 +24,11 @@ class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelega
             let newUUID = UUID().description
             UserDefaults.standard.set(newUUID, forKey: "id")
             
-            FirebaseApp.configure()
+            //FirebaseApp.configure()
             
-            var ref: DatabaseReference!
-            ref = Database.database().reference().ref.child("/")
-            ref.child("users/\(newUUID)/token").setValue("sfdsmdodmas")
+            //var ref: DatabaseReference!
+            //ref = Database.database().reference().ref.child("/")
+            //ref.child("users/\(newUUID)").setValue(newUUID)
         }
         
         UNUserNotificationCenter.current().delegate = self
@@ -71,7 +71,7 @@ class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelega
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
-        return UNNotificationPresentationOptions([.sound, .badge, .list])
+        return UNNotificationPresentationOptions([.sound, .banner, .list])
     }
     
 //    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {

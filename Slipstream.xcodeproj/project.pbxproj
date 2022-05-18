@@ -627,6 +627,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -786,7 +787,7 @@
 				CFBAD01927E88F0A00851E20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		CFBAD01A27E88F0A00851E20 /* Build configuration list for PBXNativeTarget "Slipstream WatchKit Extension" */ = {
 			isa = XCConfigurationList;
@@ -795,7 +796,7 @@
 				CFBAD01C27E88F0A00851E20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		CFBAD01E27E88F0A00851E20 /* Build configuration list for PBXNativeTarget "Slipstream WatchKit App" */ = {
 			isa = XCConfigurationList;
@@ -804,7 +805,7 @@
 				CFBAD02027E88F0A00851E20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		CFBAD02227E88F0A00851E20 /* Build configuration list for PBXNativeTarget "Slipstream" */ = {
 			isa = XCConfigurationList;
@@ -813,7 +814,7 @@
 				CFBAD02427E88F0A00851E20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 
