@@ -2,8 +2,9 @@
 //  SlipstreamApp.swift
 //  Slipstream WatchKit Extension
 //
-//  Created by Tomás Mamede on 21/03/2022.
+//  Created by Tomás Mamede on 20/05/2022.
 //
+
 
 import SwiftUI
 import Firebase
@@ -11,9 +12,11 @@ import Firebase
 @main
 struct SlipstreamApp: App {
     
-    var ref: DatabaseReference!
-    
     @WKExtensionDelegateAdaptor(AppDelegate.self) var delegate
+    
+    init() {
+        FirebaseApp.configure()
+    }
     
     @SceneBuilder var body: some Scene {
         
@@ -21,5 +24,6 @@ struct SlipstreamApp: App {
             AppEntryPoint()
         }
         
+        WKNotificationScene(controller: NotificationController.self, category: "myCategory")
     }
 }

@@ -2,7 +2,7 @@
 //  TeamStandings.swift
 //  Slipstream WatchKit Extension
 //
-//  Created by Tomás Mamede on 26/03/2022.
+//  Created by Tomás Mamede on 20/05/2022.
 //
 
 import SwiftUI
@@ -13,49 +13,48 @@ struct TeamStandings: View {
     var drivers: [Driver]
     
     var body: some View {
-//        NavigationView {
+        
+        if teams.isEmpty {
+            VStack {
+                Text("Can't show constructors standings right now. Come back later.")
+                    .font(.caption2)
+                    .bold()
+                    .multilineTextAlignment(.center)
+                    .padding()
+            }
+            .listRowBackground(Color.clear)
+            .navigationTitle(Text("Constructors"))
+            .navigationBarTitleDisplayMode(.inline)
+        }
+        else {
             List {
                 ForEach(0 ..< teams.count, id: \.self) { index in
-                    GeometryReader { geometry in
-                        NavigationLink(destination: {
-                            TeamDetails(
-                                team: teams[index],
-                                drivers: getTeamDrivers(teamName: teams[index].name)
-                            )
-                        }, label: {
-                            VStack {
-                                Spacer()
+                    NavigationLink(destination: {
+                        TeamDetails(
+                            team: teams[index],
+                            drivers: getTeamDrivers(teamName: teams[index].name)
+                        )
+                    }, label: {
+                        VStack(alignment: .leading) {
+                            HStack {
                                 
-                                HStack {
-    //                                ZStack {
-    //                                    Circle()
-    //                                        .frame(width: 35, height: 35, alignment: .center)
-    //                                    Image(teams[index].name)
-    //                                        .resizable()
-    //                                        .frame(width: 25, height: 25, alignment: .center)
-    //                                }
-                                    
-                                    RoundedRectangle(cornerRadius: 120)
-                                        .frame(width: geometry.size.width / 35, height: geometry.size.height * 0.75, alignment: .center)
-                                        .foregroundColor(getTeamColor(teamName: teams[index].name))
-                                    
-                                    
-                                    
-                                    Text("\(index + 1). \(teams[index].name)")
-                                        .padding(.leading, 6)
-                                    Spacer()
-                                }
+                                RoundedRectangle(cornerRadius: 120)
+                                    .frame(width: 4.5, height: 30)
+                                    .foregroundColor(getTeamColor(teamName: teams[index].name))
+
+                                Text("\(index + 1). \(teams[index].name)")
+                                    .padding(.leading, 6)
+                                    .multilineTextAlignment(.leading)
                                 
                                 Spacer()
                             }
-                            
+                        }
                     })
-                    }
                 }
             }
             .navigationTitle(Text("Constructors"))
             .navigationBarTitleDisplayMode(.inline)
-//        }
+        }
     }
     
     func getTeamColor(teamName: String) -> Color {

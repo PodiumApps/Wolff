@@ -2,7 +2,7 @@
 //  Article.swift
 //  Slipstream WatchKit Extension
 //
-//  Created by Tomás Mamede on 28/03/2022.
+//  Created by Tomás Mamede on 20/05/2022.
 //
 
 import SwiftUI
@@ -25,8 +25,15 @@ struct Article: View {
                     
                     Divider()
                     
-                    Text(article.text)
-                        .font(.caption2)
+                    if article.text.count > 5 {
+                        Text(article.text)
+                            .font(.caption2)
+                    }
+                    else {
+                        Text("Could not load content.")
+                            .font(.caption2)
+                            .bold()
+                    }
                 }
                 .padding([.leading, .trailing])
             }

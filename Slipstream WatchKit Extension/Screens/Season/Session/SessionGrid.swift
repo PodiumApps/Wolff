@@ -1,8 +1,8 @@
 //
-//  Session.swift
+//  SessionGrid.swift
 //  Slipstream WatchKit Extension
 //
-//  Created by Tomás Mamede on 22/04/2022.
+//  Created by Tomás Mamede on 20/05/2022.
 //
 
 import SwiftUI
@@ -16,61 +16,52 @@ struct SessionGrid: View {
     var body: some View {
         
         if classifications.count > 0 {
-        
-            GeometryReader { geometry in
-                
-                ScrollView {
-                        
-                    ForEach(0 ..< status.count, id: \.self) { index in
-                        if status[index] != "" {
-                            HStack {
+            List {
+                Section {
+                    VStack(alignment: .leading) {
+                        ForEach(0 ..< status.count, id: \.self) { index in
+                            if status[index] != "" {
                                 Text(status[index])
-                                Spacer()
                             }
-                            .padding(.leading)
                         }
                         
+                        Divider()
+                            .padding(.top)
                     }
-                    
-                    Divider()
-                        .padding()
-                    
-                    Section(content: {
-                        ForEach(0 ..< classifications.count, id: \.self) { index in
-                            NavigationLink(destination: {
-                                SessionDriverDetails(driverDetails: classifications[index])
-                            }, label: {
-                                VStack(alignment: .leading) {
-                                    
-                                    HStack {
-                                        
-                                        RoundedRectangle(cornerRadius: 120)
-                                            .frame(width: 4.5, height: 34)
-                                            .foregroundColor(getTeamColor(teamName: classifications[index].team))
-
-                                        Text("\(classifications[index].position).  \(formatDriversName(name: classifications[index].name))")
-                                            .padding(.leading, 6)
-                                            .multilineTextAlignment(.leading)
-                                        Spacer()
-                                    }
-                                }
-                                .frame(height: geometry.size.height / 100, alignment: .center)
-                            })
-                        }
-                    }, header: {
-                        HStack {
-                            if status.count > 0 {
-                                Text(status[0] == "FINISHED" ? "RESULTS" : "CLASSIFICATIONS")
-                                Spacer()
-                            }
-                        }
-                        .padding(.leading)
-                    })
+                    .listRowBackground(Color.clear)
                 }
-                .navigationTitle(Text(eventTitle))
-                .navigationBarTitleDisplayMode(.inline)
-                .padding(.top)
+                
+                Section(content: {
+                    ForEach(0 ..< classifications.count, id: \.self) { index in
+                        NavigationLink(destination: {
+                            SessionDriverDetails(driverDetails: classifications[index])
+                        }, label: {
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    
+                                    RoundedRectangle(cornerRadius: 120)
+                                        .frame(width: 4.5, height: 30)
+                                        .foregroundColor(getTeamColor(teamName: classifications[index].team))
+
+                                    Text("\(classifications[index].position).  \(formatDriversName(name: classifications[index].name))")
+                                        .padding(.leading, 6)
+                                        .multilineTextAlignment(.leading)
+                                    Spacer()
+                                }
+                            }
+                        })
+                    }
+                }, header: {
+                    HStack {
+                        if status.count > 0 {
+                            Text(status[0] == "FINISHED" ? "RESULTS" : "CLASSIFICATIONS")
+                            Spacer()
+                        }
+                    }
+                })
             }
+            .navigationTitle(Text(eventTitle))
+            .navigationBarTitleDisplayMode(.inline)
         }
         else {
             Text("Driver standings can not be shown at this time. Try again shortly.")

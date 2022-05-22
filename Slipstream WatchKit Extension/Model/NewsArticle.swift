@@ -2,7 +2,7 @@
 //  NewsArticle.swift
 //  Slipstream WatchKit Extension
 //
-//  Created by Tomás Mamede on 28/03/2022.
+//  Created by Tomás Mamede on 20/05/2022.
 //
 
 import Foundation
@@ -24,10 +24,10 @@ func decodeNews() -> [NewsArticle]? {
         
         if let data = data {
             let news = try? decoder.decode([NewsArticle].self, from: data)
-            //print(news?.count)
             return news
         }
     }
     
     return nil
 }
+

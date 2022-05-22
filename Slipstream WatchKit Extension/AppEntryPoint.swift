@@ -1,8 +1,8 @@
 //
-//  ContentView.swift
+//  AppEntryPoint.swift
 //  Slipstream WatchKit Extension
 //
-//  Created by Tomás Mamede on 21/03/2022.
+//  Created by Tomás Mamede on 20/05/2022.
 //
 
 import SwiftUI
@@ -10,11 +10,8 @@ import Firebase
 
 struct AppEntryPoint: View {
     
-    init() {
-        FirebaseApp.configure()
-    }
-    
     @ObservedObject var dataManager = DataManager()
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         
@@ -27,30 +24,25 @@ struct AppEntryPoint: View {
                     dataManager.stopAppDataListener()
                 }
         }
-        else if dataManager.dataRetrievalStatus == 2 {
-            Text("Failed to retrieve data...")
-                .multilineTextAlignment(.center)
-                .onAppear {
-                    dataManager.startAppDataListener()
-                }
-                .onDisappear {
-                    dataManager.stopAppDataListener()
-                }
-        }
-        else if dataManager.dataRetrievalStatus == 1 {
+        else {
             if let appData = dataManager.appData {
                 TabView {
                     EventsList(sessions: appData.sessions, events: appData.seasonSchedule)
-                    
+
                     NewsList(news: appData.latestNews)
-                    
+
                     Standings(
                         teams: appData.teamStandings,
                         drivers: appData.driverStandings
                     )
-                    
-                    Settings(lastServerUpdate: appData.timestamp)
+
+                    Preferences(lastServerUpdate: appData.timestamp)
                 }
+                .confirmationDialog(
+                    "Failed to retrieve data from server. The data you are seeing is not the most current. Make sure you are connected to the Internet and try again later.",
+                    isPresented: $dataManager.showModalAlert,
+                    actions: {}
+                )
                 .onAppear {
                     dataManager.startAppDataListener()
                 }
@@ -58,12 +50,18 @@ struct AppEntryPoint: View {
                     dataManager.stopAppDataListener()
                 }
             }
+            else {
+                VStack {
+                    Spacer()
+                    
+                    Text("Failed to retrieve data from server. Make sure you are connected to the Internet and try again later.")
+                        .font(.caption2)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                    
+                    Spacer()
+                }
+            }
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        AppEntryPoint()
     }
 }

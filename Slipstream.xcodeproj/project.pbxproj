@@ -7,87 +7,105 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CF0785512831086800D9F9E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0785502831086800D9F9E2 /* AppDelegate.swift */; };
-		CF315FA227F12254003C26D7 /* season_schedule.json in Resources */ = {isa = PBXBuildFile; fileRef = CF315FA127F12254003C26D7 /* season_schedule.json */; };
-		CF315FA627F12873003C26D7 /* EventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF315FA527F12873003C26D7 /* EventsList.swift */; };
-		CF315FA827F1288D003C26D7 /* TrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF315FA727F1288D003C26D7 /* TrackInfo.swift */; };
-		CF3440D2282B190A0077F506 /* FavoriteDriverSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3440D1282B190A0077F506 /* FavoriteDriverSelector.swift */; };
-		CF3440D5282D8BC30077F506 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3440D4282D8BC30077F506 /* NotificationView.swift */; };
-		CF3440D8282DB93B0077F506 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3440D7282DB93B0077F506 /* ExtensionDelegate.swift */; };
-		CF478A8F27EE688600555CCE /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF478A8E27EE688600555CCE /* Team.swift */; };
-		CF478A9727EE906F00555CCE /* TeamStandings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF478A9627EE906F00555CCE /* TeamStandings.swift */; };
-		CF5373BC27F3195D009C3F46 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5373BB27F3195D009C3F46 /* WebView.swift */; };
-		CF5373C027F327C7009C3F46 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5373BF27F327C7009C3F46 /* Settings.swift */; };
-		CF610E7A27F1F5AC0076421B /* news.json in Resources */ = {isa = PBXBuildFile; fileRef = CF610E7927F1F5AC0076421B /* news.json */; };
-		CF610E7D27F1F5CA0076421B /* NewsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF610E7C27F1F5CA0076421B /* NewsList.swift */; };
-		CF610E7F27F1F60D0076421B /* NewsArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF610E7E27F1F60D0076421B /* NewsArticle.swift */; };
-		CF610E8127F202560076421B /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF610E8027F202560076421B /* Article.swift */; };
-		CF610E8427F24E450076421B /* Standings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF610E8327F24E450076421B /* Standings.swift */; };
-		CF610E8627F25E440076421B /* EventMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF610E8527F25E440076421B /* EventMenu.swift */; };
-		CF678B4A27EC7AFD0078BCA1 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF678B4927EC7AFD0078BCA1 /* Event.swift */; };
-		CF88DC4B27EF8C1300C08AC6 /* DriverStandings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF88DC4A27EF8C1300C08AC6 /* DriverStandings.swift */; };
-		CF9E874628136000005815D4 /* SessionGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E874528136000005815D4 /* SessionGrid.swift */; };
-		CF9E874828136089005815D4 /* SessionDriverDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E874728136089005815D4 /* SessionDriverDetails.swift */; };
-		CF9E874A28142C9B005815D4 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E874928142C9B005815D4 /* Session.swift */; };
-		CF9E874C28142F77005815D4 /* sessions.json in Resources */ = {isa = PBXBuildFile; fileRef = CF9E874B28142F77005815D4 /* sessions.json */; };
-		CF9E874E281430B0005815D4 /* DriverDetailsForSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E874D281430B0005815D4 /* DriverDetailsForSession.swift */; };
-		CFBACFF827E88F0800851E20 /* Slipstream WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = CFBACFF727E88F0800851E20 /* Slipstream WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		CFBACFFD27E88F0900851E20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFBACFFC27E88F0900851E20 /* Assets.xcassets */; };
-		CFBAD00327E88F0900851E20 /* Slipstream WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CFBAD00227E88F0900851E20 /* Slipstream WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		CFBAD00827E88F0900851E20 /* SlipstreamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAD00727E88F0900851E20 /* SlipstreamApp.swift */; };
-		CFBAD00A27E88F0900851E20 /* AppEntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAD00927E88F0900851E20 /* AppEntryPoint.swift */; };
-		CFBAD00C27E88F0900851E20 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAD00B27E88F0900851E20 /* NotificationController.swift */; };
-		CFBAD01027E88F0900851E20 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAD00F27E88F0900851E20 /* ComplicationController.swift */; };
-		CFBAD01227E88F0A00851E20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFBAD01127E88F0A00851E20 /* Assets.xcassets */; };
-		CFBAD01527E88F0A00851E20 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFBAD01427E88F0A00851E20 /* Preview Assets.xcassets */; };
-		CFD7F29927F4D5B6005A63C8 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CFD7F29827F4D5B6005A63C8 /* FirebaseDatabase */; };
-		CFD7F29B27F4D61E005A63C8 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD7F29A27F4D61E005A63C8 /* DataManager.swift */; };
-		CFD7F29D27F4DC3F005A63C8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFD7F29C27F4DC3F005A63C8 /* GoogleService-Info.plist */; };
-		CFD7F29E27F4DC3F005A63C8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFD7F29C27F4DC3F005A63C8 /* GoogleService-Info.plist */; };
-		CFD7F29F27F4DC3F005A63C8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFD7F29C27F4DC3F005A63C8 /* GoogleService-Info.plist */; };
-		CFD970FB27EDE11B00B11C54 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD970FA27EDE11B00B11C54 /* Driver.swift */; };
-		CFD970FD27EDE19F00B11C54 /* DriverDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD970FC27EDE19F00B11C54 /* DriverDetails.swift */; };
-		CFDDF1CE27EE9CF00032FD9F /* TeamDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDDF1CD27EE9CF00032FD9F /* TeamDetails.swift */; };
-		CFDDF1DA27EF69D80032FD9F /* driver_standings.json in Resources */ = {isa = PBXBuildFile; fileRef = CFDDF1D927EF69D80032FD9F /* driver_standings.json */; };
-		CFDDF1DC27EF74990032FD9F /* team_standings.json in Resources */ = {isa = PBXBuildFile; fileRef = CFDDF1DB27EF74990032FD9F /* team_standings.json */; };
+		CF2CC7872839ADBF00D2189C /* FavoriteDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2CC7862839ADBF00D2189C /* FavoriteDriver.swift */; };
+		CF2CC7892839B77200D2189C /* FavoriteTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2CC7882839B77200D2189C /* FavoriteTeam.swift */; };
+		CF589FE82839272A00EDC489 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF589FE72839272A00EDC489 /* Preferences.swift */; };
+		CF589FEA2839338F00EDC489 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF589FE92839338F00EDC489 /* Notifications.swift */; };
+		CFCEF40B28380C170063CD47 /* Slipstream WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = CFCEF40A28380C170063CD47 /* Slipstream WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CFCEF41028380C170063CD47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFCEF40F28380C170063CD47 /* Assets.xcassets */; };
+		CFCEF41628380C170063CD47 /* Slipstream WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CFCEF41528380C170063CD47 /* Slipstream WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CFCEF41B28380C170063CD47 /* SlipstreamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF41A28380C170063CD47 /* SlipstreamApp.swift */; };
+		CFCEF41F28380C170063CD47 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF41E28380C170063CD47 /* NotificationController.swift */; };
+		CFCEF42328380C170063CD47 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF42228380C170063CD47 /* ComplicationController.swift */; };
+		CFCEF42528380C180063CD47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFCEF42428380C180063CD47 /* Assets.xcassets */; };
+		CFCEF42828380C180063CD47 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFCEF42728380C180063CD47 /* Preview Assets.xcassets */; };
+		CFCEF43428380C180063CD47 /* SlipstreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF43328380C180063CD47 /* SlipstreamTests.swift */; };
+		CFCEF43E28380C180063CD47 /* SlipstreamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF43D28380C180063CD47 /* SlipstreamUITests.swift */; };
+		CFCEF44028380C180063CD47 /* SlipstreamUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF43F28380C180063CD47 /* SlipstreamUITestsLaunchTests.swift */; };
+		CFCEF45728380C930063CD47 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF45628380C930063CD47 /* NotificationView.swift */; };
+		CFCEF45928380CB30063CD47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF45828380CB30063CD47 /* AppDelegate.swift */; };
+		CFCEF45F28380D050063CD47 /* sessions.json in Resources */ = {isa = PBXBuildFile; fileRef = CFCEF45B28380D050063CD47 /* sessions.json */; };
+		CFCEF46028380D050063CD47 /* season_schedule.json in Resources */ = {isa = PBXBuildFile; fileRef = CFCEF45C28380D050063CD47 /* season_schedule.json */; };
+		CFCEF46128380D050063CD47 /* team_standings.json in Resources */ = {isa = PBXBuildFile; fileRef = CFCEF45D28380D050063CD47 /* team_standings.json */; };
+		CFCEF46228380D050063CD47 /* news.json in Resources */ = {isa = PBXBuildFile; fileRef = CFCEF45E28380D050063CD47 /* news.json */; };
+		CFCEF46B28380D950063CD47 /* Standings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF46A28380D950063CD47 /* Standings.swift */; };
+		CFCEF46E28380DC40063CD47 /* TeamStandings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF46D28380DC40063CD47 /* TeamStandings.swift */; };
+		CFCEF47028380DE80063CD47 /* TeamDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF46F28380DE80063CD47 /* TeamDetails.swift */; };
+		CFCEF47328380E2E0063CD47 /* DriverDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF47228380E2E0063CD47 /* DriverDetails.swift */; };
+		CFCEF47528380E4C0063CD47 /* DriverStandings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF47428380E4C0063CD47 /* DriverStandings.swift */; };
+		CFCEF47828380E8C0063CD47 /* NewsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF47728380E8C0063CD47 /* NewsList.swift */; };
+		CFCEF47A28380EA90063CD47 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF47928380EA90063CD47 /* Article.swift */; };
+		CFCEF47D28380EE00063CD47 /* EventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF47C28380EE00063CD47 /* EventsList.swift */; };
+		CFCEF47F28380F070063CD47 /* TrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF47E28380F070063CD47 /* TrackInfo.swift */; };
+		CFCEF48128380F250063CD47 /* EventMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF48028380F250063CD47 /* EventMenu.swift */; };
+		CFCEF48428380F520063CD47 /* SessionGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF48328380F520063CD47 /* SessionGrid.swift */; };
+		CFCEF48628380F710063CD47 /* SessionDriverDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF48528380F710063CD47 /* SessionDriverDetails.swift */; };
+		CFCEF489283814AE0063CD47 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF488283814AE0063CD47 /* Event.swift */; };
+		CFCEF48B283814CA0063CD47 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF48A283814CA0063CD47 /* Driver.swift */; };
+		CFCEF48D283814F00063CD47 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF48C283814F00063CD47 /* Team.swift */; };
+		CFCEF48F2838150A0063CD47 /* NewsArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF48E2838150A0063CD47 /* NewsArticle.swift */; };
+		CFCEF491283815360063CD47 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF490283815360063CD47 /* Session.swift */; };
+		CFCEF4932838154B0063CD47 /* DriverDetailsForSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF4922838154B0063CD47 /* DriverDetailsForSession.swift */; };
+		CFCEF495283815AC0063CD47 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF494283815AC0063CD47 /* DataManager.swift */; };
+		CFCEF497283815CE0063CD47 /* AppEntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF496283815CE0063CD47 /* AppEntryPoint.swift */; };
+		CFCEF49A283817BB0063CD47 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CFCEF499283817BB0063CD47 /* FirebaseDatabase */; };
+		CFCEF4A028381D860063CD47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFCEF49F28381D860063CD47 /* GoogleService-Info.plist */; };
+		CFCEF4A128381D860063CD47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFCEF49F28381D860063CD47 /* GoogleService-Info.plist */; };
+		CFCEF4A228381D860063CD47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFCEF49F28381D860063CD47 /* GoogleService-Info.plist */; };
+		CFE2697B283A85AD000F52B6 /* drivers.txt in Resources */ = {isa = PBXBuildFile; fileRef = CFE2697A283A85AD000F52B6 /* drivers.txt */; };
+		CFE2697D283A8962000F52B6 /* constructors.txt in Resources */ = {isa = PBXBuildFile; fileRef = CFE2697C283A8962000F52B6 /* constructors.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		CFBACFF927E88F0800851E20 /* PBXContainerItemProxy */ = {
+		CFCEF40C28380C170063CD47 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = CFBACFED27E88F0800851E20 /* Project object */;
+			containerPortal = CFCEF40028380C160063CD47 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = CFBACFF627E88F0800851E20;
+			remoteGlobalIDString = CFCEF40928380C170063CD47;
 			remoteInfo = "Slipstream WatchKit App";
 		};
-		CFBAD00427E88F0900851E20 /* PBXContainerItemProxy */ = {
+		CFCEF41728380C170063CD47 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = CFBACFED27E88F0800851E20 /* Project object */;
+			containerPortal = CFCEF40028380C160063CD47 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = CFBAD00127E88F0900851E20;
+			remoteGlobalIDString = CFCEF41428380C170063CD47;
 			remoteInfo = "Slipstream WatchKit Extension";
+		};
+		CFCEF43028380C180063CD47 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CFCEF40028380C160063CD47 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFCEF41428380C170063CD47;
+			remoteInfo = "Slipstream WatchKit Extension";
+		};
+		CFCEF43A28380C180063CD47 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CFCEF40028380C160063CD47 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFCEF40928380C170063CD47;
+			remoteInfo = "Slipstream WatchKit App";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		CFBAD01D27E88F0A00851E20 /* Embed App Extensions */ = {
+		CFCEF44628380C180063CD47 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				CFBAD00327E88F0900851E20 /* Slipstream WatchKit Extension.appex in Embed App Extensions */,
+				CFCEF41628380C170063CD47 /* Slipstream WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CFBAD02127E88F0A00851E20 /* Embed Watch Content */ = {
+		CFCEF44A28380C180063CD47 /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				CFBACFF827E88F0800851E20 /* Slipstream WatchKit App.app in Embed Watch Content */,
+				CFCEF40B28380C170063CD47 /* Slipstream WatchKit App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,288 +113,320 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		CF0785502831086800D9F9E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CF315FA127F12254003C26D7 /* season_schedule.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = season_schedule.json; sourceTree = "<group>"; };
-		CF315FA527F12873003C26D7 /* EventsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsList.swift; sourceTree = "<group>"; };
-		CF315FA727F1288D003C26D7 /* TrackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfo.swift; sourceTree = "<group>"; };
-		CF3440D1282B190A0077F506 /* FavoriteDriverSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDriverSelector.swift; sourceTree = "<group>"; };
-		CF3440D4282D8BC30077F506 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
-		CF3440D6282DB7FB0077F506 /* Slipstream WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Slipstream WatchKit Extension.entitlements"; sourceTree = "<group>"; };
-		CF3440D7282DB93B0077F506 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
-		CF478A8E27EE688600555CCE /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
-		CF478A9627EE906F00555CCE /* TeamStandings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamStandings.swift; sourceTree = "<group>"; };
-		CF5373BB27F3195D009C3F46 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
-		CF5373BF27F327C7009C3F46 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		CF610E7927F1F5AC0076421B /* news.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = news.json; sourceTree = "<group>"; };
-		CF610E7C27F1F5CA0076421B /* NewsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsList.swift; sourceTree = "<group>"; };
-		CF610E7E27F1F60D0076421B /* NewsArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticle.swift; sourceTree = "<group>"; };
-		CF610E8027F202560076421B /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
-		CF610E8327F24E450076421B /* Standings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Standings.swift; sourceTree = "<group>"; };
-		CF610E8527F25E440076421B /* EventMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMenu.swift; sourceTree = "<group>"; };
-		CF678B4927EC7AFD0078BCA1 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		CF88DC4A27EF8C1300C08AC6 /* DriverStandings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverStandings.swift; sourceTree = "<group>"; };
-		CF9E874528136000005815D4 /* SessionGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionGrid.swift; sourceTree = "<group>"; };
-		CF9E874728136089005815D4 /* SessionDriverDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDriverDetails.swift; sourceTree = "<group>"; };
-		CF9E874928142C9B005815D4 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
-		CF9E874B28142F77005815D4 /* sessions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sessions.json; sourceTree = "<group>"; };
-		CF9E874D281430B0005815D4 /* DriverDetailsForSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverDetailsForSession.swift; sourceTree = "<group>"; };
-		CFBACFF327E88F0800851E20 /* Slipstream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Slipstream.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CFBACFF727E88F0800851E20 /* Slipstream WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Slipstream WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CFBACFFC27E88F0900851E20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CFBAD00227E88F0900851E20 /* Slipstream WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Slipstream WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CFBAD00727E88F0900851E20 /* SlipstreamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlipstreamApp.swift; sourceTree = "<group>"; };
-		CFBAD00927E88F0900851E20 /* AppEntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntryPoint.swift; sourceTree = "<group>"; };
-		CFBAD00B27E88F0900851E20 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
-		CFBAD00F27E88F0900851E20 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
-		CFBAD01127E88F0A00851E20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CFBAD01427E88F0A00851E20 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		CFBAD01627E88F0A00851E20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CFBAD01727E88F0A00851E20 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
-		CFD7F29A27F4D61E005A63C8 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		CFD7F29C27F4DC3F005A63C8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		CFD970FA27EDE11B00B11C54 /* Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
-		CFD970FC27EDE19F00B11C54 /* DriverDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverDetails.swift; sourceTree = "<group>"; };
-		CFDDF1CD27EE9CF00032FD9F /* TeamDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetails.swift; sourceTree = "<group>"; };
-		CFDDF1D927EF69D80032FD9F /* driver_standings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = driver_standings.json; path = ../../../../Desktop/scraping/driver_standings.json; sourceTree = "<group>"; };
-		CFDDF1DB27EF74990032FD9F /* team_standings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = team_standings.json; sourceTree = "<group>"; };
+		CF2CC7862839ADBF00D2189C /* FavoriteDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDriver.swift; sourceTree = "<group>"; };
+		CF2CC7882839B77200D2189C /* FavoriteTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTeam.swift; sourceTree = "<group>"; };
+		CF589FE72839272A00EDC489 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		CF589FE92839338F00EDC489 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		CFCEF40628380C160063CD47 /* Slipstream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Slipstream.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFCEF40A28380C170063CD47 /* Slipstream WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Slipstream WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFCEF40F28380C170063CD47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CFCEF41528380C170063CD47 /* Slipstream WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Slipstream WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFCEF41A28380C170063CD47 /* SlipstreamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlipstreamApp.swift; sourceTree = "<group>"; };
+		CFCEF41E28380C170063CD47 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		CFCEF42228380C170063CD47 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		CFCEF42428380C180063CD47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CFCEF42728380C180063CD47 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CFCEF42928380C180063CD47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CFCEF42A28380C180063CD47 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		CFCEF42F28380C180063CD47 /* SlipstreamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlipstreamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFCEF43328380C180063CD47 /* SlipstreamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlipstreamTests.swift; sourceTree = "<group>"; };
+		CFCEF43928380C180063CD47 /* SlipstreamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlipstreamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFCEF43D28380C180063CD47 /* SlipstreamUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlipstreamUITests.swift; sourceTree = "<group>"; };
+		CFCEF43F28380C180063CD47 /* SlipstreamUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlipstreamUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		CFCEF45428380C430063CD47 /* Slipstream WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Slipstream WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		CFCEF45628380C930063CD47 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		CFCEF45828380CB30063CD47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CFCEF45B28380D050063CD47 /* sessions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sessions.json; sourceTree = "<group>"; };
+		CFCEF45C28380D050063CD47 /* season_schedule.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = season_schedule.json; sourceTree = "<group>"; };
+		CFCEF45D28380D050063CD47 /* team_standings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = team_standings.json; sourceTree = "<group>"; };
+		CFCEF45E28380D050063CD47 /* news.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = news.json; sourceTree = "<group>"; };
+		CFCEF46A28380D950063CD47 /* Standings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Standings.swift; sourceTree = "<group>"; };
+		CFCEF46D28380DC40063CD47 /* TeamStandings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamStandings.swift; sourceTree = "<group>"; };
+		CFCEF46F28380DE80063CD47 /* TeamDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetails.swift; sourceTree = "<group>"; };
+		CFCEF47228380E2E0063CD47 /* DriverDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverDetails.swift; sourceTree = "<group>"; };
+		CFCEF47428380E4C0063CD47 /* DriverStandings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverStandings.swift; sourceTree = "<group>"; };
+		CFCEF47728380E8C0063CD47 /* NewsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsList.swift; sourceTree = "<group>"; };
+		CFCEF47928380EA90063CD47 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		CFCEF47C28380EE00063CD47 /* EventsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsList.swift; sourceTree = "<group>"; };
+		CFCEF47E28380F070063CD47 /* TrackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfo.swift; sourceTree = "<group>"; };
+		CFCEF48028380F250063CD47 /* EventMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMenu.swift; sourceTree = "<group>"; };
+		CFCEF48328380F520063CD47 /* SessionGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionGrid.swift; sourceTree = "<group>"; };
+		CFCEF48528380F710063CD47 /* SessionDriverDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDriverDetails.swift; sourceTree = "<group>"; };
+		CFCEF488283814AE0063CD47 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		CFCEF48A283814CA0063CD47 /* Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
+		CFCEF48C283814F00063CD47 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		CFCEF48E2838150A0063CD47 /* NewsArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticle.swift; sourceTree = "<group>"; };
+		CFCEF490283815360063CD47 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		CFCEF4922838154B0063CD47 /* DriverDetailsForSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverDetailsForSession.swift; sourceTree = "<group>"; };
+		CFCEF494283815AC0063CD47 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		CFCEF496283815CE0063CD47 /* AppEntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntryPoint.swift; sourceTree = "<group>"; };
+		CFCEF49F28381D860063CD47 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CFE2697A283A85AD000F52B6 /* drivers.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = drivers.txt; sourceTree = "<group>"; };
+		CFE2697C283A8962000F52B6 /* constructors.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = constructors.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		CFBACFFF27E88F0900851E20 /* Frameworks */ = {
+		CFCEF41228380C170063CD47 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFD7F29927F4D5B6005A63C8 /* FirebaseDatabase in Frameworks */,
+				CFCEF49A283817BB0063CD47 /* FirebaseDatabase in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFCEF42C28380C180063CD47 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFCEF43628380C180063CD47 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CF315FA427F12834003C26D7 /* Season */ = {
+		CFCEF3FF28380C160063CD47 = {
 			isa = PBXGroup;
 			children = (
-				CF9E874428135FDD005815D4 /* Session */,
-				CF315FA527F12873003C26D7 /* EventsList.swift */,
-				CF315FA727F1288D003C26D7 /* TrackInfo.swift */,
-				CF610E8527F25E440076421B /* EventMenu.swift */,
-			);
-			path = Season;
-			sourceTree = "<group>";
-		};
-		CF3440D3282D8B980077F506 /* Notifications */ = {
-			isa = PBXGroup;
-			children = (
-				CF3440D4282D8BC30077F506 /* NotificationView.swift */,
-				CF0785502831086800D9F9E2 /* AppDelegate.swift */,
-			);
-			path = Notifications;
-			sourceTree = "<group>";
-		};
-		CF5373BA27F31946009C3F46 /* WebView */ = {
-			isa = PBXGroup;
-			children = (
-				CF5373BB27F3195D009C3F46 /* WebView.swift */,
-			);
-			path = WebView;
-			sourceTree = "<group>";
-		};
-		CF5373BE27F327B4009C3F46 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				CF5373BF27F327C7009C3F46 /* Settings.swift */,
-				CF3440D1282B190A0077F506 /* FavoriteDriverSelector.swift */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
-		CF610E7B27F1F5B80076421B /* News */ = {
-			isa = PBXGroup;
-			children = (
-				CF610E7C27F1F5CA0076421B /* NewsList.swift */,
-				CF610E8027F202560076421B /* Article.swift */,
-			);
-			path = News;
-			sourceTree = "<group>";
-		};
-		CF610E8227F24E340076421B /* Standings */ = {
-			isa = PBXGroup;
-			children = (
-				CF610E8327F24E450076421B /* Standings.swift */,
-				CFDDF1CC27EE9CC30032FD9F /* Teams */,
-				CFD970F527EDDE2800B11C54 /* Drivers */,
-			);
-			path = Standings;
-			sourceTree = "<group>";
-		};
-		CF678B4627EC7ACC0078BCA1 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				CF678B4927EC7AFD0078BCA1 /* Event.swift */,
-				CFD970FA27EDE11B00B11C54 /* Driver.swift */,
-				CF478A8E27EE688600555CCE /* Team.swift */,
-				CF610E7E27F1F60D0076421B /* NewsArticle.swift */,
-				CF9E874928142C9B005815D4 /* Session.swift */,
-				CF9E874D281430B0005815D4 /* DriverDetailsForSession.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		CF678B5327ED37FF0078BCA1 /* Screens */ = {
-			isa = PBXGroup;
-			children = (
-				CF5373BE27F327B4009C3F46 /* Settings */,
-				CF610E8227F24E340076421B /* Standings */,
-				CF610E7B27F1F5B80076421B /* News */,
-				CF315FA427F12834003C26D7 /* Season */,
-			);
-			path = Screens;
-			sourceTree = "<group>";
-		};
-		CF678B5A27ED441E0078BCA1 /* Files */ = {
-			isa = PBXGroup;
-			children = (
-				CFDDF1D927EF69D80032FD9F /* driver_standings.json */,
-				CF9E874B28142F77005815D4 /* sessions.json */,
-				CFDDF1DB27EF74990032FD9F /* team_standings.json */,
-				CF610E7927F1F5AC0076421B /* news.json */,
-				CF315FA127F12254003C26D7 /* season_schedule.json */,
-			);
-			path = Files;
-			sourceTree = "<group>";
-		};
-		CF9E874428135FDD005815D4 /* Session */ = {
-			isa = PBXGroup;
-			children = (
-				CF9E874528136000005815D4 /* SessionGrid.swift */,
-				CF9E874728136089005815D4 /* SessionDriverDetails.swift */,
-			);
-			path = Session;
-			sourceTree = "<group>";
-		};
-		CFBACFEC27E88F0800851E20 = {
-			isa = PBXGroup;
-			children = (
-				CFD7F29C27F4DC3F005A63C8 /* GoogleService-Info.plist */,
-				CFBACFFB27E88F0800851E20 /* Slipstream WatchKit App */,
-				CFBAD00627E88F0900851E20 /* Slipstream WatchKit Extension */,
-				CFBACFF427E88F0800851E20 /* Products */,
+				CFCEF49F28381D860063CD47 /* GoogleService-Info.plist */,
+				CFCEF40E28380C170063CD47 /* Slipstream WatchKit App */,
+				CFCEF41928380C170063CD47 /* Slipstream WatchKit Extension */,
+				CFCEF43228380C180063CD47 /* SlipstreamTests */,
+				CFCEF43C28380C180063CD47 /* SlipstreamUITests */,
+				CFCEF40728380C160063CD47 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		CFBACFF427E88F0800851E20 /* Products */ = {
+		CFCEF40728380C160063CD47 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CFBACFF327E88F0800851E20 /* Slipstream.app */,
-				CFBACFF727E88F0800851E20 /* Slipstream WatchKit App.app */,
-				CFBAD00227E88F0900851E20 /* Slipstream WatchKit Extension.appex */,
+				CFCEF40628380C160063CD47 /* Slipstream.app */,
+				CFCEF40A28380C170063CD47 /* Slipstream WatchKit App.app */,
+				CFCEF41528380C170063CD47 /* Slipstream WatchKit Extension.appex */,
+				CFCEF42F28380C180063CD47 /* SlipstreamTests.xctest */,
+				CFCEF43928380C180063CD47 /* SlipstreamUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CFBACFFB27E88F0800851E20 /* Slipstream WatchKit App */ = {
+		CFCEF40E28380C170063CD47 /* Slipstream WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
-				CFBACFFC27E88F0900851E20 /* Assets.xcassets */,
+				CFCEF40F28380C170063CD47 /* Assets.xcassets */,
 			);
 			path = "Slipstream WatchKit App";
 			sourceTree = "<group>";
 		};
-		CFBAD00627E88F0900851E20 /* Slipstream WatchKit Extension */ = {
+		CFCEF41928380C170063CD47 /* Slipstream WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				CF3440D6282DB7FB0077F506 /* Slipstream WatchKit Extension.entitlements */,
-				CF3440D3282D8B980077F506 /* Notifications */,
-				CF5373BA27F31946009C3F46 /* WebView */,
-				CF678B5A27ED441E0078BCA1 /* Files */,
-				CF678B5327ED37FF0078BCA1 /* Screens */,
-				CF678B4627EC7ACC0078BCA1 /* Model */,
-				CFBAD00727E88F0900851E20 /* SlipstreamApp.swift */,
-				CFD7F29A27F4D61E005A63C8 /* DataManager.swift */,
-				CFBAD00927E88F0900851E20 /* AppEntryPoint.swift */,
-				CFBAD00B27E88F0900851E20 /* NotificationController.swift */,
-				CFBAD00F27E88F0900851E20 /* ComplicationController.swift */,
-				CFBAD01127E88F0A00851E20 /* Assets.xcassets */,
-				CFBAD01627E88F0A00851E20 /* Info.plist */,
-				CFBAD01727E88F0A00851E20 /* PushNotificationPayload.apns */,
-				CFBAD01327E88F0A00851E20 /* Preview Content */,
-				CF3440D7282DB93B0077F506 /* ExtensionDelegate.swift */,
+				CFCEF42A28380C180063CD47 /* PushNotificationPayload.apns */,
+				CFCEF45428380C430063CD47 /* Slipstream WatchKit Extension.entitlements */,
+				CFCEF42928380C180063CD47 /* Info.plist */,
+				CFCEF496283815CE0063CD47 /* AppEntryPoint.swift */,
+				CFCEF42228380C170063CD47 /* ComplicationController.swift */,
+				CFCEF494283815AC0063CD47 /* DataManager.swift */,
+				CFCEF41E28380C170063CD47 /* NotificationController.swift */,
+				CFCEF41A28380C170063CD47 /* SlipstreamApp.swift */,
+				CFCEF42428380C180063CD47 /* Assets.xcassets */,
+				CFCEF45A28380CE50063CD47 /* FIles */,
+				CFCEF48728380F8C0063CD47 /* Model */,
+				CFCEF45528380C6C0063CD47 /* Notifications */,
+				CFCEF42628380C180063CD47 /* Preview Content */,
+				CFCEF46328380D190063CD47 /* Screens */,
 			);
 			path = "Slipstream WatchKit Extension";
 			sourceTree = "<group>";
 		};
-		CFBAD01327E88F0A00851E20 /* Preview Content */ = {
+		CFCEF42628380C180063CD47 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				CFBAD01427E88F0A00851E20 /* Preview Assets.xcassets */,
+				CFCEF42728380C180063CD47 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		CFD970F527EDDE2800B11C54 /* Drivers */ = {
+		CFCEF43228380C180063CD47 /* SlipstreamTests */ = {
 			isa = PBXGroup;
 			children = (
-				CFD970FC27EDE19F00B11C54 /* DriverDetails.swift */,
-				CF88DC4A27EF8C1300C08AC6 /* DriverStandings.swift */,
+				CFCEF43328380C180063CD47 /* SlipstreamTests.swift */,
+			);
+			path = SlipstreamTests;
+			sourceTree = "<group>";
+		};
+		CFCEF43C28380C180063CD47 /* SlipstreamUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CFCEF43D28380C180063CD47 /* SlipstreamUITests.swift */,
+				CFCEF43F28380C180063CD47 /* SlipstreamUITestsLaunchTests.swift */,
+			);
+			path = SlipstreamUITests;
+			sourceTree = "<group>";
+		};
+		CFCEF45528380C6C0063CD47 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				CFCEF45628380C930063CD47 /* NotificationView.swift */,
+				CFCEF45828380CB30063CD47 /* AppDelegate.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		CFCEF45A28380CE50063CD47 /* FIles */ = {
+			isa = PBXGroup;
+			children = (
+				CFE2697A283A85AD000F52B6 /* drivers.txt */,
+				CFE2697C283A8962000F52B6 /* constructors.txt */,
+				CFCEF45E28380D050063CD47 /* news.json */,
+				CFCEF45C28380D050063CD47 /* season_schedule.json */,
+				CFCEF45B28380D050063CD47 /* sessions.json */,
+				CFCEF45D28380D050063CD47 /* team_standings.json */,
+			);
+			path = FIles;
+			sourceTree = "<group>";
+		};
+		CFCEF46328380D190063CD47 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				CFCEF47B28380EC90063CD47 /* Season */,
+				CFCEF47628380E6C0063CD47 /* News */,
+				CFCEF46928380D830063CD47 /* Standings */,
+				CFCEF46428380D300063CD47 /* Preferences */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		CFCEF46428380D300063CD47 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				CF589FE72839272A00EDC489 /* Preferences.swift */,
+				CF589FE92839338F00EDC489 /* Notifications.swift */,
+				CF2CC7862839ADBF00D2189C /* FavoriteDriver.swift */,
+				CF2CC7882839B77200D2189C /* FavoriteTeam.swift */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
+		CFCEF46928380D830063CD47 /* Standings */ = {
+			isa = PBXGroup;
+			children = (
+				CFCEF47128380E120063CD47 /* Drivers */,
+				CFCEF46C28380DAD0063CD47 /* Teams */,
+				CFCEF46A28380D950063CD47 /* Standings.swift */,
+			);
+			path = Standings;
+			sourceTree = "<group>";
+		};
+		CFCEF46C28380DAD0063CD47 /* Teams */ = {
+			isa = PBXGroup;
+			children = (
+				CFCEF46D28380DC40063CD47 /* TeamStandings.swift */,
+				CFCEF46F28380DE80063CD47 /* TeamDetails.swift */,
+			);
+			path = Teams;
+			sourceTree = "<group>";
+		};
+		CFCEF47128380E120063CD47 /* Drivers */ = {
+			isa = PBXGroup;
+			children = (
+				CFCEF47228380E2E0063CD47 /* DriverDetails.swift */,
+				CFCEF47428380E4C0063CD47 /* DriverStandings.swift */,
 			);
 			path = Drivers;
 			sourceTree = "<group>";
 		};
-		CFDDF1CC27EE9CC30032FD9F /* Teams */ = {
+		CFCEF47628380E6C0063CD47 /* News */ = {
 			isa = PBXGroup;
 			children = (
-				CF478A9627EE906F00555CCE /* TeamStandings.swift */,
-				CFDDF1CD27EE9CF00032FD9F /* TeamDetails.swift */,
+				CFCEF47728380E8C0063CD47 /* NewsList.swift */,
+				CFCEF47928380EA90063CD47 /* Article.swift */,
 			);
-			path = Teams;
+			path = News;
+			sourceTree = "<group>";
+		};
+		CFCEF47B28380EC90063CD47 /* Season */ = {
+			isa = PBXGroup;
+			children = (
+				CFCEF48228380F440063CD47 /* Session */,
+				CFCEF47C28380EE00063CD47 /* EventsList.swift */,
+				CFCEF47E28380F070063CD47 /* TrackInfo.swift */,
+				CFCEF48028380F250063CD47 /* EventMenu.swift */,
+			);
+			path = Season;
+			sourceTree = "<group>";
+		};
+		CFCEF48228380F440063CD47 /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				CFCEF48328380F520063CD47 /* SessionGrid.swift */,
+				CFCEF48528380F710063CD47 /* SessionDriverDetails.swift */,
+			);
+			path = Session;
+			sourceTree = "<group>";
+		};
+		CFCEF48728380F8C0063CD47 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CFCEF488283814AE0063CD47 /* Event.swift */,
+				CFCEF48A283814CA0063CD47 /* Driver.swift */,
+				CFCEF48C283814F00063CD47 /* Team.swift */,
+				CFCEF48E2838150A0063CD47 /* NewsArticle.swift */,
+				CFCEF490283815360063CD47 /* Session.swift */,
+				CFCEF4922838154B0063CD47 /* DriverDetailsForSession.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CFBACFF227E88F0800851E20 /* Slipstream */ = {
+		CFCEF40528380C160063CD47 /* Slipstream */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CFBAD02227E88F0A00851E20 /* Build configuration list for PBXNativeTarget "Slipstream" */;
+			buildConfigurationList = CFCEF44B28380C180063CD47 /* Build configuration list for PBXNativeTarget "Slipstream" */;
 			buildPhases = (
-				CFBACFF127E88F0800851E20 /* Resources */,
-				CFBAD02127E88F0A00851E20 /* Embed Watch Content */,
+				CFCEF40428380C160063CD47 /* Resources */,
+				CFCEF44A28380C180063CD47 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				CFBACFFA27E88F0800851E20 /* PBXTargetDependency */,
+				CFCEF40D28380C170063CD47 /* PBXTargetDependency */,
 			);
 			name = Slipstream;
-			packageProductDependencies = (
-			);
 			productName = Slipstream;
-			productReference = CFBACFF327E88F0800851E20 /* Slipstream.app */;
+			productReference = CFCEF40628380C160063CD47 /* Slipstream.app */;
 			productType = "com.apple.product-type.application.watchapp2-container";
 		};
-		CFBACFF627E88F0800851E20 /* Slipstream WatchKit App */ = {
+		CFCEF40928380C170063CD47 /* Slipstream WatchKit App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CFBAD01E27E88F0A00851E20 /* Build configuration list for PBXNativeTarget "Slipstream WatchKit App" */;
+			buildConfigurationList = CFCEF44728380C180063CD47 /* Build configuration list for PBXNativeTarget "Slipstream WatchKit App" */;
 			buildPhases = (
-				CFBACFF527E88F0800851E20 /* Resources */,
-				CFBAD01D27E88F0A00851E20 /* Embed App Extensions */,
+				CFCEF40828380C170063CD47 /* Resources */,
+				CFCEF44628380C180063CD47 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				CFBAD00527E88F0900851E20 /* PBXTargetDependency */,
+				CFCEF41828380C170063CD47 /* PBXTargetDependency */,
 			);
 			name = "Slipstream WatchKit App";
 			productName = "Slipstream WatchKit App";
-			productReference = CFBACFF727E88F0800851E20 /* Slipstream WatchKit App.app */;
+			productReference = CFCEF40A28380C170063CD47 /* Slipstream WatchKit App.app */;
 			productType = "com.apple.product-type.application.watchapp2";
 		};
-		CFBAD00127E88F0900851E20 /* Slipstream WatchKit Extension */ = {
+		CFCEF41428380C170063CD47 /* Slipstream WatchKit Extension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CFBAD01A27E88F0A00851E20 /* Build configuration list for PBXNativeTarget "Slipstream WatchKit Extension" */;
+			buildConfigurationList = CFCEF44328380C180063CD47 /* Build configuration list for PBXNativeTarget "Slipstream WatchKit Extension" */;
 			buildPhases = (
-				CFBACFFE27E88F0900851E20 /* Sources */,
-				CFBACFFF27E88F0900851E20 /* Frameworks */,
-				CFBAD00027E88F0900851E20 /* Resources */,
+				CFCEF41128380C170063CD47 /* Sources */,
+				CFCEF41228380C170063CD47 /* Frameworks */,
+				CFCEF41328380C170063CD47 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -384,34 +434,78 @@
 			);
 			name = "Slipstream WatchKit Extension";
 			packageProductDependencies = (
-				CFD7F29827F4D5B6005A63C8 /* FirebaseDatabase */,
+				CFCEF499283817BB0063CD47 /* FirebaseDatabase */,
 			);
 			productName = "Slipstream WatchKit Extension";
-			productReference = CFBAD00227E88F0900851E20 /* Slipstream WatchKit Extension.appex */;
+			productReference = CFCEF41528380C170063CD47 /* Slipstream WatchKit Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
+		};
+		CFCEF42E28380C180063CD47 /* SlipstreamTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFCEF44E28380C180063CD47 /* Build configuration list for PBXNativeTarget "SlipstreamTests" */;
+			buildPhases = (
+				CFCEF42B28380C180063CD47 /* Sources */,
+				CFCEF42C28380C180063CD47 /* Frameworks */,
+				CFCEF42D28380C180063CD47 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CFCEF43128380C180063CD47 /* PBXTargetDependency */,
+			);
+			name = SlipstreamTests;
+			productName = SlipstreamTests;
+			productReference = CFCEF42F28380C180063CD47 /* SlipstreamTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CFCEF43828380C180063CD47 /* SlipstreamUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFCEF45128380C180063CD47 /* Build configuration list for PBXNativeTarget "SlipstreamUITests" */;
+			buildPhases = (
+				CFCEF43528380C180063CD47 /* Sources */,
+				CFCEF43628380C180063CD47 /* Frameworks */,
+				CFCEF43728380C180063CD47 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CFCEF43B28380C180063CD47 /* PBXTargetDependency */,
+			);
+			name = SlipstreamUITests;
+			productName = SlipstreamUITests;
+			productReference = CFCEF43928380C180063CD47 /* SlipstreamUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		CFBACFED27E88F0800851E20 /* Project object */ = {
+		CFCEF40028380C160063CD47 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1330;
 				TargetAttributes = {
-					CFBACFF227E88F0800851E20 = {
-						CreatedOnToolsVersion = 13.3;
+					CFCEF40528380C160063CD47 = {
+						CreatedOnToolsVersion = 13.3.1;
 					};
-					CFBACFF627E88F0800851E20 = {
-						CreatedOnToolsVersion = 13.3;
+					CFCEF40928380C170063CD47 = {
+						CreatedOnToolsVersion = 13.3.1;
 					};
-					CFBAD00127E88F0900851E20 = {
-						CreatedOnToolsVersion = 13.3;
+					CFCEF41428380C170063CD47 = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+					CFCEF42E28380C180063CD47 = {
+						CreatedOnToolsVersion = 13.3.1;
+						TestTargetID = CFCEF41428380C170063CD47;
+					};
+					CFCEF43828380C180063CD47 = {
+						CreatedOnToolsVersion = 13.3.1;
+						TestTargetID = CFCEF40928380C170063CD47;
 					};
 				};
 			};
-			buildConfigurationList = CFBACFF027E88F0800851E20 /* Build configuration list for PBXProject "Slipstream" */;
+			buildConfigurationList = CFCEF40328380C160063CD47 /* Build configuration list for PBXProject "Slipstream" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -419,110 +513,154 @@
 				en,
 				Base,
 			);
-			mainGroup = CFBACFEC27E88F0800851E20;
+			mainGroup = CFCEF3FF28380C160063CD47;
 			packageReferences = (
-				CFD7F29727F4D5B6005A63C8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				CFCEF498283817BB0063CD47 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
-			productRefGroup = CFBACFF427E88F0800851E20 /* Products */;
+			productRefGroup = CFCEF40728380C160063CD47 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CFBACFF227E88F0800851E20 /* Slipstream */,
-				CFBACFF627E88F0800851E20 /* Slipstream WatchKit App */,
-				CFBAD00127E88F0900851E20 /* Slipstream WatchKit Extension */,
+				CFCEF40528380C160063CD47 /* Slipstream */,
+				CFCEF40928380C170063CD47 /* Slipstream WatchKit App */,
+				CFCEF41428380C170063CD47 /* Slipstream WatchKit Extension */,
+				CFCEF42E28380C180063CD47 /* SlipstreamTests */,
+				CFCEF43828380C180063CD47 /* SlipstreamUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		CFBACFF127E88F0800851E20 /* Resources */ = {
+		CFCEF40428380C160063CD47 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFD7F29D27F4DC3F005A63C8 /* GoogleService-Info.plist in Resources */,
+				CFCEF4A028381D860063CD47 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CFBACFF527E88F0800851E20 /* Resources */ = {
+		CFCEF40828380C170063CD47 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFBACFFD27E88F0900851E20 /* Assets.xcassets in Resources */,
-				CFD7F29E27F4DC3F005A63C8 /* GoogleService-Info.plist in Resources */,
+				CFCEF41028380C170063CD47 /* Assets.xcassets in Resources */,
+				CFCEF4A128381D860063CD47 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CFBAD00027E88F0900851E20 /* Resources */ = {
+		CFCEF41328380C170063CD47 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF610E7A27F1F5AC0076421B /* news.json in Resources */,
-				CFDDF1DC27EF74990032FD9F /* team_standings.json in Resources */,
-				CFBAD01527E88F0A00851E20 /* Preview Assets.xcassets in Resources */,
-				CFBAD01227E88F0A00851E20 /* Assets.xcassets in Resources */,
-				CF9E874C28142F77005815D4 /* sessions.json in Resources */,
-				CF315FA227F12254003C26D7 /* season_schedule.json in Resources */,
-				CFDDF1DA27EF69D80032FD9F /* driver_standings.json in Resources */,
-				CFD7F29F27F4DC3F005A63C8 /* GoogleService-Info.plist in Resources */,
+				CFE2697B283A85AD000F52B6 /* drivers.txt in Resources */,
+				CFCEF46228380D050063CD47 /* news.json in Resources */,
+				CFCEF42828380C180063CD47 /* Preview Assets.xcassets in Resources */,
+				CFCEF46028380D050063CD47 /* season_schedule.json in Resources */,
+				CFCEF45F28380D050063CD47 /* sessions.json in Resources */,
+				CFCEF42528380C180063CD47 /* Assets.xcassets in Resources */,
+				CFE2697D283A8962000F52B6 /* constructors.txt in Resources */,
+				CFCEF46128380D050063CD47 /* team_standings.json in Resources */,
+				CFCEF4A228381D860063CD47 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFCEF42D28380C180063CD47 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFCEF43728380C180063CD47 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		CFBACFFE27E88F0900851E20 /* Sources */ = {
+		CFCEF41128380C170063CD47 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFBAD00C27E88F0900851E20 /* NotificationController.swift in Sources */,
-				CF610E8427F24E450076421B /* Standings.swift in Sources */,
-				CF315FA827F1288D003C26D7 /* TrackInfo.swift in Sources */,
-				CF9E874828136089005815D4 /* SessionDriverDetails.swift in Sources */,
-				CF0785512831086800D9F9E2 /* AppDelegate.swift in Sources */,
-				CF3440D2282B190A0077F506 /* FavoriteDriverSelector.swift in Sources */,
-				CF610E8127F202560076421B /* Article.swift in Sources */,
-				CF610E7D27F1F5CA0076421B /* NewsList.swift in Sources */,
-				CFDDF1CE27EE9CF00032FD9F /* TeamDetails.swift in Sources */,
-				CF5373BC27F3195D009C3F46 /* WebView.swift in Sources */,
-				CFBAD00A27E88F0900851E20 /* AppEntryPoint.swift in Sources */,
-				CFBAD01027E88F0900851E20 /* ComplicationController.swift in Sources */,
-				CF9E874A28142C9B005815D4 /* Session.swift in Sources */,
-				CF478A9727EE906F00555CCE /* TeamStandings.swift in Sources */,
-				CF610E8627F25E440076421B /* EventMenu.swift in Sources */,
-				CFD970FB27EDE11B00B11C54 /* Driver.swift in Sources */,
-				CF315FA627F12873003C26D7 /* EventsList.swift in Sources */,
-				CF610E7F27F1F60D0076421B /* NewsArticle.swift in Sources */,
-				CFBAD00827E88F0900851E20 /* SlipstreamApp.swift in Sources */,
-				CF678B4A27EC7AFD0078BCA1 /* Event.swift in Sources */,
-				CFD970FD27EDE19F00B11C54 /* DriverDetails.swift in Sources */,
-				CF88DC4B27EF8C1300C08AC6 /* DriverStandings.swift in Sources */,
-				CFD7F29B27F4D61E005A63C8 /* DataManager.swift in Sources */,
-				CF3440D8282DB93B0077F506 /* ExtensionDelegate.swift in Sources */,
-				CF9E874628136000005815D4 /* SessionGrid.swift in Sources */,
-				CF3440D5282D8BC30077F506 /* NotificationView.swift in Sources */,
-				CF5373C027F327C7009C3F46 /* Settings.swift in Sources */,
-				CF9E874E281430B0005815D4 /* DriverDetailsForSession.swift in Sources */,
-				CF478A8F27EE688600555CCE /* Team.swift in Sources */,
+				CFCEF41F28380C170063CD47 /* NotificationController.swift in Sources */,
+				CFCEF497283815CE0063CD47 /* AppEntryPoint.swift in Sources */,
+				CFCEF47F28380F070063CD47 /* TrackInfo.swift in Sources */,
+				CFCEF47028380DE80063CD47 /* TeamDetails.swift in Sources */,
+				CFCEF47328380E2E0063CD47 /* DriverDetails.swift in Sources */,
+				CFCEF48128380F250063CD47 /* EventMenu.swift in Sources */,
+				CFCEF48428380F520063CD47 /* SessionGrid.swift in Sources */,
+				CFCEF46E28380DC40063CD47 /* TeamStandings.swift in Sources */,
+				CF589FEA2839338F00EDC489 /* Notifications.swift in Sources */,
+				CFCEF48628380F710063CD47 /* SessionDriverDetails.swift in Sources */,
+				CFCEF47828380E8C0063CD47 /* NewsList.swift in Sources */,
+				CF589FE82839272A00EDC489 /* Preferences.swift in Sources */,
+				CFCEF46B28380D950063CD47 /* Standings.swift in Sources */,
+				CFCEF48D283814F00063CD47 /* Team.swift in Sources */,
+				CFCEF489283814AE0063CD47 /* Event.swift in Sources */,
+				CFCEF48B283814CA0063CD47 /* Driver.swift in Sources */,
+				CF2CC7872839ADBF00D2189C /* FavoriteDriver.swift in Sources */,
+				CFCEF4932838154B0063CD47 /* DriverDetailsForSession.swift in Sources */,
+				CFCEF42328380C170063CD47 /* ComplicationController.swift in Sources */,
+				CFCEF495283815AC0063CD47 /* DataManager.swift in Sources */,
+				CFCEF47D28380EE00063CD47 /* EventsList.swift in Sources */,
+				CF2CC7892839B77200D2189C /* FavoriteTeam.swift in Sources */,
+				CFCEF48F2838150A0063CD47 /* NewsArticle.swift in Sources */,
+				CFCEF41B28380C170063CD47 /* SlipstreamApp.swift in Sources */,
+				CFCEF491283815360063CD47 /* Session.swift in Sources */,
+				CFCEF45928380CB30063CD47 /* AppDelegate.swift in Sources */,
+				CFCEF47A28380EA90063CD47 /* Article.swift in Sources */,
+				CFCEF47528380E4C0063CD47 /* DriverStandings.swift in Sources */,
+				CFCEF45728380C930063CD47 /* NotificationView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFCEF42B28380C180063CD47 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFCEF43428380C180063CD47 /* SlipstreamTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFCEF43528380C180063CD47 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFCEF44028380C180063CD47 /* SlipstreamUITestsLaunchTests.swift in Sources */,
+				CFCEF43E28380C180063CD47 /* SlipstreamUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		CFBACFFA27E88F0800851E20 /* PBXTargetDependency */ = {
+		CFCEF40D28380C170063CD47 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CFBACFF627E88F0800851E20 /* Slipstream WatchKit App */;
-			targetProxy = CFBACFF927E88F0800851E20 /* PBXContainerItemProxy */;
+			target = CFCEF40928380C170063CD47 /* Slipstream WatchKit App */;
+			targetProxy = CFCEF40C28380C170063CD47 /* PBXContainerItemProxy */;
 		};
-		CFBAD00527E88F0900851E20 /* PBXTargetDependency */ = {
+		CFCEF41828380C170063CD47 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CFBAD00127E88F0900851E20 /* Slipstream WatchKit Extension */;
-			targetProxy = CFBAD00427E88F0900851E20 /* PBXContainerItemProxy */;
+			target = CFCEF41428380C170063CD47 /* Slipstream WatchKit Extension */;
+			targetProxy = CFCEF41728380C170063CD47 /* PBXContainerItemProxy */;
+		};
+		CFCEF43128380C180063CD47 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFCEF41428380C170063CD47 /* Slipstream WatchKit Extension */;
+			targetProxy = CFCEF43028380C180063CD47 /* PBXContainerItemProxy */;
+		};
+		CFCEF43B28380C180063CD47 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFCEF40928380C170063CD47 /* Slipstream WatchKit App */;
+			targetProxy = CFCEF43A28380C180063CD47 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		CFBAD01827E88F0A00851E20 /* Debug */ = {
+		CFCEF44128380C180063CD47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -581,7 +719,7 @@
 			};
 			name = Debug;
 		};
-		CFBAD01927E88F0A00851E20 /* Release */ = {
+		CFCEF44228380C180063CD47 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -627,7 +765,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -635,7 +772,7 @@
 			};
 			name = Release;
 		};
-		CFBAD01B27E88F0A00851E20 /* Debug */ = {
+		CFCEF44428380C180063CD47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
@@ -657,7 +794,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tomas.mamede.Slipstream.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomasmamede.Slipstream.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -668,7 +805,7 @@
 			};
 			name = Debug;
 		};
-		CFBAD01C27E88F0A00851E20 /* Release */ = {
+		CFCEF44528380C180063CD47 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
@@ -690,7 +827,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tomas.mamede.Slipstream.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomasmamede.Slipstream.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -701,7 +838,7 @@
 			};
 			name = Release;
 		};
-		CFBAD01F27E88F0A00851E20 /* Debug */ = {
+		CFCEF44828380C180063CD47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -715,7 +852,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Slipstream WatchKit App";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tomas.mamede.Slipstream.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomasmamede.Slipstream.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -726,7 +863,7 @@
 			};
 			name = Debug;
 		};
-		CFBAD02027E88F0A00851E20 /* Release */ = {
+		CFCEF44928380C180063CD47 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -740,7 +877,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Slipstream WatchKit App";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tomas.mamede.Slipstream.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomasmamede.Slipstream.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -751,91 +888,189 @@
 			};
 			name = Release;
 		};
-		CFBAD02327E88F0A00851E20 /* Debug */ = {
+		CFCEF44C28380C180063CD47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y4642869FB;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tomas.mamede.Slipstream;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomasmamede.Slipstream.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		CFBAD02427E88F0A00851E20 /* Release */ = {
+		CFCEF44D28380C180063CD47 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y4642869FB;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tomas.mamede.Slipstream;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomasmamede.Slipstream.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		CFCEF44F28380C180063CD47 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y4642869FB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomasmamede.SlipstreamTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Slipstream WatchKit Extension.appex/Slipstream WatchKit Extension";
+				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+			};
+			name = Debug;
+		};
+		CFCEF45028380C180063CD47 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y4642869FB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomasmamede.SlipstreamTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Slipstream WatchKit Extension.appex/Slipstream WatchKit Extension";
+				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+			};
+			name = Release;
+		};
+		CFCEF45228380C180063CD47 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y4642869FB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomasmamede.SlipstreamUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Slipstream WatchKit App";
+				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+			};
+			name = Debug;
+		};
+		CFCEF45328380C180063CD47 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y4642869FB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tomasmamede.SlipstreamUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Slipstream WatchKit App";
+				WATCHOS_DEPLOYMENT_TARGET = 8.5;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CFBACFF027E88F0800851E20 /* Build configuration list for PBXProject "Slipstream" */ = {
+		CFCEF40328380C160063CD47 /* Build configuration list for PBXProject "Slipstream" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CFBAD01827E88F0A00851E20 /* Debug */,
-				CFBAD01927E88F0A00851E20 /* Release */,
+				CFCEF44128380C180063CD47 /* Debug */,
+				CFCEF44228380C180063CD47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
-		CFBAD01A27E88F0A00851E20 /* Build configuration list for PBXNativeTarget "Slipstream WatchKit Extension" */ = {
+		CFCEF44328380C180063CD47 /* Build configuration list for PBXNativeTarget "Slipstream WatchKit Extension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CFBAD01B27E88F0A00851E20 /* Debug */,
-				CFBAD01C27E88F0A00851E20 /* Release */,
+				CFCEF44428380C180063CD47 /* Debug */,
+				CFCEF44528380C180063CD47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
-		CFBAD01E27E88F0A00851E20 /* Build configuration list for PBXNativeTarget "Slipstream WatchKit App" */ = {
+		CFCEF44728380C180063CD47 /* Build configuration list for PBXNativeTarget "Slipstream WatchKit App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CFBAD01F27E88F0A00851E20 /* Debug */,
-				CFBAD02027E88F0A00851E20 /* Release */,
+				CFCEF44828380C180063CD47 /* Debug */,
+				CFCEF44928380C180063CD47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
-		CFBAD02227E88F0A00851E20 /* Build configuration list for PBXNativeTarget "Slipstream" */ = {
+		CFCEF44B28380C180063CD47 /* Build configuration list for PBXNativeTarget "Slipstream" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CFBAD02327E88F0A00851E20 /* Debug */,
-				CFBAD02427E88F0A00851E20 /* Release */,
+				CFCEF44C28380C180063CD47 /* Debug */,
+				CFCEF44D28380C180063CD47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
+		};
+		CFCEF44E28380C180063CD47 /* Build configuration list for PBXNativeTarget "SlipstreamTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFCEF44F28380C180063CD47 /* Debug */,
+				CFCEF45028380C180063CD47 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFCEF45128380C180063CD47 /* Build configuration list for PBXNativeTarget "SlipstreamUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFCEF45228380C180063CD47 /* Debug */,
+				CFCEF45328380C180063CD47 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CFD7F29727F4D5B6005A63C8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		CFCEF498283817BB0063CD47 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CFD7F29827F4D5B6005A63C8 /* FirebaseDatabase */ = {
+		CFCEF499283817BB0063CD47 /* FirebaseDatabase */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CFD7F29727F4D5B6005A63C8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = CFCEF498283817BB0063CD47 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabase;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = CFBACFED27E88F0800851E20 /* Project object */;
+	rootObject = CFCEF40028380C160063CD47 /* Project object */;
 }

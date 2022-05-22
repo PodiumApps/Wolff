@@ -2,7 +2,7 @@
 //  EventMenu.swift
 //  Slipstream WatchKit Extension
 //
-//  Created by Tomás Mamede on 28/03/2022.
+//  Created by Tomás Mamede on 20/05/2022.
 //
 
 import SwiftUI
@@ -61,8 +61,6 @@ struct EventMenu: View {
                     }, header: {
                         Text("Sessions")
                     })
-                    
-                    
                     
                     NavigationLink(destination: {
                         TrackInfo(event: event)

@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  Slipstream WatchKit Extension
 //
-//  Created by Tomás Mamede on 15/05/2022.
+//  Created by Tomás Mamede on 20/05/2022.
 //
 
 import Foundation
@@ -23,12 +23,6 @@ class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelega
         if uuid == nil {
             let newUUID = UUID().description
             UserDefaults.standard.set(newUUID, forKey: "id")
-            
-            //FirebaseApp.configure()
-            
-            //var ref: DatabaseReference!
-            //ref = Database.database().reference().ref.child("/")
-            //ref.child("users/\(newUUID)").setValue(newUUID)
         }
         
         UNUserNotificationCenter.current().delegate = self
@@ -70,21 +64,13 @@ class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelega
         print(error.localizedDescription)
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
-        return UNNotificationPresentationOptions([.sound, .banner, .list])
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.sound, .banner, .list])
     }
     
-//    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-//    }
-    
-//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
-//        // Do something with the notification
-//        // Go to the correct place in the app.
-//    }
-    
-//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-//        //let content = response.notification.request.content.title
-//
-//        //completionHandler()
-//    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        //let content = response.notification.request.content.title
+        completionHandler()
+    }
 }
+

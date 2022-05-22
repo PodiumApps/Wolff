@@ -1,18 +1,20 @@
 //
-//  Firebase.swift
+//  DataManager.swift
 //  Slipstream WatchKit Extension
 //
-//  Created by Tomás Mamede on 30/03/2022.
+//  Created by Tomás Mamede on 20/05/2022.
 //
 
 import Foundation
 import FirebaseDatabase
 import CoreText
-//import UserNotifications
 
 struct AppData: Codable {
     var timestamp: String
     var seasonSchedule: SeasonSchedule
+    var seasonScheduleCurrentEvent: [Event]
+    var seasonScheduleUpcomingEvents: [Event]
+    var seasonSchedulePastEvents: [Event]
     var driverStandings: [Driver]
     var teamStandings: [Team]
     var latestNews: [NewsArticle]
@@ -22,7 +24,9 @@ struct AppData: Codable {
         case timestamp = "timestamp"
         case driverStandings = "driverStandings"
         case latestNews = "latestNews"
-        case seasonSchedule = "seasonSchedule"
+        case seasonScheduleCurrentEvent = "seasonScheduleCurrent"
+        case seasonScheduleUpcomingEvents = "seasonScheduleUpcoming"
+        case seasonSchedulePastEvents = "seasonSchedulePast"
         case teamStandings = "teamStandings"
         case sessions = "sessions"
     }
@@ -32,7 +36,10 @@ struct AppData: Codable {
         timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp) ?? ""
         driverStandings = try container.decodeIfPresent([Driver].self, forKey: .driverStandings) ?? []
         teamStandings = try container.decodeIfPresent([Team].self, forKey: .teamStandings) ?? []
-        seasonSchedule = try container.decodeIfPresent(SeasonSchedule.self, forKey: .seasonSchedule) ?? SeasonSchedule(currentEvent: [], upcomoingEvents: [], pastEvents: [])
+        seasonScheduleCurrentEvent = try container.decodeIfPresent([Event].self, forKey: .seasonScheduleCurrentEvent) ?? []
+        seasonScheduleUpcomingEvents = try container.decodeIfPresent([Event].self, forKey: .seasonScheduleUpcomingEvents) ?? []
+        seasonSchedulePastEvents = try container.decodeIfPresent([Event].self, forKey: .seasonSchedulePastEvents) ?? []
+        seasonSchedule = SeasonSchedule(currentEvent: seasonScheduleCurrentEvent, upcomoingEvents: seasonScheduleUpcomingEvents, pastEvents: seasonSchedulePastEvents)
         latestNews = try container.decodeIfPresent([NewsArticle].self, forKey: .latestNews) ?? []
         sessions = try container.decodeIfPresent([Session].self, forKey: .sessions) ?? []
     }
@@ -40,17 +47,15 @@ struct AppData: Codable {
 
 class DataManager: ObservableObject {
     
-    @Published var appData: AppData?
+    var appData: AppData?
     @Published var dataRetrievalStatus = 0
+    @Published var showModalAlert = false
     
     lazy var databaseReference: DatabaseReference = Database.database().reference().ref.child("/")
     var databaseHandle: DatabaseHandle?
     
     init() {
-        self.loadLocalData()
-        if self.appData != nil {
-            dataRetrievalStatus = 1
-        }
+        startAppDataListener()
     }
     
     private func loadLocalData() {
@@ -63,6 +68,7 @@ class DataManager: ObservableObject {
                 let dataDecoded = self.decodeJSON(data: data)
                 if let appData = dataDecoded {
                     self.appData = appData
+                    self.showModalAlert.toggle()
                     print("Data loaded from file.")
                 }
             }
@@ -103,19 +109,13 @@ class DataManager: ObservableObject {
                         
                         if let newData = dataDecoded {
                             
-                            if self.appData != nil {
-                                print("Checking for notifications")
-                            }
-                            else {
-                                print("Could not check for notifications because local app data does not exist.")
-                            }
-                            
                             self.appData = newData
                             self.saveLocalData()
                             
                             self.dataRetrievalStatus = 1
                         }
                         else {
+                            self.loadLocalData()
                             self.dataRetrievalStatus = 2
                         }
                     }
@@ -125,9 +125,12 @@ class DataManager: ObservableObject {
                 }
             }
             else {
+                self.loadLocalData()
                 self.dataRetrievalStatus = 2
             }
         })
+        
+        self.checkInternetConnection()
     }
     
     func stopAppDataListener() {
@@ -136,6 +139,24 @@ class DataManager: ObservableObject {
                 databaseReference.removeObserver(withHandle: databaseHandle)
             }
         }
+    }
+    
+    func checkInternetConnection() {
+        let networkConnection = Database.database().reference(withPath: ".info/connected")
+        networkConnection.observe(.value, with: { snapshot in
+            if let connected = snapshot.value as? Bool {
+                if connected {
+                    print("Connected: True")
+                }
+                else {
+                    print("Connected: False")
+                    if self.dataRetrievalStatus != 2 {
+                        self.dataRetrievalStatus = 2
+                        self.loadLocalData()
+                    }
+                }
+            }
+        })
     }
     
     func decodeJSON(data: Data?) -> AppData? {

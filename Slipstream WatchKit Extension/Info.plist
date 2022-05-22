@@ -7,16 +7,10 @@
 		<key>NSExtensionAttributes</key>
 		<dict>
 			<key>WKAppBundleIdentifier</key>
-			<string>com.tomas.mamede.Slipstream.watchkitapp</string>
+			<string>com.tomasmamede.Slipstream.watchkitapp</string>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.watchkit</string>
 	</dict>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>remote-notification</string>
-	</array>
-	<key>WKBackgroundModes</key>
-	<array/>
 </dict>
 </plist>

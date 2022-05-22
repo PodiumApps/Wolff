@@ -2,7 +2,7 @@
 //  NewsList.swift
 //  Slipstream WatchKit Extension
 //
-//  Created by Tomás Mamede on 28/03/2022.
+//  Created by Tomás Mamede on 20/05/2022.
 //
 
 import SwiftUI
@@ -12,11 +12,23 @@ struct NewsList: View {
     var news: [NewsArticle]
     
     var body: some View {
-        NavigationView {
-            VStack(alignment: .leading) {
+        if news.isEmpty {
+            NavigationView {
+                VStack {
+                    Text("There are no news to be shown at this time. Come back later.")
+                        .font(.caption2)
+                        .bold()
+                        .multilineTextAlignment(.center)
+                        .padding()
+                }
+                .navigationTitle(Text("Latest News"))
+                .navigationBarTitleDisplayMode(.inline)
+            }
+        }
+        else {
+            NavigationView {
                 ScrollView {
                     ForEach(0 ..< news.count, id: \.self) { index in
-                        
                         NavigationLink(destination: {
                             Article(article: news[index])
                         }, label: {
@@ -33,7 +45,6 @@ struct NewsList: View {
                         .buttonStyle(PlainButtonStyle())
                         
                         Divider()
-                        
                     }
                     
                     HStack {
@@ -46,9 +57,9 @@ struct NewsList: View {
                     }
                     .padding([.leading, .trailing])
                 }
+                .navigationTitle(Text("Latest News"))
+                .navigationBarTitleDisplayMode(.automatic)
             }
-            .navigationTitle(Text("Latest News"))
-            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

@@ -2,69 +2,91 @@
 //  EventsList.swift
 //  Slipstream WatchKit Extension
 //
-//  Created by Tomás Mamede on 28/03/2022.
+//  Created by Tomás Mamede on 20/05/2022.
 //
 
 import SwiftUI
 
 struct EventsList: View {
     
-    var sessions = decodeSessionsJSON() ?? []
+    var sessions: [Session]
     var events: SeasonSchedule
     var eventsInArray: [(String, [Event])] {
         return [
-            ("Current", events.currentEvent),
-            ("Upcoming", events.upcomoingEvents),
-            ("Past", events.pastEvents.reversed())
+            ("Current", !events.currentEvent.isEmpty ? events.currentEvent : []),
+            ("Upcoming", !events.upcomoingEvents.isEmpty ? events.upcomoingEvents : []),
+            ("Past", !events.pastEvents.isEmpty ? events.pastEvents.reversed() : [])
         ]
     }
     
     var body: some View {
         NavigationView {
-            VStack {
-                List {
+            List {
+                
+                if eventsInArray[0].1.isEmpty && eventsInArray[1].1.isEmpty && eventsInArray[2].1.isEmpty {
+                    VStack {
+                        Text("There are no events to be shown at this time. Come back later.")
+                            .font(.caption2)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                    }
+                    .listRowBackground(Color.clear)
+                }
+                else {
                     ForEach(0 ..< eventsInArray.count, id: \.self) { i in
                         Section(eventsInArray[i].0) {
-                            ForEach(0 ..< eventsInArray[i].1.count, id: \.self) { index in
-                                NavigationLink(destination: {
-                                    EventMenu(
-                                        event: eventsInArray[i].1[index],
-                                        sessions: getSessionsForEvent(event: eventsInArray[i].1[index])
-                                    )
-                                }, label: {
-                                    HStack {
+                            
+                            if eventsInArray[i].1.isEmpty {
+                                VStack {
+                                    Text("There are no \(eventsInArray[i].0.lowercased()) events to be shown at this time. Come back later.")
+                                        .font(.caption2)
+                                        .multilineTextAlignment(.center)
+                                        .padding()
+                                }
+                                .listRowBackground(Color.clear)
+                            }
+                            else {
+                                ForEach(0 ..< eventsInArray[i].1.count, id: \.self) { index in
+                                    NavigationLink(destination: {
+                                        EventMenu(
+                                            event: eventsInArray[i].1[index],
+                                            sessions: getSessionsForEvent(event: eventsInArray[i].1[index])
+                                        )
+                                    }, label: {
+                                        HStack {
 
-                                        if let image = UIImage(named: eventsInArray[i].1[index].eventName) {
-                                            Image(uiImage: image)
-                                                .resizable()
+                                            if let image = UIImage(named: eventsInArray[i].1[index].eventName) {
+                                                Image(uiImage: image)
+                                                    .resizable()
+                                                    .frame(width: 40, height: 28, alignment: .center)
+                                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                                    .scaledToFit()
+                                            }
+                                            else {
+                                                AsyncImage(url: URL(string: eventsInArray[i].1[index].countryImage)) { image in
+                                                    image.resizable()
+
+                                                } placeholder: {
+                                                    Color.white
+                                                }
                                                 .frame(width: 40, height: 28, alignment: .center)
                                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                                                 .scaledToFit()
-                                        }
-                                        else {
-                                            AsyncImage(url: URL(string: eventsInArray[i].1[index].countryImage)) { image in
-                                                image.resizable()
-
-                                            } placeholder: {
-                                                Color.white
                                             }
-                                            .frame(width: 40, height: 28, alignment: .center)
-                                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                                            .scaledToFit()
+                                            
+                                            Text("\(eventsInArray[i].1[index].eventName)")
+                                                .padding(.leading, 6)
+                                            Spacer()
                                         }
-                                        
-                                        Text("\(eventsInArray[i].1[index].eventName)")
-                                            .padding(.leading, 6)
-                                        Spacer()
-                                    }
-                                })
+                                    })
+                                }
                             }
                         }
                     }
                 }
             }
             .navigationTitle(Text("Season"))
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitleDisplayMode(.automatic)
         }
     }
     
@@ -88,6 +110,6 @@ struct EventsList: View {
 
 struct EventsList_Previews: PreviewProvider {
     static var previews: some View {
-        EventsList(events: seasonSchedule)
+        EventsList(sessions: [session], events: seasonSchedule)
     }
 }

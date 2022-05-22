@@ -2,7 +2,7 @@
 //  TeamDetails.swift
 //  Slipstream WatchKit Extension
 //
-//  Created by Tomás Mamede on 26/03/2022.
+//  Created by Tomás Mamede on 20/05/2022.
 //
 
 import SwiftUI
