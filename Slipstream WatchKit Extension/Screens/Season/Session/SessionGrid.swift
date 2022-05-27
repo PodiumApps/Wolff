@@ -12,6 +12,20 @@ struct SessionGrid: View {
     var classifications: [DriverDetailsForSession]
     var eventTitle: String
     var status: [String]
+    var index: Int
+    var eventIsOccuring: String
+    
+    var finalStatus: [String] {
+        var newStatus = status
+        if index == 0 && eventIsOccuring == "1" {
+            newStatus[0] = "LIVE"
+        }
+        else {
+            newStatus.removeAll()
+            newStatus.append("FINISHED")
+        }
+        return newStatus
+    }
     
     var body: some View {
         
@@ -19,9 +33,9 @@ struct SessionGrid: View {
             List {
                 Section {
                     VStack(alignment: .leading) {
-                        ForEach(0 ..< status.count, id: \.self) { index in
-                            if status[index] != "" {
-                                Text(status[index])
+                        ForEach(0 ..< finalStatus.count, id: \.self) { index in
+                            if finalStatus[index] != "" {
+                                Text(finalStatus[index])
                             }
                         }
                         
@@ -53,8 +67,8 @@ struct SessionGrid: View {
                     }
                 }, header: {
                     HStack {
-                        if status.count > 0 {
-                            Text(status[0] == "FINISHED" ? "RESULTS" : "CLASSIFICATIONS")
+                        if finalStatus.count > 0 {
+                            Text(finalStatus[0] == "FINISHED" ? "RESULTS" : "CLASSIFICATIONS")
                             Spacer()
                         }
                     }
@@ -72,6 +86,6 @@ struct SessionGrid: View {
 
 struct Session_Previews: PreviewProvider {
     static var previews: some View {
-        SessionGrid(classifications: [driverDetailsForSession], eventTitle: "Sprint", status: [])
+        SessionGrid(classifications: [driverDetailsForSession], eventTitle: "Sprint", status: [], index: 0, eventIsOccuring: "1")
     }
 }

@@ -16,7 +16,7 @@ class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelega
     
     func applicationDidFinishLaunching() {
         
-        UserDefaults.standard.removeObject(forKey: "id")
+        //UserDefaults.standard.removeObject(forKey: "id")
         
         let uuid = UserDefaults.standard.object(forKey: "id") as? String
         

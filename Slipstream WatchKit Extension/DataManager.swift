@@ -8,9 +8,11 @@
 import Foundation
 import FirebaseDatabase
 import CoreText
+import Network
 
 struct AppData: Codable {
     var timestamp: String
+    var liveEventIsOccuring: String
     var seasonSchedule: SeasonSchedule
     var seasonScheduleCurrentEvent: [Event]
     var seasonScheduleUpcomingEvents: [Event]
@@ -29,11 +31,13 @@ struct AppData: Codable {
         case seasonSchedulePastEvents = "seasonSchedulePast"
         case teamStandings = "teamStandings"
         case sessions = "sessions"
+        case liveEventIsOccuring = "liveEventIsOccuring"
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp) ?? ""
+        liveEventIsOccuring = try container.decodeIfPresent(String.self, forKey: .liveEventIsOccuring) ?? ""
         driverStandings = try container.decodeIfPresent([Driver].self, forKey: .driverStandings) ?? []
         teamStandings = try container.decodeIfPresent([Team].self, forKey: .teamStandings) ?? []
         seasonScheduleCurrentEvent = try container.decodeIfPresent([Event].self, forKey: .seasonScheduleCurrentEvent) ?? []
@@ -47,15 +51,34 @@ struct AppData: Codable {
 
 class DataManager: ObservableObject {
     
-    var appData: AppData?
-    @Published var dataRetrievalStatus = 0
-    @Published var showModalAlert = false
+    @Published var appData: AppData? = nil
+    @Published var dataNotUpdated = false
+    
+    let monitor = NWPathMonitor()
+    let queue = DispatchQueue.global(qos: .background)
     
     lazy var databaseReference: DatabaseReference = Database.database().reference().ref.child("/")
-    var databaseHandle: DatabaseHandle?
+    var databaseHandle: DatabaseHandle? = nil
     
     init() {
-        startAppDataListener()
+        loadLocalData()
+        
+        monitor.pathUpdateHandler = { path in
+            print(path.status)
+            if path.status != .unsatisfied {
+                print("No Internet connection.")
+                if self.appData != nil {
+                    DispatchQueue.main.async {
+                        self.dataNotUpdated = true
+                    }
+                }
+            }
+            else {
+                print("We have Internet connection.")
+            }
+        }
+        
+        monitor.start(queue: queue)
     }
     
     private func loadLocalData() {
@@ -68,7 +91,6 @@ class DataManager: ObservableObject {
                 let dataDecoded = self.decodeJSON(data: data)
                 if let appData = dataDecoded {
                     self.appData = appData
-                    self.showModalAlert.toggle()
                     print("Data loaded from file.")
                 }
             }
@@ -96,41 +118,37 @@ class DataManager: ObservableObject {
     }
     
     func startAppDataListener() {
+        
+        print(getCurrentDayOfTheWeek())
+        
+        let dayOfTheWeek = getCurrentDayOfTheWeek()
+        
+        
+        
 
         databaseHandle = databaseReference.observe(DataEventType.value, with: { snapshop in
+            
             if snapshop.exists() {
                 if let data = snapshop.value {
-                    
-                    self.dataRetrievalStatus = 0
                     
                     do {
                         let json = try JSONSerialization.data(withJSONObject: data)
                         let dataDecoded = self.decodeJSON(data: json)
                         
+                        print("Retrieved data!")
+                        
                         if let newData = dataDecoded {
                             
                             self.appData = newData
                             self.saveLocalData()
-                            
-                            self.dataRetrievalStatus = 1
-                        }
-                        else {
-                            self.loadLocalData()
-                            self.dataRetrievalStatus = 2
                         }
                     }
                     catch let error {
-                        print(error)
+                        print(error.localizedDescription)
                     }
                 }
             }
-            else {
-                self.loadLocalData()
-                self.dataRetrievalStatus = 2
-            }
         })
-        
-        self.checkInternetConnection()
     }
     
     func stopAppDataListener() {
@@ -141,22 +159,9 @@ class DataManager: ObservableObject {
         }
     }
     
-    func checkInternetConnection() {
-        let networkConnection = Database.database().reference(withPath: ".info/connected")
-        networkConnection.observe(.value, with: { snapshot in
-            if let connected = snapshot.value as? Bool {
-                if connected {
-                    print("Connected: True")
-                }
-                else {
-                    print("Connected: False")
-                    if self.dataRetrievalStatus != 2 {
-                        self.dataRetrievalStatus = 2
-                        self.loadLocalData()
-                    }
-                }
-            }
-        })
+    func getCurrentDayOfTheWeek() -> Int {
+        let date = Date()
+        return Calendar.current.component(.weekday, from: date)
     }
     
     func decodeJSON(data: Data?) -> AppData? {

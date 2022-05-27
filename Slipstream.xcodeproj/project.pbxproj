@@ -234,6 +234,7 @@
 				CFCEF494283815AC0063CD47 /* DataManager.swift */,
 				CFCEF41E28380C170063CD47 /* NotificationController.swift */,
 				CFCEF41A28380C170063CD47 /* SlipstreamApp.swift */,
+				CFCEF45828380CB30063CD47 /* AppDelegate.swift */,
 				CFCEF42428380C180063CD47 /* Assets.xcassets */,
 				CFCEF45A28380CE50063CD47 /* FIles */,
 				CFCEF48728380F8C0063CD47 /* Model */,
@@ -273,7 +274,6 @@
 			isa = PBXGroup;
 			children = (
 				CFCEF45628380C930063CD47 /* NotificationView.swift */,
-				CFCEF45828380CB30063CD47 /* AppDelegate.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";

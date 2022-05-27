@@ -11,6 +11,13 @@ struct EventMenu: View {
     
     var event: Event
     var sessions: [Session]
+    var liveEventIsOccuring: String
+    var index: Int
+    
+    var finalLiveEventIsOccuring: String {
+        print(index)
+        return index > 0 ? "0" : liveEventIsOccuring
+    }
     
     var body: some View {
         VStack {
@@ -52,7 +59,9 @@ struct EventMenu: View {
                                 SessionGrid(
                                     classifications: sessions[i].currentClassifications,
                                     eventTitle: sessions[i].eventTitle,
-                                    status: sessions[i].status
+                                    status: sessions[i].status,
+                                    index: i,
+                                    eventIsOccuring: finalLiveEventIsOccuring
                                 )
                             }, label: {
                                 Text(sessions[i].eventTitle)
@@ -81,6 +90,6 @@ struct EventMenu: View {
 
 struct EventMenu_Previews: PreviewProvider {
     static var previews: some View {
-        EventMenu(event: seasonSchedule.currentEvent[0], sessions: [])
+        EventMenu(event: seasonSchedule.currentEvent[0], sessions: [], liveEventIsOccuring: "0", index: 0)
     }
 }

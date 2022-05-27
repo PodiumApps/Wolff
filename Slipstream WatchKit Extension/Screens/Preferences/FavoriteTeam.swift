@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import FirebaseDatabase
 
 struct FavoriteTeam: View {
     
-    var teams: [String]
     
+    var teams: [String]
+    @State private var ref: DatabaseReference!
     @AppStorage("favorite_team") var favoriteTeam = "Ferrari"
     
     var body: some View {
@@ -21,6 +23,12 @@ struct FavoriteTeam: View {
                 }
             })
             .pickerStyle(.inline)
+        }
+        .onDisappear {
+            if let userId = UserDefaults.standard.object(forKey: "id") as? String {
+                ref = Database.database().reference().ref.child("/")
+                ref.child("users/\(userId)/favoriteTeam").setValue(favoriteTeam)
+            }
         }
     }
 }

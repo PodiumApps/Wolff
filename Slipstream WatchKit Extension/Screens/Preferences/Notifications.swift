@@ -6,25 +6,34 @@
 //
 
 import SwiftUI
+import FirebaseDatabase
 
 struct Notifications: View {
     
-    @AppStorage("startEventNotifications") var startEventNotifications = true
-    @AppStorage("endEventNotifications") var endEventNotifications = true
+    @AppStorage("startEventNotifications") var startSessionNotifications = true
+    @AppStorage("endEventNotifications") var endSessionNotifications = true
+    @AppStorage("redFlag") var redFlagNotifications = true
     @AppStorage("favoriteDriver") var favoriteDriverNotifications = true
     @AppStorage("favoriteTeam") var favoriteTeamNotifications = true
     @AppStorage("news") var breakingNewsNotifications = true
     
+    @State private var ref: DatabaseReference!
+    
     var body: some View {
         List {
             
-            Toggle(isOn: $startEventNotifications, label: {
+            Toggle(isOn: $startSessionNotifications, label: {
                 Text("Start of Session")
                     .font(.caption)
             })
             
-            Toggle(isOn: $endEventNotifications, label: {
+            Toggle(isOn: $endSessionNotifications, label: {
                 Text("End of Session")
+                    .font(.caption)
+            })
+            
+            Toggle(isOn: $redFlagNotifications, label: {
+                Text("Red Flag")
                     .font(.caption)
             })
             
@@ -45,6 +54,17 @@ struct Notifications: View {
         }
         .navigationTitle(Text("Notifications"))
         .navigationBarTitleDisplayMode(.inline)
+        .onDisappear {
+            if let userId = UserDefaults.standard.object(forKey: "id") as? String {
+                ref = Database.database().reference().ref.child("/")
+                ref.child("users/\(userId)/notifications/startSession").setValue(startSessionNotifications)
+                ref.child("users/\(userId)/notifications/endSession").setValue(endSessionNotifications)
+                ref.child("users/\(userId)/notifications/redFlag").setValue(redFlagNotifications)
+                ref.child("users/\(userId)/notifications/favoriteDriver").setValue(favoriteDriverNotifications)
+                ref.child("users/\(userId)/notifications/favoriteTeam").setValue(favoriteTeamNotifications)
+                ref.child("users/\(userId)/notifications/breakingNews").setValue(breakingNewsNotifications)
+            }
+        }
     }
 }
 

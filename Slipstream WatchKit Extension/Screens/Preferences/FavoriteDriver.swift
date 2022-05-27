@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import FirebaseDatabase
 
 struct FavoriteDriver: View {
     
+    
     var drivers: [String]
+    @State private var ref: DatabaseReference!
     @AppStorage("favorite_driver") var favoriteDriver = "Charles Leclerc"
     
     var body: some View {
@@ -22,6 +25,12 @@ struct FavoriteDriver: View {
                 }
             })
             .pickerStyle(.inline)
+        }
+        .onDisappear {
+            if let userId = UserDefaults.standard.object(forKey: "id") as? String {
+                ref = Database.database().reference().ref.child("/")
+                ref.child("users/\(userId)/favoriteDriver").setValue(favoriteDriver)
+            }
         }
     }
 }

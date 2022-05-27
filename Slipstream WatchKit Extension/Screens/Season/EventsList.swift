@@ -10,6 +10,7 @@ import SwiftUI
 struct EventsList: View {
     
     var sessions: [Session]
+    var liveEventIsOccuring: String
     var events: SeasonSchedule
     var eventsInArray: [(String, [Event])] {
         return [
@@ -50,7 +51,9 @@ struct EventsList: View {
                                     NavigationLink(destination: {
                                         EventMenu(
                                             event: eventsInArray[i].1[index],
-                                            sessions: getSessionsForEvent(event: eventsInArray[i].1[index])
+                                            sessions: getSessionsForEvent(event: eventsInArray[i].1[index]),
+                                            liveEventIsOccuring: liveEventIsOccuring,
+                                            index: i
                                         )
                                     }, label: {
                                         HStack {
@@ -110,6 +113,6 @@ struct EventsList: View {
 
 struct EventsList_Previews: PreviewProvider {
     static var previews: some View {
-        EventsList(sessions: [session], events: seasonSchedule)
+        EventsList(sessions: [session], liveEventIsOccuring: "0", events: seasonSchedule)
     }
 }
