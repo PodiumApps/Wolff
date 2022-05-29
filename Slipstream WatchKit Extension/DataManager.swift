@@ -61,8 +61,11 @@ class DataManager: ObservableObject {
     let monitor = NWPathMonitor()
     let queue = DispatchQueue.global(qos: .background)
     
-    lazy var totalDataDatabaseReference: DatabaseReference = Database.database().reference().ref.child("/")
+    lazy var totalDataDatabaseReference: DatabaseReference = Database.database().reference().ref.child("/appData")
     var totalDataDatabaseHandle: DatabaseHandle? = nil
+    
+    lazy var lastDataTimestamp: DatabaseReference = Database.database().reference().ref.child("/timestamp")
+    var lastDataTimestampHandle: DatabaseHandle? = nil
     
     lazy var liveSessionOccuringDatabaseReference: DatabaseReference = Database.database().reference().ref.child("/liveEventIsOccuring")
     var liveSessionOccuringDatabaseHandle: DatabaseHandle? = nil
@@ -237,15 +240,6 @@ class DataManager: ObservableObject {
         if lastTotalDataDownload == nil {
             UserDefaults.standard.set(Date(), forKey: "lastTotalDataDownload")
             lastTotalDataDownload = UserDefaults.standard.object(forKey: "lastTotalDataDownload") as? Date
-        }
-        
-        let diffComponents = Calendar.current.dateComponents([.hour, .minute], from: lastTotalDataDownload!, to: Date())
-        if diffComponents.hour! < 24 {
-            print("Not allowed to get total data")
-            return
-        }
-        else {
-            UserDefaults.standard.set(Date(), forKey: "lastTotalDataDownload")
         }
         
         print("Started Total Data Listener")
