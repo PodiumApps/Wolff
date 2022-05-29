@@ -9,6 +9,7 @@ import Foundation
 import FirebaseDatabase
 import CoreText
 import Network
+import SwiftUI
 
 struct AppData: Codable {
     var liveEventIsOccuring: String
@@ -48,8 +49,14 @@ struct AppData: Codable {
 
 class DataManager: ObservableObject {
     
+    enum DataRetrievalStatus {
+        case loadingData
+        case dataLoaded
+        case errorLoadingData
+    }
+    
     @Published var appData: AppData? = nil
-    @Published var dataNotUpdated = false
+    @Published var dataRetrivalStatus: DataRetrievalStatus = .loadingData
     
     let monitor = NWPathMonitor()
     let queue = DispatchQueue.global(qos: .background)
@@ -65,23 +72,27 @@ class DataManager: ObservableObject {
     
     init() {
         loadLocalData()
-        
-//        monitor.pathUpdateHandler = { path in
-//            print(path.status)
-//            if path.status != .unsatisfied {
-//                print("No Internet connection.")
-//                if self.appData != nil {
-//                    DispatchQueue.main.async {
-//                        self.dataNotUpdated = true
-//                    }
-//                }
-//            }
-//            else {
-//                print("We have Internet connection.")
-//            }
-//        }
-//        
-//        monitor.start(queue: queue)
+        startAppDataListener()
+        //checkInternetConnection()
+    }
+    
+    private func checkInternetConnection() {
+        monitor.pathUpdateHandler = { path in
+            print(path.status)
+            if path.status != .satisfied {
+                print("No Internet connection.")
+                DispatchQueue.main.async {
+                    self.dataRetrivalStatus = .errorLoadingData
+                    self.stopAppDataListener()
+                }
+            }
+            else {
+                print("We have Internet connection.")
+                self.startAppDataListener()
+            }
+        }
+
+        monitor.start(queue: queue)
     }
     
     private func loadLocalData() {
@@ -94,6 +105,7 @@ class DataManager: ObservableObject {
                 let dataDecoded = self.decodeJSON(data: data)
                 if let appData = dataDecoded {
                     self.appData = appData
+                    self.dataRetrivalStatus = .dataLoaded
                     print("Data loaded from file.")
                 }
             }
@@ -134,10 +146,9 @@ class DataManager: ObservableObject {
                         if data == "1" {
                             
                             if self.appData == nil {
+                                
                                 self.startTotalDataListener()
-                            }
-                            else {
-                                self.stopTotalDataListener()
+                                self.dataRetrivalStatus = .loadingData
                             }
                             
                             //Live Event is on
@@ -151,6 +162,10 @@ class DataManager: ObservableObject {
                             if self.currentLiveSessionDatabaseHandle == nil {
                                 self.startTotalDataListener()
                             }
+                        }
+                        
+                        if self.appData?.liveEventIsOccuring != nil {
+                            self.appData?.liveEventIsOccuring = data
                         }
                     }
                 }
@@ -184,17 +199,22 @@ class DataManager: ObservableObject {
                                 if self.appData?.sessions != nil {
                                     self.appData?.sessions.sort(by: { $0.timestamp > $1.timestamp })
                                     if (self.appData?.sessions.count)! > 0 {
+                                        
                                         if self.appData?.sessions[0].eventTitle == newSession.eventTitle {
                                             self.appData?.sessions[0] = newSession
                                         }
                                         else {
                                             self.appData?.sessions.append(newSession)
                                         }
+                                        
+                                        print("We have new session data")
                                     }
                                 }
                                 else {
                                     self.appData?.sessions = [Session]()
                                     self.appData?.sessions.append(newSession)
+                                    
+                                    print("Added new session")
                                 }
                             }
                             
@@ -211,6 +231,23 @@ class DataManager: ObservableObject {
     }
     
     func startTotalDataListener() {
+        
+        var lastTotalDataDownload = UserDefaults.standard.object(forKey: "lastTotalDataDownload") as? Date
+        
+        if lastTotalDataDownload == nil {
+            UserDefaults.standard.set(Date(), forKey: "lastTotalDataDownload")
+            lastTotalDataDownload = UserDefaults.standard.object(forKey: "lastTotalDataDownload") as? Date
+        }
+        
+        let diffComponents = Calendar.current.dateComponents([.hour, .minute], from: lastTotalDataDownload!, to: Date())
+        if diffComponents.hour! < 24 {
+            print("Not allowed to get total data")
+            return
+        }
+        else {
+            UserDefaults.standard.set(Date(), forKey: "lastTotalDataDownload")
+        }
+        
         print("Started Total Data Listener")
         self.totalDataDatabaseHandle = self.totalDataDatabaseReference.observe(DataEventType.value) { allDataSnapshot in
             
@@ -222,13 +259,21 @@ class DataManager: ObservableObject {
                         let dataDecoded = self.decodeJSON(data: json)
 
                         if let newData = dataDecoded {
-
+                            print("Downloaded all data")
                             self.appData = newData
                             self.saveLocalData()
+                            
+                            self.dataRetrivalStatus = .dataLoaded
                         }
                     }
                     catch let error {
                         print(error.localizedDescription)
+                    }
+                    
+                    if self.appData != nil {
+                        if self.appData?.liveEventIsOccuring == "1" {
+                            self.stopTotalDataListener()
+                        }
                     }
                 }
             }
@@ -240,6 +285,10 @@ class DataManager: ObservableObject {
         if liveSessionOccuringDatabaseHandle != nil {
             liveSessionOccuringDatabaseReference.removeAllObservers()
         }
+        
+        stopTotalDataListener()
+        stopLiveSessionDataListener()
+        stopLiveSessionOccuringListener()
     }
     
     func stopLiveSessionOccuringListener() {
@@ -275,6 +324,8 @@ class DataManager: ObservableObject {
             return appDataDecoded
         }
         
+        dataRetrivalStatus = .errorLoadingData
+        
         return nil
     }
     
@@ -284,6 +335,8 @@ class DataManager: ObservableObject {
             let session = try? JSONDecoder().decode(Session.self, from: data)
             return session
         }
+        
+        dataRetrivalStatus = .errorLoadingData
         
         return nil
     }

@@ -12,52 +12,53 @@ struct AppEntryPoint: View {
     
     @EnvironmentObject var dataManager: DataManager
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.scenePhase) var scenePhase
     
     var body: some View {
-        
-        if let appData = dataManager.appData {
-            TabView {
-                EventsList(
-                    sessions: appData.sessions,
-                    liveEventIsOccuring: appData.liveEventIsOccuring,
-                    events: appData.seasonSchedule
-                )
+        TabView {
+            switch dataManager.dataRetrivalStatus {
+            case .loadingData:
+                ProgressView("Loading data...")
+            case .dataLoaded:
+                if let appData = dataManager.appData {
+                    EventsList(
+                        sessions: appData.sessions,
+                        liveEventIsOccuring: appData.liveEventIsOccuring,
+                        events: appData.seasonSchedule
+                    )
 
-                NewsList(news: appData.latestNews)
+                    NewsList(news: appData.latestNews)
 
-                Standings(
-                    teams: appData.teamStandings,
-                    drivers: appData.driverStandings
-                )
+                    Standings(
+                        teams: appData.teamStandings,
+                        drivers: appData.driverStandings
+                    )
 
-                Preferences()
-            }
-            .confirmationDialog(
-                "Failed to retrieve data from server. The data has not been updated. Make sure you are connected to the Internet and try again.",
-                isPresented: $dataManager.dataNotUpdated,
-                actions: {}
-            )
-            .onAppear {
-                dataManager.startAppDataListener()
-            }
-            .onDisappear {
-                dataManager.stopAppDataListener()
+                    Preferences()
+                }
+            case .errorLoadingData:
+                VStack {
+                    
+                    Spacer()
+
+                    Text("Failed to retrieve data from server. Make sure you are connected to the Internet and try again later.")
+                        .font(.caption2)
+                        .bold()
+                        .multilineTextAlignment(.center)
+                        .padding()
+
+                    Spacer()
+                }
             }
         }
-        else {
-            VStack {
-
-                Text("Failed to retrieve data from server. Make sure you are connected to the Internet and try again later.")
-                    .font(.caption2)
-                    .bold()
-                    .multilineTextAlignment(.center)
-                    .padding()
-
-                Spacer()
-
-                Button("Reconnect") {
-                    dataManager.startAppDataListener()
-                }
+        .onChange(of: scenePhase) { phase in
+            if phase != .active {
+                dataManager.stopAppDataListener()
+                print("Stop app data listener")
+            }
+            else {
+                dataManager.startAppDataListener()
+                print("Start app data listener")
             }
         }
     }
