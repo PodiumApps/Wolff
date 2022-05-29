@@ -11,7 +11,6 @@ import CoreText
 import Network
 
 struct AppData: Codable {
-    var timestamp: String
     var liveEventIsOccuring: String
     var seasonSchedule: SeasonSchedule
     var seasonScheduleCurrentEvent: [Event]
@@ -23,7 +22,6 @@ struct AppData: Codable {
     var sessions: [Session]
     
     enum CodingKeys: String, CodingKey {
-        case timestamp = "timestamp"
         case driverStandings = "driverStandings"
         case latestNews = "latestNews"
         case seasonScheduleCurrentEvent = "seasonScheduleCurrent"
@@ -36,7 +34,6 @@ struct AppData: Codable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        timestamp = try container.decodeIfPresent(String.self, forKey: .timestamp) ?? ""
         liveEventIsOccuring = try container.decodeIfPresent(String.self, forKey: .liveEventIsOccuring) ?? ""
         driverStandings = try container.decodeIfPresent([Driver].self, forKey: .driverStandings) ?? []
         teamStandings = try container.decodeIfPresent([Team].self, forKey: .teamStandings) ?? []
@@ -57,28 +54,34 @@ class DataManager: ObservableObject {
     let monitor = NWPathMonitor()
     let queue = DispatchQueue.global(qos: .background)
     
-    lazy var databaseReference: DatabaseReference = Database.database().reference().ref.child("/")
-    var databaseHandle: DatabaseHandle? = nil
+    lazy var totalDataDatabaseReference: DatabaseReference = Database.database().reference().ref.child("/")
+    var totalDataDatabaseHandle: DatabaseHandle? = nil
+    
+    lazy var liveSessionOccuringDatabaseReference: DatabaseReference = Database.database().reference().ref.child("/liveEventIsOccuring")
+    var liveSessionOccuringDatabaseHandle: DatabaseHandle? = nil
+    
+    lazy var currentLiveSessionDatabaseReference: DatabaseReference = Database.database().reference().ref.child("/sessions/0")
+    var currentLiveSessionDatabaseHandle: DatabaseHandle? = nil
     
     init() {
         loadLocalData()
         
-        monitor.pathUpdateHandler = { path in
-            print(path.status)
-            if path.status != .unsatisfied {
-                print("No Internet connection.")
-                if self.appData != nil {
-                    DispatchQueue.main.async {
-                        self.dataNotUpdated = true
-                    }
-                }
-            }
-            else {
-                print("We have Internet connection.")
-            }
-        }
-        
-        monitor.start(queue: queue)
+//        monitor.pathUpdateHandler = { path in
+//            print(path.status)
+//            if path.status != .unsatisfied {
+//                print("No Internet connection.")
+//                if self.appData != nil {
+//                    DispatchQueue.main.async {
+//                        self.dataNotUpdated = true
+//                    }
+//                }
+//            }
+//            else {
+//                print("We have Internet connection.")
+//            }
+//        }
+//        
+//        monitor.start(queue: queue)
     }
     
     private func loadLocalData() {
@@ -118,27 +121,108 @@ class DataManager: ObservableObject {
     }
     
     func startAppDataListener() {
+        print("Started live session occuring listener")
         
-        print(getCurrentDayOfTheWeek())
-        
-        let dayOfTheWeek = getCurrentDayOfTheWeek()
-        
-        
-        
-
-        databaseHandle = databaseReference.observe(DataEventType.value, with: { snapshop in
+        //Check if live eventIsOn
+        liveSessionOccuringDatabaseHandle = liveSessionOccuringDatabaseReference.observe(DataEventType.value) { snapshot in
             
-            if snapshop.exists() {
-                if let data = snapshop.value {
+            let dayOfTheWeek = self.getCurrentDayOfTheWeek()
+            
+            if dayOfTheWeek >= 6 || dayOfTheWeek <= 1 {
+                if snapshot.exists() {
+                    if let data = snapshot.value as? String {
+                        if data == "1" {
+                            
+                            if self.appData == nil {
+                                self.startTotalDataListener()
+                            }
+                            else {
+                                self.stopTotalDataListener()
+                            }
+                            
+                            //Live Event is on
+                            if self.currentLiveSessionDatabaseHandle == nil {
+                                self.startLiveSessionOccuringListener()
+                            }
+                        }
+                        else {
+                            //Live event not occuring
+                            self.stopLiveSessionDataListener()
+                            if self.currentLiveSessionDatabaseHandle == nil {
+                                self.startTotalDataListener()
+                            }
+                        }
+                    }
+                }
+            }
+            else {
+                self.stopLiveSessionDataListener()
+                if self.totalDataDatabaseHandle == nil {
+                    self.startTotalDataListener()
+                }
+            }
+        }
+    }
+    
+    func startLiveSessionOccuringListener() {
+        print("Started live session data listener")
+        self.currentLiveSessionDatabaseHandle = self.currentLiveSessionDatabaseReference.observe(DataEventType.value) { sessionSnapshot in
+
+            if sessionSnapshot.exists() {
+                if let sessionData = sessionSnapshot.value {
                     
+                    //Decode session data
+                    do {
+                        let json = try JSONSerialization.data(withJSONObject: sessionData)
+                        let dataDecoded = self.decodeSessionJSON(data: json)
+
+                        if let newSession = dataDecoded {
+                            print("Retrieved new session")
+                            print(newSession)
+                            
+                            if self.appData != nil {
+                                if self.appData?.sessions != nil {
+                                    self.appData?.sessions.sort(by: { $0.timestamp > $1.timestamp })
+                                    if (self.appData?.sessions.count)! > 0 {
+                                        if self.appData?.sessions[0].eventTitle == newSession.eventTitle {
+                                            self.appData?.sessions[0] = newSession
+                                        }
+                                        else {
+                                            self.appData?.sessions.append(newSession)
+                                        }
+                                    }
+                                }
+                                else {
+                                    self.appData?.sessions = [Session]()
+                                    self.appData?.sessions.append(newSession)
+                                }
+                            }
+                            
+                            self.saveLocalData()
+                        }
+                    }
+                    catch let error {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+
+        }
+    }
+    
+    func startTotalDataListener() {
+        print("Started Total Data Listener")
+        self.totalDataDatabaseHandle = self.totalDataDatabaseReference.observe(DataEventType.value) { allDataSnapshot in
+            
+            if allDataSnapshot.exists() {
+                if let data = allDataSnapshot.value {
+
                     do {
                         let json = try JSONSerialization.data(withJSONObject: data)
                         let dataDecoded = self.decodeJSON(data: json)
-                        
-                        print("Retrieved data!")
-                        
+
                         if let newData = dataDecoded {
-                            
+
                             self.appData = newData
                             self.saveLocalData()
                         }
@@ -148,14 +232,34 @@ class DataManager: ObservableObject {
                     }
                 }
             }
-        })
+        }
     }
     
     func stopAppDataListener() {
-        if databaseHandle != nil {
-            if let databaseHandle = databaseHandle {
-                databaseReference.removeObserver(withHandle: databaseHandle)
-            }
+        
+        if liveSessionOccuringDatabaseHandle != nil {
+            liveSessionOccuringDatabaseReference.removeAllObservers()
+        }
+    }
+    
+    func stopLiveSessionOccuringListener() {
+        print("Stopped live session occuring listener")
+        if liveSessionOccuringDatabaseHandle != nil {
+            currentLiveSessionDatabaseReference.removeAllObservers()
+        }
+    }
+    
+    func stopLiveSessionDataListener() {
+        print("Stopped live session data listener")
+        if currentLiveSessionDatabaseHandle != nil {
+            currentLiveSessionDatabaseReference.removeAllObservers()
+        }
+    }
+    
+    func stopTotalDataListener() {
+        print("Stopped total data listener")
+        if totalDataDatabaseHandle != nil {
+            totalDataDatabaseReference.removeAllObservers()
         }
     }
     
@@ -169,6 +273,16 @@ class DataManager: ObservableObject {
         if let data = data {
             let appDataDecoded = try? JSONDecoder().decode(AppData.self, from: data)
             return appDataDecoded
+        }
+        
+        return nil
+    }
+    
+    func decodeSessionJSON(data: Data?) -> Session? {
+            
+        if let data = data {
+            let session = try? JSONDecoder().decode(Session.self, from: data)
+            return session
         }
         
         return nil

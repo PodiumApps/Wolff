@@ -10,7 +10,24 @@ import SwiftUI
 struct SessionGrid: View {
     
     var classifications: [DriverDetailsForSession]
+    var finalClassifications: [DriverDetailsForSession] {
+        switch eventTitle {
+        case "Q2": return self.classifications.dropLast(5)
+        case "Q3": return self.classifications.dropLast(10)
+        default: return self.classifications
+        }
+    }
+    
     var eventTitle: String
+    var finalEventTitle: String {
+        switch self.eventTitle {
+        case "Q1": return "Qualifying (Q1)"
+        case "Q2": return "Qualifying (Q2)"
+        case "Q3": return "Qualifying (Q3)"
+        default: return self.eventTitle
+        }
+    }
+    
     var status: [String]
     var index: Int
     var eventIsOccuring: String
@@ -29,7 +46,7 @@ struct SessionGrid: View {
     
     var body: some View {
         
-        if classifications.count > 0 {
+        if finalClassifications.count > 0 {
             List {
                 Section {
                     VStack(alignment: .leading) {
@@ -46,7 +63,7 @@ struct SessionGrid: View {
                 }
                 
                 Section(content: {
-                    ForEach(0 ..< classifications.count, id: \.self) { index in
+                    ForEach(0 ..< finalClassifications.count, id: \.self) { index in
                         NavigationLink(destination: {
                             SessionDriverDetails(driverDetails: classifications[index])
                         }, label: {
@@ -74,7 +91,7 @@ struct SessionGrid: View {
                     }
                 })
             }
-            .navigationTitle(Text(eventTitle))
+            .navigationTitle(Text(finalEventTitle))
             .navigationBarTitleDisplayMode(.inline)
         }
         else {

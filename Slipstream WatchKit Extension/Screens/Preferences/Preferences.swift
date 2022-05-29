@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct Preferences: View {
-    var lastServerUpdate: String
     
     var body: some View {
         NavigationView {
@@ -47,11 +46,6 @@ struct Preferences: View {
                             .padding()
                         
                         VStack(alignment: .leading) {
-                            Text("Last data retrieval from server: \(lastServerUpdate)")
-                                .font(.footnote)
-                                .multilineTextAlignment(.leading)
-                                .foregroundColor(.gray)
-                                .padding(.leading, 10)
                             
                             Text("Version: 0.1")
                                 .font(.footnote)
@@ -97,6 +91,6 @@ struct Preferences: View {
 
 struct More_Previews: PreviewProvider {
     static var previews: some View {
-        Preferences(lastServerUpdate: "")
+        Preferences()
     }
 }

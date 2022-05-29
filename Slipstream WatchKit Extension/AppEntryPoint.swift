@@ -13,15 +13,13 @@ struct AppEntryPoint: View {
     @EnvironmentObject var dataManager: DataManager
     @Environment(\.presentationMode) var presentationMode
     
-    @State private var selection = 0
-    
     var body: some View {
         
         if let appData = dataManager.appData {
             TabView {
                 EventsList(
                     sessions: appData.sessions,
-                    liveEventIsOccuring: "1",
+                    liveEventIsOccuring: appData.liveEventIsOccuring,
                     events: appData.seasonSchedule
                 )
 
@@ -32,7 +30,7 @@ struct AppEntryPoint: View {
                     drivers: appData.driverStandings
                 )
 
-                Preferences(lastServerUpdate: appData.timestamp)
+                Preferences()
             }
             .confirmationDialog(
                 "Failed to retrieve data from server. The data has not been updated. Make sure you are connected to the Internet and try again.",

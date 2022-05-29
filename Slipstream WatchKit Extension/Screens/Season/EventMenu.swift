@@ -15,7 +15,6 @@ struct EventMenu: View {
     var index: Int
     
     var finalLiveEventIsOccuring: String {
-        print(index)
         return index > 0 ? "0" : liveEventIsOccuring
     }
     
