@@ -22,6 +22,10 @@ struct SlipstreamApp: App {
     @AppStorage("favorite_team") var favoriteTeam = "Ferrari"
     @AppStorage("favorite_driver") var favoriteDriver = "Charles Leclerc"
     
+    @AppStorage("generalDataTimestamp") var generalDataTimestamp = "0"
+    @AppStorage("newsDataTimestamp") var newsDataTimestamp = "0"
+    @AppStorage("sessionsDataTimestamp") var sessionsDataTimestamp = "0"
+    
     @State private var ref: DatabaseReference!
     
     @StateObject var dataManager = DataManager()
@@ -30,6 +34,18 @@ struct SlipstreamApp: App {
     
     init() {
         FirebaseApp.configure()
+        
+        if UserDefaults.standard.string(forKey: "generalDataTimestamp") == nil {
+            UserDefaults.standard.setValue("0", forKey: "generalDataTimestamp")
+        }
+        
+        if UserDefaults.standard.string(forKey: "newsDataTimestamp") == nil {
+            UserDefaults.standard.setValue("0", forKey: "newsDataTimestamp")
+        }
+        
+        if UserDefaults.standard.string(forKey: "sessionsDataTimestamp") == nil {
+            UserDefaults.standard.setValue("0", forKey: "sessionsDataTimestamp")
+        }
     }
     
     @SceneBuilder var body: some Scene {

@@ -51,15 +51,15 @@ struct AppEntryPoint: View {
                 }
             }
         }
-        .onChange(of: scenePhase) { phase in
-            if phase != .active {
-                dataManager.stopAppDataListener()
-                print("Stop app data listener")
-            }
-            else {
-                dataManager.startAppDataListener()
-                print("Start app data listener")
-            }
-        }
+//        .onChange(of: scenePhase) { phase in
+//            if phase != .active {
+//                dataManager.stopAppDataListener()
+//                print("Stop app data listener")
+//            }
+//            else {
+//                dataManager.startAppDataListener()
+//                print("Start app data listener")
+//            }
+//        }
     }
 }
