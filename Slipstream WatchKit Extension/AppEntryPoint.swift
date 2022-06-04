@@ -16,50 +16,30 @@ struct AppEntryPoint: View {
     
     var body: some View {
         TabView {
-            switch dataManager.dataRetrivalStatus {
-            case .loadingData:
-                ProgressView("Loading data...")
-            case .dataLoaded:
-                if let appData = dataManager.appData {
-                    EventsList(
-                        sessions: appData.sessions,
-                        liveEventIsOccuring: appData.liveEventIsOccuring,
-                        events: appData.seasonSchedule
-                    )
+            EventsList(
+                sessions: dataManager.sessionsData ?? [],
+                liveEventIsOccuring: dataManager.liveSessionIsOccuring,
+                events: dataManager.generalData?.seasonSchedule ?? SeasonSchedule(currentEvent: [], upcomoingEvents: [], pastEvents: [])
+            )
 
-                    NewsList(news: appData.latestNews)
+            NewsList(news: dataManager.newsData ?? [])
 
-                    Standings(
-                        teams: appData.teamStandings,
-                        drivers: appData.driverStandings
-                    )
+            Standings(
+                teams: dataManager.generalData?.teamStandings ?? [],
+                drivers: dataManager.generalData?.driverStandings ?? []
+            )
 
-                    Preferences()
-                }
-            case .errorLoadingData:
-                VStack {
-                    
-                    Spacer()
-
-                    Text("Failed to retrieve data from server. Make sure you are connected to the Internet and try again later.")
-                        .font(.caption2)
-                        .bold()
-                        .multilineTextAlignment(.center)
-                        .padding()
-
-                    Spacer()
-                }
+            Preferences()
+        }
+        .onChange(of: scenePhase) { phase in
+            if phase != .active {
+                //dataManager.stopAppDataListener()
+                print("Stop app data listener")
+            }
+            else {
+                //dataManager.startAppDataListener()
+                print("Start app data listener")
             }
         }
-//        .onChange(of: scenePhase) { phase in
-//            if phase != .active {
-//                dataManager.stopAppDataListener()
-//                print("Stop app data listener")
-//            }
-//            else {
-//                dataManager.startAppDataListener()
-//                print("Start app data listener")
-//            }
-//        }
     }
 }

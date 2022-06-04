@@ -11,6 +11,8 @@
 		CF2CC7892839B77200D2189C /* FavoriteTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2CC7882839B77200D2189C /* FavoriteTeam.swift */; };
 		CF589FE82839272A00EDC489 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF589FE72839272A00EDC489 /* Preferences.swift */; };
 		CF589FEA2839338F00EDC489 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF589FE92839338F00EDC489 /* Notifications.swift */; };
+		CF954C82284B79E9004A1923 /* NewsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF954C81284B79E9004A1923 /* NewsData.swift */; };
+		CF954C84284B7A13004A1923 /* GeneralData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF954C83284B7A13004A1923 /* GeneralData.swift */; };
 		CFCEF40B28380C170063CD47 /* Slipstream WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = CFCEF40A28380C170063CD47 /* Slipstream WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CFCEF41028380C170063CD47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFCEF40F28380C170063CD47 /* Assets.xcassets */; };
 		CFCEF41628380C170063CD47 /* Slipstream WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CFCEF41528380C170063CD47 /* Slipstream WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -117,6 +119,8 @@
 		CF2CC7882839B77200D2189C /* FavoriteTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTeam.swift; sourceTree = "<group>"; };
 		CF589FE72839272A00EDC489 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		CF589FE92839338F00EDC489 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		CF954C81284B79E9004A1923 /* NewsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsData.swift; sourceTree = "<group>"; };
+		CF954C83284B7A13004A1923 /* GeneralData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralData.swift; sourceTree = "<group>"; };
 		CFCEF40628380C160063CD47 /* Slipstream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Slipstream.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFCEF40A28380C170063CD47 /* Slipstream WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Slipstream WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFCEF40F28380C170063CD47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -191,6 +195,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF954C80284B7904004A1923 /* Data Manager */ = {
+			isa = PBXGroup;
+			children = (
+				CF954C81284B79E9004A1923 /* NewsData.swift */,
+				CF954C83284B7A13004A1923 /* GeneralData.swift */,
+			);
+			path = "Data Manager";
+			sourceTree = "<group>";
+		};
 		CFCEF3FF28380C160063CD47 = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +239,7 @@
 		CFCEF41928380C170063CD47 /* Slipstream WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				CF954C80284B7904004A1923 /* Data Manager */,
 				CFCEF42A28380C180063CD47 /* PushNotificationPayload.apns */,
 				CFCEF45428380C430063CD47 /* Slipstream WatchKit Extension.entitlements */,
 				CFCEF42928380C180063CD47 /* Info.plist */,
@@ -587,6 +601,7 @@
 			files = (
 				CFCEF41F28380C170063CD47 /* NotificationController.swift in Sources */,
 				CFCEF497283815CE0063CD47 /* AppEntryPoint.swift in Sources */,
+				CF954C84284B7A13004A1923 /* GeneralData.swift in Sources */,
 				CFCEF47F28380F070063CD47 /* TrackInfo.swift in Sources */,
 				CFCEF47028380DE80063CD47 /* TeamDetails.swift in Sources */,
 				CFCEF47328380E2E0063CD47 /* DriverDetails.swift in Sources */,
@@ -599,6 +614,7 @@
 				CF589FE82839272A00EDC489 /* Preferences.swift in Sources */,
 				CFCEF46B28380D950063CD47 /* Standings.swift in Sources */,
 				CFCEF48D283814F00063CD47 /* Team.swift in Sources */,
+				CF954C82284B79E9004A1923 /* NewsData.swift in Sources */,
 				CFCEF489283814AE0063CD47 /* Event.swift in Sources */,
 				CFCEF48B283814CA0063CD47 /* Driver.swift in Sources */,
 				CF2CC7872839ADBF00D2189C /* FavoriteDriver.swift in Sources */,

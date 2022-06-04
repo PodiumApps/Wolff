@@ -11,84 +11,6 @@ import CoreText
 import Network
 import SwiftUI
 
-struct AppData: Codable {
-    var liveEventIsOccuring: String
-    var seasonSchedule: SeasonSchedule
-    var seasonScheduleCurrentEvent: [Event]
-    var seasonScheduleUpcomingEvents: [Event]
-    var seasonSchedulePastEvents: [Event]
-    var driverStandings: [Driver]
-    var teamStandings: [Team]
-    var latestNews: [NewsArticle]
-    var sessions: [Session]
-    
-    enum CodingKeys: String, CodingKey {
-        case driverStandings = "driverStandings"
-        case latestNews = "latestNews"
-        case seasonScheduleCurrentEvent = "seasonScheduleCurrent"
-        case seasonScheduleUpcomingEvents = "seasonScheduleUpcoming"
-        case seasonSchedulePastEvents = "seasonSchedulePast"
-        case teamStandings = "teamStandings"
-        case sessions = "sessions"
-        case liveEventIsOccuring = "liveEventIsOccuring"
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        liveEventIsOccuring = try container.decodeIfPresent(String.self, forKey: .liveEventIsOccuring) ?? ""
-        driverStandings = try container.decodeIfPresent([Driver].self, forKey: .driverStandings) ?? []
-        teamStandings = try container.decodeIfPresent([Team].self, forKey: .teamStandings) ?? []
-        seasonScheduleCurrentEvent = try container.decodeIfPresent([Event].self, forKey: .seasonScheduleCurrentEvent) ?? []
-        seasonScheduleUpcomingEvents = try container.decodeIfPresent([Event].self, forKey: .seasonScheduleUpcomingEvents) ?? []
-        seasonSchedulePastEvents = try container.decodeIfPresent([Event].self, forKey: .seasonSchedulePastEvents) ?? []
-        seasonSchedule = SeasonSchedule(currentEvent: seasonScheduleCurrentEvent, upcomoingEvents: seasonScheduleUpcomingEvents, pastEvents: seasonSchedulePastEvents)
-        latestNews = try container.decodeIfPresent([NewsArticle].self, forKey: .latestNews) ?? []
-        sessions = try container.decodeIfPresent([Session].self, forKey: .sessions) ?? []
-    }
-}
-
-struct GeneralData: Codable {
-    var seasonSchedule: SeasonSchedule
-    var seasonScheduleCurrentEvent: [Event]
-    var seasonScheduleUpcomingEvents: [Event]
-    var seasonSchedulePastEvents: [Event]
-    var driverStandings: [Driver]
-    var teamStandings: [Team]
-    
-    enum CodingKeys: String, CodingKey {
-        case driverStandings = "driverStandings"
-        case seasonScheduleCurrentEvent = "seasonScheduleCurrent"
-        case seasonScheduleUpcomingEvents = "seasonScheduleUpcoming"
-        case seasonSchedulePastEvents = "seasonSchedulePast"
-        case teamStandings = "teamStandings"
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        driverStandings = try container.decodeIfPresent([Driver].self, forKey: .driverStandings) ?? []
-        teamStandings = try container.decodeIfPresent([Team].self, forKey: .teamStandings) ?? []
-        seasonScheduleCurrentEvent = try container.decodeIfPresent([Event].self, forKey: .seasonScheduleCurrentEvent) ?? []
-        seasonScheduleUpcomingEvents = try container.decodeIfPresent([Event].self, forKey: .seasonScheduleUpcomingEvents) ?? []
-        seasonSchedulePastEvents = try container.decodeIfPresent([Event].self, forKey: .seasonSchedulePastEvents) ?? []
-        seasonSchedule = SeasonSchedule(currentEvent: seasonScheduleCurrentEvent, upcomoingEvents: seasonScheduleUpcomingEvents, pastEvents: seasonSchedulePastEvents)
-    }
-}
-
-struct NewsData: Codable {
-    var news: [NewsArticle]
-    
-    enum CodingKeys: String, CodingKey {
-        case news = "data"
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        news = try container.decodeIfPresent([NewsArticle].self, forKey: .news) ?? []
-    }
-}
-
 class DataManager: ObservableObject {
     
     enum DataRetrievalStatus {
@@ -97,12 +19,10 @@ class DataManager: ObservableObject {
         case errorLoadingData
     }
     
-    @Published var appData: AppData? = nil
-    @Published var dataRetrivalStatus: DataRetrievalStatus = .loadingData
-    
-    @Published var generalData: GeneralData? = nil
-    @Published var newsData: [NewsArticle]? = nil
-    @Published var sessionsData: [Session]? = nil
+    @Published var generalData: GeneralData?
+    @Published var newsData: [NewsArticle]?
+    @Published var sessionsData: [Session]?
+    @Published var liveSessionIsOccuring = "0"
     
     let generalDataPath = "/general_data/data"
     lazy var generalDataDatabaseReference: DatabaseReference = Database.database().reference().ref.child("/general_data/timestamp")
@@ -116,8 +36,8 @@ class DataManager: ObservableObject {
     lazy var allSessionsDatabaseReference: DatabaseReference = Database.database().reference().ref.child("/sessions/timestamp")
     var allSessionsDatabaseHandle: DatabaseHandle? = nil
     
-    lazy var sessionsDatabseReference: DatabaseReference = Database.database().reference().ref.child("/sessions/live_event_is_occuring")
-    var sessionsDBHandle: DatabaseHandle? = nil
+    lazy var liveSessionOccuringDatabseReference: DatabaseReference = Database.database().reference().ref.child("/sessions/live_event_is_occuring")
+    var liveSessionOccuringDBHandle: DatabaseHandle? = nil
     
     lazy var currentLiveSessionDatabaseReference: DatabaseReference = Database.database().reference().ref.child("/sessions/0")
     var currentLiveSessionDatabaseHandle: DatabaseHandle? = nil
@@ -126,10 +46,11 @@ class DataManager: ObservableObject {
     let queue = DispatchQueue.global(qos: .background)
     
     init() {
-        //loadLocalData()
-        //startAppDataListener()
-        //checkInternetConnection()
+        loadLocalData(filename: "generalData.txt")
+        loadLocalData(filename: "newsData.txt")
+        loadLocalData(filename: "sessionsData.txt")
         
+        startLiveSessionsTimestampDataListener()
         startGeneralDataListener()
         startNewsDataListener()
     }
@@ -140,7 +61,6 @@ class DataManager: ObservableObject {
             if path.status != .satisfied {
                 print("No Internet connection.")
                 DispatchQueue.main.async {
-                    self.dataRetrivalStatus = .errorLoadingData
                     //self.stopAppDataListener()
                 }
             }
@@ -168,9 +88,11 @@ class DataManager: ObservableObject {
                 case "newsData.txt":
                     let dataDecoded = self.decodeNewsData(data: data)
                     self.newsData = dataDecoded
+                    print("News Data loaded from file")
                 case "sessionsData.txt":
                     let dataDecoded = self.decodeAllSessionsJSON(data: data)
                     self.sessionsData = dataDecoded
+                    print("Sessions Data loaded from file")
                 default:
                     return
                 }
@@ -210,21 +132,24 @@ class DataManager: ObservableObject {
         }
     }
     
-    private func startSessionsDataListener() {
+    private func startLiveSessionsTimestampDataListener() {
         
-        sessionsDBHandle = self.sessionsDatabseReference.observe(DataEventType.value) { snapshot in
+        print("Start Live Session Timestamp Data Listener")
+        
+        liveSessionOccuringDBHandle = self.liveSessionOccuringDatabseReference.observe(DataEventType.value) { snapshot in
             if snapshot.exists() {
                 if let liveSessionIsOccuring = snapshot.value as? String {
+                    self.liveSessionIsOccuring = liveSessionIsOccuring
+                    
                     if liveSessionIsOccuring == "1" {
-                        self.startLiveSessionOccuringListener()
+                        self.startLiveSessionIsOccuring()
                         //We have a live event happening
                         //Go get the latest session
                     }
                     else {
-                        self.stopLiveSessionOccuringListener()
+                        self.stopLiveSessionIsOccuring()
+                        self.getAllSessions()
                         //No live event is happening
-                        //Compara os timestamps
-                        //getAllSessions() - if timestamp diferente do guardado
                     }
                 }
             }
@@ -232,10 +157,17 @@ class DataManager: ObservableObject {
         }
     }
     
+    private func stopLiveSessionsTimestampDataListener() {
+        if liveSessionOccuringDBHandle != nil {
+            liveSessionOccuringDatabseReference.removeAllObservers()
+            print("Start Live Session Timestamp Data Listener")
+        }
+    }
+    
     private func startGeneralDataListener() {
+        print("Started general data listener")
         
         generalDataDBHandle = self.generalDataDatabaseReference.observe(DataEventType.value) { timestampSnapshot in
-            print("Started general data listener")
             
             if timestampSnapshot.exists() {
                 if let timestamp = timestampSnapshot.value as? String {
@@ -259,6 +191,7 @@ class DataManager: ObservableObject {
                                         if let generalData = decodedData {
                                             self.generalData = generalData
                                             self.saveLocalData(filename: "generalData.txt")
+                                            UserDefaults.standard.set(timestamp, forKey: "generalDataTimestamp")
                                         }
                                     }
                                     catch let error {
@@ -312,6 +245,7 @@ class DataManager: ObservableObject {
                                             if let newsData = decodedData {
                                                 self.newsData = newsData
                                                 self.saveLocalData(filename: "newsData.txt")
+                                                UserDefaults.standard.set(timestamp, forKey: "newsDataTimestamp")
                                             }
                                         }
                                         catch let error {
@@ -343,7 +277,7 @@ class DataManager: ObservableObject {
         return nil
     }
     
-    func startLiveSessionOccuringListener() {
+    func startLiveSessionIsOccuring() {
         print("Started live session occuring data listener")
         
         self.currentLiveSessionDatabaseHandle = self.currentLiveSessionDatabaseReference.observe(DataEventType.value) { sessionSnapshot in
@@ -362,7 +296,7 @@ class DataManager: ObservableObject {
                                 self.sessionsData!.sort(by: { $0.timestamp > $1.timestamp })
                                         
                                 if self.sessionsData![0].eventTitle == newSession.eventTitle {
-                                    self.appData?.sessions[0] = newSession
+                                    //self.appData?.sessions[0] = newSession
                                 }
                                 else {
                                     self.sessionsData!.append(newSession)
@@ -379,10 +313,10 @@ class DataManager: ObservableObject {
     }
     
     private func getAllSessions() {
-        //TODO!
+        
+        print("Started all sessions data listener")
         
         allSessionsDatabaseHandle = self.allSessionsDatabaseReference.observe(DataEventType.value) { timestampSnapshot in
-            print("Started general data listener")
             
             if timestampSnapshot.exists() {
                 if let timestamp = timestampSnapshot.value as? String {
@@ -401,6 +335,7 @@ class DataManager: ObservableObject {
                                             if let sessionsData = decodedData {
                                                 self.sessionsData = sessionsData
                                                 self.saveLocalData(filename: "sessionsData.txt")
+                                                UserDefaults.standard.set(timestamp, forKey: "sessionsDataTimestamp")
                                             }
                                         }
                                         catch let error {
@@ -416,7 +351,7 @@ class DataManager: ObservableObject {
         }
     }
     
-    private func stopLiveSessionOccuringListener() {
+    private func stopLiveSessionIsOccuring() {
         if self.currentLiveSessionDatabaseHandle != nil {
             self.currentLiveSessionDatabaseReference.removeAllObservers()
             print("Stop live session occuring data listener")
@@ -439,13 +374,6 @@ class DataManager: ObservableObject {
             return session
         }
         
-        dataRetrivalStatus = .errorLoadingData
-        
         return nil
-    }
-    
-    func getCurrentDayOfTheWeek() -> Int {
-        let date = Date()
-        return Calendar.current.component(.weekday, from: date)
     }
 }

@@ -22,10 +22,6 @@ struct SlipstreamApp: App {
     @AppStorage("favorite_team") var favoriteTeam = "Ferrari"
     @AppStorage("favorite_driver") var favoriteDriver = "Charles Leclerc"
     
-    @AppStorage("generalDataTimestamp") var generalDataTimestamp = "0"
-    @AppStorage("newsDataTimestamp") var newsDataTimestamp = "0"
-    @AppStorage("sessionsDataTimestamp") var sessionsDataTimestamp = "0"
-    
     @State private var ref: DatabaseReference!
     
     @StateObject var dataManager = DataManager()
