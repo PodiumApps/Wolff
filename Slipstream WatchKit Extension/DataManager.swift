@@ -23,17 +23,19 @@ class DataManager: ObservableObject {
     var generalDataDBHandle: DatabaseHandle? = nil
     
     let newsDataPath = "/news/data"
-    lazy var newsDataDatabaseReference: DatabaseReference = Database.database().reference().ref.child("/news/timestamp")
+    lazy var newsDataDatabaseReference: DatabaseReference =
+        Database.database().reference().ref.child("/news/timestamp")
     var newsDataDBHandle: DatabaseHandle? = nil
     
-    let sessionsDataPath = "sessions/data"
+    let sessionsDataPath = "/sessions/data/sessions"
     lazy var allSessionsDatabaseReference: DatabaseReference = Database.database().reference().ref.child("/sessions/timestamp")
     var allSessionsDatabaseHandle: DatabaseHandle? = nil
     
+    let liveEventStatusDataPath = "/sessions/live_event_is_occuring"
     lazy var liveSessionStatusDatabseReference: DatabaseReference = Database.database().reference().ref.child("/sessions/live_event_is_occuring")
     var liveSessionOccuringDBHandle: DatabaseHandle? = nil
     
-    lazy var currentLiveSessionDatabaseReference: DatabaseReference = Database.database().reference().ref.child("/sessions/0")
+    lazy var currentLiveSessionDatabaseReference: DatabaseReference = Database.database().reference().ref.child("/sessions/data/sessions/0")
     var currentLiveSessionDatabaseHandle: DatabaseHandle? = nil
     
     let monitor = NWPathMonitor()
@@ -45,15 +47,15 @@ class DataManager: ObservableObject {
         loadLocalData(filename: "sessionsData.txt")
         
         getGeneralData()
-        //getNewsData()
-        //getLiveSessionStatus()
+        getNewsData()
+        getAllSessions()
+        getLiveSessionStatus()
         
         checkInternetConnection()
     }
     
     private func checkInternetConnection() {
         monitor.pathUpdateHandler = { path in
-            print(path.status)
             if path.status != .satisfied {
                 print("No Internet connection.")
                 DispatchQueue.main.async {
@@ -139,7 +141,8 @@ class DataManager: ObservableObject {
         startListener(
             reference: newsDataDatabaseReference,
             handle: &newsDataDBHandle,
-            timestampKeyAndDataPath: ("newsDataTimestamp", newsDataPath)
+            timestampKey: "newsDataTimestamp",
+            dataPath: newsDataPath
         ) { (newsData: [NewsArticle]) in
             self.newsData = newsData
             self.saveLocalData(filename: "newsData.txt")
@@ -151,7 +154,8 @@ class DataManager: ObservableObject {
         startListener(
             reference: generalDataDatabaseReference,
             handle: &generalDataDBHandle,
-            timestampKeyAndDataPath: ("generalDataTimestamp", generalDataPath)
+            timestampKey: "generalDataTimestamp",
+            dataPath: generalDataPath
         ) { (generalData: GeneralData) in
             self.generalData = generalData
             self.saveLocalData(filename: "generalData.txt")
@@ -162,12 +166,13 @@ class DataManager: ObservableObject {
         startListener(
             reference: liveSessionStatusDatabseReference,
             handle: &liveSessionOccuringDBHandle,
-            timestampKeyAndDataPath: nil
+            timestampKey: nil,
+            dataPath: liveEventStatusDataPath
         ) { (status: String) in
+            self.liveSessionIsOccuring = status
+            
             switch status {
             case "1":
-                self.getLiveSessionData()
-            case "0":
                 self.getLiveSessionData()
             default: return
             }
@@ -178,7 +183,8 @@ class DataManager: ObservableObject {
         startListener(
             reference: currentLiveSessionDatabaseReference,
             handle: &currentLiveSessionDatabaseHandle,
-            timestampKeyAndDataPath: nil
+            timestampKey: nil,
+            dataPath: nil
         ) { (newSession: Session) in
             guard self.sessionsData != nil else { return }
             self.sessionsData?.sort(by: { $0.timestamp > $1.timestamp })
@@ -196,7 +202,8 @@ class DataManager: ObservableObject {
         startListener(
             reference: allSessionsDatabaseReference,
             handle: &allSessionsDatabaseHandle,
-            timestampKeyAndDataPath: ("sessionsDataTimestamp", sessionsDataPath)
+            timestampKey: "sessionsDataTimestamp",
+            dataPath: sessionsDataPath
         ) { (sessionsData: [Session]) in
             self.sessionsData = sessionsData
             self.saveLocalData(filename: "sessionsData.txt")
@@ -206,39 +213,50 @@ class DataManager: ObservableObject {
     private func startListener<T: Decodable>(
         reference: DatabaseReference,
         handle: inout DatabaseHandle?,
-        timestampKeyAndDataPath: (timestampKey: String, dataPath: String)?,
+        timestampKey: String?,
+        dataPath: String?,
         saveData: @escaping (T) -> Void
     ) {
         
         func save(_ snapshot: DataSnapshot?) {
             guard let data = snapshot?.value else { return }
-            do {
-                let json = try JSONSerialization.data(withJSONObject: data)
-                saveData(try JSONDecoder().decode(T.self, from: json))
-            } catch let error {
-                print(error.localizedDescription)
+            
+            if dataPath == liveEventStatusDataPath {
+                saveData(data as! T)
+            }
+            else {
+                do {
+                    let json = try JSONSerialization.data(withJSONObject: data)
+                    saveData(try JSONDecoder().decode(T.self, from: json))
+                } catch let error {
+                    print(error.localizedDescription)
+                }
             }
         }
         
         handle = reference.observe(DataEventType.value) { sessionSnapshot in
+            
             guard sessionSnapshot.exists() else { return }
-            if let (timestampKey, dataPath) = timestampKeyAndDataPath {
-                guard
-                    let timestamp = sessionSnapshot.value as? String,
-                    timestamp != UserDefaults.standard.string(forKey: timestampKey)
+            guard let dataPath = dataPath else { return }
+            
+            
+            if let timestampKey = timestampKey {
+                guard let timestamp = sessionSnapshot.value as? String,
+                      timestamp != UserDefaults.standard.string(forKey: timestampKey)
                 else { return }
-                Database
-                    .database()
-                    .reference()
-                    .child(dataPath)
-                    .getData(
-                        completion: { dataError, dataSnapshot in
-                            guard dataError == nil else { return }
-                            save(dataSnapshot)
-                            UserDefaults.standard.set(timestamp, forKey: timestampKey)
-                        }
-                    )
+                UserDefaults.standard.set(timestamp, forKey: timestampKey)
             }
+            
+            Database
+                .database()
+                .reference()
+                .child(dataPath)
+                .getData(
+                    completion: { dataError, dataSnapshot in
+                        guard dataError == nil else { return }
+                        save(dataSnapshot)
+                    }
+                )
         }
     }
 }

@@ -51,9 +51,7 @@
 		CFCEF495283815AC0063CD47 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF494283815AC0063CD47 /* DataManager.swift */; };
 		CFCEF497283815CE0063CD47 /* AppEntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCEF496283815CE0063CD47 /* AppEntryPoint.swift */; };
 		CFCEF49A283817BB0063CD47 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CFCEF499283817BB0063CD47 /* FirebaseDatabase */; };
-		CFCEF4A028381D860063CD47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFCEF49F28381D860063CD47 /* GoogleService-Info.plist */; };
-		CFCEF4A128381D860063CD47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFCEF49F28381D860063CD47 /* GoogleService-Info.plist */; };
-		CFCEF4A228381D860063CD47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFCEF49F28381D860063CD47 /* GoogleService-Info.plist */; };
+		CFD47A75291D7F9E00E4B58C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFD47A74291D7F9E00E4B58C /* GoogleService-Info.plist */; };
 		CFE2697B283A85AD000F52B6 /* drivers.txt in Resources */ = {isa = PBXBuildFile; fileRef = CFE2697A283A85AD000F52B6 /* drivers.txt */; };
 		CFE2697D283A8962000F52B6 /* constructors.txt in Resources */ = {isa = PBXBuildFile; fileRef = CFE2697C283A8962000F52B6 /* constructors.txt */; };
 /* End PBXBuildFile section */
@@ -164,7 +162,7 @@
 		CFCEF4922838154B0063CD47 /* DriverDetailsForSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverDetailsForSession.swift; sourceTree = "<group>"; };
 		CFCEF494283815AC0063CD47 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		CFCEF496283815CE0063CD47 /* AppEntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntryPoint.swift; sourceTree = "<group>"; };
-		CFCEF49F28381D860063CD47 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CFD47A74291D7F9E00E4B58C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CFE2697A283A85AD000F52B6 /* drivers.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = drivers.txt; sourceTree = "<group>"; };
 		CFE2697C283A8962000F52B6 /* constructors.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = constructors.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -198,6 +196,7 @@
 		CF954C80284B7904004A1923 /* Data Manager */ = {
 			isa = PBXGroup;
 			children = (
+				CFD47A74291D7F9E00E4B58C /* GoogleService-Info.plist */,
 				CF954C81284B79E9004A1923 /* NewsData.swift */,
 				CF954C83284B7A13004A1923 /* GeneralData.swift */,
 			);
@@ -207,7 +206,6 @@
 		CFCEF3FF28380C160063CD47 = {
 			isa = PBXGroup;
 			children = (
-				CFCEF49F28381D860063CD47 /* GoogleService-Info.plist */,
 				CFCEF40E28380C170063CD47 /* Slipstream WatchKit App */,
 				CFCEF41928380C170063CD47 /* Slipstream WatchKit Extension */,
 				CFCEF43228380C180063CD47 /* SlipstreamTests */,
@@ -549,7 +547,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFCEF4A028381D860063CD47 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,7 +555,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFCEF41028380C170063CD47 /* Assets.xcassets in Resources */,
-				CFCEF4A128381D860063CD47 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,13 +564,13 @@
 			files = (
 				CFE2697B283A85AD000F52B6 /* drivers.txt in Resources */,
 				CFCEF46228380D050063CD47 /* news.json in Resources */,
+				CFD47A75291D7F9E00E4B58C /* GoogleService-Info.plist in Resources */,
 				CFCEF42828380C180063CD47 /* Preview Assets.xcassets in Resources */,
 				CFCEF46028380D050063CD47 /* season_schedule.json in Resources */,
 				CFCEF45F28380D050063CD47 /* sessions.json in Resources */,
 				CFCEF42528380C180063CD47 /* Assets.xcassets in Resources */,
 				CFE2697D283A8962000F52B6 /* constructors.txt in Resources */,
 				CFCEF46128380D050063CD47 /* team_standings.json in Resources */,
-				CFCEF4A228381D860063CD47 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

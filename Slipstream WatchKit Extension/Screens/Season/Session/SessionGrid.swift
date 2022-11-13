@@ -41,6 +41,7 @@ struct SessionGrid: View {
             newStatus.removeAll()
             newStatus.append("FINISHED")
         }
+        
         return newStatus
     }
     

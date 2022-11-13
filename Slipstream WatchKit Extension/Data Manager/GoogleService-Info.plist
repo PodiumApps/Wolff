@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1066399643686-4e66ciqcmp9srr7q5uqallikl8fqafho.apps.googleusercontent.com</string>
+	<string>1066399643686-tb9hfgsb4um9kdftmoecl79iukok1t19.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1066399643686-4e66ciqcmp9srr7q5uqallikl8fqafho</string>
+	<string>com.googleusercontent.apps.1066399643686-tb9hfgsb4um9kdftmoecl79iukok1t19</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCyuVt2bWOl9xLrLPg0lPPrbgfyrycF_FE</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.tomasmamede.Slipstream.watchkitapp.watchkitextension</string>
+	<string>com.tomasmamede.Slipstream.watchkitapp</string>
 	<key>PROJECT_ID</key>
 	<string>slipstream-76796</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1066399643686:ios:b85bbb9a89d8714ef70ee7</string>
+	<string>1:1066399643686:ios:c8fd10dd29112772f70ee7</string>
 	<key>DATABASE_URL</key>
 	<string>https://slipstream-76796-default-rtdb.firebaseio.com</string>
 </dict>

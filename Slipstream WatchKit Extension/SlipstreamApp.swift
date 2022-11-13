@@ -20,7 +20,7 @@ struct SlipstreamApp: App {
     @AppStorage("favoriteTeam") var favoriteTeamNotifications = true
     @AppStorage("news") var breakingNewsNotifications = true
     @AppStorage("favorite_team") var favoriteTeam = "Ferrari"
-    @AppStorage("favorite_driver") var favoriteDriver = "Charles Leclerc"
+    @AppStorage("favorite_driver") var favoriteDriver = "Charles Leclerc" // TODO: Ver isto! Devia ser None!
     
     @State private var ref: DatabaseReference!
     
@@ -31,16 +31,16 @@ struct SlipstreamApp: App {
     init() {
         FirebaseApp.configure()
         
-        if UserDefaults.standard.string(forKey: "generalDataTimestamp") == nil {
-            UserDefaults.standard.setValue("0", forKey: "generalDataTimestamp")
+        if UserDefaults.standard.string(forKey: "general_data_timestamp") == nil {
+            UserDefaults.standard.setValue("0", forKey: "general_data_timestamp")
         }
         
-        if UserDefaults.standard.string(forKey: "newsDataTimestamp") == nil {
-            UserDefaults.standard.setValue("0", forKey: "newsDataTimestamp")
+        if UserDefaults.standard.string(forKey: "news_data_timestamp") == nil {
+            UserDefaults.standard.setValue("0", forKey: "news_data_timestamp")
         }
         
-        if UserDefaults.standard.string(forKey: "sessionsDataTimestamp") == nil {
-            UserDefaults.standard.setValue("0", forKey: "sessionsDataTimestamp")
+        if UserDefaults.standard.string(forKey: "sessions_data_timestamp") == nil {
+            UserDefaults.standard.setValue("0", forKey: "sessions_data_timestamp")
         }
     }
     
@@ -63,6 +63,5 @@ struct SlipstreamApp: App {
                     }
                 }
         }
-        //WKNotificationScene(controller: NotificationController.self, category: "myCategory")
     }
 }
