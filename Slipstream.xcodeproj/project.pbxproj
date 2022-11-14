@@ -198,6 +198,7 @@
 			children = (
 				CFD47A74291D7F9E00E4B58C /* GoogleService-Info.plist */,
 				CF954C81284B79E9004A1923 /* NewsData.swift */,
+				CFCEF494283815AC0063CD47 /* DataManager.swift */,
 				CF954C83284B7A13004A1923 /* GeneralData.swift */,
 			);
 			path = "Data Manager";
@@ -243,7 +244,6 @@
 				CFCEF42928380C180063CD47 /* Info.plist */,
 				CFCEF496283815CE0063CD47 /* AppEntryPoint.swift */,
 				CFCEF42228380C170063CD47 /* ComplicationController.swift */,
-				CFCEF494283815AC0063CD47 /* DataManager.swift */,
 				CFCEF41E28380C170063CD47 /* NotificationController.swift */,
 				CFCEF41A28380C170063CD47 /* SlipstreamApp.swift */,
 				CFCEF45828380CB30063CD47 /* AppDelegate.swift */,

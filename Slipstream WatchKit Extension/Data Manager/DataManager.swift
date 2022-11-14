@@ -27,15 +27,15 @@ class DataManager: ObservableObject {
         Database.database().reference().ref.child("/news/timestamp")
     var newsDataDBHandle: DatabaseHandle? = nil
     
-    let sessionsDataPath = "/sessions/data/sessions"
+    let sessionsDataPath = "/sessions/data/"
     lazy var allSessionsDatabaseReference: DatabaseReference = Database.database().reference().ref.child("/sessions/timestamp")
     var allSessionsDatabaseHandle: DatabaseHandle? = nil
     
-    let liveEventStatusDataPath = "/sessions/live_event_is_occuring"
-    lazy var liveSessionStatusDatabseReference: DatabaseReference = Database.database().reference().ref.child("/sessions/live_event_is_occuring")
+    let liveEventStatusDataPath = "/live_session_is_occuring/data"
+    lazy var liveSessionStatusDatabseReference: DatabaseReference = Database.database().reference().ref.child("/live_session_is_occuring/data")
     var liveSessionOccuringDBHandle: DatabaseHandle? = nil
     
-    lazy var currentLiveSessionDatabaseReference: DatabaseReference = Database.database().reference().ref.child("/sessions/data/sessions/0")
+    lazy var currentLiveSessionDatabaseReference: DatabaseReference = Database.database().reference().ref.child("/sessions/data/0")
     var currentLiveSessionDatabaseHandle: DatabaseHandle? = nil
     
     let monitor = NWPathMonitor()
@@ -144,6 +144,7 @@ class DataManager: ObservableObject {
             timestampKey: "newsDataTimestamp",
             dataPath: newsDataPath
         ) { (newsData: [NewsArticle]) in
+            print(newsData)
             self.newsData = newsData
             self.saveLocalData(filename: "newsData.txt")
         }
