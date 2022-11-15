@@ -31,5 +31,13 @@ struct AppEntryPoint: View {
 
             Preferences()
         }
+        .onChange(of: scenePhase) { newPhase in
+            switch newPhase {
+            case .active: dataManager.startTimer()
+            default: dataManager.timer.invalidate()
+            }
+            
+            print("Timer: \(dataManager.timer.isValid)")
+        }
     }
 }

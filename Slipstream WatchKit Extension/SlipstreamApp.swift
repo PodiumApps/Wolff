@@ -62,6 +62,12 @@ struct SlipstreamApp: App {
                         ref.child("users/\(userId)/favoriteTeam").setValue(favoriteTeam)
                     }
                 }
+                .onAppear {
+                    print("Timer: \(dataManager.timer.isValid)")
+                }
+                .onDisappear {
+                    print("Timer: \(dataManager.timer.isValid)")
+                }
         }
     }
 }

@@ -41,15 +41,19 @@ class DataManager: ObservableObject {
     let monitor = NWPathMonitor()
     let queue = DispatchQueue.global(qos: .background)
     
+    var timer = Timer()
+    
     init() {
         loadLocalData(filename: "generalData.txt")
         loadLocalData(filename: "newsData.txt")
         loadLocalData(filename: "sessionsData.txt")
         
-        getGeneralData()
-        getNewsData()
-        getAllSessions()
-        getLiveSessionStatus()
+        // getGeneralData()
+        // getNewsData()
+        // getAllSessions()
+//        getLiveSessionStatus()
+        
+        startTimer()
         
         checkInternetConnection()
     }
@@ -137,127 +141,132 @@ class DataManager: ObservableObject {
         }
     }
     
-    private func getNewsData() {
-        startListener(
-            reference: newsDataDatabaseReference,
-            handle: &newsDataDBHandle,
-            timestampKey: "newsDataTimestamp",
-            dataPath: newsDataPath
-        ) { (newsData: [NewsArticle]) in
-            print(newsData)
-            self.newsData = newsData
-            self.saveLocalData(filename: "newsData.txt")
-        }
-    }
+//    private func getNewsData() {
+//        startListener(
+//            reference: newsDataDatabaseReference,
+//            handle: &newsDataDBHandle,
+//            timestampKey: "newsDataTimestamp",
+//            dataPath: newsDataPath
+//        ) { (newsData: [NewsArticle]) in
+//            print(newsData)
+//            self.newsData = newsData
+//            self.saveLocalData(filename: "newsData.txt")
+//        }
+//    }
     
     
     private func getGeneralData() {
-        startListener(
-            reference: generalDataDatabaseReference,
-            handle: &generalDataDBHandle,
-            timestampKey: "generalDataTimestamp",
-            dataPath: generalDataPath
+        let dataURL = "https://slipstream-76796-default-rtdb.firebaseio.com/general_data/timestamp.json"
+        
+        getDataFromURL(
+            dataURL: dataURL
         ) { (generalData: GeneralData) in
             self.generalData = generalData
             self.saveLocalData(filename: "generalData.txt")
         }
     }
     
-    private func getLiveSessionStatus() {
-        startListener(
-            reference: liveSessionStatusDatabseReference,
-            handle: &liveSessionOccuringDBHandle,
-            timestampKey: nil,
-            dataPath: liveEventStatusDataPath
-        ) { (status: String) in
-            self.liveSessionIsOccuring = status
-            
-            switch status {
-            case "1":
-                self.getLiveSessionData()
-            default: return
-            }
+//    private func getLiveSessionStatus() {
+//        startListener(
+//            reference: liveSessionStatusDatabseReference,
+//            handle: &liveSessionOccuringDBHandle,
+//            timestampKey: nil,
+//            dataPath: liveEventStatusDataPath
+//        ) { (status: String) in
+//            self.liveSessionIsOccuring = status
+//
+//            switch status {
+//            case "1":
+//                self.getLiveSessionData()
+//            default: return
+//            }
+//        }
+//    }
+    
+//    private func getLiveSessionData() {
+//        startListener(
+//            reference: currentLiveSessionDatabaseReference,
+//            handle: &currentLiveSessionDatabaseHandle,
+//            timestampKey: nil,
+//            dataPath: nil
+//        ) { (newSession: Session) in
+//            guard self.sessionsData != nil else { return }
+//            self.sessionsData?.sort(by: { $0.timestamp > $1.timestamp })
+//
+//            if self.sessionsData![0].eventTitle == newSession.eventTitle {
+//                self.sessionsData![0] = newSession
+//            }
+//            else {
+//                self.sessionsData!.append(newSession)
+//            }
+//        }
+//    }
+    
+//    private func getAllSessions() {
+//        startListener(
+//            reference: allSessionsDatabaseReference,
+//            handle: &allSessionsDatabaseHandle,
+//            timestampKey: "sessionsDataTimestamp",
+//            dataPath: sessionsDataPath
+//        ) { (sessionsData: [Session]) in
+//            self.sessionsData = sessionsData
+//            self.saveLocalData(filename: "sessionsData.txt")
+//        }
+//    }
+    
+    func startTimer() {
+        
+        let generalDataTimestampURL = "https://slipstream-76796-default-rtdb.firebaseio.com/general_data/timestamp.json"
+        let generalDataTimestampKey = "generalDataTimestamp"
+        
+        self.timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
+            URLSession.shared.dataTask(with: URL(string: generalDataTimestampURL)!) { data, _, error in
+                
+                guard let data = data, error == nil else { fatalError("General Data timestamp not found!") }
+                let generalDataTimestamp = String(decoding: data, as: UTF8.self)
+                
+                if generalDataTimestamp != UserDefaults.standard.string(forKey: generalDataTimestampKey) {
+                    UserDefaults.standard.set(generalDataTimestamp, forKey: generalDataTimestampKey)
+                    
+                    let dataURL = "https://slipstream-76796-default-rtdb.firebaseio.com/general_data/data.json"
+                    
+                    self.getDataFromURL(dataURL: dataURL) { (generalData: GeneralData) in
+                        self.generalData = generalData
+                        self.saveLocalData(filename: "generalData.txt")
+                    }
+                }
+                
+            }.resume()
         }
+        
     }
     
-    private func getLiveSessionData() {
-        startListener(
-            reference: currentLiveSessionDatabaseReference,
-            handle: &currentLiveSessionDatabaseHandle,
-            timestampKey: nil,
-            dataPath: nil
-        ) { (newSession: Session) in
-            guard self.sessionsData != nil else { return }
-            self.sessionsData?.sort(by: { $0.timestamp > $1.timestamp })
-            
-            if self.sessionsData![0].eventTitle == newSession.eventTitle {
-                self.sessionsData![0] = newSession
-            }
-            else {
-                self.sessionsData!.append(newSession)
-            }
-        }
-    }
-    
-    private func getAllSessions() {
-        startListener(
-            reference: allSessionsDatabaseReference,
-            handle: &allSessionsDatabaseHandle,
-            timestampKey: "sessionsDataTimestamp",
-            dataPath: sessionsDataPath
-        ) { (sessionsData: [Session]) in
-            self.sessionsData = sessionsData
-            self.saveLocalData(filename: "sessionsData.txt")
-        }
-    }
-    
-    private func startListener<T: Decodable>(
-        reference: DatabaseReference,
-        handle: inout DatabaseHandle?,
-        timestampKey: String?,
-        dataPath: String?,
+    private func getDataFromURL<T: Decodable>(
+        dataURL: String?,
         saveData: @escaping (T) -> Void
     ) {
         
-        func save(_ snapshot: DataSnapshot?) {
-            guard let data = snapshot?.value else { return }
+        func save(_ data: Data?) {
+            guard let data = data else { return }
             
-            if dataPath == liveEventStatusDataPath {
+            if dataURL == "" {
                 saveData(data as! T)
             }
             else {
                 do {
-                    let json = try JSONSerialization.data(withJSONObject: data)
-                    saveData(try JSONDecoder().decode(T.self, from: json))
+                    saveData(try JSONDecoder().decode(T.self, from: data))
                 } catch let error {
                     print(error.localizedDescription)
                 }
             }
         }
         
-        handle = reference.observe(DataEventType.value) { sessionSnapshot in
+        guard let dataURL = dataURL else { fatalError("Data URL not available.") }
+        
+        URLSession.shared.dataTask(with: URL(string: dataURL)!) { data, _, error in
             
-            guard sessionSnapshot.exists() else { return }
-            guard let dataPath = dataPath else { return }
-            
-            
-            if let timestampKey = timestampKey {
-                guard let timestamp = sessionSnapshot.value as? String,
-                      timestamp != UserDefaults.standard.string(forKey: timestampKey)
-                else { return }
-                UserDefaults.standard.set(timestamp, forKey: timestampKey)
-            }
-            
-            Database
-                .database()
-                .reference()
-                .child(dataPath)
-                .getData(
-                    completion: { dataError, dataSnapshot in
-                        guard dataError == nil else { return }
-                        save(dataSnapshot)
-                    }
-                )
-        }
+            guard let generalData = data, error == nil else { fatalError("General Data not found!") }
+            save(generalData)
+        }.resume()
     }
 }
