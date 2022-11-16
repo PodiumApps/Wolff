@@ -248,7 +248,12 @@ class DataManager: ObservableObject {
                 print(self.liveSessionIsOccuring)
             }.resume()
             
-            
+            if self.liveSessionIsOccuring == "0" {
+                
+            }
+            else if self.liveSessionIsOccuring == "1" {
+                
+            }
         }
     }
     
