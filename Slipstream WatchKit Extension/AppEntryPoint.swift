@@ -12,7 +12,6 @@ struct AppEntryPoint: View {
     
     @EnvironmentObject var dataManager: DataManager
     @Environment(\.presentationMode) var presentationMode
-    @Environment(\.scenePhase) var scenePhase
     
     var body: some View {
         TabView {
@@ -30,14 +29,6 @@ struct AppEntryPoint: View {
             )
 
             Preferences()
-        }
-        .onChange(of: scenePhase) { newPhase in
-            switch newPhase {
-            case .active: dataManager.startTimer()
-            default: dataManager.timer.invalidate()
-            }
-            
-            print("Timer: \(dataManager.timer.isValid)")
         }
     }
 }

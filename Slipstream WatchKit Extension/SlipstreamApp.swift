@@ -13,6 +13,8 @@ import FirebaseDatabase
 @main
 struct SlipstreamApp: App {
     
+    @Environment(\.scenePhase) var scenePhase
+    
     @AppStorage("startEventNotifications") var startSessionNotifications = true
     @AppStorage("endEventNotifications") var endSessionNotifications = true
     @AppStorage("redFlag") var redFlagNotifications = true
@@ -62,10 +64,12 @@ struct SlipstreamApp: App {
                         ref.child("users/\(userId)/favoriteTeam").setValue(favoriteTeam)
                     }
                 }
-                .onAppear {
-                    print("Timer: \(dataManager.timer.isValid)")
-                }
-                .onDisappear {
+                .onChange(of: scenePhase) { newPhase in
+                    switch newPhase {
+                    case .active: dataManager.startTimer()
+                    default: dataManager.timer.invalidate()
+                    }
+                    
                     print("Timer: \(dataManager.timer.isValid)")
                 }
         }
