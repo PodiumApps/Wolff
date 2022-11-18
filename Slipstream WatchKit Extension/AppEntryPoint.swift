@@ -14,21 +14,28 @@ struct AppEntryPoint: View {
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        TabView {
-            EventsList(
-                sessions: dataManager.sessionsData ?? [],
-                liveEventIsOccuring: dataManager.liveSessionIsOccuring,
-                events: dataManager.generalData?.seasonSchedule ?? SeasonSchedule(currentEvent: [], upcomoingEvents: [], pastEvents: [])
-            )
-
-            NewsList(news: dataManager.newsData ?? [])
-
-            Standings(
-                teams: dataManager.generalData?.teamStandings ?? [],
-                drivers: dataManager.generalData?.driverStandings ?? []
-            )
-
-            Preferences()
+        if dataManager.dataRetrievalStatus == .dataLoaded {
+            TabView {
+                EventsList(
+                    sessions: dataManager.sessionsData ?? [],
+                    liveEventIsOccuring: dataManager.liveSessionIsOccuring,
+                    events: dataManager.generalData?.seasonSchedule ?? SeasonSchedule(currentEvent: [], upcomoingEvents: [], pastEvents: [])
+                )
+                
+                NewsList(news: dataManager.newsData ?? [])
+                
+                Standings(
+                    teams: dataManager.generalData?.teamStandings ?? [],
+                    drivers: dataManager.generalData?.driverStandings ?? []
+                )
+                
+                Preferences()
+            }
+        }
+        else {
+            VStack {
+                
+            }
         }
     }
 }

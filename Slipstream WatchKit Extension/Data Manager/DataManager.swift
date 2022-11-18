@@ -10,33 +10,14 @@ class DataManager: ObservableObject {
     enum DataRetrievalStatus {
         case loadingData
         case dataLoaded
-        case errorLoadingData
+        case error
     }
     
     @Published var generalData: GeneralData?
     @Published var newsData: [NewsArticle]?
     @Published var sessionsData: [Session]?
     @Published var liveSessionIsOccuring = "0"
-    
-    let generalDataPath = "/general_data/data"
-    lazy var generalDataDatabaseReference: DatabaseReference = Database.database().reference().ref.child("/general_data/timestamp")
-    var generalDataDBHandle: DatabaseHandle? = nil
-    
-    let newsDataPath = "/news/data"
-    lazy var newsDataDatabaseReference: DatabaseReference =
-        Database.database().reference().ref.child("/news/timestamp")
-    var newsDataDBHandle: DatabaseHandle? = nil
-    
-    let sessionsDataPath = "/sessions/data/"
-    lazy var allSessionsDatabaseReference: DatabaseReference = Database.database().reference().ref.child("/sessions/timestamp")
-    var allSessionsDatabaseHandle: DatabaseHandle? = nil
-    
-    let liveEventStatusDataPath = "/live_session_is_occuring/data"
-    lazy var liveSessionStatusDatabseReference: DatabaseReference = Database.database().reference().ref.child("/live_session_is_occuring/data")
-    var liveSessionOccuringDBHandle: DatabaseHandle? = nil
-    
-    lazy var currentLiveSessionDatabaseReference: DatabaseReference = Database.database().reference().ref.child("/sessions/data/0")
-    var currentLiveSessionDatabaseHandle: DatabaseHandle? = nil
+    @Published var dataRetrievalStatus = DataRetrievalStatus.dataLoaded
     
     let monitor = NWPathMonitor()
     let queue = DispatchQueue.global(qos: .background)
@@ -48,11 +29,7 @@ class DataManager: ObservableObject {
         loadLocalData(filename: "newsData.txt")
         loadLocalData(filename: "sessionsData.txt")
         
-        // getGeneralData()
-        // getNewsData()
-        // getAllSessions()
-//        getLiveSessionStatus()
-        
+        fetchData()
         startTimer()
         
         checkInternetConnection()
@@ -71,7 +48,7 @@ class DataManager: ObservableObject {
                 //self.startAppDataListener()
             }
         }
-
+        
         monitor.start(queue: queue)
     }
     
@@ -139,121 +116,158 @@ class DataManager: ObservableObject {
             }
         }
     }
-
     
-//    private func getLiveSessionStatus() {
-//        startListener(
-//            reference: liveSessionStatusDatabseReference,
-//            handle: &liveSessionOccuringDBHandle,
-//            timestampKey: nil,
-//            dataPath: liveEventStatusDataPath
-//        ) { (status: String) in
-//            self.liveSessionIsOccuring = status
-//
-//            switch status {
-//            case "1":
-//                self.getLiveSessionData()
-//            default: return
-//            }
-//        }
-//    }
-    
-//    private func getLiveSessionData() {
-//        startListener(
-//            reference: currentLiveSessionDatabaseReference,
-//            handle: &currentLiveSessionDatabaseHandle,
-//            timestampKey: nil,
-//            dataPath: nil
-//        ) { (newSession: Session) in
-//            guard self.sessionsData != nil else { return }
-//            self.sessionsData?.sort(by: { $0.timestamp > $1.timestamp })
-//
-//            if self.sessionsData![0].eventTitle == newSession.eventTitle {
-//                self.sessionsData![0] = newSession
-//            }
-//            else {
-//                self.sessionsData!.append(newSession)
-//            }
-//        }
-//    }
-    
-//    private func getAllSessions() {
-//        startListener(
-//            reference: allSessionsDatabaseReference,
-//            handle: &allSessionsDatabaseHandle,
-//            timestampKey: "sessionsDataTimestamp",
-//            dataPath: sessionsDataPath
-//        ) { (sessionsData: [Session]) in
-//            self.sessionsData = sessionsData
-//            self.saveLocalData(filename: "sessionsData.txt")
-//        }
-//    }
-    
-    func startTimer() {
+    private func fetchGeneralData() {
         
         let generalDataTimestampURL = "https://slipstream-76796-default-rtdb.firebaseio.com/general_data/timestamp.json"
         let generalDataTimestampKey = "generalDataTimestamp"
         
+        // General Data
+        URLSession.shared.dataTask(with: URL(string: generalDataTimestampURL)!) { data, _, error in
+            
+            guard let data = data, error == nil else {
+                print("General Data timestamp not found!")
+                self.dataRetrievalStatus = .error
+                return
+            }
+            
+            self.dataRetrievalStatus = .dataLoaded
+            
+            let generalDataTimestamp = String(decoding: data, as: UTF8.self)
+            
+            if generalDataTimestamp != UserDefaults.standard.string(forKey: generalDataTimestampKey) {
+                UserDefaults.standard.set(generalDataTimestamp, forKey: generalDataTimestampKey)
+                
+                let dataURL = "https://slipstream-76796-default-rtdb.firebaseio.com/general_data/data.json"
+                self.getDataFromURL(dataURL: dataURL) { (generalData: GeneralData) in
+                    DispatchQueue.main.async {
+                        self.generalData = generalData
+                        self.saveLocalData(filename: "generalData.txt")
+                    }
+                }
+            }
+            
+        }.resume()
+    }
+    
+    private func fetchNewsData() {
+        
         let newsDataTimestampURL = "https://slipstream-76796-default-rtdb.firebaseio.com/news/timestamp.json"
         let newsDataTimestampKey = "newsDataTimestamp"
+        
+        // News Data
+        URLSession.shared.dataTask(with: URL(string: newsDataTimestampURL)!) { data, _, error in
+            
+            guard let data = data, error == nil else {
+                print("News data timestamp not found!")
+                self.dataRetrievalStatus = .error
+                return
+            }
+            
+            self.dataRetrievalStatus = .dataLoaded
+            
+            let newsDataTimestamp = String(decoding: data, as: UTF8.self)
+            
+            if newsDataTimestamp != UserDefaults.standard.string(forKey: newsDataTimestampKey) {
+                UserDefaults.standard.set(newsDataTimestamp, forKey: newsDataTimestampKey)
+                
+                let dataURL = "https://slipstream-76796-default-rtdb.firebaseio.com/news/data.json"
+                self.getDataFromURL(dataURL: dataURL) { (newsData: [NewsArticle]) in
+                    DispatchQueue.main.async {
+                        self.newsData = newsData
+                        self.saveLocalData(filename: "newsData.txt")
+                    }
+                }
+            }
+        }.resume()
+    }
+    
+    private func fetchSessionsData() {
         
         let liveEventIsOccuringURL = "https://slipstream-76796-default-rtdb.firebaseio.com/live_session_is_occuring/data.json"
         
         let allSessionsDataTimestampURL = "https://slipstream-76796-default-rtdb.firebaseio.com/sessions/timestamp.json"
         let allSessionsTimestampKey = "sessionsDataTimestamp"
         
+        // Live Event Is Occuring
+        URLSession.shared.dataTask(with: URL(string: liveEventIsOccuringURL)!) { data, _, error in
+            
+            guard let data = data, error == nil else {
+                print("Live Session Is Occuring data not found!")
+                self.dataRetrievalStatus = .error
+                return
+            }
+            
+            self.dataRetrievalStatus = .dataLoaded
+            
+            let liveSessionIsOccuring = String(data: data, encoding: .utf8)
+            
+            DispatchQueue.main.async {
+                self.liveSessionIsOccuring = liveSessionIsOccuring ?? "0"
+            }
+        }.resume()
+        
+        if self.liveSessionIsOccuring == "0" || self.liveSessionIsOccuring == "\"0\"" {
+            
+            // All sessions data
+            URLSession.shared.dataTask(with: URL(string: allSessionsDataTimestampURL)!) { data, _, error in
+                
+                guard let data = data, error == nil else {
+                    print("Sessions data not found")
+                    self.dataRetrievalStatus = .error
+                    return
+                }
+                
+                self.dataRetrievalStatus = .dataLoaded
+                
+                let sessionsDataTimestamp = String(decoding: data, as: UTF8.self)
+                
+                if sessionsDataTimestamp != UserDefaults.standard.string(forKey: allSessionsTimestampKey) {
+                    UserDefaults.standard.set(sessionsDataTimestamp, forKey: allSessionsTimestampKey)
+                    
+                    let dataURL = "https://slipstream-76796-default-rtdb.firebaseio.com/sessions/data.json"
+                    self.getDataFromURL(dataURL: dataURL) { (sessionsData: [Session]) in
+                        DispatchQueue.main.async {
+                            self.sessionsData = sessionsData
+                            self.saveLocalData(filename: "sessionsData.txt")
+                        }
+                    }
+                }
+            }.resume()
+        }
+        else if self.liveSessionIsOccuring == "1" || self.liveSessionIsOccuring == "\"1\"" {
+            
+            // Latest live session
+            let dataURL = "https://slipstream-76796-default-rtdb.firebaseio.com/sessions/data/0.json"
+            self.getDataFromURL(dataURL: dataURL) { (newSession: Session) in
+                DispatchQueue.main.async {
+                    guard self.sessionsData != nil else { return }
+                    self.sessionsData?.sort(by: { $0.timestamp > $1.timestamp })
+                    
+                    if self.sessionsData![0].eventTitle == newSession.eventTitle {
+                        self.sessionsData![0] = newSession
+                    }
+                    else {
+                        self.sessionsData!.append(newSession)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func fetchData() {
+        
+        DispatchQueue.main.async {
+            self.fetchGeneralData()
+            self.fetchNewsData()
+            self.fetchSessionsData()
+        }
+    }
+    
+    func startTimer() {
+        
         self.timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
-            
-            // General Data
-            URLSession.shared.dataTask(with: URL(string: generalDataTimestampURL)!) { data, _, error in
-                
-                guard let data = data, error == nil else { fatalError("General Data timestamp not found!") }
-                let generalDataTimestamp = String(decoding: data, as: UTF8.self)
-                
-                if generalDataTimestamp != UserDefaults.standard.string(forKey: generalDataTimestampKey) {
-                    UserDefaults.standard.set(generalDataTimestamp, forKey: generalDataTimestampKey)
-                    
-                    let dataURL = "https://slipstream-76796-default-rtdb.firebaseio.com/general_data/data.json"
-                    self.getDataFromURL(dataURL: dataURL) { (generalData: GeneralData) in
-                        self.generalData = generalData
-                        self.saveLocalData(filename: "generalData.txt")
-                    }
-                }
-                
-            }.resume()
-            
-            // News Data
-            URLSession.shared.dataTask(with: URL(string: newsDataTimestampURL)!) { data, _, error in
-                
-                guard let data = data, error == nil else { fatalError("News data timestamp not found!") }
-                let newsDataTimestamp = String(decoding: data, as: UTF8.self)
-                
-                if newsDataTimestamp != UserDefaults.standard.string(forKey: newsDataTimestampKey) {
-                    UserDefaults.standard.set(newsDataTimestamp, forKey: newsDataTimestampKey)
-                    
-                    let dataURL = "https://slipstream-76796-default-rtdb.firebaseio.com/news/data.json"
-                    self.getDataFromURL(dataURL: dataURL) { (newsData: [NewsArticle]) in
-                        self.newsData = newsData
-                        self.saveLocalData(filename: "newsData.txt")
-                    }
-                }
-            }.resume()
-            
-            // Live Event Is Occuring
-            URLSession.shared.dataTask(with: URL(string: liveEventIsOccuringURL)!) { data, _, error in
-                
-                guard let data = data, error == nil else { fatalError("Live Session Is Occuring data not found!") }
-                let liveSessionIsOccuring = String(decoding: data, as: UTF8.self)
-                self.liveSessionIsOccuring = liveSessionIsOccuring
-                print(self.liveSessionIsOccuring)
-            }.resume()
-            
-            if self.liveSessionIsOccuring == "0" {
-                
-            }
-            else if self.liveSessionIsOccuring == "1" {
-                
-            }
+            self.fetchData()
         }
     }
     
@@ -272,12 +286,14 @@ class DataManager: ObservableObject {
             }
         }
         
-        guard let dataURL = dataURL else { fatalError("Data URL not available.") }
+        guard let dataURL = dataURL else { print("Data URL not available."); return }
         
         URLSession.shared.dataTask(with: URL(string: dataURL)!) { data, _, error in
             
-            guard let generalData = data, error == nil else { fatalError("General Data not found!") }
-            save(generalData)
+            guard let data = data, error == nil else { print("Data not found"); return }
+            
+            self.dataRetrievalStatus = .dataLoaded
+            save(data)
         }.resume()
     }
 }

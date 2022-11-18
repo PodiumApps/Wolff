@@ -33,16 +33,17 @@ struct SessionGrid: View {
     var eventIsOccuring: String
     
     var finalStatus: [String] {
-        var newStatus = status
-        if index == 0 && eventIsOccuring == "1" {
-            newStatus[0] = "LIVE"
-        }
-        else {
-            newStatus.removeAll()
-            newStatus.append("FINISHED")
-        }
-        
-        return newStatus
+//        var newStatus = status
+//        if index == 0 && eventIsOccuring == "\"1\"" {
+//            newStatus[0] = "LIVE"
+//        }
+//        else {
+//            newStatus.removeAll()
+//            newStatus.append("FINISHED")
+//        }
+//
+//        return newStatus
+        return status
     }
     
     var body: some View {
