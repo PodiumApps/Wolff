@@ -8,8 +8,7 @@ import SwiftUI
 class DataManager: ObservableObject {
     
     enum DataRetrievalStatus {
-        case loadingData
-        case dataLoaded
+        case ok
         case error
     }
     
@@ -17,10 +16,12 @@ class DataManager: ObservableObject {
     @Published var newsData: [NewsArticle]?
     @Published var sessionsData: [Session]?
     @Published var liveSessionIsOccuring = "0"
-    @Published var dataRetrievalStatus = DataRetrievalStatus.dataLoaded
+    @Published var dataRetrievalStatus = true
+    @Published var sheetDismissedOnce = false
     
-    let monitor = NWPathMonitor()
-    let queue = DispatchQueue.global(qos: .background)
+    
+//    let monitor = NWPathMonitor()
+//    let queue = DispatchQueue.global(qos: .background)
     
     var timer = Timer()
     
@@ -32,25 +33,25 @@ class DataManager: ObservableObject {
         fetchData()
         startTimer()
         
-        checkInternetConnection()
+//        checkInternetConnection()
     }
     
-    private func checkInternetConnection() {
-        monitor.pathUpdateHandler = { path in
-            if path.status != .satisfied {
-                print("No Internet connection.")
-                DispatchQueue.main.async {
-                    //self.stopAppDataListener()
-                }
-            }
-            else {
-                print("We have Internet connection.")
-                //self.startAppDataListener()
-            }
-        }
-        
-        monitor.start(queue: queue)
-    }
+//    private func checkInternetConnection() {
+//        monitor.pathUpdateHandler = { path in
+//            if path.status != .satisfied {
+//                print("No Internet connection.")
+//                DispatchQueue.main.async {
+//                    //self.stopAppDataListener()
+//                }
+//            }
+//            else {
+//                print("We have Internet connection.")
+//                //self.startAppDataListener()
+//            }
+//        }
+//
+//        monitor.start(queue: queue)
+//    }
     
     private func loadLocalData(filename: String) {
         let directoryURLs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -127,11 +128,18 @@ class DataManager: ObservableObject {
             
             guard let data = data, error == nil else {
                 print("General Data timestamp not found!")
-                self.dataRetrievalStatus = .error
+                
+                DispatchQueue.main.async {
+                    self.dataRetrievalStatus = false
+                }
+                
                 return
             }
             
-            self.dataRetrievalStatus = .dataLoaded
+            DispatchQueue.main.async {
+                self.dataRetrievalStatus = true
+                self.sheetDismissedOnce = false
+            }
             
             let generalDataTimestamp = String(decoding: data, as: UTF8.self)
             
@@ -160,11 +168,18 @@ class DataManager: ObservableObject {
             
             guard let data = data, error == nil else {
                 print("News data timestamp not found!")
-                self.dataRetrievalStatus = .error
+                
+                DispatchQueue.main.async {
+                    self.dataRetrievalStatus = false
+                }
+                
                 return
             }
             
-            self.dataRetrievalStatus = .dataLoaded
+            DispatchQueue.main.async {
+                self.dataRetrievalStatus = true
+                self.sheetDismissedOnce = false
+            }
             
             let newsDataTimestamp = String(decoding: data, as: UTF8.self)
             
@@ -194,11 +209,18 @@ class DataManager: ObservableObject {
             
             guard let data = data, error == nil else {
                 print("Live Session Is Occuring data not found!")
-                self.dataRetrievalStatus = .error
+                
+                DispatchQueue.main.async {
+                    self.dataRetrievalStatus = false
+                }
+                
                 return
             }
             
-            self.dataRetrievalStatus = .dataLoaded
+            DispatchQueue.main.async {
+                self.dataRetrievalStatus = true
+                self.sheetDismissedOnce = false
+            }
             
             let liveSessionIsOccuring = String(data: data, encoding: .utf8)
             
@@ -214,11 +236,18 @@ class DataManager: ObservableObject {
                 
                 guard let data = data, error == nil else {
                     print("Sessions data not found")
-                    self.dataRetrievalStatus = .error
+                    
+                    DispatchQueue.main.async {
+                        self.dataRetrievalStatus = false
+                    }
+                    
                     return
                 }
                 
-                self.dataRetrievalStatus = .dataLoaded
+                DispatchQueue.main.async {
+                    self.dataRetrievalStatus = true
+                    self.sheetDismissedOnce = false
+                }
                 
                 let sessionsDataTimestamp = String(decoding: data, as: UTF8.self)
                 
@@ -290,9 +319,21 @@ class DataManager: ObservableObject {
         
         URLSession.shared.dataTask(with: URL(string: dataURL)!) { data, _, error in
             
-            guard let data = data, error == nil else { print("Data not found"); return }
+            guard let data = data, error == nil else {
+                print("Data not found")
+                
+                DispatchQueue.main.async {
+                    self.dataRetrievalStatus = false
+                }
+                
+                return
+            }
             
-            self.dataRetrievalStatus = .dataLoaded
+            DispatchQueue.main.async {
+                self.dataRetrievalStatus = true
+                self.sheetDismissedOnce = false
+            }
+            
             save(data)
         }.resume()
     }

@@ -12,9 +12,11 @@ struct AppEntryPoint: View {
     
     @EnvironmentObject var dataManager: DataManager
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        if dataManager.dataRetrievalStatus == .dataLoaded {
+        
+        if dataManager.dataRetrievalStatus == true || dataManager.sheetDismissedOnce == true {
             TabView {
                 EventsList(
                     sessions: dataManager.sessionsData ?? [],
@@ -34,7 +36,12 @@ struct AppEntryPoint: View {
         }
         else {
             VStack {
-                
+                Spacer()
+                Text("Check your Internet Connection")
+                Spacer()
+                Button("Dismiss") {
+                    dataManager.sheetDismissedOnce = true
+                }
             }
         }
     }
