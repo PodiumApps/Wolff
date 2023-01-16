@@ -17,13 +17,13 @@ struct LiveView<ViewModel: LiveRepresentable>: View {
             
         case .loading(let sessionResults), .results(let sessionResults):
             ZStack {
-                Image(Images.liveBackground)
+                Image.liveBackground
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .edgesIgnoringSafeArea(.all)
                 GeometryReader { geometry in
                     InfiniteScroller(contentHeight: geometry.size.height) {
-                        Image(Images.liveSideBarBackground)
+                        Image.liveSideBarBackground
                             .resizable()
                             .frame(width: geometry.size.width, height: geometry.size.height)
                             .aspectRatio(contentMode: .fill)

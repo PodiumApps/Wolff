@@ -1,9 +1,19 @@
 import Foundation
+import SwiftUI
 
-enum Images {
+extension Image {
     
-    static var iconTrophy = "trophy"
+    static let iconTrophy =  Image(systemName: "trophy")
+    static let iconFastestLap = Image("fastest_lap_icon")
     
-    static var liveSideBarBackground = "side_bar"
-    static var liveBackground = "background"
+    static let liveSideBarBackground = Image("side_bar")
+    static let liveBackground = Image("background")
+
+    static let resultsCardBackground = Image("f1_grid")
+
+    // MARK: SFSymbols
+
+    static let informationIcon = Image(systemName: "info.circle.fill")
+    static let trophyIcon = Image(systemName: "trophy.fill")
+
 }

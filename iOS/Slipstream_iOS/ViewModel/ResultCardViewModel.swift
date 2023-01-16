@@ -1,15 +1,8 @@
-//
-//  ResultCardViewModel.swift
-//  Slipstream_iOS
-//
-//  Created by Tomás Mamede on 09/01/2023.
-//
-
 import Foundation
 
 protocol ResultCardRepresentable {
 
-    var sessionType: String { get }
+    var sessionType: Session.Name { get }
     var fastestLap: String { get }
     var drivers: [ResultCardViewModel.Driver] { get }
 }
@@ -22,11 +15,11 @@ final class ResultCardViewModel: ResultCardRepresentable {
         let position: Position
     }
 
-    let sessionType: String
+    let sessionType: Session.Name
     let fastestLap: String
     let drivers: [Driver]
 
-    enum Position {
+    enum Position: Comparable {
 
         case first
         case second
@@ -40,13 +33,21 @@ final class ResultCardViewModel: ResultCardRepresentable {
             }
         }
 
+        var order: Int {
+            switch self {
+            case .first: return 0
+            case .second: return 1
+            case .third: return 2
+            }
+        }
+
         var showTrophyImage: Bool { self == .first }
     }
 
-    init(sessionType: String, fastestLap: String, drivers: [Driver]) {
+    init(sessionType: Session.Name, fastestLap: String, drivers: [Driver]) {
 
         self.sessionType = sessionType
         self.fastestLap = fastestLap
-        self.drivers = drivers
+        self.drivers = drivers.sorted(by: { $1.position.order < $0.position.order })
     }
 }

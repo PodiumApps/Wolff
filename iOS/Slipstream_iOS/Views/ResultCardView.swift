@@ -1,10 +1,3 @@
-//
-//  ResultCard.swift
-//  Slipstream_iOS
-//
-//  Created by Tomás Mamede on 07/01/2023.
-//
-
 import SwiftUI
 
 struct ResultCardView<ViewModel: ResultCardRepresentable>: View {
@@ -16,49 +9,51 @@ struct ResultCardView<ViewModel: ResultCardRepresentable>: View {
     }
 
     var body: some View {
-        ZStack {
-            Image("f1_grid")
+        
+        VStack {
+            VStack(alignment: .leading, spacing: Constants.topInfoSpacing) {
+                HStack {
+                    Text(viewModel.sessionType.label)
+                        .font(.titleFontBold)
+                    Spacer()
+                    Image.informationIcon
+                        .foregroundColor(Color.blue)
+                        .background(Color.white)
+                        .clipShape(Circle())
+                }
+
+                HStack {
+                    Image.iconFastestLap
+                    Text(viewModel.fastestLap)
+                }
+                .font(.subheadlineFont)
+            }
+            .padding(Constants.topInfoPadding)
+            .foregroundColor(Constants.topInfoColor)
+            
+            ZStack {
+                ForEach(viewModel.drivers) {
+                    driverCircle(
+                        position: $0.position,
+                        driverTicker: $0.id
+                    )
+                }
+            }
+            .offset(y: Constants.combinedDriverCirclesYOffset)
+            
+            Spacer()
+        }
+        .background(
+            Image.resultsCardBackground
                 .resizable()
                 .scaledToFill()
                 .frame(width: Constants.cardSquareSize, height: Constants.cardSquareSize)
-
-            RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
-                .background(Color.black)
-                .opacity(Constants.backgroundImageOpacity)
-
-            VStack {
-                VStack(alignment: .leading, spacing: Constants.topInfoSpacing) {
-                    HStack {
-                        Text(viewModel.sessionType)
-                            .font(.title2)
-                            .fontWeight(.bold)
-                        Spacer()
-                        Image(systemName: "info.circle.fill")
-                            .foregroundColor(Color.blue)
-                            .background(Color.white)
-                            .clipShape(
-                                Circle()
-                            )
-                    }
-                    Label(viewModel.fastestLap, systemImage: "steeringwheel")
-                        .font(.subheadline)
-                }
-                .padding(Constants.topInfoPadding)
-                .foregroundColor(Constants.topInfoColor)
-
-                ZStack {
-                    ForEach(viewModel.drivers.reversed()) {
-                        driverCircle(
-                            position: $0.position,
-                            driverTicker: $0.id
-                        )
-                    }
-                }
-                .offset(y: Constants.combinedDriverCirclesYOffset)
-
-                Spacer()
-            }
-        }
+                .overlay(
+                    RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
+                        .background(Color.black)
+                        .opacity(Constants.backgroundImageOpacity)
+                )
+        )
         .frame(width: Constants.cardSquareSize, height: Constants.cardSquareSize)
         .cornerRadius(Constants.cardCornerRadius)
         .shadow(
@@ -75,33 +70,26 @@ struct ResultCardView<ViewModel: ResultCardRepresentable>: View {
         VStack {
 
             if position.showTrophyImage {
-                Image(systemName: "trophy.fill")
+                Image.trophyIcon
             } else {
                 Text(position.label)
                     .font(.title3)
-                    .bold()
+                    .bold() // TODO: Passar para Fonts
             }
 
             Text(driverTicker)
-                .font(.headline)
+                .font(.headline) // TODO: Passar para Fonts
                 .bold()
         }
-        .frame(
-            width: Constants.driverCircleDiameter,
-            height: Constants.driverCircleDiameter
-        )
-        .background(
-            applyCircleBackgroundColor(position: position)
-        )
+        .frame(width: Constants.driverCircleDiameter, height: Constants.driverCircleDiameter)
+        .background(applyCircleBackgroundColor(position: position))
         .overlay(
             Circle()
-                .stroke(Color.white, lineWidth: Constants.driverCircleBorderLinewidth)
+                .stroke(Color.white.gradient, lineWidth: Constants.driverCircleBorderLinewidth)
+                .opacity(0.8)
         )
         .clipShape(Circle())
-        .offset(
-            x: applyXOffset(position: position),
-            y: applyYOffset(position: position)
-        )
+        .offset(x: applyXOffset(position: position), y: applyYOffset(position: position))
     }
 
     func applyCircleBackgroundColor(position: ResultCardViewModel.Position) -> AnyGradient {
@@ -161,23 +149,24 @@ fileprivate enum Constants {
 }
 
 struct ResultCard_Previews: PreviewProvider {
+
     static var previews: some View {
         ResultCardView(
             viewModel:
                 ResultCardViewModel(
-                    sessionType: "Race",
+                    sessionType: Session.mockSession.name,
                     fastestLap: "1:20:507",
                     drivers: [
                         ResultCardViewModel.Driver(
-                            id: "VER",
+                            id: Driver.mockHamilton.codeName,
                             position: .first
                         ),
                         ResultCardViewModel.Driver(
-                            id: "LEC",
+                            id: Driver.mockVertasppen.codeName,
                             position: .second
                         ),
                         ResultCardViewModel.Driver(
-                            id: "HAM",
+                            id: Driver.mockLeclerc.codeName,
                             position: .third
                         )
                     ]

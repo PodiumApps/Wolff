@@ -22,5 +22,28 @@ extension Session {
         case qualifying = "Qualifying"
         case sprint = "Sprint"
         case race = "Race"
+
+        var label: String {
+
+            switch self {
+            case .firstPractice: return "Practice 1"
+            case .secondPractice: return "Practice 2"
+            case .thirdPractice: return "Practice 3"
+            case .qualifying: return "Qualifying"
+            case .sprint: return "Sprint Race"
+            case .race: return "Race"
+            }
+        }
     }
+
+    static let mockSession: Self = .init(
+        id: "race",
+        fastestDriver: Driver.mockHamilton,
+        circuit: Circuit.mockCircuit,
+        round: 4,
+        laps: 52,
+        date: Date(),
+        name: .race,
+        timeLeft: "1 hour"
+    )
 }

@@ -20,7 +20,7 @@ struct LiveCarView<ViewModel: LiveCarRepresentable>: View {
             VStack {
                 VStack(spacing: 2) {
                     if viewModel.position == 1 {
-                        Image(Images.iconTrophy)
+                        Image.iconTrophy
                     } else {
                         Text("\(viewModel.position)")
                     }
