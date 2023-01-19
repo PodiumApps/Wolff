@@ -61,10 +61,19 @@
 		CF20D362297577D80038A860 /* ConstructorStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D360297577D80038A860 /* ConstructorStyler.swift */; };
 		CF20D36529760C300038A860 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36429760C300038A860 /* Colors.swift */; };
 		CF20D36629760C300038A860 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36429760C300038A860 /* Colors.swift */; };
+		CF20D3682976FBD50038A860 /* GrandPrixCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */; };
+		CF20D3692976FBD50038A860 /* GrandPrixCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */; };
+		CF20D36B297700160038A860 /* GrandPrixCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36A297700160038A860 /* GrandPrixCardView.swift */; };
+		CF20D36C297700160038A860 /* GrandPrixCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36A297700160038A860 /* GrandPrixCardView.swift */; };
+		CF20D36E297802040038A860 /* DriverResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36D297802040038A860 /* DriverResult.swift */; };
+		CF20D36F297802040038A860 /* DriverResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36D297802040038A860 /* DriverResult.swift */; };
+		CF20D371297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D370297818EE0038A860 /* EventStatusBackgroundStyler.swift */; };
+		CF20D372297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D370297818EE0038A860 /* EventStatusBackgroundStyler.swift */; };
 		CF277A1E297017C50048DE75 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A1D297017C50048DE75 /* Fonts.swift */; };
 		CF277A1F297017C50048DE75 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A1D297017C50048DE75 /* Fonts.swift */; };
 		CF277A21297303430048DE75 /* NewsCarouselComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A20297303430048DE75 /* NewsCarouselComponentView.swift */; };
 		CF277A23297313260048DE75 /* NewsCarouselComponentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A22297313260048DE75 /* NewsCarouselComponentViewModel.swift */; };
+		CFA783F829782ED800C21E25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42096837295378A20075D75E /* Assets.xcassets */; };
 		CFB508C92953034300C46D81 /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB508C82953034300C46D81 /* EventCard.swift */; };
 		CFBD88D7296C1FB50068AB54 /* ResultCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBD88D6296C1FB50068AB54 /* ResultCardViewModel.swift */; };
 		CFEE3F2B2969B6970050EE8B /* ResultCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEE3F2A2969B6970050EE8B /* ResultCardView.swift */; };
@@ -124,6 +133,10 @@
 		CF0544452951CB8D00A39FE3 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		CF20D360297577D80038A860 /* ConstructorStyler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorStyler.swift; sourceTree = "<group>"; };
 		CF20D36429760C300038A860 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandPrixCardViewModel.swift; sourceTree = "<group>"; };
+		CF20D36A297700160038A860 /* GrandPrixCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandPrixCardView.swift; sourceTree = "<group>"; };
+		CF20D36D297802040038A860 /* DriverResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverResult.swift; sourceTree = "<group>"; };
+		CF20D370297818EE0038A860 /* EventStatusBackgroundStyler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStatusBackgroundStyler.swift; sourceTree = "<group>"; };
 		CF277A1D297017C50048DE75 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		CF277A20297303430048DE75 /* NewsCarouselComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCarouselComponentView.swift; sourceTree = "<group>"; };
 		CF277A22297313260048DE75 /* NewsCarouselComponentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCarouselComponentViewModel.swift; sourceTree = "<group>"; };
@@ -300,6 +313,7 @@
 				42B21975295DE14600515097 /* LiveCarView.swift */,
 				CFEE3F2A2969B6970050EE8B /* ResultCardView.swift */,
 				CF277A20297303430048DE75 /* NewsCarouselComponentView.swift */,
+				CF20D36A297700160038A860 /* GrandPrixCardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -311,6 +325,8 @@
 				42B2197D295EE95600515097 /* LiveCarViewModel.swift */,
 				CFBD88D6296C1FB50068AB54 /* ResultCardViewModel.swift */,
 				CF277A22297313260048DE75 /* NewsCarouselComponentViewModel.swift */,
+				CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */,
+				CF20D36D297802040038A860 /* DriverResult.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -403,6 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				CF20D360297577D80038A860 /* ConstructorStyler.swift */,
+				CF20D370297818EE0038A860 /* EventStatusBackgroundStyler.swift */,
 			);
 			path = Stylers;
 			sourceTree = "<group>";
@@ -572,6 +589,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				420967FB294C9A8F0075D75E /* Preview Assets.xcassets in Resources */,
+				CFA783F829782ED800C21E25 /* Assets.xcassets in Resources */,
 				420967F8294C9A8F0075D75E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -607,6 +625,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42096823294C9B990075D75E /* NetworkManager.swift in Sources */,
+				CF20D371297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */,
 				CF20D36529760C300038A860 /* Colors.swift in Sources */,
 				42B21972295DDBAB00515097 /* Details.swift in Sources */,
 				CF0544462951CB8D00A39FE3 /* DateExtension.swift in Sources */,
@@ -617,11 +636,14 @@
 				CF05443A29507C1000A39FE3 /* Circuit.swift in Sources */,
 				42B21988295EEA9400515097 /* ConstructorMock.swift in Sources */,
 				42B2196E295D9EFB00515097 /* SessionResult.swift in Sources */,
+				CF20D3682976FBD50038A860 /* GrandPrixCardViewModel.swift in Sources */,
 				CF20D361297577D80038A860 /* ConstructorStyler.swift in Sources */,
+				CF20D36B297700160038A860 /* GrandPrixCardView.swift in Sources */,
 				42B2198F295EEAA500515097 /* SessionMock.swift in Sources */,
 				CFB508C92953034300C46D81 /* EventCard.swift in Sources */,
 				42B2199A295F3A2300515097 /* DoubleExtension.swift in Sources */,
 				42B219A0295F426200515097 /* Images.swift in Sources */,
+				CF20D36E297802040038A860 /* DriverResult.swift in Sources */,
 				CF054428294F7D4E00A39FE3 /* Constructor.swift in Sources */,
 				42B21995295EEAC600515097 /* StandingsMock.swift in Sources */,
 				CF277A1E297017C50048DE75 /* Fonts.swift in Sources */,
@@ -652,6 +674,7 @@
 				42B21997295EEAC600515097 /* StandingsMock.swift in Sources */,
 				42B21989295EEA9400515097 /* ConstructorMock.swift in Sources */,
 				CF277A21297303430048DE75 /* NewsCarouselComponentView.swift in Sources */,
+				CF20D3692976FBD50038A860 /* GrandPrixCardViewModel.swift in Sources */,
 				4209685F29537AF10075D75E /* News.swift in Sources */,
 				CF277A1F297017C50048DE75 /* Fonts.swift in Sources */,
 				42B21976295DE14600515097 /* LiveCarView.swift in Sources */,
@@ -660,6 +683,7 @@
 				CFBD88D7296C1FB50068AB54 /* ResultCardViewModel.swift in Sources */,
 				42B21977295DE5E000515097 /* SessionResult.swift in Sources */,
 				4209685C29537AC90075D75E /* DateExtension.swift in Sources */,
+				CF20D36F297802040038A860 /* DriverResult.swift in Sources */,
 				42B21981295EEA2300515097 /* SessionResultMock.swift in Sources */,
 				42B2197C295EE46500515097 /* LiveViewModel.swift in Sources */,
 				CF20D362297577D80038A860 /* ConstructorStyler.swift in Sources */,
@@ -672,7 +696,9 @@
 				42B219A5295F450200515097 /* InfiniteScroller.swift in Sources */,
 				4209686229537AF70075D75E /* Constructor.swift in Sources */,
 				42B21986295EEA7200515097 /* DriverMock.swift in Sources */,
+				CF20D372297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */,
 				42096834295378A10075D75E /* Slipstream_iOSApp.swift in Sources */,
+				CF20D36C297700160038A860 /* GrandPrixCardView.swift in Sources */,
 				4209686B29537B0D0075D75E /* Circuit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

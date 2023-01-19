@@ -15,5 +15,6 @@ extension Image {
 
     static let informationIcon: Self = Image(systemName: "info.circle.fill")
     static let trophyIcon: Self = Image(systemName: "trophy.fill")
+    static let chevronRight: Self = Image(systemName: "chevron.right")
 
 }

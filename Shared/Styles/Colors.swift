@@ -2,15 +2,19 @@ import SwiftUI
 
 extension Color {
 
-    static let alphaRomeo: Color = Color("alphaRomeo")
-    static let alphaTauri: Color = Color("alphaTauri")
-    static let alpine: Color = Color("alpine")
-    static let astonMartin: Color = Color("astonMartin")
-    static let ferrari: Color = Color("ferrari")
-    static let haas: Color = Color("haas")
-    static let mclaren: Color = Color("mclaren")
-    static let mercedes: Color = Color("mercedes")
-    static let redBull: Color = Color("redBull")
-    static let williams: Color = Color("williams")
-    static let noTeam: Color = Color.black
+    static let alphaRomeo: Self = Color("alphaRomeo")
+    static let alphaTauri: Self = Color("alphaTauri")
+    static let alpine: Self = Color("alpine")
+    static let astonMartin: Self = Color("astonMartin")
+    static let ferrari: Self = Color("ferrari")
+    static let haas: Self = Color("haas")
+    static let mclaren: Self = Color("mclaren")
+    static let mercedes: Self = Color("mercedes")
+    static let redBull: Self = Color("redBull")
+    static let williams: Self = Color("williams")
+    static let noTeam: Self = Color.primary
+
+    static let completedOrUpcomingEvent: Self = Color("completedOrUpcoming")
+    static let liveSession: Self = Color("live")
+    static let current: Self = Color("current")
 }
