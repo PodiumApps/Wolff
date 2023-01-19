@@ -2,15 +2,14 @@ import Foundation
 
 struct DriverResult: Identifiable {
 
-    let id = UUID().uuidString
-    let driverTicker: String // Driver Ticker
+    let id: String // Driver Ticker
     let value: Value
 
-    enum Value: Int {
+    enum Value: Comparable {
 
-        case first = 1
-        case second = 2
-        case third = 3
+        case first
+        case second
+        case third
 
         var label: String {
             switch self {

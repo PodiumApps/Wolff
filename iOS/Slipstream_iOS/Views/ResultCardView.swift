@@ -35,7 +35,7 @@ struct ResultCardView<ViewModel: ResultCardRepresentable>: View {
                 ForEach(viewModel.drivers) {
                     driverCircle(
                         position: $0.value,
-                        driverTicker: $0.driverTicker
+                        driverTicker: $0.id
                     )
                 }
             }
@@ -152,9 +152,9 @@ struct ResultCard_Previews: PreviewProvider {
                     sessionType: Session.mockSession.name,
                     fastestLap: "1:20:507",
                     drivers: [
-                        .init(driverTicker: Driver.mockHamilton.codeName, value: .first),
-                        .init(driverTicker: Driver.mockVertasppen.codeName, value: .second),
-                        .init(driverTicker: Driver.mockLeclerc.codeName, value: .third)
+                        .init(id: Driver.mockHamilton.codeName, value: .first),
+                        .init(id: Driver.mockVertasppen.codeName, value: .second),
+                        .init(id: Driver.mockLeclerc.codeName, value: .third)
                     ]
                 )
         )

@@ -17,4 +17,10 @@ extension Font {
     static let chevronRightFont: Self = .largeTitle
     static let liveTextFont: Self = .body.bold()
 
+    static let eventTitleFont: Self = Font.system(.title3, weight: .bold)
+    static let eventRoundNumberFont: Self = Font.body.italic()
+    static let liveSessionTitleFont: Self = Font.body.bold()
+    static let chevronRightFont: Self = Font.largeTitle
+    static let liveTextFont: Self = Font.body.bold()
+
 }

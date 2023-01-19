@@ -612,7 +612,6 @@
 			files = (
 				420967FB294C9A8F0075D75E /* Preview Assets.xcassets in Resources */,
 				CFE23F4F2982EBF200412DB6 /* Localizable.strings in Resources */,
-				CFA783F829782ED800C21E25 /* Assets.xcassets in Resources */,
 				CFE23F552982EDBA00412DB6 /* swiftgen.yml in Resources */,
 				420967F8294C9A8F0075D75E /* Assets.xcassets in Resources */,
 			);
