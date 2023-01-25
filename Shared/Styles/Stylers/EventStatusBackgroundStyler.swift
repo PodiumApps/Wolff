@@ -2,22 +2,47 @@ import SwiftUI
 
 protocol EventStatusBackgroundStylerRepresentable {
 
-    var eventStatus: GrandPrixCardViewModel.EventStatus { get }
+    var status: EventStatusBackgroundStyler.Status { get }
 }
 
 class EventStatusBackgroundStyler: EventStatusBackgroundStylerRepresentable {
 
-    var eventStatus: GrandPrixCardViewModel.EventStatus
+    var status: Status
 
     var color: Color {
-        switch eventStatus {
+        switch status {
         case .current: return .current
-        case .live: return .liveSession
-        case .finished, .upcoming: return .completedOrUpcomingEvent
+        case .liveSession: return .liveSession
+        case .completeOrUpcomingEvent: return .completedOrUpcomingEvent
         }
     }
 
-    init(eventStatus: GrandPrixCardViewModel.EventStatus) {
-        self.eventStatus = eventStatus
+    init(status: Status) {
+        self.status = status
+    }
+}
+
+extension EventStatusBackgroundStyler {
+
+    enum Status {
+        case current
+        case liveSession
+        case completeOrUpcomingEvent
+    }
+
+    convenience init(grandPrixCardStatus: GrandPrixCardViewModel.Status) {
+
+        let status: Status
+
+        switch grandPrixCardStatus {
+        case .current:
+            status = .current
+        case .live:
+            status = .liveSession
+        case .finished, .upcoming:
+            status = .completeOrUpcomingEvent
+        }
+
+        self.init(status: status)
     }
 }

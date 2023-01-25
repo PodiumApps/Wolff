@@ -10,7 +10,7 @@ struct GrandPrixCardView<ViewModel: GrandPrixCardRepresentable>: View {
     init(viewModel: ViewModel) {
 
         self.viewModel = viewModel
-        self.eventStatusBackgroundStyler = EventStatusBackgroundStyler(eventStatus: viewModel.eventStatus)
+        self.eventStatusBackgroundStyler = EventStatusBackgroundStyler(grandPrixCardStatus: viewModel.eventStatus)
     }
 
     var body: some View {
@@ -28,18 +28,12 @@ struct GrandPrixCardView<ViewModel: GrandPrixCardRepresentable>: View {
                 }
 
                 switch viewModel.eventStatus {
-                case .finished:
-                    if let drivers = viewModel.drivers {
-                        driversPositionComponent(drivers: drivers)
-                    }
-                case .live, .current:
-                    if let title = viewModel.currentSessionTitle, let details = viewModel.currentSessionDetails {
-                        sessionDetailsComponent(title: title, details: details)
-                    }
-                case .upcoming:
-                    if let details = viewModel.currentSessionDetails {
-                        sessionDetailsComponent(details: details)
-                    }
+                case .finished(let drivers):
+                    driversPositionComponent(drivers: drivers)
+                case .live(let title, let details), .current(let title, let details):
+                    sessionDetailsComponent(title: title, details: details)
+                case .upcoming(let details):
+                    sessionDetailsComponent(details: details)
                 }
             }
             .frame(maxWidth: .infinity)
@@ -72,7 +66,7 @@ struct GrandPrixCardView<ViewModel: GrandPrixCardRepresentable>: View {
 
         HStack(spacing: Constants.horizontalSpacing) {
             ForEach(drivers) {
-                driverLabel(position: $0.value, driverTicker: $0.id)
+                driverLabel(position: $0.value, driverTicker: $0.driverTicker)
             }
         }
     }
@@ -92,7 +86,7 @@ struct GrandPrixCardView<ViewModel: GrandPrixCardRepresentable>: View {
         .bold()
     }
 
-    func sessionDetailsComponent(title: String? = .none, details: String) -> some View {
+    func sessionDetailsComponent(title: String? = nil, details: String) -> some View {
 
         HStack {
             if let title = title {
@@ -100,11 +94,7 @@ struct GrandPrixCardView<ViewModel: GrandPrixCardRepresentable>: View {
                     .font(.liveSessionTitleFont)
             }
 
-            if viewModel.eventStatus == .live || viewModel.eventStatus == .upcoming {
-                Text(details)
-            } else {
-                Text("\(details) until start")
-            }
+            Text(details)
         }
     }
 
@@ -173,15 +163,7 @@ struct ScheduleCarouselComponentView_Previews: PreviewProvider {
                 GrandPrixCardViewModel(
                     round: 13,
                     title: "Emilia Romagna 2023",
-                    circuitID: "bahrain_2023",
-                    eventSatus: .upcoming,
-                    currentSessionTitle: "FP1",
-                    currentSessionDetails: "05-07 MAY",
-                    drivers: [
-                        .init(id: "HAM", value: .first),
-                        .init(id: "LEC", value: .second),
-                        .init(id: "VER", value: .third)
-                    ]
+                    eventSatus: .upcoming(details: "05-07 MAY")
                 )
         )
 
@@ -190,15 +172,7 @@ struct ScheduleCarouselComponentView_Previews: PreviewProvider {
                 GrandPrixCardViewModel(
                     round: 13,
                     title: "Emilia Romagna 2023",
-                    circuitID: "bahrain_2023",
-                    eventSatus: .current,
-                    currentSessionTitle: "FP1",
-                    currentSessionDetails: "10:30h",
-                    drivers: [
-                        .init(id: "HAM", value: .first),
-                        .init(id: "LEC", value: .second),
-                        .init(id: "VER", value: .third)
-                    ]
+                    eventSatus: .current(title: "FP1", details: "10:30h until start")
                 )
         )
 
@@ -207,15 +181,7 @@ struct ScheduleCarouselComponentView_Previews: PreviewProvider {
                 GrandPrixCardViewModel(
                     round: 3,
                     title: "Emilia Romagna 2023",
-                    circuitID: "bahrain_2023",
-                    eventSatus: .live,
-                    currentSessionTitle: "Race",
-                    currentSessionDetails: "Lap 22 of 52",
-                    drivers: [
-                        .init(id: "HAM", value: .first),
-                        .init(id: "LEC", value: .second),
-                        .init(id: "VER", value: .third)
-                    ]
+                    eventSatus: .live(title: "Race", details: "Lap 22 of 52")
                 )
         )
 
@@ -224,13 +190,13 @@ struct ScheduleCarouselComponentView_Previews: PreviewProvider {
                 GrandPrixCardViewModel(
                     round: 3,
                     title: "Bahrain 2023",
-                    circuitID: "bahrain_2023",
-                    eventSatus: .finished,
-                    drivers: [
-                        .init(id: "HAM", value: .first),
-                        .init(id: "LEC", value: .second),
-                        .init(id: "VER", value: .third)
-                    ]
+                    eventSatus: .finished(
+                        drivers: [
+                            .init(driverTicker: "HAM", value: .first),
+                            .init(driverTicker: "LEC", value: .second),
+                            .init(driverTicker: "VER", value: .third)
+                        ]
+                    )
                 )
         )
     }
