@@ -35,7 +35,7 @@ struct ResultCardView<ViewModel: ResultCardRepresentable>: View {
                 ForEach(viewModel.drivers) {
                     driverCircle(
                         position: $0.value,
-                        driverTicker: $0.id
+                        driverTicker: $0.driverTicker
                     )
                 }
             }
