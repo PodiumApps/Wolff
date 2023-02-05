@@ -35,7 +35,7 @@ struct ResultCardView<ViewModel: ResultCardRepresentable>: View {
                 ForEach(viewModel.drivers) {
                     driverCircle(
                         position: $0.value,
-                        driverTicker: $0.id
+                        driverTicker: $0.driverTicker
                     )
                 }
             }
@@ -70,13 +70,11 @@ struct ResultCardView<ViewModel: ResultCardRepresentable>: View {
                 Image.trophyIcon
             } else {
                 Text(position.label)
-                    .font(.title3)
-                    .bold() // TODO: Passar para Fonts
+                    .font(.driverPositionFont)
             }
 
             Text(driverTicker)
-                .font(.headline) // TODO: Passar para Fonts
-                .bold()
+                .font(.driverTickerFont)
         }
         .frame(width: Constants.driverCircleDiameter, height: Constants.driverCircleDiameter)
         .background(applyCircleBackgroundColor(position: position))
