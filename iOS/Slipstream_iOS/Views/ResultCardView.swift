@@ -34,8 +34,8 @@ struct ResultCardView<ViewModel: ResultCardRepresentable>: View {
             ZStack {
                 ForEach(viewModel.drivers) {
                     driverCircle(
-                        position: $0.position,
-                        driverTicker: $0.id
+                        position: $0.value,
+                        driverTicker: $0.driverTicker
                     )
                 }
             }
@@ -63,23 +63,18 @@ struct ResultCardView<ViewModel: ResultCardRepresentable>: View {
         )
     }
 
-    func driverCircle(
-        position: ResultCardViewModel.Position,
-        driverTicker: String
-    ) -> some View {
-        VStack {
+    func driverCircle(position: DriverResult.Value, driverTicker: String) -> some View {
 
+        VStack {
             if position.showTrophyImage {
                 Image.trophyIcon
             } else {
                 Text(position.label)
-                    .font(.title3)
-                    .bold() // TODO: Passar para Fonts
+                    .font(.driverPositionFont)
             }
 
             Text(driverTicker)
-                .font(.headline) // TODO: Passar para Fonts
-                .bold()
+                .font(.driverTickerFont)
         }
         .frame(width: Constants.driverCircleDiameter, height: Constants.driverCircleDiameter)
         .background(applyCircleBackgroundColor(position: position))
@@ -92,7 +87,7 @@ struct ResultCardView<ViewModel: ResultCardRepresentable>: View {
         .offset(x: applyXOffset(position: position), y: applyYOffset(position: position))
     }
 
-    func applyCircleBackgroundColor(position: ResultCardViewModel.Position) -> AnyGradient {
+    func applyCircleBackgroundColor(position: DriverResult.Value) -> AnyGradient {
 
         switch position {
         case .first: return Color.yellow.gradient
@@ -101,7 +96,7 @@ struct ResultCardView<ViewModel: ResultCardRepresentable>: View {
         }
     }
 
-    func applyXOffset(position: ResultCardViewModel.Position) -> CGFloat {
+    func applyXOffset(position: DriverResult.Value) -> CGFloat {
 
         switch position {
         case .second: return Constants.secondPositionCircleXOffset
@@ -110,7 +105,7 @@ struct ResultCardView<ViewModel: ResultCardRepresentable>: View {
         }
     }
 
-    func applyYOffset(position: ResultCardViewModel.Position)-> CGFloat {
+    func applyYOffset(position: DriverResult.Value)-> CGFloat {
 
         switch position {
         case .first: return Constants.firstPositionCircleYOffset
@@ -157,18 +152,9 @@ struct ResultCard_Previews: PreviewProvider {
                     sessionType: Session.mockSession.name,
                     fastestLap: "1:20:507",
                     drivers: [
-                        ResultCardViewModel.Driver(
-                            id: Driver.mockHamilton.codeName,
-                            position: .first
-                        ),
-                        ResultCardViewModel.Driver(
-                            id: Driver.mockVertasppen.codeName,
-                            position: .second
-                        ),
-                        ResultCardViewModel.Driver(
-                            id: Driver.mockLeclerc.codeName,
-                            position: .third
-                        )
+                        .init(driverTicker: Driver.mockHamilton.codeName, value: .first),
+                        .init(driverTicker: Driver.mockVertasppen.codeName, value: .second),
+                        .init(driverTicker: Driver.mockLeclerc.codeName, value: .third)
                     ]
                 )
         )

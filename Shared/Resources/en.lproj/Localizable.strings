@@ -1,0 +1,5 @@
+"grand_prix_card.title" = "Monza 2023";
+
+// MARK: - GrandPrixCard
+
+"grand_prix_card.top.round" = "Round %@";
