@@ -2,19 +2,40 @@ import SwiftUI
 
 extension Color {
 
-    static let alphaRomeo: Self = Color("alphaRomeo")
-    static let alphaTauri: Self = Color("alphaTauri")
-    static let alpine: Self = Color("alpine")
-    static let astonMartin: Self = Color("astonMartin")
-    static let ferrari: Self = Color("ferrari")
-    static let haas: Self = Color("haas")
-    static let mclaren: Self = Color("mclaren")
-    static let mercedes: Self = Color("mercedes")
-    static let redBull: Self = Color("redBull")
-    static let williams: Self = Color("williams")
-    static let noTeam: Self = Color.primary
+    enum Constructor {
 
-    static let completedOrUpcomingEvent: Self = Color("completedOrUpcoming")
-    static let liveSession: Self = Color("live")
-    static let current: Self = Color("current")
+        static let alphaRomeo: Color = .init("alphaRomeo")
+        static let alphaTauri: Color = .init("alphaTauri")
+        static let alpine: Color = .init("alpine")
+        static let astonMartin: Color = .init("astonMartin")
+        static let ferrari: Color = .init("ferrari")
+        static let haas: Color = .init("haas")
+        static let mclaren: Color = .init("mclaren")
+        static let mercedes: Color = .init("mercedes")
+        static let redBull: Color = .init("redBull")
+        static let williams: Color = .init("williams")
+        static let noTeam: Color = .primary
+    }
+
+    enum Event {
+
+        static let completedOrUpcomingEvent: Color = .init("completedOrUpcoming")
+        static let liveSession: Color = .init("live")
+        static let current: Color = .init("current")
+    }
+
+    enum SessionDriverRow {
+
+        static let positionBackground: Color = .init("positionBackground")
+        static let rowBackground: Color = .init("rowBackground")
+    }
+
+    enum Tyre {
+
+        static let soft: Color = .init("soft")
+        static let medium: Color = .init("medium")
+        static let hard: Color = .init("hard")
+        static let wet: Color = .init("wet")
+        static let intermediate: Color = .init("intermediate")
+    }
 }
