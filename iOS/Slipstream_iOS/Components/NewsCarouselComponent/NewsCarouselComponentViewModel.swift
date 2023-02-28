@@ -9,7 +9,7 @@ protocol NewsCarouselComponentRepresentable {
 }
 
 final class NewsCarouselComponentViewModel: NewsCarouselComponentRepresentable {
-
+// Should we change the name of this class? StandingsCarouselComponentViewModel? 🤔
     let driverName: String
     let constructorName: String
     let position: Int
