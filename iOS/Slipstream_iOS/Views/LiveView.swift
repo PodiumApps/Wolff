@@ -87,7 +87,7 @@ private extension LiveView {
                             LiveCarViewModel(
                                 image: result.driver.constructor.name,
                                 position: index + 1,
-                                label: result.driver.codeName,
+                                label: result.driver.driverThicker,
                                 offset: calculateOffset(for: result.time, index: index),
                                 time: result.time
                             )

@@ -3,42 +3,49 @@ import Foundation
 extension Driver {
     
     static let mockVertasppen: Self = .init(
-        id: UUID().uuidString,
-        carNumber: 27,
-        codeName: "VER",
-        name: "Marc Verstappen",
-        birth: Date(),
-        constructor: .mockFerrari,
-        standings: .driverDetail
+        id: 0,
+        driverLiveID: "max_verstappen",
+        firstName: "Max",
+        lastName: "Verstappen",
+        driverThicker: "VER",
+        position: 1,
+        points: 10,
+        constructorId: 0
     )
     
     static let mockLeclerc: Self = .init(
-        id: UUID().uuidString,
-        carNumber: 21,
-        codeName: "LEC",
-        name: "Mr Leclerc",
-        birth: Date(),
-        constructor: .mockFerrari,
-        standings: .driverDetail
+        id: 1,
+        driverLiveID: "leclerc",
+        firstName: "Max",
+        lastName: "Leclerc",
+        driverThicker: "LEC",
+        position: 2,
+        points: 10,
+        constructorId: 1
     )
+    
     
     static let mockAlonso: Self = .init(
-        id: UUID().uuidString,
-        carNumber: 21,
-        codeName: "ALO",
-        name: "Alonso",
-        birth: Date(),
-        constructor: .mockAlfa,
-        standings: .driverDetail
+        id: 2,
+        driverLiveID: "fernando_alonso",
+        firstName: "Fernando",
+        lastName: "Alonso",
+        driverThicker: "ALO",
+        position: 3,
+        points: 10,
+        constructorId: 2
     )
     
+    
     static let mockHamilton: Self = .init(
-        id: UUID().uuidString,
-        carNumber: 12,
-        codeName: "HAM",
-        name: "Lewis Hamilton",
-        birth: Date(),
-        constructor: .mockMercedes,
-        standings: .driverDetail
+        id: 3,
+        driverLiveID: "lewis_hamilton",
+        firstName: "Lewis",
+        lastName: "Hamilton",
+        driverThicker: "HAM",
+        position: 4,
+        points: 10,
+        constructorId: 2
     )
+    
 }

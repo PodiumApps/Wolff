@@ -3,10 +3,10 @@ import SwiftUI
 
 protocol SessionDriverRowViewModelRepresentable: ObservableObject {
 
-    var position: String { get }
+    var position: Int { get }
     var driverTicker: String { get }
-    var timeGap: String { get }
-    var tyrePitCount: String { get }
+    var timeGap: String? { get }
+    var tyrePitCount: Int { get }
     var currentTyre: SessionDriverRowViewModel.Tyre { get }
 
     var isSelected: Bool { get set }
@@ -16,10 +16,10 @@ protocol SessionDriverRowViewModelRepresentable: ObservableObject {
 
 final class SessionDriverRowViewModel: SessionDriverRowViewModelRepresentable {
 
-    var position: String
+    var position: Int
     var driverTicker: String
-    var timeGap: String
-    var tyrePitCount: String
+    var timeGap: String?
+    var tyrePitCount: Int
     var currentTyre: Tyre
 
     @Published var isSelected: Bool
@@ -33,11 +33,11 @@ final class SessionDriverRowViewModel: SessionDriverRowViewModelRepresentable {
 
         var color: Color {
             switch self {
-            case .soft: return Color.Tyre.soft
-            case .medium: return Color.Tyre.medium
-            case .hard: return Color.Tyre.hard
-            case .intermediate: return Color.Tyre.intermediate
-            case .wet: return Color.Tyre.wet
+            case .soft: return .Tyre.soft
+            case .medium: return .Tyre.medium
+            case .hard: return .Tyre.hard
+            case .intermediate: return .Tyre.intermediate
+            case .wet: return .Tyre.wet
             }
         }
 
@@ -53,10 +53,10 @@ final class SessionDriverRowViewModel: SessionDriverRowViewModelRepresentable {
     }
 
     init(
-        position: String,
+        position: Int,
         driverTicker: String,
-        timeGap: String,
-        tyrePitCount: String,
+        timeGap: String?,
+        tyrePitCount: Int,
         currentTyre: LivePosition.Tyre,
         isSelected: Bool = false
     ) {

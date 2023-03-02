@@ -14,7 +14,6 @@
 		42096805294C9A900075D75E /* SlipstreamWatch_Watch_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096804294C9A900075D75E /* SlipstreamWatch_Watch_AppTests.swift */; };
 		42096823294C9B990075D75E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096822294C9B990075D75E /* NetworkManager.swift */; };
 		42096834295378A10075D75E /* Slipstream_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096833295378A10075D75E /* Slipstream_iOSApp.swift */; };
-		42096836295378A10075D75E /* LiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096835295378A10075D75E /* LiveView.swift */; };
 		42096838295378A20075D75E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42096837295378A20075D75E /* Assets.xcassets */; };
 		4209683B295378A20075D75E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4209683A295378A20075D75E /* Preview Assets.xcassets */; };
 		42096845295378A30075D75E /* Slipstream_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096844295378A30075D75E /* Slipstream_iOSTests.swift */; };
@@ -24,15 +23,28 @@
 		4209686229537AF70075D75E /* Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF054427294F7D4E00A39FE3 /* Constructor.swift */; };
 		4209686B29537B0D0075D75E /* Circuit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF05443929507C1000A39FE3 /* Circuit.swift */; };
 		4209686E2954CDCC0075D75E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096822294C9B990075D75E /* NetworkManager.swift */; };
+		42521CA029B0EB9500000586 /* NetworkManagerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521C9F29B0EB9500000586 /* NetworkManagerRepresentable.swift */; };
+		42521CA129B0EB9500000586 /* NetworkManagerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521C9F29B0EB9500000586 /* NetworkManagerRepresentable.swift */; };
+		42521CA429B0ECBD00000586 /* LiveSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CA329B0ECBD00000586 /* LiveSessionService.swift */; };
+		42521CA529B0ECBD00000586 /* LiveSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CA329B0ECBD00000586 /* LiveSessionService.swift */; };
+		42521CA729B0F21700000586 /* DriverAndConstructorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CA629B0F21700000586 /* DriverAndConstructorService.swift */; };
+		42521CA829B0F21700000586 /* DriverAndConstructorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CA629B0F21700000586 /* DriverAndConstructorService.swift */; };
+		42521CAA29B0F9FF00000586 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CA929B0F9FF00000586 /* Global.swift */; };
+		42521CAB29B0F9FF00000586 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CA929B0F9FF00000586 /* Global.swift */; };
+		42521CAD29B0FC3900000586 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CAC29B0FC3900000586 /* AppViewModel.swift */; };
+		42521CAE29B0FC3900000586 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CAC29B0FC3900000586 /* AppViewModel.swift */; };
+		42521CB029B0FCD700000586 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CAF29B0FCD700000586 /* AppView.swift */; };
+		42521CB229B1006000000586 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CB129B1006000000586 /* ServiceLocator.swift */; };
+		42521CB329B1006000000586 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CB129B1006000000586 /* ServiceLocator.swift */; };
+		42521CB529B1033600000586 /* LoggerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CB429B1033600000586 /* LoggerExtension.swift */; };
+		42521CB629B1033600000586 /* LoggerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CB429B1033600000586 /* LoggerExtension.swift */; };
 		42B2196E295D9EFB00515097 /* SessionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2196D295D9EFB00515097 /* SessionResult.swift */; };
 		42B21970295DA4D400515097 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2196F295DA4D400515097 /* Session.swift */; };
 		42B21972295DDBAB00515097 /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B21971295DDBAB00515097 /* Details.swift */; };
 		42B21973295DDBBB00515097 /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B21971295DDBAB00515097 /* Details.swift */; };
-		42B21976295DE14600515097 /* LiveCarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B21975295DE14600515097 /* LiveCarView.swift */; };
 		42B21977295DE5E000515097 /* SessionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2196D295D9EFB00515097 /* SessionResult.swift */; };
 		42B21978295DE83600515097 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2196F295DA4D400515097 /* Session.swift */; };
 		42B2197C295EE46500515097 /* LiveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2197B295EE46500515097 /* LiveViewModel.swift */; };
-		42B2197E295EE95600515097 /* LiveCarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2197D295EE95600515097 /* LiveCarViewModel.swift */; };
 		42B21981295EEA2300515097 /* SessionResultMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B21980295EEA2300515097 /* SessionResultMock.swift */; };
 		42B21982295EEA2600515097 /* SessionResultMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B21980295EEA2300515097 /* SessionResultMock.swift */; };
 		42B21984295EEA5600515097 /* SessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B21983295EEA5600515097 /* SessionMock.swift */; };
@@ -124,6 +136,14 @@
 		4209683A295378A20075D75E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		42096840295378A30075D75E /* Slipstream_iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Slipstream_iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		42096844295378A30075D75E /* Slipstream_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slipstream_iOSTests.swift; sourceTree = "<group>"; };
+		42521C9F29B0EB9500000586 /* NetworkManagerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerRepresentable.swift; sourceTree = "<group>"; };
+		42521CA329B0ECBD00000586 /* LiveSessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveSessionService.swift; sourceTree = "<group>"; };
+		42521CA629B0F21700000586 /* DriverAndConstructorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverAndConstructorService.swift; sourceTree = "<group>"; };
+		42521CA929B0F9FF00000586 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		42521CAC29B0FC3900000586 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		42521CAF29B0FCD700000586 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		42521CB129B1006000000586 /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
+		42521CB429B1033600000586 /* LoggerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerExtension.swift; sourceTree = "<group>"; };
 		42B2196D295D9EFB00515097 /* SessionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionResult.swift; sourceTree = "<group>"; };
 		42B2196F295DA4D400515097 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		42B21971295DDBAB00515097 /* Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
@@ -246,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				42096822294C9B990075D75E /* NetworkManager.swift */,
+				42521C9F29B0EB9500000586 /* NetworkManagerRepresentable.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -283,6 +304,7 @@
 		4209685B29537AB60075D75E /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				42521CA229B0ECAC00000586 /* Services */,
 				CFE23F442982E89D00412DB6 /* Resources */,
 				42B2199E295F425500515097 /* Styles */,
 				42B2197F295EEA1200515097 /* Mocks */,
@@ -311,6 +333,16 @@
 			path = iOS;
 			sourceTree = "<group>";
 		};
+		42521CA229B0ECAC00000586 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				42521CA329B0ECBD00000586 /* LiveSessionService.swift */,
+				42521CA629B0F21700000586 /* DriverAndConstructorService.swift */,
+				42521CB129B1006000000586 /* ServiceLocator.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		42B2196B295D94C800515097 /* Support */ = {
 			isa = PBXGroup;
 			children = (
@@ -337,6 +369,7 @@
 				CFEE3F2A2969B6970050EE8B /* ResultCardView.swift */,
 				CF277A20297303430048DE75 /* NewsCarouselComponentView.swift */,
 				CF20D36A297700160038A860 /* GrandPrixCardView.swift */,
+				42521CAF29B0FCD700000586 /* AppView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -350,6 +383,7 @@
 				CF277A22297313260048DE75 /* NewsCarouselComponentViewModel.swift */,
 				CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */,
 				CF20D36D297802040038A860 /* DriverResult.swift */,
+				42521CAC29B0FC3900000586 /* AppViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -435,6 +469,7 @@
 			children = (
 				CF0544452951CB8D00A39FE3 /* DateExtension.swift */,
 				42B21999295F3A2300515097 /* DoubleExtension.swift */,
+				42521CB429B1033600000586 /* LoggerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -517,6 +552,7 @@
 				CFE23F522982EBF200412DB6 /* Localizable.strings */,
 				CFE23F4C2982EB9400412DB6 /* Localization.swift */,
 				CFE23F542982EDBA00412DB6 /* swiftgen.yml */,
+				42521CA929B0F9FF00000586 /* Global.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -733,8 +769,11 @@
 				CF20D371297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */,
 				CF20D36529760C300038A860 /* Colors.swift in Sources */,
 				42B21972295DDBAB00515097 /* Details.swift in Sources */,
+				42521CA729B0F21700000586 /* DriverAndConstructorService.swift in Sources */,
 				CF0544462951CB8D00A39FE3 /* DateExtension.swift in Sources */,
 				420967F6294C9A8D0075D75E /* ContentView.swift in Sources */,
+				42521CA429B0ECBD00000586 /* LiveSessionService.swift in Sources */,
+				42521CAD29B0FC3900000586 /* AppViewModel.swift in Sources */,
 				42B21982295EEA2600515097 /* SessionResultMock.swift in Sources */,
 				420967F4294C9A8D0075D75E /* SlipstreamWatchApp.swift in Sources */,
 				CF233DED29ADFA9900A8D1CD /* LivePosition.swift in Sources */,
@@ -751,11 +790,15 @@
 				42B219A0295F426200515097 /* Images.swift in Sources */,
 				CF20D36E297802040038A860 /* DriverResult.swift in Sources */,
 				CF054428294F7D4E00A39FE3 /* Constructor.swift in Sources */,
+				42521CAA29B0F9FF00000586 /* Global.swift in Sources */,
+				42521CB529B1033600000586 /* LoggerExtension.swift in Sources */,
 				42B21995295EEAC600515097 /* StandingsMock.swift in Sources */,
 				CF277A1E297017C50048DE75 /* Fonts.swift in Sources */,
+				42521CA029B0EB9500000586 /* NetworkManagerRepresentable.swift in Sources */,
 				CFE23F4D2982EB9400412DB6 /* Localization.swift in Sources */,
 				CF054422294CECCD00A39FE3 /* Driver.swift in Sources */,
 				42B2198C295EEAA100515097 /* DriverMock.swift in Sources */,
+				42521CB229B1006000000586 /* ServiceLocator.swift in Sources */,
 				CF05443C29507D3A00A39FE3 /* News.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -778,17 +821,17 @@
 				CF277A23297313260048DE75 /* NewsCarouselComponentViewModel.swift in Sources */,
 				4209686E2954CDCC0075D75E /* NetworkManager.swift in Sources */,
 				42B21973295DDBBB00515097 /* Details.swift in Sources */,
+				42521CAB29B0F9FF00000586 /* Global.swift in Sources */,
 				42B21997295EEAC600515097 /* StandingsMock.swift in Sources */,
 				42B21989295EEA9400515097 /* ConstructorMock.swift in Sources */,
 				CF277A21297303430048DE75 /* NewsCarouselComponentView.swift in Sources */,
+				42521CA129B0EB9500000586 /* NetworkManagerRepresentable.swift in Sources */,
 				CF20D3692976FBD50038A860 /* GrandPrixCardViewModel.swift in Sources */,
 				4209685F29537AF10075D75E /* News.swift in Sources */,
 				CF233DEE29ADFA9900A8D1CD /* LivePosition.swift in Sources */,
 				CF233DEA29ABF08100A8D1CD /* SessionStandingsListView.swift in Sources */,
 				CF277A1F297017C50048DE75 /* Fonts.swift in Sources */,
-				42B21976295DE14600515097 /* LiveCarView.swift in Sources */,
 				4209686029537AF70075D75E /* Driver.swift in Sources */,
-				42096836295378A10075D75E /* LiveView.swift in Sources */,
 				CFBD88D7296C1FB50068AB54 /* ResultCardViewModel.swift in Sources */,
 				42B21977295DE5E000515097 /* SessionResult.swift in Sources */,
 				4209685C29537AC90075D75E /* DateExtension.swift in Sources */,
@@ -797,16 +840,21 @@
 				42B21981295EEA2300515097 /* SessionResultMock.swift in Sources */,
 				CFE23F4E2982EB9400412DB6 /* Localization.swift in Sources */,
 				CF233DE329ABE02F00A8D1CD /* SessionDriverRowViewModel.swift in Sources */,
+				42521CA829B0F21700000586 /* DriverAndConstructorService.swift in Sources */,
 				42B2197C295EE46500515097 /* LiveViewModel.swift in Sources */,
 				CF20D362297577D80038A860 /* ConstructorStyler.swift in Sources */,
 				CFEE3F2B2969B6970050EE8B /* ResultCardView.swift in Sources */,
 				42B21984295EEA5600515097 /* SessionMock.swift in Sources */,
+				42521CAE29B0FC3900000586 /* AppViewModel.swift in Sources */,
+				42521CB629B1033600000586 /* LoggerExtension.swift in Sources */,
 				CF233DE829ABEF7600A8D1CD /* SessionStandingsListViewModel.swift in Sources */,
 				CF20D36629760C300038A860 /* Colors.swift in Sources */,
-				42B2197E295EE95600515097 /* LiveCarViewModel.swift in Sources */,
+				42521CA529B0ECBD00000586 /* LiveSessionService.swift in Sources */,
 				42B219A1295F426200515097 /* Images.swift in Sources */,
 				42B21978295DE83600515097 /* Session.swift in Sources */,
 				42B219A5295F450200515097 /* InfiniteScroller.swift in Sources */,
+				42521CB329B1006000000586 /* ServiceLocator.swift in Sources */,
+				42521CB029B0FCD700000586 /* AppView.swift in Sources */,
 				4209686229537AF70075D75E /* Constructor.swift in Sources */,
 				42B21986295EEA7200515097 /* DriverMock.swift in Sources */,
 				CF20D372297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */,

@@ -2,52 +2,53 @@ import SwiftUI
 
 struct SessionDriverRowView<ViewModel: SessionDriverRowViewModelRepresentable>: View {
 
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject private var viewModel: ViewModel
+    
+    var action: ()->Void
 
-    init(viewModel: ViewModel) {
+    init(viewModel: ViewModel,  action: @escaping(() -> Void)) {
+        
         self.viewModel = viewModel
+        self.action = action
     }
 
     var body: some View {
-        HStack(alignment: .center, spacing: 0) {
-            Text(viewModel.position)
-                .padding(.vertical, Constants.Label.verticalPadding)
-                .foregroundColor(viewModel.isSelected ? .white : .primary)
-                .frame(width: 45)
-                .background(
-                    RoundedRectangle(cornerRadius: Constants.Row.cornerRadius)
-                        .fill(
-                            self.viewModel.isSelected ? Color.SessionDriverRow.positionBackground : Color(UIColor.systemBackground))
-                        )
-
-            VStack {
-                HStack {
-//                    Spacer()
-                    createLabel(for: viewModel.driverTicker.uppercased())
-//                    Spacer()
-                    createLabel(for: viewModel.timeGap, with: .red)
-//                    Spacer()
-                    createLabel(for: viewModel.tyrePitCount)
-//                    Spacer()
-                    createLabel(for: viewModel.currentTyre.name, with: viewModel.currentTyre.color)
-//                    Spacer()
+        Button(action: {
+            action()
+        }) {
+            HStack(alignment: .center, spacing: 0) {
+                Text("\(viewModel.position)")
+                    .padding(.vertical, Constants.Label.verticalPadding)
+                    .foregroundColor(viewModel.isSelected ? .white : .primary)
+                    .frame(width: 45)
+                    .background(
+                        RoundedRectangle(cornerRadius: Constants.Row.cornerRadius)
+                            .fill(
+                                self.viewModel.isSelected
+                                ? Color.SessionDriverRow.positionBackground
+                                : .clear
+                            )
+                    )
+                
+                VStack {
+                    HStack {
+                        createLabel(for: viewModel.driverTicker.uppercased())
+                        createLabel(for: viewModel.timeGap ?? "", with: .red)
+                        createLabel(for: "\(viewModel.tyrePitCount)")
+                        createLabel(for: viewModel.currentTyre.name, with: viewModel.currentTyre.color)
+                    }
                 }
+                .padding(.vertical, Constants.Label.verticalPadding)
+                .padding(.trailing, Constants.Label.trailingPadding)
+                .frame(minWidth: Constants.Label.minWidth, maxWidth: Constants.Label.maxWidth)
             }
-            .padding(.vertical, Constants.Label.verticalPadding)
-            .padding(.trailing, Constants.Label.trailingPadding)
-            .frame(minWidth: Constants.Label.minWidth, maxWidth: Constants.Label.maxWidth)
         }
-        .font(.body).bold()
-        .background(viewModel.isSelected ? Color.SessionDriverRow.rowBackground : Color(UIColor.systemBackground))
-        .clipShape(
-            RoundedRectangle(cornerRadius: Constants.Row.cornerRadius)
-        )
+        .buttonStyle(ButtonRowStyle(isSelected: viewModel.isSelected))
     }
 
-    func createLabel(for info: String, with color: Color = .primary) -> some View {
+    private func createLabel(for info: String, with color: Color = .primary) -> some View {
         
         Text(info)
-            .foregroundColor(color)
             .minimumScaleFactor(0.9)
             .frame(
                 minWidth: Constants.Label.minWidth,
@@ -56,8 +57,32 @@ struct SessionDriverRowView<ViewModel: SessionDriverRowViewModelRepresentable>: 
                 maxHeight: 20
             )
             .truncationMode(.tail)
+            .foregroundColor(color)
+            .font(.body)
+            .fontWeight(viewModel.isSelected ? .heavy : .light)
     }
 }
+
+private struct ButtonRowStyle: ButtonStyle {
+    
+    private let isSelected: Bool
+    
+    init(isSelected: Bool) {
+        self.isSelected = isSelected
+    }
+    
+    func makeBody(configuration: Self.Configuration) -> some View {
+        
+      configuration.label
+        .background(
+            configuration.isPressed
+            ? Color.SessionDriverRow.rowBackground.opacity(0.25)
+            : isSelected ? Color.SessionDriverRow.rowBackground : Color(UIColor.systemBackground)
+        )
+        .cornerRadius(Constants.Row.cornerRadius)
+    }
+
+  }
 
 fileprivate enum Constants {
 
@@ -81,12 +106,14 @@ struct SessionDriverRowView_Previews: PreviewProvider {
     static var previews: some View {
         SessionDriverRowView(
             viewModel: SessionDriverRowViewModel(
-                position: "2",
+                position: 2,
                 driverTicker: "HAM",
                 timeGap: "+2.344",
-                tyrePitCount: "3",
+                tyrePitCount: 3,
                 currentTyre: .medium
             )
-        )
+        ) {
+            
+        }
     }
 }
