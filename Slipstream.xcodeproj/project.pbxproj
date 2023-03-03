@@ -44,6 +44,8 @@
 		42521CBC29B1F38F00000586 /* LiveSessionDriverDetailsSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CBA29B1F38F00000586 /* LiveSessionDriverDetailsSheetViewModel.swift */; };
 		42521CBE29B2378300000586 /* SessionDriverStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CBD29B2378300000586 /* SessionDriverStyler.swift */; };
 		42521CBF29B2378300000586 /* SessionDriverStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CBD29B2378300000586 /* SessionDriverStyler.swift */; };
+		42521CC129B250DE00000586 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CC029B250DE00000586 /* ButtonStyle.swift */; };
+		42521CC229B250DE00000586 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CC029B250DE00000586 /* ButtonStyle.swift */; };
 		42B2196E295D9EFB00515097 /* SessionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2196D295D9EFB00515097 /* SessionResult.swift */; };
 		42B21970295DA4D400515097 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2196F295DA4D400515097 /* Session.swift */; };
 		42B21972295DDBAB00515097 /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B21971295DDBAB00515097 /* Details.swift */; };
@@ -153,6 +155,7 @@
 		42521CB729B1F37D00000586 /* LiveSessionDriverDetailsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveSessionDriverDetailsSheet.swift; sourceTree = "<group>"; };
 		42521CBA29B1F38F00000586 /* LiveSessionDriverDetailsSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveSessionDriverDetailsSheetViewModel.swift; sourceTree = "<group>"; };
 		42521CBD29B2378300000586 /* SessionDriverStyler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDriverStyler.swift; sourceTree = "<group>"; };
+		42521CC029B250DE00000586 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		42B2196D295D9EFB00515097 /* SessionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionResult.swift; sourceTree = "<group>"; };
 		42B2196F295DA4D400515097 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		42B21971295DDBAB00515097 /* Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
@@ -418,6 +421,7 @@
 				42B2199F295F426200515097 /* Images.swift */,
 				CF277A1D297017C50048DE75 /* Fonts.swift */,
 				CF20D36429760C300038A860 /* Colors.swift */,
+				42521CC029B250DE00000586 /* ButtonStyle.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -777,6 +781,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42521CC129B250DE00000586 /* ButtonStyle.swift in Sources */,
 				42096823294C9B990075D75E /* NetworkManager.swift in Sources */,
 				CF20D371297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */,
 				CF20D36529760C300038A860 /* Colors.swift in Sources */,
@@ -841,6 +846,7 @@
 				42B21997295EEAC600515097 /* StandingsMock.swift in Sources */,
 				42B21989295EEA9400515097 /* ConstructorMock.swift in Sources */,
 				CF277A21297303430048DE75 /* NewsCarouselComponentView.swift in Sources */,
+				42521CC229B250DE00000586 /* ButtonStyle.swift in Sources */,
 				42521CBC29B1F38F00000586 /* LiveSessionDriverDetailsSheetViewModel.swift in Sources */,
 				42521CA129B0EB9500000586 /* NetworkManagerRepresentable.swift in Sources */,
 				CF20D3692976FBD50038A860 /* GrandPrixCardViewModel.swift in Sources */,

@@ -31,8 +31,8 @@ struct SessionStandingsListView<ViewModel: SessionStandingsListViewModelRepresen
                 .padding(.top, 150) // TODO: - Remove when we finish the top view
                 .padding(.horizontal, Constants.ScrollView.paddingHorizontal)
                 .overlay (
-                        VStack {
-                            if let selectedDriverViewModel = viewModel.selectedDriver {
+                    VStack {
+                        if let selectedDriverViewModel = viewModel.selectedDriver {
                             Spacer()
                             LiveSessionDriverDetailsSheet(viewModel: selectedDriverViewModel)
                         }

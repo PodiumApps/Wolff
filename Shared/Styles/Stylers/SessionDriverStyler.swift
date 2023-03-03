@@ -3,15 +3,19 @@ import SwiftUI
 protocol SessionDriverStylerRepresentable {
     
     var tyre: SessionDriverStyler.Tyre { get }
+    var constructorStyler: ConstructorStylerRepresentable { get }
 }
 
 class SessionDriverStyler: SessionDriverStylerRepresentable {
     
     let tyre: Tyre
+    let constructorStyler: ConstructorStylerRepresentable
     
-    init(tyre: Tyre) {
+    init(tyre: Tyre, constructorId: String) {
         
         self.tyre = tyre
+        
+        self.constructorStyler = ConstructorStyler(constructor: constructorId)
     }
     
 }
@@ -47,9 +51,20 @@ extension SessionDriverStyler {
             case .undefined: return "N/D"
             }
         }
+        
+        var thicker: String {
+            switch self {
+            case .soft: return "S"
+            case .medium: return "M"
+            case .hard: return "H"
+            case .intermediate: return "I"
+            case .wet: return "W"
+            case .undefined: return "N/D"
+            }
+        }
     }
     
-    convenience init(tyre: LivePosition.Tyre) {
+    convenience init(tyre: LivePosition.Tyre, constructorId: String) {
         
         
         let tyreStyle: Tyre
@@ -69,6 +84,6 @@ extension SessionDriverStyler {
             tyreStyle = .soft
         }
         
-        self.init(tyre: tyreStyle)
+        self.init(tyre: tyreStyle, constructorId: constructorId)
     }
 }

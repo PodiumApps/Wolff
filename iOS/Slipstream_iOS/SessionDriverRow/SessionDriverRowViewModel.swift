@@ -8,6 +8,7 @@ protocol SessionDriverRowViewModelRepresentable: ObservableObject {
     var timeGap: String? { get }
     var tyrePitCount: Int { get }
     var currentTyre: LivePosition.Tyre { get }
+    var constructorId: String { get }
 
     var isSelected: Bool { get set }
 
@@ -16,11 +17,12 @@ protocol SessionDriverRowViewModelRepresentable: ObservableObject {
 
 final class SessionDriverRowViewModel: SessionDriverRowViewModelRepresentable {
 
-    var position: Int
-    var driverTicker: String
-    var timeGap: String?
-    var tyrePitCount: Int
-    var currentTyre: LivePosition.Tyre
+    let position: Int
+    let driverTicker: String
+    let timeGap: String?
+    let tyrePitCount: Int
+    let currentTyre: LivePosition.Tyre
+    let constructorId: String
 
     @Published var isSelected: Bool
 
@@ -30,6 +32,7 @@ final class SessionDriverRowViewModel: SessionDriverRowViewModelRepresentable {
         timeGap: String?,
         tyrePitCount: Int,
         currentTyre: LivePosition.Tyre,
+        constructorId: String,
         isSelected: Bool = false
     ) {
 
@@ -38,6 +41,7 @@ final class SessionDriverRowViewModel: SessionDriverRowViewModelRepresentable {
         self.timeGap = timeGap
         self.tyrePitCount = tyrePitCount
         self.currentTyre = currentTyre
+        self.constructorId = constructorId
 
         self.isSelected = isSelected
     }

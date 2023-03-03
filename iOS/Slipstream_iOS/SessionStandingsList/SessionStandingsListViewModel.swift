@@ -137,6 +137,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                     timeGap: position.time,
                     tyrePitCount: position.tyrePitCount,
                     currentTyre: position.tyre,
+                    constructorId: constructor.constructorId,
                     isSelected: driver.driverThicker == self.selectedDriver?.driver.driverThicker
                 )
         }

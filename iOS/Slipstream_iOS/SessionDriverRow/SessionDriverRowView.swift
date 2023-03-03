@@ -11,7 +11,10 @@ struct SessionDriverRowView<ViewModel: SessionDriverRowViewModelRepresentable>: 
         
         self.viewModel = viewModel
         self.action = action
-        self.sessionDriverStyler = SessionDriverStyler(tyre: viewModel.currentTyre)
+        self.sessionDriverStyler = SessionDriverStyler(
+            tyre: viewModel.currentTyre,
+            constructorId: viewModel.constructorId
+        )
     }
 
     var body: some View {
@@ -22,19 +25,25 @@ struct SessionDriverRowView<ViewModel: SessionDriverRowViewModelRepresentable>: 
                 Text("\(viewModel.position)")
                     .padding(.vertical, Constants.Label.verticalPadding)
                     .foregroundColor(viewModel.isSelected ? .white : .primary)
-                    .frame(width: 45)
+                    .frame(width: 45, height: 35)
                     .background(
+                        
                         RoundedRectangle(cornerRadius: Constants.Row.cornerRadius)
-                            .fill(
-                                self.viewModel.isSelected
-                                ? Color.SessionDriverRow.positionBackground
-                                : .clear
-                            )
+                            .fill(sessionDriverStyler.constructorStyler.constructor.color.gradient)
+                            .opacity(viewModel.isSelected ? 1 : 0)
                     )
                 
                 VStack {
                     HStack {
-                        createLabel(for: viewModel.driverTicker.uppercased())
+                        HStack(spacing: 0) {
+                            RoundedRectangle(cornerRadius: 4)
+                                .fill(sessionDriverStyler.constructorStyler.constructor.color.gradient)
+                                .frame(width: 5)
+                                .opacity(viewModel.isSelected ? 0 : 1)
+                            
+                            createLabel(for: viewModel.driverTicker.uppercased())
+                            Spacer()
+                        }
                         createLabel(
                             for: viewModel.timeGap ?? "",
                             with: viewModel.position == 1
@@ -42,7 +51,16 @@ struct SessionDriverRowView<ViewModel: SessionDriverRowViewModelRepresentable>: 
                                 : .SessionDriverRow.secondPlaceTime
                         )
                         createLabel(for: "\(viewModel.tyrePitCount)")
-                        createLabel(for: sessionDriverStyler.tyre.name, with: sessionDriverStyler.tyre.color)
+                        
+                        createLabel(for: sessionDriverStyler.tyre.thicker, with: .white, font: .caption)
+                            .padding(4)
+                            .background(
+                                Circle()
+                                    .fill(sessionDriverStyler.tyre.color.gradient)
+//                                    .strokeBorder(.black, lineWidth: 1)
+//                                    .background(Circle().fill(sessionDriverStyler.tyre.color.gradient))
+                                    .shadow(radius: 1)
+                            )
                     }
                 }
                 .padding(.vertical, Constants.Label.verticalPadding)
@@ -50,10 +68,16 @@ struct SessionDriverRowView<ViewModel: SessionDriverRowViewModelRepresentable>: 
                 .frame(minWidth: Constants.Label.minWidth, maxWidth: Constants.Label.maxWidth)
             }
         }
-        .buttonStyle(ButtonRowStyle(isSelected: viewModel.isSelected))
+        .buttonStyle(
+            ButtonRowStyle(
+                isSelected: viewModel.isSelected,
+                cornerRadius: Constants.Row.cornerRadius,
+                selectedColor: sessionDriverStyler.constructorStyler.constructor.color
+            )
+        )
     }
 
-    private func createLabel(for info: String, with color: Color = .primary) -> some View {
+    private func createLabel(for info: String, with color: Color = .primary, font: Font = .body) -> some View {
         
         Text(info)
             .minimumScaleFactor(0.9)
@@ -65,31 +89,10 @@ struct SessionDriverRowView<ViewModel: SessionDriverRowViewModelRepresentable>: 
             )
             .truncationMode(.tail)
             .foregroundColor(color)
-            .font(.body)
-            .fontWeight(viewModel.isSelected ? .heavy : .light)
+            .font(font)
+            .fontWeight(viewModel.isSelected ? .bold : .regular)
     }
 }
-
-private struct ButtonRowStyle: ButtonStyle {
-    
-    private let isSelected: Bool
-    
-    init(isSelected: Bool) {
-        self.isSelected = isSelected
-    }
-    
-    func makeBody(configuration: Self.Configuration) -> some View {
-        
-      configuration.label
-        .background(
-            configuration.isPressed
-            ? Color.SessionDriverRow.rowBackground.opacity(0.25)
-            : isSelected ? Color.SessionDriverRow.rowBackground : Color(UIColor.systemBackground)
-        )
-        .cornerRadius(Constants.Row.cornerRadius)
-    }
-
-  }
 
 fileprivate enum Constants {
 
@@ -117,7 +120,8 @@ struct SessionDriverRowView_Previews: PreviewProvider {
                 driverTicker: "HAM",
                 timeGap: "+2.344",
                 tyrePitCount: 3,
-                currentTyre: .medium
+                currentTyre: .medium,
+                constructorId: "mercedes"
             )
         ) {
             

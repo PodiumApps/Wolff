@@ -13,7 +13,7 @@ struct LiveSessionDriverDetailsSheet<ViewModel: LiveSessionDriverDetailsSheetVie
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 16)
+            RoundedRectangle(cornerRadius: Constants.cornerRadius)
                 .fill(constructorStyler.constructor.color.gradient)
                 .opacity(0.05)
             
@@ -33,7 +33,7 @@ struct LiveSessionDriverDetailsSheet<ViewModel: LiveSessionDriverDetailsSheetVie
                         Image.racingCar
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 55, height: 15)
+                            .frame(width: Constants.Image.width, height: Constants.Image.height)
                             .foregroundColor(constructorStyler.constructor.color)
                             .offset(y: 10)
                         
@@ -51,8 +51,9 @@ struct LiveSessionDriverDetailsSheet<ViewModel: LiveSessionDriverDetailsSheetVie
                 
                 Divider()
                 
+                // TODO: - idea for the bottom part of the bottom sheet
 //                HStack {
-//                    Text("Provisional")
+//                    Text("Provisional Standings")
 //                        .font(.eventTitleFont)
 //                        .fontWeight(.medium)
 //                    Text("1")
@@ -70,8 +71,20 @@ struct LiveSessionDriverDetailsSheet<ViewModel: LiveSessionDriverDetailsSheetVie
             }
             .padding()
         }
-        .frame(height: 200)
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16))
+        .frame(height: Constants.height)
+        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Constants.cornerRadius))
+    }
+}
+
+fileprivate enum Constants {
+    
+    static let height: CGFloat = 200
+    static let cornerRadius: CGFloat = 16
+    
+    enum Image {
+        
+        static let height: CGFloat = 15
+        static let width: CGFloat = 55
     }
 }
 
