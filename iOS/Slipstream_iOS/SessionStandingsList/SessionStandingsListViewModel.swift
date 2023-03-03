@@ -6,11 +6,13 @@ protocol SessionStandingsListViewModelRepresentable: ObservableObject {
 
     var state: SessionStandingsListViewModel.State { get }
     var action: PassthroughSubject<SessionStandingsListViewModel.Action, Never> { get }
+    var selectedDriver: LiveSessionDriverDetailsSheetViewModel? { get }
 }
 
 final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresentable {
 
     @Published var state: SessionStandingsListViewModel.State = .loading
+    @Published var selectedDriver: LiveSessionDriverDetailsSheetViewModel? = nil
     var action = PassthroughSubject<Action, Never>()
     
     private let drivers: [Driver]
@@ -18,7 +20,6 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
     private let liveSessionService: LiveSessionServiceRepresentable
     private var subscriptions = Set<AnyCancellable>()
     private var timer: Timer? = nil
-    private var selectedIndex: String? = nil
 
     init(
         drivers: [Driver],
@@ -53,7 +54,11 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
 
     private func tapRow(at index: Int) {
         
-        guard case .results(let positions) = state else {
+        guard
+            case .results(let positions) = state,
+            let driver = drivers.lazy.first(where: { $0.driverThicker == positions[index].driverTicker }),
+            let constructor = constructors.lazy.first(where: { $0.id == driver.constructorId })
+        else {
             return
         }
 
@@ -64,7 +69,9 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
         }
 
         positions[index].toggleSelection()
-        selectedIndex = positions[index].driverTicker
+        
+        selectedDriver = .init(driver: driver, constructor: constructor)
+        
         state = .results(positions)
     }
     
@@ -111,19 +118,24 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
             
                 guard
                     let self,
-                    let driver = self.drivers.lazy.first(where: { $0.driverLiveID == position.id })
+                    let driver = drivers.lazy.first(where: { $0.driverLiveID == position.id }),
+                    let constructor = constructors.lazy.first(where: { $0.id == driver.constructorId })
                 else {
                     return nil
                 }
                 
-            
-            return .init(
+                if selectedDriver == nil, index == 0 {
+                    selectedDriver = .init(driver: driver, constructor: constructor)
+                }
+                
+                
+                return .init(
                     position: position.position,
                     driverTicker: driver.driverThicker,
                     timeGap: position.time,
                     tyrePitCount: position.tyrePitCount,
                     currentTyre: position.tyre,
-                    isSelected: driver.driverThicker == self.selectedIndex
+                    isSelected: driver.driverThicker == self.selectedDriver?.driver.driverThicker
                 )
         }
         

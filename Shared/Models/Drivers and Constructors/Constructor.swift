@@ -3,6 +3,7 @@ import Foundation
 struct Constructor: Decodable, Hashable, Identifiable {
 
     let id: Int
+    let constructorId: String
     let name: String
     let fullName: String
     let teamPrinciple: String

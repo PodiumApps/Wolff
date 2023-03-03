@@ -4,6 +4,7 @@ extension Constructor {
     
     static let mockFerrari: Self = .init(
         id: 0,
+        constructorId: "ferrari",
         name: "Ferrari",
         fullName: "Oi",
         teamPrinciple: "tEamy",
@@ -13,6 +14,7 @@ extension Constructor {
     
     static let mockAlfa: Self = .init(
         id: 1,
+        constructorId: "alfa",
         name: "Alfa",
         fullName: "Oi",
         teamPrinciple: "tEamy",
@@ -22,7 +24,8 @@ extension Constructor {
     
     static let mockMercedes: Self = .init(
         id: 2,
-        name: "Merceded",
+        constructorId: "mercedes",
+        name: "Mercedes",
         fullName: "Oi",
         teamPrinciple: "tEamy",
         position: 1,

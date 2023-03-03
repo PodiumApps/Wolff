@@ -19,16 +19,24 @@ struct SessionStandingsListView<ViewModel: SessionStandingsListViewModelRepresen
             case .loading:
                 ProgressView()
             case .results(let rowsViewModel):
-                
-                List {
+                ScrollView(showsIndicators: false) {
                     ForEach(0 ..< rowsViewModel.count, id: \.self) { index in
                         SessionDriverRowView(viewModel: rowsViewModel[index]) {
                             viewModel.action.send(.tap(index))
                         }
+                        .padding(.bottom, index == rowsViewModel.count - 1 ? 170 : 0)
                     }
-                    .listRowSeparator(.hidden)
                 }
-                .listStyle(.plain)
+                .padding(.top, 200)
+                .overlay (
+                        VStack {
+                            if let selectedDriverViewModel = viewModel.selectedDriver {
+                            Spacer()
+                            LiveSessionDriverDetailsSheet(viewModel: selectedDriverViewModel)
+                        }
+                    }
+                    .ignoresSafeArea(.all)
+                )
             }
         }
         .onAppear {

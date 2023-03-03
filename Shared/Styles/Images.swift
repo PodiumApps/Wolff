@@ -10,6 +10,8 @@ extension Image {
     static let liveBackground: Self = Image("background")
 
     static let resultsCardBackground: Self = Image("f1_grid")
+    
+    static let racingCar: Self = Image("racingCar")
 
     // MARK: SFSymbols
 
