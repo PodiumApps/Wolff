@@ -54,7 +54,7 @@ fileprivate enum Constants {
     
     enum ScrollView {
         
-        static let paddingHorizontal: CGFloat = 150
+        static let paddingHorizontal: CGFloat = 4
     }
     
     enum RowView {
