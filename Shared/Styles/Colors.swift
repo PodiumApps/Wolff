@@ -28,6 +28,8 @@ extension Color {
 
         static let positionBackground: Color = .init("positionBackground")
         static let rowBackground: Color = .init("rowBackground")
+        static let firstPlaceTime: Color = .init("firstPlaceTime")
+        static let secondPlaceTime: Color = .init("secondPlaceTime")
     }
 
     enum Tyre {

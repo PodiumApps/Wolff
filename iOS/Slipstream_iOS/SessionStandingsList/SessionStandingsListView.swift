@@ -15,7 +15,8 @@ struct SessionStandingsListView<ViewModel: SessionStandingsListViewModelRepresen
             switch viewModel.state {
                 
             case .error:
-                Text("Error")
+                Text(Localization.SessionDriverList.Error.text)
+                Button(Localization.SessionDriverList.Error.cta) { viewModel.action.send(.refresh) }
             case .loading:
                 ProgressView()
             case .results(let rowsViewModel):
@@ -24,10 +25,11 @@ struct SessionStandingsListView<ViewModel: SessionStandingsListViewModelRepresen
                         SessionDriverRowView(viewModel: rowsViewModel[index]) {
                             viewModel.action.send(.tap(index))
                         }
-                        .padding(.bottom, index == rowsViewModel.count - 1 ? 170 : 0)
+                        .padding(.bottom, index == rowsViewModel.count - 1 ? Constants.RowView.paddingBottom : 0)
                     }
                 }
-                .padding(.top, 200)
+                .padding(.top, 150) // TODO: - Remove when we finish the top view
+                .padding(.horizontal, Constants.ScrollView.paddingHorizontal)
                 .overlay (
                         VStack {
                             if let selectedDriverViewModel = viewModel.selectedDriver {
@@ -45,6 +47,19 @@ struct SessionStandingsListView<ViewModel: SessionStandingsListViewModelRepresen
         .onDisappear {
             viewModel.action.send(.onDisappear)
         }
+    }
+}
+
+fileprivate enum Constants {
+    
+    enum ScrollView {
+        
+        static let paddingHorizontal: CGFloat = 150
+    }
+    
+    enum RowView {
+        
+        static let paddingBottom: CGFloat = 200
     }
 }
 

@@ -47,6 +47,8 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                     self?.viewDidLoad()
                 case .onDisappear:
                     self?.timer?.invalidate()
+                case .refresh:
+                    self?.liveSessionService.action.send(.fetchPositions)
                 }
             }
             .store(in: &subscriptions)
@@ -148,6 +150,7 @@ extension SessionStandingsListViewModel {
     enum Action {
         
         case tap(Int)
+        case refresh
         case viewDidLoad
         case onDisappear
     }

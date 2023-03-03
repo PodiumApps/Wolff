@@ -3,3 +3,8 @@
 // MARK: - GrandPrixCard
 
 "grand_prix_card.top.round" = "Round %@";
+
+
+// MARK: - SessionDriverList
+"session_driver_list.error.text" = "Something went wrong";
+"session_driver_list.error.cta" = "Refresh";

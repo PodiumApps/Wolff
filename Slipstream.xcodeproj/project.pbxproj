@@ -42,6 +42,8 @@
 		42521CB929B1F37D00000586 /* LiveSessionDriverDetailsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CB729B1F37D00000586 /* LiveSessionDriverDetailsSheet.swift */; };
 		42521CBB29B1F38F00000586 /* LiveSessionDriverDetailsSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CBA29B1F38F00000586 /* LiveSessionDriverDetailsSheetViewModel.swift */; };
 		42521CBC29B1F38F00000586 /* LiveSessionDriverDetailsSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CBA29B1F38F00000586 /* LiveSessionDriverDetailsSheetViewModel.swift */; };
+		42521CBE29B2378300000586 /* SessionDriverStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CBD29B2378300000586 /* SessionDriverStyler.swift */; };
+		42521CBF29B2378300000586 /* SessionDriverStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CBD29B2378300000586 /* SessionDriverStyler.swift */; };
 		42B2196E295D9EFB00515097 /* SessionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2196D295D9EFB00515097 /* SessionResult.swift */; };
 		42B21970295DA4D400515097 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2196F295DA4D400515097 /* Session.swift */; };
 		42B21972295DDBAB00515097 /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B21971295DDBAB00515097 /* Details.swift */; };
@@ -150,6 +152,7 @@
 		42521CB429B1033600000586 /* LoggerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerExtension.swift; sourceTree = "<group>"; };
 		42521CB729B1F37D00000586 /* LiveSessionDriverDetailsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveSessionDriverDetailsSheet.swift; sourceTree = "<group>"; };
 		42521CBA29B1F38F00000586 /* LiveSessionDriverDetailsSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveSessionDriverDetailsSheetViewModel.swift; sourceTree = "<group>"; };
+		42521CBD29B2378300000586 /* SessionDriverStyler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDriverStyler.swift; sourceTree = "<group>"; };
 		42B2196D295D9EFB00515097 /* SessionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionResult.swift; sourceTree = "<group>"; };
 		42B2196F295DA4D400515097 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		42B21971295DDBAB00515097 /* Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
@@ -487,6 +490,7 @@
 			children = (
 				CF20D360297577D80038A860 /* ConstructorStyler.swift */,
 				CF20D370297818EE0038A860 /* EventStatusBackgroundStyler.swift */,
+				42521CBD29B2378300000586 /* SessionDriverStyler.swift */,
 			);
 			path = Stylers;
 			sourceTree = "<group>";
@@ -782,6 +786,7 @@
 				420967F6294C9A8D0075D75E /* ContentView.swift in Sources */,
 				42521CA429B0ECBD00000586 /* LiveSessionService.swift in Sources */,
 				42521CAD29B0FC3900000586 /* AppViewModel.swift in Sources */,
+				42521CBE29B2378300000586 /* SessionDriverStyler.swift in Sources */,
 				42B21982295EEA2600515097 /* SessionResultMock.swift in Sources */,
 				420967F4294C9A8D0075D75E /* SlipstreamWatchApp.swift in Sources */,
 				CF233DED29ADFA9900A8D1CD /* LivePosition.swift in Sources */,
@@ -829,6 +834,7 @@
 			files = (
 				42B2199C295F3A2300515097 /* DoubleExtension.swift in Sources */,
 				CF277A23297313260048DE75 /* NewsCarouselComponentViewModel.swift in Sources */,
+				42521CBF29B2378300000586 /* SessionDriverStyler.swift in Sources */,
 				4209686E2954CDCC0075D75E /* NetworkManager.swift in Sources */,
 				42B21973295DDBBB00515097 /* Details.swift in Sources */,
 				42521CAB29B0F9FF00000586 /* Global.swift in Sources */,
@@ -1022,6 +1028,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iOS/Slipstream_iOS/Preview Content\"";
+				DEVELOPMENT_TEAM = U5QL3W6RAW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Slipstream;
@@ -1055,6 +1062,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iOS/Slipstream_iOS/Preview Content\"";
+				DEVELOPMENT_TEAM = U5QL3W6RAW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Slipstream;

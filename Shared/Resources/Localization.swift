@@ -20,6 +20,14 @@ internal enum Localization {
       }
     }
   }
+  internal enum SessionDriverList {
+    internal enum Error {
+      /// Refresh
+      internal static let cta = Localization.tr("Localizable", "session_driver_list.error.cta", fallback: "Refresh")
+      /// Something went wrong
+      internal static let text = Localization.tr("Localizable", "session_driver_list.error.text", fallback: "Something went wrong")
+    }
+  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

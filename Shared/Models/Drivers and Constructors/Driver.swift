@@ -4,6 +4,7 @@ struct Driver: Decodable, Identifiable, Hashable {
 
     let id: Int
     let driverLiveID: String
+    let carNumber: Int
     let firstName: String
     let lastName: String
     let driverThicker: String

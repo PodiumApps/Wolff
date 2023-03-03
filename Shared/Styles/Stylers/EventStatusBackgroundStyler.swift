@@ -18,6 +18,7 @@ class EventStatusBackgroundStyler: EventStatusBackgroundStylerRepresentable {
     }
 
     init(status: Status) {
+        
         self.status = status
     }
 }

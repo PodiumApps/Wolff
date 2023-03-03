@@ -7,7 +7,7 @@ protocol SessionDriverRowViewModelRepresentable: ObservableObject {
     var driverTicker: String { get }
     var timeGap: String? { get }
     var tyrePitCount: Int { get }
-    var currentTyre: SessionDriverRowViewModel.Tyre { get }
+    var currentTyre: LivePosition.Tyre { get }
 
     var isSelected: Bool { get set }
 
@@ -20,37 +20,9 @@ final class SessionDriverRowViewModel: SessionDriverRowViewModelRepresentable {
     var driverTicker: String
     var timeGap: String?
     var tyrePitCount: Int
-    var currentTyre: Tyre
+    var currentTyre: LivePosition.Tyre
 
     @Published var isSelected: Bool
-
-    enum Tyre {
-        case soft
-        case medium
-        case hard
-        case intermediate
-        case wet
-
-        var color: Color {
-            switch self {
-            case .soft: return .Tyre.soft
-            case .medium: return .Tyre.medium
-            case .hard: return .Tyre.hard
-            case .intermediate: return .Tyre.intermediate
-            case .wet: return .Tyre.wet
-            }
-        }
-
-        var name: String {
-            switch self {
-            case .soft: return "Soft"
-            case .medium: return "Medium"
-            case .hard: return "Hard"
-            case .intermediate: return "Inter"
-            case .wet: return "Wet"
-            }
-        }
-    }
 
     init(
         position: Int,
@@ -65,7 +37,7 @@ final class SessionDriverRowViewModel: SessionDriverRowViewModelRepresentable {
         self.driverTicker = driverTicker
         self.timeGap = timeGap
         self.tyrePitCount = tyrePitCount
-        self.currentTyre = LivePosition.Tyre.getTyreStyle(for: currentTyre)
+        self.currentTyre = currentTyre
 
         self.isSelected = isSelected
     }

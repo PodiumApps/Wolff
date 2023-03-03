@@ -3,6 +3,7 @@ import SwiftUI
 struct SessionDriverRowView<ViewModel: SessionDriverRowViewModelRepresentable>: View {
 
     @ObservedObject private var viewModel: ViewModel
+    private let sessionDriverStyler: SessionDriverStylerRepresentable
     
     var action: ()->Void
 
@@ -10,6 +11,7 @@ struct SessionDriverRowView<ViewModel: SessionDriverRowViewModelRepresentable>: 
         
         self.viewModel = viewModel
         self.action = action
+        self.sessionDriverStyler = SessionDriverStyler(tyre: viewModel.currentTyre)
     }
 
     var body: some View {
@@ -33,9 +35,14 @@ struct SessionDriverRowView<ViewModel: SessionDriverRowViewModelRepresentable>: 
                 VStack {
                     HStack {
                         createLabel(for: viewModel.driverTicker.uppercased())
-                        createLabel(for: viewModel.timeGap ?? "", with: .red)
+                        createLabel(
+                            for: viewModel.timeGap ?? "",
+                            with: viewModel.position == 1
+                                ? .SessionDriverRow.firstPlaceTime
+                                : .SessionDriverRow.secondPlaceTime
+                        )
                         createLabel(for: "\(viewModel.tyrePitCount)")
-                        createLabel(for: viewModel.currentTyre.name, with: viewModel.currentTyre.color)
+                        createLabel(for: sessionDriverStyler.tyre.name, with: sessionDriverStyler.tyre.color)
                     }
                 }
                 .padding(.vertical, Constants.Label.verticalPadding)

@@ -37,7 +37,7 @@ struct LiveSessionDriverDetailsSheet<ViewModel: LiveSessionDriverDetailsSheetVie
                             .foregroundColor(constructorStyler.constructor.color)
                             .offset(y: 10)
                         
-                        Text("21")
+                        Text("\(viewModel.driver.carNumber)")
                             .font(.footnote)
                             .foregroundColor(constructorStyler.constructor.color)
                             .padding(4)
@@ -60,26 +60,9 @@ struct LiveSessionDriverDetailsSheet<ViewModel: LiveSessionDriverDetailsSheetVie
 //                        .fontWeight(.light)
 //                    Image(systemName: "arrow.up.circle.fill")
 //                        .foregroundColor(.green)
-//                    
+//
 //                    Spacer()
-//                    
-////                    VStack {
-////                        Text("Points")
-////                        HStack {
-////                            Text("\(viewModel.driver.points) pts")
-////                            Image(systemName: "arrow.up.circle.fill")
-////                                .foregroundColor(.green)
-////                        }
-////                    }
-////
-////                    Spacer()
-////
-////                    VStack {
-////                        Text("Constructor")
-////                        HStack {
-////                            Text("\(viewModel.constructor.position)st - \(viewModel.constructor.points)pts")
-////                        }
-////                    }
+//
 //                }
                 
                 
@@ -88,10 +71,7 @@ struct LiveSessionDriverDetailsSheet<ViewModel: LiveSessionDriverDetailsSheetVie
             .padding()
         }
         .frame(height: 200)
-        .background(
-            .ultraThinMaterial,
-            in: RoundedRectangle(cornerRadius: 16)
-        )
+        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16))
     }
 }
 

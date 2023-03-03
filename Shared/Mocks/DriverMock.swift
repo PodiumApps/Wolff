@@ -5,6 +5,7 @@ extension Driver {
     static let mockVertasppen: Self = .init(
         id: 0,
         driverLiveID: "max_verstappen",
+        carNumber: 10,
         firstName: "Max",
         lastName: "Verstappen",
         driverThicker: "VER",
@@ -16,6 +17,7 @@ extension Driver {
     static let mockLeclerc: Self = .init(
         id: 1,
         driverLiveID: "leclerc",
+        carNumber: 12,
         firstName: "Max",
         lastName: "Leclerc",
         driverThicker: "LEC",
@@ -28,6 +30,7 @@ extension Driver {
     static let mockAlonso: Self = .init(
         id: 2,
         driverLiveID: "fernando_alonso",
+        carNumber: 20,
         firstName: "Fernando",
         lastName: "Alonso",
         driverThicker: "ALO",
@@ -40,6 +43,7 @@ extension Driver {
     static let mockHamilton: Self = .init(
         id: 3,
         driverLiveID: "lewis_hamilton",
+        carNumber: 30,
         firstName: "Lewis",
         lastName: "Hamilton",
         driverThicker: "HAM",
