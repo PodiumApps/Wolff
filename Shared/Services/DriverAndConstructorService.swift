@@ -37,9 +37,6 @@ class DriverAndConstructorService: DriverAndConstructorServiceRepresentable {
                     switch action {
                     case .fetchAll:
                         await self.fetchAll()
-                    case .fetchDriverDetails(let id):
-                        await self.fetchDriver(id: id)
-                    case .fetchConstructorDetails(let id):
                         break
                     }
                 }
@@ -58,16 +55,7 @@ class DriverAndConstructorService: DriverAndConstructorServiceRepresentable {
             
         } catch {
             Logger.driverAndConstructorService.error("Fetch all drivers failed with \(error)")
-            state = .error(.fetchAllFailed(error))
-        }
-    }
-    
-    private func fetchDriver(id: Int) async {
-        
-        do {
-            let driver = try await networkManager.load(Driver.getDriver(id: id))
-        } catch {
-            state = .error(.fetchDriverFailed(error))
+            state = .error(error)
         }
     }
 }
@@ -77,8 +65,6 @@ extension DriverAndConstructorService {
     
     enum Action {
         
-        case fetchDriverDetails(id: Int)
-        case fetchConstructorDetails(id: Int)
         case fetchAll
     }
     
@@ -86,13 +72,7 @@ extension DriverAndConstructorService {
         
         case refreshing
         case refreshed([Driver], [Constructor])
-        case error(ServiceError)
-    }
-    
-    enum ServiceError {
-        
-        case fetchAllFailed(Error)
-        case fetchDriverFailed(Error)
+        case error(Error)
     }
 }
 

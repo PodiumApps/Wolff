@@ -85,13 +85,13 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
             .receive(on: DispatchQueue.main)
             .map { [weak self] serviceStatus in
                 
-                guard let self else { return .error }
+                guard let self else { return .error("Missing self") }
                 
                 self.timer?.invalidate()
                 
                 switch serviceStatus {
-                case.error:
-                    return .error
+                case.error(let error):
+                    return .error(error.localizedDescription)
                 case .refreshing:
                     return .loading
                 case .refreshed(let livePositions):
@@ -160,6 +160,6 @@ extension SessionStandingsListViewModel {
         
         case loading
         case results([SessionDriverRowViewModel])
-        case error
+        case error(String)
     }
 }

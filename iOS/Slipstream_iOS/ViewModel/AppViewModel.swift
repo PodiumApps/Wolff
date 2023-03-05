@@ -29,12 +29,8 @@ class AppViewModel: AppViewModelRepresentable {
             .map { serviceStatus in
                 
                 switch serviceStatus {
-                case .error(let serviceError):
-                    switch serviceError {
-                    case .fetchDriverFailed(let error), .fetchAllFailed(let error):
-                        return .error(error.localizedDescription)
-                    }
-                    
+                case .error(let error):
+                    return .error(error.localizedDescription)
                 case .refreshing:
                     return .loading
                 case .refreshed(let drivers, let constructors):

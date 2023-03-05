@@ -54,7 +54,7 @@ class LiveSessionService: LiveSessionServiceRepresentable {
             state = .refreshed(positions)
         } catch {
             Logger.liveSessionService.error("Fetch failed with \(error)")
-            state = .error(.fetchFailed(error))
+            state = .error(error)
         }
     }
 }
@@ -71,12 +71,7 @@ extension LiveSessionService {
         
         case refreshing
         case refreshed([LivePosition])
-        case error(ServiceError)
-    }
-    
-    enum ServiceError {
-        
-        case fetchFailed(Error)
+        case error(Error)
     }
     
     

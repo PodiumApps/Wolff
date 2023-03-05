@@ -14,8 +14,8 @@ struct SessionStandingsListView<ViewModel: SessionStandingsListViewModelRepresen
         Group {
             switch viewModel.state {
                 
-            case .error:
-                Text(Localization.SessionDriverList.Error.text)
+            case .error(let error):
+                Text(Localization.SessionDriverList.Error.text + " - \(error)")
                 Button(Localization.SessionDriverList.Error.cta) { viewModel.action.send(.refresh) }
             case .loading:
                 ProgressView()
