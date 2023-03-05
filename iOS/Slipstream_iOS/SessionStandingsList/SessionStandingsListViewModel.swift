@@ -20,6 +20,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
     private let liveSessionService: LiveSessionServiceRepresentable
     private var subscriptions = Set<AnyCancellable>()
     private var timer: Timer? = nil
+    private var viewIsVisible: Bool = false
 
     init(
         drivers: [Driver],
@@ -30,6 +31,8 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
         self.drivers = drivers
         self.constructors = constructors
         self.liveSessionService = liveSessionService
+        
+        liveSessionService.action.send(.fetchPositions)
         
         setupBindings()
     }
@@ -44,14 +47,37 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                 case .tap(let index):
                     self?.tapRow(at: index)
                 case .viewDidLoad:
-                    self?.viewDidLoad()
+                    self?.viewIsVisible = true
+                    self?.liveSessionService.action.send(.updatePositions)
                 case .onDisappear:
+                    self?.viewIsVisible = false
                     self?.timer?.invalidate()
                 case .refresh:
                     self?.liveSessionService.action.send(.fetchPositions)
                 }
             }
             .store(in: &subscriptions)
+        
+        
+        liveSessionService.statePublisher
+            .receive(on: DispatchQueue.main)
+            .map { [weak self] serviceStatus in
+                
+                guard let self else { return .error("Missing self") }
+                
+                self.timer?.invalidate()
+                
+                switch serviceStatus {
+                case.error(let error):
+                    return .error(error.localizedDescription)
+                case .refreshing:
+                    return .loading
+                case .refreshed(let livePositions):
+                    self.startUpdating()
+                    return self.buildRowsViewModel(for: livePositions)
+                }
+            }
+            .assign(to: &$state)
     }
 
     private func tapRow(at index: Int) {
@@ -77,33 +103,9 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
         state = .results(positions)
     }
     
-    private func viewDidLoad() {
-        
-        liveSessionService.action.send(.fetchPositions)
-        
-        liveSessionService.statePublisher
-            .receive(on: DispatchQueue.main)
-            .map { [weak self] serviceStatus in
-                
-                guard let self else { return .error("Missing self") }
-                
-                self.timer?.invalidate()
-                
-                switch serviceStatus {
-                case.error(let error):
-                    return .error(error.localizedDescription)
-                case .refreshing:
-                    return .loading
-                case .refreshed(let livePositions):
-                    self.startUpdating()
-                    return self.buildRowsViewModel(for: livePositions)
-                }
-            }
-            .assign(to: &$state)
-        
-    }
-    
     private func startUpdating() {
+        
+        guard viewIsVisible else { return }
         
         timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { [weak self] _ in
             guard let self else { return }
