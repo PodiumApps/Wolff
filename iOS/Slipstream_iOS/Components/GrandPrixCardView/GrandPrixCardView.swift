@@ -21,7 +21,7 @@ struct GrandPrixCardView<ViewModel: GrandPrixCardRepresentable>: View {
                     Text(viewModel.title.uppercased())
                         .minimumScaleFactor(Constants.Card.titleTextScalingFactor)
                         .font(.eventTitleFont)
-                    Text("Round \(viewModel.round)")
+                    Text(Localization.GrandPrixCard.Top.round(viewModel.round))
                         .font(.eventRoundNumberFont)
 
                     Spacer()
@@ -44,7 +44,10 @@ struct GrandPrixCardView<ViewModel: GrandPrixCardRepresentable>: View {
             }
         }
         .frame(width: Constants.Card.width, height: Constants.Card.height)
-        .background(eventStatusBackgroundStyler.color)
+        .background(
+            RoundedRectangle(cornerRadius: Constants.Card.cornerRadius)
+                .fill(eventStatusBackgroundStyler.color)
+        )
         .clipShape(
             RoundedRectangle(cornerRadius: Constants.Card.cornerRadius)
         )
@@ -70,10 +73,10 @@ struct GrandPrixCardView<ViewModel: GrandPrixCardRepresentable>: View {
                     liveCircleAnimationAmount -= Constants.LiveComponent.circleAnimationDecrease
                 }
 
-            Text("LIVE")
+            Text(Localization.GrandPrixCard.Label.live)
                 .font(.liveTextFont)
         }
-        .frame(maxWidth: Constants.LiveComponent.width, maxHeight: .infinity)
+        .frame(width: Constants.LiveComponent.width, height: Constants.Card.height)
         .foregroundColor(.white)
         .background(Color.red)
     }
@@ -81,9 +84,9 @@ struct GrandPrixCardView<ViewModel: GrandPrixCardRepresentable>: View {
     func applyForegroundColor(position: DriverResult.Value) -> Color {
 
         switch position {
-        case .first: return Color.yellow
-        case .second: return Color.gray
-        case .third: return Color.brown
+        case .first: return .yellow
+        case .second: return .gray
+        case .third: return .brown
         }
     }
 }

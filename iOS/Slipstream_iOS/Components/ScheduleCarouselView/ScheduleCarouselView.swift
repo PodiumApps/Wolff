@@ -23,7 +23,7 @@ struct ScheduleCarouselComponentView<ViewModel: ScheduleCorouselViewModelReprese
             }
 
             VStack(alignment: .leading, spacing: Constants.Card.verticalSpacing) {
-                Text(viewModel.title.uppercased())
+                Text(viewModel.title)
                     .font(.title3)
                     .bold()
 
@@ -33,9 +33,9 @@ struct ScheduleCarouselComponentView<ViewModel: ScheduleCorouselViewModelReprese
         .frame(height: Constants.Card.height)
         .padding(.vertical, Constants.Card.verticalPadding)
         .padding(.horizontal, Constants.Card.horizontalPadding)
-        .background(eventStatusBackgroundStyler.color)
-        .clipShape(
+        .background(
             RoundedRectangle(cornerRadius: Constants.Card.cornerRadius)
+                .fill(eventStatusBackgroundStyler.color)
         )
     }
 }

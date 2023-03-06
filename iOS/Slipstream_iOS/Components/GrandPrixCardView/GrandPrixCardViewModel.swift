@@ -23,7 +23,7 @@ final class GrandPrixCardViewModel: GrandPrixCardRepresentable {
     ) {
 
         self.round = round
-        self.title = title
+        self.title = title.uppercased()
         self.grandPrixDate = grandPrixDate
         self.eventStatus = eventStatus
     }

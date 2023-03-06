@@ -73,13 +73,12 @@
 		CF233DE029A8DB7C00A8D1CD /* GrandPrixSchedulePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DDF29A8DB7C00A8D1CD /* GrandPrixSchedulePickerView.swift */; };
 		CF277A1E297017C50048DE75 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A1D297017C50048DE75 /* Fonts.swift */; };
 		CF277A1F297017C50048DE75 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A1D297017C50048DE75 /* Fonts.swift */; };
-		CF277A21297303430048DE75 /* NewsCarouselComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A20297303430048DE75 /* NewsCarouselComponentView.swift */; };
-		CF277A23297313260048DE75 /* NewsCarouselComponentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A22297313260048DE75 /* NewsCarouselComponentViewModel.swift */; };
+		CF277A21297303430048DE75 /* StandingsCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A20297303430048DE75 /* StandingsCarouselView.swift */; };
+		CF277A23297313260048DE75 /* StandingsCarouselViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A22297313260048DE75 /* StandingsCarouselViewModel.swift */; };
 		CF5F07772996CC3D00E79996 /* ScheduleCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5F07762996CC3D00E79996 /* ScheduleCarouselView.swift */; };
-		CF78D01E2996C58600D45EDE /* ScheduleCarouselComponentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF78D01D2996C58600D45EDE /* ScheduleCarouselComponentViewModel.swift */; };
+		CF78D01E2996C58600D45EDE /* ScheduleCarouselViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF78D01D2996C58600D45EDE /* ScheduleCarouselViewModel.swift */; };
 		CF8EB9D329A77AA700F38158 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8EB9D229A77AA700F38158 /* Event.swift */; };
 		CF8EB9D429A77AA700F38158 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8EB9D229A77AA700F38158 /* Event.swift */; };
-		CFA783F829782ED800C21E25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42096837295378A20075D75E /* Assets.xcassets */; };
 		CFB508C92953034300C46D81 /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB508C82953034300C46D81 /* EventCard.swift */; };
 		CFBD88D7296C1FB50068AB54 /* ResultCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBD88D6296C1FB50068AB54 /* ResultCardViewModel.swift */; };
 		CFE23F4D2982EB9400412DB6 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE23F4C2982EB9400412DB6 /* Localization.swift */; };
@@ -153,10 +152,10 @@
 		CF233DDD29A8D98800A8D1CD /* GrandPrixSchedulePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandPrixSchedulePickerViewModel.swift; sourceTree = "<group>"; };
 		CF233DDF29A8DB7C00A8D1CD /* GrandPrixSchedulePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandPrixSchedulePickerView.swift; sourceTree = "<group>"; };
 		CF277A1D297017C50048DE75 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
-		CF277A20297303430048DE75 /* NewsCarouselComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCarouselComponentView.swift; sourceTree = "<group>"; };
-		CF277A22297313260048DE75 /* NewsCarouselComponentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCarouselComponentViewModel.swift; sourceTree = "<group>"; };
+		CF277A20297303430048DE75 /* StandingsCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsCarouselView.swift; sourceTree = "<group>"; };
+		CF277A22297313260048DE75 /* StandingsCarouselViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsCarouselViewModel.swift; sourceTree = "<group>"; };
 		CF5F07762996CC3D00E79996 /* ScheduleCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCarouselView.swift; sourceTree = "<group>"; };
-		CF78D01D2996C58600D45EDE /* ScheduleCarouselComponentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCarouselComponentViewModel.swift; sourceTree = "<group>"; };
+		CF78D01D2996C58600D45EDE /* ScheduleCarouselViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCarouselViewModel.swift; sourceTree = "<group>"; };
 		CF8EB9D229A77AA700F38158 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		CFB508C82953034300C46D81 /* EventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCard.swift; sourceTree = "<group>"; };
 		CFBD88D6296C1FB50068AB54 /* ResultCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCardViewModel.swift; sourceTree = "<group>"; };
@@ -425,10 +424,10 @@
 		CF233DD329A7D59A00A8D1CD /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				CF233DDC29A8D8FD00A8D1CD /* GrandPrixSchedulePicker */,
-				CF233DDA29A8D83B00A8D1CD /* NewsCarouselComponent */,
-				CF233DD929A8D82100A8D1CD /* ScheduleCarouselComponent */,
-				CF233DD829A8D80600A8D1CD /* GrandPrixCard */,
+				CF233DDC29A8D8FD00A8D1CD /* GrandPrixSchedulePickerView */,
+				CF233DDA29A8D83B00A8D1CD /* StandingsCarouselView */,
+				CF233DD929A8D82100A8D1CD /* ScheduleCarouselView */,
+				CF233DD829A8D80600A8D1CD /* GrandPrixCardView */,
 				CF233DD729A8D7BF00A8D1CD /* ResultCardView */,
 				CF233DD629A8D77D00A8D1CD /* LiveCarView */,
 				CF233DD429A7D6A900A8D1CD /* EventComponentView.swift */,
@@ -457,31 +456,31 @@
 			path = ResultCardView;
 			sourceTree = "<group>";
 		};
-		CF233DD829A8D80600A8D1CD /* GrandPrixCard */ = {
+		CF233DD829A8D80600A8D1CD /* GrandPrixCardView */ = {
 			isa = PBXGroup;
 			children = (
 				CF20D36A297700160038A860 /* GrandPrixCardView.swift */,
 				CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */,
 			);
-			path = GrandPrixCard;
+			path = GrandPrixCardView;
 			sourceTree = "<group>";
 		};
-		CF233DD929A8D82100A8D1CD /* ScheduleCarouselComponent */ = {
+		CF233DD929A8D82100A8D1CD /* ScheduleCarouselView */ = {
 			isa = PBXGroup;
 			children = (
-				CF78D01D2996C58600D45EDE /* ScheduleCarouselComponentViewModel.swift */,
+				CF78D01D2996C58600D45EDE /* ScheduleCarouselViewModel.swift */,
 				CF5F07762996CC3D00E79996 /* ScheduleCarouselView.swift */,
 			);
-			path = ScheduleCarouselComponent;
+			path = ScheduleCarouselView;
 			sourceTree = "<group>";
 		};
-		CF233DDA29A8D83B00A8D1CD /* NewsCarouselComponent */ = {
+		CF233DDA29A8D83B00A8D1CD /* StandingsCarouselView */ = {
 			isa = PBXGroup;
 			children = (
-				CF277A20297303430048DE75 /* NewsCarouselComponentView.swift */,
-				CF277A22297313260048DE75 /* NewsCarouselComponentViewModel.swift */,
+				CF277A20297303430048DE75 /* StandingsCarouselView.swift */,
+				CF277A22297313260048DE75 /* StandingsCarouselViewModel.swift */,
 			);
-			path = NewsCarouselComponent;
+			path = StandingsCarouselView;
 			sourceTree = "<group>";
 		};
 		CF233DDB29A8D8A800A8D1CD /* Screens */ = {
@@ -491,13 +490,13 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
-		CF233DDC29A8D8FD00A8D1CD /* GrandPrixSchedulePicker */ = {
+		CF233DDC29A8D8FD00A8D1CD /* GrandPrixSchedulePickerView */ = {
 			isa = PBXGroup;
 			children = (
 				CF233DDD29A8D98800A8D1CD /* GrandPrixSchedulePickerViewModel.swift */,
 				CF233DDF29A8DB7C00A8D1CD /* GrandPrixSchedulePickerView.swift */,
 			);
-			path = GrandPrixSchedulePicker;
+			path = GrandPrixSchedulePickerView;
 			sourceTree = "<group>";
 		};
 		CF8EB9D129A77A8D00F38158 /* Event */ = {
@@ -807,18 +806,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				42B2199C295F3A2300515097 /* DoubleExtension.swift in Sources */,
-				CF277A23297313260048DE75 /* NewsCarouselComponentViewModel.swift in Sources */,
+				CF277A23297313260048DE75 /* StandingsCarouselViewModel.swift in Sources */,
 				4209686E2954CDCC0075D75E /* NetworkManager.swift in Sources */,
 				42B21973295DDBBB00515097 /* Details.swift in Sources */,
 				42B21997295EEAC600515097 /* StandingsMock.swift in Sources */,
 				42B21989295EEA9400515097 /* ConstructorMock.swift in Sources */,
-				CF277A21297303430048DE75 /* NewsCarouselComponentView.swift in Sources */,
+				CF277A21297303430048DE75 /* StandingsCarouselView.swift in Sources */,
 				CF20D3692976FBD50038A860 /* GrandPrixCardViewModel.swift in Sources */,
 				4209685F29537AF10075D75E /* News.swift in Sources */,
 				CF277A1F297017C50048DE75 /* Fonts.swift in Sources */,
 				42B21976295DE14600515097 /* LiveCarView.swift in Sources */,
 				4209686029537AF70075D75E /* Driver.swift in Sources */,
-				CF78D01E2996C58600D45EDE /* ScheduleCarouselComponentViewModel.swift in Sources */,
+				CF78D01E2996C58600D45EDE /* ScheduleCarouselViewModel.swift in Sources */,
 				42096836295378A10075D75E /* LiveView.swift in Sources */,
 				CFBD88D7296C1FB50068AB54 /* ResultCardViewModel.swift in Sources */,
 				42B21977295DE5E000515097 /* SessionResult.swift in Sources */,
@@ -895,6 +894,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"watch/Slipstream_watch/Preview Content\"";
+				DEVELOPMENT_TEAM = Y4642869FB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -924,6 +924,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"watch/Slipstream_watch/Preview Content\"";
+				DEVELOPMENT_TEAM = Y4642869FB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -995,6 +996,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iOS/Slipstream_iOS/Preview Content\"";
+				DEVELOPMENT_TEAM = Y4642869FB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Slipstream;
@@ -1028,6 +1030,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iOS/Slipstream_iOS/Preview Content\"";
+				DEVELOPMENT_TEAM = Y4642869FB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Slipstream;

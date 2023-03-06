@@ -55,9 +55,9 @@ struct EventComponentView: View {
     func applyForegroundColor(position: DriverResult.Value) -> Color {
 
         switch position {
-        case .first: return Color.yellow
-        case .second: return Color.gray
-        case .third: return Color.brown
+        case .first: return .yellow
+        case .second: return .gray
+        case .third: return .brown
         }
     }
 }

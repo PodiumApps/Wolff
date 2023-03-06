@@ -18,7 +18,7 @@ final class ScheduleCarouselViewModel: ScheduleCorouselViewModelRepresentable {
     init(round: Int, title: String, grandPrixDate: String, eventStatus: Event.Status) {
 
         self.round = round
-        self.title = title
+        self.title = title.uppercased()
         self.grandPrixDate = grandPrixDate
         self.eventStatus = eventStatus
     }
