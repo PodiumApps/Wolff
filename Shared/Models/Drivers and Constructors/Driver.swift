@@ -7,7 +7,7 @@ struct Driver: Decodable, Identifiable, Hashable {
     let carNumber: Int
     let firstName: String
     let lastName: String
-    let driverThicker: String
+    let driverTicker: String
     let position: Int
     let points: Int
     let constructorId: Int

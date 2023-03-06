@@ -84,7 +84,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
         
         guard
             case .results(let positions) = state,
-            let driver = drivers.lazy.first(where: { $0.driverThicker == positions[index].driverTicker }),
+            let driver = drivers.lazy.first(where: { $0.driverTicker == positions[index].driverTicker }),
             let constructor = constructors.lazy.first(where: { $0.id == driver.constructorId })
         else {
             return
@@ -135,12 +135,12 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                 
                 return .init(
                     position: position.position,
-                    driverTicker: driver.driverThicker,
+                    driverTicker: driver.driverTicker,
                     timeGap: position.time,
                     tyrePitCount: position.tyrePitCount,
                     currentTyre: position.tyre,
                     constructorId: constructor.constructorId,
-                    isSelected: driver.driverThicker == self.selectedDriver?.driver.driverThicker
+                    isSelected: driver.driverTicker == self.selectedDriver?.driver.driverTicker
                 )
         }
         

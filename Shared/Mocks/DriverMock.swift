@@ -8,7 +8,7 @@ extension Driver {
         carNumber: 10,
         firstName: "Max",
         lastName: "Verstappen",
-        driverThicker: "VER",
+        driverTicker: "VER",
         position: 1,
         points: 10,
         constructorId: 0
@@ -20,7 +20,7 @@ extension Driver {
         carNumber: 12,
         firstName: "Max",
         lastName: "Leclerc",
-        driverThicker: "LEC",
+        driverTicker: "LEC",
         position: 2,
         points: 10,
         constructorId: 1
@@ -33,7 +33,7 @@ extension Driver {
         carNumber: 20,
         firstName: "Fernando",
         lastName: "Alonso",
-        driverThicker: "ALO",
+        driverTicker: "ALO",
         position: 3,
         points: 10,
         constructorId: 2
@@ -46,7 +46,7 @@ extension Driver {
         carNumber: 30,
         firstName: "Lewis",
         lastName: "Hamilton",
-        driverThicker: "HAM",
+        driverTicker: "HAM",
         position: 4,
         points: 10,
         constructorId: 2

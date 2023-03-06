@@ -27,7 +27,7 @@ enum HttpMethod {
 struct Resource<T: Decodable> {
 
     let url: URL
-    var method: HttpMethod
+    let method: HttpMethod
 }
 
 protocol NetworkManagerRepresentable {
