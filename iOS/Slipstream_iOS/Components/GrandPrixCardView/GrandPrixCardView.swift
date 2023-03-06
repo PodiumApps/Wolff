@@ -44,10 +44,7 @@ struct GrandPrixCardView<ViewModel: GrandPrixCardRepresentable>: View {
             }
         }
         .frame(width: Constants.Card.width, height: Constants.Card.height)
-        .background(
-            RoundedRectangle(cornerRadius: Constants.Card.cornerRadius)
-                .fill(eventStatusBackgroundStyler.color)
-        )
+        .background(eventStatusBackgroundStyler.color)
         .clipShape(
             RoundedRectangle(cornerRadius: Constants.Card.cornerRadius)
         )
