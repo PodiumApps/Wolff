@@ -25,7 +25,7 @@ struct SessionDriverRowView<ViewModel: SessionDriverRowViewModelRepresentable>: 
                 Text("\(viewModel.position)")
                     .padding(.vertical, Constants.Label.verticalPadding)
                     .foregroundColor(viewModel.isSelected ? .white : .primary)
-                    .frame(width: 45, height: 35)
+                    .frame(width: Constants.Position.width, height: Constants.Position.height)
                     .background(
                         
                         RoundedRectangle(cornerRadius: Constants.Row.cornerRadius)
@@ -36,9 +36,9 @@ struct SessionDriverRowView<ViewModel: SessionDriverRowViewModelRepresentable>: 
                 VStack {
                     HStack {
                         HStack(spacing: 0) {
-                            RoundedRectangle(cornerRadius: 4)
+                            RoundedRectangle(cornerRadius: Constants.Row.constructorRectangleRadius)
                                 .fill(sessionDriverStyler.constructorStyler.constructor.color.gradient)
-                                .frame(width: 5)
+                                .frame(width: Constants.Row.constructorRectangleWidth)
                                 .opacity(viewModel.isSelected ? 0 : 1)
                             
                             createLabel(for: viewModel.driverTicker.uppercased())
@@ -52,13 +52,11 @@ struct SessionDriverRowView<ViewModel: SessionDriverRowViewModelRepresentable>: 
                         )
                         createLabel(for: "\(viewModel.tyrePitCount)")
                         
-                        createLabel(for: sessionDriverStyler.tyre.thicker, with: .white, font: .caption)
-                            .padding(4)
+                        createLabel(for: sessionDriverStyler.tyre.ticker, with: .white, font: .caption)
+                            .padding(Constants.Row.tyrePadding)
                             .background(
                                 Circle()
                                     .fill(sessionDriverStyler.tyre.color.gradient)
-//                                    .strokeBorder(.black, lineWidth: 1)
-//                                    .background(Circle().fill(sessionDriverStyler.tyre.color.gradient))
                                     .shadow(radius: 1)
                             )
                     }
@@ -80,12 +78,12 @@ struct SessionDriverRowView<ViewModel: SessionDriverRowViewModelRepresentable>: 
     private func createLabel(for info: String, with color: Color = .primary, font: Font = .body) -> some View {
         
         Text(info)
-            .minimumScaleFactor(0.9)
+            .minimumScaleFactor(Constants.Label.minimumScaleFactor)
             .frame(
                 minWidth: Constants.Label.minWidth,
                 maxWidth: Constants.Label.maxWidth,
                 minHeight: 0,
-                maxHeight: 20
+                maxHeight: Constants.Label.maxHeight
             )
             .truncationMode(.tail)
             .foregroundColor(color)
@@ -95,16 +93,27 @@ struct SessionDriverRowView<ViewModel: SessionDriverRowViewModelRepresentable>: 
 }
 
 fileprivate enum Constants {
+    
+    enum Position {
+        
+        static let width: CGFloat = 45
+        static let height: CGFloat = 35
+    }
 
     enum Row {
 
         static let cornerRadius: CGFloat = 10
+        static let constructorRectangleRadius: CGFloat = 5
+        static let constructorRectangleWidth: CGFloat = 5
+        static let tyrePadding: CGFloat = 4
     }
 
     enum Label {
 
         static let minWidth: CGFloat = 0
         static let maxWidth: CGFloat = .infinity
+        static let maxHeight: CGFloat = 20
+        static let minimumScaleFactor: CGFloat = 0.9
 
         static let verticalPadding: CGFloat = 5
         static let horizontalPadding: CGFloat = 10

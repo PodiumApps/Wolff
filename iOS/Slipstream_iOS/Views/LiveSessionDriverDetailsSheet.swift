@@ -13,17 +13,21 @@ struct LiveSessionDriverDetailsSheet<ViewModel: LiveSessionDriverDetailsSheetVie
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: Constants.cornerRadius)
+            RoundedRectangle(cornerRadius: Constants.Background.cornerRadius)
                 .fill(constructorStyler.constructor.color.gradient)
-                .opacity(0.05)
+                .opacity(Constants.Background.opacity)
             
             VStack(alignment: .leading, spacing: 10) {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(viewModel.driver.fullName)
+                        Text(viewModel.driver.firstName)
                             .font(.driverPositionFont)
-                            .fontWeight(.semibold)
-                        HStack {
+                            .fontWeight(.regular)
+                        HStack(spacing: 4) {
+                            Text(viewModel.driver.lastName)
+                                .font(.driverPositionFont)
+                                .fontWeight(.semibold)
+                                .foregroundColor(constructorStyler.constructor.color)
                             Text(viewModel.constructor.name)
                                 .fontWeight(.thin)
                         }
@@ -35,17 +39,17 @@ struct LiveSessionDriverDetailsSheet<ViewModel: LiveSessionDriverDetailsSheetVie
                             .scaledToFill()
                             .frame(width: Constants.Image.width, height: Constants.Image.height)
                             .foregroundColor(constructorStyler.constructor.color)
-                            .offset(y: 10)
+                            .offset(y: Constants.RacingCar.imageYOffset)
                         
                         Text("\(viewModel.driver.carNumber)")
                             .font(.footnote)
                             .foregroundColor(constructorStyler.constructor.color)
-                            .padding(4)
+                            .padding(Constants.RacingCar.textPadding)
                             .background(
                                 Circle()
                                     .fill(.white)
                             )
-                            .offset(x: -33, y: 2)
+                            .offset(x: Constants.RacingCar.textXOffset, y: Constants.RacingCar.textYOffset)
                     }
                 }
                 
@@ -80,6 +84,21 @@ fileprivate enum Constants {
     
     static let height: CGFloat = 200
     static let cornerRadius: CGFloat = 16
+    
+    enum Background {
+        
+        static let cornerRadius: CGFloat = 16
+        static let opacity: CGFloat = 0.05
+    }
+    
+    enum RacingCar {
+        
+        static let imageYOffset: CGFloat = 10
+        
+        static let textPadding: CGFloat = 4
+        static let textYOffset: CGFloat = 2
+        static let textXOffset: CGFloat = -33
+    }
     
     enum Image {
         

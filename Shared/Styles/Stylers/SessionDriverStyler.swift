@@ -52,7 +52,7 @@ extension SessionDriverStyler {
             }
         }
         
-        var thicker: String {
+        var ticker: String {
             switch self {
             case .soft: return "S"
             case .medium: return "M"
