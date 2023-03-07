@@ -140,7 +140,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                     tyrePitCount: position.tyrePitCount,
                     currentTyre: position.tyre,
                     constructorId: constructor.constructorId,
-                    isSelected: driver.driverTicker == self.selectedDriver?.driver.driverTicker
+                    isSelected: driver.id == self.selectedDriver?.driverID
                 )
         }
         

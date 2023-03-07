@@ -8,7 +8,7 @@ struct LiveSessionDriverDetailsSheet<ViewModel: LiveSessionDriverDetailsSheetVie
     init(viewModel: ViewModel) {
         
         self.viewModel = viewModel
-        self.constructorStyler = ConstructorStyler(constructor: viewModel.constructor.constructorId)
+        self.constructorStyler = ConstructorStyler(constructor: viewModel.constructorStylerID)
     }
     
     var body: some View {
@@ -16,21 +16,21 @@ struct LiveSessionDriverDetailsSheet<ViewModel: LiveSessionDriverDetailsSheetVie
             RoundedRectangle(cornerRadius: Constants.Background.cornerRadius)
                 .fill(constructorStyler.constructor.color.gradient)
                 .opacity(Constants.Background.opacity)
+                .frame(height: Constants.height)
             
-            VStack(alignment: .leading, spacing: 10) {
-                HStack(alignment: .top) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(viewModel.driver.firstName)
-                            .font(.driverPositionFont)
-                            .fontWeight(.regular)
-                        HStack(spacing: 4) {
-                            Text(viewModel.driver.lastName)
+            VStack(alignment: .leading, spacing: Constants.Spacing.parentVerticalStack) {
+                HStack(alignment: .bottom) {
+                    VStack(alignment: .leading, spacing: Constants.Spacing.horizontalStacks) {
+                        HStack(alignment: .bottom, spacing: Constants.Spacing.horizontalStacks) {
+                            Text(viewModel.titleRegular)
+                                .fontWeight(.regular)
+                            Text(viewModel.titleBold)
+                                .foregroundColor(constructorStyler.constructor.color)
                                 .font(.driverPositionFont)
                                 .fontWeight(.semibold)
-                                .foregroundColor(constructorStyler.constructor.color)
-                            Text(viewModel.constructor.name)
-                                .fontWeight(.thin)
                         }
+                        Text(viewModel.detailsText)
+                            .fontWeight(.thin)
                     }
                     Spacer()
                     ZStack {
@@ -41,19 +41,19 @@ struct LiveSessionDriverDetailsSheet<ViewModel: LiveSessionDriverDetailsSheetVie
                             .foregroundColor(constructorStyler.constructor.color)
                             .offset(y: Constants.RacingCar.imageYOffset)
                         
-                        Text("\(viewModel.driver.carNumber)")
-                            .font(.footnote)
-                            .foregroundColor(constructorStyler.constructor.color)
+                        Text(viewModel.circleText)
+                            .font(.system(size: 10))
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
                             .padding(Constants.RacingCar.textPadding)
-                            .background(
-                                Circle()
-                                    .fill(.white)
-                            )
+//                            .background(
+//                                Circle()
+//                                    .fill(constructorStyler.constructor.color)
+//                                    .frame(width: 25)
+//                            )
                             .offset(x: Constants.RacingCar.textXOffset, y: Constants.RacingCar.textYOffset)
                     }
                 }
-                
-                Divider()
                 
                 // TODO: - idea for the bottom part of the bottom sheet
 //                HStack {
@@ -82,8 +82,14 @@ struct LiveSessionDriverDetailsSheet<ViewModel: LiveSessionDriverDetailsSheetVie
 
 fileprivate enum Constants {
     
-    static let height: CGFloat = 200
+    static let height: CGFloat = 120
     static let cornerRadius: CGFloat = 16
+    
+    enum Spacing {
+        
+        static let parentVerticalStack: CGFloat = 10
+        static let horizontalStacks: CGFloat = 4
+    }
     
     enum Background {
         
@@ -93,11 +99,11 @@ fileprivate enum Constants {
     
     enum RacingCar {
         
-        static let imageYOffset: CGFloat = 10
+        static let imageYOffset: CGFloat = 0
         
         static let textPadding: CGFloat = 4
-        static let textYOffset: CGFloat = 2
-        static let textXOffset: CGFloat = -33
+        static let textYOffset: CGFloat = 1
+        static let textXOffset: CGFloat = -10
     }
     
     enum Image {
