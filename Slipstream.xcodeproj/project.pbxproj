@@ -286,8 +286,6 @@
 		42096832295378A10075D75E /* Slipstream_iOS */ = {
 			isa = PBXGroup;
 			children = (
-				CF233DE629ABEF3500A8D1CD /* SessionStandingsList */,
-				CF233DE129ABE00B00A8D1CD /* SessionDriverRow */,
 				42B219A2295F44F400515097 /* ViewBuilders */,
 				42B21979295EE43D00515097 /* ViewModel */,
 				42B21974295DE12800515097 /* Views */,
@@ -376,6 +374,8 @@
 		42B21974295DE12800515097 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CF233DE429ABE17B00A8D1CD /* SessionDriverRowView.swift */,
+				CF233DE929ABF08100A8D1CD /* SessionStandingsListView.swift */,
 				42096835295378A10075D75E /* LiveView.swift */,
 				42B21975295DE14600515097 /* LiveCarView.swift */,
 				CFEE3F2A2969B6970050EE8B /* ResultCardView.swift */,
@@ -390,6 +390,8 @@
 		42B21979295EE43D00515097 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				CF233DE729ABEF7600A8D1CD /* SessionStandingsListViewModel.swift */,
+				CF233DE229ABE02F00A8D1CD /* SessionDriverRowViewModel.swift */,
 				42B2197B295EE46500515097 /* LiveViewModel.swift */,
 				42B2197D295EE95600515097 /* LiveCarViewModel.swift */,
 				CFBD88D6296C1FB50068AB54 /* ResultCardViewModel.swift */,
@@ -497,24 +499,6 @@
 				42521CBD29B2378300000586 /* SessionDriverStyler.swift */,
 			);
 			path = Stylers;
-			sourceTree = "<group>";
-		};
-		CF233DE129ABE00B00A8D1CD /* SessionDriverRow */ = {
-			isa = PBXGroup;
-			children = (
-				CF233DE229ABE02F00A8D1CD /* SessionDriverRowViewModel.swift */,
-				CF233DE429ABE17B00A8D1CD /* SessionDriverRowView.swift */,
-			);
-			path = SessionDriverRow;
-			sourceTree = "<group>";
-		};
-		CF233DE629ABEF3500A8D1CD /* SessionStandingsList */ = {
-			isa = PBXGroup;
-			children = (
-				CF233DE729ABEF7600A8D1CD /* SessionStandingsListViewModel.swift */,
-				CF233DE929ABF08100A8D1CD /* SessionStandingsListView.swift */,
-			);
-			path = SessionStandingsList;
 			sourceTree = "<group>";
 		};
 		CF233DEB29ADFA6C00A8D1CD /* LiveSession */ = {
