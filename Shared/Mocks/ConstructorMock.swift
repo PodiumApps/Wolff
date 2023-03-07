@@ -3,21 +3,32 @@ import Foundation
 extension Constructor {
     
     static let mockFerrari: Self = .init(
-        id: UUID().uuidString,
+        id: 0,
+        constructorId: "ferrari",
         name: "Ferrari",
-        teamPrinciple: "Tomás Mamede",
-        standings: .constructorDetail
+        fullName: "Oi",
+        teamPrinciple: "tEamy",
+        position: 1,
+        points: 0
     )
+    
     static let mockAlfa: Self = .init(
-        id: UUID().uuidString,
-        name: "Alfa Romeo",
-        teamPrinciple: "Miguel Teixeira",
-        standings: .constructorDetail
+        id: 1,
+        constructorId: "alfa",
+        name: "Alfa",
+        fullName: "Oi",
+        teamPrinciple: "tEamy",
+        position: 1,
+        points: 0
     )
+    
     static let mockMercedes: Self = .init(
-        id: UUID().uuidString,
+        id: 2,
+        constructorId: "mercedes",
         name: "Mercedes",
-        teamPrinciple: "Zé Inácio",
-        standings: .constructorDetail
+        fullName: "Oi",
+        teamPrinciple: "tEamy",
+        position: 1,
+        points: 0
     )
 }

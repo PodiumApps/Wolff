@@ -4,3 +4,7 @@
 
 "grand_prix_card.top.round" = "Round %@";
 "grand_prix_card.label.live" = "LIVE";
+
+// MARK: - SessionDriverList
+"session_driver_list.error.text" = "Something went wrong";
+"session_driver_list.error.cta" = "Refresh";

@@ -1,99 +1,64 @@
 import Foundation
 
-enum HTTPMethod {
+final class NetworkManager: NetworkManagerRepresentable {
 
-    case get([URLQueryItem] = [], percentEnconding: String = "%20")
-    case post(Data?)
-    case put(Data?)
+    static let shared = NetworkManager()
 
-    var name: String {
-
-        switch self {
-        case .get:
-            return "GET"
-        case .post:
-            return "POST"
-        case .put:
-            return "PUT"
-        }
-    }
-}
-
-struct Resource<T: Codable> {
-
-    let url: URL
-    var method: HTTPMethod = .get()
-}
-
-class NetworkManager {
-
-    enum NetworkError: Error {
-        case invalidResponse
-        case badURL
-        case decodingError
-        case noComponents
-    }
-
-    private let token = Date().tokenString
-
-    func load<T: Codable>(_ resource: Resource<T>) async throws -> T {
+    func load<T: Decodable>(_ resource: Resource<T>) async throws -> T {
 
         var request = URLRequest(url: resource.url)
 
         switch resource.method {
 
-        case .post(let data):
+        case .post(let body, let token):
             request.httpMethod = resource.method.name
-            request.httpBody = data
+            
+            do {
+                let data = try JSONEncoder().encode(body)
+                request.httpBody = data
+            } catch {
+                throw NetworkError.encodingError(error)
+            }
+            
+            if let token { request.addValue(token, forHTTPHeaderField: "x-secret-key") }
 
-        case.put(let data):
-            request.httpMethod = resource.method.name
-            request.httpBody = data
-
-        case .get(let queryItems, let percentEncoding):
-
+        case .get(let queryItems, let token):
+            
             guard
                 var components = URLComponents(url: resource.url, resolvingAgainstBaseURL: false)
             else {
                 throw NetworkError.noComponents
             }
+            
+            components.queryItems = queryItems
 
-            let token = [URLQueryItem(name: "token", value: token)]
-
-            if !queryItems.isEmpty {
-                components.queryItems = queryItems + token
-            } else {
-                components.queryItems = token
-            }
-
-            components.percentEncodedQuery = components.percentEncodedQuery?
-                .replacingOccurrences(of: "%.20", with: percentEncoding)
-
-            guard let url = components.url else {
-                throw NetworkError.badURL
-            }
-
-            print(url)
+            guard let url = components.url else { throw NetworkError.badUrl(components.url) }
 
             request = URLRequest(url: url)
+            
+            if let token { request.addValue(token, forHTTPHeaderField: "x-secret-key") }
         }
-
+        
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = ["Content-Type": "application/json"]
-
         let session = URLSession(configuration: configuration)
 
         let (data, response) = try await session.data(for: request)
 
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-            throw NetworkError.invalidResponse
-        }
-
-        do {
-            return try JSONDecoder().decode(T.self, from: data)
-        } catch {
-            print(error)
-            throw NetworkError.decodingError
+        guard let httpResponse = response as? HTTPURLResponse else { throw NetworkError.badResponse(response) }
+        
+        if httpResponse.statusCode == 200 {
+            do {
+                return try JSONDecoder().decode(T.self, from: data)
+            } catch {
+                throw NetworkError.decodingError(error)
+            }
+        } else {
+            do {
+                throw NetworkError.invalidResponse(statusCode: httpResponse.statusCode, "Invalid response")
+            } catch {
+                throw NetworkError.decodingError(error)
+            }
         }
     }
 }

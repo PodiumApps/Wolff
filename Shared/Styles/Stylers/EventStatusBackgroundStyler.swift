@@ -11,13 +11,14 @@ class EventStatusBackgroundStyler: EventStatusBackgroundStylerRepresentable {
 
     var color: Color {
         switch status {
-        case .current: return .current
-        case .liveSession: return .liveSession
-        case .completeOrUpcomingEvent: return .completedOrUpcomingEvent
+        case .current: return .Event.current
+        case .liveSession: return .Event.liveSession
+        case .completeOrUpcomingEvent: return .Event.completedOrUpcomingEvent
         }
     }
 
     init(status: Status) {
+        
         self.status = status
     }
 }

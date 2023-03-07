@@ -25,17 +25,17 @@ class ConstructorStyler: ConstructorStylerRepresentable {
 
         var color: Color {
             switch self {
-            case .alfa_romeo_ferrari: return .alphaRomeo
-            case .alphatauri_rbpt: return .alphaTauri
-            case .alpine_renault: return .alpine
-            case .aston_martin_aramco_mercedes: return .astonMartin
-            case .ferrari: return .ferrari
-            case .haas_ferrari: return .haas
-            case .mclaren_mercedes: return .mclaren
-            case .mercedes: return .mercedes
-            case .red_bull_racing_rbpt: return .redBull
-            case .williams_mercedes: return .williams
-            case .noTeam: return .primary
+            case .alfa_romeo_ferrari: return .Constructor.alphaRomeo
+            case .alphatauri_rbpt: return .Constructor.alphaTauri
+            case .alpine_renault: return .Constructor.alpine
+            case .aston_martin_aramco_mercedes: return .Constructor.astonMartin
+            case .ferrari: return .Constructor.ferrari
+            case .haas_ferrari: return .Constructor.haas
+            case .mclaren_mercedes: return .Constructor.mclaren
+            case .mercedes: return .Constructor.mercedes
+            case .red_bull_racing_rbpt: return .Constructor.redBull
+            case .williams_mercedes: return .Constructor.williams
+            case .noTeam: return .Constructor.noTeam
             }
         }
     }

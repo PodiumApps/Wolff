@@ -152,9 +152,9 @@ struct ResultCard_Previews: PreviewProvider {
                     sessionType: Session.mockSession.name,
                     fastestLap: "1:20:507",
                     drivers: [
-                        .init(driverTicker: Driver.mockHamilton.codeName, value: .first),
-                        .init(driverTicker: Driver.mockVertasppen.codeName, value: .second),
-                        .init(driverTicker: Driver.mockLeclerc.codeName, value: .third)
+                        .init(driverTicker: Driver.mockHamilton.driverTicker, value: .first),
+                        .init(driverTicker: Driver.mockVertasppen.driverTicker, value: .second),
+                        .init(driverTicker: Driver.mockLeclerc.driverTicker, value: .third)
                     ]
                 )
         )
