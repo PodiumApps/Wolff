@@ -37,7 +37,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
         setupBindings()
     }
     
-    // Private
+    // MARK: - Private
     private func setupBindings() {
         
         action

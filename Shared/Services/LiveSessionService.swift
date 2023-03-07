@@ -25,7 +25,7 @@ class LiveSessionService: LiveSessionServiceRepresentable {
         setupBindings()
     }
     
-    // Private
+    // MARK: - Private
     private func setupBindings() {
         
         action

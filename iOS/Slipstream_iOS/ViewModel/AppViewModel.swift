@@ -19,7 +19,7 @@ class AppViewModel: AppViewModelRepresentable {
         load()
     }
     
-    // Private
+    // MARK: - Private
     private func load() {
        
         driverAndConstructorService.action.send(.fetchAll)

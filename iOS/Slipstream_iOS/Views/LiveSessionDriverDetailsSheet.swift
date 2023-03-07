@@ -46,11 +46,6 @@ struct LiveSessionDriverDetailsSheet<ViewModel: LiveSessionDriverDetailsSheetVie
                             .fontWeight(.semibold)
                             .foregroundColor(.white)
                             .padding(Constants.RacingCar.textPadding)
-//                            .background(
-//                                Circle()
-//                                    .fill(constructorStyler.constructor.color)
-//                                    .frame(width: 25)
-//                            )
                             .offset(x: Constants.RacingCar.textXOffset, y: Constants.RacingCar.textYOffset)
                     }
                 }

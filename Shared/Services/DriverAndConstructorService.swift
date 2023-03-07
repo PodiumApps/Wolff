@@ -25,7 +25,7 @@ class DriverAndConstructorService: DriverAndConstructorServiceRepresentable {
         setupBindings()
     }
     
-    // Private
+    // MARK: - Private
     private func setupBindings() {
         
         action
