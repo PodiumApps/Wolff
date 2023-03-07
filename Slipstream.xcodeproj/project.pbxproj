@@ -63,7 +63,6 @@
 		CF20D36629760C300038A860 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36429760C300038A860 /* Colors.swift */; };
 		CF20D3682976FBD50038A860 /* GrandPrixCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */; };
 		CF20D3692976FBD50038A860 /* GrandPrixCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */; };
-		CF20D36B297700160038A860 /* GrandPrixCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36A297700160038A860 /* GrandPrixCardView.swift */; };
 		CF20D36C297700160038A860 /* GrandPrixCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36A297700160038A860 /* GrandPrixCardView.swift */; };
 		CF20D36F297802040038A860 /* DriverResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36D297802040038A860 /* DriverResult.swift */; };
 		CF20D371297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D370297818EE0038A860 /* EventStatusBackgroundStyler.swift */; };
@@ -253,8 +252,10 @@
 		42096832295378A10075D75E /* Slipstream_iOS */ = {
 			isa = PBXGroup;
 			children = (
-				CF233DDB29A8D8A800A8D1CD /* Screens */,
-				CF233DD329A7D59A00A8D1CD /* Components */,
+				42521D0329B7910500000586 /* ViewModel */,
+				42521D0029B790BE00000586 /* Views */,
+				CF233DD429A7D6A900A8D1CD /* EventComponentView.swift */,
+				CF20D36D297802040038A860 /* DriverResult.swift */,
 				42B219A2295F44F400515097 /* ViewBuilders */,
 				42B2196B295D94C800515097 /* Support */,
 				42096839295378A20075D75E /* Preview Content */,
@@ -307,6 +308,34 @@
 				42096843295378A30075D75E /* Slipstream_iOSTests */,
 			);
 			path = iOS;
+			sourceTree = "<group>";
+		};
+		42521D0029B790BE00000586 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				42096835295378A10075D75E /* LiveView.swift */,
+				42B21975295DE14600515097 /* LiveCarView.swift */,
+				CFEE3F2A2969B6970050EE8B /* ResultCardView.swift */,
+				CF20D36A297700160038A860 /* GrandPrixCardView.swift */,
+				CF277A20297303430048DE75 /* StandingsCarouselView.swift */,
+				CF233DDF29A8DB7C00A8D1CD /* GrandPrixSchedulePickerView.swift */,
+				CF5F07762996CC3D00E79996 /* ScheduleCarouselView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		42521D0329B7910500000586 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				42B2197D295EE95600515097 /* LiveCarViewModel.swift */,
+				42B2197B295EE46500515097 /* LiveViewModel.swift */,
+				CF233DDD29A8D98800A8D1CD /* GrandPrixSchedulePickerViewModel.swift */,
+				CF277A22297313260048DE75 /* StandingsCarouselViewModel.swift */,
+				CF78D01D2996C58600D45EDE /* ScheduleCarouselViewModel.swift */,
+				CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */,
+				CFBD88D6296C1FB50068AB54 /* ResultCardViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		42B2196B295D94C800515097 /* Support */ = {
@@ -419,84 +448,6 @@
 				CF20D370297818EE0038A860 /* EventStatusBackgroundStyler.swift */,
 			);
 			path = Stylers;
-			sourceTree = "<group>";
-		};
-		CF233DD329A7D59A00A8D1CD /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				CF233DDC29A8D8FD00A8D1CD /* GrandPrixSchedulePickerView */,
-				CF233DDA29A8D83B00A8D1CD /* StandingsCarouselView */,
-				CF233DD929A8D82100A8D1CD /* ScheduleCarouselView */,
-				CF233DD829A8D80600A8D1CD /* GrandPrixCardView */,
-				CF233DD729A8D7BF00A8D1CD /* ResultCardView */,
-				CF233DD629A8D77D00A8D1CD /* LiveCarView */,
-				CF233DD429A7D6A900A8D1CD /* EventComponentView.swift */,
-				CF20D36D297802040038A860 /* DriverResult.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		CF233DD629A8D77D00A8D1CD /* LiveCarView */ = {
-			isa = PBXGroup;
-			children = (
-				42B2197D295EE95600515097 /* LiveCarViewModel.swift */,
-				42B2197B295EE46500515097 /* LiveViewModel.swift */,
-				42096835295378A10075D75E /* LiveView.swift */,
-				42B21975295DE14600515097 /* LiveCarView.swift */,
-			);
-			path = LiveCarView;
-			sourceTree = "<group>";
-		};
-		CF233DD729A8D7BF00A8D1CD /* ResultCardView */ = {
-			isa = PBXGroup;
-			children = (
-				CFEE3F2A2969B6970050EE8B /* ResultCardView.swift */,
-				CFBD88D6296C1FB50068AB54 /* ResultCardViewModel.swift */,
-			);
-			path = ResultCardView;
-			sourceTree = "<group>";
-		};
-		CF233DD829A8D80600A8D1CD /* GrandPrixCardView */ = {
-			isa = PBXGroup;
-			children = (
-				CF20D36A297700160038A860 /* GrandPrixCardView.swift */,
-				CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */,
-			);
-			path = GrandPrixCardView;
-			sourceTree = "<group>";
-		};
-		CF233DD929A8D82100A8D1CD /* ScheduleCarouselView */ = {
-			isa = PBXGroup;
-			children = (
-				CF78D01D2996C58600D45EDE /* ScheduleCarouselViewModel.swift */,
-				CF5F07762996CC3D00E79996 /* ScheduleCarouselView.swift */,
-			);
-			path = ScheduleCarouselView;
-			sourceTree = "<group>";
-		};
-		CF233DDA29A8D83B00A8D1CD /* StandingsCarouselView */ = {
-			isa = PBXGroup;
-			children = (
-				CF277A20297303430048DE75 /* StandingsCarouselView.swift */,
-				CF277A22297313260048DE75 /* StandingsCarouselViewModel.swift */,
-			);
-			path = StandingsCarouselView;
-			sourceTree = "<group>";
-		};
-		CF233DDB29A8D8A800A8D1CD /* Screens */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Screens;
-			sourceTree = "<group>";
-		};
-		CF233DDC29A8D8FD00A8D1CD /* GrandPrixSchedulePickerView */ = {
-			isa = PBXGroup;
-			children = (
-				CF233DDD29A8D98800A8D1CD /* GrandPrixSchedulePickerViewModel.swift */,
-				CF233DDF29A8DB7C00A8D1CD /* GrandPrixSchedulePickerView.swift */,
-			);
-			path = GrandPrixSchedulePickerView;
 			sourceTree = "<group>";
 		};
 		CF8EB9D129A77A8D00F38158 /* Event */ = {
@@ -776,7 +727,6 @@
 				CF8EB9D329A77AA700F38158 /* Event.swift in Sources */,
 				CF20D3682976FBD50038A860 /* GrandPrixCardViewModel.swift in Sources */,
 				CF20D361297577D80038A860 /* ConstructorStyler.swift in Sources */,
-				CF20D36B297700160038A860 /* GrandPrixCardView.swift in Sources */,
 				42B2198F295EEAA500515097 /* SessionMock.swift in Sources */,
 				CFB508C92953034300C46D81 /* EventCard.swift in Sources */,
 				42B2199A295F3A2300515097 /* DoubleExtension.swift in Sources */,
