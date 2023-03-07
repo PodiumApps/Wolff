@@ -16,7 +16,7 @@ struct AppView<ViewModel: AppViewModelRepresentable>: View {
             Text(string)
         case .loading:
             ProgressView()
-        case.results(let sessionViewModel):
+        case .results(let sessionViewModel):
             NavigationView {
                 NavigationLink(
                     "Live view",
