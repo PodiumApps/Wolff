@@ -2,7 +2,7 @@ import SwiftUI
 
 struct GrandPrixCardView<ViewModel: GrandPrixCardRepresentable>: View {
 
-    @State private var liveCircleAnimationAmount = Constants.liveCircleAnimationAmount
+    @State private var liveCircleAnimationAmount = Constants.LiveComponent.circleAnimationAmount
 
     private let viewModel: ViewModel
     private var eventStatusBackgroundStyler: EventStatusBackgroundStyler
@@ -16,28 +16,21 @@ struct GrandPrixCardView<ViewModel: GrandPrixCardRepresentable>: View {
     var body: some View {
 
         HStack {
-            VStack(alignment: .leading, spacing: Constants.verticalSpacing) {
+            VStack(alignment: .leading, spacing: Constants.Card.verticalSpacing) {
                 HStack(alignment: .firstTextBaseline) {
                     Text(viewModel.title.uppercased())
-                        .minimumScaleFactor(Constants.eventTitleTextScalingFactor)
+                        .minimumScaleFactor(Constants.Card.titleTextScalingFactor)
                         .font(.eventTitleFont)
-                    Text("Round \(viewModel.round)")
+                    Text(Localization.GrandPrixCard.Top.round(viewModel.round))
                         .font(.eventRoundNumberFont)
 
                     Spacer()
                 }
 
-                switch viewModel.eventStatus {
-                case .finished(let drivers):
-                    driversPositionComponent(drivers: drivers)
-                case .live(let title, let details), .current(let title, let details):
-                    sessionDetailsComponent(title: title, details: details)
-                case .upcoming(let details):
-                    sessionDetailsComponent(details: details)
-                }
+                EventComponentView(eventStatus: viewModel.eventStatus)
             }
             .frame(maxWidth: .infinity)
-            .padding(Constants.cardContentPadding)
+            .padding(Constants.Card.contentPadding)
 
             Spacer()
 
@@ -45,78 +38,42 @@ struct GrandPrixCardView<ViewModel: GrandPrixCardRepresentable>: View {
             case .finished, .upcoming, .current:
                 Image.chevronRight
                     .font(.chevronRightFont)
-                    .padding(.trailing, Constants.cardContentPadding)
+                    .padding(.trailing, Constants.Card.contentPadding)
             case .live:
                 liveIndicatorComponent()
             }
         }
-        .frame(width: Constants.cardWidth, height: Constants.cardHeigth)
+        .frame(width: Constants.Card.width, height: Constants.Card.height)
         .background(eventStatusBackgroundStyler.color)
         .clipShape(
-            RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
+            RoundedRectangle(cornerRadius: Constants.Card.cornerRadius)
         )
         .shadow(
-            radius: Constants.cardShadowRadius,
-            x: Constants.cardHorizontalShadow,
-            y: Constants.cardVerticalShadow
+            radius: Constants.Card.shadowRadius,
+            x: Constants.Card.horizontalShadow,
+            y: Constants.Card.verticalShadow
         )
-    }
-
-    func driversPositionComponent(drivers: [DriverResult]) -> some View {
-
-        HStack(spacing: Constants.horizontalSpacing) {
-            ForEach(drivers) {
-                driverLabel(position: $0.value, driverTicker: $0.driverTicker)
-            }
-        }
-    }
-
-    func driverLabel(position: DriverResult.Value, driverTicker: String) -> some View {
-
-        HStack(spacing: Constants.horizontalDriversComponentSpacing) {
-            if position == .first {
-                Image.trophyIcon
-            } else {
-                Text(position.label)
-            }
-
-            Text(driverTicker)
-        }
-        .foregroundColor(applyForegroundColor(position: position))
-        .bold()
-    }
-
-    func sessionDetailsComponent(title: String? = nil, details: String) -> some View {
-
-        HStack {
-            if let title = title {
-                Text(title)
-                    .font(.liveSessionTitleFont)
-            }
-
-            Text(details)
-        }
     }
 
     func liveIndicatorComponent() -> some View {
 
         HStack {
             Circle()
-                .frame(width: Constants.liveCircleSize)
+                .frame(width: Constants.LiveComponent.circleSize)
                 .scaleEffect(liveCircleAnimationAmount)
                 .animation(
                     .easeInOut(
-                        duration: Constants.liveCircleAnimationDuration).repeatForever(autoreverses: true),
+                        duration: Constants.LiveComponent.circleAnimationDuration).repeatForever(autoreverses: true),
                         value: liveCircleAnimationAmount
                     )
                 .onAppear {
-                    liveCircleAnimationAmount -= Constants.liveCircleAnimationDecrease
+                    liveCircleAnimationAmount -= Constants.LiveComponent.circleAnimationDecrease
                 }
 
-            Text("LIVE")
+            Text(Localization.GrandPrixCard.Label.live)
                 .font(.liveTextFont)
         }
-        .frame(maxWidth: Constants.liveComponentWidth, maxHeight: .infinity)
+        .frame(width: Constants.LiveComponent.width, height: Constants.Card.height)
         .foregroundColor(.white)
         .background(Color.red)
     }
@@ -124,38 +81,39 @@ struct GrandPrixCardView<ViewModel: GrandPrixCardRepresentable>: View {
     func applyForegroundColor(position: DriverResult.Value) -> Color {
 
         switch position {
-        case .first: return Color.yellow
-        case .second: return Color.gray
-        case .third: return Color.brown
+        case .first: return .yellow
+        case .second: return .gray
+        case .third: return .brown
         }
     }
 }
 
 fileprivate enum Constants {
 
-    static let cardWidth: CGFloat = UIScreen.main.bounds.width * 0.95
-    static let cardHeigth: CGFloat = 70
-    static let cardCornerRadius: CGFloat = 10
-    static let cardContentPadding: CGFloat = 12
-    static let cardHorizontalShadow: CGFloat = 7
-    static let cardVerticalShadow: CGFloat = 7
-    static let cardShadowRadius: CGFloat = 7
+    enum Card {
 
-    static let eventTitleTextScalingFactor: CGFloat = 0.75
+        static let width: CGFloat = UIScreen.main.bounds.width * 0.95
+        static let height: CGFloat = 70
+        static let cornerRadius: CGFloat = 10
+        static let contentPadding: CGFloat = 12
+        static let horizontalShadow: CGFloat = 7
+        static let verticalShadow: CGFloat = 7
+        static let verticalSpacing: CGFloat = 7
+        static let shadowRadius: CGFloat = 7
+        static let titleTextScalingFactor: CGFloat = 0.75
+    }
 
-    static let verticalSpacing: CGFloat = 7
-    static let horizontalSpacing: CGFloat = 14
+    enum LiveComponent {
 
-    static let horizontalDriversComponentSpacing: CGFloat = 7
-
-    static let liveComponentWidth: CGFloat = 80
-    static let liveCircleSize: CGFloat = 12
-    static let liveCircleAnimationDuration: Double = 1
-    static let liveCircleAnimationAmount: Double = 1
-    static let liveCircleAnimationDecrease: Double = 0.6
+        static let width: CGFloat = 80
+        static let circleSize: CGFloat = 12
+        static let circleAnimationDuration: Double = 1
+        static let circleAnimationAmount: Double = 1
+        static let circleAnimationDecrease: Double = 0.6
+    }
 }
 
-struct ScheduleCarouselComponentView_Previews: PreviewProvider {
+struct GrandPrixCardView_Previews: PreviewProvider {
     static var previews: some View {
 
         GrandPrixCardView(
@@ -163,7 +121,7 @@ struct ScheduleCarouselComponentView_Previews: PreviewProvider {
                 GrandPrixCardViewModel(
                     round: 13,
                     title: "Emilia Romagna 2023",
-                    eventSatus: .upcoming(details: "05-07 MAY")
+                    eventStatus: .upcoming(details: "05-07 MAY")
                 )
         )
 
@@ -172,7 +130,7 @@ struct ScheduleCarouselComponentView_Previews: PreviewProvider {
                 GrandPrixCardViewModel(
                     round: 13,
                     title: "Emilia Romagna 2023",
-                    eventSatus: .current(title: "FP1", details: "10:30h until start")
+                    eventStatus: .current(title: "FP1", details: "10:30h until start")
                 )
         )
 
@@ -181,7 +139,7 @@ struct ScheduleCarouselComponentView_Previews: PreviewProvider {
                 GrandPrixCardViewModel(
                     round: 3,
                     title: "Emilia Romagna 2023",
-                    eventSatus: .live(title: "Race", details: "Lap 22 of 52")
+                    eventStatus: .live(title: "Race", details: "Lap 22 of 52")
                 )
         )
 
@@ -190,7 +148,7 @@ struct ScheduleCarouselComponentView_Previews: PreviewProvider {
                 GrandPrixCardViewModel(
                     round: 3,
                     title: "Bahrain 2023",
-                    eventSatus: .finished(
+                    eventStatus: .finished(
                         drivers: [
                             .init(driverTicker: "HAM", value: .first),
                             .init(driverTicker: "LEC", value: .second),
