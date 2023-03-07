@@ -46,7 +46,7 @@ struct NewsCarouselComponentView_Previews: PreviewProvider {
     static var previews: some View {
         StandingsCarouselView(
             viewModel: StandingsCarouselViewModel(
-                driverName: Driver.mockHamilton.name,
+                driverName: Driver.mockHamilton.fullName,
                 constructorName: "Mercedes",
                 position: 1,
                 points: 100

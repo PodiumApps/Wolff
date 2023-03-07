@@ -121,19 +121,19 @@ fileprivate enum Constants {
     }
 }
 
-struct SessionDriverRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        SessionDriverRowView(
-            viewModel: SessionDriverRowViewModel(
-                position: 2,
-                driverTicker: "HAM",
-                timeGap: "+2.344",
-                tyrePitCount: 3,
-                currentTyre: .medium,
-                constructorId: "mercedes"
-            )
-        ) {
-            
-        }
-    }
-}
+//struct SessionDriverRowView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SessionDriverRowView(
+//            viewModel: SessionDriverRowViewModel(
+//                position: 2,
+//                driverTicker: "HAM",
+//                timeGap: "+2.344",
+//                tyrePitCount: 3,
+//                currentTyre: .medium,
+//                constructorId: "mercedes"
+//            )
+//        ) {
+//            
+//        }
+//    }
+//}
