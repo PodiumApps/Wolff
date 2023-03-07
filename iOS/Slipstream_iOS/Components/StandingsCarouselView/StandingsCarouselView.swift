@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct NewsCarouselComponentView<ViewModel: NewsCarouselComponentRepresentable>: View {
+struct StandingsCarouselView<ViewModel: StandingsCarouselViewModel>: View {
 
     private let viewModel: ViewModel
     private let constructorStyler: ConstructorStylerRepresentable
@@ -43,8 +43,8 @@ fileprivate enum Constants {
 
 struct NewsCarouselComponentView_Previews: PreviewProvider {
     static var previews: some View {
-        NewsCarouselComponentView(
-            viewModel: NewsCarouselComponentViewModel(
+        StandingsCarouselView(
+            viewModel: StandingsCarouselViewModel(
                 driverName: Driver.mockHamilton.name,
                 constructorName: "Mercedes",
                 position: 1,

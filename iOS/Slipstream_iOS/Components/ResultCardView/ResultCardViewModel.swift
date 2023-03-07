@@ -17,6 +17,6 @@ final class ResultCardViewModel: ResultCardRepresentable {
 
         self.sessionType = sessionType
         self.fastestLap = fastestLap
-        self.drivers = drivers.sorted(by: { $1.value.order < $0.value.order })
+        self.drivers = drivers.sorted(by: { $0.value.order > $1.value.order })
     }
 }

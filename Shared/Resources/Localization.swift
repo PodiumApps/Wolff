@@ -13,6 +13,10 @@ internal enum Localization {
   internal enum GrandPrixCard {
     /// Monza 2023
     internal static let title = Localization.tr("Localizable", "grand_prix_card.title", fallback: "Monza 2023")
+    internal enum Label {
+      /// LIVE
+      internal static let live = Localization.tr("Localizable", "grand_prix_card.label.live", fallback: "LIVE")
+    }
     internal enum Top {
       /// Round %@
       internal static func round(_ p1: Any) -> String {

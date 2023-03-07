@@ -30,7 +30,7 @@ extension EventStatusBackgroundStyler {
         case completeOrUpcomingEvent
     }
 
-    convenience init(grandPrixCardStatus: GrandPrixCardViewModel.Status) {
+    convenience init(grandPrixCardStatus: Event.Status) {
 
         let status: Status
 

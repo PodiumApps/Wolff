@@ -1,6 +1,6 @@
 import Foundation
 
-protocol NewsCarouselComponentRepresentable {
+protocol StandingsCarouselViewModelRepresentable {
 
     var driverName: String { get }
     var constructorName: String { get }
@@ -8,7 +8,7 @@ protocol NewsCarouselComponentRepresentable {
     var points: Int { get }
 }
 
-final class NewsCarouselComponentViewModel: NewsCarouselComponentRepresentable {
+final class StandingsCarouselViewModel: StandingsCarouselViewModelRepresentable {
 
     let driverName: String
     let constructorName: String
