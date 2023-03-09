@@ -1,7 +1,15 @@
 import Foundation
 
 struct Event: Decodable {
-
+    
+    let id: String
+    let firstGrandPrix: Int
+    let lapRecord: String
+    let name: String
+    let lenght: Double
+    let raceDistance: Double
+    let round: Int
+    let sessions: [Session]
 }
 
 extension Event {

@@ -2,8 +2,7 @@ import Foundation
 
 struct Constructor: Decodable, Hashable, Identifiable {
 
-    let id: Int
-    let constructorId: String
+    let id: String
     let name: String
     let fullName: String
     let teamPrinciple: String

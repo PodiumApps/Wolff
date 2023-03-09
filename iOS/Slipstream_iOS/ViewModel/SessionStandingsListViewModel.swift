@@ -122,7 +122,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
             
                 guard
                     let self,
-                    let driver = drivers.lazy.first(where: { $0.driverLiveID == position.id }),
+                    let driver = drivers.lazy.first(where: { $0.id == position.id }),
                     let constructor = constructors.lazy.first(where: { $0.id == driver.constructorId })
                 else {
                     return nil
@@ -139,7 +139,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                     timeGap: position.time,
                     tyrePitCount: position.tyrePitCount,
                     currentTyre: position.tyre,
-                    constructorId: constructor.constructorId,
+                    constructorId: constructor.id,
                     isSelected: driver.id == self.selectedDriver?.driverID
                 )
         }

@@ -149,7 +149,7 @@ struct ResultCard_Previews: PreviewProvider {
         ResultCardView(
             viewModel:
                 ResultCardViewModel(
-                    sessionType: Session.mockSession.name,
+                    sessionType: Session.mock.name,
                     fastestLap: "1:20:507",
                     drivers: [
                         .init(driverTicker: Driver.mockHamilton.driverTicker, value: .first),
