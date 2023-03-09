@@ -23,6 +23,9 @@
 		4209686229537AF70075D75E /* Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF054427294F7D4E00A39FE3 /* Constructor.swift */; };
 		4209686B29537B0D0075D75E /* Circuit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF05443929507C1000A39FE3 /* Circuit.swift */; };
 		4209686E2954CDCC0075D75E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096822294C9B990075D75E /* NetworkManager.swift */; };
+		4245E81029B7E0DD00843B02 /* SeasonListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4245E80F29B7E0DD00843B02 /* SeasonListView.swift */; };
+		4245E81229B7E0EE00843B02 /* SeasonListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4245E81129B7E0EE00843B02 /* SeasonListViewModel.swift */; };
+		4245E81329B7E9E800843B02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42096837295378A20075D75E /* Assets.xcassets */; };
 		42521CA029B0EB9500000586 /* NetworkManagerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521C9F29B0EB9500000586 /* NetworkManagerRepresentable.swift */; };
 		42521CA129B0EB9500000586 /* NetworkManagerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521C9F29B0EB9500000586 /* NetworkManagerRepresentable.swift */; };
 		42521CA429B0ECBD00000586 /* LiveSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CA329B0ECBD00000586 /* LiveSessionService.swift */; };
@@ -100,7 +103,6 @@
 		CF277A23297313260048DE75 /* StandingsCarouselViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A22297313260048DE75 /* StandingsCarouselViewModel.swift */; };
 		CF5F07772996CC3D00E79996 /* ScheduleCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5F07762996CC3D00E79996 /* ScheduleCarouselView.swift */; };
 		CF78D01E2996C58600D45EDE /* ScheduleCarouselViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF78D01D2996C58600D45EDE /* ScheduleCarouselViewModel.swift */; };
-		CF8EB9D329A77AA700F38158 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8EB9D229A77AA700F38158 /* Event.swift */; };
 		CF8EB9D429A77AA700F38158 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8EB9D229A77AA700F38158 /* Event.swift */; };
 		CFB508C92953034300C46D81 /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB508C82953034300C46D81 /* EventCard.swift */; };
 		CFE23F4D2982EB9400412DB6 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE23F4C2982EB9400412DB6 /* Localization.swift */; };
@@ -145,6 +147,8 @@
 		4209683A295378A20075D75E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		42096840295378A30075D75E /* Slipstream_iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Slipstream_iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		42096844295378A30075D75E /* Slipstream_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slipstream_iOSTests.swift; sourceTree = "<group>"; };
+		4245E80F29B7E0DD00843B02 /* SeasonListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonListView.swift; sourceTree = "<group>"; };
+		4245E81129B7E0EE00843B02 /* SeasonListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonListViewModel.swift; sourceTree = "<group>"; };
 		42521C9F29B0EB9500000586 /* NetworkManagerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerRepresentable.swift; sourceTree = "<group>"; };
 		42521CA329B0ECBD00000586 /* LiveSessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveSessionService.swift; sourceTree = "<group>"; };
 		42521CA629B0F21700000586 /* DriverAndConstructorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverAndConstructorService.swift; sourceTree = "<group>"; };
@@ -381,6 +385,7 @@
 				CF233DE929ABF08100A8D1CD /* SessionStandingsListView.swift */,
 				42521CAF29B0FCD700000586 /* AppView.swift */,
 				42521CB729B1F37D00000586 /* LiveSessionDriverDetailsSheet.swift */,
+				4245E80F29B7E0DD00843B02 /* SeasonListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -399,6 +404,7 @@
 				CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */,
 				CFBD88D6296C1FB50068AB54 /* ResultCardViewModel.swift */,
 				42521D0E29B79A3400000586 /* AppViewModel.swift */,
+				4245E81129B7E0EE00843B02 /* SeasonListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -729,6 +735,7 @@
 				CFE23F4F2982EBF200412DB6 /* Localizable.strings in Resources */,
 				CFE23F552982EDBA00412DB6 /* swiftgen.yml in Resources */,
 				420967F8294C9A8F0075D75E /* Assets.xcassets in Resources */,
+				4245E81329B7E9E800843B02 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -820,7 +827,6 @@
 				CF05443A29507C1000A39FE3 /* Circuit.swift in Sources */,
 				42B21988295EEA9400515097 /* ConstructorMock.swift in Sources */,
 				42B2196E295D9EFB00515097 /* SessionResult.swift in Sources */,
-				CF8EB9D329A77AA700F38158 /* Event.swift in Sources */,
 				CF20D361297577D80038A860 /* ConstructorStyler.swift in Sources */,
 				42B2198F295EEAA500515097 /* SessionMock.swift in Sources */,
 				CFB508C92953034300C46D81 /* EventCard.swift in Sources */,
@@ -898,9 +904,11 @@
 				42B219A5295F450200515097 /* InfiniteScroller.swift in Sources */,
 				42521D0B29B799C700000586 /* LiveSessionDriverDetailsSheetViewModel.swift in Sources */,
 				42521CB329B1006000000586 /* ServiceLocator.swift in Sources */,
+				4245E81229B7E0EE00843B02 /* SeasonListViewModel.swift in Sources */,
 				42521CB029B0FCD700000586 /* AppView.swift in Sources */,
 				42521D0D29B799EC00000586 /* SessionStandingsListView.swift in Sources */,
 				4209686229537AF70075D75E /* Constructor.swift in Sources */,
+				4245E81029B7E0DD00843B02 /* SeasonListView.swift in Sources */,
 				42B21986295EEA7200515097 /* DriverMock.swift in Sources */,
 				CF20D372297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */,
 				42096834295378A10075D75E /* Slipstream_iOSApp.swift in Sources */,

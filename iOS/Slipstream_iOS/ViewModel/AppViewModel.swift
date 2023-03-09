@@ -34,11 +34,8 @@ class AppViewModel: AppViewModelRepresentable {
                 case .refreshing:
                     return .loading
                 case .refreshed(let drivers, let constructors):
-                    let liveSessionViewModel = SessionStandingsListViewModel(
-                        drivers: drivers,
-                        constructors: constructors
-                    )
-                    return .results(liveSessionViewModel)
+                    let seasonListViewModel = SeasonListViewModel(drivers: drivers, constructors: constructors)
+                    return .results(seasonListViewModel)
                     
                 }
             }
@@ -54,7 +51,7 @@ extension AppViewModel {
         
         case loading
         case error(String)
-        case results(SessionStandingsListViewModel)
+        case results(SeasonListViewModel)
     }
 }
 

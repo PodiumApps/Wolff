@@ -12,6 +12,13 @@ extension Image {
     static let resultsCardBackground: Self = Image("f1_grid")
     
     static let racingCar: Self = Image("racingCar")
+    
+    enum TabBar {
+        
+        static let settings: Image = .init("settings_tab_icon")
+        static let season: Image = .init("season_tab_icon")
+        static let standings: Image = .init("standings_tab_icon")
+    }
 
     // MARK: SFSymbols
 
