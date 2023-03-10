@@ -34,7 +34,7 @@ class AppViewModel: AppViewModelRepresentable {
                 case .refreshing:
                     return .loading
                 case .refreshed(let drivers, let constructors):
-                    let seasonListViewModel = SeasonListViewModel(drivers: drivers, constructors: constructors)
+                    let seasonListViewModel = SeasonListViewModel.make(drivers: drivers, constructors: constructors)
                     return .results(seasonListViewModel)
                     
                 }

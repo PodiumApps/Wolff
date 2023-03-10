@@ -14,7 +14,7 @@ extension Font {
     static let eventTitleFont: Self = .system(.title3, weight: .bold)
     static let eventRoundNumberFont: Self = .body.italic()
     static let liveSessionTitleFont: Self = .body.bold()
-    static let chevronRightFont: Self = .largeTitle
+    static let chevronRightFont: Self = .body
     static let liveTextFont: Self = .body.bold()
 
 }

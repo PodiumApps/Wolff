@@ -19,3 +19,24 @@ extension Date {
             .replacingOccurrences(of: "SHA512 digest:", with: "")
     }
 }
+
+// Get date components
+extension Date {
+    
+    func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
+        return calendar.dateComponents(Set(components), from: self)
+    }
+
+    func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
+        return calendar.component(component, from: self)
+    }
+}
+
+extension DateFormatter {
+    
+    static let standard: DateFormatter = {
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.sssssZ"
+        return dateFormatter
+    }()
+}

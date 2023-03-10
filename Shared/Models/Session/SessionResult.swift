@@ -1,6 +1,6 @@
 import Foundation
 
-struct SessionResult: Decodable, Identifiable, Hashable {
+struct SessionResult: Decodable, Identifiable {
     
     typealias ID = Identifier<SessionResult>
     

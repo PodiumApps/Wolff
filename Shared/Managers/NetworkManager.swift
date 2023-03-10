@@ -49,7 +49,9 @@ final class NetworkManager: NetworkManagerRepresentable {
         
         if httpResponse.statusCode == 200 {
             do {
-                return try JSONDecoder().decode(T.self, from: data)
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .formatted(.standard)
+                return try decoder.decode(T.self, from: data)
             } catch {
                 throw NetworkError.decodingError(error)
             }

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ScheduleCarouselComponentView<ViewModel: ScheduleCorouselViewModelRepresentable>: View {
+struct ScheduleCarouselComponentView<ViewModel: ScheduleCarouselViewModelRepresentable>: View {
 
     private let viewModel: ViewModel
     private var eventStatusBackgroundStyler: EventStatusBackgroundStyler

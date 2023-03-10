@@ -1,6 +1,6 @@
 import Foundation
 
-protocol ScheduleCorouselViewModelRepresentable {
+protocol ScheduleCarouselViewModelRepresentable {
 
     var round: Int { get }
     var title: String { get }
@@ -8,7 +8,7 @@ protocol ScheduleCorouselViewModelRepresentable {
     var eventStatus: Event.Status { get }
 }
 
-final class ScheduleCarouselViewModel: ScheduleCorouselViewModelRepresentable {
+final class ScheduleCarouselViewModel: ScheduleCarouselViewModelRepresentable {
 
     var round: Int
     var title: String

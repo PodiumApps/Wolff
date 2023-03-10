@@ -43,15 +43,15 @@ struct GrandPrixCardView<ViewModel: GrandPrixCardRepresentable>: View {
                 liveIndicatorComponent()
             }
         }
-        .frame(width: Constants.Card.width, height: Constants.Card.height)
-        .background(eventStatusBackgroundStyler.color)
-        .clipShape(
+        .frame(height: Constants.Card.height)
+        .background(
             RoundedRectangle(cornerRadius: Constants.Card.cornerRadius)
-        )
-        .shadow(
-            radius: Constants.Card.shadowRadius,
-            x: Constants.Card.horizontalShadow,
-            y: Constants.Card.verticalShadow
+                .fill(eventStatusBackgroundStyler.color)
+                .shadow(
+                    radius: Constants.Card.shadowRadius,
+                    x: Constants.Card.horizontalShadow,
+                    y: Constants.Card.verticalShadow
+                )
         )
     }
 
@@ -96,10 +96,10 @@ fileprivate enum Constants {
         static let height: CGFloat = 70
         static let cornerRadius: CGFloat = 10
         static let contentPadding: CGFloat = 12
-        static let horizontalShadow: CGFloat = 7
-        static let verticalShadow: CGFloat = 7
+        static let horizontalShadow: CGFloat = 3
+        static let verticalShadow: CGFloat = 3
         static let verticalSpacing: CGFloat = 7
-        static let shadowRadius: CGFloat = 7
+        static let shadowRadius: CGFloat = 3
         static let titleTextScalingFactor: CGFloat = 0.75
     }
 
