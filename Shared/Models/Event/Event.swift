@@ -123,7 +123,7 @@ extension Event {
         
         if event.sessions.filter({ $0.winnerID != nil }).count == event.sessions.count  {
             
-            let winnerID = event.sessions.first(where: { $0.name == .race })?.winnerID ?? ""
+            let winnerID = event.sessions.first(where: { $0.name == .race })?.winnerID ?? .init("")
             
             let driverTicker = drivers.first(where: { $0.id == winnerID })?.driverTicker
             

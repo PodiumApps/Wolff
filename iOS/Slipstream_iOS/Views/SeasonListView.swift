@@ -4,6 +4,8 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
     
     @ObservedObject private var viewModel: ViewModel
     
+    private typealias statedID = SeasonListViewModel.State.idValue
+    
     @State var xTranslate: CGFloat = -UIScreen.main.bounds.width / 2
     
     init(viewModel: ViewModel) {
@@ -24,9 +26,7 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
                                 .padding(.bottom, 8)
                                 .padding(.horizontal, 12)
                                 .redacted(
-                                    reason: viewModel.state.id == SeasonListViewModel.State.idValue.loading.rawValue
-                                    ? .placeholder
-                                    : []
+                                    reason: viewModel.state.id == statedID.loading.rawValue ? .placeholder : []
                                 )
                                 .onTapGesture {
                                     viewModel.action.send(.tap(index: index))

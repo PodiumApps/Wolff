@@ -43,7 +43,6 @@ class DriverAndConstructorService: DriverAndConstructorServiceRepresentable {
                     switch action {
                     case .fetchAll:
                         await self.fetchAll()
-                        break
                     }
                 }
             }

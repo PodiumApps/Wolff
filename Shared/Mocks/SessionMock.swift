@@ -12,81 +12,81 @@ extension Session {
     
     static let mockArray: [Self] = [
         .init(
-            id: 0,
+            id: .init("0"),
             laps: 52,
             date: Date(),
             name: .race,
-            winnerID: "lewis_hamilton"
+            winnerID: .init("lewis_hamilton")
         ),
         .init(
-            id: 1,
+            id: .init("1"),
             laps: 52,
             date: Date(),
             name: .race,
-            winnerID: "lewis_hamilton"
+            winnerID: .init("lewis_hamilton")
         ),
         .init(
-            id: 2,
+            id: .init("2"),
             laps: 52,
             date: Date(),
             name: .race,
-            winnerID: "lewis_hamilton"
+            winnerID: .init("lewis_hamilton")
         ),
         .init(
-            id: 3,
+            id: .init("3"),
             laps: 52,
             date: Date(),
             name: .race,
-            winnerID: "lewis_hamilton"
+            winnerID: .init("lewis_hamilton")
         ),
         .init(
-            id: 4,
+            id: .init("4"),
             laps: 52,
             date: Date(),
             name: .race,
-            winnerID: "lewis_hamilton"
+            winnerID: nil
         ),
         .init(
-            id: 5,
+            id: .init("5"),
             laps: 52,
             date: Date(),
             name: .race,
-            winnerID: "lewis_hamilton"
+            winnerID: nil
         ),
         .init(
-            id: 6,
+            id: .init("6"),
             laps: 52,
             date: Date(),
             name: .race,
-            winnerID: "lewis_hamilton"
+            winnerID: nil
         ),
         .init(
-            id: 7,
+            id: .init("7"),
             laps: 52,
             date: Date(),
             name: .race,
-            winnerID: "lewis_hamilton"
+            winnerID: nil
         ),
         .init(
-            id: 8,
+            id: .init("8"),
             laps: 52,
             date: Date(),
             name: .race,
-            winnerID: "lewis_hamilton"
+            winnerID: nil
         ),
         .init(
-            id: 9,
+            id: .init("9"),
             laps: 52,
             date: Date(),
             name: .race,
-            winnerID: "lewis_hamilton"
+            winnerID: nil
         ),
         .init(
-            id: 10,
+            id: .init("10"),
             laps: 52,
             date: Date(),
             name: .race,
-            winnerID: "lewis_hamilton"
+            winnerID: nil
         )
     ]
 }

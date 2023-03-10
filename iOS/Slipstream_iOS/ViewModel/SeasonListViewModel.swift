@@ -49,7 +49,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                 }
             }
             .store(in: &subscriptions)
-//
+
         Publishers
             .Zip(driverAndConstructorService.statePublisher, eventService.statePublisher)
             .receive(on: DispatchQueue.main)
@@ -90,7 +90,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
         
         let sessionStandingsVM: SessionStandingsListViewModel = .init(event: events[index])
         
-        self.route.append(.sessionStandings(sessionStandingsVM))
+        route.append(.sessionStandings(sessionStandingsVM))
     }
 }
 
@@ -101,7 +101,6 @@ extension SeasonListViewModel {
         static func == (lhs: SeasonListViewModel.State, rhs: SeasonListViewModel.State) -> Bool {
             lhs.id == rhs.id
         }
-        
         
         case error(String)
         case results([GrandPrixCardViewModel])
@@ -115,6 +114,7 @@ extension SeasonListViewModel {
         }
         
         var id: String {
+            
             switch self {
             case .loading: return idValue.loading.rawValue
             case .results: return idValue.results.rawValue

@@ -218,7 +218,6 @@ extension SessionStandingsListViewModel {
             lhs.id == rhs.id
         }
         
-        
         case header(String)
         case positionList([SessionDriverRowViewModel])
         
@@ -234,7 +233,5 @@ extension SessionStandingsListViewModel {
             case .positionList: return idValue.positionList.rawValue
             }
         }
-        
-        
     }
 }

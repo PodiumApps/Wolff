@@ -4,11 +4,11 @@ enum UserDefaultsKeys: String {
     
     case drivers = "drivers"
     case constructors = "constructors"
-    
-    
 }
+
 @propertyWrapper
 struct UserDefaultsWrapper<T: Codable> {
+    
     private let userDefaults: UserDefaults
     private let key: UserDefaultsKeys
     
@@ -30,6 +30,7 @@ struct UserDefaultsWrapper<T: Codable> {
         userDefaults: UserDefaults = UserDefaults.standard,
         key: UserDefaultsKeys
     ) {
+        
         self.userDefaults = userDefaults
         self.key = key
       }

@@ -61,7 +61,7 @@ extension SessionDriverRowViewModel {
             timeGap: "Leader",
             tyrePitCount: 2,
             currentTyre: .hard,
-            constructorId: "red_bull_rgbpt"
+            constructorId: .init("red_bull_rgbpt")
         ),
         .init(
             position: 1,
@@ -69,7 +69,7 @@ extension SessionDriverRowViewModel {
             timeGap: "Leader",
             tyrePitCount: 2,
             currentTyre: .medium,
-            constructorId: "red_bull_rgbpt"
+            constructorId: .init("red_bull_rgbpt")
         ),
         .init(
             position: 2,
@@ -77,7 +77,7 @@ extension SessionDriverRowViewModel {
             timeGap: "Leader",
             tyrePitCount: 2,
             currentTyre: .soft,
-            constructorId: "mercedes"
+            constructorId: .init("mercedes")
         ),
         .init(
             position: 2,
@@ -85,7 +85,7 @@ extension SessionDriverRowViewModel {
             timeGap: "Leader",
             tyrePitCount: 2,
             currentTyre: .soft,
-            constructorId: "mercedes"
+            constructorId: .init("mercedes")
         ),
         .init(
             position: 3,
@@ -93,7 +93,7 @@ extension SessionDriverRowViewModel {
             timeGap: "Leader",
             tyrePitCount: 2,
             currentTyre: .hard,
-            constructorId: "ferrari"
+            constructorId: .init("ferrari")
         ),
         .init(
             position: 3,
@@ -101,7 +101,7 @@ extension SessionDriverRowViewModel {
             timeGap: "Leader",
             tyrePitCount: 2,
             currentTyre: .soft,
-            constructorId: "ferrari"
+            constructorId: .init("ferrari")
         ),
         .init(
             position: 4,
@@ -109,7 +109,7 @@ extension SessionDriverRowViewModel {
             timeGap: "Leader",
             tyrePitCount: 2,
             currentTyre: .medium,
-            constructorId: "haas"
+            constructorId: .init("haas")
         ),
         .init(
             position: 4,
@@ -117,7 +117,7 @@ extension SessionDriverRowViewModel {
             timeGap: "Leader",
             tyrePitCount: 2,
             currentTyre: .soft,
-            constructorId: "haas"
+            constructorId: .init("haas")
         ),
         .init(
             position: 5,
@@ -125,7 +125,7 @@ extension SessionDriverRowViewModel {
             timeGap: "Leader",
             tyrePitCount: 2,
             currentTyre: .hard,
-            constructorId: "alphaTauri"
+            constructorId: .init("alphaTauri")
         ),
         .init(
             position: 5,
@@ -133,7 +133,7 @@ extension SessionDriverRowViewModel {
             timeGap: "Leader",
             tyrePitCount: 2,
             currentTyre: .soft,
-            constructorId: "alphaTauri"
+            constructorId: .init("alphaTauri")
         )
     ]
 }
