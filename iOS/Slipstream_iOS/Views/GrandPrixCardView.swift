@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct GrandPrixCardView<ViewModel: GrandPrixCardRepresentable>: View {
+struct GrandPrixCardView<ViewModel: GrandPrixCardViewModelRepresentable>: View {
 
     @State private var liveCircleAnimationAmount = Constants.LiveComponent.circleAnimationAmount
 
@@ -46,7 +46,7 @@ struct GrandPrixCardView<ViewModel: GrandPrixCardRepresentable>: View {
         .frame(height: Constants.Card.height)
         .background(
             RoundedRectangle(cornerRadius: Constants.Card.cornerRadius)
-                .fill(eventStatusBackgroundStyler.color)
+                .fill(eventStatusBackgroundStyler.color.gradient)
                 .shadow(
                     radius: Constants.Card.shadowRadius,
                     x: Constants.Card.horizontalShadow,

@@ -78,6 +78,12 @@
 		42B219A5295F450200515097 /* InfiniteScroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B219A3295F450200515097 /* InfiniteScroller.swift */; };
 		42BCAD6229BBD7F10089B46A /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD6129BBD7F10089B46A /* Identifier.swift */; };
 		42BCAD6329BBD7F10089B46A /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD6129BBD7F10089B46A /* Identifier.swift */; };
+		42BCAD5529BB4B360089B46A /* EventMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5429BB4B360089B46A /* EventMock.swift */; };
+		42BCAD5629BB4B360089B46A /* EventMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5429BB4B360089B46A /* EventMock.swift */; };
+		42BCAD5929BB742B0089B46A /* UserDefaultsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5829BB742B0089B46A /* UserDefaultsWrapper.swift */; };
+		42BCAD5A29BB742B0089B46A /* UserDefaultsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5829BB742B0089B46A /* UserDefaultsWrapper.swift */; };
+		42BCAD5C29BB7B000089B46A /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5B29BB7B000089B46A /* EventService.swift */; };
+		42BCAD5D29BB7B000089B46A /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5B29BB7B000089B46A /* EventService.swift */; };
 		CF054422294CECCD00A39FE3 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF054421294CECCD00A39FE3 /* Driver.swift */; };
 		CF054428294F7D4E00A39FE3 /* Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF054427294F7D4E00A39FE3 /* Constructor.swift */; };
 		CF05443A29507C1000A39FE3 /* Circuit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF05443929507C1000A39FE3 /* Circuit.swift */; };
@@ -180,6 +186,9 @@
 		42B2199F295F426200515097 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		42B219A3295F450200515097 /* InfiniteScroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteScroller.swift; sourceTree = "<group>"; };
 		42BCAD6129BBD7F10089B46A /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
+		42BCAD5429BB4B360089B46A /* EventMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMock.swift; sourceTree = "<group>"; };
+		42BCAD5829BB742B0089B46A /* UserDefaultsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsWrapper.swift; sourceTree = "<group>"; };
+		42BCAD5B29BB7B000089B46A /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		CF054421294CECCD00A39FE3 /* Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
 		CF054427294F7D4E00A39FE3 /* Constructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constructor.swift; sourceTree = "<group>"; };
 		CF05443929507C1000A39FE3 /* Circuit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circuit.swift; sourceTree = "<group>"; };
@@ -332,6 +341,7 @@
 		4209685B29537AB60075D75E /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				42BCAD5729BB74130089B46A /* PropertyWrappers */,
 				42521CA229B0ECAC00000586 /* Services */,
 				CFE23F442982E89D00412DB6 /* Resources */,
 				42B2199E295F425500515097 /* Styles */,
@@ -367,6 +377,7 @@
 				42521CA329B0ECBD00000586 /* LiveSessionService.swift */,
 				42521CA629B0F21700000586 /* DriverAndConstructorService.swift */,
 				42521CB129B1006000000586 /* ServiceLocator.swift */,
+				42BCAD5B29BB7B000089B46A /* EventService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -446,6 +457,7 @@
 				42B21985295EEA7200515097 /* DriverMock.swift */,
 				42B21987295EEA9400515097 /* ConstructorMock.swift */,
 				42B21994295EEAC600515097 /* StandingsMock.swift */,
+				42BCAD5429BB4B360089B46A /* EventMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -468,6 +480,14 @@
 				42B219A3295F450200515097 /* InfiniteScroller.swift */,
 			);
 			path = ViewBuilders;
+			sourceTree = "<group>";
+		};
+		42BCAD5729BB74130089B46A /* PropertyWrappers */ = {
+			isa = PBXGroup;
+			children = (
+				42BCAD5829BB742B0089B46A /* UserDefaultsWrapper.swift */,
+			);
+			path = PropertyWrappers;
 			sourceTree = "<group>";
 		};
 		CF05441F294CEC9600A39FE3 /* Controllers */ = {
@@ -826,12 +846,15 @@
 				42B21970295DA4D400515097 /* Session.swift in Sources */,
 				CF05443A29507C1000A39FE3 /* Circuit.swift in Sources */,
 				42B21988295EEA9400515097 /* ConstructorMock.swift in Sources */,
+				42BCAD5529BB4B360089B46A /* EventMock.swift in Sources */,
 				42B2196E295D9EFB00515097 /* SessionResult.swift in Sources */,
 				CF20D361297577D80038A860 /* ConstructorStyler.swift in Sources */,
 				42B2198F295EEAA500515097 /* SessionMock.swift in Sources */,
 				CFB508C92953034300C46D81 /* EventCard.swift in Sources */,
+				42BCAD5929BB742B0089B46A /* UserDefaultsWrapper.swift in Sources */,
 				42B2199A295F3A2300515097 /* DoubleExtension.swift in Sources */,
 				42B219A0295F426200515097 /* Images.swift in Sources */,
+				42BCAD5C29BB7B000089B46A /* EventService.swift in Sources */,
 				CF054428294F7D4E00A39FE3 /* Constructor.swift in Sources */,
 				42521CAA29B0F9FF00000586 /* Global.swift in Sources */,
 				42521CB529B1033600000586 /* LoggerExtension.swift in Sources */,
@@ -865,6 +888,7 @@
 				42521D1F29B79DED00000586 /* ResultCardViewModel.swift in Sources */,
 				42B2199C295F3A2300515097 /* DoubleExtension.swift in Sources */,
 				42521CBF29B2378300000586 /* SessionDriverStyler.swift in Sources */,
+				42BCAD5A29BB742B0089B46A /* UserDefaultsWrapper.swift in Sources */,
 				CF277A23297313260048DE75 /* StandingsCarouselViewModel.swift in Sources */,
 				4209686E2954CDCC0075D75E /* NetworkManager.swift in Sources */,
 				42521D0929B799C700000586 /* SessionDriverRowViewModel.swift in Sources */,
@@ -897,6 +921,7 @@
 				42521CB629B1033600000586 /* LoggerExtension.swift in Sources */,
 				CF20D36629760C300038A860 /* Colors.swift in Sources */,
 				42521CA529B0ECBD00000586 /* LiveSessionService.swift in Sources */,
+				42BCAD5D29BB7B000089B46A /* EventService.swift in Sources */,
 				CF233DE029A8DB7C00A8D1CD /* GrandPrixSchedulePickerView.swift in Sources */,
 				42B219A1295F426200515097 /* Images.swift in Sources */,
 				42521D1D29B79D2100000586 /* SessionStandingsListViewModel.swift in Sources */,
@@ -916,6 +941,7 @@
 				42521D0F29B79A3400000586 /* AppViewModel.swift in Sources */,
 				CF20D36C297700160038A860 /* GrandPrixCardView.swift in Sources */,
 				4209686B29537B0D0075D75E /* Circuit.swift in Sources */,
+				42BCAD5629BB4B360089B46A /* EventMock.swift in Sources */,
 				CF5F07772996CC3D00E79996 /* ScheduleCarouselView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

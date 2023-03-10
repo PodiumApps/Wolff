@@ -1,28 +1,36 @@
+import Combine
 import Foundation
 
 protocol SeasonListViewModelRepresentable: ObservableObject {
     
     var state: SeasonListViewModel.State { get }
+    var route: [SeasonListViewModel.Route] { get set }
+    var action: PassthroughSubject<SeasonListViewModel.Action, Never> { get }
 }
 
 class SeasonListViewModel: SeasonListViewModelRepresentable {
     
-    private let drivers: [Driver]
-    private let constructors: [Constructor]
-    private let networkManager: NetworkManagerRepresentable
+    private var drivers: [Driver]
+    private var events: [Event]
+    private let eventService: EventServiceRepresentable
+    private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
+    private var subscriptions = Set<AnyCancellable>()
     
     @Published var state: State
+    @Published var route: [Route]
+    var action = PassthroughSubject<Action, Never>()
     
     init(
-        drivers: [Driver],
-        constructors: [Constructor],
-        networkManager: NetworkManagerRepresentable
+        driverAndConstructorService: DriverAndConstructorServiceRepresentable,
+        eventService: EventServiceRepresentable
     ) {
         
-        self.drivers = drivers
-        self.constructors = constructors
-        self.networkManager = networkManager
-        self.state = .loading
+        self.drivers = []
+        self.events = []
+        self.eventService = eventService
+        self.driverAndConstructorService = driverAndConstructorService
+        self.state = .loading([])
+        self.route = []
         
         load()
     }
@@ -30,27 +38,111 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
     // MARK: - Private
     private func load() {
         
-        Task { @MainActor [weak self] in
-            
-            guard let self else { return }
-            
-            do {
-                let events = try await networkManager.load(Event.getEvents())
-                
-                let schedulesViewModel: [GrandPrixCardViewModel] = events.map { event in
-                    
-                    GrandPrixCardViewModel(
-                        round: event.round,
-                        title: event.name,
-                        grandPrixDate: "01-10",
-                        eventStatus: event.status
-                    )
+        eventService.action.send(.fetchAll)
+        
+        action
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                switch action {
+                case .tap(let index):
+                    self?.tapRow(at: index)
                 }
+            }
+            .store(in: &subscriptions)
+//
+        Publishers
+            .Zip(driverAndConstructorService.statePublisher, eventService.statePublisher)
+            .receive(on: DispatchQueue.main)
+            .compactMap { [weak self] driverAndConstructorService, eventService in
+
+                guard let self else { return nil }
                 
-                self.state = .results(schedulesViewModel)
-            } catch {
-                print(error)
-                self.state = .error
+                switch (driverAndConstructorService, eventService) {
+                case (.error(let error), _),
+                     (_, .error(let error)):
+                    return .error(error.localizedDescription)
+                case (.refreshed(let drivers, _), .refreshed(let events, let nextEvent)):
+                    self.drivers = drivers
+                    self.events = events
+                    return .results(self.buildGranPrixCardViewModel(events: events, nextEvent: nextEvent))
+                default:
+                    return .loading(self.buildGranPrixCardViewModel(events: Event.mockArray, nextEvent: .mock))
+                }
+            }
+            .assign(to: &$state)
+    }
+    
+    private func buildGranPrixCardViewModel(events: [Event], nextEvent: Event) -> [GrandPrixCardViewModel] {
+        
+        events.compactMap { [weak self] event in
+            
+            guard let self else { return nil }
+            
+            return GrandPrixCardViewModel(
+                round: event.round,
+                title: event.name,
+                eventStatus: Event.getEventStatus(for: event, comparing: nextEvent, drivers: self.drivers)
+            )
+        }
+    }
+    
+    private func tapRow(at index: Int) {
+        
+        let sessionStandingsVM: SessionStandingsListViewModel = .init(event: events[index])
+        
+        self.route.append(.sessionStandings(sessionStandingsVM))
+    }
+}
+
+extension SeasonListViewModel {
+    
+    enum State: Equatable {
+        
+        static func == (lhs: SeasonListViewModel.State, rhs: SeasonListViewModel.State) -> Bool {
+            lhs.id == rhs.id
+        }
+        
+        
+        case error(String)
+        case results([GrandPrixCardViewModel])
+        case loading([GrandPrixCardViewModel])
+        
+        enum idValue: String {
+            
+            case error
+            case loading
+            case results
+        }
+        
+        var id: String {
+            switch self {
+            case .loading: return idValue.loading.rawValue
+            case .results: return idValue.results.rawValue
+            case .error: return idValue.error.rawValue
+            }
+        }
+    }
+    
+    enum Action {
+        
+        case tap(index: Int)
+    }
+    
+    enum Route: Hashable {
+        
+        static func == (lhs: SeasonListViewModel.Route, rhs: SeasonListViewModel.Route) -> Bool {
+            lhs.id == rhs.id
+        }
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
+        }
+        
+        case sessionStandings(SessionStandingsListViewModel)
+        
+        var id: String {
+            switch self {
+            case .sessionStandings: return "sessionStandings"
             }
         }
     }
@@ -58,18 +150,11 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
 
 extension SeasonListViewModel {
     
-    enum State {
+    static func make() -> SeasonListViewModel {
         
-        case error
-        case results([GrandPrixCardViewModel])
-        case loading
-    }
-}
-
-extension SeasonListViewModel {
-    
-    static func make(drivers: [Driver], constructors: [Constructor]) -> SeasonListViewModel {
-        
-        .init(drivers: drivers, constructors: constructors, networkManager: NetworkManager.shared)
+        .init(
+            driverAndConstructorService: ServiceLocator.shared.driverAndConstructorService,
+            eventService: ServiceLocator.shared.eventService
+        )
     }
 }

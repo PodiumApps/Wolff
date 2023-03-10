@@ -1,6 +1,6 @@
 import Foundation
 
-struct Driver: Decodable, Identifiable, Hashable {
+struct Driver: Codable, Identifiable, Hashable {
     
     typealias ID = Identifier<Driver>
 

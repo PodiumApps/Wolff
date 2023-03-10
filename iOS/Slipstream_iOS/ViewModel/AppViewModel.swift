@@ -23,24 +23,8 @@ class AppViewModel: AppViewModelRepresentable {
     private func load() {
        
         driverAndConstructorService.action.send(.fetchAll)
-        
-        driverAndConstructorService.statePublisher
-            .receive(on: DispatchQueue.main)
-            .map { serviceStatus in
-                
-                switch serviceStatus {
-                case .error(let error):
-                    return .error(error.localizedDescription)
-                case .refreshing:
-                    return .loading
-                case .refreshed(let drivers, let constructors):
-                    let seasonListViewModel = SeasonListViewModel.make(drivers: drivers, constructors: constructors)
-                    return .results(seasonListViewModel)
-                    
-                }
-            }
-            .assign(to: &$state)
-        
+        let seasonListViewModel = SeasonListViewModel.make()
+        state = .results(seasonListViewModel)
     }
     
 }

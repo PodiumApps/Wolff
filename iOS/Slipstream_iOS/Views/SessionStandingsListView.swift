@@ -19,26 +19,36 @@ struct SessionStandingsListView<ViewModel: SessionStandingsListViewModelRepresen
                 Button(Localization.SessionDriverList.Error.cta) { viewModel.action.send(.refresh) }
             case .loading:
                 ProgressView()
-            case .results(let rowsViewModel):
-                ScrollView(showsIndicators: false) {
-                    ForEach(0 ..< rowsViewModel.count, id: \.self) { index in
-                        SessionDriverRowView(viewModel: rowsViewModel[index]) {
-                            viewModel.action.send(.tap(index))
+            case .results(let cells):
+                
+                VStack {
+                    ForEach(cells) { cell in
+                        switch cell {
+                        case .header(let title):
+                            Text(title)
+                        case .positionList(let rowsViewModel):
+                            ScrollView(showsIndicators: false) {
+                                ForEach(0 ..< rowsViewModel.count, id: \.self) { index in
+                                    SessionDriverRowView(viewModel: rowsViewModel[index]) {
+                                        viewModel.action.send(.tap(index))
+                                    }
+                                    .padding(.bottom, index == rowsViewModel.count - 1 ? Constants.RowView.paddingBottom : 0)
+                                }
+                            }
+                            .padding(.top, 150) // TODO: - Remove when we finish the top view
+                            .padding(.horizontal, Constants.ScrollView.paddingHorizontal)
+                            .overlay (
+                                VStack {
+                                    if let selectedDriverViewModel = viewModel.selectedDriver {
+                                        Spacer()
+                                        LiveSessionDriverDetailsSheet(viewModel: selectedDriverViewModel)
+                                    }
+                                }
+                                    .ignoresSafeArea(.all)
+                            )
                         }
-                        .padding(.bottom, index == rowsViewModel.count - 1 ? Constants.RowView.paddingBottom : 0)
                     }
                 }
-                .padding(.top, 150) // TODO: - Remove when we finish the top view
-                .padding(.horizontal, Constants.ScrollView.paddingHorizontal)
-                .overlay (
-                    VStack {
-                        if let selectedDriverViewModel = viewModel.selectedDriver {
-                            Spacer()
-                            LiveSessionDriverDetailsSheet(viewModel: selectedDriverViewModel)
-                        }
-                    }
-                    .ignoresSafeArea(.all)
-                )
             }
         }
         .onAppear {
@@ -47,6 +57,7 @@ struct SessionStandingsListView<ViewModel: SessionStandingsListViewModelRepresen
         .onDisappear {
             viewModel.action.send(.onDisappear)
         }
+        .toolbar(.hidden, for: .tabBar)
     }
 }
 
@@ -66,10 +77,7 @@ fileprivate enum Constants {
 struct SessionStandingsListView_Previews: PreviewProvider {
     static var previews: some View {
         SessionStandingsListView(
-            viewModel: SessionStandingsListViewModel(
-                drivers: [.mockAlonso, .mockHamilton, .mockVertasppen],
-                constructors: [.mockAlfa, .mockFerrari, .mockMercedes]
-            )
+            viewModel: SessionStandingsListViewModel(event: .mock)
         )
     }
 }
