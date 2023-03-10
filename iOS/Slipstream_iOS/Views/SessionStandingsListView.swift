@@ -3,6 +3,8 @@ import SwiftUI
 struct SessionStandingsListView<ViewModel: SessionStandingsListViewModelRepresentable>: View {
 
     @ObservedObject private var viewModel: ViewModel
+    
+    private typealias stateID = SessionStandingsListViewModel.State.idValue
 
     init(viewModel: ViewModel) {
         
@@ -17,9 +19,7 @@ struct SessionStandingsListView<ViewModel: SessionStandingsListViewModelRepresen
             case .error(let error):
                 Text(Localization.SessionDriverList.Error.text + " - \(error)")
                 Button(Localization.SessionDriverList.Error.cta) { viewModel.action.send(.refresh) }
-            case .loading:
-                ProgressView()
-            case .results(let cells):
+            case .results(let cells), .loading(let cells):
                 
                 VStack {
                     ForEach(cells) { cell in
@@ -39,16 +39,15 @@ struct SessionStandingsListView<ViewModel: SessionStandingsListViewModelRepresen
                             .padding(.horizontal, Constants.ScrollView.paddingHorizontal)
                             .overlay (
                                 VStack {
-                                    if let selectedDriverViewModel = viewModel.selectedDriver {
-                                        Spacer()
-                                        LiveSessionDriverDetailsSheet(viewModel: selectedDriverViewModel)
-                                    }
+                                    Spacer()
+                                    LiveSessionDriverDetailsSheet(viewModel: viewModel.selectedDriver)
                                 }
                                     .ignoresSafeArea(.all)
                             )
                         }
                     }
                 }
+                .redacted(reason: viewModel.state.id == stateID.loading.rawValue ? .placeholder : [])
             }
         }
         .onAppear {

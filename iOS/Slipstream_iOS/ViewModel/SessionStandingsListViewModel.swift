@@ -6,13 +6,13 @@ protocol SessionStandingsListViewModelRepresentable: ObservableObject {
 
     var state: SessionStandingsListViewModel.State { get }
     var action: PassthroughSubject<SessionStandingsListViewModel.Action, Never> { get }
-    var selectedDriver: LiveSessionDriverDetailsSheetViewModel? { get }
+    var selectedDriver: LiveSessionDriverDetailsSheetViewModel { get }
 }
 
 final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresentable {
 
-    @Published var state: SessionStandingsListViewModel.State = .loading
-    @Published var selectedDriver: LiveSessionDriverDetailsSheetViewModel? = nil
+    @Published var state: State
+    @Published var selectedDriver: LiveSessionDriverDetailsSheetViewModel
     var action = PassthroughSubject<Action, Never>()
     
     private var drivers: [Driver]
@@ -37,6 +37,8 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
         self.driverAndConstructorService = driverAndConstructorService
         self.cells = []
         self.event = event
+        self.selectedDriver = .mock
+        self.state = .loading([.header("Skeleton View"), .positionList(SessionDriverRowViewModel.mockArray)])
         
         setupBindings()
     }
@@ -73,7 +75,9 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                     self.drivers = drivers
                     self.constructors = constructors
                     self.liveSessionService.action.send(.fetchPositions)
-                default:
+                case .error(let error):
+                    self.state = .error(error.localizedDescription)
+                case .refreshing:
                     break
                 }
             }
@@ -93,7 +97,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                 case .refreshed(let livePositions):
                     return self.buildRowsViewModel(for: livePositions)
                 default:
-                    return .loading
+                    return .loading([.header("Skeleton View"), .positionList(SessionDriverRowViewModel.mockArray)])
                 }
             }
             .assign(to: &$state)
@@ -141,7 +145,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
         
         let standings: [SessionDriverRowViewModel] = livePositions
             .enumerated()
-            .compactMap { [weak self] index, position in
+            .compactMap { [weak self] index, position -> SessionDriverRowViewModel? in
             
                 guard
                     let self,
@@ -151,7 +155,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                     return nil
                 }
                 
-                if selectedDriver == nil, index == 0 {
+                if selectedDriver.driverID == Driver.mockVertasppen.id, index == 0 {
                     selectedDriver = .init(driver: driver, constructor: constructor)
                 }
                 
@@ -162,7 +166,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                     tyrePitCount: position.tyrePitCount,
                     currentTyre: position.tyre,
                     constructorId: constructor.id,
-                    isSelected: driver.id == self.selectedDriver?.driverID
+                    isSelected: driver.id == self.selectedDriver.driverID
                 )
         }
         
@@ -182,11 +186,30 @@ extension SessionStandingsListViewModel {
         case onDisappear
     }
     
-    enum State {
+    enum State: Equatable {
         
-        case loading
+        static func == (lhs: SessionStandingsListViewModel.State, rhs: SessionStandingsListViewModel.State) -> Bool {
+            lhs.id == rhs.id
+        }
+        
+        case loading([Cell])
         case results([Cell])
         case error(String)
+        
+        enum idValue: String {
+            
+            case loading = "loading"
+            case results = "results"
+            case error = "error"
+        }
+        
+        var id: String {
+            switch self {
+            case .loading: return idValue.loading.rawValue
+            case .results: return idValue.results.rawValue
+            case .error: return idValue.error.rawValue
+            }
+        }
     }
     
     enum Cell: Equatable, Identifiable {

@@ -51,3 +51,89 @@ final class SessionDriverRowViewModel: SessionDriverRowViewModelRepresentable {
         isSelected = !isSelected
     }
 }
+
+extension SessionDriverRowViewModel {
+    
+    static var mockArray: [SessionDriverRowViewModel] = [
+        .init(
+            position: 1,
+            driverTicker: "VER",
+            timeGap: "Leader",
+            tyrePitCount: 2,
+            currentTyre: .hard,
+            constructorId: "red_bull_rgbpt"
+        ),
+        .init(
+            position: 1,
+            driverTicker: "VER",
+            timeGap: "Leader",
+            tyrePitCount: 2,
+            currentTyre: .medium,
+            constructorId: "red_bull_rgbpt"
+        ),
+        .init(
+            position: 2,
+            driverTicker: "HAM",
+            timeGap: "Leader",
+            tyrePitCount: 2,
+            currentTyre: .soft,
+            constructorId: "mercedes"
+        ),
+        .init(
+            position: 2,
+            driverTicker: "HAM",
+            timeGap: "Leader",
+            tyrePitCount: 2,
+            currentTyre: .soft,
+            constructorId: "mercedes"
+        ),
+        .init(
+            position: 3,
+            driverTicker: "LEC",
+            timeGap: "Leader",
+            tyrePitCount: 2,
+            currentTyre: .hard,
+            constructorId: "ferrari"
+        ),
+        .init(
+            position: 3,
+            driverTicker: "LEC",
+            timeGap: "Leader",
+            tyrePitCount: 2,
+            currentTyre: .soft,
+            constructorId: "ferrari"
+        ),
+        .init(
+            position: 4,
+            driverTicker: "PER",
+            timeGap: "Leader",
+            tyrePitCount: 2,
+            currentTyre: .medium,
+            constructorId: "haas"
+        ),
+        .init(
+            position: 4,
+            driverTicker: "PER",
+            timeGap: "Leader",
+            tyrePitCount: 2,
+            currentTyre: .soft,
+            constructorId: "haas"
+        ),
+        .init(
+            position: 5,
+            driverTicker: "VER",
+            timeGap: "Leader",
+            tyrePitCount: 2,
+            currentTyre: .hard,
+            constructorId: "alphaTauri"
+        ),
+        .init(
+            position: 5,
+            driverTicker: "VER",
+            timeGap: "Leader",
+            tyrePitCount: 2,
+            currentTyre: .soft,
+            constructorId: "alphaTauri"
+        )
+    ]
+}
