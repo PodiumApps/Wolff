@@ -44,49 +44,49 @@ extension Session {
             laps: 52,
             date: Date(),
             name: .race,
-            winnerID: nil
+            winnerID: .init("lewis_hamilton")
         ),
         .init(
             id: .init("5"),
             laps: 52,
             date: Date(),
             name: .race,
-            winnerID: nil
+            winnerID: .init("lewis_hamilton")
         ),
         .init(
             id: .init("6"),
             laps: 52,
             date: Date(),
             name: .race,
-            winnerID: nil
+            winnerID: .init("lewis_hamilton")
         ),
         .init(
             id: .init("7"),
             laps: 52,
             date: Date(),
             name: .race,
-            winnerID: nil
+            winnerID: .init("lewis_hamilton")
         ),
         .init(
             id: .init("8"),
             laps: 52,
             date: Date(),
             name: .race,
-            winnerID: nil
+            winnerID: .init("lewis_hamilton")
         ),
         .init(
             id: .init("9"),
             laps: 52,
             date: Date(),
             name: .race,
-            winnerID: nil
+            winnerID: .init("lewis_hamilton")
         ),
         .init(
             id: .init("10"),
             laps: 52,
             date: Date(),
             name: .race,
-            winnerID: nil
+            winnerID: .init("lewis_hamilton")
         )
     ]
 }

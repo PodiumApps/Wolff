@@ -53,6 +53,7 @@ struct GrandPrixCardView<ViewModel: GrandPrixCardViewModelRepresentable>: View {
                     y: Constants.Card.verticalShadow
                 )
         )
+        .clipShape(RoundedRectangle(cornerRadius: Constants.Card.cornerRadius))
     }
 
     func liveIndicatorComponent() -> some View {
