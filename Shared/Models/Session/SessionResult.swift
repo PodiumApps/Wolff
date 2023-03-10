@@ -2,7 +2,7 @@ import Foundation
 
 struct SessionResult: Decodable, Identifiable, Hashable {
     
-    typealias ID = String
+    typealias ID = Identifier<SessionResult>
     
     let id: ID
     let driver: Driver

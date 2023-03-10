@@ -5,7 +5,7 @@ extension SessionResult {
     
     static let mock: [Self] = [
         .init(
-            id: UUID().uuidString,
+            id: .init(UUID().uuidString),
             driver: .mockVertasppen,
             points: 40,
             tirePitCount: 3,
@@ -17,7 +17,7 @@ extension SessionResult {
             lap: 23
         ),
         .init(
-            id: UUID().uuidString,
+            id: .init(UUID().uuidString),
             driver: .mockAlonso,
             points: 20,
             tirePitCount: 3,
@@ -29,7 +29,7 @@ extension SessionResult {
             lap: 23
         ),
         .init(
-            id: UUID().uuidString,
+            id: .init(UUID().uuidString),
             driver: .mockHamilton,
             points: 40,
             tirePitCount: 3,
@@ -41,7 +41,7 @@ extension SessionResult {
             lap: 23
         ),
         .init(
-            id: UUID().uuidString,
+            id: .init(UUID().uuidString),
             driver: .mockLeclerc,
             points: 40,
             tirePitCount: 6,

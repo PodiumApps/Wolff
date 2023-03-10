@@ -2,7 +2,7 @@ import Foundation
 
 struct Driver: Decodable, Identifiable, Hashable {
     
-    typealias ID = String
+    typealias ID = Identifier<Driver>
 
     let id: ID
     let carNumber: Int
@@ -11,7 +11,7 @@ struct Driver: Decodable, Identifiable, Hashable {
     let driverTicker: String
     let position: Int
     let points: Int
-    let constructorId: String
+    let constructorId: Constructor.ID
     
     var fullName: String { firstName + " " + lastName }
 }

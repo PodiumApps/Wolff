@@ -2,7 +2,7 @@ import Foundation
 
 struct Constructor: Decodable, Hashable, Identifiable {
     
-    typealias ID = String
+    typealias ID = Identifier<Constructor>
 
     let id: ID
     let name: String

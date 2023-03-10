@@ -3,7 +3,7 @@ import Foundation
 extension Constructor {
     
     static let mockFerrari: Self = .init(
-        id: "ferrari",
+        id: .init("ferrari"),
         name: "Ferrari",
         fullName: "Oi",
         teamPrinciple: "tEamy",
@@ -12,7 +12,7 @@ extension Constructor {
     )
     
     static let mockAlfa: Self = .init(
-        id: "alfa",
+        id: .init("alfa"),
         name: "Alfa",
         fullName: "Oi",
         teamPrinciple: "tEamy",
@@ -21,7 +21,7 @@ extension Constructor {
     )
     
     static let mockMercedes: Self = .init(
-        id: "mercedes",
+        id: .init("mercedes"),
         name: "Mercedes",
         fullName: "Oi",
         teamPrinciple: "tEamy",

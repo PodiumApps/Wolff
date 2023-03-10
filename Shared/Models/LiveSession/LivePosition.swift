@@ -2,10 +2,8 @@ import Foundation
 import OSLog
 
 struct LivePosition: Decodable, Identifiable {
-    
-    typealias ID = String
 
-    let id: ID
+    let id: Identifier<Driver>
     let position: Int
     let time: String?
     let tyre: Tyre
