@@ -2,7 +2,7 @@ import Foundation
 
 struct Session: Decodable, Identifiable, Hashable {
     
-    typealias ID = String
+    typealias ID = Int
     
     let id: ID
     let laps: Int
