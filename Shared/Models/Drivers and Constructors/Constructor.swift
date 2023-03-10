@@ -1,8 +1,10 @@
 import Foundation
 
 struct Constructor: Decodable, Hashable, Identifiable {
+    
+    typealias ID = String
 
-    let id: String
+    let id: ID
     let name: String
     let fullName: String
     let teamPrinciple: String

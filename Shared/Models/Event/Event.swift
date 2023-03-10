@@ -2,11 +2,13 @@ import Foundation
 
 struct Event: Decodable {
     
-    let id: String
+    typealias ID = String
+    
+    let id: ID
     let firstGrandPrix: Int
     let lapRecord: String
     let name: String
-    let lenght: Double
+    let length: Double
     let raceDistance: Double
     let round: Int
     let sessions: [Session]

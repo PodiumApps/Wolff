@@ -2,14 +2,14 @@ import SwiftUI
 
 protocol ConstructorStylerRepresentable {
 
-    var constructor: ConstructorStyler.Constructor { get }
+    var constructor: ConstructorStyler.Details { get }
 }
 
 class ConstructorStyler: ConstructorStylerRepresentable {
 
-    let constructor: Constructor
+    let constructor: Details
 
-    enum Constructor: String, CaseIterable {
+    enum Details: String, CaseIterable {
 
         case alfa_romeo_ferrari
         case alphatauri_rbpt
@@ -40,8 +40,8 @@ class ConstructorStyler: ConstructorStylerRepresentable {
         }
     }
 
-    init(constructor: String) {
-        self.constructor = Constructor.allCases.first(where: { $0.rawValue == constructor }) ?? .noTeam
+    init(constructor: Constructor.ID) {
+        self.constructor = Details.allCases.first(where: { $0.rawValue == constructor }) ?? .noTeam
     }
 
 }

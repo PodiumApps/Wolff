@@ -1,8 +1,10 @@
 import Foundation
 
 struct Driver: Decodable, Identifiable, Hashable {
+    
+    typealias ID = String
 
-    let id: String
+    let id: ID
     let carNumber: Int
     let firstName: String
     let lastName: String

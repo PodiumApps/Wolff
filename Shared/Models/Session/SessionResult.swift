@@ -2,7 +2,9 @@ import Foundation
 
 struct SessionResult: Decodable, Identifiable, Hashable {
     
-    let id: String
+    typealias ID = String
+    
+    let id: ID
     let driver: Driver
     let points: Int?
     let tirePitCount: Int
