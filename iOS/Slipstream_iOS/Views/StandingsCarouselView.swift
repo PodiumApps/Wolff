@@ -5,7 +5,7 @@ struct StandingsCarouselView<ViewModel: StandingsCarouselViewModel>: View {
     private let viewModel: ViewModel
     private let constructorStyler: ConstructorStylerRepresentable
 
-    init(viewModel: ViewModel, constructorID: String) {
+    init(viewModel: ViewModel, constructorID: Constructor.ID) {
         
         self.viewModel = viewModel
         self.constructorStyler = ConstructorStyler(constructor: constructorID)
@@ -51,7 +51,7 @@ struct NewsCarouselComponentView_Previews: PreviewProvider {
                 position: 1,
                 points: 100
             ),
-            constructorID: "mercedes"
+            constructorID: .init("mercedes")
         )
     }
 }

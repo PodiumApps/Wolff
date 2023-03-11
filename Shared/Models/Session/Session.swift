@@ -2,23 +2,22 @@ import Foundation
 
 struct Session: Decodable, Identifiable, Hashable {
     
-    let id: String
-    let fastestDriver: Driver?
-    let circuit: Circuit
-    let round: Int
+    typealias ID = Identifier<Session>
+    
+    let id: ID
     let laps: Int
     let date: Date
     let name: Name
-    let timeLeft: String?
+    let winnerID: Driver.ID?
 }
 
 extension Session {
     
     enum Name: String, Decodable, Hashable {
         
-        case firstPractice = "First Practice"
-        case secondPractice = "Second Practice"
-        case thirdPractice = "Third Practice"
+        case firstPractice = "Practice 1"
+        case secondPractice = "Practice 2"
+        case thirdPractice = "Practice 3"
         case qualifying = "Qualifying"
         case sprint = "Sprint"
         case race = "Race"
@@ -35,15 +34,4 @@ extension Session {
             }
         }
     }
-
-    static let mockSession: Self = .init(
-        id: "race",
-        fastestDriver: Driver.mockHamilton,
-        circuit: Circuit.mockCircuit,
-        round: 4,
-        laps: 52,
-        date: Date(),
-        name: .race,
-        timeLeft: "1 hour"
-    )
 }

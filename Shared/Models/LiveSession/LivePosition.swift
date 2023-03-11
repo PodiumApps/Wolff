@@ -3,7 +3,7 @@ import OSLog
 
 struct LivePosition: Decodable, Identifiable {
 
-    let id: String
+    let id: Identifier<Driver>
     let position: Int
     let time: String?
     let tyre: Tyre

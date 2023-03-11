@@ -11,7 +11,7 @@ class SessionDriverStyler: SessionDriverStylerRepresentable {
     let tyre: Tyre
     let constructorStyler: ConstructorStylerRepresentable
     
-    init(tyre: Tyre, constructorId: String) {
+    init(tyre: Tyre, constructorId: Constructor.ID) {
         
         self.tyre = tyre
         
@@ -64,7 +64,7 @@ extension SessionDriverStyler {
         }
     }
     
-    convenience init(tyre: LivePosition.Tyre, constructorId: String) {
+    convenience init(tyre: LivePosition.Tyre, constructorId: Constructor.ID) {
         
         
         let tyreStyle: Tyre

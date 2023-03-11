@@ -1,16 +1,17 @@
 import Foundation
 
 struct Driver: Decodable, Identifiable, Hashable {
+    
+    typealias ID = Identifier<Driver>
 
-    let id: Int
-    let driverLiveID: String
+    let id: ID
     let carNumber: Int
     let firstName: String
     let lastName: String
     let driverTicker: String
     let position: Int
     let points: Int
-    let constructorId: Int
+    let constructorId: Constructor.ID
     
     var fullName: String { firstName + " " + lastName }
 }
@@ -24,7 +25,7 @@ extension Driver {
         return Resource(url: url, method: .get(accessToken: Date().tokenString))
     }
     
-    static func getDriver(id: Int) -> Resource<Self> {
+    static func getDriver(id: String) -> Resource<Self> {
 
         guard let url = URL(string: "\(Global.url)/v1/driver/\(id)") else { fatalError("URL not found.") }
 

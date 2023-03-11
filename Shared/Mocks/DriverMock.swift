@@ -3,53 +3,49 @@ import Foundation
 extension Driver {
     
     static let mockVertasppen: Self = .init(
-        id: 0,
-        driverLiveID: "max_verstappen",
+        id: .init("max_verstappen"),
         carNumber: 10,
         firstName: "Max",
         lastName: "Verstappen",
         driverTicker: "VER",
         position: 1,
         points: 10,
-        constructorId: 0
+        constructorId: .init("red_bull")
     )
     
     static let mockLeclerc: Self = .init(
-        id: 1,
-        driverLiveID: "leclerc",
+        id: .init("leclerc"),
         carNumber: 12,
         firstName: "Max",
         lastName: "Leclerc",
         driverTicker: "LEC",
         position: 2,
         points: 10,
-        constructorId: 1
+        constructorId: .init("ferrari")
     )
     
     
     static let mockAlonso: Self = .init(
-        id: 2,
-        driverLiveID: "fernando_alonso",
+        id: .init("fernando_alonso"),
         carNumber: 20,
         firstName: "Fernando",
         lastName: "Alonso",
         driverTicker: "ALO",
         position: 3,
         points: 10,
-        constructorId: 2
+        constructorId: .init("aston_martin")
     )
     
     
     static let mockHamilton: Self = .init(
-        id: 3,
-        driverLiveID: "lewis_hamilton",
+        id: .init("lewis_hamilton"),
         carNumber: 30,
         firstName: "Lewis",
         lastName: "Hamilton",
         driverTicker: "HAM",
         position: 4,
         points: 10,
-        constructorId: 2
+        constructorId: .init("mercedes")
     )
     
 }

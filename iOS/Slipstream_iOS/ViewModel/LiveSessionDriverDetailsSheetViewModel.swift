@@ -7,8 +7,8 @@ protocol LiveSessionDriverDetailsSheetViewModelRepresentable: ObservableObject {
     var circleText: String { get }
     var detailsText: String { get }
     
-    var constructorStylerID: String { get }
-    var driverID: Int { get }
+    var constructorStylerID: Constructor.ID { get }
+    var driverID: Driver.ID { get }
 }
 
 class LiveSessionDriverDetailsSheetViewModel: LiveSessionDriverDetailsSheetViewModelRepresentable {
@@ -17,8 +17,8 @@ class LiveSessionDriverDetailsSheetViewModel: LiveSessionDriverDetailsSheetViewM
     let titleBold: String
     let circleText: String
     let detailsText: String
-    let constructorStylerID: String
-    let driverID: Int
+    let constructorStylerID: Constructor.ID
+    let driverID: Driver.ID
     
     init(driver: Driver, constructor: Constructor) {
         
@@ -27,7 +27,7 @@ class LiveSessionDriverDetailsSheetViewModel: LiveSessionDriverDetailsSheetViewM
         self.circleText = "\(driver.carNumber)"
         self.detailsText = constructor.name
         
-        self.constructorStylerID = constructor.constructorId
+        self.constructorStylerID = constructor.id
         self.driverID = driver.id
     }
 }
