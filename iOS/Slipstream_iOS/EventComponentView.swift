@@ -7,7 +7,7 @@ struct EventComponentView: View {
     var body: some View {
 
         switch eventStatus {
-        case .current(let title, let details), .live(title: let title, details: let details):
+        case .current(let title, let details, _), .live(title: let title, details: let details):
             sessionDetailsComponent(title: title, details: details)
         case .finished(drivers: let drivers):
             driversPositionComponent(drivers: drivers)

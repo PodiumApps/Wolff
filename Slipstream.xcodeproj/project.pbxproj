@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4207B43329BE703400AA4758 /* DriverResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36D297802040038A860 /* DriverResult.swift */; };
 		420967F4294C9A8D0075D75E /* SlipstreamWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420967F3294C9A8D0075D75E /* SlipstreamWatchApp.swift */; };
 		420967F6294C9A8D0075D75E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420967F5294C9A8D0075D75E /* ContentView.swift */; };
 		420967F8294C9A8F0075D75E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 420967F7294C9A8F0075D75E /* Assets.xcassets */; };
@@ -76,14 +77,14 @@
 		42B219A0295F426200515097 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2199F295F426200515097 /* Images.swift */; };
 		42B219A1295F426200515097 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2199F295F426200515097 /* Images.swift */; };
 		42B219A5295F450200515097 /* InfiniteScroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B219A3295F450200515097 /* InfiniteScroller.swift */; };
-		42BCAD6229BBD7F10089B46A /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD6129BBD7F10089B46A /* Identifier.swift */; };
-		42BCAD6329BBD7F10089B46A /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD6129BBD7F10089B46A /* Identifier.swift */; };
 		42BCAD5529BB4B360089B46A /* EventMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5429BB4B360089B46A /* EventMock.swift */; };
 		42BCAD5629BB4B360089B46A /* EventMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5429BB4B360089B46A /* EventMock.swift */; };
 		42BCAD5929BB742B0089B46A /* UserDefaultsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5829BB742B0089B46A /* UserDefaultsWrapper.swift */; };
 		42BCAD5A29BB742B0089B46A /* UserDefaultsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5829BB742B0089B46A /* UserDefaultsWrapper.swift */; };
 		42BCAD5C29BB7B000089B46A /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5B29BB7B000089B46A /* EventService.swift */; };
 		42BCAD5D29BB7B000089B46A /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5B29BB7B000089B46A /* EventService.swift */; };
+		42BCAD6229BBD7F10089B46A /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD6129BBD7F10089B46A /* Identifier.swift */; };
+		42BCAD6329BBD7F10089B46A /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD6129BBD7F10089B46A /* Identifier.swift */; };
 		CF054422294CECCD00A39FE3 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF054421294CECCD00A39FE3 /* Driver.swift */; };
 		CF054428294F7D4E00A39FE3 /* Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF054427294F7D4E00A39FE3 /* Constructor.swift */; };
 		CF05443A29507C1000A39FE3 /* Circuit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF05443929507C1000A39FE3 /* Circuit.swift */; };
@@ -185,10 +186,10 @@
 		42B21999295F3A2300515097 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 		42B2199F295F426200515097 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		42B219A3295F450200515097 /* InfiniteScroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteScroller.swift; sourceTree = "<group>"; };
-		42BCAD6129BBD7F10089B46A /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
 		42BCAD5429BB4B360089B46A /* EventMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMock.swift; sourceTree = "<group>"; };
 		42BCAD5829BB742B0089B46A /* UserDefaultsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsWrapper.swift; sourceTree = "<group>"; };
 		42BCAD5B29BB7B000089B46A /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
+		42BCAD6129BBD7F10089B46A /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
 		CF054421294CECCD00A39FE3 /* Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
 		CF054427294F7D4E00A39FE3 /* Constructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constructor.swift; sourceTree = "<group>"; };
 		CF05443929507C1000A39FE3 /* Circuit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circuit.swift; sourceTree = "<group>"; };
@@ -314,7 +315,6 @@
 				42521D0329B7910500000586 /* ViewModel */,
 				42521D0029B790BE00000586 /* Views */,
 				CF233DD429A7D6A900A8D1CD /* EventComponentView.swift */,
-				CF20D36D297802040038A860 /* DriverResult.swift */,
 				42B219A2295F44F400515097 /* ViewBuilders */,
 				42B2196B295D94C800515097 /* Support */,
 				42096839295378A20075D75E /* Preview Content */,
@@ -521,6 +521,7 @@
 		CF05443F29507E2A00A39FE3 /* Drivers and Constructors */ = {
 			isa = PBXGroup;
 			children = (
+				CF20D36D297802040038A860 /* DriverResult.swift */,
 				CF054421294CECCD00A39FE3 /* Driver.swift */,
 				CF054427294F7D4E00A39FE3 /* Constructor.swift */,
 				42B21971295DDBAB00515097 /* Details.swift */,
@@ -840,6 +841,7 @@
 				420967F6294C9A8D0075D75E /* ContentView.swift in Sources */,
 				42521CA429B0ECBD00000586 /* LiveSessionService.swift in Sources */,
 				42521CBE29B2378300000586 /* SessionDriverStyler.swift in Sources */,
+				4207B43329BE703400AA4758 /* DriverResult.swift in Sources */,
 				42B21982295EEA2600515097 /* SessionResultMock.swift in Sources */,
 				420967F4294C9A8D0075D75E /* SlipstreamWatchApp.swift in Sources */,
 				CF233DED29ADFA9900A8D1CD /* LivePosition.swift in Sources */,

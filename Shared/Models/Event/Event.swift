@@ -18,7 +18,7 @@ extension Event {
 
     enum Status {
         case upcoming(details: String)
-        case current(title: String, details: String)
+        case current(title: String, details: String, isToday: Bool)
         case live(title: String, details: String)
         case finished(drivers: [DriverResult])
     }
@@ -51,6 +51,7 @@ extension Event {
     ) -> Status {
         
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_us")
         
         guard
             let firstSessionDate: Date = event.sessions.first?.date,
@@ -64,68 +65,61 @@ extension Event {
         let firstDay = formatter.string(from: firstSessionDate)
         let lastDay = formatter.string(from: finalSessionDate)
         
-        let todayDay = formatter.string(from: Date())
-        
         formatter.dateFormat = "MMMM"
         let month = formatter.string(from: finalSessionDate).uppercased()
-        let todayMonth = formatter.string(from: Date())
-        
-        formatter.dateFormat = "HH"
-        let actualHour = Int(formatter.string(from: Date())) ?? 0
-        
-        formatter.dateFormat = "mm"
-        let actualMinutes = Int(formatter.string(from: Date())) ?? 0
         
         if event.id == nextEvent.id,
            event.sessions.filter({ $0.winnerID != nil }).count != event.sessions.count {
             
-            if let nextDateEvent = event.sessions.first(where: { $0.winnerID == nil })?.date {
+            if let nextSession = event.sessions.lazy.first(where: { $0.winnerID == nil }) {
                 
-                formatter.dateFormat = "dd"
-                let nextDayEvent = formatter.string(from: nextDateEvent)
+                let intervaltimeStamp = nextSession.date.timeIntervalSinceNow
+                let dayInSeconds: Double = 24*60*60
                 
-                formatter.dateFormat = "MMMM"
-                let nextMonthEvent = formatter.string(from: nextDateEvent)
-                
-                formatter.dateFormat = "HH"
-                let nextHour = Int(formatter.string(from: nextDateEvent)) ?? 0
-                
-                formatter.dateFormat = "mm"
-                let nextMinutes = Int(formatter.string(from: nextDateEvent)) ?? 0
-                
-                if todayDay == nextDayEvent,
-                   todayMonth == nextMonthEvent {
-                    guard
-                        let sessionName = event.sessions.first(where: { $0.winnerID == nil })?.name
-                    else {
-                        fatalError("We should have a session name for \(event)")
-                    }
+                if intervaltimeStamp < dayInSeconds {
                     
-                    if actualHour >= nextHour, actualMinutes >= nextMinutes {
-                        
-                        return .live(title: sessionName.label, details: "")
+                    if intervaltimeStamp <= 0 {
+                        return .live(title: nextSession.name.label, details: "")
                     } else {
+                        let finalString: String
+                        if intervaltimeStamp  < 60 {
+                            finalString = "About to start"
+                        } else {
+                            let formatter = DateComponentsFormatter()
+                            formatter.allowedUnits = [.hour, .minute]
+                            
+                            guard
+                                let timeToEvent = formatter.string(from: intervaltimeStamp)
+                            else {
+                                fatalError("We should have a time to Event conversion")
+                            }
+                            
+                            finalString = "\(timeToEvent.replacingOccurrences(of: ":", with: "h"))min to"
+                        }
+                        
                         return .current(
-                            title: "\(nextHour - actualHour)h\(nextMinutes - actualMinutes)min to",
-                            details: sessionName.label)
+                            title: "\(finalString)",
+                            details: nextSession.name.label,
+                            isToday: true
+                        )
                     }
                 }
             }
             
             guard
-                let sessionName = event.sessions.first(where: { $0.winnerID == nil })?.name
+                let sessionName = event.sessions.lazy.first(where: { $0.winnerID == nil })?.name
             else {
                 fatalError("We should have a session name for \(event)")
             }
             
-            return .current(title: "\(firstDay) \(month)", details: sessionName.label)
+            return .current(title: "\(firstDay) \(month)", details: sessionName.label, isToday: false)
         }
         
-        if event.sessions.filter({ $0.winnerID != nil }).count == event.sessions.count  {
+        if event.sessions.lazy.filter({ $0.winnerID != nil }).count == event.sessions.count  {
             
-            let winnerID = event.sessions.first(where: { $0.name == .race })?.winnerID ?? .init("")
+            let winnerID = event.sessions.lazy.first(where: { $0.name == .race })?.winnerID ?? .init("")
             
-            let driverTicker = drivers.first(where: { $0.id == winnerID })?.driverTicker
+            let driverTicker = drivers.lazy.first(where: { $0.id == winnerID })?.driverTicker
             
             return .finished(
                 drivers: [

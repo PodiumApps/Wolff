@@ -131,7 +131,7 @@ struct GrandPrixCardView_Previews: PreviewProvider {
                 GrandPrixCardViewModel(
                     round: 13,
                     title: "Emilia Romagna 2023",
-                    eventStatus: .current(title: "FP1", details: "10:30h until start")
+                    eventStatus: .current(title: "FP1", details: "10:30h until start", isToday: true)
                 )
         )
 

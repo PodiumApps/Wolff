@@ -12,9 +12,11 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
     
     private var drivers: [Driver]
     private var events: [Event]
+    private var nextEvent: Event?
     private let eventService: EventServiceRepresentable
     private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
     private var subscriptions = Set<AnyCancellable>()
+    private var timer: Timer? = nil
     
     @Published var state: State
     @Published var route: [Route]
@@ -31,6 +33,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
         self.driverAndConstructorService = driverAndConstructorService
         self.state = .loading([])
         self.route = []
+        self.nextEvent = nil
         
         load()
     }
@@ -61,10 +64,13 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                 case (.error(let error), _),
                      (_, .error(let error)):
                     return .error(error.localizedDescription)
+
                 case (.refreshed(let drivers, _), .refreshed(let events, let nextEvent)):
                     self.drivers = drivers
                     self.events = events
+                    self.nextEvent = nextEvent
                     return .results(self.buildGranPrixCardViewModel(events: events, nextEvent: nextEvent))
+
                 default:
                     return .loading(self.buildGranPrixCardViewModel(events: Event.mockArray, nextEvent: .mock))
                 }
@@ -74,14 +80,20 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
     
     private func buildGranPrixCardViewModel(events: [Event], nextEvent: Event) -> [GrandPrixCardViewModel] {
         
-        events.compactMap { [weak self] event in
+        events.enumerated().compactMap { [weak self] (index, event) in
             
             guard let self else { return nil }
+            
+            let eventStatus = Event.getEventStatus(for: event, comparing: nextEvent, drivers: self.drivers)
+            
+            if case .current(_, _, true) = eventStatus {
+                self.updateTodayEvent(index: index)
+            }
             
             return GrandPrixCardViewModel(
                 round: event.round,
                 title: event.name,
-                eventStatus: Event.getEventStatus(for: event, comparing: nextEvent, drivers: self.drivers)
+                eventStatus: eventStatus
             )
         }
     }
@@ -91,6 +103,31 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
         let sessionStandingsVM: SessionStandingsListViewModel = .init(event: events[index])
         
         route.append(.sessionStandings(sessionStandingsVM))
+    }
+    
+    private func updateTodayEvent(index: Int) {
+        
+        timer?.invalidate()
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
+            
+            guard
+                let self,
+                let nextEvent = self.nextEvent,
+                case .results(var granPrixVM) = self.state
+            else {
+                return
+            }
+            
+            debugPrint("Updating event index \(index)")
+            granPrixVM[index].eventStatus = Event.getEventStatus(
+                for: self.events[index],
+                comparing: nextEvent,
+                drivers: self.drivers
+            )
+            
+            self.state = .results(granPrixVM)
+        }
     }
 }
 

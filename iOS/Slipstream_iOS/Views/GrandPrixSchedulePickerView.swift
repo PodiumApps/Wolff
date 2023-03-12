@@ -127,7 +127,8 @@ struct GrandPrixSchedulePickerView_Previews: PreviewProvider {
                         grandPrixDate: "24-27 Set",
                         eventStatus: .current(
                             title: "FP1",
-                            details: "10:30h until start"
+                            details: "10:30h until start",
+                            isToday: true
                         )
                     ),
                     ScheduleCarouselViewModel(
@@ -136,7 +137,8 @@ struct GrandPrixSchedulePickerView_Previews: PreviewProvider {
                         grandPrixDate: "24-27 Set",
                         eventStatus: .current(
                             title: "FP1",
-                            details: "10:30h until start"
+                            details: "10:30h until start",
+                            isToday: true
                         )
                     ),
                     ScheduleCarouselViewModel(
