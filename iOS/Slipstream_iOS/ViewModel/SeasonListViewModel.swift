@@ -15,8 +15,10 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
     private var nextEvent: Event?
     private let eventService: EventServiceRepresentable
     private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
+    private let liveEventService: LiveSessionServiceRepresentable
     private var subscriptions = Set<AnyCancellable>()
     private var timer: Timer? = nil
+    private var updatedIndex: Int? = nil
     
     @Published var state: State
     @Published var route: [Route]
@@ -24,13 +26,15 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
     
     init(
         driverAndConstructorService: DriverAndConstructorServiceRepresentable,
-        eventService: EventServiceRepresentable
+        eventService: EventServiceRepresentable,
+        liveEventService: LiveSessionServiceRepresentable
     ) {
         
         self.drivers = []
         self.events = []
         self.eventService = eventService
         self.driverAndConstructorService = driverAndConstructorService
+        self.liveEventService = liveEventService
         self.state = .loading([])
         self.route = []
         self.nextEvent = nil
@@ -42,6 +46,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
     private func load() {
         
         eventService.action.send(.fetchAll)
+        liveEventService.action.send(.fetchPositions)
         
         action
             .receive(on: DispatchQueue.main)
@@ -50,6 +55,22 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                 case .tap(let index):
                     self?.tapRow(at: index)
                 }
+            }
+            .store(in: &subscriptions)
+        
+        liveEventService.statePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] liveEventService in
+                
+                guard let self else { return }
+                
+                switch liveEventService {
+                case .refreshed(let livePostions):
+                    self.updateTodayEvent(livePositions: livePostions)
+                default:
+                    break
+                }
+                
             }
             .store(in: &subscriptions)
 
@@ -72,7 +93,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                     return .results(self.buildGranPrixCardViewModel(events: events, nextEvent: nextEvent))
 
                 default:
-                    return .loading(self.buildGranPrixCardViewModel(events: Event.mockArray, nextEvent: .mock))
+                    return .loading(GrandPrixCardViewModel.mockArray)
                 }
             }
             .assign(to: &$state)
@@ -86,8 +107,10 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
             
             let eventStatus = Event.getEventStatus(for: event, comparing: nextEvent, drivers: self.drivers)
             
-            if case .current(_, _, true) = eventStatus {
-                self.updateTodayEvent(index: index)
+            if case .live(_, _, let sessions) = eventStatus, !sessions.isEmpty {
+                self.timer?.invalidate()
+                self.updatedIndex = index
+                self.updateTodayEvent()
             }
             
             return GrandPrixCardViewModel(
@@ -105,28 +128,49 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
         route.append(.sessionStandings(sessionStandingsVM))
     }
     
-    private func updateTodayEvent(index: Int) {
+    private func updateTodayEvent(livePositions: [LivePosition] = []) {
         
-        timer?.invalidate()
+        let driversTransform: [Driver] = livePositions.lazy.compactMap { [weak self] position in
+            
+            guard
+                let self,
+                position.position <= 3,
+                let driver = self.drivers.first(where: { $0.id == position.id })
+            else {
+                return nil
+            }
+            
+            return driver
+        }
         
-        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: livePositions.isEmpty) { [weak self] _ in
             
             guard
                 let self,
                 let nextEvent = self.nextEvent,
-                case .results(var granPrixVM) = self.state
+                case .results(let granPrixVM) = self.state,
+                let updatedIndex = self.updatedIndex
             else {
                 return
             }
             
-            debugPrint("Updating event index \(index)")
-            granPrixVM[index].eventStatus = Event.getEventStatus(
-                for: self.events[index],
+            let newEventStatus = Event.getEventStatus(
+                for: self.events[updatedIndex],
                 comparing: nextEvent,
-                drivers: self.drivers
+                drivers: self.drivers,
+                liveDrivers: driversTransform
             )
+            debugPrint("Updating event index \(updatedIndex) to \(newEventStatus)")
+            
+            granPrixVM[updatedIndex].eventStatus = newEventStatus
             
             self.state = .results(granPrixVM)
+            
+            if !livePositions.isEmpty {
+                self.liveEventService.action.send(.updatePositions)
+            } else {
+                self.liveEventService.action.send(.fetchPositions)
+            }
         }
     }
 }
@@ -191,7 +235,8 @@ extension SeasonListViewModel {
         
         .init(
             driverAndConstructorService: ServiceLocator.shared.driverAndConstructorService,
-            eventService: ServiceLocator.shared.eventService
+            eventService: ServiceLocator.shared.eventService,
+            liveEventService: ServiceLocator.shared.liveSessionService
         )
     }
 }

@@ -7,17 +7,25 @@ struct EventComponentView: View {
     var body: some View {
 
         switch eventStatus {
-        case .current(let title, let details, _), .live(title: let title, details: let details):
-            sessionDetailsComponent(title: title, details: details)
-        case .finished(drivers: let drivers):
-            driversPositionComponent(drivers: drivers)
-        case .upcoming(details: let details):
-            sessionDetailsComponent(details: details)
+        case .live(let timeToEvent, let session, let drivers):
+            if drivers.isEmpty {
+                sessionDetailsComponent(title: timeToEvent, details: session.label)
+            } else {
+                driversPositionComponent(for: drivers)
+            }
+        case .finished(let driver):
+            Text(driver)
+        case .upcoming(let start, let end, let session):
+            if let session {
+                sessionDetailsComponent(title: start + "-" + end, details: session.label)
+            } else {
+                sessionDetailsComponent(details: start + "-" + end)
+            }
         }
     }
-
-    func driversPositionComponent(drivers: [DriverResult]) -> some View {
-
+    
+    func driversPositionComponent(for drivers: [DriverResult]) -> some View {
+        
         HStack(spacing: Constants.DriverComponent.horizontalSpacing) {
             ForEach(drivers) {
                 driverLabel(position: $0.value, driverTicker: $0.driverTicker)
