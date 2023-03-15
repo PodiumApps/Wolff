@@ -77,19 +77,20 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] liveEventService in
                 
-                guard let self else { return }
+                guard
+                    let self,
+                    let index = self.cells.firstIndex(where: { $0.id == Section.idValue.live.rawValue })
+                else {
+                    return
+                }
                 
                 switch liveEventService {
                 case .refreshed(let livePostions):
                     self.state = self.loadData(livePositions: livePostions, fetchLivePositions: false)
                     
                 case .refreshing, .error:
-                    if let index = self.cells.firstIndex(where: { $0.id == Section.idValue.live.rawValue }) {
-                        
-                        self.cells[index] = .live(LiveCardCellViewModel.mockLiveSoonHours, index: nil)
-                                                  
-                        self.state = .results(self.cells)
-                    }
+                    self.cells[index] = .live(LiveCardCellViewModel.mockLiveSoonHours, index: nil)
+                    self.state = .results(self.cells)
                 }
                 
             }
@@ -273,9 +274,11 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
             
             guard let self else { return }
             
-            if timeInterval > 0 {
+            if timeInterval > 0 || livePositions.isEmpty {
                 self.eventService.action.send(.updateAll)
-            } else {
+            }
+            
+            if timeInterval < 0 {
                 self.liveEventService.action.send(.updatePositions)
             }
         }
