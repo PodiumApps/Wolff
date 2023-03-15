@@ -32,19 +32,18 @@ struct UpcomingAndStandingsEventCellView<ViewModel: UpcomingAndStandingsEventCel
                     .frame(height: 120)
                     Divider()
                 case .standings(let drivers, let constructors):
-//                    VStack(alignment: .leading, spacing: 16) {
-                        Text("Current Standings")
-                            .font(.system(size: 24, weight: .heavy))
-                            .padding(.horizontal, 12)
+                    Text("Current Standings")
+                        .font(.system(size: 24, weight: .heavy))
+                        .padding(.horizontal, 12)
+                    
+                    ForEach(drivers) { driver in
+                        StandingsCellView(viewModel: StandingsCellViewModel(driver: driver, constructor: constructors))
+                            .padding(.top, 8)
+                        Divider()
                         
-                        ForEach(drivers) { driver in
-                            StandingsCellView(viewModel: StandingsCellViewModel(driver: driver, constructor: constructors))
-                                .padding(.top, 8)
-                            Divider()
-                            
-                        }
-                        .listStyle(.plain)
-//                    }
+                    }
+                    .padding(.horizontal, 12)
+                    .listStyle(.plain)
                 }
             }
         }

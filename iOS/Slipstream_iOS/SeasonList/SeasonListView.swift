@@ -58,7 +58,6 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
                                         }
                                         .padding(.horizontal, 12)
                                         UpcomingAndStandingsEventCellView(viewModel: viewModel)
-                                            .padding(.horizontal, 12)
                                     }
                                     .padding(.top, 16)
                                 }
