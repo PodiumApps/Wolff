@@ -48,4 +48,6 @@ extension Driver {
         constructorId: .init("mercedes")
     )
     
+    static let mockArray: [Self] = [.mockAlonso, .mockLeclerc, .mockHamilton, .mockVertasppen]
+    
 }

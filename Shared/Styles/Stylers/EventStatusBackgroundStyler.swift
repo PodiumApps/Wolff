@@ -54,7 +54,7 @@ extension EventStatusBackgroundStyler {
         switch grandPrixCardStatus {
         case .live:
             status = .liveSession
-        case .upcoming(_, _, let session):
+        case .upcoming(_, _, _, let session):
             status = .upcoming(hasSession: session != nil)
         case .finished:
             status = .complete

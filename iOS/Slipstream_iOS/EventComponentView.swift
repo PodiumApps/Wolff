@@ -16,12 +16,8 @@ struct EventComponentView: View {
             }
         case .finished(let driver):
             Text(driver)
-        case .upcoming(let start, let end, let session):
-            if let session {
-                sessionDetailsComponent(title: start + "-" + end, details: session)
-            } else {
-                sessionDetailsComponent(details: start + "-" + end)
-            }
+        case .upcoming(let start, let end, let session, _):
+            sessionDetailsComponent(title: start + "-" + end, details: "\(session)")
         }
     }
     

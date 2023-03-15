@@ -26,7 +26,7 @@ extension ScheduleCarouselViewModel {
     static let mockUpcoming: ScheduleCarouselViewModel = .init(
         round: 13,
         title: "Emilia Romagna 2023",
-        eventStatus: .upcoming(start: "05", end: "07 MAY", session: nil)
+        eventStatus: .upcoming(start: "05", end: "07 MAY", sessionName: "Race", timeInterval: .init(23000))
     )
     
     static let mockLive: ScheduleCarouselViewModel = .init(

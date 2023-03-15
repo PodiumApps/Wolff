@@ -1,17 +1,17 @@
 import SwiftUI
 
-protocol LiveViewModelRepresentable: ObservableObject {
+protocol LiveCardCellViewModelRepresentable: ObservableObject {
     
-    var topSection: LiveViewModel.TopSection { get }
-    var cardSection: LiveViewModel.CardSection { get }
-    var time: LiveViewModel.Time { get }
+    var topSection: LiveCardCellViewModel.TopSection { get }
+    var cardSection: LiveCardCellViewModel.CardSection { get }
+    var time: LiveCardCellViewModel.Time { get }
     var isLive: Bool { get }
     
 //    var state: LiveViewModel.State { get }
 }
 
 
-final class LiveViewModel: LiveViewModelRepresentable {
+final class LiveCardCellViewModel: LiveCardCellViewModelRepresentable {
     
     typealias TopSection = (title: String, round: Int)
     typealias CardSection = (title: String, status: String?, drivers: [String])
@@ -52,11 +52,11 @@ final class LiveViewModel: LiveViewModelRepresentable {
     
 }
 
-extension LiveViewModel {
+extension LiveCardCellViewModel {
     
     enum State: Equatable {
         
-        static func == (lhs: LiveViewModel.State, rhs: LiveViewModel.State) -> Bool {
+        static func == (lhs: LiveCardCellViewModel.State, rhs: LiveCardCellViewModel.State) -> Bool {
             lhs.id == rhs.id
         }
         
@@ -80,27 +80,27 @@ extension LiveViewModel {
 }
 
 
-extension LiveViewModel {
+extension LiveCardCellViewModel {
     
-    static let mockLiveAboutToStart: LiveViewModel = .init(
+    static let mockLiveAboutToStart: LiveCardCellViewModel = .init(
         topSection: TopSection(title: "Emilia Romagna, Italy", round: 23),
         cardSection: CardSection(title: "Race", status: "", drivers: []),
         timeInterval: .init(0)
     )
     
-    static let mockLiveSoon: LiveViewModel = .init(
+    static let mockLiveSoon: LiveCardCellViewModel = .init(
         topSection: TopSection(title: "Emilia Romagna, Italy", round: 23),
         cardSection: CardSection(title: "Race", status: "", drivers: []),
         timeInterval: .init(400)
     )
     
-    static let mockLiveSoonHours: LiveViewModel = .init(
+    static let mockLiveSoonHours: LiveCardCellViewModel = .init(
         topSection: TopSection(title: "Emilia Romagna, Italy", round: 23),
         cardSection: CardSection(title: "Race", status: "", drivers: []),
         timeInterval: .init(4300)
     )
     
-    static let mockLive: LiveViewModel = .init(
+    static let mockLive: LiveCardCellViewModel = .init(
         topSection: TopSection(title: "Emilia Romagna, Italy", round: 23),
         cardSection: CardSection(
             title: "Race",

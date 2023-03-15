@@ -22,42 +22,31 @@ struct GrandPrixCardView<ViewModel: GrandPrixCardViewModelRepresentable>: View {
                     
                     VStack(alignment: .leading, spacing: 4) {
                         Text(viewModel.title)
-                            .font(.system(size: 15, weight: .heavy))
+                            .font(.system(size: 15, weight: .bold))
                         HStack {
                             
                             Text(viewModel.subtitle)
-                                .font(.system(size: 15, weight: .heavy))
+                                .font(.system(size: 15, weight: .semibold))
                             
                             Text(Localization.GrandPrixCard.Top.round(viewModel.round))
                                 .font(.system(size: 13))
                         }
                     }
                     
-                    Text(viewModel.grandPrixDate)
-                        .font(.system(size: 18, weight: .semibold))
+                    HStack {
+                        Text(viewModel.grandPrixDate)
+                            .font(.system(size: 14, weight: .semibold))
+                        
+                        if let label = viewModel.nextSession {
+                            Text("in " + label)
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(.accentColor)
+                        }
+                    }
                     
                 }
                 .padding()
                 .frame(width: 240, height: Constants.Card.height, alignment: .leading)
-                
-                if viewModel.isNext {
-                    ZStack {
-                        VStack {
-                            HStack {
-                                Spacer()
-                                Text("Next")
-                                    .font(.system(size: 12, weight: .semibold))
-                                    .padding(4)
-                                    .foregroundColor(.white)
-                                    .background(
-                                        Rectangle()
-                                            .fill(Color.accentColor)
-                                    )
-                            }
-                            Spacer()
-                        }
-                    }
-                }
             }
         }
         .foregroundColor(.primary)

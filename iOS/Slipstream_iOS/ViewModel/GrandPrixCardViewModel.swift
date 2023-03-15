@@ -6,7 +6,7 @@ protocol GrandPrixCardViewModelRepresentable {
     var title: String { get }
     var subtitle: String { get }
     var grandPrixDate: String { get }
-    var isNext: Bool { get }
+    var nextSession: String? { get }
 }
 
 final class GrandPrixCardViewModel: GrandPrixCardViewModelRepresentable {
@@ -15,21 +15,33 @@ final class GrandPrixCardViewModel: GrandPrixCardViewModelRepresentable {
     let title: String
     let subtitle: String
     let grandPrixDate: String
-    let isNext: Bool
+    let nextSession: String?
 
     init(
         round: Int,
         title: String,
         subtitle: String,
         grandPrixDate: String,
-        isNext: Bool = false
+        nextSession: TimeInterval? = nil
     ) {
 
         self.round = round
         self.title = title
         self.subtitle = subtitle
         self.grandPrixDate = grandPrixDate.capitalized
-        self.isNext = isNext
+        
+        let weekInterval: Double = 7*24*60*60
+        
+        if let nextSession = nextSession, nextSession < weekInterval {
+            let formatter = DateComponentsFormatter()
+            formatter.allowedUnits = [.day, .hour]
+            formatter.calendar?.locale = Locale(identifier: "en_us")
+            
+            self.nextSession = formatter.string(from: nextSession) ?? "0:00".uppercased()
+        } else {
+            self.nextSession = nil
+            
+        }
     }
 }
 
@@ -54,7 +66,7 @@ extension GrandPrixCardViewModel {
         title: "Spa-Francorchamps",
         subtitle: "Belgium",
         grandPrixDate: "21 - 23 October",
-        isNext: true
+        nextSession: .init(320000)
     )
     
     static let mockArray: [GrandPrixCardViewModel] = [

@@ -20,7 +20,7 @@ extension Event {
 
     enum Status {
         
-        case upcoming(start: String, end: String, session: String?)
+        case upcoming(start: String, end: String, sessionName: String, timeInterval: TimeInterval? = nil)
         case live(timeInterval: TimeInterval, sessionName: String, driverTickers: [String])
         case finished(winner: String)
     }
@@ -78,9 +78,9 @@ extension Event {
             if let nextSession = event.sessions.lazy.first(where: { $0.winnerID == nil }) {
                 
                 let intervaltimeStamp = nextSession.date.timeIntervalSinceNow
-                let dayInSeconds: Double = 4*60*60
+                let liveInSeconds: Double = 4*60*60
                 
-                if intervaltimeStamp < dayInSeconds {
+                if intervaltimeStamp < liveInSeconds {
                     
                     if intervaltimeStamp <= 0 && !liveDrivers.isEmpty {
                         let driverResult: [String] = liveDrivers.map(\.driverTicker)
@@ -109,13 +109,14 @@ extension Event {
                 }
             }
             
-            guard
-                let sessionName = event.sessions.lazy.first(where: { $0.winnerID == nil })?.name
-            else {
-                fatalError("We should have a session name for \(event)")
+            if let session = event.sessions.lazy.first(where: { $0.winnerID == nil }){
+                return .upcoming(
+                    start: firstDay,
+                    end: lastDay,
+                    sessionName: session.name.label,
+                    timeInterval: session.date.timeIntervalSinceNow
+                )
             }
-            
-            return .upcoming(start: firstDay, end: lastDay, session: sessionName.label)
         }
         
         if
@@ -127,6 +128,11 @@ extension Event {
             return .finished(winner: driverTicker)
         }
         
-        return .upcoming(start: firstDay, end: lastDay, session: nil)
+        return .upcoming(
+            start: firstDay,
+            end: lastDay,
+            sessionName: "",
+            timeInterval: nil
+        )
     }
 }
