@@ -223,8 +223,8 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                 self.upcomingEvents.append(
                     .init(
                         round: event.round,
-                        title: event.name,
-                        subtitle: "Italy",
+                        title: event.title,
+                        subtitle: event.country,
                         grandPrixDate: timeInterval ?? threeDaysInterval < threeDaysInterval
                             ? session
                             : start + " - " + end,
@@ -239,8 +239,8 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                 self.finishedEvents.append(
                     .init(
                         round: event.round,
-                        title: event.name,
-                        subtitle: "Italy",
+                        title: event.title,
+                        subtitle: event.country,
                         grandPrixDate: "Winner: " + winner,
                         nextSession: nil
                     )

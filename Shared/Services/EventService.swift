@@ -52,11 +52,11 @@ class EventService: EventServiceRepresentable {
         do {
             let events = try await self.networkManager.load(Event.getEvents())
             let nextEvent = try await self.networkManager.load(Event.getNextEvent())
-            Logger.liveSessionService.info("Got \(events.count) events and nextEventID = \(nextEvent.id)")
+            Logger.eventService.info("Got \(events.count) events and nextEventID = \(nextEvent.id)")
             
             state = .refreshed(events, nextEvent: nextEvent)
         } catch {
-            Logger.liveSessionService.error("Error \(error)")
+            Logger.eventService.error("Error \(error)")
             state = .error(error)
         }
     }
