@@ -3,6 +3,7 @@ import Foundation
 struct Event: Decodable {
     
     typealias ID = String
+    typealias Time = (hours: Int, minutes: Int)
     
     let id: ID
     let firstGrandPrix: Int
@@ -19,8 +20,8 @@ extension Event {
 
     enum Status {
         
-        case upcoming(start: String, end: String, session: Session.Name?)
-        case live(timeToEvent: String, session: Session.Name, drivers: [DriverResult])
+        case upcoming(start: String, end: String, session: String?)
+        case live(timeInterval: TimeInterval, sessionName: String, driverTickers: [String])
         case finished(winner: String)
     }
 }
@@ -62,14 +63,14 @@ extension Event {
             fatalError("There should have an interval date for event id -> \(event.id)")
         }
         
-        formatter.dateFormat = "MMM"
+        formatter.dateFormat = "MMMM"
         let firstMonth = formatter.string(from: firstSessionDate).uppercased()
         let lastMonth = formatter.string(from: finalSessionDate).uppercased()
         
         formatter.dateFormat = "dd"
         
-        let firstDay = formatter.string(from: firstSessionDate) + (firstMonth == lastMonth ? "" : firstMonth)
-        let lastDay = formatter.string(from: finalSessionDate) + lastMonth
+        let firstDay = formatter.string(from: firstSessionDate) + (firstMonth == lastMonth ? "" : " " + firstMonth)
+        let lastDay = formatter.string(from: finalSessionDate) + " " + lastMonth
         
         if event.id == nextEvent.id,
            event.sessions.filter({ $0.winnerID != nil }).count != event.sessions.count {
@@ -77,36 +78,33 @@ extension Event {
             if let nextSession = event.sessions.lazy.first(where: { $0.winnerID == nil }) {
                 
                 let intervaltimeStamp = nextSession.date.timeIntervalSinceNow
-                let dayInSeconds: Double = 8*60*60
+                let dayInSeconds: Double = 4*60*60
                 
                 if intervaltimeStamp < dayInSeconds {
                     
                     if intervaltimeStamp <= 0 && !liveDrivers.isEmpty {
-                        let driverResult: [DriverResult] = liveDrivers.enumerated().map { index, driver in
-                                .init(
-                                    driverTicker: driver.driverTicker,
-                                    value: index == 0 ? .first : index == 1 ? .second : .third
-                                )
-                        }
-                        return .live(timeToEvent: "", session: nextSession.name, drivers: driverResult)
+                        let driverResult: [String] = liveDrivers.map(\.driverTicker)
+                        return .live(
+                            timeInterval: .init(0),
+                            sessionName: nextSession.name.label,
+                            driverTickers: driverResult
+                        )
                     } else {
-                        let finalString: String
-                        if intervaltimeStamp  < 60 {
-                            finalString = "About to start \(nextSession.name.label)"
-                        } else {
-                            let formatter = DateComponentsFormatter()
-                            formatter.allowedUnits = [.hour, .minute]
-                            
-                            guard
-                                let timeToEvent = formatter.string(from: intervaltimeStamp)
-                            else {
-                                fatalError("We should have a time to Event conversion")
-                            }
-                            
-                            finalString = "\(timeToEvent.replacingOccurrences(of: ":", with: "h"))min to \(nextSession.name.label)"
+                        
+                    
+                        if intervaltimeStamp < 60 {
+                            return .live(
+                                timeInterval: .init(0),
+                                sessionName: nextSession.name.label,
+                                driverTickers: []
+                            )
                         }
                         
-                        return .live(timeToEvent: finalString, session: nextSession.name, drivers: [])
+                        return .live(
+                            timeInterval: intervaltimeStamp,
+                            sessionName: nextSession.name.label,
+                            driverTickers: []
+                        )
                     }
                 }
             }
@@ -117,7 +115,7 @@ extension Event {
                 fatalError("We should have a session name for \(event)")
             }
             
-            return .upcoming(start: firstDay, end: lastDay, session: sessionName)
+            return .upcoming(start: firstDay, end: lastDay, session: sessionName.label)
         }
         
         if

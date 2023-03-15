@@ -1,10 +1,9 @@
 import SwiftUI
 
-struct LiveView<ViewModel: LiveRepresentable>: View {
+struct LiveView<ViewModel: LiveViewModelRepresentable>: View {
     
+    @State private var liveCircleAnimationAmount = Constants.LiveComponent.circleAnimationAmount
     @ObservedObject private var viewModel: ViewModel
-    
-    private let columns = [GridItem(.fixed(80)), GridItem(.fixed(80))]
     
     init(viewModel: ViewModel) {
         
@@ -13,93 +12,151 @@ struct LiveView<ViewModel: LiveRepresentable>: View {
     
     var body: some View {
         
-        switch viewModel.state {
+        VStack(alignment: .leading) {
             
-        case .loading(let sessionResults), .results(let sessionResults):
-            ZStack {
-                Image.liveBackground
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .edgesIgnoringSafeArea(.all)
-                GeometryReader { geometry in
-                    InfiniteScroller(contentHeight: geometry.size.height) {
-                        Image.liveSideBarBackground
-                            .resizable()
-                            .frame(width: geometry.size.width, height: geometry.size.height)
-                            .aspectRatio(contentMode: .fill)
-                    }
+            HStack {
+                if viewModel.isLive {
+                    liveIndicatorComponent()
                 }
-                .edgesIgnoringSafeArea(.all)
                 
-                VStack {
-                    
-                    if let firstResult = sessionResults.first {
-                        HStack {
-                            Spacer()
-                            Text("Lap \(firstResult.lap)/\(firstResult.session.laps)")
-                                .foregroundColor(.white)
-                        }
-                        HStack {
-                            Spacer()
-                            Text("Fastest lap: 1:23:204")
-                                .foregroundColor(.white)
+                Text("HAPPENING \(viewModel.isLive ? "NOW" : "SOON")")
+                    .font(.system(size: 20, weight: .heavy))
+                    .foregroundColor(Color.accentColor)
+            }
+            HStack {
+                Text(viewModel.topSection.title)
+                    .font(.system(size: 20, weight: .bold))
+                Spacer()
+                Text("Round \(viewModel.topSection.round)")
+                    .font(.system(size: 16))
+            }
+            
+            HStack {
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack(spacing: 24) {
+                        Text(viewModel.cardSection.title)
+                            .font(.system(size: 20, weight: .heavy))
+                        
+                        if let status = viewModel.cardSection.status, viewModel.isLive {
+                            Text(status)
                         }
                     }
-                    scrollView(for: sessionResults)
+                    
+                    if viewModel.time.minutes > 0 {
+                        HStack(alignment: .firstTextBaseline, spacing: 5) {
+                            if viewModel.time.hours > 0 {
+                                Text("\(viewModel.time.hours)")
+                                    .font(.system(size: 20, weight: .heavy))
+                                Text("HOUR")
+                                    .font(.system(size: 14, weight: .semibold))
+                            }
+                            
+                            Text("\(viewModel.time.minutes)")
+                                .font(.system(size: 20, weight: .heavy))
+                            Text("MINUTES left")
+                                .font(.system(size: 14, weight: .semibold))
+                        }
+                    } else if !viewModel.cardSection.drivers.isEmpty {
+                        
+                        HStack(spacing: 12) {
+                            ForEach(0 ..< viewModel.cardSection.drivers.count, id: \.self) { index in
+                                HStack(alignment: .firstTextBaseline, spacing: 2) {
+                                    Text("\(index + 1)")
+                                        .font(.system(size: 16, weight: .semibold))
+                                    + Text("º")
+                                        .font(.system(size: 10))
+                                        .fontWeight(.semibold)
+                                        .baselineOffset(4.0)
+                                        .foregroundColor(.white)
+                                    Text(viewModel.cardSection.drivers[index])
+                                        .font(.system(size: 20, weight: .bold))
+                                }
+                            }
+                        }
+                    } else {
+                        Text("About to start")
+                            .font(.system(size: 20, weight: .heavy))
+                    }
                 }
-                .padding(.horizontal, 20)
-                .padding(.top, 80)
+                
+                Spacer()
+                
+                Image.chevronRight
+                    .font(.system(size: 32))
+                    .foregroundColor(.white)
             }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 16)
+            .foregroundColor(.white)
+            .background(
+                RoundedRectangle(cornerRadius: 14)
+                    .fill(Color.accentColor.gradient)
+                    .opacity(0.9)
+                    .shadow(
+                        radius: Constants.Card.shadowRadius,
+                        x: Constants.Card.horizontalShadow,
+                        y: Constants.Card.verticalShadow
+                    )
+            )
         }
     }
     
-    private func calculateOffset(for time: Double, index: Int) -> CGFloat {
+    private func liveIndicatorComponent() -> some View {
         
-        var calc: CGFloat = 110
+        Circle()
+            .frame(width: Constants.LiveComponent.circleSize)
+            .scaleEffect(liveCircleAnimationAmount)
+            .animation(
+                .easeInOut(
+                    duration: Constants.LiveComponent.circleAnimationDuration).repeatForever(autoreverses: true),
+                value: liveCircleAnimationAmount
+            )
+            .onAppear {
+                liveCircleAnimationAmount = 0
+            }
+            .foregroundColor(Color.accentColor)
+    }
+}
+
+fileprivate enum Constants {
+    
+    enum Card {
         
-        if time > 0 {
-            calc += CGFloat(time * 80)
-        }
+        static let horizontalShadow: CGFloat = 3
+        static let verticalShadow: CGFloat = 3
+        static let shadowRadius: CGFloat = 3
+    }
+    
+    enum LiveComponent {
         
-        if index > 0 {
-            calc -= 140
-        }
-        
-        return calc
+        static let width: CGFloat = 78
+        static let circleSize: CGFloat = 12
+        static let circleAnimationDuration: Double = 1
+        static let circleAnimationAmount: Double = 1
+        static let circleAnimationDecrease: Double = 0.6
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        LiveView(viewModel: LiveViewModel())
-    }
-}
-
-private extension LiveView {
-    
-    func scrollView(for sessionResults: [SessionResult]) -> some View {
         
-        ScrollView {
-            LazyVGrid(columns: columns, spacing: 0) {
-                ForEach(Array(sessionResults.enumerated()), id: \.offset) { (index, result) in
-                    LiveCarView(
-                        viewModel:
-                            LiveCarViewModel(
-                                image: result.driver.constructor.name,
-                                position: index + 1,
-                                label: result.driver.driverThicker,
-                                offset: calculateOffset(for: result.time, index: index),
-                                time: result.time
-                            )
-                    )
-                    .redacted(reason: viewModel.state == .loading(SessionResult.mock) ? .placeholder : [])
-                }
-            }
-            .onAppear {
-                Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { timer in
-                    viewModel.checkPositions()
-                }
-            }
+        ForEach(ColorScheme.allCases, id: \.self) {
+            
+            LiveView(viewModel: LiveViewModel.mockLiveSoonHours)
+                .preferredColorScheme($0)
+                .previewDisplayName("Soon hours \($0)")
+            
+            LiveView(viewModel: LiveViewModel.mockLiveSoon)
+                .preferredColorScheme($0)
+                .previewDisplayName("Soon \($0)")
+            
+            LiveView(viewModel: LiveViewModel.mockLiveAboutToStart)
+                .preferredColorScheme($0)
+                .previewDisplayName("About to start \($0)")
+            
+            LiveView(viewModel: LiveViewModel.mockLive)
+                .preferredColorScheme($0)
+                .previewDisplayName("Live \($0)")
         }
     }
 }

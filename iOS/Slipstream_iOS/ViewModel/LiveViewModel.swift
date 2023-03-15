@@ -1,95 +1,116 @@
 import SwiftUI
 
-protocol LiveRepresentable: ObservableObject {
+protocol LiveViewModelRepresentable: ObservableObject {
     
-    var state: LiveViewModel.State { get }
+    var topSection: LiveViewModel.TopSection { get }
+    var cardSection: LiveViewModel.CardSection { get }
+    var time: LiveViewModel.Time { get }
+    var isLive: Bool { get }
     
-    func checkPositions()
+//    var state: LiveViewModel.State { get }
 }
 
 
-final class LiveViewModel: LiveRepresentable {
+final class LiveViewModel: LiveViewModelRepresentable {
+    
+    typealias TopSection = (title: String, round: Int)
+    typealias CardSection = (title: String, status: String?, drivers: [String])
+    typealias Time = (hours: Int, minutes: Int)
+    
+    let topSection: TopSection
+    let cardSection: CardSection
+    let time: Time
+    
+    var isLive: Bool { !cardSection.drivers.isEmpty && time.hours == 0 && time.minutes == 0 }
+    
+    init(topSection: TopSection, cardSection: CardSection, timeInterval: TimeInterval) {
+        
+        self.topSection = topSection
+        self.cardSection = cardSection
+        
+        if timeInterval < 60 {
+            self.time = Time(hours: 0, minutes: 0)
+        } else {
+            let formatter = DateComponentsFormatter()
+            formatter.allowedUnits = [.hour, .minute]
+            
+            let timeString = formatter.string(from: timeInterval) ?? "0:00"
+            let timeSplit = timeString.split(separator: ":")
+            
+            var hours: Int = 0
+            
+            if timeSplit.count > 1 {
+                hours = Int(timeSplit.first ?? "0") ?? 0
+            }
+            
+            let minutes = Int(timeString.split(separator: ":").last ?? "0")
+            
+            self.time = Time(hours: hours, minutes: minutes ?? 0)
+        }
+        
+    }
+    
+}
+
+extension LiveViewModel {
     
     enum State: Equatable {
         
-        case loading([SessionResult])
-        case results([SessionResult])
-    }
-    
-    @Published var state: State = .loading(SessionResult.mock)
-    
-    
-    @Published private var results = SessionResult.mock
-    
-    private var forceChange: Int = 0
-    
-    
-    func checkPositions() {
+        static func == (lhs: LiveViewModel.State, rhs: LiveViewModel.State) -> Bool {
+            lhs.id == rhs.id
+        }
         
-        results = generateRandomTime()
-        state = .results(results)
+        case results(TopSection, CardSection, Time, isLive: Bool)
+        case loading(TopSection, CardSection, Time, isLive: Bool)
         
-    }
-    
-    private func generateRandomTime() -> [SessionResult] {
-        
-        if forceChange == 10 {
+        enum idValue: String {
             
-            forceChange = 0
+            case loading
+            case results
+        }
+        
+        var id: String {
             
-            var newResults = results.enumerated().map { index, result in
-                var randomTime = Double.random(in: 1..<5)
-                
-                if index > 0 {
-                    randomTime = results[index - 1].time - 3
-                }
-                
-                return SessionResult(
-                    id: result.id,
-                    driver: result.driver,
-                    points: result.points,
-                    tirePitCount: result.tirePitCount,
-                    startingGrid: result.startingGrid,
-                    session: result.session,
-                    tireName: result.tireName,
-                    position: result.position,
-                    time: randomTime < 0 ? Double.random(in: 1..<5) : randomTime,
-                    lap: result.lap + 1
-                )
-                
+            switch self {
+            case .loading: return idValue.loading.rawValue
+            case .results: return idValue.results.rawValue
             }
-            .sorted(by: { $0.time < $1.time })
-            
-            
-            let minimumTimeId = newResults.min { $0.time < $1.time }?.id ?? ""
-            
-            guard let index = newResults.firstIndex(where: { $0.id == minimumTimeId }) else { return [] }
-            
-            newResults[index].time = 0
-            
-            return newResults
         }
-        
-        forceChange += 1
-        
-        return results.enumerated().map { index, result in
-            
-            return SessionResult(
-                id: result.id,
-                driver: result.driver,
-                points: result.points,
-                tirePitCount: result.tirePitCount,
-                startingGrid: result.startingGrid,
-                session: result.session,
-                tireName: result.tireName,
-                position: result.position,
-                time: index == 0 ? 0 : index < 0 ? Double.random(in: 1..<1.5) : result.time + Double.random(in: -0.05..<0.05),
-                lap: result.lap
-            )
-            
-        }
-        .sorted(by: { $0.time < $1.time })
-        
-        
     }
+}
+
+
+extension LiveViewModel {
+    
+    static let mockLiveAboutToStart: LiveViewModel = .init(
+        topSection: TopSection(title: "Emilia Romagna, Italy", round: 23),
+        cardSection: CardSection(title: "Race", status: "", drivers: []),
+        timeInterval: .init(0)
+    )
+    
+    static let mockLiveSoon: LiveViewModel = .init(
+        topSection: TopSection(title: "Emilia Romagna, Italy", round: 23),
+        cardSection: CardSection(title: "Race", status: "", drivers: []),
+        timeInterval: .init(400)
+    )
+    
+    static let mockLiveSoonHours: LiveViewModel = .init(
+        topSection: TopSection(title: "Emilia Romagna, Italy", round: 23),
+        cardSection: CardSection(title: "Race", status: "", drivers: []),
+        timeInterval: .init(4300)
+    )
+    
+    static let mockLive: LiveViewModel = .init(
+        topSection: TopSection(title: "Emilia Romagna, Italy", round: 23),
+        cardSection: CardSection(
+            title: "Race",
+            status: "Lap 14/28",
+            drivers: [
+                Driver.mockHamilton.driverTicker,
+                Driver.mockVertasppen.driverTicker,
+                Driver.mockAlonso.driverTicker
+            ]
+        ),
+        timeInterval: .init(0)
+    )
 }

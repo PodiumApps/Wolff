@@ -32,19 +32,19 @@ extension ScheduleCarouselViewModel {
     static let mockLive: ScheduleCarouselViewModel = .init(
         round: 13,
         title: "Emilia Romagna 2023",
-        eventStatus: .live(timeToEvent: "2h30min", session: .race, drivers: [])
+        eventStatus: .live(timeInterval: .init(400), sessionName: "Race", driverTickers: [])
     )
     
     static let mockLiveEvent: ScheduleCarouselViewModel = .init(
         round: 13,
         title: "Emilia Romagna 2023",
         eventStatus: .live(
-            timeToEvent: "",
-            session: .race,
-            drivers: [
-                .init(driverTicker: Driver.mockVertasppen.driverTicker, value: .first),
-                .init(driverTicker: Driver.mockHamilton.driverTicker, value: .second),
-                .init(driverTicker: Driver.mockAlonso.driverTicker, value: .third)
+            timeInterval: .init(0),
+            sessionName: "Race",
+            driverTickers: [
+                Driver.mockVertasppen.driverTicker,
+                Driver.mockHamilton.driverTicker,
+                Driver.mockAlonso.driverTicker
             ]
         )
     )

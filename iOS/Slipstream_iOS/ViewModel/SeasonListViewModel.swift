@@ -20,6 +20,8 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
     private var timer: Timer? = nil
     private var updatedIndex: Int? = nil
     
+    @Published var cells: [Cell] = []
+    
     @Published var state: State
     @Published var route: [Route]
     var action = PassthroughSubject<Action, Never>()
@@ -46,7 +48,6 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
     private func load() {
         
         eventService.action.send(.fetchAll)
-        liveEventService.action.send(.fetchPositions)
         
         action
             .receive(on: DispatchQueue.main)
@@ -66,59 +67,129 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                 
                 switch liveEventService {
                 case .refreshed(let livePostions):
-                    self.updateTodayEvent(livePositions: livePostions)
-                default:
-                    break
+                    self.state = self.loadData(livePositions: livePostions, fetchLivePositions: false)
+                    
+                case .refreshing, .error:
+                    if let index = self.cells.firstIndex(where: { $0.id == Cell.idValue.live.rawValue }) {
+                        
+                        self.cells[index] = .live(LiveViewModel.mockLiveSoonHours, index: nil)
+                                                  
+                        self.state = .results(self.cells)
+                    }
                 }
                 
             }
             .store(in: &subscriptions)
-
-        Publishers
-            .Zip(driverAndConstructorService.statePublisher, eventService.statePublisher)
+        
+       eventService.statePublisher
+            .combineLatest(driverAndConstructorService.statePublisher)
             .receive(on: DispatchQueue.main)
-            .compactMap { [weak self] driverAndConstructorService, eventService in
+            .compactMap { [weak self] eventService, driverAndConstructorService in
 
                 guard let self else { return nil }
                 
-                switch (driverAndConstructorService, eventService) {
-                case (.error(let error), _),
-                     (_, .error(let error)):
+                switch (eventService, driverAndConstructorService) {
+                case (.error(let error), _), (_, .error(let error)):
                     return .error(error.localizedDescription)
 
-                case (.refreshed(let drivers, _), .refreshed(let events, let nextEvent)):
+                case (.refreshed(let events, let nextEvent), .refreshed(let drivers, _)):
                     self.drivers = drivers
                     self.events = events
                     self.nextEvent = nextEvent
-                    return .results(self.buildGranPrixCardViewModel(events: events, nextEvent: nextEvent))
+                    return self.loadData(fetchLivePositions: self.cells.isEmpty)
 
-                default:
-                    return .loading(GrandPrixCardViewModel.mockArray)
+                case (.refreshing, _), (_, .refreshing):
+                    return self.cells.isEmpty ? .loading(Cell.cellsLoading) : .results(self.cells)
                 }
             }
             .assign(to: &$state)
     }
     
-    private func buildGranPrixCardViewModel(events: [Event], nextEvent: Event) -> [GrandPrixCardViewModel] {
+    private func loadData(
+        livePositions: [LivePosition] = [],
+        fetchLivePositions: Bool
+    ) -> State {
         
-        events.enumerated().compactMap { [weak self] (index, event) in
+        cells = []
+        
+        guard let nextEvent else { return .error("No next event") }
+        
+        if fetchLivePositions { liveEventService.action.send(.fetchPositions) }
+        
+        var upcomingEvents: [GrandPrixCardViewModel] = []
+        events.enumerated().forEach { (index, event) in
             
-            guard let self else { return nil }
+            var livePostionsTransform: [Driver] = []
             
-            let eventStatus = Event.getEventStatus(for: event, comparing: nextEvent, drivers: self.drivers)
-            
-            if case .live(_, _, let sessions) = eventStatus, !sessions.isEmpty {
-                self.timer?.invalidate()
-                self.updatedIndex = index
-                self.updateTodayEvent()
+            if !livePositions.isEmpty {
+                livePostionsTransform = livePositions.lazy.compactMap { [weak self] position in
+                    
+                    guard
+                        let self,
+                        position.position <= 3,
+                        let driver = self.drivers.first(where: { $0.id == position.id })
+                    else {
+                        return nil
+                    }
+                    
+                    return driver
+                }
             }
             
-            return GrandPrixCardViewModel(
-                round: event.round,
-                title: event.name,
-                eventStatus: eventStatus
+            let eventStatus = Event.getEventStatus(
+                for: event,
+                comparing: nextEvent,
+                drivers: self.drivers,
+                liveDrivers: livePostionsTransform
             )
+            
+            // Live CELL
+            if case .live(let timeInterval, let sessionName, let drivers) = eventStatus {
+                
+                self.timer?.invalidate()
+                self.updatedIndex = index
+                
+                self.updateTodayEvent(livePositions: livePositions, timeInterval: timeInterval)
+                
+                if fetchLivePositions {
+                    cells.append(.live(LiveViewModel.mockLiveSoon, index: nil))
+                } else {
+                    cells.append(
+                        .live(
+                            .init(
+                                topSection: LiveViewModel.TopSection(title: event.name, round: event.round),
+                                cardSection: LiveViewModel.CardSection(
+                                    title: sessionName,
+                                    status: nil,
+                                    drivers: drivers
+                                ),
+                                timeInterval: timeInterval
+                            ),
+                            index: index
+                        )
+                    )
+                }
+            }
+            
+            if case .upcoming(let start, let end, let session) = eventStatus {
+                
+                upcomingEvents.append(
+                    .init(
+                        round: event.round,
+                        title: event.name,
+                        subtitle: "Italy",
+                        grandPrixDate: start + " - " + end,
+                        isNext: session != nil
+                    )
+                )
+                
+            }
         }
+        
+        cells.append(.upcoming(upcomingEvents))
+        cells.append(.pastEvent)
+        
+        return .results(cells)
     }
     
     private func tapRow(at index: Int) {
@@ -128,48 +199,16 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
         route.append(.sessionStandings(sessionStandingsVM))
     }
     
-    private func updateTodayEvent(livePositions: [LivePosition] = []) {
-        
-        let driversTransform: [Driver] = livePositions.lazy.compactMap { [weak self] position in
-            
-            guard
-                let self,
-                position.position <= 3,
-                let driver = self.drivers.first(where: { $0.id == position.id })
-            else {
-                return nil
-            }
-            
-            return driver
-        }
+    private func updateTodayEvent(livePositions: [LivePosition] = [], timeInterval: TimeInterval) {
         
         timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: livePositions.isEmpty) { [weak self] _ in
             
-            guard
-                let self,
-                let nextEvent = self.nextEvent,
-                case .results(let granPrixVM) = self.state,
-                let updatedIndex = self.updatedIndex
-            else {
-                return
-            }
+            guard let self else { return }
             
-            let newEventStatus = Event.getEventStatus(
-                for: self.events[updatedIndex],
-                comparing: nextEvent,
-                drivers: self.drivers,
-                liveDrivers: driversTransform
-            )
-            debugPrint("Updating event index \(updatedIndex) to \(newEventStatus)")
-            
-            granPrixVM[updatedIndex].eventStatus = newEventStatus
-            
-            self.state = .results(granPrixVM)
-            
-            if !livePositions.isEmpty {
+            if timeInterval <= 0 {
                 self.liveEventService.action.send(.updatePositions)
             } else {
-                self.liveEventService.action.send(.fetchPositions)
+                self.eventService.action.send(.updateAll)
             }
         }
     }
@@ -184,8 +223,8 @@ extension SeasonListViewModel {
         }
         
         case error(String)
-        case results([GrandPrixCardViewModel])
-        case loading([GrandPrixCardViewModel])
+        case results([Cell])
+        case loading([Cell])
         
         enum idValue: String {
             
@@ -224,6 +263,37 @@ extension SeasonListViewModel {
         var id: String {
             switch self {
             case .sessionStandings: return "sessionStandings"
+            }
+        }
+    }
+    
+    enum Cell: Equatable, Identifiable {
+        
+        static func == (lhs: SeasonListViewModel.Cell, rhs: SeasonListViewModel.Cell) -> Bool {
+            lhs.id == rhs.id
+        }
+        
+        static let cellsLoading: [Self] = [
+            .live(LiveViewModel.mockLiveSoonHours, index: nil),
+            .upcoming(GrandPrixCardViewModel.mockArray)
+        ]
+        
+        case live(LiveViewModel, index: Int?)
+        case upcoming([GrandPrixCardViewModel])
+        case pastEvent
+        
+        enum idValue: String {
+            case live = "live"
+            case upcoming = "upcoming"
+            case pastEvent = "pastEvent"
+        }
+        
+        var id: String {
+            
+            switch self {
+            case .live: return idValue.live.rawValue
+            case .upcoming: return idValue.upcoming.rawValue
+            case .pastEvent: return idValue.pastEvent.rawValue
             }
         }
     }

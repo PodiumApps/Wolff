@@ -5,9 +5,9 @@ struct SessionDriverRowView<ViewModel: SessionDriverRowViewModelRepresentable>: 
     @ObservedObject private var viewModel: ViewModel
     private let sessionDriverStyler: SessionDriverStylerRepresentable
     
-    var action: ()->Void
+    private let action: ()->Void
 
-    init(viewModel: ViewModel,  action: @escaping(() -> Void)) {
+    init(viewModel: ViewModel, action: @escaping(() -> Void)) {
         
         self.viewModel = viewModel
         self.action = action

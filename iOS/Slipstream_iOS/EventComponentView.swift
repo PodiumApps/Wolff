@@ -9,15 +9,16 @@ struct EventComponentView: View {
         switch eventStatus {
         case .live(let timeToEvent, let session, let drivers):
             if drivers.isEmpty {
-                sessionDetailsComponent(title: timeToEvent, details: session.label)
+                sessionDetailsComponent(title: "\(timeToEvent)", details: session)
             } else {
-                driversPositionComponent(for: drivers)
+                Text("Something here")
+//                driversPositionComponent(for: drivers)
             }
         case .finished(let driver):
             Text(driver)
         case .upcoming(let start, let end, let session):
             if let session {
-                sessionDetailsComponent(title: start + "-" + end, details: session.label)
+                sessionDetailsComponent(title: start + "-" + end, details: session)
             } else {
                 sessionDetailsComponent(details: start + "-" + end)
             }

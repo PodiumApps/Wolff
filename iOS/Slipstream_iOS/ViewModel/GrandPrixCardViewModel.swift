@@ -1,82 +1,73 @@
 import Foundation
 
 protocol GrandPrixCardViewModelRepresentable {
-
+    
     var round: Int { get }
     var title: String { get }
-    var eventStatus: Event.Status { get }
+    var subtitle: String { get }
+    var grandPrixDate: String { get }
+    var isNext: Bool { get }
 }
 
 final class GrandPrixCardViewModel: GrandPrixCardViewModelRepresentable {
 
-    var round: Int
-    var title: String
-    var eventStatus: Event.Status
+    let round: Int
+    let title: String
+    let subtitle: String
+    let grandPrixDate: String
+    let isNext: Bool
 
     init(
         round: Int,
         title: String,
-        eventStatus: Event.Status
+        subtitle: String,
+        grandPrixDate: String,
+        isNext: Bool = false
     ) {
 
         self.round = round
-        self.title = title.uppercased()
-        self.eventStatus = eventStatus
+        self.title = title
+        self.subtitle = subtitle
+        self.grandPrixDate = grandPrixDate.capitalized
+        self.isNext = isNext
     }
 }
 
 extension GrandPrixCardViewModel {
     
-    static let mockUpcoming: GrandPrixCardViewModel = .init(
+    static let mockShortDate: GrandPrixCardViewModel = .init(
         round: 13,
-        title: "Emilia Romagna 2023",
-        eventStatus: .upcoming(start: "05", end: "07 MAY", session: nil)
+        title: "Emilia Romagna",
+        subtitle: "Italy",
+        grandPrixDate: "21 - 23 October"
     )
     
-    static let mockNextSession: GrandPrixCardViewModel = .init(
+    static let mockFullDate: GrandPrixCardViewModel = .init(
         round: 13,
-        title: "Emilia Romagna 2023",
-        eventStatus: .upcoming(start: "05", end: "07 MAY", session: .firstPractice)
+        title: "Spa-Francorchamps",
+        subtitle: "Belgium",
+        grandPrixDate: "21 October - 23 October"
     )
     
-    
-    static let mockLive: GrandPrixCardViewModel = .init(
+    static let mockNextFullDate: GrandPrixCardViewModel = .init(
         round: 13,
-        title: "Emilia Romagna 2023",
-        eventStatus: .live(timeToEvent: "2h30min", session: .race, drivers: [])
-    )
-    
-    static let mockLiveEvent: GrandPrixCardViewModel = .init(
-        round: 13,
-        title: "Emilia Romagna 2023",
-        eventStatus: .live(
-            timeToEvent: "",
-            session: .race,
-            drivers: [
-                .init(driverTicker: Driver.mockVertasppen.driverTicker, value: .first),
-                .init(driverTicker: Driver.mockHamilton.driverTicker, value: .second),
-                .init(driverTicker: Driver.mockAlonso.driverTicker, value: .third)
-            ]
-        )
-    )
-    
-    static let mockFinished: GrandPrixCardViewModel = .init(
-        round: 13,
-        title: "Emilia Romagna 2023",
-        eventStatus: .finished(winner: Driver.mockHamilton.driverTicker)
+        title: "Spa-Francorchamps",
+        subtitle: "Belgium",
+        grandPrixDate: "21 - 23 October",
+        isNext: true
     )
     
     static let mockArray: [GrandPrixCardViewModel] = [
-        .mockUpcoming,
-        .mockUpcoming,
-        .mockUpcoming,
-        .mockUpcoming,
-        .mockUpcoming,
-        .mockUpcoming,
-        .mockFinished,
-        .mockUpcoming,
-        .mockUpcoming,
-        .mockUpcoming,
-        .mockFinished
+        .mockShortDate,
+        .mockFullDate,
+        .mockShortDate,
+        .mockFullDate,
+        .mockShortDate,
+        .mockShortDate,
+        .mockShortDate,
+        .mockFullDate,
+        .mockFullDate,
+        .mockFullDate,
+        .mockShortDate
     ]
 }

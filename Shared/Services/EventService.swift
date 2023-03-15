@@ -32,10 +32,12 @@ class EventService: EventServiceRepresentable {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] action in
                 guard let self else { return }
-                self.state = .refreshing
                 Task {
                     switch action {
                     case .fetchAll:
+                        self.state = .refreshing
+                        await self.fetchAll()
+                    case .updateAll:
                         await self.fetchAll()
                     }
                 }
@@ -66,6 +68,7 @@ extension EventService {
     enum Action {
         
         case fetchAll
+        case updateAll
     }
     
     enum State {
