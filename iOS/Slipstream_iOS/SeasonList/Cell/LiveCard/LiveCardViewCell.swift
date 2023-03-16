@@ -16,28 +16,28 @@ struct LiveCardViewCell<ViewModel: LiveCardCellViewModelRepresentable>: View {
             
             HStack {
                 if viewModel.isLive {
-                    liveIndicatorComponent()
+                    LiveIndicatorComponent
                 }
                 
-                Text("HAPPENING \(viewModel.isLive ? "NOW" : "SOON")")
-                    .font(.system(size: 20, weight: .heavy))
+                Text(viewModel.isLive ? Localization.LiveCardCell.Title.now : Localization.LiveCardCell.Title.soon)
+                    .font(.Title4.heavy)
                     .foregroundColor(Color.accentColor)
             }
             HStack {
                 Text(viewModel.topSection.title)
-                    .font(.system(size: 20, weight: .bold))
+                    .font(.Title4.bold)
                 Spacer()
-                Text("Round \(viewModel.topSection.round)")
-                    .font(.system(size: 16))
+                Text(Localization.LiveCardCell.Top.round(viewModel.topSection.round))
+                    .font(.Body.regular)
             }
             Button(action: {
                 viewModel.action.send(())
             }) {
                 HStack {
-                    VStack(alignment: .leading, spacing: 8) {
-                        HStack(spacing: 24) {
+                    VStack(alignment: .leading, spacing: Constants.Card.verticalSpacing) {
+                        HStack(spacing: Constants.Card.horizontalSpacing) {
                             Text(viewModel.cardSection.title)
-                                .font(.system(size: 20, weight: .heavy))
+                                .font(.Title4.heavy)
                             
                             if let status = viewModel.cardSection.status, viewModel.isLive {
                                 Text(status)
@@ -45,56 +45,29 @@ struct LiveCardViewCell<ViewModel: LiveCardCellViewModelRepresentable>: View {
                         }
                         
                         if viewModel.time.minutes > 0 {
-                            HStack(alignment: .firstTextBaseline, spacing: 5) {
-                                if viewModel.time.hours > 0 {
-                                    Text("\(viewModel.time.hours)")
-                                        .font(.system(size: 20, weight: .heavy))
-                                    Text("HOUR")
-                                        .font(.system(size: 14, weight: .semibold))
-                                }
-                                
-                                Text("\(viewModel.time.minutes)")
-                                    .font(.system(size: 20, weight: .heavy))
-                                Text("MINUTES left")
-                                    .font(.system(size: 14, weight: .semibold))
-                            }
+                            TimeView
                         } else if !viewModel.cardSection.drivers.isEmpty {
-                            
-                            HStack(spacing: 12) {
-                                ForEach(0 ..< viewModel.cardSection.drivers.count, id: \.self) { index in
-                                    HStack(alignment: .firstTextBaseline, spacing: 2) {
-                                        Text("\(index + 1)")
-                                            .font(.system(size: 16, weight: .semibold))
-                                        + Text((index + 1).getPositionString)
-                                            .font(.system(size: 10))
-                                            .fontWeight(.semibold)
-                                            .baselineOffset(4.0)
-                                            .foregroundColor(.white)
-                                        Text(viewModel.cardSection.drivers[index])
-                                            .font(.system(size: 20, weight: .bold))
-                                    }
-                                }
-                            }
+                            DriversPositionsView
                         } else {
-                            Text("About to start")
-                                .font(.system(size: 20, weight: .heavy))
+                            Text(Localization.LiveCardCell.aboutToStart)
+                                .font(.Title4.heavy)
                         }
                     }
                     
                     Spacer()
                     
                     Image.chevronRight
-                        .font(.system(size: 32))
+                        .font(.Title.regular)
                         .foregroundColor(.white)
                 }
             }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 16)
+            .padding(.horizontal, Constants.Card.horizontalPadding)
+            .padding(.vertical, Constants.Card.verticalPadding)
             .foregroundColor(.white)
             .background(
-                RoundedRectangle(cornerRadius: 14)
+                RoundedRectangle(cornerRadius: Constants.Card.cornerRadius)
                     .fill(Color.accentColor.gradient)
-                    .opacity(0.9)
+                    .opacity(Constants.Card.opacity)
                     .shadow(
                         radius: Constants.Card.shadowRadius,
                         x: Constants.Card.horizontalShadow,
@@ -104,11 +77,47 @@ struct LiveCardViewCell<ViewModel: LiveCardCellViewModelRepresentable>: View {
         }
     }
     
-    private func liveIndicatorComponent() -> some View {
+    private var TimeView: some View {
+        
+        HStack(alignment: .firstTextBaseline, spacing: Constants.Time.horizontalSpacing) {
+            if viewModel.time.hours > 0 {
+                Text("\(viewModel.time.hours)")
+                    .font(.Title4.heavy)
+                Text(Localization.LiveCardCell.Time.hours)
+                    .font(.Caption.semibold)
+            }
+            
+            Text("\(viewModel.time.minutes)")
+                .font(.Title4.heavy)
+            Text(Localization.LiveCardCell.Time.minutes)
+                .font(.Caption.semibold)
+        }
+    }
+    
+    private var DriversPositionsView: some View {
+        
+        HStack(spacing: Constants.DriverPosition.horizontalSpacing) {
+            ForEach(0 ..< viewModel.cardSection.drivers.count, id: \.self) { index in
+                HStack(alignment: .firstTextBaseline, spacing: Constants.DriverPosition.spacing) {
+                    Text("\(index + 1)")
+                        .font(.Body.semibold)
+                    + Text((index + 1).getPositionString)
+                        .font(.Superscript.regular)
+                        .fontWeight(.semibold)
+                        .baselineOffset(Constants.DriverPosition.baselineOffset)
+                        .foregroundColor(.white)
+                    Text(viewModel.cardSection.drivers[index])
+                        .font(.Title4.bold)
+                }
+            }
+        }
+    }
+    
+    private var LiveIndicatorComponent: some View {
         
         Circle()
             .frame(width: Constants.LiveComponent.circleSize)
-            .scaleEffect(startLiveAnimation ? 1: 0.2)
+            .scaleEffect(startLiveAnimation ? 1 : 0.2)
             .animation(
                 .easeInOut(duration: Constants.LiveComponent.circleAnimationDuration).repeatForever(autoreverses: true),
                 value: startLiveAnimation
@@ -125,11 +134,29 @@ struct LiveCardViewCell<ViewModel: LiveCardCellViewModelRepresentable>: View {
 
 fileprivate enum Constants {
     
+    enum Time {
+        
+        static let horizontalSpacing: CGFloat = 4
+    }
+    
+    enum DriverPosition {
+        
+        static let horizontalSpacing: CGFloat = 12
+        static let spacing: CGFloat = 2
+        static let baselineOffset: CGFloat = 4.0
+    }
+    
     enum Card {
         
         static let horizontalShadow: CGFloat = 3
         static let verticalShadow: CGFloat = 3
         static let shadowRadius: CGFloat = 3
+        static let horizontalPadding: CGFloat = 12
+        static let verticalPadding: CGFloat = 16
+        static let verticalSpacing: CGFloat = 8
+        static let horizontalSpacing: CGFloat = 24
+        static let cornerRadius: CGFloat = 12
+        static let opacity: CGFloat = 0.9
     }
     
     enum LiveComponent {

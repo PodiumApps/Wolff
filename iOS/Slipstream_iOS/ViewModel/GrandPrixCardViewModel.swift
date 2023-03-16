@@ -35,13 +35,21 @@ final class GrandPrixCardViewModel: GrandPrixCardViewModelRepresentable {
         self.grandPrixDate = grandPrixDate.capitalized
         
         let weekInterval: Double = 7*24*60*60
+        let dayInterval: Double = 24*60*60
         
         if let nextSession = nextSession, nextSession < weekInterval {
             let formatter = DateComponentsFormatter()
-            formatter.allowedUnits = [.day, .hour]
-            formatter.calendar?.locale = Locale(identifier: "en_us")
             
-            self.nextSession = formatter.string(from: nextSession) ?? "0:00".uppercased()
+            formatter.allowedUnits = nextSession < dayInterval ? [.hour, .minute] : [.day, .hour]
+            formatter.calendar?.locale = Locale(identifier: "en_us")
+            formatter.zeroFormattingBehavior = .pad
+            
+            let string = formatter.string(from: nextSession) ?? "0:00"
+            let finalString = nextSession < dayInterval
+                ? string.replacingOccurrences(of: ":", with: "h ") + "min"
+                : string.uppercased()
+            
+            self.nextSession = finalString
         } else {
             self.nextSession = nil
             

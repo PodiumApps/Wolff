@@ -28,16 +28,16 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
                                 LiveCardViewCell(viewModel: viewModel)
                                     .foregroundColor(.primary)
                                     .redacted(reason: isLoading ? .placeholder : [])
-                                    .padding(.horizontal, 12)
+                                    .padding(.horizontal, Constants.horizontalPadding)
                                 
                                 Divider()
-                                    .padding(.horizontal, 12)
-                                    .padding(.top, 16)
+                                    .padding(.horizontal, Constants.horizontalPadding)
+                                    .padding(.top, Constants.topPadding)
                                 
                             case .upcomingAndStandings(let viewModel):
                                 ScrollView {
                                     UpcomingAndStandingsEventCellView(viewModel: viewModel)
-                                        .padding(.top, 16)
+                                        .padding(.top, Constants.topPadding)
                                 }
                             }
                         }
@@ -58,6 +58,12 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
             .navigationBarTitle("Season 2023")
         }
     }
+}
+
+fileprivate enum Constants {
+    
+    static var horizontalPadding: CGFloat = 12
+    static var topPadding: CGFloat = 16
 }
 
 struct SeasonListView_Previews: PreviewProvider {

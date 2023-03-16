@@ -226,7 +226,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
     
     private func updateTodayEvent(livePositions: [LivePosition] = [], timeInterval: TimeInterval) {
         
-        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false) { [weak self] _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: false) { [weak self] _ in
             
             guard let self else { return }
             

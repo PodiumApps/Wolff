@@ -24,6 +24,28 @@ internal enum Localization {
       }
     }
   }
+  internal enum LiveCardCell {
+    /// About to start
+    internal static let aboutToStart = Localization.tr("Localizable", "live_card_cell.about_to_start", fallback: "About to start")
+    internal enum Time {
+      /// HOURS
+      internal static let hours = Localization.tr("Localizable", "live_card_cell.time.hours", fallback: "HOURS")
+      /// MINUTES left
+      internal static let minutes = Localization.tr("Localizable", "live_card_cell.time.minutes", fallback: "MINUTES left")
+    }
+    internal enum Title {
+      /// HAPPENING NOW
+      internal static let now = Localization.tr("Localizable", "live_card_cell.title.now", fallback: "HAPPENING NOW")
+      /// HAPPENING SOON
+      internal static let soon = Localization.tr("Localizable", "live_card_cell.title.soon", fallback: "HAPPENING SOON")
+    }
+    internal enum Top {
+      /// Round %@
+      internal static func round(_ p1: Any) -> String {
+        return Localization.tr("Localizable", "live_card_cell.top.round", String(describing: p1), fallback: "Round %@")
+      }
+    }
+  }
   internal enum SessionDriverList {
     internal enum Error {
       /// Refresh
