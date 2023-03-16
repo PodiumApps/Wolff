@@ -6,8 +6,6 @@ protocol SeasonListViewModelRepresentable: ObservableObject {
     var state: SeasonListViewModel.State { get }
     var route: [SeasonListViewModel.Route] { get set }
     var action: PassthroughSubject<SeasonListViewModel.Action, Never> { get }
-    var filters: [SeasonListViewModel.UpcomingOrPastFilter] { get }
-    var upcomingOrPastSelection: SeasonListViewModel.UpcomingOrPastFilter { get }
 }
 
 class SeasonListViewModel: SeasonListViewModelRepresentable {
@@ -16,21 +14,17 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
     private var constructors: [Constructor]
     private var events: [Event]
     private var nextEvent: Event?
-    private var finishedEvents: [GrandPrixCardViewModel] = []
-    private var upcomingEvents: [GrandPrixCardViewModel] = []
     private let eventService: EventServiceRepresentable
     private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
     private let liveEventService: LiveSessionServiceRepresentable
     private var subscriptions = Set<AnyCancellable>()
     private var timer: Timer? = nil
-    private var updatedIndex: Int? = nil
     
     @Published var cells: [Section] = []
     
     @Published var state: State
     @Published var route: [Route]
-    let filters: [UpcomingOrPastFilter] = UpcomingOrPastFilter.allCases
-    @Published var upcomingOrPastSelection: UpcomingOrPastFilter = .upcoming
+    @Published var upcomingAndStandingsFilter: UpcomingAndStandingsEventCellViewModel.Filter = .upcoming
     var action = PassthroughSubject<Action, Never>()
     
     init(
@@ -57,22 +51,6 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
         
         eventService.action.send(.fetchAll)
         
-        action
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] action in
-                
-                guard let self else { return }
-                
-                switch action {
-                case .tap(let index):
-                    self.tapRow(at: index)
-                case .filterEvent(let filter):
-                    self.upcomingOrPastSelection = filter
-                    self.buildUpcomingViewModel(for: filter == .upcoming ? self.upcomingEvents : self.finishedEvents)
-                }
-            }
-            .store(in: &subscriptions)
-        
         liveEventService.statePublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] liveEventService in
@@ -89,7 +67,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                     self.state = self.loadData(livePositions: livePostions, fetchLivePositions: false)
                     
                 case .refreshing, .error:
-                    self.cells[index] = .live(LiveCardCellViewModel.mockLiveSoonHours, index: nil)
+                    self.cells[index] = .live(LiveCardCellViewModel.mockLiveAboutToStart, isLoading: true)
                     self.state = .results(self.cells)
                 }
                 
@@ -121,48 +99,21 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
             .assign(to: &$state)
     }
     
-    private func buildStandingsViewModel(for drivers: [Driver]) {
-        
-        if let index = cells.firstIndex(where: { $0.id == Section.idValue.upcomingAndStandings.rawValue }),
-           case .upcomingAndStandings(let upcomingVM) = cells[index],
-           let standingsIndex = upcomingVM.cells
-            .firstIndex(where: { $0.id  == UpcomingAndStandingsEventCellViewModel.Cell.idValue.standings.rawValue }) {
-            
-            upcomingVM.cells[standingsIndex] = .standings(drivers, constructors)
-            cells[index] = .upcomingAndStandings(upcomingVM)
-        }
-        
-        state = .results(cells)
-    }
-    
-    private func buildUpcomingViewModel(for events: [GrandPrixCardViewModel]) {
-        
-        if let index = cells.firstIndex(where: { $0.id == Section.idValue.upcomingAndStandings.rawValue }),
-           case .upcomingAndStandings(let upcomingVM) = cells[index],
-           let upcomingIndex = upcomingVM.cells
-            .firstIndex(where: { $0.id  == UpcomingAndStandingsEventCellViewModel.Cell.idValue.upcoming.rawValue }) {
-            
-            upcomingVM.cells[upcomingIndex] = .upcoming(events)
-            cells[index] = .upcomingAndStandings(upcomingVM)
-        }
-        
-        state = .results(cells)
-    }
-    
     private func loadData(
         livePositions: [LivePosition] = [],
         fetchLivePositions: Bool
     ) -> State {
         
         cells = []
-        finishedEvents = []
-        upcomingEvents = []
+        var upcomingEvents: [Event.Details] = []
         
         guard let nextEvent else { return .error("No next event") }
         
         if fetchLivePositions { liveEventService.action.send(.fetchPositions) }
         
-        events.enumerated().forEach { (index, event) in
+        events.enumerated().forEach { [weak self] (index, event) in
+            
+            guard let self else { return }
             
             var livePostionsTransform: [Driver] = []
             
@@ -189,76 +140,81 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
             )
             
             // Live CELL
-            if case .live(let timeInterval, let sessionName, let drivers) = eventStatus {
+            if case .live(let timeInterval, _, _) = eventStatus {
                 
                 self.timer?.invalidate()
-                self.updatedIndex = index
                 
                 self.updateTodayEvent(livePositions: livePositions, timeInterval: timeInterval)
                 
                 if fetchLivePositions {
-                    cells.append(.live(LiveCardCellViewModel.mockLiveSoon, index: nil))
+                    cells.append(.live(LiveCardCellViewModel.mockLiveAboutToStart, isLoading: true))
                 } else {
-                    cells.append(
-                        .live(
-                            .init(
-                                topSection: LiveCardCellViewModel.TopSection(title: event.name, round: event.round),
-                                cardSection: LiveCardCellViewModel.CardSection(
-                                    title: sessionName,
-                                    status: nil,
-                                    drivers: drivers
-                                ),
-                                timeInterval: timeInterval
-                            ),
-                            index: index
-                        )
+                    let eventDetail: Event.Details = .init(
+                        status: eventStatus,
+                        round: event.round,
+                        title: event.title,
+                        country: event.country
                     )
+                    
+                    cells.append(.live(buildLiveViewModel(with: eventDetail, index: index)))
                 }
-            }
-            
-            if case .upcoming(let start, let end, let session, let timeInterval) = eventStatus {
-                
-                let threeDaysInterval: Double = 3*24*60*60
-                
-                self.upcomingEvents.append(
+            } else {
+                upcomingEvents.append(
                     .init(
+                        status: eventStatus,
                         round: event.round,
                         title: event.title,
-                        subtitle: event.country,
-                        grandPrixDate: timeInterval ?? threeDaysInterval < threeDaysInterval
-                            ? session
-                            : start + " - " + end,
-                        nextSession: timeInterval
-                    )
-                )
-                
-            }
-            
-            if case .finished(let winner) = eventStatus {
-                
-                self.finishedEvents.append(
-                    .init(
-                        round: event.round,
-                        title: event.title,
-                        subtitle: event.country,
-                        grandPrixDate: "Winner: " + winner,
-                        nextSession: nil
+                        country: event.country
                     )
                 )
             }
+            
         }
         
-        cells.append(
-            .upcomingAndStandings(
-                .init(
-                    upcoming: upcomingOrPastSelection == .upcoming ? upcomingEvents : finishedEvents,
-                    drivers: drivers,
-                    constructors: constructors
-                )
-            )
-        )
+        cells.append(.upcomingAndStandings(buildUpcomingAndStandingsViewModel(with: upcomingEvents)))
         
         return .results(cells)
+    }
+    
+    private func buildLiveViewModel(with eventDetails: Event.Details, index: Int) -> LiveCardCellViewModel {
+        
+        let viewModel: LiveCardCellViewModel = .init(eventDetail: eventDetails, drivers: drivers)
+        
+        viewModel.action
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard case .results = self?.state else { return }
+                self?.tapRow(at: index)
+            }
+            .store(in: &subscriptions)
+        
+        return viewModel
+        
+        
+    }
+    
+    private func buildUpcomingAndStandingsViewModel(
+        with eventDetails: [Event.Details]
+    ) -> UpcomingAndStandingsEventCellViewModel {
+        
+        let viewModel = UpcomingAndStandingsEventCellViewModel(
+            eventDetails: eventDetails,
+            drivers: drivers,
+            constructors: constructors,
+            filter: upcomingAndStandingsFilter
+        )
+        
+        viewModel.action
+            .receive(on: DispatchQueue.main)
+            .compactMap {
+                switch $0 {
+                case .filterEvent(let filter): return filter
+                }
+            }
+            .assign(to: &$upcomingAndStandingsFilter)
+        
+        return viewModel
+            
     }
     
     private func tapRow(at index: Int) {
@@ -270,7 +226,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
     
     private func updateTodayEvent(livePositions: [LivePosition] = [], timeInterval: TimeInterval) {
         
-        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: false) { [weak self] _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false) { [weak self] _ in
             
             guard let self else { return }
             
@@ -278,7 +234,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                 self.eventService.action.send(.updateAll)
             }
             
-            if timeInterval < 0 {
+            if timeInterval <= 0 {
                 self.liveEventService.action.send(.updatePositions)
             }
         }
@@ -317,7 +273,6 @@ extension SeasonListViewModel {
     enum Action {
         
         case tap(index: Int)
-        case filterEvent(UpcomingOrPastFilter)
     }
     
     enum Route: Hashable {
@@ -346,17 +301,18 @@ extension SeasonListViewModel {
         }
         
         static let cellsLoading: [Self] = [
-            .live(LiveCardCellViewModel.mockLiveSoonHours, index: nil),
+            .live(LiveCardCellViewModel.mockLiveAboutToStart, isLoading: true),
             .upcomingAndStandings(
                 .init(
-                    upcoming: GrandPrixCardViewModel.mockArray,
+                    eventDetails: Event.mockDetailsArray,
                     drivers: Driver.mockArray,
-                    constructors: Constructor.mockArray
+                    constructors: Constructor.mockArray,
+                    filter: .upcoming
                 )
             )
         ]
         
-        case live(LiveCardCellViewModel, index: Int?)
+        case live(LiveCardCellViewModel, isLoading: Bool = false)
         case upcomingAndStandings(UpcomingAndStandingsEventCellViewModel)
         
         enum idValue: String {
@@ -371,21 +327,6 @@ extension SeasonListViewModel {
             case .upcomingAndStandings: return idValue.upcomingAndStandings.rawValue
             }
         }
-    }
-    
-    enum UpcomingOrPastFilter: CaseIterable, Hashable, Identifiable {
-        
-        case upcoming
-        case past
-        
-        var label: String {
-            switch self {
-            case .upcoming: return "Upcoming"
-            case .past: return "Past"
-            }
-        }
-        
-        var id: Self { return self }
     }
 }
 

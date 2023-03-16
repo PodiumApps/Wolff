@@ -27,7 +27,7 @@ struct ScheduleCarouselComponentView<ViewModel: ScheduleCarouselViewModelReprese
                     .font(.title3)
                     .bold()
 
-                EventComponentView(eventStatus: viewModel.eventStatus)
+//                EventComponentView(eventStatus: viewModel.eventStatus)
             }
         }
         .frame(height: Constants.Card.height)

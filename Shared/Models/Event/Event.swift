@@ -22,7 +22,7 @@ extension Event {
         
         case upcoming(start: String, end: String, sessionName: String, timeInterval: TimeInterval? = nil)
         case live(timeInterval: TimeInterval, sessionName: String, driverTickers: [String])
-        case finished(winner: String)
+        case finished(winner: [Driver.ID])
     }
 }
 
@@ -73,9 +73,9 @@ extension Event {
         let lastDay = formatter.string(from: finalSessionDate) + " " + lastMonth
         
         if event.id == nextEvent.id,
-           event.sessions.filter({ $0.winnerID != nil }).count != event.sessions.count {
+           event.sessions.filter({ !$0.winners.isEmpty }).count != event.sessions.count {
             
-            if let nextSession = event.sessions.lazy.first(where: { $0.winnerID == nil }) {
+            if let nextSession = event.sessions.lazy.first(where: { $0.winners.isEmpty }) {
                 
                 let intervaltimeStamp = nextSession.date.timeIntervalSinceNow
                 let liveInSeconds: Double = 4*60*60
@@ -109,7 +109,7 @@ extension Event {
                 }
             }
             
-            if let session = event.sessions.lazy.first(where: { $0.winnerID == nil }){
+            if let session = event.sessions.lazy.first(where: { $0.winners.isEmpty }){
                 return .upcoming(
                     start: firstDay,
                     end: lastDay,
@@ -120,12 +120,11 @@ extension Event {
         }
         
         if
-            event.sessions.lazy.filter({ $0.winnerID != nil }).count == event.sessions.count,
-            let winnerID = event.sessions.lazy.first(where: { $0.name == .race })?.winnerID,
-            let driverTicker = drivers.lazy.first(where: { $0.id == winnerID })?.driverTicker
+            event.sessions.lazy.filter({ !$0.winners.isEmpty }).count == event.sessions.count,
+            let winners = event.sessions.lazy.first(where: { $0.name == .race })?.winners
         {
             
-            return .finished(winner: driverTicker)
+            return .finished(winner: winners)
         }
         
         return .upcoming(
@@ -135,4 +134,54 @@ extension Event {
             timeInterval: nil
         )
     }
+}
+
+extension Event {
+    
+    struct Details {
+        
+        let status: Status
+        let round: Int
+        let title: String
+        let country: String
+    }
+    
+    static let mockStatusUpcoming: Event.Status = .upcoming(start: "02", end: "05 October", sessionName: "Race")
+    static let mockStatusFinished: Event.Status = .finished(winner: Driver.mockArray.map { $0.id })
+    static let mockStatusLive: Status = .live(
+        timeInterval: .init(100),
+        sessionName: "Race",
+        driverTickers: [
+            Driver.mockHamilton.driverTicker,
+            Driver.mockAlonso.driverTicker,
+            Driver.mockVertasppen.driverTicker
+        ]
+    )
+    
+    static let mockDetailsArray: [Details] = [
+        .init(
+            status: Event.mockStatusUpcoming,
+            round: 1,
+            title: "Title here",
+            country: "Country here"
+        ),
+        .init(
+            status: Event.mockStatusUpcoming,
+            round: 1,
+            title: "Title here",
+            country: "Country here"
+        ),
+        .init(
+            status: Event.mockStatusUpcoming,
+            round: 1,
+            title: "Title here",
+            country: "Country here"
+        ),
+        .init(
+            status: Event.mockStatusUpcoming,
+            round: 1,
+            title: "Title here",
+            country: "Country here"
+        )
+    ]
 }

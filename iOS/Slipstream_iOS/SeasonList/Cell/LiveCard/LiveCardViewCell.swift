@@ -4,12 +4,10 @@ struct LiveCardViewCell<ViewModel: LiveCardCellViewModelRepresentable>: View {
     
     @State private var startLiveAnimation: Bool = false
     @ObservedObject private var viewModel: ViewModel
-    private let action: ()->Void
     
-    init(viewModel: ViewModel, action: @escaping(() -> Void)) {
+    init(viewModel: ViewModel) {
         
         self.viewModel = viewModel
-        self.action = action
     }
     
     var body: some View {
@@ -33,7 +31,7 @@ struct LiveCardViewCell<ViewModel: LiveCardCellViewModelRepresentable>: View {
                     .font(.system(size: 16))
             }
             Button(action: {
-                action()
+                viewModel.action.send(())
             }) {
                 HStack {
                     VStack(alignment: .leading, spacing: 8) {
@@ -67,7 +65,7 @@ struct LiveCardViewCell<ViewModel: LiveCardCellViewModelRepresentable>: View {
                                     HStack(alignment: .firstTextBaseline, spacing: 2) {
                                         Text("\(index + 1)")
                                             .font(.system(size: 16, weight: .semibold))
-                                        + Text("º")
+                                        + Text((index + 1).getPositionString)
                                             .font(.system(size: 10))
                                             .fontWeight(.semibold)
                                             .baselineOffset(4.0)
@@ -148,22 +146,8 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         
         ForEach(ColorScheme.allCases, id: \.self) {
-            
-            LiveCardViewCell(viewModel: LiveCardCellViewModel.mockLiveSoonHours){}
+            LiveCardViewCell(viewModel: LiveCardCellViewModel.mockLiveAboutToStart)
                 .preferredColorScheme($0)
-                .previewDisplayName("Soon hours \($0)")
-            
-            LiveCardViewCell(viewModel: LiveCardCellViewModel.mockLiveSoon){}
-                .preferredColorScheme($0)
-                .previewDisplayName("Soon \($0)")
-            
-            LiveCardViewCell(viewModel: LiveCardCellViewModel.mockLiveAboutToStart){}
-                .preferredColorScheme($0)
-                .previewDisplayName("About to start \($0)")
-            
-            LiveCardViewCell(viewModel: LiveCardCellViewModel.mockLive){}
-                .preferredColorScheme($0)
-                .previewDisplayName("Live \($0)")
         }
     }
 }

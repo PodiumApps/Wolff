@@ -23,16 +23,12 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
                     VStack(alignment: .leading, spacing: 0) {
                         ForEach(cells) { cell in
                             switch cell {
-                            case .live(let viewModel, let index):
+                            case .live(let viewModel, let isLoading):
                                 
-                                LiveCardViewCell(viewModel: viewModel) {
-                                    if let index {
-                                        self.viewModel.action.send(.tap(index: index))
-                                    }
-                                }
-                                .foregroundColor(.primary)
-                                .redacted(reason: index == nil ? .placeholder : [])
-                                .padding(.horizontal, 12)
+                                LiveCardViewCell(viewModel: viewModel)
+                                    .foregroundColor(.primary)
+                                    .redacted(reason: isLoading ? .placeholder : [])
+                                    .padding(.horizontal, 12)
                                 
                                 Divider()
                                     .padding(.horizontal, 12)
@@ -40,26 +36,8 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
                                 
                             case .upcomingAndStandings(let viewModel):
                                 ScrollView {
-                                    VStack(alignment: .leading, spacing: 8) {
-                                        HStack {
-                                            ForEach(self.viewModel.filters) { filter in
-                                                Button(action: {
-                                                    self.viewModel.action.send(.filterEvent(filter))
-                                                }) {
-                                                    Text(filter.label)
-                                                        .font(.system(size: 24, weight: .semibold))
-                                                        .foregroundColor(
-                                                            filter == self.viewModel.upcomingOrPastSelection
-                                                            ? .accentColor
-                                                            : Color(UIColor.systemGray4)
-                                                        )
-                                                }
-                                            }
-                                        }
-                                        .padding(.horizontal, 12)
-                                        UpcomingAndStandingsEventCellView(viewModel: viewModel)
-                                    }
-                                    .padding(.top, 16)
+                                    UpcomingAndStandingsEventCellView(viewModel: viewModel)
+                                        .padding(.top, 16)
                                 }
                             }
                         }

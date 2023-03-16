@@ -52,6 +52,6 @@ extension ScheduleCarouselViewModel {
     static let mockFinished: ScheduleCarouselViewModel = .init(
         round: 13,
         title: "Emilia Romagna 2023",
-        eventStatus: .finished(winner: Driver.mockHamilton.driverTicker)
+        eventStatus: .finished(winner: [Driver.mockHamilton.id, Driver.mockAlonso.id, Driver.mockLeclerc.id])
     )
 }

@@ -4,6 +4,10 @@ import Combine
 protocol UpcomingAndStandingsEventCellViewModelRepresentable: ObservableObject {
     
     var cells: [UpcomingAndStandingsEventCellViewModel.Cell] { get }
+    var filters: [UpcomingAndStandingsEventCellViewModel.Filter] { get }
+    var filterSelection: UpcomingAndStandingsEventCellViewModel.Filter { get }
+    
+    var action: PassthroughSubject<UpcomingAndStandingsEventCellViewModel.Action, Never> { get }
     
 }
 
@@ -11,12 +15,100 @@ class UpcomingAndStandingsEventCellViewModel: UpcomingAndStandingsEventCellViewM
     
     @Published var cells: [Cell]
     
-    init(upcoming: [GrandPrixCardViewModel], drivers: [Driver], constructors: [Constructor]) {
+    let filters: [Filter] = Filter.allCases
+    @Published var filterSelection: Filter = .upcoming
+    
+    private var upcomingEvents: [GrandPrixCardViewModel]
+    private var finishedEvents: [GrandPrixCardViewModel]
+    private var subscriptions = Set<AnyCancellable>()
+    private let eventDetails: [Event.Details]
+    
+    var action = PassthroughSubject<Action, Never>()
+    
+    init(eventDetails: [Event.Details], drivers: [Driver], constructors: [Constructor], filter: Filter) {
         
-        cells = [
-            .upcoming(upcoming),
+        self.cells = []
+        self.upcomingEvents = []
+        self.finishedEvents = []
+        self.eventDetails = eventDetails
+        self.filterSelection = filter
+        
+        loadEventDetails(drivers: drivers)
+        setupBindings(drivers: drivers, constructors: constructors)
+    }
+    
+    private func setupBindings(drivers: [Driver], constructors: [Constructor]) {
+        
+        self.cells = [
+            .upcoming(filterSelection == .upcoming ? self.upcomingEvents : self.finishedEvents),
             .standings(drivers, constructors)
         ]
+        
+        action
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                
+                guard let self else { return }
+                
+                switch action {
+                case .filterEvent(let filter):
+                    self.filterSelection = filter
+                    self.buildUpcomingViewModel(for: filter == .upcoming ? self.upcomingEvents : self.finishedEvents)
+                }
+            }
+            .store(in: &subscriptions)
+    }
+    
+    private func loadEventDetails(drivers: [Driver]) {
+        
+        eventDetails.lazy.forEach { details in
+            
+            switch details.status {
+            case .upcoming(let start, let end, let session, let timeInterval):
+                let threeDaysInterval: Double = 3*24*60*60
+                self.upcomingEvents.append(
+                        .init(
+                        round: details.round,
+                        title: details.title,
+                        subtitle: details.country,
+                        grandPrixDate: timeInterval ?? threeDaysInterval < threeDaysInterval
+                            ? session
+                            : start + " - " + end,
+                        winners: [],
+                        nextSession: timeInterval
+                    )
+                )
+                
+            case .finished(let winners):
+                let winnersTickers: [String] = winners.lazy.enumerated().compactMap { index, winner in
+                    
+                    guard let driver = drivers.lazy.first(where: { $0.id == winner }) else { return nil }
+                    return driver.driverTicker
+                }
+                
+                self.finishedEvents.append(
+                    GrandPrixCardViewModel(
+                        round: details.round,
+                        title: details.title,
+                        subtitle: details.country,
+                        grandPrixDate: "",
+                        winners: winnersTickers,
+                        nextSession: nil
+                    )
+                )
+            case .live:
+                break
+            }
+        }
+    }
+    
+    
+    private func buildUpcomingViewModel(for events: [GrandPrixCardViewModel]) {
+        
+        if let index = cells.firstIndex(where: { $0.id == Cell.idValue.upcoming.rawValue }) {
+            
+            cells[index] = .upcoming(events)
+        }
     }
     
 }
@@ -50,7 +142,7 @@ extension UpcomingAndStandingsEventCellViewModel {
         }
     }
     
-    enum UpcomingOrPastFilter: CaseIterable, Hashable, Identifiable {
+    enum Filter: CaseIterable, Hashable, Identifiable {
         
         case upcoming
         case past
@@ -63,5 +155,10 @@ extension UpcomingAndStandingsEventCellViewModel {
         }
         
         var id: Self { return self }
+    }
+    
+    enum Action {
+        
+        case filterEvent(Filter)
     }
 }

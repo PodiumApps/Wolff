@@ -12,7 +12,23 @@ struct UpcomingAndStandingsEventCellView<ViewModel: UpcomingAndStandingsEventCel
     var body: some View {
         
         VStack(alignment: .leading) {
-            
+            HStack {
+                ForEach(self.viewModel.filters) { filter in
+                    Button(action: {
+                        self.viewModel.action.send(.filterEvent(filter))
+                    }) {
+                        Text(filter.label)
+                            .font(.system(size: 24, weight: .semibold))
+                            .foregroundColor(
+                                filter == self.viewModel.filterSelection
+                                ? .accentColor
+                                : Color(UIColor.systemGray4)
+                            )
+                    }
+                }
+            }
+            .padding(.horizontal, 12)
+                
             ForEach(viewModel.cells) { cell in
                 
                 switch cell {
@@ -31,6 +47,7 @@ struct UpcomingAndStandingsEventCellView<ViewModel: UpcomingAndStandingsEventCel
                     }
                     .frame(height: 120)
                     Divider()
+                        .padding(.horizontal, 12)
                 case .standings(let drivers, let constructors):
                     Text("Current Standings")
                         .font(.system(size: 24, weight: .heavy))
@@ -50,13 +67,16 @@ struct UpcomingAndStandingsEventCellView<ViewModel: UpcomingAndStandingsEventCel
     }
 }
 
-//struct UpcomingAndPastEventCellView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        UpcomingAndPastEventCellView(
-//            viewModel: UpcomingAndPastEventCellViewModel(
-//                upcoming: GrandPrixCardViewModel.mockArray,
-//                finished: GrandPrixCardViewModel.mockArray
-//            )
-//        )
-//    }
-//}
+struct UpcomingAndPastEventCellView_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        UpcomingAndStandingsEventCellView(
+            viewModel: UpcomingAndStandingsEventCellViewModel(
+                eventDetails: Event.mockDetailsArray,
+                drivers: Driver.mockArray,
+                constructors: Constructor.mockArray,
+                filter: .upcoming
+            )
+        )
+    }
+}

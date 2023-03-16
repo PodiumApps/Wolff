@@ -22,7 +22,7 @@ struct GrandPrixCardView<ViewModel: GrandPrixCardViewModelRepresentable>: View {
                     
                     VStack(alignment: .leading, spacing: 4) {
                         Text(viewModel.title)
-                            .font(.system(size: 15, weight: .bold))
+                            .font(.system(size: 18, weight: .bold))
                         HStack {
                             
                             Text(viewModel.subtitle)
@@ -34,8 +34,26 @@ struct GrandPrixCardView<ViewModel: GrandPrixCardViewModelRepresentable>: View {
                     }
                     
                     HStack {
-                        Text(viewModel.grandPrixDate)
-                            .font(.system(size: 14, weight: .semibold))
+                        if !viewModel.winners.isEmpty {
+                            HStack(spacing: 8) {
+                                ForEach(0 ..< viewModel.winners.count, id: \.self) { index in
+                                    HStack(spacing: 2) {
+                                        Text("\(index + 1)")
+                                            .font(.system(size: 14, weight: .semibold))
+                                        + Text((index + 1).getPositionString)
+                                            .font(.system(size: 8))
+                                            .fontWeight(.semibold)
+                                            .baselineOffset(4.0)
+                                        
+                                        Text(viewModel.winners[index])
+                                            .font(.system(size: 14, weight: .bold))
+                                    }
+                                }
+                            }
+                        } else {
+                            Text(viewModel.grandPrixDate)
+                                .font(.system(size: 14, weight: .semibold))
+                        }
                         
                         if let label = viewModel.nextSession {
                             Text("in " + label)

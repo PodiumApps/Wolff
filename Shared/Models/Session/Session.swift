@@ -8,7 +8,7 @@ struct Session: Decodable, Identifiable {
     let laps: Int
     var date: Date
     let name: Name
-    let winnerID: Driver.ID?
+    let winners: [Driver.ID]
 }
 
 extension Session {

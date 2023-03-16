@@ -12,13 +12,14 @@
 		4207B43929C0BCBE00AA4758 /* LiveCardCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2197B295EE46500515097 /* LiveCardCellViewModel.swift */; };
 		4207B43A29C18CFD00AA4758 /* GrandPrixCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */; };
 		4207B43B29C18D0200AA4758 /* GrandPrixCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36A297700160038A860 /* GrandPrixCardView.swift */; };
-		4207B43C29C1CD1200AA4758 /* EventComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DD429A7D6A900A8D1CD /* EventComponentView.swift */; };
 		4207B43E29C1E47F00AA4758 /* UpcomingAndStandingsEventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B43D29C1E47E00AA4758 /* UpcomingAndStandingsEventCellViewModel.swift */; };
 		4207B44429C1E59300AA4758 /* UpcomingAndStandingsEventCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B44329C1E59300AA4758 /* UpcomingAndStandingsEventCellView.swift */; };
 		4207B44729C2151A00AA4758 /* DriverDetailsTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B44629C2151A00AA4758 /* DriverDetailsTextView.swift */; };
 		4207B44929C215F100AA4758 /* CarWithNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B44829C215F100AA4758 /* CarWithNumberView.swift */; };
 		4207B44C29C216DC00AA4758 /* StandingsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B44B29C216DC00AA4758 /* StandingsCellView.swift */; };
 		4207B44E29C216E900AA4758 /* StandingsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B44D29C216E900AA4758 /* StandingsCellViewModel.swift */; };
+		4207B45029C3425300AA4758 /* IntegerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B44F29C3425300AA4758 /* IntegerExtension.swift */; };
+		4207B45129C3426800AA4758 /* IntegerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B44F29C3425300AA4758 /* IntegerExtension.swift */; };
 		420967F4294C9A8D0075D75E /* SlipstreamWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420967F3294C9A8D0075D75E /* SlipstreamWatchApp.swift */; };
 		420967F6294C9A8D0075D75E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420967F5294C9A8D0075D75E /* ContentView.swift */; };
 		420967F8294C9A8F0075D75E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 420967F7294C9A8F0075D75E /* Assets.xcassets */; };
@@ -153,6 +154,7 @@
 		4207B44829C215F100AA4758 /* CarWithNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarWithNumberView.swift; sourceTree = "<group>"; };
 		4207B44B29C216DC00AA4758 /* StandingsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsCellView.swift; sourceTree = "<group>"; };
 		4207B44D29C216E900AA4758 /* StandingsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsCellViewModel.swift; sourceTree = "<group>"; };
+		4207B44F29C3425300AA4758 /* IntegerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerExtension.swift; sourceTree = "<group>"; };
 		420967EE294C9A8D0075D75E /* Slipstream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Slipstream.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		420967F3294C9A8D0075D75E /* SlipstreamWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlipstreamWatchApp.swift; sourceTree = "<group>"; };
 		420967F5294C9A8D0075D75E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -213,7 +215,6 @@
 		CF20D36A297700160038A860 /* GrandPrixCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandPrixCardView.swift; sourceTree = "<group>"; };
 		CF20D36D297802040038A860 /* DriverResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverResult.swift; sourceTree = "<group>"; };
 		CF20D370297818EE0038A860 /* EventStatusBackgroundStyler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStatusBackgroundStyler.swift; sourceTree = "<group>"; };
-		CF233DD429A7D6A900A8D1CD /* EventComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventComponentView.swift; sourceTree = "<group>"; };
 		CF233DDD29A8D98800A8D1CD /* GrandPrixSchedulePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandPrixSchedulePickerViewModel.swift; sourceTree = "<group>"; };
 		CF233DDF29A8DB7C00A8D1CD /* GrandPrixSchedulePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandPrixSchedulePickerView.swift; sourceTree = "<group>"; };
 		CF233DE229ABE02F00A8D1CD /* SessionDriverRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDriverRowViewModel.swift; sourceTree = "<group>"; };
@@ -386,7 +387,6 @@
 				4207B43F29C1E51700AA4758 /* SeasonList */,
 				42521D0329B7910500000586 /* ViewModel */,
 				42521D0029B790BE00000586 /* Views */,
-				CF233DD429A7D6A900A8D1CD /* EventComponentView.swift */,
 				42B219A2295F44F400515097 /* ViewBuilders */,
 				42B2196B295D94C800515097 /* Support */,
 				42096839295378A20075D75E /* Preview Content */,
@@ -607,6 +607,7 @@
 				CF0544452951CB8D00A39FE3 /* DateExtension.swift */,
 				42B21999295F3A2300515097 /* DoubleExtension.swift */,
 				42521CB429B1033600000586 /* LoggerExtension.swift */,
+				4207B44F29C3425300AA4758 /* IntegerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -898,6 +899,7 @@
 				42521CC129B250DE00000586 /* ButtonStyle.swift in Sources */,
 				42096823294C9B990075D75E /* NetworkManager.swift in Sources */,
 				CF20D371297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */,
+				4207B45129C3426800AA4758 /* IntegerExtension.swift in Sources */,
 				CF20D36529760C300038A860 /* Colors.swift in Sources */,
 				42B21972295DDBAB00515097 /* Details.swift in Sources */,
 				42521CA729B0F21700000586 /* DriverAndConstructorService.swift in Sources */,
@@ -978,6 +980,7 @@
 				CF8EB9D429A77AA700F38158 /* Event.swift in Sources */,
 				4209685C29537AC90075D75E /* DateExtension.swift in Sources */,
 				CF233DE529ABE17B00A8D1CD /* SessionDriverRowView.swift in Sources */,
+				4207B45029C3425300AA4758 /* IntegerExtension.swift in Sources */,
 				CF20D36F297802040038A860 /* DriverResult.swift in Sources */,
 				42B21981295EEA2300515097 /* SessionResultMock.swift in Sources */,
 				CFE23F4E2982EB9400412DB6 /* Localization.swift in Sources */,
@@ -985,7 +988,6 @@
 				CF20D362297577D80038A860 /* ConstructorStyler.swift in Sources */,
 				CFEE3F2B2969B6970050EE8B /* ResultCardView.swift in Sources */,
 				42B21984295EEA5600515097 /* SessionMock.swift in Sources */,
-				4207B43C29C1CD1200AA4758 /* EventComponentView.swift in Sources */,
 				42521CB629B1033600000586 /* LoggerExtension.swift in Sources */,
 				CF20D36629760C300038A860 /* Colors.swift in Sources */,
 				4207B43829C0BC9300AA4758 /* LiveCardViewCell.swift in Sources */,

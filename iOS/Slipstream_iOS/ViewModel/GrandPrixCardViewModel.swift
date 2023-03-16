@@ -6,6 +6,7 @@ protocol GrandPrixCardViewModelRepresentable {
     var title: String { get }
     var subtitle: String { get }
     var grandPrixDate: String { get }
+    var winners: [String] { get }
     var nextSession: String? { get }
 }
 
@@ -15,6 +16,7 @@ final class GrandPrixCardViewModel: GrandPrixCardViewModelRepresentable {
     let title: String
     let subtitle: String
     let grandPrixDate: String
+    let winners: [String]
     let nextSession: String?
 
     init(
@@ -22,12 +24,14 @@ final class GrandPrixCardViewModel: GrandPrixCardViewModelRepresentable {
         title: String,
         subtitle: String,
         grandPrixDate: String,
+        winners: [String],
         nextSession: TimeInterval? = nil
     ) {
 
         self.round = round
         self.title = title
         self.subtitle = subtitle
+        self.winners = winners
         self.grandPrixDate = grandPrixDate.capitalized
         
         let weekInterval: Double = 7*24*60*60
@@ -51,14 +55,16 @@ extension GrandPrixCardViewModel {
         round: 13,
         title: "Emilia Romagna",
         subtitle: "Italy",
-        grandPrixDate: "21 - 23 October"
+        grandPrixDate: "21 - 23 October",
+        winners: []
     )
     
     static let mockFullDate: GrandPrixCardViewModel = .init(
         round: 13,
         title: "Spa-Francorchamps",
         subtitle: "Belgium",
-        grandPrixDate: "21 October - 23 October"
+        grandPrixDate: "21 October - 23 October",
+        winners: []
     )
     
     static let mockNextFullDate: GrandPrixCardViewModel = .init(
@@ -66,6 +72,7 @@ extension GrandPrixCardViewModel {
         title: "Spa-Francorchamps",
         subtitle: "Belgium",
         grandPrixDate: "21 - 23 October",
+        winners: [],
         nextSession: .init(320000)
     )
     

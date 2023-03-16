@@ -1,4 +1,5 @@
-import SwiftUI
+import Combine
+import Foundation
 
 protocol LiveCardCellViewModelRepresentable: ObservableObject {
     
@@ -7,7 +8,8 @@ protocol LiveCardCellViewModelRepresentable: ObservableObject {
     var time: LiveCardCellViewModel.Time { get }
     var isLive: Bool { get }
     
-//    var state: LiveViewModel.State { get }
+    
+    var action: PassthroughSubject<Void, Never> { get }
 }
 
 
@@ -17,42 +19,65 @@ final class LiveCardCellViewModel: LiveCardCellViewModelRepresentable {
     typealias CardSection = (title: String, status: String?, drivers: [String])
     typealias Time = (hours: Int, minutes: Int)
     
-    let topSection: TopSection
-    let cardSection: CardSection
-    let time: Time
+    @Published var topSection: TopSection
+    @Published var cardSection: CardSection
+    @Published var time: Time
+    var action = PassthroughSubject<Void, Never>()
     
     var isLive: Bool { !cardSection.drivers.isEmpty && time.hours == 0 && time.minutes == 0 }
     
-    init(topSection: TopSection, cardSection: CardSection, timeInterval: TimeInterval) {
+    init(eventDetail: Event.Details, drivers: [Driver]) {
         
-        self.topSection = topSection
-        self.cardSection = cardSection
+        self.topSection = TopSection(title: "", round: 0)
+        self.cardSection = CardSection(title: "", status: nil, drivers: [])
         
-        if timeInterval < 60 {
-            self.time = Time(hours: 0, minutes: 0)
-        } else {
-            let formatter = DateComponentsFormatter()
-            formatter.allowedUnits = [.hour, .minute]
+        self.time = Time(hours: 0, minutes: 0)
+        
+        setupBindings(eventDetail: eventDetail, drivers: drivers)
+        
+    }
+    
+    private func setupBindings(eventDetail: Event.Details, drivers: [Driver]) {
+        
+        if case .live(let timeInterval, let sessionName, let drivers) = eventDetail.status {
             
-            let timeString = formatter.string(from: timeInterval) ?? "0:00"
-            let timeSplit = timeString.split(separator: ":")
+            self.topSection = TopSection(title: eventDetail.title, round: eventDetail.round)
+            self.cardSection = CardSection(
+                title: sessionName,
+                status: nil,
+                drivers: drivers
+            )
             
-            var hours: Int = 0
-            
-            if timeSplit.count > 1 {
-                hours = Int(timeSplit.first ?? "0") ?? 0
+            if timeInterval < 60 {
+                self.time = Time(hours: 0, minutes: 0)
+            } else {
+                let formatter = DateComponentsFormatter()
+                formatter.allowedUnits = [.hour, .minute]
+                
+                let timeString = formatter.string(from: timeInterval) ?? "0:00"
+                let timeSplit = timeString.split(separator: ":")
+                
+                var hours: Int = 0
+                
+                if timeSplit.count > 1 {
+                    hours = Int(timeSplit.first ?? "0") ?? 0
+                }
+                
+                let minutes = Int(timeString.split(separator: ":").last ?? "0")
+                
+                self.time = Time(hours: hours, minutes: minutes ?? 0)
             }
-            
-            let minutes = Int(timeString.split(separator: ":").last ?? "0")
-            
-            self.time = Time(hours: hours, minutes: minutes ?? 0)
         }
-        
     }
     
 }
 
 extension LiveCardCellViewModel {
+    
+    enum Action {
+        
+        case tapLiveEvent
+    }
     
     enum State: Equatable {
         
@@ -83,34 +108,7 @@ extension LiveCardCellViewModel {
 extension LiveCardCellViewModel {
     
     static let mockLiveAboutToStart: LiveCardCellViewModel = .init(
-        topSection: TopSection(title: "Emilia Romagna, Italy", round: 23),
-        cardSection: CardSection(title: "Race", status: "", drivers: []),
-        timeInterval: .init(0)
-    )
-    
-    static let mockLiveSoon: LiveCardCellViewModel = .init(
-        topSection: TopSection(title: "Emilia Romagna, Italy", round: 23),
-        cardSection: CardSection(title: "Race", status: "", drivers: []),
-        timeInterval: .init(400)
-    )
-    
-    static let mockLiveSoonHours: LiveCardCellViewModel = .init(
-        topSection: TopSection(title: "Emilia Romagna, Italy", round: 23),
-        cardSection: CardSection(title: "Race", status: "", drivers: []),
-        timeInterval: .init(4300)
-    )
-    
-    static let mockLive: LiveCardCellViewModel = .init(
-        topSection: TopSection(title: "Emilia Romagna, Italy", round: 23),
-        cardSection: CardSection(
-            title: "Race",
-            status: "Lap 14/28",
-            drivers: [
-                Driver.mockHamilton.driverTicker,
-                Driver.mockVertasppen.driverTicker,
-                Driver.mockAlonso.driverTicker
-            ]
-        ),
-        timeInterval: .init(0)
+        eventDetail: Event.mockDetailsArray[0],
+        drivers: Driver.mockArray
     )
 }
