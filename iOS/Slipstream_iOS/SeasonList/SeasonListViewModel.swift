@@ -43,7 +43,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
         self.eventService = eventService
         self.driverAndConstructorService = driverAndConstructorService
         self.liveEventService = liveEventService
-        self.state = .loading([])
+        self.state = .loading(Section.cellsLoading)
         self.route = []
         self.nextEvent = nil
         self.cells = Section.cellsLoading
@@ -99,7 +99,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                     return self.loadData()
 
                 case (.refreshing, _), (_, .refreshing):
-                    return .results(self.cells)
+                    return .loading(self.cells)
                 }
             }
             .assign(to: &$state)
