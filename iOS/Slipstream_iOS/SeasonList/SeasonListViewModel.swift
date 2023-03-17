@@ -152,18 +152,23 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
              return
         }
         
-        cells[index] = .live(
-            buildLiveViewModel(with: events[nextLiveEventIndex].shortDetails, index: index, livePositions: livePositions)
-        )
-        
-        if timeInterval < 0 && livePositions.isEmpty {
-            timerEvents?.invalidate()
-            updateEvents(force: true)
-        }
-        
         timer?.invalidate()
         
         updateTodayEvent(timeInterval: timeInterval)
+        
+        if timeInterval < -.hourInterval && livePositions.isEmpty {
+            timerEvents?.invalidate()
+            updateEvents(force: true)
+            cells.remove(at: index)
+        } else {
+            cells[index] = .live(
+                buildLiveViewModel(
+                    with: events[nextLiveEventIndex].shortDetails,
+                    index: index,
+                    livePositions: livePositions
+                )
+            )
+        }
         
         state = .results(cells)
     }
@@ -240,7 +245,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
     private func updateTodayEvent(livePositions: [LivePosition] = [], timeInterval: TimeInterval) {
         
         timer = Timer.scheduledTimer(
-            withTimeInterval: timeInterval > 0 && timeInterval < .hourInterval && livePositions.isEmpty ? 1 : 10,
+            withTimeInterval: timeInterval > 0 && timeInterval < .hourInterval && livePositions.isEmpty ? 1 : 60,
             repeats: false
         ) { [weak self] _ in
             
