@@ -79,33 +79,33 @@ struct EventCardView: View {
 
                     // MARK: - Current / Upcoming
 
-//                    VStack(alignment: .leading) {
-//                        HStack {
-//                            HStack(alignment: .bottom, spacing: 2) {
-//                                Text("2")
-//                                    .font(.system(size: 12, weight: .semibold))
-//                                Text("HOURS")
-//                                    .font(.system(size: 10, weight: .regular))
-//                                    .foregroundColor(Color.gray)
-//                            }
-//
-//                            HStack(alignment: .bottom, spacing: 2) {
-//                                Text("30")
-//                                    .font(.system(size: 12, weight: .semibold))
-//                                Text("MINUTES")
-//                                    .font(.system(size: 10, weight: .regular))
-//                                    .foregroundColor(Color.gray)
-//                            }
-//                        }
-//
-//                        HStack(alignment: .bottom, spacing: 3) {
-//                            Text("TO")
-//                                .font(.system(size: 10, weight: .regular))
-//                                .foregroundColor(Color.gray)
-//                            Text("Qualifying")
-//                                .font(.system(size: 10, weight: .semibold))
-//                        }
-//                    }
+                    VStack(alignment: .leading) {
+                        HStack {
+                            HStack(alignment: .bottom, spacing: 2) {
+                                Text("2")
+                                    .font(.system(size: 12, weight: .semibold))
+                                Text("HOURS")
+                                    .font(.system(size: 10, weight: .regular))
+                                    .foregroundColor(Color.gray)
+                            }
+
+                            HStack(alignment: .bottom, spacing: 2) {
+                                Text("30")
+                                    .font(.system(size: 12, weight: .semibold))
+                                Text("MINUTES")
+                                    .font(.system(size: 10, weight: .regular))
+                                    .foregroundColor(Color.gray)
+                            }
+                        }
+
+                        HStack(alignment: .bottom, spacing: 3) {
+                            Text("TO")
+                                .font(.system(size: 10, weight: .regular))
+                                .foregroundColor(Color.gray)
+                            Text("Qualifying")
+                                .font(.system(size: 10, weight: .semibold))
+                        }
+                    }
 
 //                    VStack(alignment: .leading, spacing: 0) {
 //                        HStack {
@@ -131,27 +131,27 @@ struct EventCardView: View {
 
                     // MARK: - Live
 
-                    HStack(alignment: .bottom) {
-                        VStack(alignment: .leading) {
-                            HStack(spacing: 10) {
-                                Text("Race")
-                                    .font(.system(size: 12, weight: .semibold))
-
-                                HStack(spacing: 2) {
-                                    Text("Lap 27 of 52")
-                                }
-                                .font(.system(size: 10, weight: .semibold))
-                                .foregroundColor(Color.white)
-
-                            }
-                            Text("HAPPENING NOW")
-                                .font(.system(size: 10, weight: .regular))
-                                .foregroundColor(Color.red)
-
-                        }
-
-                        Spacer()
-                    }
+//                    HStack(alignment: .bottom) {
+//                        VStack(alignment: .leading) {
+//                            HStack(spacing: 10) {
+//                                Text("Race")
+//                                    .font(.system(size: 12, weight: .semibold))
+//
+//                                HStack(spacing: 2) {
+//                                    Text("Lap 27 of 52")
+//                                }
+//                                .font(.system(size: 10, weight: .semibold))
+//                                .foregroundColor(Color.white)
+//
+//                            }
+//                            Text("HAPPENING NOW")
+//                                .font(.system(size: 10, weight: .regular))
+//                                .foregroundColor(Color.red)
+//
+//                        }
+//
+//                        Spacer()
+//                    }
                 }
 
                 Spacer()
@@ -160,17 +160,17 @@ struct EventCardView: View {
         .buttonBorderShape(
             .roundedRectangle(radius: 8)
         )
-        .background(Color.red.opacity(isAnimationActive ? 0.35 : 0.15))
-        .animation(
-            .easeInOut(duration: 1.2).repeatForever(autoreverses: true),
-            value: isAnimationActive
-        )
+//        .background(Color.red.opacity(isAnimationActive ? 0.35 : 0.15))
+//        .animation(
+//            .easeInOut(duration: 1.2).repeatForever(autoreverses: true),
+//            value: isAnimationActive
+//        )
+//        .onAppear {
+//            isAnimationActive.toggle()
+//        }
         .clipShape(
             RoundedRectangle(cornerRadius: 8)
         )
-        .onAppear {
-            isAnimationActive.toggle()
-        }
     }
 
     @State private var isAnimationActive = false
