@@ -18,6 +18,10 @@ struct Event: Decodable {
 
 extension Event {
     
+    var shortDetails: ShortDetails {
+        .init(status: status, round: round, title: title, country: country)
+    }
+
     var status: Status {
         
         if let nextSession = sessions.first(where: {
@@ -82,11 +86,27 @@ extension Event {
         return (first: firstDay, last: lastDay)
     }
 
-    enum Status {
+    enum Status: Equatable {
         
         case upcoming(start: String, end: String, sessionName: String, timeInterval: TimeInterval? = nil)
         case live(timeInterval: TimeInterval, sessionName: String)
         case finished(winner: [Driver.ID])
+        
+        
+        enum idValue: String {
+            case live = "live"
+            case upcoming = "upcoming"
+            case finished = "finished"
+        }
+        
+        var id: String {
+            
+            switch self {
+            case .upcoming: return idValue.upcoming.rawValue
+            case .live: return idValue.live.rawValue
+            case .finished: return idValue.finished.rawValue
+            }
+        }
     }
 }
 

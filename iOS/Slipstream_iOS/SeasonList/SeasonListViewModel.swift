@@ -1,5 +1,6 @@
 import Combine
 import Foundation
+import OSLog
 
 protocol SeasonListViewModelRepresentable: ObservableObject {
     
@@ -19,8 +20,11 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
     private let liveEventService: LiveSessionServiceRepresentable
     private var subscriptions = Set<AnyCancellable>()
     private var timer: Timer? = nil
+    private var timerEvents: Timer? = nil
+    private var timesToRefreshEvents: Int = 0
+    private var firstReload: Bool = true
     
-    @Published var cells: [Section] = []
+    @Published var cells: [Section]
     
     @Published var state: State
     @Published var route: [Route]
@@ -42,6 +46,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
         self.state = .loading([])
         self.route = []
         self.nextEvent = nil
+        self.cells = Section.cellsLoading
         
         load()
     }
@@ -63,13 +68,15 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                 }
                 
                 switch liveEventService {
-                case .refreshed(let livePostions):
-                    self.state = self.loadData(livePositions: livePostions, fetchLivePositions: false)
+                case .refreshed(let livePositions):
+                    
+                    self.loadLiveData(livePositions: livePositions)
                     
                 case .refreshing, .error:
                     self.cells[index] = .live(LiveCardCellViewModel.mockLiveAboutToStart, isLoading: true)
                     self.state = .results(self.cells)
                 }
+                
                 
             }
             .store(in: &subscriptions)
@@ -89,68 +96,27 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                     self.constructors = constructors
                     self.drivers = drivers
                     self.events = events
-                    return self.loadData(fetchLivePositions: self.cells.isEmpty)
+                    return self.loadData()
 
                 case (.refreshing, _), (_, .refreshing):
-                    return self.cells.isEmpty ? .loading(Section.cellsLoading) : .results(self.cells)
+                    return .results(self.cells)
                 }
             }
             .assign(to: &$state)
     }
     
-    private func loadData(
-        livePositions: [LivePosition] = [],
-        fetchLivePositions: Bool
-    ) -> State {
+    private func loadData() -> State {
         
-        cells = []
         var upcomingEvents: [Event.ShortDetails] = []
         
-        if fetchLivePositions { liveEventService.action.send(.fetchPositions) }
+        if firstReload {
+            liveEventService.action.send(.fetchPositions)
+            firstReload = false
+        }
         
-        events.enumerated().forEach { [weak self] (index, event) in
-            
-            guard let self else { return }
-            
-            var livePostionsTransform: [Driver] = []
-            
-            if !livePositions.isEmpty {
-                livePostionsTransform = livePositions.lazy.compactMap { [weak self] position in
-                    
-                    guard
-                        let self,
-                        position.position <= 3,
-                        let driver = self.drivers.first(where: { $0.id == position.id })
-                    else {
-                        return nil
-                    }
-                    
-                    return driver
-                }
-            }
-            
-            // Live CELL
-            if case .live(let timeInterval, _) = event.status {
-                
-                self.timer?.invalidate()
-                
-                self.updateTodayEvent(livePositions: livePositions, timeInterval: timeInterval)
-                
-                if fetchLivePositions {
-                    cells.append(.live(LiveCardCellViewModel.mockLiveAboutToStart, isLoading: true))
-                } else {
-                    let eventDetail: Event.ShortDetails = .init(
-                        status: event.status,
-                        round: event.round,
-                        title: event.title,
-                        country: event.country
-                    )
-                    
-                    cells.append(
-                        .live(buildLiveViewModel(with: eventDetail, index: index, liveDrivers: livePostionsTransform))
-                    )
-                }
-            } else {
+        events.enumerated().forEach { (index, event) in
+
+            if event.status.id != Event.Status.idValue.live.rawValue {
                 upcomingEvents.append(
                     .init(
                         status: event.status,
@@ -163,16 +129,67 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
             
         }
         
-        cells.append(.upcomingAndStandings(buildUpcomingAndStandingsViewModel(with: upcomingEvents)))
+        timerEvents?.invalidate()
+        updateEvents()
+        
+        if !events.contains(where: { $0.status.id == Event.Status.idValue.live.rawValue }) {
+            cells = [.upcomingAndStandings(buildUpcomingAndStandingsViewModel(with: upcomingEvents))]
+        } else if let cellIndex = cells.firstIndex(where: { $0.id == Section.idValue.upcomingAndStandings.rawValue }) {
+            cells[cellIndex] = .upcomingAndStandings(buildUpcomingAndStandingsViewModel(with: upcomingEvents))
+        }
         
         return .results(cells)
+    }
+    
+    private func loadLiveData(livePositions: [LivePosition] = []) {
+        
+        guard
+            let index = self.cells.firstIndex(where: { $0.id == Section.idValue.live.rawValue }),
+            let nextLiveEventIndex = events
+                .firstIndex(where: { $0.status.id == Event.Status.idValue.live.rawValue }),
+            case .live(let timeInterval, _) = self.events[nextLiveEventIndex].status
+        else {
+             return
+        }
+        
+        cells[index] = .live(
+            buildLiveViewModel(with: events[nextLiveEventIndex].shortDetails, index: index, livePositions: livePositions)
+        )
+        
+        if timeInterval < 0 && livePositions.isEmpty {
+            timerEvents?.invalidate()
+            updateEvents(force: true)
+        }
+        
+        timer?.invalidate()
+        
+        updateTodayEvent(timeInterval: timeInterval)
+        
+        state = .results(cells)
     }
     
     private func buildLiveViewModel(
         with eventDetails: Event.ShortDetails,
         index: Int,
-        liveDrivers: [Driver]
+        livePositions: [LivePosition]
     ) -> LiveCardCellViewModel {
+        
+        var liveDrivers: [Driver] = []
+        
+        if !livePositions.isEmpty {
+            liveDrivers = livePositions.lazy.compactMap { [weak self] position in
+                
+                guard
+                    let self,
+                    position.position <= 3,
+                    let driver = self.drivers.first(where: { $0.id == position.id })
+                else {
+                    return nil
+                }
+                
+                return driver
+            }
+        }
         
         let viewModel: LiveCardCellViewModel = .init(eventDetail: eventDetails, drivers: liveDrivers)
         
@@ -222,17 +239,42 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
     
     private func updateTodayEvent(livePositions: [LivePosition] = [], timeInterval: TimeInterval) {
         
-        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: false) { [weak self] _ in
+        timer = Timer.scheduledTimer(
+            withTimeInterval: timeInterval > 0 && timeInterval < .hourInterval && livePositions.isEmpty ? 1 : 10,
+            repeats: false
+        ) { [weak self] _ in
             
             guard let self else { return }
             
-            if timeInterval > 0 || livePositions.isEmpty {
-                self.eventService.action.send(.updateAll)
-            }
-            
             if timeInterval <= 0 {
                 self.liveEventService.action.send(.updatePositions)
+            } else {
+                self.loadLiveData()
             }
+        }
+    }
+    
+    private func updateEvents(force: Bool = false) {
+        
+        if force {
+            eventService.action.send(.updateAll)
+            return
+        }
+        
+        timerEvents = Timer.scheduledTimer(withTimeInterval: 55, repeats: false) { [weak self] _ in
+            
+            guard let self else { return }
+            
+            self.timesToRefreshEvents += 1
+            
+            if self.timesToRefreshEvents == 5 {
+                self.timesToRefreshEvents = 0
+                self.eventService.action.send(.updateAll)
+            } else {
+                Logger.eventService.debug("Loading current events cells \(self.timesToRefreshEvents)")
+                self.state = self.loadData()
+            }
+            
         }
     }
 }

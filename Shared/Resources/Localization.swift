@@ -30,8 +30,12 @@ internal enum Localization {
     internal enum Time {
       /// HOURS
       internal static let hours = Localization.tr("Localizable", "live_card_cell.time.hours", fallback: "HOURS")
-      /// MINUTES left
-      internal static let minutes = Localization.tr("Localizable", "live_card_cell.time.minutes", fallback: "MINUTES left")
+      /// left
+      internal static let `left` = Localization.tr("Localizable", "live_card_cell.time.left", fallback: "left")
+      /// MINUTES
+      internal static let minutes = Localization.tr("Localizable", "live_card_cell.time.minutes", fallback: "MINUTES")
+      /// SECONDS
+      internal static let seconds = Localization.tr("Localizable", "live_card_cell.time.seconds", fallback: "SECONDS")
     }
     internal enum Title {
       /// HAPPENING NOW

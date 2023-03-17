@@ -91,6 +91,16 @@ struct LiveCardViewCell<ViewModel: LiveCardCellViewModelRepresentable>: View {
                 .font(.Title4.heavy)
             Text(Localization.LiveCardCell.Time.minutes)
                 .font(.Caption.semibold)
+            
+            if viewModel.time.seconds > 0 {
+                Text("\(viewModel.time.seconds)")
+                    .font(.Title4.heavy)
+                Text(Localization.LiveCardCell.Time.seconds)
+                    .font(.Caption.semibold)
+            }
+            
+            Text(Localization.LiveCardCell.Time.left)
+                .font(.Caption.semibold)
         }
     }
     
