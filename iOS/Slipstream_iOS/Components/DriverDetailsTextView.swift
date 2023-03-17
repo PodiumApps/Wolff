@@ -17,26 +17,17 @@ struct DriverDetailsTextView: View {
     
     var body: some View {
         
-        VStack(alignment: .leading, spacing: Constants.Spacing.horizontalStacks) {
-            HStack(alignment: .bottom, spacing: Constants.Spacing.horizontalStacks) {
+        VStack(alignment: .leading, spacing: .Spacing.default) {
+            HStack(alignment: .bottom, spacing: .Spacing.default) {
                 Text(titleRegular)
-                    .fontWeight(.regular)
+                    .font(.Body.regular)
                 Text(titleBold)
                     .foregroundColor(color)
-                    .font(.driverPositionFont)
-                    .fontWeight(.semibold)
+                    .font(.Body.bold)
             }
             Text(detailsText)
-                .fontWeight(.thin)
+                .font(.Caption.regular)
         }
-    }
-}
-
-fileprivate enum Constants {
-    
-    enum Spacing {
-        
-        static let horizontalStacks: CGFloat = 4
     }
 }
 

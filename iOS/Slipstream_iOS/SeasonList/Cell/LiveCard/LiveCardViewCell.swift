@@ -34,8 +34,8 @@ struct LiveCardViewCell<ViewModel: LiveCardCellViewModelRepresentable>: View {
                 viewModel.action.send(())
             }) {
                 HStack {
-                    VStack(alignment: .leading, spacing: Constants.Card.verticalSpacing) {
-                        HStack(spacing: Constants.Card.horizontalSpacing) {
+                    VStack(alignment: .leading, spacing: .Spacing.default2) {
+                        HStack(spacing: .Spacing.default6) {
                             Text(viewModel.cardSection.title)
                                 .font(.Title4.heavy)
                             
@@ -61,8 +61,8 @@ struct LiveCardViewCell<ViewModel: LiveCardCellViewModelRepresentable>: View {
                         .foregroundColor(.white)
                 }
             }
-            .padding(.horizontal, Constants.Card.horizontalPadding)
-            .padding(.vertical, Constants.Card.verticalPadding)
+            .padding(.horizontal, .Spacing.default3)
+            .padding(.vertical, .Spacing.default4)
             .foregroundColor(.white)
             .background(
                 RoundedRectangle(cornerRadius: Constants.Card.cornerRadius)
@@ -79,7 +79,7 @@ struct LiveCardViewCell<ViewModel: LiveCardCellViewModelRepresentable>: View {
     
     private var TimeView: some View {
         
-        HStack(alignment: .firstTextBaseline, spacing: Constants.Time.horizontalSpacing) {
+        HStack(alignment: .firstTextBaseline, spacing: .Spacing.default) {
             if viewModel.time.hours > 0 {
                 Text("\(viewModel.time.hours)")
                     .font(.Title4.heavy)
@@ -96,9 +96,9 @@ struct LiveCardViewCell<ViewModel: LiveCardCellViewModelRepresentable>: View {
     
     private var DriversPositionsView: some View {
         
-        HStack(spacing: Constants.DriverPosition.horizontalSpacing) {
+        HStack(spacing: .Spacing.default3) {
             ForEach(0 ..< viewModel.cardSection.drivers.count, id: \.self) { index in
-                HStack(alignment: .firstTextBaseline, spacing: Constants.DriverPosition.spacing) {
+                HStack(alignment: .firstTextBaseline, spacing: .Spacing.default) {
                     Text("\(index + 1)")
                         .font(.Body.semibold)
                     + Text((index + 1).getPositionString)
@@ -134,15 +134,8 @@ struct LiveCardViewCell<ViewModel: LiveCardCellViewModelRepresentable>: View {
 
 fileprivate enum Constants {
     
-    enum Time {
-        
-        static let horizontalSpacing: CGFloat = 4
-    }
-    
     enum DriverPosition {
         
-        static let horizontalSpacing: CGFloat = 12
-        static let spacing: CGFloat = 2
         static let baselineOffset: CGFloat = 4.0
     }
     
@@ -151,10 +144,6 @@ fileprivate enum Constants {
         static let horizontalShadow: CGFloat = 3
         static let verticalShadow: CGFloat = 3
         static let shadowRadius: CGFloat = 3
-        static let horizontalPadding: CGFloat = 12
-        static let verticalPadding: CGFloat = 16
-        static let verticalSpacing: CGFloat = 8
-        static let horizontalSpacing: CGFloat = 24
         static let cornerRadius: CGFloat = 12
         static let opacity: CGFloat = 0.9
     }

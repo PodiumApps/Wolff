@@ -27,8 +27,8 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
 
     init(
         event: Event,
-        driverAndConstructorService: DriverAndConstructorServiceRepresentable = ServiceLocator.shared.driverAndConstructorService,
-        liveSessionService: LiveSessionServiceRepresentable = ServiceLocator.shared.liveSessionService
+        driverAndConstructorService: DriverAndConstructorServiceRepresentable,
+        liveSessionService: LiveSessionServiceRepresentable
     ) {
         
         self.drivers = []
@@ -233,5 +233,17 @@ extension SessionStandingsListViewModel {
             case .positionList: return idValue.positionList.rawValue
             }
         }
+    }
+}
+
+extension SessionStandingsListViewModel {
+    
+    static func make(event: Event) -> SessionStandingsListViewModel {
+        
+        .init(
+            event: event,
+            driverAndConstructorService: ServiceLocator.shared.driverAndConstructorService,
+            liveSessionService: ServiceLocator.shared.liveSessionService
+        )
     }
 }

@@ -22,10 +22,10 @@ struct CarWithNumberView: View {
                 .offset(y: Constants.RacingCar.imageYOffset)
             
             Text(circleText)
-                .font(.system(size: 10))
+                .font(.Caption.regular)
                 .fontWeight(.semibold)
                 .foregroundColor(.white)
-                .padding(Constants.RacingCar.textPadding)
+                .padding(.Spacing.default)
                 .offset(x: Constants.RacingCar.textXOffset, y: Constants.RacingCar.textYOffset)
         }
     }
@@ -40,7 +40,6 @@ fileprivate enum Constants {
         
         static let imageYOffset: CGFloat = 0
         
-        static let textPadding: CGFloat = 4
         static let textYOffset: CGFloat = 1
         static let textXOffset: CGFloat = -10
     }

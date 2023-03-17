@@ -26,7 +26,7 @@ final class LiveCardCellViewModel: LiveCardCellViewModelRepresentable {
     
     var isLive: Bool { !cardSection.drivers.isEmpty && time.hours == 0 && time.minutes == 0 }
     
-    init(eventDetail: Event.Details, drivers: [Driver]) {
+    init(eventDetail: Event.ShortDetails, drivers: [Driver]) {
         
         self.topSection = TopSection(title: "", round: 0)
         self.cardSection = CardSection(title: "", status: nil, drivers: [])
@@ -37,15 +37,17 @@ final class LiveCardCellViewModel: LiveCardCellViewModelRepresentable {
         
     }
     
-    private func setupBindings(eventDetail: Event.Details, drivers: [Driver]) {
+    private func setupBindings(eventDetail: Event.ShortDetails, drivers: [Driver]) {
         
-        if case .live(let timeInterval, let sessionName, let drivers) = eventDetail.status {
+        let driverTickers: [String] = drivers.map(\.driverTicker)
+        
+        if case .live(let timeInterval, let sessionName) = eventDetail.status {
             
             self.topSection = TopSection(title: eventDetail.title, round: eventDetail.round)
             self.cardSection = CardSection(
                 title: sessionName,
                 status: nil,
-                drivers: drivers
+                drivers: driverTickers
             )
             
             if timeInterval < 60 {

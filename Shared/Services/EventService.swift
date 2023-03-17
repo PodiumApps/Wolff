@@ -51,10 +51,9 @@ class EventService: EventServiceRepresentable {
         
         do {
             let events = try await self.networkManager.load(Event.getEvents())
-            let nextEvent = try await self.networkManager.load(Event.getNextEvent())
-            Logger.eventService.info("Got \(events.count) events and nextEventID = \(nextEvent.id)")
+            Logger.eventService.info("Got \(events.count) events")
             
-            state = .refreshed(events, nextEvent: nextEvent)
+            state = .refreshed(events)
         } catch {
             Logger.eventService.error("Error \(error)")
             state = .error(error)
@@ -74,7 +73,7 @@ extension EventService {
     enum State {
         
         case refreshing
-        case refreshed([Event], nextEvent: Event)
+        case refreshed([Event])
         case error(Error)
     }
 }

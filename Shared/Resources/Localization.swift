@@ -11,11 +11,11 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum Localization {
   internal enum GrandPrixCard {
-    /// Monza 2023
-    internal static let title = Localization.tr("Localizable", "grand_prix_card.title", fallback: "Monza 2023")
     internal enum Label {
-      /// LIVE
-      internal static let live = Localization.tr("Localizable", "grand_prix_card.label.live", fallback: "LIVE")
+      /// in %@
+      internal static func time(_ p1: Any) -> String {
+        return Localization.tr("Localizable", "grand_prix_card.label.time", String(describing: p1), fallback: "in %@")
+      }
     }
     internal enum Top {
       /// Round %@
@@ -46,12 +46,30 @@ internal enum Localization {
       }
     }
   }
+  internal enum SeasonListView {
+    internal enum Navigation {
+      /// Season 2023
+      internal static let title = Localization.tr("Localizable", "season_list_view.navigation.title", fallback: "Season 2023")
+    }
+  }
   internal enum SessionDriverList {
     internal enum Error {
       /// Refresh
       internal static let cta = Localization.tr("Localizable", "session_driver_list.error.cta", fallback: "Refresh")
       /// Something went wrong
       internal static let text = Localization.tr("Localizable", "session_driver_list.error.text", fallback: "Something went wrong")
+    }
+  }
+  internal enum UpcomingAndStandingsCell {
+    internal enum Segment {
+      /// Past
+      internal static let past = Localization.tr("Localizable", "upcoming_and_standings_cell.segment.past", fallback: "Past")
+      /// Upcoming
+      internal static let upcoming = Localization.tr("Localizable", "upcoming_and_standings_cell.segment.upcoming", fallback: "Upcoming")
+    }
+    internal enum Standings {
+      /// Current Standings
+      internal static let title = Localization.tr("Localizable", "upcoming_and_standings_cell.standings.title", fallback: "Current Standings")
     }
   }
 }

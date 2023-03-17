@@ -63,10 +63,10 @@ extension Font {
     }
     
     enum Superscript {
-        static let regular: Font = .system(size: 10)
-        static let heavy: Font = .system(size: 10, weight: .heavy)
-        static let bold: Font = .system(size: 10, weight: .bold)
-        static let semibold: Font = .system(size: 10, weight: .semibold)
+        static let regular: Font = .system(size: 8)
+        static let heavy: Font = .system(size: 8, weight: .heavy)
+        static let bold: Font = .system(size: 8, weight: .bold)
+        static let semibold: Font = .system(size: 8, weight: .semibold)
     }
 
 }

@@ -6,9 +6,8 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
     
     private typealias stateID = SeasonListViewModel.State.idValue
     
-    @State var xTranslate: CGFloat = -UIScreen.main.bounds.width / 2
-    
     init(viewModel: ViewModel) {
+        
         self.viewModel = viewModel
     }
     
@@ -28,23 +27,23 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
                                 LiveCardViewCell(viewModel: viewModel)
                                     .foregroundColor(.primary)
                                     .redacted(reason: isLoading ? .placeholder : [])
-                                    .padding(.horizontal, Constants.horizontalPadding)
+                                    .padding(.horizontal, .Spacing.default3)
                                 
                                 Divider()
-                                    .padding(.horizontal, Constants.horizontalPadding)
-                                    .padding(.top, Constants.topPadding)
+                                    .padding(.horizontal, .Spacing.default3)
+                                    .padding(.top, .Spacing.default4)
                                 
                             case .upcomingAndStandings(let viewModel):
                                 ScrollView {
                                     UpcomingAndStandingsEventCellView(viewModel: viewModel)
-                                        .padding(.top, Constants.topPadding)
+                                        .padding(.top, .Spacing.default4)
                                 }
                             }
                         }
                         
                         Spacer()
                     }
-                    .padding(.top, 16)
+                    .padding(.top, .Spacing.default4)
                     .redacted(reason: viewModel.state.id == stateID.loading.rawValue ? .placeholder : [])
                 }
             }
@@ -55,15 +54,9 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarTitle("Season 2023")
+            .navigationBarTitle(Localization.SeasonListView.Navigation.title)
         }
     }
-}
-
-fileprivate enum Constants {
-    
-    static var horizontalPadding: CGFloat = 12
-    static var topPadding: CGFloat = 16
 }
 
 struct SeasonListView_Previews: PreviewProvider {

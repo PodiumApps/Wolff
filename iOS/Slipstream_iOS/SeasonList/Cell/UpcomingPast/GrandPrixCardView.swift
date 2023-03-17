@@ -18,53 +18,52 @@ struct GrandPrixCardView<ViewModel: GrandPrixCardViewModelRepresentable>: View {
             action()
         }) {
             ZStack {
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: .Spacing.default3) {
                     
-                    VStack(alignment: .leading, spacing: 4) {
+                    VStack(alignment: .leading, spacing: .Spacing.default) {
                         Text(viewModel.title)
-                            .font(.system(size: 18, weight: .bold))
+                            .font(.Title4.bold)
                         HStack {
                             
                             Text(viewModel.subtitle)
-                                .font(.system(size: 15, weight: .semibold))
+                                .font(.Body.semibold)
                             
                             Text(Localization.GrandPrixCard.Top.round(viewModel.round))
-                                .font(.system(size: 13))
+                                .font(.Caption.regular)
                         }
                     }
                     
                     HStack {
                         if !viewModel.winners.isEmpty {
-                            HStack(spacing: 8) {
+                            HStack(spacing: .Spacing.default2) {
                                 ForEach(0 ..< viewModel.winners.count, id: \.self) { index in
-                                    HStack(spacing: 2) {
+                                    HStack(spacing: .Spacing.default) {
                                         Text("\(index + 1)")
-                                            .font(.system(size: 14, weight: .semibold))
+                                            .font(.Caption.semibold)
                                         + Text((index + 1).getPositionString)
-                                            .font(.system(size: 8))
-                                            .fontWeight(.semibold)
-                                            .baselineOffset(4.0)
+                                            .font(.Superscript.semibold)
+                                            .baselineOffset(Constants.Card.baselineOffset)
                                         
                                         Text(viewModel.winners[index])
-                                            .font(.system(size: 14, weight: .bold))
+                                            .font(.Body.bold)
                                     }
                                 }
                             }
                         } else {
                             Text(viewModel.grandPrixDate)
-                                .font(.system(size: 14, weight: .semibold))
+                                .font(.Body.regular)
                         }
                         
                         if let label = viewModel.nextSession {
-                            Text("in " + label)
-                                .font(.system(size: 16, weight: .bold))
+                            Text(Localization.GrandPrixCard.Label.time(label))
+                                .font(.Body.bold)
                                 .foregroundColor(.accentColor)
                         }
                     }
                     
                 }
                 .padding()
-                .frame(width: 240, height: Constants.Card.height, alignment: .leading)
+                .frame(width: Constants.Card.width, height: Constants.Card.height, alignment: .leading)
             }
         }
         .foregroundColor(.primary)
@@ -77,7 +76,7 @@ struct GrandPrixCardView<ViewModel: GrandPrixCardViewModelRepresentable>: View {
                     y: Constants.Card.verticalShadow
                 )
         )
-        .frame(width: 240, height: Constants.Card.height)
+        .frame(width: Constants.Card.width, height: Constants.Card.height)
     }
 }
 
@@ -86,12 +85,14 @@ fileprivate enum Constants {
     enum Card {
         
         static let height: CGFloat = 95
+        static let width: CGFloat = 240
         static let cornerRadius: CGFloat = 8
         static let contentPadding: CGFloat = 12
         static let horizontalShadow: CGFloat = 3
         static let verticalShadow: CGFloat = 3
         static let verticalSpacing: CGFloat = 7
         static let shadowRadius: CGFloat = 3
+        static let baselineOffset: CGFloat = 4.0
     }
     
     enum LiveComponent {

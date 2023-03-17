@@ -11,10 +11,9 @@ struct StandingsCellView<ViewModel: StandingsCellViewModelRepresentable>: View {
         self.constructorStyler = ConstructorStyler(constructor: viewModel.constructorStylerID)
     }
     var body: some View {
-        HStack(spacing: 16) {
+        HStack(spacing: .Spacing.default4) {
             Text("\(viewModel.position)")
-                .font(.system(size: 24))
-//            CarWithNumberView(color: constructorStyler.constructor.color, circleText: viewModel.circleText)
+                .font(.Title3.regular)
             DriverDetailsTextView(
                 titleRegular: viewModel.titleRegular,
                 titleBold: viewModel.titleBold,
@@ -25,7 +24,7 @@ struct StandingsCellView<ViewModel: StandingsCellViewModelRepresentable>: View {
             Spacer()
             
             Text("\(viewModel.points) pts")
-                .font(.system(size: 18, weight: .semibold))
+                .font(.Body.semibold)
         }
     }
 }

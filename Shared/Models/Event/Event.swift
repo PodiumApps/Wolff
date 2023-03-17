@@ -2,7 +2,7 @@ import Foundation
 
 struct Event: Decodable {
     
-    typealias ID = String
+    typealias ID = Identifier<Event>
     
     let id: ID
     let firstGrandPrix: Int
@@ -17,11 +17,75 @@ struct Event: Decodable {
 }
 
 extension Event {
+    
+    var status: Status {
+        
+        if let nextSession = sessions.first(where: {
+            $0.date.timeIntervalSince(Date()) > -.maximumSessionTime
+            && $0.date.timeIntervalSince(Date()) < .maximumSessionTime
+            && $0.winners.isEmpty
+        }) {
+            
+            return .live(timeInterval: nextSession.date.timeIntervalSinceNow, sessionName: nextSession.name.label)
+        }
+        
+        if
+            sessions.lazy.filter({ !$0.winners.isEmpty }).count == sessions.count,
+            let winners = sessions.lazy.first(where: { $0.name == .race })?.winners
+        {
+            
+            return .finished(winner: winners)
+        }
+        
+        if let session = sessions.lazy.first(where: {
+            $0.winners.isEmpty
+            && $0.date.timeIntervalSince(Date()) < .threeDaysInterval
+        }){
+            return .upcoming(
+                start: daysString.first,
+                end: daysString.last,
+                sessionName: session.name.label,
+                timeInterval: session.date.timeIntervalSinceNow
+            )
+        }
+        
+        return .upcoming(
+            start: daysString.first,
+            end: daysString.last,
+            sessionName: "",
+            timeInterval: nil
+        )
+
+    }
+    
+    var daysString: (first: String, last: String) {
+        
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_us")
+        
+        guard
+            let firstSessionDate: Date = sessions.first?.date,
+            let finalSessionDate: Date = sessions.last?.date
+        else {
+            fatalError("There should have an interval date for event id -> \(id)")
+        }
+        
+        formatter.dateFormat = "MMMM"
+        let firstMonth = formatter.string(from: firstSessionDate).uppercased()
+        let lastMonth = formatter.string(from: finalSessionDate).uppercased()
+        
+        formatter.dateFormat = "dd"
+        
+        let firstDay = formatter.string(from: firstSessionDate) + (firstMonth == lastMonth ? "" : " " + firstMonth)
+        let lastDay = formatter.string(from: finalSessionDate) + " " + lastMonth
+        
+        return (first: firstDay, last: lastDay)
+    }
 
     enum Status {
         
         case upcoming(start: String, end: String, sessionName: String, timeInterval: TimeInterval? = nil)
-        case live(timeInterval: TimeInterval, sessionName: String, driverTickers: [String])
+        case live(timeInterval: TimeInterval, sessionName: String)
         case finished(winner: [Driver.ID])
     }
 }
@@ -46,99 +110,7 @@ extension Event {
 
 extension Event {
     
-    static func getEventStatus(
-        for event: Self,
-        comparing nextEvent: Self,
-        drivers: [Driver],
-        liveDrivers: [Driver] = []
-    ) -> Status {
-        
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_us")
-        
-        guard
-            let firstSessionDate: Date = event.sessions.first?.date,
-            let finalSessionDate: Date = event.sessions.last?.date
-        else {
-            fatalError("There should have an interval date for event id -> \(event.id)")
-        }
-        
-        formatter.dateFormat = "MMMM"
-        let firstMonth = formatter.string(from: firstSessionDate).uppercased()
-        let lastMonth = formatter.string(from: finalSessionDate).uppercased()
-        
-        formatter.dateFormat = "dd"
-        
-        let firstDay = formatter.string(from: firstSessionDate) + (firstMonth == lastMonth ? "" : " " + firstMonth)
-        let lastDay = formatter.string(from: finalSessionDate) + " " + lastMonth
-        
-        if event.id == nextEvent.id,
-           event.sessions.filter({ !$0.winners.isEmpty }).count != event.sessions.count {
-            
-            if let nextSession = event.sessions.lazy.first(where: { $0.winners.isEmpty }) {
-                
-                let intervaltimeStamp = nextSession.date.timeIntervalSinceNow
-                let liveInSeconds: Double = 4*60*60
-                
-                if intervaltimeStamp < liveInSeconds {
-                    
-                    if intervaltimeStamp <= 0 && !liveDrivers.isEmpty {
-                        let driverResult: [String] = liveDrivers.map(\.driverTicker)
-                        return .live(
-                            timeInterval: .init(0),
-                            sessionName: nextSession.name.label,
-                            driverTickers: driverResult
-                        )
-                    } else {
-                        
-                    
-                        if intervaltimeStamp < 60 {
-                            return .live(
-                                timeInterval: .init(0),
-                                sessionName: nextSession.name.label,
-                                driverTickers: []
-                            )
-                        }
-                        
-                        return .live(
-                            timeInterval: intervaltimeStamp,
-                            sessionName: nextSession.name.label,
-                            driverTickers: []
-                        )
-                    }
-                }
-            }
-            
-            if let session = event.sessions.lazy.first(where: { $0.winners.isEmpty }){
-                return .upcoming(
-                    start: firstDay,
-                    end: lastDay,
-                    sessionName: session.name.label,
-                    timeInterval: session.date.timeIntervalSinceNow
-                )
-            }
-        }
-        
-        if
-            event.sessions.lazy.filter({ !$0.winners.isEmpty }).count == event.sessions.count,
-            let winners = event.sessions.lazy.first(where: { $0.name == .race })?.winners
-        {
-            
-            return .finished(winner: winners)
-        }
-        
-        return .upcoming(
-            start: firstDay,
-            end: lastDay,
-            sessionName: "",
-            timeInterval: nil
-        )
-    }
-}
-
-extension Event {
-    
-    struct Details {
+    struct ShortDetails {
         
         let status: Status
         let round: Int
@@ -148,17 +120,9 @@ extension Event {
     
     static let mockStatusUpcoming: Event.Status = .upcoming(start: "02", end: "05 October", sessionName: "Race")
     static let mockStatusFinished: Event.Status = .finished(winner: Driver.mockArray.map { $0.id })
-    static let mockStatusLive: Status = .live(
-        timeInterval: .init(100),
-        sessionName: "Race",
-        driverTickers: [
-            Driver.mockHamilton.driverTicker,
-            Driver.mockAlonso.driverTicker,
-            Driver.mockVertasppen.driverTicker
-        ]
-    )
+    static let mockStatusLive: Status = .live(timeInterval: .init(100), sessionName: "Race")
     
-    static let mockDetailsArray: [Details] = [
+    static let mockDetailsArray: [ShortDetails] = [
         .init(
             status: Event.mockStatusUpcoming,
             round: 1,

@@ -85,11 +85,10 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                 case (.error(let error), _), (_, .error(let error)):
                     return .error(error.localizedDescription)
 
-                case (.refreshed(let events, let nextEvent), .refreshed(let drivers, let constructors)):
+                case (.refreshed(let events), .refreshed(let drivers, let constructors)):
                     self.constructors = constructors
                     self.drivers = drivers
                     self.events = events
-                    self.nextEvent = nextEvent
                     return self.loadData(fetchLivePositions: self.cells.isEmpty)
 
                 case (.refreshing, _), (_, .refreshing):
@@ -105,9 +104,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
     ) -> State {
         
         cells = []
-        var upcomingEvents: [Event.Details] = []
-        
-        guard let nextEvent else { return .error("No next event") }
+        var upcomingEvents: [Event.ShortDetails] = []
         
         if fetchLivePositions { liveEventService.action.send(.fetchPositions) }
         
@@ -132,15 +129,8 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                 }
             }
             
-            let eventStatus = Event.getEventStatus(
-                for: event,
-                comparing: nextEvent,
-                drivers: self.drivers,
-                liveDrivers: livePostionsTransform
-            )
-            
             // Live CELL
-            if case .live(let timeInterval, _, _) = eventStatus {
+            if case .live(let timeInterval, _) = event.status {
                 
                 self.timer?.invalidate()
                 
@@ -149,19 +139,21 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                 if fetchLivePositions {
                     cells.append(.live(LiveCardCellViewModel.mockLiveAboutToStart, isLoading: true))
                 } else {
-                    let eventDetail: Event.Details = .init(
-                        status: eventStatus,
+                    let eventDetail: Event.ShortDetails = .init(
+                        status: event.status,
                         round: event.round,
                         title: event.title,
                         country: event.country
                     )
                     
-                    cells.append(.live(buildLiveViewModel(with: eventDetail, index: index)))
+                    cells.append(
+                        .live(buildLiveViewModel(with: eventDetail, index: index, liveDrivers: livePostionsTransform))
+                    )
                 }
             } else {
                 upcomingEvents.append(
                     .init(
-                        status: eventStatus,
+                        status: event.status,
                         round: event.round,
                         title: event.title,
                         country: event.country
@@ -176,9 +168,13 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
         return .results(cells)
     }
     
-    private func buildLiveViewModel(with eventDetails: Event.Details, index: Int) -> LiveCardCellViewModel {
+    private func buildLiveViewModel(
+        with eventDetails: Event.ShortDetails,
+        index: Int,
+        liveDrivers: [Driver]
+    ) -> LiveCardCellViewModel {
         
-        let viewModel: LiveCardCellViewModel = .init(eventDetail: eventDetails, drivers: drivers)
+        let viewModel: LiveCardCellViewModel = .init(eventDetail: eventDetails, drivers: liveDrivers)
         
         viewModel.action
             .receive(on: DispatchQueue.main)
@@ -194,7 +190,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
     }
     
     private func buildUpcomingAndStandingsViewModel(
-        with eventDetails: [Event.Details]
+        with eventDetails: [Event.ShortDetails]
     ) -> UpcomingAndStandingsEventCellViewModel {
         
         let viewModel = UpcomingAndStandingsEventCellViewModel(
@@ -219,7 +215,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
     
     private func tapRow(at index: Int) {
         
-        let sessionStandingsVM: SessionStandingsListViewModel = .init(event: events[index])
+        let sessionStandingsVM: SessionStandingsListViewModel = .make(event: events[index])
         
         route.append(.sessionStandings(sessionStandingsVM))
     }

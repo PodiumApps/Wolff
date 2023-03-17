@@ -20,6 +20,7 @@
 		4207B44E29C216E900AA4758 /* StandingsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B44D29C216E900AA4758 /* StandingsCellViewModel.swift */; };
 		4207B45029C3425300AA4758 /* IntegerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B44F29C3425300AA4758 /* IntegerExtension.swift */; };
 		4207B45129C3426800AA4758 /* IntegerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B44F29C3425300AA4758 /* IntegerExtension.swift */; };
+		4207B45329C4662800AA4758 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B45229C4662800AA4758 /* Spacing.swift */; };
 		420967F4294C9A8D0075D75E /* SlipstreamWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420967F3294C9A8D0075D75E /* SlipstreamWatchApp.swift */; };
 		420967F6294C9A8D0075D75E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420967F5294C9A8D0075D75E /* ContentView.swift */; };
 		420967F8294C9A8F0075D75E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 420967F7294C9A8F0075D75E /* Assets.xcassets */; };
@@ -155,6 +156,7 @@
 		4207B44B29C216DC00AA4758 /* StandingsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsCellView.swift; sourceTree = "<group>"; };
 		4207B44D29C216E900AA4758 /* StandingsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsCellViewModel.swift; sourceTree = "<group>"; };
 		4207B44F29C3425300AA4758 /* IntegerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerExtension.swift; sourceTree = "<group>"; };
+		4207B45229C4662800AA4758 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		420967EE294C9A8D0075D75E /* Slipstream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Slipstream.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		420967F3294C9A8D0075D75E /* SlipstreamWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlipstreamWatchApp.swift; sourceTree = "<group>"; };
 		420967F5294C9A8D0075D75E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -302,7 +304,7 @@
 			children = (
 				4207B43D29C1E47E00AA4758 /* UpcomingAndStandingsEventCellViewModel.swift */,
 				CF20D36A297700160038A860 /* GrandPrixCardView.swift */,
-				CF233DDD29A8D98800A8D1CD /* GrandPrixSchedulePickerViewModel.swift */,
+				CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */,
 				4207B44329C1E59300AA4758 /* UpcomingAndStandingsEventCellView.swift */,
 			);
 			path = UpcomingPast;
@@ -472,12 +474,12 @@
 		42521D0329B7910500000586 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				CF233DDD29A8D98800A8D1CD /* GrandPrixSchedulePickerViewModel.swift */,
 				42521D0729B799C700000586 /* LiveSessionDriverDetailsSheetViewModel.swift */,
 				42521D0529B799C700000586 /* SessionDriverRowViewModel.swift */,
 				42521D0629B799C700000586 /* SessionStandingsListViewModel.swift */,
 				CF277A22297313260048DE75 /* StandingsCarouselViewModel.swift */,
 				CF78D01D2996C58600D45EDE /* ScheduleCarouselViewModel.swift */,
-				CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */,
 				CFBD88D6296C1FB50068AB54 /* ResultCardViewModel.swift */,
 				42521D0E29B79A3400000586 /* AppViewModel.swift */,
 			);
@@ -534,6 +536,7 @@
 				CF277A1D297017C50048DE75 /* Fonts.swift */,
 				CF20D36429760C300038A860 /* Colors.swift */,
 				42521CC029B250DE00000586 /* ButtonStyle.swift */,
+				4207B45229C4662800AA4758 /* Spacing.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -973,6 +976,7 @@
 				4209685F29537AF10075D75E /* News.swift in Sources */,
 				CF277A1F297017C50048DE75 /* Fonts.swift in Sources */,
 				4207B44C29C216DC00AA4758 /* StandingsCellView.swift in Sources */,
+				4207B45329C4662800AA4758 /* Spacing.swift in Sources */,
 				4209686029537AF70075D75E /* Driver.swift in Sources */,
 				42521D1E29B79D6800000586 /* LivePosition.swift in Sources */,
 				42521CB929B1F37D00000586 /* LiveSessionDriverDetailsSheet.swift in Sources */,

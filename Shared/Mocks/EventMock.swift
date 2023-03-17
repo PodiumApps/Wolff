@@ -3,7 +3,7 @@ import Foundation
 extension Event {
     
     static var mock: Self = .init(
-        id: "0",
+        id: .init("0"),
         firstGrandPrix: 0,
         lapRecord: "lap record",
         name: "name",
@@ -17,7 +17,7 @@ extension Event {
     
     static var mockArray: [Self] = [
         .init(
-            id: "0",
+            id: .init("0"),
             firstGrandPrix: 0,
             lapRecord: "lap record",
             name: "name",
@@ -29,7 +29,7 @@ extension Event {
             sessions: Session.mockArray
         ),
         .init(
-            id: "1",
+            id: .init("1"),
             firstGrandPrix: 0,
             lapRecord: "lap record",
             name: "name",
@@ -41,7 +41,7 @@ extension Event {
             sessions: Session.mockArray
         ),
         .init(
-            id: "2",
+            id: .init("2"),
             firstGrandPrix: 0,
             lapRecord: "lap record",
             name: "name",
@@ -53,7 +53,7 @@ extension Event {
             sessions: Session.mockArray
         ),
         .init(
-            id: "3",
+            id: .init("3"),
             firstGrandPrix: 0,
             lapRecord: "lap record",
             name: "name",
@@ -65,7 +65,7 @@ extension Event {
             sessions: Session.mockArray
         ),
         .init(
-            id: "4",
+            id: .init("4"),
             firstGrandPrix: 0,
             lapRecord: "lap record",
             name: "name",
@@ -77,7 +77,7 @@ extension Event {
             sessions: Session.mockArray
         ),
         .init(
-            id: "5",
+            id: .init("5"),
             firstGrandPrix: 0,
             lapRecord: "lap record",
             name: "name",
@@ -89,7 +89,7 @@ extension Event {
             sessions: Session.mockArray
         ),
         .init(
-            id: "6",
+            id: .init("6"),
             firstGrandPrix: 0,
             lapRecord: "lap record",
             name: "name",
@@ -101,7 +101,7 @@ extension Event {
             sessions: Session.mockArray
         ),
         .init(
-            id: "7",
+            id: .init("7"),
             firstGrandPrix: 0,
             lapRecord: "lap record",
             name: "name",
@@ -113,7 +113,7 @@ extension Event {
             sessions: Session.mockArray
         ),
         .init(
-            id: "8",
+            id: .init("8"),
             firstGrandPrix: 0,
             lapRecord: "lap record",
             name: "name",
@@ -125,7 +125,7 @@ extension Event {
             sessions: Session.mockArray
         ),
         .init(
-            id: "9",
+            id: .init("9"),
             firstGrandPrix: 0,
             lapRecord: "lap record",
             name: "name",
@@ -137,7 +137,7 @@ extension Event {
             sessions: Session.mockArray
         ),
         .init(
-            id: "10",
+            id: .init("10"),
             firstGrandPrix: 0,
             lapRecord: "lap record",
             name: "name",

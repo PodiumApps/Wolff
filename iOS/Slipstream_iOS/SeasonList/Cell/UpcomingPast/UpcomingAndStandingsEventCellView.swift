@@ -18,7 +18,7 @@ struct UpcomingAndStandingsEventCellView<ViewModel: UpcomingAndStandingsEventCel
                         self.viewModel.action.send(.filterEvent(filter))
                     }) {
                         Text(filter.label)
-                            .font(.system(size: 24, weight: .semibold))
+                            .font(.Title3.semibold)
                             .foregroundColor(
                                 filter == self.viewModel.filterSelection
                                 ? .accentColor
@@ -27,7 +27,7 @@ struct UpcomingAndStandingsEventCellView<ViewModel: UpcomingAndStandingsEventCel
                     }
                 }
             }
-            .padding(.horizontal, 12)
+            .padding(.horizontal, .Spacing.default3)
                 
             ForEach(viewModel.cells) { cell in
                 
@@ -35,31 +35,31 @@ struct UpcomingAndStandingsEventCellView<ViewModel: UpcomingAndStandingsEventCel
                 case .upcoming(let cardsVM):
                     
                     ScrollView(.horizontal, showsIndicators: false) {
-                        LazyHStack(spacing: 16) {
+                        LazyHStack(spacing: .Spacing.default4) {
                             ForEach(0 ..< cardsVM.count, id: \.self) { index in
                                 GrandPrixCardView(viewModel: cardsVM[index]) {
                                     
                                 }
-                                .padding(.leading, index == 0 ? 12 : 0)
-                                .padding(.trailing, index == cardsVM.count - 1 ? 12 : 0)
+                                .padding(.leading, index == 0 ? .Spacing.default4 : 0)
+                                .padding(.trailing, index == cardsVM.count - 1 ? .Spacing.default4 : 0)
                             }
                         }
                     }
                     .frame(height: 120)
                     Divider()
-                        .padding(.horizontal, 12)
+                        .padding(.horizontal, .Spacing.default4)
                 case .standings(let drivers, let constructors):
-                    Text("Current Standings")
-                        .font(.system(size: 24, weight: .heavy))
-                        .padding(.horizontal, 12)
+                    Text(Localization.UpcomingAndStandingsCell.Standings.title)
+                        .font(.Title3.heavy)
+                        .padding(.horizontal, .Spacing.default4)
                     
                     ForEach(drivers) { driver in
                         StandingsCellView(viewModel: StandingsCellViewModel(driver: driver, constructor: constructors))
-                            .padding(.top, 8)
+                            .padding(.top, .Spacing.default2)
                         Divider()
                         
                     }
-                    .padding(.horizontal, 12)
+                    .padding(.horizontal, .Spacing.default4)
                     .listStyle(.plain)
                 }
             }

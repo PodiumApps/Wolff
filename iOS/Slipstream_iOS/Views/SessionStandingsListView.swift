@@ -76,7 +76,7 @@ fileprivate enum Constants {
 struct SessionStandingsListView_Previews: PreviewProvider {
     static var previews: some View {
         SessionStandingsListView(
-            viewModel: SessionStandingsListViewModel(event: .mock)
+            viewModel: SessionStandingsListViewModel.make(event: .mock)
         )
     }
 }

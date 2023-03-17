@@ -8,7 +8,6 @@ protocol UpcomingAndStandingsEventCellViewModelRepresentable: ObservableObject {
     var filterSelection: UpcomingAndStandingsEventCellViewModel.Filter { get }
     
     var action: PassthroughSubject<UpcomingAndStandingsEventCellViewModel.Action, Never> { get }
-    
 }
 
 class UpcomingAndStandingsEventCellViewModel: UpcomingAndStandingsEventCellViewModelRepresentable {
@@ -21,11 +20,11 @@ class UpcomingAndStandingsEventCellViewModel: UpcomingAndStandingsEventCellViewM
     private var upcomingEvents: [GrandPrixCardViewModel]
     private var finishedEvents: [GrandPrixCardViewModel]
     private var subscriptions = Set<AnyCancellable>()
-    private let eventDetails: [Event.Details]
+    private let eventDetails: [Event.ShortDetails]
     
     var action = PassthroughSubject<Action, Never>()
     
-    init(eventDetails: [Event.Details], drivers: [Driver], constructors: [Constructor], filter: Filter) {
+    init(eventDetails: [Event.ShortDetails], drivers: [Driver], constructors: [Constructor], filter: Filter) {
         
         self.cells = []
         self.upcomingEvents = []
@@ -65,13 +64,13 @@ class UpcomingAndStandingsEventCellViewModel: UpcomingAndStandingsEventCellViewM
             
             switch details.status {
             case .upcoming(let start, let end, let session, let timeInterval):
-                let threeDaysInterval: Double = 3*24*60*60
+                
                 self.upcomingEvents.append(
                         .init(
                         round: details.round,
                         title: details.title,
                         subtitle: details.country,
-                        grandPrixDate: timeInterval ?? threeDaysInterval < threeDaysInterval
+                        grandPrixDate: timeInterval ?? .threeDaysInterval  < .threeDaysInterval
                             ? session
                             : start + " - " + end,
                         winners: [],
@@ -149,8 +148,8 @@ extension UpcomingAndStandingsEventCellViewModel {
         
         var label: String {
             switch self {
-            case .upcoming: return "Upcoming"
-            case .past: return "Past"
+            case .upcoming: return Localization.UpcomingAndStandingsCell.Segment.upcoming
+            case .past: return Localization.UpcomingAndStandingsCell.Segment.past
             }
         }
         
