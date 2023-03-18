@@ -24,8 +24,6 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
     private var timesToRefreshEvents: Int = 0
     private var firstReload: Bool = true
     
-    @Published var cells: [Section]
-    
     @Published var state: State
     @Published var route: [Route]
     @Published var upcomingAndStandingsFilter: UpcomingAndStandingsEventCellViewModel.Filter = .upcoming
@@ -46,7 +44,6 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
         self.state = .loading(Section.cellsLoading)
         self.route = []
         self.nextEvent = nil
-        self.cells = Section.cellsLoading
         
         load()
     }
@@ -58,28 +55,29 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
         
         liveEventService.statePublisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] liveEventService in
+            .compactMap { [weak self] liveEventService in
                 
                 guard
                     let self,
-                    let index = self.cells.firstIndex(where: { $0.id == .live })
+                    case .results(var cells) = self.state,
+                    let index = cells.firstIndex(where: { $0.id == .live })
                 else {
-                    return
+                    return nil
                 }
                 
                 switch liveEventService {
                 case .refreshed(let livePositions):
                     
-                    self.loadLiveData(livePositions: livePositions)
+                    return .results(self.loadLiveData(livePositions: livePositions))
                     
                 case .refreshing, .error:
-                    self.cells[index] = .live(LiveCardCellViewModel.mockLiveAboutToStart, isLoading: true)
-                    self.state = .results(self.cells)
+                    cells[index] = .live(LiveCardCellViewModel.mockLiveAboutToStart, isLoading: true)
+                    return .results(cells)
                 }
                 
                 
             }
-            .store(in: &subscriptions)
+            .assign(to: &$state)
         
        eventService.statePublisher
             .combineLatest(driverAndConstructorService.statePublisher)
@@ -96,81 +94,89 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                     self.constructors = constructors
                     self.drivers = drivers
                     self.events = events
-                    return self.loadData()
+                    return .results(self.loadData())
 
                 case (.refreshing, _), (_, .refreshing):
-                    return .loading(self.cells)
+                    return .loading(Section.cellsLoading)
                 }
             }
             .assign(to: &$state)
     }
     
-    private func loadData() -> State {
-        
-        var upcomingEvents: [Event.ShortDetails] = []
+    private func loadData() -> [Section] {
         
         if firstReload {
             liveEventService.action.send(.fetchPositions)
             firstReload = false
         }
         
-        events.enumerated().forEach { (index, event) in
-
-            if event.status.id != .live {
-                upcomingEvents.append(
-                    .init(
-                        status: event.status,
-                        round: event.round,
-                        title: event.title,
-                        country: event.country
+        switch state {
+        case .loading(var cells), .results(var cells):
+            
+            let upcomingEvents: [Event.ShortDetails] = events.lazy.compactMap { event in
+                
+                guard event.status.id != .live else { return nil }
+                
+                return .init(
+                    status: event.status,
+                    round: event.round,
+                    title: event.title,
+                    country: event.country
+                )
+                
+            }
+            
+            timerEvents?.invalidate()
+            updateEvents()
+            
+            if !events.contains(where: { $0.status.id == .live }) {
+                cells = [.upcomingAndStandings(buildUpcomingAndStandingsViewModel(with: upcomingEvents))]
+            } else if let cellIndex = cells.firstIndex(where: { $0.id == .upcomingAndStandings }) {
+                cells[cellIndex] = .upcomingAndStandings(buildUpcomingAndStandingsViewModel(with: upcomingEvents))
+            }
+            
+            return cells
+        case.error:
+            return []
+        }
+    }
+    
+    private func loadLiveData(livePositions: [LivePosition] = []) -> [Section] {
+        
+        switch state {
+        case .loading(var cells), .results(var cells):
+            
+            guard
+                let index = cells.firstIndex(where: { $0.id == .live }),
+                let nextLiveEventIndex = events
+                    .firstIndex(where: { $0.status.id == .live }),
+                case .live(let timeInterval, _) = self.events[nextLiveEventIndex].status
+            else {
+                 return []
+            }
+            
+            timer?.invalidate()
+            
+            updateTodayEvent(timeInterval: timeInterval)
+            
+            if timeInterval < -.hourInterval && livePositions.isEmpty {
+                timerEvents?.invalidate()
+                updateEvents(force: true)
+                cells.remove(at: index)
+            } else {
+                cells[index] = .live(
+                    buildLiveViewModel(
+                        with: events[nextLiveEventIndex].shortDetails,
+                        index: index,
+                        livePositions: livePositions
                     )
                 )
             }
             
+            return cells
+        case.error:
+            return []
         }
-        
-        timerEvents?.invalidate()
-        updateEvents()
-        
-        if !events.contains(where: { $0.status.id == .live }) {
-            cells = [.upcomingAndStandings(buildUpcomingAndStandingsViewModel(with: upcomingEvents))]
-        } else if let cellIndex = cells.firstIndex(where: { $0.id == .upcomingAndStandings }) {
-            cells[cellIndex] = .upcomingAndStandings(buildUpcomingAndStandingsViewModel(with: upcomingEvents))
-        }
-        
-        return .results(cells)
-    }
-    
-    private func loadLiveData(livePositions: [LivePosition] = []) {
-        
-        guard
-            let index = self.cells.firstIndex(where: { $0.id == .live }),
-            let nextLiveEventIndex = events
-                .firstIndex(where: { $0.status.id == .live }),
-            case .live(let timeInterval, _) = self.events[nextLiveEventIndex].status
-        else {
-             return
-        }
-        
-        timer?.invalidate()
-        
-        updateTodayEvent(timeInterval: timeInterval)
-        
-        if timeInterval < -.hourInterval && livePositions.isEmpty {
-            timerEvents?.invalidate()
-            updateEvents(force: true)
-            cells.remove(at: index)
-        } else {
-            cells[index] = .live(
-                buildLiveViewModel(
-                    with: events[nextLiveEventIndex].shortDetails,
-                    index: index,
-                    livePositions: livePositions
-                )
-            )
-        }
-        
-        state = .results(cells)
     }
     
     private func buildLiveViewModel(
@@ -254,7 +260,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
             if timeInterval <= 0 {
                 self.liveEventService.action.send(.updatePositions)
             } else {
-                self.loadLiveData()
+                self.state = .results(self.loadLiveData())
             }
         }
     }
@@ -277,7 +283,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                 self.eventService.action.send(.updateAll)
             } else {
                 Logger.eventService.debug("Loading current events cells \(self.timesToRefreshEvents)")
-                self.state = self.loadData()
+                self.state = .results(self.loadData())
             }
             
         }
