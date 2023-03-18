@@ -3,8 +3,6 @@ import SwiftUI
 struct SessionStandingsListView<ViewModel: SessionStandingsListViewModelRepresentable>: View {
 
     @ObservedObject private var viewModel: ViewModel
-    
-    private typealias stateID = SessionStandingsListViewModel.State.idValue
 
     init(viewModel: ViewModel) {
         
@@ -47,7 +45,7 @@ struct SessionStandingsListView<ViewModel: SessionStandingsListViewModelRepresen
                         }
                     }
                 }
-                .redacted(reason: viewModel.state.id == stateID.loading.rawValue ? .placeholder : [])
+                .redacted(reason: viewModel.state.id == .loading ? .placeholder : [])
             }
         }
         .onAppear {

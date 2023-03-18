@@ -93,18 +93,18 @@ extension Event {
         case finished(winner: [Driver.ID])
         
         
-        enum idValue: String {
-            case live = "live"
-            case upcoming = "upcoming"
-            case finished = "finished"
+        enum Identifier {
+            case live
+            case upcoming
+            case finished
         }
         
-        var id: String {
+        var id: Identifier {
             
             switch self {
-            case .upcoming: return idValue.upcoming.rawValue
-            case .live: return idValue.live.rawValue
-            case .finished: return idValue.finished.rawValue
+            case .upcoming: return .upcoming
+            case .live: return .live
+            case .finished: return .finished
             }
         }
     }

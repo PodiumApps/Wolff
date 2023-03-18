@@ -104,7 +104,7 @@ class UpcomingAndStandingsEventCellViewModel: UpcomingAndStandingsEventCellViewM
     
     private func buildUpcomingViewModel(for events: [GrandPrixCardViewModel]) {
         
-        if let index = cells.firstIndex(where: { $0.id == Cell.idValue.upcoming.rawValue }) {
+        if let index = cells.firstIndex(where: { $0.id == .upcoming }) {
             
             cells[index] = .upcoming(events)
         }
@@ -127,16 +127,16 @@ extension UpcomingAndStandingsEventCellViewModel {
         case upcoming([GrandPrixCardViewModel])
         case standings([Driver], [Constructor])
         
-        enum idValue: String {
-            case upcoming = "upcoming"
-            case standings = "standings"
+        enum Identifier {
+            case upcoming
+            case standings
         }
         
-        var id: String {
+        var id: Identifier {
             
             switch self {
-            case .upcoming: return idValue.upcoming.rawValue
-            case .standings: return idValue.standings.rawValue
+            case .upcoming: return .upcoming
+            case .standings: return .standings
             }
         }
     }

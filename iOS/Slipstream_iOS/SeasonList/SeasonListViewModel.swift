@@ -62,7 +62,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                 
                 guard
                     let self,
-                    let index = self.cells.firstIndex(where: { $0.id == Section.idValue.live.rawValue })
+                    let index = self.cells.firstIndex(where: { $0.id == .live })
                 else {
                     return
                 }
@@ -116,7 +116,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
         
         events.enumerated().forEach { (index, event) in
 
-            if event.status.id != Event.Status.idValue.live.rawValue {
+            if event.status.id != .live {
                 upcomingEvents.append(
                     .init(
                         status: event.status,
@@ -132,9 +132,9 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
         timerEvents?.invalidate()
         updateEvents()
         
-        if !events.contains(where: { $0.status.id == Event.Status.idValue.live.rawValue }) {
+        if !events.contains(where: { $0.status.id == .live }) {
             cells = [.upcomingAndStandings(buildUpcomingAndStandingsViewModel(with: upcomingEvents))]
-        } else if let cellIndex = cells.firstIndex(where: { $0.id == Section.idValue.upcomingAndStandings.rawValue }) {
+        } else if let cellIndex = cells.firstIndex(where: { $0.id == .upcomingAndStandings }) {
             cells[cellIndex] = .upcomingAndStandings(buildUpcomingAndStandingsViewModel(with: upcomingEvents))
         }
         
@@ -144,9 +144,9 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
     private func loadLiveData(livePositions: [LivePosition] = []) {
         
         guard
-            let index = self.cells.firstIndex(where: { $0.id == Section.idValue.live.rawValue }),
+            let index = self.cells.firstIndex(where: { $0.id == .live }),
             let nextLiveEventIndex = events
-                .firstIndex(where: { $0.status.id == Event.Status.idValue.live.rawValue }),
+                .firstIndex(where: { $0.status.id == .live }),
             case .live(let timeInterval, _) = self.events[nextLiveEventIndex].status
         else {
              return
@@ -296,19 +296,19 @@ extension SeasonListViewModel {
         case results([Section])
         case loading([Section])
         
-        enum idValue: String {
+        enum Identifier: String {
             
             case error
             case loading
             case results
         }
         
-        var id: String {
+        var id: Identifier {
             
             switch self {
-            case .loading: return idValue.loading.rawValue
-            case .results: return idValue.results.rawValue
-            case .error: return idValue.error.rawValue
+            case .loading: return .loading
+            case .results: return .results
+            case .error: return .error
             }
         }
     }
@@ -358,16 +358,16 @@ extension SeasonListViewModel {
         case live(LiveCardCellViewModel, isLoading: Bool = false)
         case upcomingAndStandings(UpcomingAndStandingsEventCellViewModel)
         
-        enum idValue: String {
-            case live = "live"
-            case upcomingAndStandings = "upcomingAndStandings"
+        enum Identifier {
+            case live
+            case upcomingAndStandings
         }
         
-        var id: String {
+        var id: Identifier {
             
             switch self {
-            case .live: return idValue.live.rawValue
-            case .upcomingAndStandings: return idValue.upcomingAndStandings.rawValue
+            case .live: return .live
+            case .upcomingAndStandings: return .upcomingAndStandings
             }
         }
     }

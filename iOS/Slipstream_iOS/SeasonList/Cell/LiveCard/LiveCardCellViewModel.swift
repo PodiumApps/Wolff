@@ -96,17 +96,17 @@ extension LiveCardCellViewModel {
         case results(TopSection, CardSection, Time, isLive: Bool)
         case loading(TopSection, CardSection, Time, isLive: Bool)
         
-        enum idValue: String {
+        enum Identifier {
             
             case loading
             case results
         }
         
-        var id: String {
+        var id: Identifier {
             
             switch self {
-            case .loading: return idValue.loading.rawValue
-            case .results: return idValue.results.rawValue
+            case .loading: return .loading
+            case .results: return .results
             }
         }
     }

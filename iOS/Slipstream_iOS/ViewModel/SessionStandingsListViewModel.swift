@@ -107,7 +107,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
         
         guard
             case .results(let cells) = state,
-            let positionsIndex = cells.firstIndex(where: { $0.id == Cell.idValue.positionList.rawValue }),
+            let positionsIndex = cells.firstIndex(where: { $0.id == .positionList }),
             case .positionList(let positions) = cells[positionsIndex],
             let driver = drivers.lazy.first(where: { $0.driverTicker == positions[index].driverTicker }),
             let constructor = constructors.lazy.first(where: { $0.id == driver.constructorId })
@@ -188,26 +188,22 @@ extension SessionStandingsListViewModel {
     
     enum State: Equatable {
         
-        static func == (lhs: SessionStandingsListViewModel.State, rhs: SessionStandingsListViewModel.State) -> Bool {
-            lhs.id == rhs.id
-        }
-        
         case loading([Cell])
         case results([Cell])
         case error(String)
         
-        enum idValue: String {
+        enum Identifier {
             
-            case loading = "loading"
-            case results = "results"
-            case error = "error"
+            case loading
+            case results
+            case error
         }
         
-        var id: String {
+        var id: Identifier {
             switch self {
-            case .loading: return idValue.loading.rawValue
-            case .results: return idValue.results.rawValue
-            case .error: return idValue.error.rawValue
+            case .loading: return .loading
+            case .results: return .results
+            case .error: return .error
             }
         }
     }
@@ -221,16 +217,16 @@ extension SessionStandingsListViewModel {
         case header(String)
         case positionList([SessionDriverRowViewModel])
         
-        enum idValue: String {
-            case header = "header"
-            case positionList = "positionList"
+        enum Identifier {
+            case header
+            case positionList
         }
         
-        var id: String {
+        var id: Identifier {
             
             switch self {
-            case .header: return idValue.header.rawValue
-            case .positionList: return idValue.positionList.rawValue
+            case .header: return .header
+            case .positionList: return .positionList
             }
         }
     }

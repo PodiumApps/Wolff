@@ -4,8 +4,6 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
     
     @ObservedObject private var viewModel: ViewModel
     
-    private typealias stateID = SeasonListViewModel.State.idValue
-    
     init(viewModel: ViewModel) {
         
         self.viewModel = viewModel
@@ -44,7 +42,7 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
                         Spacer()
                     }
                     .padding(.top, .Spacing.default4)
-                    .redacted(reason: viewModel.state.id == stateID.loading.rawValue ? .placeholder : [])
+                    .redacted(reason: viewModel.state.id == .loading ? .placeholder : [])
                 }
             }
             .navigationDestination(for: SeasonListViewModel.Route.self) { route in
