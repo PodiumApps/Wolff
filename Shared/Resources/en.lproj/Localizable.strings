@@ -11,7 +11,7 @@
 "live_card_cell.title.now" = "HAPPENING NOW";
 "live_card_cell.title.soon" = "HAPPENING SOON";
 "live_card_cell.top.round" = "Round %@";
-"live_card_cell.about_to_start" = "About to start";
+"live_card_cell.about_to_start" = "About to Start";
 "live_card_cell.time.hours" = "HOURS";
 "live_card_cell.time.minutes" = "MINUTES";
 "live_card_cell.time.seconds" = "SECONDS";

@@ -7,7 +7,7 @@ protocol SessionDriverRowViewModelRepresentable: ObservableObject {
     var driverTicker: String { get }
     var timeGap: String? { get }
     var tyrePitCount: Int { get }
-    var currentTyre: LivePosition.Tyre { get }
+    var currentTyre: SessionResult.Tyre { get }
     var constructorId: Constructor.ID { get }
 
     var isSelected: Bool { get set }
@@ -21,7 +21,7 @@ final class SessionDriverRowViewModel: SessionDriverRowViewModelRepresentable {
     let driverTicker: String
     let timeGap: String?
     let tyrePitCount: Int
-    let currentTyre: LivePosition.Tyre
+    let currentTyre: SessionResult.Tyre
     let constructorId: Constructor.ID
 
     @Published var isSelected: Bool
@@ -31,7 +31,7 @@ final class SessionDriverRowViewModel: SessionDriverRowViewModelRepresentable {
         driverTicker: String,
         timeGap: String?,
         tyrePitCount: Int,
-        currentTyre: LivePosition.Tyre,
+        currentTyre: SessionResult.Tyre,
         constructorId: Constructor.ID,
         isSelected: Bool = false
     ) {

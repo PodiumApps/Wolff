@@ -43,5 +43,4 @@ class ConstructorStyler: ConstructorStylerRepresentable {
     init(constructor: Constructor.ID) {
         self.constructor = Details.allCases.first(where: { $0.rawValue == constructor.string }) ?? .noTeam
     }
-
 }

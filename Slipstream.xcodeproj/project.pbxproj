@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4207B43329BE703400AA4758 /* DriverResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36D297802040038A860 /* DriverResult.swift */; };
 		4207B43829C0BC9300AA4758 /* LiveCardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096835295378A10075D75E /* LiveCardViewCell.swift */; };
 		4207B43929C0BCBE00AA4758 /* LiveCardCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2197B295EE46500515097 /* LiveCardCellViewModel.swift */; };
 		4207B43A29C18CFD00AA4758 /* GrandPrixCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */; };
@@ -21,6 +20,8 @@
 		4207B45029C3425300AA4758 /* IntegerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B44F29C3425300AA4758 /* IntegerExtension.swift */; };
 		4207B45129C3426800AA4758 /* IntegerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B44F29C3425300AA4758 /* IntegerExtension.swift */; };
 		4207B45329C4662800AA4758 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B45229C4662800AA4758 /* Spacing.swift */; };
+		4207B45429C7230C00AA4758 /* DriverResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36D297802040038A860 /* DriverResult.swift */; };
+		4207B45629C7230E00AA4758 /* DriverResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36D297802040038A860 /* DriverResult.swift */; };
 		420967F4294C9A8D0075D75E /* SlipstreamWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420967F3294C9A8D0075D75E /* SlipstreamWatchApp.swift */; };
 		420967F6294C9A8D0075D75E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420967F5294C9A8D0075D75E /* ContentView.swift */; };
 		420967F8294C9A8F0075D75E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 420967F7294C9A8F0075D75E /* Assets.xcassets */; };
@@ -107,7 +108,6 @@
 		CF20D362297577D80038A860 /* ConstructorStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D360297577D80038A860 /* ConstructorStyler.swift */; };
 		CF20D36529760C300038A860 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36429760C300038A860 /* Colors.swift */; };
 		CF20D36629760C300038A860 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36429760C300038A860 /* Colors.swift */; };
-		CF20D36F297802040038A860 /* DriverResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36D297802040038A860 /* DriverResult.swift */; };
 		CF20D371297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D370297818EE0038A860 /* EventStatusBackgroundStyler.swift */; };
 		CF20D372297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D370297818EE0038A860 /* EventStatusBackgroundStyler.swift */; };
 		CF233DDE29A8D98800A8D1CD /* GrandPrixSchedulePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DDD29A8D98800A8D1CD /* GrandPrixSchedulePickerViewModel.swift */; };
@@ -900,6 +900,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42521CC129B250DE00000586 /* ButtonStyle.swift in Sources */,
+				4207B45629C7230E00AA4758 /* DriverResult.swift in Sources */,
 				42096823294C9B990075D75E /* NetworkManager.swift in Sources */,
 				CF20D371297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */,
 				4207B45129C3426800AA4758 /* IntegerExtension.swift in Sources */,
@@ -910,7 +911,6 @@
 				420967F6294C9A8D0075D75E /* ContentView.swift in Sources */,
 				42521CA429B0ECBD00000586 /* LiveSessionService.swift in Sources */,
 				42521CBE29B2378300000586 /* SessionDriverStyler.swift in Sources */,
-				4207B43329BE703400AA4758 /* DriverResult.swift in Sources */,
 				42B21982295EEA2600515097 /* SessionResultMock.swift in Sources */,
 				420967F4294C9A8D0075D75E /* SlipstreamWatchApp.swift in Sources */,
 				CF233DED29ADFA9900A8D1CD /* LivePosition.swift in Sources */,
@@ -979,13 +979,13 @@
 				4207B45329C4662800AA4758 /* Spacing.swift in Sources */,
 				4209686029537AF70075D75E /* Driver.swift in Sources */,
 				42521D1E29B79D6800000586 /* LivePosition.swift in Sources */,
+				4207B45429C7230C00AA4758 /* DriverResult.swift in Sources */,
 				42521CB929B1F37D00000586 /* LiveSessionDriverDetailsSheet.swift in Sources */,
 				CF78D01E2996C58600D45EDE /* ScheduleCarouselViewModel.swift in Sources */,
 				CF8EB9D429A77AA700F38158 /* Event.swift in Sources */,
 				4209685C29537AC90075D75E /* DateExtension.swift in Sources */,
 				CF233DE529ABE17B00A8D1CD /* SessionDriverRowView.swift in Sources */,
 				4207B45029C3425300AA4758 /* IntegerExtension.swift in Sources */,
-				CF20D36F297802040038A860 /* DriverResult.swift in Sources */,
 				42B21981295EEA2300515097 /* SessionResultMock.swift in Sources */,
 				CFE23F4E2982EB9400412DB6 /* Localization.swift in Sources */,
 				42521CA829B0F21700000586 /* DriverAndConstructorService.swift in Sources */,

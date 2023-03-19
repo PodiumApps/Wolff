@@ -43,7 +43,6 @@ class EventService: EventServiceRepresentable {
                 }
             }
             .store(in: &subscriptions)
-        
     }
     
     
@@ -58,8 +57,7 @@ class EventService: EventServiceRepresentable {
             Logger.eventService.error("Error \(error)")
             state = .error(error)
         }
-    }
-    
+    }    
 }
 
 extension EventService {

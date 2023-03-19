@@ -123,7 +123,6 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                     title: event.title,
                     country: event.country
                 )
-                
             }
             
             timerEvents?.invalidate()

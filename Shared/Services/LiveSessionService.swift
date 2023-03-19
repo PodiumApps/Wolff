@@ -73,8 +73,6 @@ extension LiveSessionService {
         case refreshed([LivePosition])
         case error(Error)
     }
-    
-    
 }
 
 extension LiveSessionService {

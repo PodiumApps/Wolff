@@ -9,7 +9,7 @@ extension Double {
     static let liveInSeconds: Self = 4*Double.hourInterval
     static let threeDaysInterval: Self = 3*24*Double.hourInterval
     
-    static let maximumSessionTime: Self = 4*Double.hourInterval
+    static let maximumSessionTime: Self = 4.5*Double.hourInterval
     
     static let hourInterval: Self = 60*60
 }
