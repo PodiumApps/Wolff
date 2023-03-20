@@ -18,6 +18,12 @@ class DriverAndConstructorService: DriverAndConstructorServiceRepresentable {
     private let networkManager: NetworkManagerRepresentable
     private var subscriptions = Set<AnyCancellable>()
     
+    @UserDefaultsWrapper(key: .drivers)
+    private var persistedDrivers: [Driver]?
+    
+    @UserDefaultsWrapper(key: .constructors)
+    private var persistedConstructors: [Constructor]?
+    
     init(networkManager: NetworkManagerRepresentable) {
         
         self.networkManager = networkManager
@@ -37,7 +43,6 @@ class DriverAndConstructorService: DriverAndConstructorServiceRepresentable {
                     switch action {
                     case .fetchAll:
                         await self.fetchAll()
-                        break
                     }
                 }
             }
@@ -46,13 +51,26 @@ class DriverAndConstructorService: DriverAndConstructorServiceRepresentable {
     
     private func fetchAll() async {
         
+        if let drivers = persistedDrivers,
+           !drivers.isEmpty,
+           let constructors = persistedConstructors,
+           !constructors.isEmpty
+        {
+            state = .refreshed(drivers, constructors)
+            Logger.driverAndConstructorService
+                .info("\(drivers.count) drivers and \(constructors.count) constructors from persistence")
+        }
+        
         do {
             let drivers = try await networkManager.load(Driver.getDrivers())
+            self.persistedDrivers = drivers
             Logger.driverAndConstructorService.info("Fetched \(drivers.count) drivers")
-            let constructors = try await networkManager.load(Constructor.getConstructors())
-            Logger.driverAndConstructorService.info("Fetched \(constructors.count) constructors")
-            state = .refreshed(drivers, constructors)
             
+            let constructors = try await networkManager.load(Constructor.getConstructors())
+            self.persistedConstructors = constructors
+            Logger.driverAndConstructorService.info("Fetched \(constructors.count) constructors")
+            
+            state = .refreshed(drivers, constructors)
         } catch {
             Logger.driverAndConstructorService.error("Fetch all drivers failed with \(error)")
             state = .error(error)
@@ -74,8 +92,13 @@ extension DriverAndConstructorService {
         case refreshed([Driver], [Constructor])
         case error(Error)
     }
+    
+    enum RefreshStatus {
+        
+        case defaults
+        case server
+    }
 }
-
 
 extension DriverAndConstructorService {
     

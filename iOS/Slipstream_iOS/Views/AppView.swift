@@ -16,13 +16,30 @@ struct AppView<ViewModel: AppViewModelRepresentable>: View {
             Text(string)
         case .loading:
             ProgressView()
-        case .results(let sessionViewModel):
-            NavigationView {
-                NavigationLink(
-                    "Live view",
-                    destination: SessionStandingsListView(viewModel: sessionViewModel)
-                )
+        case .results(let seasonListViewModel):
+            TabView {
+                
+                SeasonListView(viewModel: seasonListViewModel)
+                    .tabItem {
+                        Image.TabBar.season
+                    }
+                
+                Text("Standings")
+                    .tabItem {
+                        Image.TabBar.standings
+                    }
+                
+                Text("Settings")
+                    .tabItem {
+                        Image.TabBar.settings
+                    }
             }
+//            NavigationView {
+//                NavigationLink(
+//                    "Live view",
+//                    destination: SessionStandingsListView(viewModel: sessionViewModel)
+//                )
+//            }
         }
     }
 }

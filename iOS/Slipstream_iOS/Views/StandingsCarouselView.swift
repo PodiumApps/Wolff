@@ -21,12 +21,12 @@ struct StandingsCarouselView<ViewModel: StandingsCarouselViewModel>: View {
             VStack(alignment: .leading) {
                 HStack {
                     Text(viewModel.driverName)
-                        .font(.newsCarouselDriverNameFont)
+                        .font(.Body.bold)
                     Text("\(viewModel.points) pts")
                 }
 
                 Text(viewModel.constructorName)
-                    .font(.newsCarouselConstrutorNameFont)
+                    .font(.Caption.regular)
             }
         }
         .frame(height: Constants.height)

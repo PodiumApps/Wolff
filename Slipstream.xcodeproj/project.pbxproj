@@ -7,6 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4207B43829C0BC9300AA4758 /* LiveCardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096835295378A10075D75E /* LiveCardViewCell.swift */; };
+		4207B43929C0BCBE00AA4758 /* LiveCardCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2197B295EE46500515097 /* LiveCardCellViewModel.swift */; };
+		4207B43A29C18CFD00AA4758 /* GrandPrixCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */; };
+		4207B43B29C18D0200AA4758 /* GrandPrixCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36A297700160038A860 /* GrandPrixCardView.swift */; };
+		4207B43E29C1E47F00AA4758 /* UpcomingAndStandingsEventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B43D29C1E47E00AA4758 /* UpcomingAndStandingsEventCellViewModel.swift */; };
+		4207B44429C1E59300AA4758 /* UpcomingAndStandingsEventCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B44329C1E59300AA4758 /* UpcomingAndStandingsEventCellView.swift */; };
+		4207B44729C2151A00AA4758 /* DriverDetailsTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B44629C2151A00AA4758 /* DriverDetailsTextView.swift */; };
+		4207B44929C215F100AA4758 /* CarWithNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B44829C215F100AA4758 /* CarWithNumberView.swift */; };
+		4207B44C29C216DC00AA4758 /* StandingsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B44B29C216DC00AA4758 /* StandingsCellView.swift */; };
+		4207B44E29C216E900AA4758 /* StandingsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B44D29C216E900AA4758 /* StandingsCellViewModel.swift */; };
+		4207B45029C3425300AA4758 /* IntegerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B44F29C3425300AA4758 /* IntegerExtension.swift */; };
+		4207B45129C3426800AA4758 /* IntegerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B44F29C3425300AA4758 /* IntegerExtension.swift */; };
+		4207B45329C4662800AA4758 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B45229C4662800AA4758 /* Spacing.swift */; };
+		4207B45429C7230C00AA4758 /* DriverResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36D297802040038A860 /* DriverResult.swift */; };
+		4207B45629C7230E00AA4758 /* DriverResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36D297802040038A860 /* DriverResult.swift */; };
 		420967F4294C9A8D0075D75E /* SlipstreamWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420967F3294C9A8D0075D75E /* SlipstreamWatchApp.swift */; };
 		420967F6294C9A8D0075D75E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420967F5294C9A8D0075D75E /* ContentView.swift */; };
 		420967F8294C9A8F0075D75E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 420967F7294C9A8F0075D75E /* Assets.xcassets */; };
@@ -23,6 +38,9 @@
 		4209686229537AF70075D75E /* Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF054427294F7D4E00A39FE3 /* Constructor.swift */; };
 		4209686B29537B0D0075D75E /* Circuit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF05443929507C1000A39FE3 /* Circuit.swift */; };
 		4209686E2954CDCC0075D75E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096822294C9B990075D75E /* NetworkManager.swift */; };
+		4245E81029B7E0DD00843B02 /* SeasonListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4245E80F29B7E0DD00843B02 /* SeasonListView.swift */; };
+		4245E81229B7E0EE00843B02 /* SeasonListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4245E81129B7E0EE00843B02 /* SeasonListViewModel.swift */; };
+		4245E81329B7E9E800843B02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42096837295378A20075D75E /* Assets.xcassets */; };
 		42521CA029B0EB9500000586 /* NetworkManagerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521C9F29B0EB9500000586 /* NetworkManagerRepresentable.swift */; };
 		42521CA129B0EB9500000586 /* NetworkManagerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521C9F29B0EB9500000586 /* NetworkManagerRepresentable.swift */; };
 		42521CA429B0ECBD00000586 /* LiveSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CA329B0ECBD00000586 /* LiveSessionService.swift */; };
@@ -73,6 +91,12 @@
 		42B219A0295F426200515097 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2199F295F426200515097 /* Images.swift */; };
 		42B219A1295F426200515097 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2199F295F426200515097 /* Images.swift */; };
 		42B219A5295F450200515097 /* InfiniteScroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B219A3295F450200515097 /* InfiniteScroller.swift */; };
+		42BCAD5529BB4B360089B46A /* EventMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5429BB4B360089B46A /* EventMock.swift */; };
+		42BCAD5629BB4B360089B46A /* EventMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5429BB4B360089B46A /* EventMock.swift */; };
+		42BCAD5929BB742B0089B46A /* UserDefaultsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5829BB742B0089B46A /* UserDefaultsWrapper.swift */; };
+		42BCAD5A29BB742B0089B46A /* UserDefaultsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5829BB742B0089B46A /* UserDefaultsWrapper.swift */; };
+		42BCAD5C29BB7B000089B46A /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5B29BB7B000089B46A /* EventService.swift */; };
+		42BCAD5D29BB7B000089B46A /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5B29BB7B000089B46A /* EventService.swift */; };
 		42BCAD6229BBD7F10089B46A /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD6129BBD7F10089B46A /* Identifier.swift */; };
 		42BCAD6329BBD7F10089B46A /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD6129BBD7F10089B46A /* Identifier.swift */; };
 		CF054422294CECCD00A39FE3 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF054421294CECCD00A39FE3 /* Driver.swift */; };
@@ -84,12 +108,8 @@
 		CF20D362297577D80038A860 /* ConstructorStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D360297577D80038A860 /* ConstructorStyler.swift */; };
 		CF20D36529760C300038A860 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36429760C300038A860 /* Colors.swift */; };
 		CF20D36629760C300038A860 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36429760C300038A860 /* Colors.swift */; };
-		CF20D3692976FBD50038A860 /* GrandPrixCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */; };
-		CF20D36C297700160038A860 /* GrandPrixCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36A297700160038A860 /* GrandPrixCardView.swift */; };
-		CF20D36F297802040038A860 /* DriverResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36D297802040038A860 /* DriverResult.swift */; };
 		CF20D371297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D370297818EE0038A860 /* EventStatusBackgroundStyler.swift */; };
 		CF20D372297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D370297818EE0038A860 /* EventStatusBackgroundStyler.swift */; };
-		CF233DD529A7D6A900A8D1CD /* EventComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DD429A7D6A900A8D1CD /* EventComponentView.swift */; };
 		CF233DDE29A8D98800A8D1CD /* GrandPrixSchedulePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DDD29A8D98800A8D1CD /* GrandPrixSchedulePickerViewModel.swift */; };
 		CF233DE029A8DB7C00A8D1CD /* GrandPrixSchedulePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DDF29A8DB7C00A8D1CD /* GrandPrixSchedulePickerView.swift */; };
 		CF233DE529ABE17B00A8D1CD /* SessionDriverRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DE429ABE17B00A8D1CD /* SessionDriverRowView.swift */; };
@@ -100,7 +120,6 @@
 		CF277A23297313260048DE75 /* StandingsCarouselViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A22297313260048DE75 /* StandingsCarouselViewModel.swift */; };
 		CF5F07772996CC3D00E79996 /* ScheduleCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5F07762996CC3D00E79996 /* ScheduleCarouselView.swift */; };
 		CF78D01E2996C58600D45EDE /* ScheduleCarouselViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF78D01D2996C58600D45EDE /* ScheduleCarouselViewModel.swift */; };
-		CF8EB9D329A77AA700F38158 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8EB9D229A77AA700F38158 /* Event.swift */; };
 		CF8EB9D429A77AA700F38158 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8EB9D229A77AA700F38158 /* Event.swift */; };
 		CFB508C92953034300C46D81 /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB508C82953034300C46D81 /* EventCard.swift */; };
 		CFE23F4D2982EB9400412DB6 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE23F4C2982EB9400412DB6 /* Localization.swift */; };
@@ -130,6 +149,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4207B43D29C1E47E00AA4758 /* UpcomingAndStandingsEventCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingAndStandingsEventCellViewModel.swift; sourceTree = "<group>"; };
+		4207B44329C1E59300AA4758 /* UpcomingAndStandingsEventCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingAndStandingsEventCellView.swift; sourceTree = "<group>"; };
+		4207B44629C2151A00AA4758 /* DriverDetailsTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverDetailsTextView.swift; sourceTree = "<group>"; };
+		4207B44829C215F100AA4758 /* CarWithNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarWithNumberView.swift; sourceTree = "<group>"; };
+		4207B44B29C216DC00AA4758 /* StandingsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsCellView.swift; sourceTree = "<group>"; };
+		4207B44D29C216E900AA4758 /* StandingsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsCellViewModel.swift; sourceTree = "<group>"; };
+		4207B44F29C3425300AA4758 /* IntegerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerExtension.swift; sourceTree = "<group>"; };
+		4207B45229C4662800AA4758 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		420967EE294C9A8D0075D75E /* Slipstream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Slipstream.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		420967F3294C9A8D0075D75E /* SlipstreamWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlipstreamWatchApp.swift; sourceTree = "<group>"; };
 		420967F5294C9A8D0075D75E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -140,11 +167,13 @@
 		42096822294C9B990075D75E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		42096831295378A10075D75E /* Slipstream_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Slipstream_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42096833295378A10075D75E /* Slipstream_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slipstream_iOSApp.swift; sourceTree = "<group>"; };
-		42096835295378A10075D75E /* LiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveView.swift; sourceTree = "<group>"; };
+		42096835295378A10075D75E /* LiveCardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveCardViewCell.swift; sourceTree = "<group>"; };
 		42096837295378A20075D75E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4209683A295378A20075D75E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		42096840295378A30075D75E /* Slipstream_iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Slipstream_iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		42096844295378A30075D75E /* Slipstream_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slipstream_iOSTests.swift; sourceTree = "<group>"; };
+		4245E80F29B7E0DD00843B02 /* SeasonListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonListView.swift; sourceTree = "<group>"; };
+		4245E81129B7E0EE00843B02 /* SeasonListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonListViewModel.swift; sourceTree = "<group>"; };
 		42521C9F29B0EB9500000586 /* NetworkManagerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerRepresentable.swift; sourceTree = "<group>"; };
 		42521CA329B0ECBD00000586 /* LiveSessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveSessionService.swift; sourceTree = "<group>"; };
 		42521CA629B0F21700000586 /* DriverAndConstructorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverAndConstructorService.swift; sourceTree = "<group>"; };
@@ -164,9 +193,7 @@
 		42B2196D295D9EFB00515097 /* SessionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionResult.swift; sourceTree = "<group>"; };
 		42B2196F295DA4D400515097 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		42B21971295DDBAB00515097 /* Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
-		42B21975295DE14600515097 /* LiveCarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveCarView.swift; sourceTree = "<group>"; };
-		42B2197B295EE46500515097 /* LiveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewModel.swift; sourceTree = "<group>"; };
-		42B2197D295EE95600515097 /* LiveCarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveCarViewModel.swift; sourceTree = "<group>"; };
+		42B2197B295EE46500515097 /* LiveCardCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveCardCellViewModel.swift; sourceTree = "<group>"; };
 		42B21980295EEA2300515097 /* SessionResultMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionResultMock.swift; sourceTree = "<group>"; };
 		42B21983295EEA5600515097 /* SessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionMock.swift; sourceTree = "<group>"; };
 		42B21985295EEA7200515097 /* DriverMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverMock.swift; sourceTree = "<group>"; };
@@ -175,6 +202,9 @@
 		42B21999295F3A2300515097 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 		42B2199F295F426200515097 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		42B219A3295F450200515097 /* InfiniteScroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteScroller.swift; sourceTree = "<group>"; };
+		42BCAD5429BB4B360089B46A /* EventMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMock.swift; sourceTree = "<group>"; };
+		42BCAD5829BB742B0089B46A /* UserDefaultsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsWrapper.swift; sourceTree = "<group>"; };
+		42BCAD5B29BB7B000089B46A /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		42BCAD6129BBD7F10089B46A /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
 		CF054421294CECCD00A39FE3 /* Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
 		CF054427294F7D4E00A39FE3 /* Constructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constructor.swift; sourceTree = "<group>"; };
@@ -187,7 +217,6 @@
 		CF20D36A297700160038A860 /* GrandPrixCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandPrixCardView.swift; sourceTree = "<group>"; };
 		CF20D36D297802040038A860 /* DriverResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverResult.swift; sourceTree = "<group>"; };
 		CF20D370297818EE0038A860 /* EventStatusBackgroundStyler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStatusBackgroundStyler.swift; sourceTree = "<group>"; };
-		CF233DD429A7D6A900A8D1CD /* EventComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventComponentView.swift; sourceTree = "<group>"; };
 		CF233DDD29A8D98800A8D1CD /* GrandPrixSchedulePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandPrixSchedulePickerViewModel.swift; sourceTree = "<group>"; };
 		CF233DDF29A8DB7C00A8D1CD /* GrandPrixSchedulePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandPrixSchedulePickerView.swift; sourceTree = "<group>"; };
 		CF233DE229ABE02F00A8D1CD /* SessionDriverRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDriverRowViewModel.swift; sourceTree = "<group>"; };
@@ -241,6 +270,64 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4207B43F29C1E51700AA4758 /* SeasonList */ = {
+			isa = PBXGroup;
+			children = (
+				4245E81129B7E0EE00843B02 /* SeasonListViewModel.swift */,
+				4245E80F29B7E0DD00843B02 /* SeasonListView.swift */,
+				4207B44029C1E51E00AA4758 /* Cell */,
+			);
+			path = SeasonList;
+			sourceTree = "<group>";
+		};
+		4207B44029C1E51E00AA4758 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				4207B44A29C216CC00AA4758 /* Standings */,
+				4207B44229C1E54B00AA4758 /* UpcomingPast */,
+				4207B44129C1E54400AA4758 /* LiveCard */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		4207B44129C1E54400AA4758 /* LiveCard */ = {
+			isa = PBXGroup;
+			children = (
+				42096835295378A10075D75E /* LiveCardViewCell.swift */,
+				42B2197B295EE46500515097 /* LiveCardCellViewModel.swift */,
+			);
+			path = LiveCard;
+			sourceTree = "<group>";
+		};
+		4207B44229C1E54B00AA4758 /* UpcomingPast */ = {
+			isa = PBXGroup;
+			children = (
+				4207B43D29C1E47E00AA4758 /* UpcomingAndStandingsEventCellViewModel.swift */,
+				CF20D36A297700160038A860 /* GrandPrixCardView.swift */,
+				CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */,
+				4207B44329C1E59300AA4758 /* UpcomingAndStandingsEventCellView.swift */,
+			);
+			path = UpcomingPast;
+			sourceTree = "<group>";
+		};
+		4207B44529C214F800AA4758 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				4207B44629C2151A00AA4758 /* DriverDetailsTextView.swift */,
+				4207B44829C215F100AA4758 /* CarWithNumberView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		4207B44A29C216CC00AA4758 /* Standings */ = {
+			isa = PBXGroup;
+			children = (
+				4207B44B29C216DC00AA4758 /* StandingsCellView.swift */,
+				4207B44D29C216E900AA4758 /* StandingsCellViewModel.swift */,
+			);
+			path = Standings;
+			sourceTree = "<group>";
+		};
 		420967F2294C9A8D0075D75E /* Slipstream_watch */ = {
 			isa = PBXGroup;
 			children = (
@@ -298,10 +385,10 @@
 		42096832295378A10075D75E /* Slipstream_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				4207B44529C214F800AA4758 /* Components */,
+				4207B43F29C1E51700AA4758 /* SeasonList */,
 				42521D0329B7910500000586 /* ViewModel */,
 				42521D0029B790BE00000586 /* Views */,
-				CF233DD429A7D6A900A8D1CD /* EventComponentView.swift */,
-				CF20D36D297802040038A860 /* DriverResult.swift */,
 				42B219A2295F44F400515097 /* ViewBuilders */,
 				42B2196B295D94C800515097 /* Support */,
 				42096839295378A20075D75E /* Preview Content */,
@@ -328,6 +415,7 @@
 		4209685B29537AB60075D75E /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				42BCAD5729BB74130089B46A /* PropertyWrappers */,
 				42521CA229B0ECAC00000586 /* Services */,
 				CFE23F442982E89D00412DB6 /* Resources */,
 				42B2199E295F425500515097 /* Styles */,
@@ -363,6 +451,7 @@
 				42521CA329B0ECBD00000586 /* LiveSessionService.swift */,
 				42521CA629B0F21700000586 /* DriverAndConstructorService.swift */,
 				42521CB129B1006000000586 /* ServiceLocator.swift */,
+				42BCAD5B29BB7B000089B46A /* EventService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -370,10 +459,7 @@
 		42521D0029B790BE00000586 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				42096835295378A10075D75E /* LiveView.swift */,
-				42B21975295DE14600515097 /* LiveCarView.swift */,
 				CFEE3F2A2969B6970050EE8B /* ResultCardView.swift */,
-				CF20D36A297700160038A860 /* GrandPrixCardView.swift */,
 				CF277A20297303430048DE75 /* StandingsCarouselView.swift */,
 				CF233DDF29A8DB7C00A8D1CD /* GrandPrixSchedulePickerView.swift */,
 				CF5F07762996CC3D00E79996 /* ScheduleCarouselView.swift */,
@@ -388,15 +474,12 @@
 		42521D0329B7910500000586 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				CF233DDD29A8D98800A8D1CD /* GrandPrixSchedulePickerViewModel.swift */,
 				42521D0729B799C700000586 /* LiveSessionDriverDetailsSheetViewModel.swift */,
 				42521D0529B799C700000586 /* SessionDriverRowViewModel.swift */,
 				42521D0629B799C700000586 /* SessionStandingsListViewModel.swift */,
-				42B2197D295EE95600515097 /* LiveCarViewModel.swift */,
-				42B2197B295EE46500515097 /* LiveViewModel.swift */,
-				CF233DDD29A8D98800A8D1CD /* GrandPrixSchedulePickerViewModel.swift */,
 				CF277A22297313260048DE75 /* StandingsCarouselViewModel.swift */,
 				CF78D01D2996C58600D45EDE /* ScheduleCarouselViewModel.swift */,
-				CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */,
 				CFBD88D6296C1FB50068AB54 /* ResultCardViewModel.swift */,
 				42521D0E29B79A3400000586 /* AppViewModel.swift */,
 			);
@@ -440,6 +523,7 @@
 				42B21985295EEA7200515097 /* DriverMock.swift */,
 				42B21987295EEA9400515097 /* ConstructorMock.swift */,
 				42B21994295EEAC600515097 /* StandingsMock.swift */,
+				42BCAD5429BB4B360089B46A /* EventMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -452,6 +536,7 @@
 				CF277A1D297017C50048DE75 /* Fonts.swift */,
 				CF20D36429760C300038A860 /* Colors.swift */,
 				42521CC029B250DE00000586 /* ButtonStyle.swift */,
+				4207B45229C4662800AA4758 /* Spacing.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -462,6 +547,14 @@
 				42B219A3295F450200515097 /* InfiniteScroller.swift */,
 			);
 			path = ViewBuilders;
+			sourceTree = "<group>";
+		};
+		42BCAD5729BB74130089B46A /* PropertyWrappers */ = {
+			isa = PBXGroup;
+			children = (
+				42BCAD5829BB742B0089B46A /* UserDefaultsWrapper.swift */,
+			);
+			path = PropertyWrappers;
 			sourceTree = "<group>";
 		};
 		CF05441F294CEC9600A39FE3 /* Controllers */ = {
@@ -495,6 +588,7 @@
 		CF05443F29507E2A00A39FE3 /* Drivers and Constructors */ = {
 			isa = PBXGroup;
 			children = (
+				CF20D36D297802040038A860 /* DriverResult.swift */,
 				CF054421294CECCD00A39FE3 /* Driver.swift */,
 				CF054427294F7D4E00A39FE3 /* Constructor.swift */,
 				42B21971295DDBAB00515097 /* Details.swift */,
@@ -516,6 +610,7 @@
 				CF0544452951CB8D00A39FE3 /* DateExtension.swift */,
 				42B21999295F3A2300515097 /* DoubleExtension.swift */,
 				42521CB429B1033600000586 /* LoggerExtension.swift */,
+				4207B44F29C3425300AA4758 /* IntegerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -729,6 +824,7 @@
 				CFE23F4F2982EBF200412DB6 /* Localizable.strings in Resources */,
 				CFE23F552982EDBA00412DB6 /* swiftgen.yml in Resources */,
 				420967F8294C9A8F0075D75E /* Assets.xcassets in Resources */,
+				4245E81329B7E9E800843B02 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -804,8 +900,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				42521CC129B250DE00000586 /* ButtonStyle.swift in Sources */,
+				4207B45629C7230E00AA4758 /* DriverResult.swift in Sources */,
 				42096823294C9B990075D75E /* NetworkManager.swift in Sources */,
 				CF20D371297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */,
+				4207B45129C3426800AA4758 /* IntegerExtension.swift in Sources */,
 				CF20D36529760C300038A860 /* Colors.swift in Sources */,
 				42B21972295DDBAB00515097 /* Details.swift in Sources */,
 				42521CA729B0F21700000586 /* DriverAndConstructorService.swift in Sources */,
@@ -819,13 +917,15 @@
 				42B21970295DA4D400515097 /* Session.swift in Sources */,
 				CF05443A29507C1000A39FE3 /* Circuit.swift in Sources */,
 				42B21988295EEA9400515097 /* ConstructorMock.swift in Sources */,
+				42BCAD5529BB4B360089B46A /* EventMock.swift in Sources */,
 				42B2196E295D9EFB00515097 /* SessionResult.swift in Sources */,
-				CF8EB9D329A77AA700F38158 /* Event.swift in Sources */,
 				CF20D361297577D80038A860 /* ConstructorStyler.swift in Sources */,
 				42B2198F295EEAA500515097 /* SessionMock.swift in Sources */,
 				CFB508C92953034300C46D81 /* EventCard.swift in Sources */,
+				42BCAD5929BB742B0089B46A /* UserDefaultsWrapper.swift in Sources */,
 				42B2199A295F3A2300515097 /* DoubleExtension.swift in Sources */,
 				42B219A0295F426200515097 /* Images.swift in Sources */,
+				42BCAD5C29BB7B000089B46A /* EventService.swift in Sources */,
 				CF054428294F7D4E00A39FE3 /* Constructor.swift in Sources */,
 				42521CAA29B0F9FF00000586 /* Global.swift in Sources */,
 				42521CB529B1033600000586 /* LoggerExtension.swift in Sources */,
@@ -855,14 +955,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4207B43A29C18CFD00AA4758 /* GrandPrixCardViewModel.swift in Sources */,
 				42521D2029B79E1400000586 /* SessionResult.swift in Sources */,
 				42521D1F29B79DED00000586 /* ResultCardViewModel.swift in Sources */,
 				42B2199C295F3A2300515097 /* DoubleExtension.swift in Sources */,
 				42521CBF29B2378300000586 /* SessionDriverStyler.swift in Sources */,
+				42BCAD5A29BB742B0089B46A /* UserDefaultsWrapper.swift in Sources */,
 				CF277A23297313260048DE75 /* StandingsCarouselViewModel.swift in Sources */,
 				4209686E2954CDCC0075D75E /* NetworkManager.swift in Sources */,
 				42521D0929B799C700000586 /* SessionDriverRowViewModel.swift in Sources */,
 				42B21973295DDBBB00515097 /* Details.swift in Sources */,
+				4207B43929C0BCBE00AA4758 /* LiveCardCellViewModel.swift in Sources */,
 				42521CAB29B0F9FF00000586 /* Global.swift in Sources */,
 				42B21997295EEAC600515097 /* StandingsMock.swift in Sources */,
 				42BCAD6329BBD7F10089B46A /* Identifier.swift in Sources */,
@@ -870,18 +973,19 @@
 				42521CC229B250DE00000586 /* ButtonStyle.swift in Sources */,
 				42521CA129B0EB9500000586 /* NetworkManagerRepresentable.swift in Sources */,
 				CF277A21297303430048DE75 /* StandingsCarouselView.swift in Sources */,
-				CF20D3692976FBD50038A860 /* GrandPrixCardViewModel.swift in Sources */,
 				4209685F29537AF10075D75E /* News.swift in Sources */,
 				CF277A1F297017C50048DE75 /* Fonts.swift in Sources */,
+				4207B44C29C216DC00AA4758 /* StandingsCellView.swift in Sources */,
+				4207B45329C4662800AA4758 /* Spacing.swift in Sources */,
 				4209686029537AF70075D75E /* Driver.swift in Sources */,
 				42521D1E29B79D6800000586 /* LivePosition.swift in Sources */,
+				4207B45429C7230C00AA4758 /* DriverResult.swift in Sources */,
 				42521CB929B1F37D00000586 /* LiveSessionDriverDetailsSheet.swift in Sources */,
 				CF78D01E2996C58600D45EDE /* ScheduleCarouselViewModel.swift in Sources */,
 				CF8EB9D429A77AA700F38158 /* Event.swift in Sources */,
 				4209685C29537AC90075D75E /* DateExtension.swift in Sources */,
 				CF233DE529ABE17B00A8D1CD /* SessionDriverRowView.swift in Sources */,
-				CF20D36F297802040038A860 /* DriverResult.swift in Sources */,
-				CF233DD529A7D6A900A8D1CD /* EventComponentView.swift in Sources */,
+				4207B45029C3425300AA4758 /* IntegerExtension.swift in Sources */,
 				42B21981295EEA2300515097 /* SessionResultMock.swift in Sources */,
 				CFE23F4E2982EB9400412DB6 /* Localization.swift in Sources */,
 				42521CA829B0F21700000586 /* DriverAndConstructorService.swift in Sources */,
@@ -890,24 +994,34 @@
 				42B21984295EEA5600515097 /* SessionMock.swift in Sources */,
 				42521CB629B1033600000586 /* LoggerExtension.swift in Sources */,
 				CF20D36629760C300038A860 /* Colors.swift in Sources */,
+				4207B43829C0BC9300AA4758 /* LiveCardViewCell.swift in Sources */,
 				42521CA529B0ECBD00000586 /* LiveSessionService.swift in Sources */,
+				42BCAD5D29BB7B000089B46A /* EventService.swift in Sources */,
+				4207B44729C2151A00AA4758 /* DriverDetailsTextView.swift in Sources */,
 				CF233DE029A8DB7C00A8D1CD /* GrandPrixSchedulePickerView.swift in Sources */,
 				42B219A1295F426200515097 /* Images.swift in Sources */,
 				42521D1D29B79D2100000586 /* SessionStandingsListViewModel.swift in Sources */,
 				42B21978295DE83600515097 /* Session.swift in Sources */,
 				42B219A5295F450200515097 /* InfiniteScroller.swift in Sources */,
+				4207B43E29C1E47F00AA4758 /* UpcomingAndStandingsEventCellViewModel.swift in Sources */,
 				42521D0B29B799C700000586 /* LiveSessionDriverDetailsSheetViewModel.swift in Sources */,
 				42521CB329B1006000000586 /* ServiceLocator.swift in Sources */,
+				4245E81229B7E0EE00843B02 /* SeasonListViewModel.swift in Sources */,
 				42521CB029B0FCD700000586 /* AppView.swift in Sources */,
 				42521D0D29B799EC00000586 /* SessionStandingsListView.swift in Sources */,
 				4209686229537AF70075D75E /* Constructor.swift in Sources */,
+				4245E81029B7E0DD00843B02 /* SeasonListView.swift in Sources */,
+				4207B44E29C216E900AA4758 /* StandingsCellViewModel.swift in Sources */,
+				4207B44929C215F100AA4758 /* CarWithNumberView.swift in Sources */,
 				42B21986295EEA7200515097 /* DriverMock.swift in Sources */,
+				4207B43B29C18D0200AA4758 /* GrandPrixCardView.swift in Sources */,
 				CF20D372297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */,
 				42096834295378A10075D75E /* Slipstream_iOSApp.swift in Sources */,
 				CF233DDE29A8D98800A8D1CD /* GrandPrixSchedulePickerViewModel.swift in Sources */,
 				42521D0F29B79A3400000586 /* AppViewModel.swift in Sources */,
-				CF20D36C297700160038A860 /* GrandPrixCardView.swift in Sources */,
 				4209686B29537B0D0075D75E /* Circuit.swift in Sources */,
+				42BCAD5629BB4B360089B46A /* EventMock.swift in Sources */,
+				4207B44429C1E59300AA4758 /* UpcomingAndStandingsEventCellView.swift in Sources */,
 				CF5F07772996CC3D00E79996 /* ScheduleCarouselView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

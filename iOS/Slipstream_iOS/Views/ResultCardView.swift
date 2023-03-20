@@ -14,7 +14,7 @@ struct ResultCardView<ViewModel: ResultCardRepresentable>: View {
             VStack(alignment: .leading, spacing: Constants.topInfoSpacing) {
                 HStack {
                     Text(viewModel.sessionType.label)
-                        .font(.titleFontBold)
+                        .font(.Title2.bold)
                     Spacer()
                     Image.informationIcon
                         .foregroundColor(Color.blue)
@@ -26,7 +26,7 @@ struct ResultCardView<ViewModel: ResultCardRepresentable>: View {
                     Image.iconFastestLap
                     Text(viewModel.fastestLap)
                 }
-                .font(.subheadlineFont)
+                .font(.Caption.regular)
             }
             .padding(Constants.topInfoPadding)
             .foregroundColor(Constants.topInfoColor)
@@ -70,11 +70,11 @@ struct ResultCardView<ViewModel: ResultCardRepresentable>: View {
                 Image.trophyIcon
             } else {
                 Text(position.label)
-                    .font(.driverPositionFont)
+                    .font(.Title3.bold)
             }
 
             Text(driverTicker)
-                .font(.driverTickerFont)
+                .font(.Body.bold)
         }
         .frame(width: Constants.driverCircleDiameter, height: Constants.driverCircleDiameter)
         .background(applyCircleBackgroundColor(position: position))

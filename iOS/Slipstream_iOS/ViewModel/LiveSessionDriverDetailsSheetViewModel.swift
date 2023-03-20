@@ -31,3 +31,8 @@ class LiveSessionDriverDetailsSheetViewModel: LiveSessionDriverDetailsSheetViewM
         self.driverID = driver.id
     }
 }
+
+extension LiveSessionDriverDetailsSheetViewModel {
+    
+    static var mock: LiveSessionDriverDetailsSheetViewModel = .init(driver: .mockVertasppen, constructor: .mockMercedes)
+}

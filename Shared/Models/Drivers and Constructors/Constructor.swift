@@ -1,6 +1,6 @@
 import Foundation
 
-struct Constructor: Decodable, Hashable, Identifiable {
+struct Constructor: Codable, Hashable, Identifiable {
     
     typealias ID = Identifier<Constructor>
 

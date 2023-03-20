@@ -5,9 +5,9 @@ struct SessionDriverRowView<ViewModel: SessionDriverRowViewModelRepresentable>: 
     @ObservedObject private var viewModel: ViewModel
     private let sessionDriverStyler: SessionDriverStylerRepresentable
     
-    var action: ()->Void
+    private let action: ()->Void
 
-    init(viewModel: ViewModel,  action: @escaping(() -> Void)) {
+    init(viewModel: ViewModel, action: @escaping(() -> Void)) {
         
         self.viewModel = viewModel
         self.action = action
@@ -121,19 +121,19 @@ fileprivate enum Constants {
     }
 }
 
-//struct SessionDriverRowView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SessionDriverRowView(
-//            viewModel: SessionDriverRowViewModel(
-//                position: 2,
-//                driverTicker: "HAM",
-//                timeGap: "+2.344",
-//                tyrePitCount: 3,
-//                currentTyre: .medium,
-//                constructorId: "mercedes"
-//            )
-//        ) {
-//            
-//        }
-//    }
-//}
+struct SessionDriverRowView_Previews: PreviewProvider {
+    static var previews: some View {
+        SessionDriverRowView(
+            viewModel: SessionDriverRowViewModel(
+                position: 2,
+                driverTicker: "HAM",
+                timeGap: "+2.344",
+                tyrePitCount: 3,
+                currentTyre: .medium,
+                constructorId: .init("mercedes")
+            )
+        ) {
+            
+        }
+    }
+}

@@ -23,5 +23,4 @@ struct ButtonRowStyle: ButtonStyle {
         )
         .cornerRadius(cornerRadius)
     }
-
   }

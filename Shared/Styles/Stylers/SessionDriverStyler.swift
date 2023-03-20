@@ -59,12 +59,12 @@ extension SessionDriverStyler {
             case .hard: return "H"
             case .intermediate: return "I"
             case .wet: return "W"
-            case .undefined: return "N/D"
+            case .undefined: return "?"
             }
         }
     }
     
-    convenience init(tyre: LivePosition.Tyre, constructorId: Constructor.ID) {
+    convenience init(tyre: SessionResult.Tyre, constructorId: Constructor.ID) {
         
         
         let tyreStyle: Tyre

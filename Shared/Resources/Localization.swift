@@ -11,11 +11,11 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum Localization {
   internal enum GrandPrixCard {
-    /// Monza 2023
-    internal static let title = Localization.tr("Localizable", "grand_prix_card.title", fallback: "Monza 2023")
     internal enum Label {
-      /// LIVE
-      internal static let live = Localization.tr("Localizable", "grand_prix_card.label.live", fallback: "LIVE")
+      /// in %@
+      internal static func time(_ p1: Any) -> String {
+        return Localization.tr("Localizable", "grand_prix_card.label.time", String(describing: p1), fallback: "in %@")
+      }
     }
     internal enum Top {
       /// Round %@
@@ -24,12 +24,56 @@ internal enum Localization {
       }
     }
   }
+  internal enum LiveCardCell {
+    /// About to Start
+    internal static let aboutToStart = Localization.tr("Localizable", "live_card_cell.about_to_start", fallback: "About to Start")
+    internal enum Time {
+      /// HOURS
+      internal static let hours = Localization.tr("Localizable", "live_card_cell.time.hours", fallback: "HOURS")
+      /// left
+      internal static let `left` = Localization.tr("Localizable", "live_card_cell.time.left", fallback: "left")
+      /// MINUTES
+      internal static let minutes = Localization.tr("Localizable", "live_card_cell.time.minutes", fallback: "MINUTES")
+      /// SECONDS
+      internal static let seconds = Localization.tr("Localizable", "live_card_cell.time.seconds", fallback: "SECONDS")
+    }
+    internal enum Title {
+      /// HAPPENING NOW
+      internal static let now = Localization.tr("Localizable", "live_card_cell.title.now", fallback: "HAPPENING NOW")
+      /// HAPPENING SOON
+      internal static let soon = Localization.tr("Localizable", "live_card_cell.title.soon", fallback: "HAPPENING SOON")
+    }
+    internal enum Top {
+      /// Round %@
+      internal static func round(_ p1: Any) -> String {
+        return Localization.tr("Localizable", "live_card_cell.top.round", String(describing: p1), fallback: "Round %@")
+      }
+    }
+  }
+  internal enum SeasonListView {
+    internal enum Navigation {
+      /// Season 2023
+      internal static let title = Localization.tr("Localizable", "season_list_view.navigation.title", fallback: "Season 2023")
+    }
+  }
   internal enum SessionDriverList {
     internal enum Error {
       /// Refresh
       internal static let cta = Localization.tr("Localizable", "session_driver_list.error.cta", fallback: "Refresh")
       /// Something went wrong
       internal static let text = Localization.tr("Localizable", "session_driver_list.error.text", fallback: "Something went wrong")
+    }
+  }
+  internal enum UpcomingAndStandingsCell {
+    internal enum Segment {
+      /// Past
+      internal static let past = Localization.tr("Localizable", "upcoming_and_standings_cell.segment.past", fallback: "Past")
+      /// Upcoming
+      internal static let upcoming = Localization.tr("Localizable", "upcoming_and_standings_cell.segment.upcoming", fallback: "Upcoming")
+    }
+    internal enum Standings {
+      /// Current Standings
+      internal static let title = Localization.tr("Localizable", "upcoming_and_standings_cell.standings.title", fallback: "Current Standings")
     }
   }
 }

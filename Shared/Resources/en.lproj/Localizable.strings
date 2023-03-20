@@ -1,10 +1,27 @@
-"grand_prix_card.title" = "Monza 2023";
-
 // MARK: - GrandPrixCard
 
 "grand_prix_card.top.round" = "Round %@";
-"grand_prix_card.label.live" = "LIVE";
+"grand_prix_card.label.time" = "in %@";
 
 // MARK: - SessionDriverList
 "session_driver_list.error.text" = "Something went wrong";
 "session_driver_list.error.cta" = "Refresh";
+
+// MARK: - LiveCardCell
+"live_card_cell.title.now" = "HAPPENING NOW";
+"live_card_cell.title.soon" = "HAPPENING SOON";
+"live_card_cell.top.round" = "Round %@";
+"live_card_cell.about_to_start" = "About to Start";
+"live_card_cell.time.hours" = "HOURS";
+"live_card_cell.time.minutes" = "MINUTES";
+"live_card_cell.time.seconds" = "SECONDS";
+"live_card_cell.time.left" = "left";
+
+// MARK: - SeasonListView
+"season_list_view.navigation.title" = "Season 2023";
+
+
+// MARK: - UpcomingAndStandingsCell
+"upcoming_and_standings_cell.segment.upcoming" = "Upcoming";
+"upcoming_and_standings_cell.segment.past" = "Past";
+"upcoming_and_standings_cell.standings.title" = "Current Standings";

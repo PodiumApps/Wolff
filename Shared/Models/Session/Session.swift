@@ -1,14 +1,14 @@
 import Foundation
 
-struct Session: Decodable, Identifiable, Hashable {
+struct Session: Decodable, Identifiable {
     
     typealias ID = Identifier<Session>
     
     let id: ID
     let laps: Int
-    let date: Date
+    var date: Date
     let name: Name
-    let winnerID: Driver.ID?
+    let winners: [Driver.ID]
 }
 
 extension Session {

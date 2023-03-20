@@ -11,9 +11,24 @@ class EventStatusBackgroundStyler: EventStatusBackgroundStylerRepresentable {
 
     var color: Color {
         switch status {
-        case .current: return .Event.current
-        case .liveSession: return .Event.liveSession
-        case .completeOrUpcomingEvent: return .Event.completedOrUpcomingEvent
+        case .upcoming(let hasSession):
+            return hasSession ? .Event.current : .Event.completedOrUpcomingEvent
+        case .liveSession:
+            return .Event.liveSession
+        case .complete:
+            return .Event.completedOrUpcomingEvent
+        }
+    }
+    
+    var titleFont: Font {
+        
+        switch status {
+        case .liveSession:
+            return .system(size: 16, weight: .semibold, design: .monospaced)
+        case .upcoming(let hasSession):
+            return .system(size: hasSession ? 16 : 24, weight: .semibold, design: .monospaced)
+        case .complete:
+            return .system(size: 24, weight: .semibold, design: .monospaced)
         }
     }
 
@@ -26,9 +41,10 @@ class EventStatusBackgroundStyler: EventStatusBackgroundStylerRepresentable {
 extension EventStatusBackgroundStyler {
 
     enum Status {
-        case current
+        
+        case upcoming(hasSession: Bool)
         case liveSession
-        case completeOrUpcomingEvent
+        case complete
     }
 
     convenience init(grandPrixCardStatus: Event.Status) {
@@ -36,12 +52,12 @@ extension EventStatusBackgroundStyler {
         let status: Status
 
         switch grandPrixCardStatus {
-        case .current:
-            status = .current
         case .live:
             status = .liveSession
-        case .finished, .upcoming:
-            status = .completeOrUpcomingEvent
+        case .upcoming(_, _, _, let session):
+            status = .upcoming(hasSession: session != nil)
+        case .finished:
+            status = .complete
         }
 
         self.init(status: status)

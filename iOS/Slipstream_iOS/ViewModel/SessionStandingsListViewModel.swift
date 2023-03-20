@@ -6,33 +6,39 @@ protocol SessionStandingsListViewModelRepresentable: ObservableObject {
 
     var state: SessionStandingsListViewModel.State { get }
     var action: PassthroughSubject<SessionStandingsListViewModel.Action, Never> { get }
-    var selectedDriver: LiveSessionDriverDetailsSheetViewModel? { get }
+    var selectedDriver: LiveSessionDriverDetailsSheetViewModel { get }
 }
 
 final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresentable {
 
-    @Published var state: SessionStandingsListViewModel.State = .loading
-    @Published var selectedDriver: LiveSessionDriverDetailsSheetViewModel? = nil
+    @Published var state: State
+    @Published var selectedDriver: LiveSessionDriverDetailsSheetViewModel
     var action = PassthroughSubject<Action, Never>()
     
-    private let drivers: [Driver]
-    private let constructors: [Constructor]
+    private var drivers: [Driver]
+    private var constructors: [Constructor]
+    private let event: Event
+    private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
     private let liveSessionService: LiveSessionServiceRepresentable
     private var subscriptions = Set<AnyCancellable>()
     private var timer: Timer? = nil
     private var viewIsVisible: Bool = false
+    @Published private var cells: [Cell]
 
     init(
-        drivers: [Driver],
-        constructors: [Constructor],
-        liveSessionService: LiveSessionServiceRepresentable = ServiceLocator.shared.liveSessionService
+        event: Event,
+        driverAndConstructorService: DriverAndConstructorServiceRepresentable,
+        liveSessionService: LiveSessionServiceRepresentable
     ) {
         
-        self.drivers = drivers
-        self.constructors = constructors
+        self.drivers = []
+        self.constructors = []
         self.liveSessionService = liveSessionService
-        
-        liveSessionService.action.send(.fetchPositions)
+        self.driverAndConstructorService = driverAndConstructorService
+        self.cells = []
+        self.event = event
+        self.selectedDriver = .mock
+        self.state = .loading([.header("Skeleton View"), .positionList(SessionDriverRowViewModel.mockArray)])
         
         setupBindings()
     }
@@ -48,7 +54,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                     self?.tapRow(at: index)
                 case .viewDidLoad:
                     self?.viewIsVisible = true
-                    self?.liveSessionService.action.send(.updatePositions)
+                    self?.startUpdating()
                 case .onDisappear:
                     self?.viewIsVisible = false
                     self?.timer?.invalidate()
@@ -58,23 +64,40 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
             }
             .store(in: &subscriptions)
         
+        driverAndConstructorService.statePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] driverAndConstructorService in
+                
+                guard let self else { return }
+                
+                switch driverAndConstructorService {
+                case .refreshed(let drivers, let constructors):
+                    self.drivers = drivers
+                    self.constructors = constructors
+                    self.liveSessionService.action.send(.fetchPositions)
+                case .error(let error):
+                    self.state = .error(error.localizedDescription)
+                case .refreshing:
+                    break
+                }
+            }
+            .store(in: &subscriptions)
         
         liveSessionService.statePublisher
             .receive(on: DispatchQueue.main)
-            .map { [weak self] serviceStatus in
+            .compactMap { [weak self] liveSessionService in
                 
-                guard let self else { return .error("Missing self") }
+                guard let self else { return nil }
                 
                 self.timer?.invalidate()
                 
-                switch serviceStatus {
-                case.error(let error):
+                switch liveSessionService {
+                case .error(let error):
                     return .error(error.localizedDescription)
-                case .refreshing:
-                    return .loading
                 case .refreshed(let livePositions):
-                    self.startUpdating()
                     return self.buildRowsViewModel(for: livePositions)
+                default:
+                    return .loading([.header("Skeleton View"), .positionList(SessionDriverRowViewModel.mockArray)])
                 }
             }
             .assign(to: &$state)
@@ -83,7 +106,9 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
     private func tapRow(at index: Int) {
         
         guard
-            case .results(let positions) = state,
+            case .results(let cells) = state,
+            let positionsIndex = cells.firstIndex(where: { $0.id == .positionList }),
+            case .positionList(let positions) = cells[positionsIndex],
             let driver = drivers.lazy.first(where: { $0.driverTicker == positions[index].driverTicker }),
             let constructor = constructors.lazy.first(where: { $0.id == driver.constructorId })
         else {
@@ -100,7 +125,9 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
         
         selectedDriver = .init(driver: driver, constructor: constructor)
         
-        state = .results(positions)
+        self.cells[positionsIndex] = Cell.positionList(positions)
+        
+        state = .results(cells)
     }
     
     private func startUpdating() {
@@ -118,7 +145,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
         
         let standings: [SessionDriverRowViewModel] = livePositions
             .enumerated()
-            .compactMap { [weak self] index, position in
+            .compactMap { [weak self] index, position -> SessionDriverRowViewModel? in
             
                 guard
                     let self,
@@ -128,10 +155,9 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                     return nil
                 }
                 
-                if selectedDriver == nil, index == 0 {
+                if selectedDriver.driverID == Driver.mockVertasppen.id, index == 0 {
                     selectedDriver = .init(driver: driver, constructor: constructor)
                 }
-                
                 
                 return .init(
                     position: position.position,
@@ -140,11 +166,13 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                     tyrePitCount: position.tyrePitCount,
                     currentTyre: position.tyre,
                     constructorId: constructor.id,
-                    isSelected: driver.id == self.selectedDriver?.driverID
+                    isSelected: driver.id == self.selectedDriver.driverID
                 )
         }
         
-        return .results(standings)
+        cells = [.header(event.name), .positionList(standings)]
+        
+        return .results(cells)
     }
 }
 
@@ -158,10 +186,60 @@ extension SessionStandingsListViewModel {
         case onDisappear
     }
     
-    enum State {
+    enum State: Equatable {
         
-        case loading
-        case results([SessionDriverRowViewModel])
+        case loading([Cell])
+        case results([Cell])
         case error(String)
+        
+        enum Identifier {
+            
+            case loading
+            case results
+            case error
+        }
+        
+        var id: Identifier {
+            switch self {
+            case .loading: return .loading
+            case .results: return .results
+            case .error: return .error
+            }
+        }
+    }
+    
+    enum Cell: Equatable, Identifiable {
+        
+        static func == (lhs: SessionStandingsListViewModel.Cell, rhs: SessionStandingsListViewModel.Cell) -> Bool {
+            lhs.id == rhs.id
+        }
+        
+        case header(String)
+        case positionList([SessionDriverRowViewModel])
+        
+        enum Identifier {
+            case header
+            case positionList
+        }
+        
+        var id: Identifier {
+            
+            switch self {
+            case .header: return .header
+            case .positionList: return .positionList
+            }
+        }
+    }
+}
+
+extension SessionStandingsListViewModel {
+    
+    static func make(event: Event) -> SessionStandingsListViewModel {
+        
+        .init(
+            event: event,
+            driverAndConstructorService: ServiceLocator.shared.driverAndConstructorService,
+            liveSessionService: ServiceLocator.shared.liveSessionService
+        )
     }
 }

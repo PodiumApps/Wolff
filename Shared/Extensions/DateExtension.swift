@@ -19,3 +19,13 @@ extension Date {
             .replacingOccurrences(of: "SHA512 digest:", with: "")
     }
 }
+
+
+extension DateFormatter {
+    
+    static let standard: DateFormatter = {
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.sssssZ"
+        return dateFormatter
+    }()
+}
