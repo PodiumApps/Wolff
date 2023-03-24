@@ -237,7 +237,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
             .assign(to: &$upcomingAndStandingsFilter)
         
         return viewModel
-            
+
     }
     
     private func tapRow(at index: Int) {
@@ -284,7 +284,6 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                 Logger.eventService.debug("Loading current events cells \(self.timesToRefreshEvents)")
                 self.state = .results(self.loadData())
             }
-            
         }
     }
 }

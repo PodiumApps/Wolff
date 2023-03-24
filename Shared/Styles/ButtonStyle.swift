@@ -19,7 +19,9 @@ struct ButtonRowStyle: ButtonStyle {
         .background(
             configuration.isPressed
                 ? Color.SessionDriverRow.rowBackground.opacity(0.25)
-                : isSelected ? selectedColor.opacity(0.2) : Color(UIColor.systemBackground)
+                //: isSelected ? selectedColor.opacity(0.2) : Color(UIColor.systemBackground)
+                : isSelected ? selectedColor.opacity(0.2) : Color.gray
+
         )
         .cornerRadius(cornerRadius)
     }
