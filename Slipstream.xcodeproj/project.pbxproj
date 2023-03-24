@@ -130,7 +130,7 @@
 		CFE46FA429C9B4A80063805A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36429760C300038A860 /* Colors.swift */; };
 		CFE46FA529C9B4AD0063805A /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CC029B250DE00000586 /* ButtonStyle.swift */; };
 		CFE46FA629C9B4B00063805A /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4207B45229C4662800AA4758 /* Spacing.swift */; };
-		CFE46FA829CA07D60063805A /* SeasonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE46FA729CA07D60063805A /* SeasonViewModel.swift */; };
+		CFE46FA829CA07D60063805A /* SeasonListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE46FA729CA07D60063805A /* SeasonListViewModel.swift */; };
 		CFEBC07129CCBE47000A2472 /* LiveEventCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEBC07029CCBE47000A2472 /* LiveEventCardViewModel.swift */; };
 		CFEBC07329CCBE58000A2472 /* LiveEventCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEBC07229CCBE58000A2472 /* LiveEventCardView.swift */; };
 		CFEBC07629CD092F000A2472 /* UpcomingEventCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEBC07529CD092F000A2472 /* UpcomingEventCardViewModel.swift */; };
@@ -244,7 +244,7 @@
 		CFE23F542982EDBA00412DB6 /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		CFE46F9C29C90A0F0063805A /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		CFE46F9E29C90D0F0063805A /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
-		CFE46FA729CA07D60063805A /* SeasonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonViewModel.swift; sourceTree = "<group>"; };
+		CFE46FA729CA07D60063805A /* SeasonListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonListViewModel.swift; sourceTree = "<group>"; };
 		CFEBC07029CCBE47000A2472 /* LiveEventCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveEventCardViewModel.swift; sourceTree = "<group>"; };
 		CFEBC07229CCBE58000A2472 /* LiveEventCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveEventCardView.swift; sourceTree = "<group>"; };
 		CFEBC07529CD092F000A2472 /* UpcomingEventCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingEventCardViewModel.swift; sourceTree = "<group>"; };
@@ -704,7 +704,7 @@
 		CFE46FA929CA07DF0063805A /* Season */ = {
 			isa = PBXGroup;
 			children = (
-				CFE46FA729CA07D60063805A /* SeasonViewModel.swift */,
+				CFE46FA729CA07D60063805A /* SeasonListViewModel.swift */,
 			);
 			path = Season;
 			sourceTree = "<group>";
@@ -986,7 +986,7 @@
 				CFE46F9F29C90D0F0063805A /* AppView.swift in Sources */,
 				CF054428294F7D4E00A39FE3 /* Constructor.swift in Sources */,
 				42521CAA29B0F9FF00000586 /* Global.swift in Sources */,
-				CFE46FA829CA07D60063805A /* SeasonViewModel.swift in Sources */,
+				CFE46FA829CA07D60063805A /* SeasonListViewModel.swift in Sources */,
 				42521CB529B1033600000586 /* LoggerExtension.swift in Sources */,
 				42B21995295EEAC600515097 /* StandingsMock.swift in Sources */,
 				CF277A1E297017C50048DE75 /* Fonts.swift in Sources */,

@@ -28,9 +28,11 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
 
     // Timer
 
-    private var timer: Timer? = nil
-    private var timerEvents: Timer? = nil
-    private var timesToRefreshEvent: Int = 0
+    private let fiveMinutesInSeconds: Double = 5 * 60
+    private var updateAllEventsTimer: Timer? = nil
+
+    private let oneMinuteInSeconds: Double = 60
+    private var liveEventTimer: Timer? = nil
 
     // Published / Combine
 
@@ -39,7 +41,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
     @Published var state: SeasonListViewModel.State
     @Published var route: [SeasonListViewModel.Route]
 
-    var liveEvents: [Cell]
+    var eventCells: [Cell]
 
     init(
         driversAndConstructorService: DriverAndConstructorServiceRepresentable,
@@ -59,9 +61,9 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         self.state = .loading
         self.route = []
 
-        self.liveEvents = []
+        self.eventCells = []
 
-        // loadEvents()
+        self.loadEvents()
     }
 
     // MARK: - Private
@@ -87,7 +89,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                     self.drivers = drivers
                     self.events = events
 
-                    return .results
+                    return self.buildAllEventCells()
 
                 case (.refreshing, _), (_, .refreshing):
                     return .loading
@@ -95,9 +97,89 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
             }
             .assign(to: &$state)
 
-        liveEvents = events.compactMap { event in
+        liveEventService.statePublisher
+            .receive(on: DispatchQueue.main)
+            .compactMap { [weak self] liveEventService in
+
+                guard
+                    let self,
+                    case .results(var cells) = self.state,
+                    let index = cells.firstIndex(where: { $0.id == .live }),
+                    case .live(let timeInterval, let sessionName) = self.events[index].status
+                else {
+                    return nil
+                }
+
+                switch liveEventService {
+                case .refreshed(let positions):
+
+                    let podium: [String] = positions[0 ..< 3].compactMap { [weak self] position in
+
+                        guard let self else { return nil }
+
+                        guard let driver = self.drivers.first(where: { $0.id == position.id }) else { return nil }
+                        return driver.driverTicker
+                    }
+
+                    cells[index] = .live(
+                        self.buildLiveViewModel(
+                            event: self.events[index],
+                            timeInterval: timeInterval,
+                            sessionName: sessionName,
+                            podium: podium
+                        )
+                    )
+
+                    return .results(cells)
+
+                case .refreshing, .error:
+
+                    cells[index] = .live(
+                        self.buildLiveViewModel(
+                            event: self.events[index],
+                            timeInterval: timeInterval,
+                            sessionName: sessionName
+                        )
+                    )
+
+                    return .results(cells)
+                }
+            }
+            .assign(to: &$state)
+
+        updateAllEventsTimer =
+            Timer.scheduledTimer(withTimeInterval: fiveMinutesInSeconds, repeats: true) { [weak self] _ in
+
+                guard let self else { return }
+
+                self.eventService.action.send(.updateAll)
+            }
+    }
+
+    private func updateLiveEventTimer(timeInterval: TimeInterval) {
+
+        liveEventTimer?.invalidate()
+
+        var triggerInterval: Double = 60
+        if timeInterval <= 0 { triggerInterval = 1 }
+
+        liveEventTimer =
+            Timer.scheduledTimer(withTimeInterval: triggerInterval, repeats: true) { [weak self] _ in
+
+                guard let self else { return }
+
+                self.liveEventService.action.send(.fetchPositions)
+        }
+    }
+
+    private func buildAllEventCells() -> State {
+
+        eventCells = events.compactMap { event in
             switch event.status {
             case .live(let timeInterval, let sessionName):
+
+                updateLiveEventTimer(timeInterval: timeInterval)
+
                 return .live(
                     buildLiveViewModel(
                         event: event,
@@ -105,7 +187,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                         sessionName: sessionName
                     )
                 )
-            case .upcoming(let start, let end, let sessionName, let timeInterval?):
+            case .upcoming(let start, let end, let sessionName, let timeInterval):
                 return .upcoming(
                     buildUpcomingViewModel(
                         event: event,
@@ -129,21 +211,17 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                         podium: tickers
                     )
                 )
-            default:
-                return .finished(
-                    buildFinishedCardViewModel(
-                        event: event,
-                        podium: []
-                    )
-                )
             }
         }
+
+        return .results(eventCells)
     }
 
     private func buildLiveViewModel(
         event: Event,
         timeInterval: TimeInterval,
-        sessionName: String
+        sessionName: String,
+        podium: [String]? = nil
     ) -> LiveEventCardViewModel {
 
         return LiveEventCardViewModel(
@@ -152,7 +230,8 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
             country: event.country,
             round: event.round,
             timeInterval: timeInterval,
-            sessionName: sessionName
+            sessionName: sessionName,
+            podium: podium
         )
     }
 
@@ -199,20 +278,20 @@ extension SeasonListViewModel {
         case upcoming(UpcomingEventCardViewModel)
         case finished(FinishedEventCardViewModel)
 
-        enum Identifier {
-
-            case live
-            case upcoming
-            case finished
-        }
-
         var id: Identifier {
 
             switch self {
             case .live: return .live
-            case .upcoming: return .upcoming
-            case .finished: return .finished
+            case .upcoming(let viewModel): return .upcoming(viewModel.id.string)
+            case .finished(let viewModel): return .finished(viewModel.id.string)
             }
+        }
+
+        enum Identifier: Hashable {
+
+            case live
+            case upcoming(String)
+            case finished(String)
         }
 
         func hash(into hasher: inout Hasher) {
@@ -242,7 +321,7 @@ extension SeasonListViewModel {
         }
 
         case error(String)
-        case results
+        case results([Cell])
         case loading
 
         enum Identifier: String {
