@@ -60,16 +60,23 @@ extension LiveEventCardViewModel {
 
             if timeInterval < 60 { return .aboutToStart }
 
-            let minutesLeft = timeInterval / 60
-            let hoursLeft = timeInterval / 60 / 60
+            let timeToStart = getHoursAndMinutes(from: timeInterval)
 
             return
                 .betweenOneMinuteAndFourHoursToGo(
-                    hours: Int(hoursLeft),
-                    minutes: Int(minutesLeft)
+                    hours: timeToStart.hours,
+                    minutes: timeToStart.minutes
                 )
         }
 
         return .happeningNow(podium: podium)
+    }
+
+    private func getHoursAndMinutes(from timeInterval: TimeInterval) -> (hours: Int, minutes: Int) {
+
+        let hours = Int(timeInterval) / (60 * 60)
+        let minutes = Int(timeInterval) % (60 * 60) / 60
+
+        return (hours, minutes)
     }
 }

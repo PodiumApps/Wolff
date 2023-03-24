@@ -134,8 +134,8 @@ struct LiveEventCardView_Previews: PreviewProvider {
                 country: "Belgium",
                 round: 18,
                 timeInterval: .init(0),
-                sessionName: "Qualifying",
-                podium: ["VER", "LEC", "ALO"]
+                sessionName: "Qualifying"
+                //podium: ["VER", "LEC", "ALO"]
             )
         )
     }
