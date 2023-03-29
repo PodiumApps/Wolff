@@ -3,7 +3,7 @@ import Foundation
 extension CGFloat {
     
     enum Spacing {
-        
+        static let none: CGFloat = 0
         static let `default`: CGFloat = 4
         static let default2: CGFloat = .Spacing.default * 2
         static let default3: CGFloat = .Spacing.default * 3

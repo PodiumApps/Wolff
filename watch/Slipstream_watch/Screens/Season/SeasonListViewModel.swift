@@ -7,6 +7,7 @@ protocol SeasonListViewModelRepresentable: ObservableObject {
     var state: SeasonListViewModel.State { get }
     var route: [SeasonListViewModel.Route] { get set }
     var action: PassthroughSubject<SeasonListViewModel.Action, Never> { get }
+    var indexFirstToAppear: Int { get set }
 }
 
 final class SeasonListViewModel: SeasonListViewModelRepresentable {
@@ -40,6 +41,8 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
     var action = PassthroughSubject<Action, Never>()
     @Published var state: SeasonListViewModel.State
     @Published var route: [SeasonListViewModel.Route]
+
+    @Published var indexFirstToAppear: Int = 0
 
     var eventCells: [Cell]
 
@@ -229,6 +232,16 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                         podium: tickers
                     )
                 )
+            }
+        }
+
+        for (index, cell) in eventCells.enumerated() {
+            switch cell {
+            case .live, .upcoming:
+                indexFirstToAppear = index
+                return .results(eventCells)
+            case .finished:
+                continue
             }
         }
 

@@ -23,10 +23,10 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
                         HStack(spacing: .Spacing.default3) {
                             HStack(spacing: .Spacing.default) {
                                 Text(viewModel.country)
-                                    .font(Font.Caption.semibold)
+                                    .font(.Caption.semibold)
                             }
                             Text(Localization.LiveCardCell.Top.round(viewModel.round))
-                                .font(Font.Caption2.medium)
+                                .font(.Caption2.medium)
                                 .foregroundColor(Color.red)
                         }
                     }
@@ -53,9 +53,9 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
 
         VStack(alignment: .leading) {
             Text(viewModel.sessionName)
-                .font(Font.Caption.bold)
+                .font(.Caption.bold)
             Text(Localization.LiveCardCell.aboutToStart.uppercased())
-                .font(Font.Caption.regular)
+                .font(.Caption.regular)
                 .foregroundColor(.red)
         }
     }
@@ -70,9 +70,9 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
                 if hours > 0 {
                     HStack(alignment: .bottom) {
                         Text(hours.description)
-                            .font(Font.Caption.bold)
+                            .font(.Caption.bold)
                         Text(hours != 1 ? Localization.LiveCardCell.Time.hours : Localization.LiveCardCell.Time.hours)
-                            .font(Font.Caption2.semibold)
+                            .font(.Caption2.semibold)
                             .foregroundColor(.red)
                     }
                 }
@@ -80,12 +80,12 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
                 if minutes > 0 {
                     HStack(alignment: .bottom) {
                         Text(minutes.description)
-                            .font(Font.Caption.bold)
+                            .font(.Caption.bold)
                         Text(minutes != 1
-                                ? Localization.LiveCardCell.Time.minutes
-                                : Localization.LiveCardCell.Time.minute
+                            ? Localization.LiveCardCell.Time.minutes
+                            : Localization.LiveCardCell.Time.minute
                         )
-                        .font(Font.Caption2.semibold)
+                        .font(.Caption2.semibold)
                             .foregroundColor(.red)
                     }
                 }
@@ -93,38 +93,37 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
 
             HStack(alignment: .bottom) {
                 Text(Localization.LiveCardCell.to)
-                    .font(Font.Caption2.semibold)
+                    .font(.Caption2.semibold)
                     .foregroundColor(.red)
                 Text(viewModel.sessionName)
-                    .font(Font.Caption.bold)
+                    .font(.Caption.bold)
             }
         }
     }
 
     private func createHappeningNowSection(podium: [String]) -> some View {
 
-        VStack(alignment: .leading, spacing: 5) {
+        VStack(alignment: .leading, spacing: .Spacing.default) {
             VStack(alignment: .leading) {
                 Text(viewModel.sessionName)
-                    .font(Font.Caption.bold)
+                    .font(.Caption.bold)
                 Text(Localization.LiveCardCell.Title.now)
-                    .font(Font.Caption2.semibold)
+                    .font(.Caption2.semibold)
                     .foregroundColor(.red)
             }
 
-            HStack(spacing: .Spacing.default3) {
+            HStack(spacing: .Spacing.default2) {
                 ForEach(0 ..< podium.count, id: \.self) { index in
-                    HStack {
-                        HStack(spacing: 0) {
-                            Text(String(index + 1))
+                    HStack(spacing: .Spacing.default) {
+                        HStack(spacing: .Spacing.none) {
+                            Text("\(index + 1)")
                             Text((index + 1).getPositionString)
-                                .font(Font.Caption2.medium)
-                                .offset(y: -2)
+                                .offset(y: Constants.OrdinalComponent.yOffset)
                         }
-                        .font(Font.Caption2.semibold)
+                        .font(.Caption2.regular)
                         Text(podium[index])
+                            .font(.Caption2.bold)
                     }
-                    .font(Font.Caption.bold)
                 }
             }
         }
@@ -137,6 +136,11 @@ fileprivate enum Constants {
 
         static let lineLimit: Int = 1
         static let scalingFactor: CGFloat = 0.1
+    }
+
+    enum OrdinalComponent {
+
+        static let yOffset: CGFloat = -1
     }
 }
 

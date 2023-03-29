@@ -16,22 +16,32 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
                 case .error(let error):
                     Text(error)
                 case .results(let cells):
-                    List(cells) { cell in
-                        NavigationLink(destination: EmptyView()) {
-                            switch cell {
-                            case .upcoming(let viewModel):
-                                UpcomingEventCardView(viewModel: viewModel)
-                                    .frame(minHeight: 85)
-                            case .live(let viewModel):
-                                LiveEventCardView(viewModel: viewModel)
-                                    .frame(minHeight: 85)
-                            case .finished(let viewModel):
-                                FinishedEventCardView(viewModel: viewModel)
-                                    .frame(minHeight: 95)
+                    ScrollViewReader { proxy in
+                        List(0 ..< cells.count, id: \.self) { index in
+                            NavigationLink(destination: EmptyView()) {
+                                switch cells[index] {
+                                case .upcoming(let viewModel):
+                                    UpcomingEventCardView(viewModel: viewModel)
+                                        .id(index)
+                                        .frame(minHeight: 85)
+                                case .live(let viewModel):
+                                    LiveEventCardView(viewModel: viewModel)
+                                        .id(index)
+                                        .frame(minHeight: 85)
+                                case .finished(let viewModel):
+                                    FinishedEventCardView(viewModel: viewModel)
+                                        .id(index)
+                                        .frame(minHeight: 95)
+                                }
+                            }
+                        }
+                        .listStyle(.carousel)
+                        .onAppear {
+                            withAnimation {
+                                proxy.scrollTo(viewModel.indexFirstToAppear)
                             }
                         }
                     }
-                    .listStyle(.carousel)
                 case .loading:
                     ProgressView()
                 }

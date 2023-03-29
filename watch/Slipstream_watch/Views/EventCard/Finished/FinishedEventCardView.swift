@@ -10,6 +10,7 @@ struct FinishedEventCardView<ViewModel: FinishedEventCardViewModelRepresentable>
     }
 
     var body: some View {
+        
         Button(action: {
 
         }) {
@@ -18,48 +19,48 @@ struct FinishedEventCardView<ViewModel: FinishedEventCardViewModelRepresentable>
                     VStack(alignment: .leading) {
                         HStack(alignment: .bottom) {
                             Text(viewModel.title)
-                                .font(Font.Body.bold)
+                                .font(.Body.bold)
                         }
 
                         HStack(spacing: .Spacing.default) {
                             HStack(spacing: .Spacing.default) {
                                 Text(viewModel.country)
-                                    .font(Font.Caption.semibold)
+                                    .font(.Caption.semibold)
                             }
 
                             Spacer()
 
                             Text(Localization.LiveCardCell.Top.round(viewModel.round))
-                                .font(Font.Caption2.medium)
+                                .font(.Caption2.medium)
                                 .foregroundColor(.primary.opacity(Constants.Round.opacity))
                         }
                     }
 
-                    createHappeningNowSection(podium: viewModel.podium)
+                    createPodiumSection(podium: viewModel.podium)
                 }
             }
             .padding(.horizontal, Constants.Padding.horizontal)
         }
     }
 
-    private func createHappeningNowSection(podium: [String]) -> some View {
+    private func createPodiumSection(podium: [String]) -> some View {
 
-        VStack(alignment: .leading, spacing: 3) {
+        VStack(alignment: .leading, spacing: .Spacing.default) {
             Text(Localization.FinishedCardCell.finished)
-                .font(.system(size: 11, weight: .semibold))
-                .foregroundColor(.primary.opacity(0.9))
+                .font(.Caption2.semibold)
+                .foregroundColor(.primary.opacity(Constants.Finished.opacity))
 
             HStack(spacing: .Spacing.default2) {
                 ForEach(0 ..< podium.count, id: \.self) { index in
-                    HStack(spacing: 3) {
-                        HStack(spacing: 0) {
-                            Text(String(index + 1))
+                    HStack(spacing: .Spacing.default) {
+                        HStack(spacing: .Spacing.none) {
+                            Text("\(index + 1)")
                             Text((index + 1).getPositionString)
-                                .offset(y: -2)
+                                .offset(y: Constants.OrdinalComponent.yOffset)
                         }
-                            .font(.system(size: 9, weight: .medium))
+                        .font(.Caption2.regular)
                         Text(podium[index])
-                            .font(.system(size: 10, weight: .bold))
+                            .font(.Caption2.bold)
                     }
                 }
             }
@@ -77,6 +78,16 @@ fileprivate enum Constants {
     enum Padding {
 
         static let horizontal: CGFloat = 3
+    }
+
+    enum Finished {
+
+        static let opacity: CGFloat = 0.9
+    }
+
+    enum OrdinalComponent {
+
+        static let yOffset: CGFloat = -1
     }
 }
 
