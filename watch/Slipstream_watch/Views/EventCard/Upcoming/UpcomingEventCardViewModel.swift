@@ -10,6 +10,7 @@ protocol UpcomingEventCardViewModelRepresentable {
     var end: String { get }
     var sessionName: String { get }
     var timeInterval: TimeInterval? { get }
+    var state: UpcomingEventCardViewModel.State { get }
 }
 
 final class UpcomingEventCardViewModel: UpcomingEventCardViewModelRepresentable {
@@ -22,6 +23,8 @@ final class UpcomingEventCardViewModel: UpcomingEventCardViewModelRepresentable 
     var end: String
     var sessionName: String
     var timeInterval: TimeInterval?
+    var state: State { setUpUpcomingEventsState() }
+    
 
     init(
         id: Event.ID,
@@ -42,5 +45,31 @@ final class UpcomingEventCardViewModel: UpcomingEventCardViewModelRepresentable 
         self.end = end
         self.sessionName = sessionName
         self.timeInterval = timeInterval
+    }
+}
+
+extension UpcomingEventCardViewModel {
+
+    enum State {
+
+        case moreThanFortyEightHours(eventDate: String)
+        case lessThanFortyEightHours(hours: Int, minutes: Int)
+    }
+
+    private func setUpUpcomingEventsState() -> State {
+
+        let eventDate = "\(start) - \(end)".capitalized
+
+        guard let timeInterval else {
+            return .moreThanFortyEightHours(eventDate: eventDate)
+        }
+
+        if timeInterval < 48 * .hourInterval {
+
+            let timeToStart = timeInterval.hoursAndMinutes
+            return .lessThanFortyEightHours(hours: timeToStart.hours, minutes: timeToStart.minutes)
+        }
+
+        return .moreThanFortyEightHours(eventDate: eventDate)
     }
 }

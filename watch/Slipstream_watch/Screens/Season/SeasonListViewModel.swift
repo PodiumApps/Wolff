@@ -147,8 +147,20 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
             }
             .assign(to: &$state)
 
+//        updateGetAllEventsTimer()
+    }
+
+    private func updateGetAllEventsTimer(timeInterval: TimeInterval) {
+
+        updateAllEventsTimer?.invalidate()
+
+        var triggerInterval = 5 * .minuteInterval
+        if timeInterval <= (48 * .hourInterval) {
+            triggerInterval = .minuteInterval
+        }
+
         updateAllEventsTimer =
-            Timer.scheduledTimer(withTimeInterval: fiveMinutesInSeconds, repeats: true) { [weak self] _ in
+            Timer.scheduledTimer(withTimeInterval: triggerInterval, repeats: true) { [weak self] _ in
 
                 guard let self else { return }
 
@@ -160,15 +172,21 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
 
         liveEventTimer?.invalidate()
 
-        var triggerInterval: Double = 60
-        if timeInterval <= 0 { triggerInterval = 1 }
+        var triggerInterval: Double = .minuteInterval
+        if timeInterval <= 0 { triggerInterval = 15 }
 
         liveEventTimer =
-            Timer.scheduledTimer(withTimeInterval: triggerInterval, repeats: true) { [weak self] _ in
+            Timer.scheduledTimer(withTimeInterval: triggerInterval, repeats: false) { [weak self] _ in
 
                 guard let self else { return }
 
-                self.liveEventService.action.send(.fetchPositions)
+                if timeInterval < .minuteInterval {
+
+                    self.liveEventService.action.send(.updatePositions)
+                } else {
+
+                    self.state = self.buildAllEventCells()
+                }
         }
     }
 
@@ -364,7 +382,14 @@ extension SeasonListViewModel {
     }
 }
 
+extension SeasonListViewModel {
 
+    static func make() -> SeasonListViewModel {
 
-
-
+        .init(
+            driversAndConstructorService: ServiceLocator.shared.driverAndConstructorService,
+            eventService: ServiceLocator.shared.eventService,
+            liveEventService: ServiceLocator.shared.liveSessionService
+        )
+    }
+}

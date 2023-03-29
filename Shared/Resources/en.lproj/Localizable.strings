@@ -13,9 +13,15 @@
 "live_card_cell.top.round" = "Round %@";
 "live_card_cell.about_to_start" = "About to Start";
 "live_card_cell.time.hours" = "HOURS";
+"live_card_cell.time.hour" = "HOUR";
 "live_card_cell.time.minutes" = "MINUTES";
+"live_card_cell.time.minute" = "MINUTE";
 "live_card_cell.time.seconds" = "SECONDS";
 "live_card_cell.time.left" = "left";
+"live_card_cell.to" = "To";
+
+// MARK: - FinishedCard
+"finished_card_cell.finished" = "FINISHED";
 
 // MARK: - SeasonListView
 "season_list_view.navigation.title" = "Season 2023";

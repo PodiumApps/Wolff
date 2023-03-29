@@ -137,6 +137,9 @@
 		CFEBC07829CD0C76000A2472 /* UpcomingEventCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEBC07729CD0C76000A2472 /* UpcomingEventCardView.swift */; };
 		CFEBC07B29CD144B000A2472 /* FinishedEventCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEBC07A29CD144B000A2472 /* FinishedEventCardViewModel.swift */; };
 		CFEBC07D29CD147B000A2472 /* FinishedEventCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEBC07C29CD147B000A2472 /* FinishedEventCardView.swift */; };
+		CFEBC07F29D32D33000A2472 /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEBC07E29D32D33000A2472 /* TimeIntervalExtension.swift */; };
+		CFEBC08029D32D33000A2472 /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEBC07E29D32D33000A2472 /* TimeIntervalExtension.swift */; };
+		CFEBC08429D33895000A2472 /* SeasonListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEBC08329D33895000A2472 /* SeasonListView.swift */; };
 		CFEE3F2B2969B6970050EE8B /* ResultCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEE3F2A2969B6970050EE8B /* ResultCardView.swift */; };
 /* End PBXBuildFile section */
 
@@ -251,6 +254,8 @@
 		CFEBC07729CD0C76000A2472 /* UpcomingEventCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingEventCardView.swift; sourceTree = "<group>"; };
 		CFEBC07A29CD144B000A2472 /* FinishedEventCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedEventCardViewModel.swift; sourceTree = "<group>"; };
 		CFEBC07C29CD147B000A2472 /* FinishedEventCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedEventCardView.swift; sourceTree = "<group>"; };
+		CFEBC07E29D32D33000A2472 /* TimeIntervalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtension.swift; sourceTree = "<group>"; };
+		CFEBC08329D33895000A2472 /* SeasonListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonListView.swift; sourceTree = "<group>"; };
 		CFEE3F2A2969B6970050EE8B /* ResultCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -612,6 +617,7 @@
 				42B21999295F3A2300515097 /* DoubleExtension.swift */,
 				42521CB429B1033600000586 /* LoggerExtension.swift */,
 				4207B44F29C3425300AA4758 /* IntegerExtension.swift */,
+				CFEBC07E29D32D33000A2472 /* TimeIntervalExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -705,6 +711,7 @@
 			isa = PBXGroup;
 			children = (
 				CFE46FA729CA07D60063805A /* SeasonListViewModel.swift */,
+				CFEBC08329D33895000A2472 /* SeasonListView.swift */,
 			);
 			path = Season;
 			sourceTree = "<group>";
@@ -959,6 +966,7 @@
 				42096823294C9B990075D75E /* NetworkManager.swift in Sources */,
 				4207B45129C3426800AA4758 /* IntegerExtension.swift in Sources */,
 				42B21972295DDBAB00515097 /* Details.swift in Sources */,
+				CFEBC08429D33895000A2472 /* SeasonListView.swift in Sources */,
 				CFEBC07629CD092F000A2472 /* UpcomingEventCardViewModel.swift in Sources */,
 				42521CA729B0F21700000586 /* DriverAndConstructorService.swift in Sources */,
 				CF0544462951CB8D00A39FE3 /* DateExtension.swift in Sources */,
@@ -982,6 +990,7 @@
 				CFE46FA629C9B4B00063805A /* Spacing.swift in Sources */,
 				CFE46FA029C90D690063805A /* Event.swift in Sources */,
 				42B219A0295F426200515097 /* Images.swift in Sources */,
+				CFEBC07F29D32D33000A2472 /* TimeIntervalExtension.swift in Sources */,
 				42BCAD5C29BB7B000089B46A /* EventService.swift in Sources */,
 				CFE46F9F29C90D0F0063805A /* AppView.swift in Sources */,
 				CF054428294F7D4E00A39FE3 /* Constructor.swift in Sources */,
@@ -1059,6 +1068,7 @@
 				42521CB629B1033600000586 /* LoggerExtension.swift in Sources */,
 				CF20D36629760C300038A860 /* Colors.swift in Sources */,
 				4207B43829C0BC9300AA4758 /* LiveCardViewCell.swift in Sources */,
+				CFEBC08029D32D33000A2472 /* TimeIntervalExtension.swift in Sources */,
 				42521CA529B0ECBD00000586 /* LiveSessionService.swift in Sources */,
 				42BCAD5D29BB7B000089B46A /* EventService.swift in Sources */,
 				4207B44729C2151A00AA4758 /* DriverDetailsTextView.swift in Sources */,

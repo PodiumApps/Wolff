@@ -9,7 +9,7 @@ protocol LiveEventCardViewModelRepresentable {
     var timeInterval: TimeInterval { get }
     var sessionName: String { get }
     var podium: [String]? { get }
-    var state: LiveEventCardViewModel.State? { get }
+    var state: LiveEventCardViewModel.State { get }
 }
 
 final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
@@ -21,7 +21,8 @@ final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
     var timeInterval: TimeInterval
     var sessionName: String
     var podium: [String]?
-    var state: State? = nil
+
+    var state: State { setUpLiveEventState() }
 
     init(
         id: Event.ID,
@@ -40,8 +41,6 @@ final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
         self.timeInterval = timeInterval
         self.sessionName = sessionName
         self.podium = podium
-
-        self.state = self.setUpLiveEventState()
     }
 }
 
@@ -58,9 +57,9 @@ extension LiveEventCardViewModel {
 
         guard let podium else {
 
-            if timeInterval < 60 { return .aboutToStart }
+            if timeInterval < .minuteInterval { return .aboutToStart }
 
-            let timeToStart = getHoursAndMinutes(from: timeInterval)
+            let timeToStart = timeInterval.hoursAndMinutes
 
             return
                 .betweenOneMinuteAndFourHoursToGo(
@@ -70,13 +69,5 @@ extension LiveEventCardViewModel {
         }
 
         return .happeningNow(podium: podium)
-    }
-
-    private func getHoursAndMinutes(from timeInterval: TimeInterval) -> (hours: Int, minutes: Int) {
-
-        let hours = Int(timeInterval) / (60 * 60)
-        let minutes = Int(timeInterval) % (60 * 60) / 60
-
-        return (hours, minutes)
     }
 }

@@ -10,6 +10,10 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum Localization {
+  internal enum FinishedCardCell {
+    /// FINISHED
+    internal static let finished = Localization.tr("Localizable", "finished_card_cell.finished", fallback: "FINISHED")
+  }
   internal enum GrandPrixCard {
     internal enum Label {
       /// in %@
@@ -27,11 +31,17 @@ internal enum Localization {
   internal enum LiveCardCell {
     /// About to Start
     internal static let aboutToStart = Localization.tr("Localizable", "live_card_cell.about_to_start", fallback: "About to Start")
+    /// To
+    internal static let to = Localization.tr("Localizable", "live_card_cell.to", fallback: "To")
     internal enum Time {
+      /// HOUR
+      internal static let hour = Localization.tr("Localizable", "live_card_cell.time.hour", fallback: "HOUR")
       /// HOURS
       internal static let hours = Localization.tr("Localizable", "live_card_cell.time.hours", fallback: "HOURS")
       /// left
       internal static let `left` = Localization.tr("Localizable", "live_card_cell.time.left", fallback: "left")
+      /// MINUTE
+      internal static let minute = Localization.tr("Localizable", "live_card_cell.time.minute", fallback: "MINUTE")
       /// MINUTES
       internal static let minutes = Localization.tr("Localizable", "live_card_cell.time.minutes", fallback: "MINUTES")
       /// SECONDS

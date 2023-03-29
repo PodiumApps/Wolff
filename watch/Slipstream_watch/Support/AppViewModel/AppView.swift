@@ -16,9 +16,9 @@ struct AppView<ViewModel: AppViewModelRepresentable>: View {
             Text(error)
         case .loading:
             ProgressView()
-        case .results:
+        case .results(let viewModel):
             TabView {
-                Text("Season")
+                SeasonListView(viewModel: viewModel)
                 Text("Standings")
                 Text("Settings")
             }

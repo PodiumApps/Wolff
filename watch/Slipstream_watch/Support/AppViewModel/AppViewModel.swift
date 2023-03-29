@@ -21,6 +21,9 @@ final class AppViewModel: AppViewModelRepresentable {
     private func load() {
 
         driverAndConstructorService.action.send(.fetchAll)
+
+        let seasonListViewModel = SeasonListViewModel.make()
+        state = .results(seasonListViewModel)
     }
 }
 
@@ -30,7 +33,7 @@ extension AppViewModel {
 
         case loading
         case error(String)
-        case results
+        case results(SeasonListViewModel)
     }
 }
 

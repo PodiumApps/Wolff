@@ -17,111 +17,126 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
                 VStack(alignment: .leading, spacing: .Spacing.default2) {
                     VStack(alignment: .leading) {
                         Text(viewModel.title)
+                            .lineLimit(Constants.Title.lineLimit)
+                            .minimumScaleFactor(Constants.Title.scalingFactor)
                             .font(.Body.semibold)
                         HStack(spacing: .Spacing.default3) {
                             HStack(spacing: .Spacing.default) {
-                                Text("🇧🇪")
                                 Text(viewModel.country)
-                                    .font(.system(size: 12, weight: .medium))
+                                    .font(Font.Caption.semibold)
                             }
-                            Text("Round \(viewModel.round.description)")
-                                .font(.system(size: 12, weight: .regular))
+                            Text(Localization.LiveCardCell.Top.round(viewModel.round))
+                                .font(Font.Caption2.medium)
                                 .foregroundColor(Color.red)
                         }
                     }
 
-                    if let state = viewModel.state {
-                        makeBottomSection(state: state)
+                    switch viewModel.state {
+                    case .aboutToStart:
+                        createAboutToStartSection()
+                    case .betweenOneMinuteAndFourHoursToGo(let hours, let minutes):
+                        createBetweenOneMinuteAndFourHoursToGoSection(
+                            hours: hours,
+                            minutes: minutes
+                        )
+                    case .happeningNow(let podium):
+                        createHappeningNowSection(podium: podium)
                     }
-
-//                    VStack(alignment: .leading, spacing: 1) {
-//                        Text(viewModel.sessionName)
-//                            .font(.system(size: 12, weight: .bold))
-//                        Text("Happening Now".uppercased())
-//                            .font(.system(size: 11, weight: .medium))
-//                            .foregroundColor(.red)
-//                    }
                 }
 
                 Spacer()
             }
         }
-        .background(Color.red.opacity(0.27))
-        .buttonBorderShape(
-            .roundedRectangle(radius: 10)
-        )
-        .clipShape(
-            RoundedRectangle(cornerRadius: 10)
-        )
     }
 
-    private func makeBottomSection(state: LiveEventCardViewModel.State) -> some View {
+    private func createAboutToStartSection() -> some View {
 
         VStack(alignment: .leading) {
-            switch state {
-            case .aboutToStart:
-                Text(viewModel.sessionName)
-                    .font(.system(size: 12, weight: .bold))
-                Text("ABOUT TO START")
-                    .font(.system(size: 11, weight: .medium))
+            Text(viewModel.sessionName)
+                .font(Font.Caption.bold)
+            Text(Localization.LiveCardCell.aboutToStart.uppercased())
+                .font(Font.Caption.regular)
+                .foregroundColor(.red)
+        }
+    }
+
+    private func createBetweenOneMinuteAndFourHoursToGoSection(
+        hours: Int,
+        minutes: Int
+    ) -> some View {
+
+        VStack(alignment: .leading) {
+            HStack(alignment: .bottom, spacing: .Spacing.default2) {
+                if hours > 0 {
+                    HStack(alignment: .bottom) {
+                        Text(hours.description)
+                            .font(Font.Caption.bold)
+                        Text(hours != 1 ? Localization.LiveCardCell.Time.hours : Localization.LiveCardCell.Time.hours)
+                            .font(Font.Caption2.semibold)
+                            .foregroundColor(.red)
+                    }
+                }
+
+                if minutes > 0 {
+                    HStack(alignment: .bottom) {
+                        Text(minutes.description)
+                            .font(Font.Caption.bold)
+                        Text(minutes != 1
+                                ? Localization.LiveCardCell.Time.minutes
+                                : Localization.LiveCardCell.Time.minute
+                        )
+                        .font(Font.Caption2.semibold)
+                            .foregroundColor(.red)
+                    }
+                }
+            }
+
+            HStack(alignment: .bottom) {
+                Text(Localization.LiveCardCell.to)
+                    .font(Font.Caption2.semibold)
                     .foregroundColor(.red)
-
-            case .betweenOneMinuteAndFourHoursToGo(let hours, let minutes):
-                HStack(alignment: .bottom, spacing: .Spacing.default2) {
-                    if hours > 0 {
-                        HStack(alignment: .bottom) {
-                            Text(hours.description)
-                                .font(.system(size: 12, weight: .bold))
-                            Text(hours != 1 ? "HOURS" : "HOUR")
-                                .font(.system(size: 11, weight: .medium))
-                                .foregroundColor(.red)
-                        }
-                    }
-
-                    if minutes > 0 {
-                        HStack(alignment: .bottom) {
-                            Text(minutes.description)
-                                .font(.system(size: 12, weight: .bold))
-                            Text(minutes != 1 ? "MINUTES" : "MINUTE")
-                                .font(.system(size: 11, weight: .medium))
-                                .foregroundColor(.red)
-                        }
-                    }
-                }
-
-                HStack(alignment: .bottom) {
-                    Text("To")
-                        .font(.system(size: 11, weight: .medium))
-                        .foregroundColor(.red)
-                    Text(viewModel.sessionName)
-                        .font(.system(size: 12, weight: .bold))
-                }
-
-            case .happeningNow(let podium):
                 Text(viewModel.sessionName)
-                    .font(.system(size: 12, weight: .bold))
-                Text("HAPPENING NOW")
-                    .font(.system(size: 11, weight: .medium))
-                    .foregroundColor(.red)
-
-                HStack(spacing: .Spacing.default3) {
-                    ForEach(0 ..< podium.count, id: \.self) { index in
-                        HStack {
-                            HStack(spacing: 0) {
-                                Text(String(index + 1))
-                                Text((index + 1).getPositionString)
-                                    .font(.system(size: 10, weight: .medium))
-                                    .offset(y: -2)
-                            }
-                            .font(.system(size: 11, weight: .medium))
-                            Text(podium[index])
-                        }
-                        .font(.system(size: 12, weight: .bold))
-                    }
-                }
-                .padding(.top, .Spacing.default)
+                    .font(Font.Caption.bold)
             }
         }
+    }
+
+    private func createHappeningNowSection(podium: [String]) -> some View {
+
+        VStack(alignment: .leading, spacing: 5) {
+            VStack(alignment: .leading) {
+                Text(viewModel.sessionName)
+                    .font(Font.Caption.bold)
+                Text(Localization.LiveCardCell.Title.now)
+                    .font(Font.Caption2.semibold)
+                    .foregroundColor(.red)
+            }
+
+            HStack(spacing: .Spacing.default3) {
+                ForEach(0 ..< podium.count, id: \.self) { index in
+                    HStack {
+                        HStack(spacing: 0) {
+                            Text(String(index + 1))
+                            Text((index + 1).getPositionString)
+                                .font(Font.Caption2.medium)
+                                .offset(y: -2)
+                        }
+                        .font(Font.Caption2.semibold)
+                        Text(podium[index])
+                    }
+                    .font(Font.Caption.bold)
+                }
+            }
+        }
+    }
+}
+
+fileprivate enum Constants {
+
+    enum Title {
+
+        static let lineLimit: Int = 1
+        static let scalingFactor: CGFloat = 0.1
     }
 }
 
@@ -133,7 +148,7 @@ struct LiveEventCardView_Previews: PreviewProvider {
                 title: "Spa-Francorchamps",
                 country: "Belgium",
                 round: 18,
-                timeInterval: .init(0),
+                timeInterval: .init(150),
                 sessionName: "Qualifying"
                 //podium: ["VER", "LEC", "ALO"]
             )
