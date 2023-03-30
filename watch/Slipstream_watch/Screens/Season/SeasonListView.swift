@@ -23,15 +23,15 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
                                 case .upcoming(let viewModel):
                                     UpcomingEventCardView(viewModel: viewModel)
                                         .id(index)
-                                        .frame(minHeight: 85)
+                                        .padding(.vertical, 7)
                                 case .live(let viewModel):
                                     LiveEventCardView(viewModel: viewModel)
                                         .id(index)
-                                        .frame(minHeight: 85)
+                                        .padding(.vertical, 7)
                                 case .finished(let viewModel):
                                     FinishedEventCardView(viewModel: viewModel)
                                         .id(index)
-                                        .frame(minHeight: 95)
+                                        .padding(.vertical, 7)
                                 }
                             }
                             .listRowBackground(

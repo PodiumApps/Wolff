@@ -156,12 +156,16 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         liveEventTimer?.invalidate()
 
         var triggerInterval: Double = .minuteInterval
-        if timeInterval <= 0 { triggerInterval = 15 }
+        print("Time Interval: \(timeInterval)")
+        if timeInterval <= 0.0 {
+            triggerInterval = 10
+        }
 
         liveEventTimer =
-            Timer.scheduledTimer(withTimeInterval: triggerInterval, repeats: true) { [weak self] _ in
+        Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { [weak self, timeInterval] _ in
 
                 guard let self else { return }
+                print("Time Interval inside timer: \(timeInterval)")
 
                 if timeInterval < .minuteInterval {
 
@@ -169,6 +173,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                 }
 
                 self.state = self.buildAllEventCells()
+                print("Aqui!")
         }
     }
 
@@ -189,7 +194,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                 )
             case .upcoming(let start, let end, let sessionName, let timeInterval):
 
-                if let timeInterval { updateLiveEventTimer(timeInterval: timeInterval) }
+//                if let timeInterval { updateLiveEventTimer(timeInterval: timeInterval) }
 
                 return .upcoming(
                     buildUpcomingViewModel(
@@ -244,7 +249,8 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
             round: event.round,
             timeInterval: timeInterval,
             sessionName: sessionName,
-            podium: podium
+            podium: podium,
+            state: setUpLiveEventState(podium: podium, timeInterval: timeInterval)
         )
     }
 
@@ -280,6 +286,24 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
             round: event.round,
             podium: podium
         )
+    }
+
+    private func setUpLiveEventState(podium: [String]?, timeInterval: TimeInterval) -> LiveEventCardViewModel.State {
+
+        guard let podium, timeInterval <= 0 else {
+
+            if timeInterval < .minuteInterval { return .aboutToStart }
+
+            let timeToStart = timeInterval.hoursAndMinutes
+
+            return
+                .betweenOneMinuteAndFourHoursToGo(
+                    hours: timeToStart.hours,
+                    minutes: timeToStart.minutes
+                )
+        }
+
+        return .happeningNow(podium: podium)
     }
 }
 

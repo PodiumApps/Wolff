@@ -21,8 +21,7 @@ final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
     var timeInterval: TimeInterval
     var sessionName: String
     var podium: [String]?
-
-    var state: State { setUpLiveEventState() }
+    var state: State
 
     init(
         id: Event.ID,
@@ -31,7 +30,8 @@ final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
         round: Int,
         timeInterval: TimeInterval,
         sessionName: String,
-        podium: [String]? = nil
+        podium: [String]? = nil,
+        state: State
     ) {
 
         self.id = id
@@ -41,33 +41,16 @@ final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
         self.timeInterval = timeInterval
         self.sessionName = sessionName
         self.podium = podium
+        self.state = state
     }
 }
 
 extension LiveEventCardViewModel {
 
-    enum State {
+    enum State: Equatable {
 
         case betweenOneMinuteAndFourHoursToGo(hours: Int, minutes: Int)
         case aboutToStart // Less than one minute
         case happeningNow(podium: [String])
-    }
-
-    private func setUpLiveEventState() -> State {
-
-        guard let podium else {
-
-            if timeInterval < .minuteInterval { return .aboutToStart }
-
-            let timeToStart = timeInterval.hoursAndMinutes
-
-            return
-                .betweenOneMinuteAndFourHoursToGo(
-                    hours: timeToStart.hours,
-                    minutes: timeToStart.minutes
-                )
-        }
-
-        return .happeningNow(podium: podium)
     }
 }

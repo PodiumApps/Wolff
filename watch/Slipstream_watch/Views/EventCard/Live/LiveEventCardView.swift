@@ -46,7 +46,6 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
                         )
                     case .happeningNow(let podium):
                         createHappeningNowSection(podium: podium)
-                            .padding(.bottom, 5)
                     }
                 }
 
@@ -170,7 +169,8 @@ struct LiveEventCardView_Previews: PreviewProvider {
                 country: "Belgium",
                 round: 18,
                 timeInterval: .init(150),
-                sessionName: "Qualifying"
+                sessionName: "Qualifying",
+                state: .aboutToStart
                 //podium: ["VER", "LEC", "ALO"]
             )
         )
