@@ -52,6 +52,7 @@ struct UpcomingEventCardView<ViewModel: UpcomingEventCardViewModelRepresentable>
                 Spacer()
             }
             .padding(.horizontal, Constants.Padding.horizontal)
+            
         }
     }
 

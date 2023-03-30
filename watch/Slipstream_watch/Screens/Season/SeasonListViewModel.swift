@@ -149,26 +149,6 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                 }
             }
             .assign(to: &$state)
-
-//        updateGetAllEventsTimer()
-    }
-
-    private func updateGetAllEventsTimer(timeInterval: TimeInterval) {
-
-        updateAllEventsTimer?.invalidate()
-
-        var triggerInterval = 5 * .minuteInterval
-        if timeInterval <= (48 * .hourInterval) {
-            triggerInterval = .minuteInterval
-        }
-
-        updateAllEventsTimer =
-            Timer.scheduledTimer(withTimeInterval: triggerInterval, repeats: true) { [weak self] _ in
-
-                guard let self else { return }
-
-                self.eventService.action.send(.updateAll)
-            }
     }
 
     private func updateLiveEventTimer(timeInterval: TimeInterval) {
@@ -179,17 +159,16 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         if timeInterval <= 0 { triggerInterval = 15 }
 
         liveEventTimer =
-            Timer.scheduledTimer(withTimeInterval: triggerInterval, repeats: false) { [weak self] _ in
+            Timer.scheduledTimer(withTimeInterval: triggerInterval, repeats: true) { [weak self] _ in
 
                 guard let self else { return }
 
                 if timeInterval < .minuteInterval {
 
                     self.liveEventService.action.send(.updatePositions)
-                } else {
-
-                    self.state = self.buildAllEventCells()
                 }
+
+                self.state = self.buildAllEventCells()
         }
     }
 
@@ -209,6 +188,9 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                     )
                 )
             case .upcoming(let start, let end, let sessionName, let timeInterval):
+
+                if let timeInterval { updateLiveEventTimer(timeInterval: timeInterval) }
+
                 return .upcoming(
                     buildUpcomingViewModel(
                         event: event,

@@ -34,6 +34,11 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
                                         .frame(minHeight: 95)
                                 }
                             }
+                            .listRowBackground(
+                                cells[index].id == .live
+                                ? Color.red.opacity(0.40).clipped().cornerRadius(15)
+                                : Color.Event.completedOrUpcomingEvent.opacity(0.4).clipped().cornerRadius(15)
+                            )
                         }
                         .listStyle(.carousel)
                         .onAppear {

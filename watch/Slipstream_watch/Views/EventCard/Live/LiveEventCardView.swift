@@ -46,6 +46,7 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
                         )
                     case .happeningNow(let podium):
                         createHappeningNowSection(podium: podium)
+                            .padding(.bottom, 5)
                     }
                 }
 
@@ -98,7 +99,7 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
 
             HStack(alignment: .bottom) {
                 Text(Localization.LiveCardCell.to)
-                    .font(.Caption.semibold)
+                    .font(.Caption2.semibold)
                     .foregroundColor(.red)
                 Text(viewModel.sessionName)
                     .font(.Caption.bold)
@@ -110,11 +111,11 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
 
         VStack(alignment: .leading, spacing: .Spacing.default) {
             VStack(alignment: .leading) {
-                Text(viewModel.sessionName)
-                    .font(.Caption.bold)
                 Text(Localization.LiveCardCell.Title.now)
                     .font(.Caption2.semibold)
                     .foregroundColor(.red)
+                Text(viewModel.sessionName)
+                    .font(.Caption.bold)
             }
 
             HStack(spacing: .Spacing.default2) {
