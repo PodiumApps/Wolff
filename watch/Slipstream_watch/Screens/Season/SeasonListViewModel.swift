@@ -151,21 +151,17 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
             .assign(to: &$state)
     }
 
-    private func updateLiveEventTimer(timeInterval: TimeInterval) {
+    private func updateLiveEventTimer(timeInterval: TimeInterval, triggerInterval: Double) {
 
         liveEventTimer?.invalidate()
 
-        var triggerInterval: Double = .minuteInterval
-        print("Time Interval: \(timeInterval)")
-        if timeInterval <= 0.0 {
-            triggerInterval = 10
-        }
+//        print(timeInterval)
 
         liveEventTimer =
-        Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { [weak self, timeInterval] _ in
+        Timer.scheduledTimer(withTimeInterval: triggerInterval, repeats: true) { [weak self, timeInterval] _ in
 
                 guard let self else { return }
-                print("Time Interval inside timer: \(timeInterval)")
+//                print("Time Interval inside timer: \(timeInterval)")
 
                 if timeInterval < .minuteInterval {
 
@@ -173,17 +169,24 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                 }
 
                 self.state = self.buildAllEventCells()
-                print("Aqui!")
+//                print("Aqui!")
         }
     }
 
     private func buildAllEventCells() -> State {
 
+        for event in events {
+            if event.title == "Melbourne" {
+                print(event)
+            }
+        }
+
         eventCells = events.compactMap { event in
             switch event.status {
             case .live(let timeInterval, let sessionName):
 
-                updateLiveEventTimer(timeInterval: timeInterval)
+                updateLiveEventTimer(timeInterval: timeInterval, triggerInterval: 10)
+//                print("Update live")
 
                 return .live(
                     buildLiveViewModel(
@@ -194,7 +197,9 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                 )
             case .upcoming(let start, let end, let sessionName, let timeInterval):
 
-//                if let timeInterval { updateLiveEventTimer(timeInterval: timeInterval) }
+                if let timeInterval, timeInterval > (4 * .hourInterval) {
+                    updateLiveEventTimer(timeInterval: timeInterval, triggerInterval: .minuteInterval)
+                }
 
                 return .upcoming(
                     buildUpcomingViewModel(
