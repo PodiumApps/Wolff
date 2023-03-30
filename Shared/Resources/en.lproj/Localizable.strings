@@ -18,7 +18,7 @@
 "live_card_cell.time.minute" = "MINUTE";
 "live_card_cell.time.seconds" = "SECONDS";
 "live_card_cell.time.left" = "left";
-"live_card_cell.to" = "To";
+"live_card_cell.to" = "TO";
 
 // MARK: - FinishedCard
 "finished_card_cell.finished" = "FINISHED";

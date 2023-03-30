@@ -17,14 +17,15 @@ struct FinishedEventCardView<ViewModel: FinishedEventCardViewModelRepresentable>
             HStack {
                 VStack(alignment: .leading, spacing: .Spacing.default2) {
                     VStack(alignment: .leading) {
-                        HStack(alignment: .bottom) {
-                            Text(viewModel.title)
-                                .font(.Body.bold)
-                        }
-
-                        HStack(spacing: .Spacing.default) {
-                            HStack(spacing: .Spacing.default) {
+                        Text(viewModel.title)
+                            .lineLimit(Constants.Title.lineLimit)
+                            .minimumScaleFactor(Constants.Title.minimumScalingFactor)
+                            .font(.Body.semibold)
+                        HStack(spacing: .Spacing.default3) {
+                            HStack {
                                 Text(viewModel.country)
+                                    .lineLimit(Constants.Country.lineLimit)
+                                    .minimumScaleFactor(Constants.Country.minimumScalingFactor)
                                     .font(.Caption.semibold)
                             }
 
@@ -56,11 +57,15 @@ struct FinishedEventCardView<ViewModel: FinishedEventCardViewModelRepresentable>
                         HStack(spacing: .Spacing.none) {
                             Text("\(index + 1)")
                             Text((index + 1).getPositionString)
-                                .offset(y: Constants.OrdinalComponent.yOffset)
+                                .offset(y: Constants.Podium.OrdinalComponent.yOffset)
                         }
-                        .font(.Caption2.regular)
+                        .font(.Caption.regular)
+                        .lineLimit(Constants.Podium.DriverTicker.lineLimit)
+                        .minimumScaleFactor(Constants.Podium.DriverTicker.minimumScalingFactor)
                         Text(podium[index])
-                            .font(.Caption2.bold)
+                            .font(.Caption.bold)
+                            .lineLimit(Constants.Podium.DriverTicker.lineLimit)
+                            .minimumScaleFactor(Constants.Podium.DriverTicker.minimumScalingFactor)
                     }
                 }
             }
@@ -69,6 +74,18 @@ struct FinishedEventCardView<ViewModel: FinishedEventCardViewModelRepresentable>
 }
 
 fileprivate enum Constants {
+
+    enum Title {
+
+        static let lineLimit: Int = 1
+        static let minimumScalingFactor: CGFloat = 0.1
+    }
+
+    enum Country {
+
+        static let lineLimit: Int = 1
+        static let minimumScalingFactor: CGFloat = 0.1
+    }
 
     enum Round {
 
@@ -85,9 +102,18 @@ fileprivate enum Constants {
         static let opacity: CGFloat = 0.9
     }
 
-    enum OrdinalComponent {
+    enum Podium {
 
-        static let yOffset: CGFloat = -1
+        enum DriverTicker {
+
+            static let lineLimit: Int = 1
+            static let minimumScalingFactor: CGFloat = 0.1
+        }
+
+        enum OrdinalComponent {
+
+            static let yOffset: CGFloat = -1
+        }
     }
 }
 

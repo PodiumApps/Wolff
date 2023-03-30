@@ -18,16 +18,21 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
                     VStack(alignment: .leading) {
                         Text(viewModel.title)
                             .lineLimit(Constants.Title.lineLimit)
-                            .minimumScaleFactor(Constants.Title.scalingFactor)
+                            .minimumScaleFactor(Constants.Title.minimumScalingFactor)
                             .font(.Body.semibold)
                         HStack(spacing: .Spacing.default3) {
-                            HStack(spacing: .Spacing.default) {
+                            HStack {
                                 Text(viewModel.country)
+                                    .lineLimit(Constants.Country.lineLimit)
+                                    .minimumScaleFactor(Constants.Country.minimumScalingFactor)
                                     .font(.Caption.semibold)
                             }
+
+                            Spacer()
+
                             Text(Localization.LiveCardCell.Top.round(viewModel.round))
                                 .font(.Caption2.medium)
-                                .foregroundColor(Color.red)
+                                .foregroundColor(.primary.opacity(Constants.Round.opacity))
                         }
                     }
 
@@ -93,7 +98,7 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
 
             HStack(alignment: .bottom) {
                 Text(Localization.LiveCardCell.to)
-                    .font(.Caption2.semibold)
+                    .font(.Caption.semibold)
                     .foregroundColor(.red)
                 Text(viewModel.sessionName)
                     .font(.Caption.bold)
@@ -135,12 +140,23 @@ fileprivate enum Constants {
     enum Title {
 
         static let lineLimit: Int = 1
-        static let scalingFactor: CGFloat = 0.1
+        static let minimumScalingFactor: CGFloat = 0.1
+    }
+
+    enum Country {
+
+        static let lineLimit: Int = 1
+        static let minimumScalingFactor: CGFloat = 0.1
     }
 
     enum OrdinalComponent {
 
         static let yOffset: CGFloat = -1
+    }
+
+    enum Round {
+
+        static let opacity: CGFloat = 0.9
     }
 }
 

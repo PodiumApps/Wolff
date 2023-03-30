@@ -18,29 +18,29 @@ struct UpcomingEventCardView<ViewModel: UpcomingEventCardViewModelRepresentable>
                 VStack(alignment: .leading, spacing: .Spacing.default2) {
                     VStack(alignment: .leading) {
                         Text(viewModel.title)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.1)
+                            .lineLimit(Constants.Title.lineLimit)
+                            .minimumScaleFactor(Constants.Title.minimumScalingFactor)
                             .font(.Body.semibold)
                         HStack(spacing: .Spacing.default3) {
                             HStack {
                                 Text(viewModel.country)
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.1)
-                                    .font(.system(size: 12, weight: .semibold))
+                                    .lineLimit(Constants.Country.lineLimit)
+                                    .minimumScaleFactor(Constants.Country.minimumScalingFactor)
+                                    .font(.Caption.semibold)
                             }
 
                             Spacer()
 
-                            Text("Round \(viewModel.round)")
-                                .font(.system(size: 10, weight: .medium))
-                                .foregroundColor(.primary.opacity(0.9))
+                            Text(Localization.LiveCardCell.Top.round(viewModel.round))
+                                .font(.Caption2.medium)
+                                .foregroundColor(.primary.opacity(Constants.Round.opacity))
                         }
                     }
 
                     switch viewModel.state {
                     case .moreThanFortyEightHours(let date):
                         Text(date)
-                            .font(.system(size: 13, weight: .regular))
+                            .font(.Caption.medium)
                     case .lessThanFortyEightHours(let hours, let minutes):
                         createLessThanFortyEightHoursLeftSection(
                             hours: hours,
@@ -51,7 +51,7 @@ struct UpcomingEventCardView<ViewModel: UpcomingEventCardViewModelRepresentable>
 
                 Spacer()
             }
-            .padding(.horizontal, 3)
+            .padding(.horizontal, Constants.Padding.horizontal)
         }
     }
 
@@ -65,9 +65,12 @@ struct UpcomingEventCardView<ViewModel: UpcomingEventCardViewModelRepresentable>
                 if hours > 0 {
                     HStack(alignment: .bottom) {
                         Text(hours.description)
-                            .font(.system(size: 12, weight: .bold))
-                        Text(hours != 1 ? "HOURS" : "HOUR")
-                            .font(.system(size: 10, weight: .medium))
+                            .font(.Caption.bold)
+                        Text(hours != 1
+                             ? Localization.LiveCardCell.Time.hours
+                             : Localization.LiveCardCell.Time.hour
+                        )
+                            .font(.Caption2.semibold)
                             .foregroundColor(.gray)
                     }
                 }
@@ -75,25 +78,51 @@ struct UpcomingEventCardView<ViewModel: UpcomingEventCardViewModelRepresentable>
                 if minutes > 0 {
                     HStack(alignment: .bottom) {
                         Text(minutes.description)
-                            .font(.system(size: 12, weight: .bold))
-                        Text(minutes != 1 ? "MINUTES" : "MINUTE")
-                            .font(.system(size: 10, weight: .medium))
+                            .font(.Caption.bold)
+                        Text(minutes != 1
+                             ? Localization.LiveCardCell.Time.minutes
+                             : Localization.LiveCardCell.Time.minute
+                        )
+                            .font(.Caption2.semibold)
                             .foregroundColor(.gray)
                     }
                 }
             }
 
             HStack(alignment: .bottom) {
-                Text("To")
-                    .font(.system(size: 11, weight: .medium))
+                Text(Localization.LiveCardCell.to)
+                    .font(.Caption2.semibold)
                     .foregroundColor(.gray)
                 Text(viewModel.sessionName)
-                    .font(.system(size: 12, weight: .bold))
+                    .font(.Caption.bold)
             }
         }
     }
+}
 
+fileprivate enum Constants {
 
+    enum Title {
+
+        static let lineLimit: Int = 1
+        static let minimumScalingFactor: CGFloat = 0.1
+    }
+
+    enum Padding {
+
+        static let horizontal: CGFloat = 3
+    }
+
+    enum Country {
+
+        static let lineLimit: Int = 1
+        static let minimumScalingFactor: CGFloat = 0.1
+    }
+
+    enum Round {
+
+        static let opacity: CGFloat = 0.9
+    }
 }
 
 struct UpcomingEventCardView_Previews: PreviewProvider {

@@ -31,8 +31,8 @@ internal enum Localization {
   internal enum LiveCardCell {
     /// About to Start
     internal static let aboutToStart = Localization.tr("Localizable", "live_card_cell.about_to_start", fallback: "About to Start")
-    /// To
-    internal static let to = Localization.tr("Localizable", "live_card_cell.to", fallback: "To")
+    /// TO
+    internal static let to = Localization.tr("Localizable", "live_card_cell.to", fallback: "TO")
     internal enum Time {
       /// HOUR
       internal static let hour = Localization.tr("Localizable", "live_card_cell.time.hour", fallback: "HOUR")
