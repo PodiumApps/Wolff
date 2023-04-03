@@ -47,6 +47,11 @@ final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
 
 extension LiveEventCardViewModel {
 
+    enum Action {
+
+        case tapEvent
+    }
+
     enum State: Equatable {
 
         case betweenOneMinuteAndFourHoursToGo(hours: Int, minutes: Int)

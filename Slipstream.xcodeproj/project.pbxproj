@@ -119,7 +119,10 @@
 		CFCD655929DA4B390079BE9F /* UpcomingSessionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCD655829DA4B390079BE9F /* UpcomingSessionCellViewModel.swift */; };
 		CFCD655B29DA4BCC0079BE9F /* UpcomingSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCD655A29DA4BCC0079BE9F /* UpcomingSessionView.swift */; };
 		CFCD655D29DA4E6B0079BE9F /* FinishedSessionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCD655C29DA4E6B0079BE9F /* FinishedSessionCellViewModel.swift */; };
-		CFCD655F29DA4F1A0079BE9F /* FinishedCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCD655E29DA4F1A0079BE9F /* FinishedCellView.swift */; };
+		CFCD655F29DA4F1A0079BE9F /* FinishedSessionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCD655E29DA4F1A0079BE9F /* FinishedSessionCellView.swift */; };
+		CFCD656229DAD9080079BE9F /* LiveSessionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCD656129DAD9080079BE9F /* LiveSessionCellViewModel.swift */; };
+		CFCD656429DAD9A90079BE9F /* LiveSessionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCD656329DAD9A90079BE9F /* LiveSessionCellView.swift */; };
+		CFCD656629DAE5330079BE9F /* SessionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCD656529DAE5330079BE9F /* SessionListView.swift */; };
 		CFE23F4D2982EB9400412DB6 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE23F4C2982EB9400412DB6 /* Localization.swift */; };
 		CFE23F4E2982EB9400412DB6 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE23F4C2982EB9400412DB6 /* Localization.swift */; };
 		CFE23F4F2982EBF200412DB6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CFE23F522982EBF200412DB6 /* Localizable.strings */; };
@@ -251,7 +254,10 @@
 		CFCD655829DA4B390079BE9F /* UpcomingSessionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSessionCellViewModel.swift; sourceTree = "<group>"; };
 		CFCD655A29DA4BCC0079BE9F /* UpcomingSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSessionView.swift; sourceTree = "<group>"; };
 		CFCD655C29DA4E6B0079BE9F /* FinishedSessionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedSessionCellViewModel.swift; sourceTree = "<group>"; };
-		CFCD655E29DA4F1A0079BE9F /* FinishedCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedCellView.swift; sourceTree = "<group>"; };
+		CFCD655E29DA4F1A0079BE9F /* FinishedSessionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedSessionCellView.swift; sourceTree = "<group>"; };
+		CFCD656129DAD9080079BE9F /* LiveSessionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveSessionCellViewModel.swift; sourceTree = "<group>"; };
+		CFCD656329DAD9A90079BE9F /* LiveSessionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveSessionCellView.swift; sourceTree = "<group>"; };
+		CFCD656529DAE5330079BE9F /* SessionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListView.swift; sourceTree = "<group>"; };
 		CFE23F4C2982EB9400412DB6 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		CFE23F512982EBF200412DB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CFE23F542982EDBA00412DB6 /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
@@ -660,9 +666,11 @@
 		CFCD655329DA40340079BE9F /* SessionList */ = {
 			isa = PBXGroup;
 			children = (
+				CFCD656029DAD8EE0079BE9F /* LiveSession */,
 				CFCD655729DA4B1E0079BE9F /* FinishedSession */,
 				CFCD655629DA4B110079BE9F /* UpcomingSession */,
 				CFCD655429DA40490079BE9F /* SessionListViewModel.swift */,
+				CFCD656529DAE5330079BE9F /* SessionListView.swift */,
 			);
 			path = SessionList;
 			sourceTree = "<group>";
@@ -680,9 +688,18 @@
 			isa = PBXGroup;
 			children = (
 				CFCD655C29DA4E6B0079BE9F /* FinishedSessionCellViewModel.swift */,
-				CFCD655E29DA4F1A0079BE9F /* FinishedCellView.swift */,
+				CFCD655E29DA4F1A0079BE9F /* FinishedSessionCellView.swift */,
 			);
 			path = FinishedSession;
+			sourceTree = "<group>";
+		};
+		CFCD656029DAD8EE0079BE9F /* LiveSession */ = {
+			isa = PBXGroup;
+			children = (
+				CFCD656129DAD9080079BE9F /* LiveSessionCellViewModel.swift */,
+				CFCD656329DAD9A90079BE9F /* LiveSessionCellView.swift */,
+			);
+			path = LiveSession;
 			sourceTree = "<group>";
 		};
 		CFCEF3FF28380C160063CD47 = {
@@ -1007,6 +1024,7 @@
 				42B21972295DDBAB00515097 /* Details.swift in Sources */,
 				CFEBC08429D33895000A2472 /* SeasonListView.swift in Sources */,
 				CFEBC07629CD092F000A2472 /* UpcomingEventCardViewModel.swift in Sources */,
+				CFCD656629DAE5330079BE9F /* SessionListView.swift in Sources */,
 				42521CA729B0F21700000586 /* DriverAndConstructorService.swift in Sources */,
 				CF0544462951CB8D00A39FE3 /* DateExtension.swift in Sources */,
 				42521CA429B0ECBD00000586 /* LiveSessionService.swift in Sources */,
@@ -1017,6 +1035,7 @@
 				42B21970295DA4D400515097 /* Session.swift in Sources */,
 				CF05443A29507C1000A39FE3 /* Circuit.swift in Sources */,
 				42B21988295EEA9400515097 /* ConstructorMock.swift in Sources */,
+				CFCD656229DAD9080079BE9F /* LiveSessionCellViewModel.swift in Sources */,
 				42BCAD5529BB4B360089B46A /* EventMock.swift in Sources */,
 				42B2196E295D9EFB00515097 /* SessionResult.swift in Sources */,
 				CFCD655B29DA4BCC0079BE9F /* UpcomingSessionView.swift in Sources */,
@@ -1051,7 +1070,8 @@
 				42BCAD6229BBD7F10089B46A /* Identifier.swift in Sources */,
 				CFE46FA429C9B4A80063805A /* Colors.swift in Sources */,
 				42B2198C295EEAA100515097 /* DriverMock.swift in Sources */,
-				CFCD655F29DA4F1A0079BE9F /* FinishedCellView.swift in Sources */,
+				CFCD655F29DA4F1A0079BE9F /* FinishedSessionCellView.swift in Sources */,
+				CFCD656429DAD9A90079BE9F /* LiveSessionCellView.swift in Sources */,
 				42521CB229B1006000000586 /* ServiceLocator.swift in Sources */,
 				CF05443C29507D3A00A39FE3 /* News.swift in Sources */,
 				CFE46FA129C9B49D0063805A /* ConstructorStyler.swift in Sources */,

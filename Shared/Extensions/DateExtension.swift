@@ -28,4 +28,14 @@ extension DateFormatter {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.sssssZ"
         return dateFormatter
     }()
+
+    static let session: DateFormatter = {
+        var timeZone = TimeZone.current
+
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, yyyy, hh:mm a"
+        dateFormatter.timeZone = timeZone
+        
+        return dateFormatter
+    }()
 }

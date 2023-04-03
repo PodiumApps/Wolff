@@ -169,6 +169,11 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         }
     }
 
+    private func tapRow(at index: Int) {
+
+        let sessionsListViewModel = SessionListViewModel(event: events[index])
+    }
+
     private func buildAllEventCells() -> State {
 
         eventCells = events.compactMap { event in

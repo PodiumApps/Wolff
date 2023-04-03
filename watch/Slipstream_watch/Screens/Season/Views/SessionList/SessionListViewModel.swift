@@ -9,46 +9,61 @@ protocol SessionListViewModelRepresentable {
 final class SessionListViewModel: SessionListViewModelRepresentable {
 
     private let event: Event
-    private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
-    private let liveSessionService: LiveSessionServiceRepresentable
-
-    private var timer: Timer?
 
     @Published var state: State
     @Published private var sessionCells: [Cell]
 
-    init(
-        event: Event,
-        driverAndConstructorService: DriverAndConstructorServiceRepresentable,
-        liveSessionService: LiveSessionServiceRepresentable
-    ) {
+    init(event: Event) {
 
         self.event = event
-        self.driverAndConstructorService = driverAndConstructorService
-        self.liveSessionService = liveSessionService
 
         self.state = .loading
         self.sessionCells = []
+
+        self.state = buildSessionRows()
     }
 
     private func buildSessionRows() -> State {
 
+        var liveEventCellBuilt = false
+
         sessionCells = event.sessions.compactMap { session in
 
-            if session.winners.isEmpty {
-                return .upcoming(
-                    buildUpcomingSessionCellViewModel(
-                        sessionName: session.name,
-                        date: session.date
+            if case .live = event.status {
+                if session.winners.isEmpty && !liveEventCellBuilt {
+                    liveEventCellBuilt = true
+                    return .live(
+                        buildLiveSessionCellViewModel(sessionName: session.name, podium: [])
                     )
-                )
+                } else {
+                    if session.winners.isEmpty {
+                        return .upcoming(
+                            buildUpcomingSessionCellViewModel(
+                                sessionName: session.name, date: session.date
+                            )
+                        )
+                    } else {
+                        return .finished(
+                            buildFinishedSessionCellViewModel(
+                                sessionName: session.name, winners: session.winners
+                            )
+                        )
+                    }
+                }
             } else {
-                return .finished(
-                    buildFinishedSessionCellViewModel(
-                        sessionName: session.name,
-                        winners: session.winners
+                if session.winners.isEmpty {
+                    return .upcoming(
+                        buildUpcomingSessionCellViewModel(
+                            sessionName: session.name, date: session.date
+                        )
                     )
-                )
+                } else {
+                    return .finished(
+                        buildFinishedSessionCellViewModel(
+                            sessionName: session.name, winners: session.winners
+                        )
+                    )
+                }
             }
         }
 
@@ -63,15 +78,19 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
         )
     }
 
-//    private func buildLiveSessionCellViewModel() -> LiveSessionCellViewModel {
-//
-//    }
+    private func buildLiveSessionCellViewModel(sessionName: Session.Name, podium: [Driver.ID]) -> LiveSessionCellViewModel {
+
+        return LiveSessionCellViewModel(
+            sessionName: sessionName.label,
+            podium: ["VER", "HAM", "ALO"]
+        )
+    }
 
     private func buildFinishedSessionCellViewModel(sessionName: Session.Name, winners: [Driver.ID]) -> FinishedSessionCellViewModel {
 
         return FinishedSessionCellViewModel(
             session: sessionName.label,
-            winners: []
+            winners: ["HAM", "ALO", "VER"]
         )
     }
 }
@@ -104,13 +123,13 @@ extension SessionListViewModel {
     enum Cell: Equatable, Identifiable {
 
         case upcoming(UpcomingSessionCellViewModel)
-//        case live(LiveSessionCellViewModel)
+        case live(LiveSessionCellViewModel)
         case finished(FinishedSessionCellViewModel)
 
         enum Identifier {
 
             case upcoming
-//            case live
+            case live
             case finished
         }
 
@@ -118,7 +137,7 @@ extension SessionListViewModel {
 
             switch self {
             case .upcoming: return .upcoming
-//            case .live: return .live
+            case .live: return .live
             case .finished: return .finished
             }
         }

@@ -14,11 +14,16 @@ struct UpcomingSessionView<ViewModel: UpcomingSessionCellViewModelRepresentable>
         Button(action: {
 
         }) {
+            HStack {
+                VStack(alignment: .leading, spacing: .Spacing.default) {
 
-            VStack(alignment: .leading, spacing: .Spacing.default2) {
+                    Text(viewModel.sessionName)
+                        .font(.Body.semibold)
+                    Text(DateFormatter.session.string(from: viewModel.date))
+                        .font(.Caption.regular)
+                }
 
-                Text(viewModel.sessionName)
-                Text(viewModel.date.description)
+                Spacer()
             }
         }
     }
