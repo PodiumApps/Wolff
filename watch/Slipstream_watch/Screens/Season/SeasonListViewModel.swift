@@ -155,13 +155,10 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
 
         liveEventTimer?.invalidate()
 
-//        print(timeInterval)
-
         liveEventTimer =
         Timer.scheduledTimer(withTimeInterval: triggerInterval, repeats: true) { [weak self, timeInterval] _ in
 
                 guard let self else { return }
-//                print("Time Interval inside timer: \(timeInterval)")
 
                 if timeInterval < .minuteInterval {
 
@@ -169,24 +166,16 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                 }
 
                 self.state = self.buildAllEventCells()
-//                print("Aqui!")
         }
     }
 
     private func buildAllEventCells() -> State {
-
-        for event in events {
-            if event.title == "Melbourne" {
-                print(event)
-            }
-        }
 
         eventCells = events.compactMap { event in
             switch event.status {
             case .live(let timeInterval, let sessionName):
 
                 updateLiveEventTimer(timeInterval: timeInterval, triggerInterval: 10)
-//                print("Update live")
 
                 return .live(
                     buildLiveViewModel(
