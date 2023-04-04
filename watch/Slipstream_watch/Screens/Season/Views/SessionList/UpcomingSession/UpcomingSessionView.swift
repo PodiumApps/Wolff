@@ -11,21 +11,33 @@ struct UpcomingSessionView<ViewModel: UpcomingSessionCellViewModelRepresentable>
 
     var body: some View {
 
-        Button(action: {
+//        Button(action: {
 
-        }) {
+//        }) {
             HStack {
                 VStack(alignment: .leading, spacing: .Spacing.default) {
 
                     Text(viewModel.sessionName)
                         .font(.Body.semibold)
-                    Text(DateFormatter.session.string(from: viewModel.date))
-                        .font(.Caption.regular)
+
+                    if viewModel.date.isSessionToday {
+                        Text("Today, \(DateFormatter.timeForSession.string(from: viewModel.date))")
+                            .font(.Caption.regular)
+                            .foregroundColor(.gray)
+                    } else if viewModel.date.isSessionTomorrow {
+                        Text("Tomorrow, \(DateFormatter.timeForSession.string(from: viewModel.date))")
+                            .font(.Caption.regular)
+                            .foregroundColor(.gray)
+                    } else {
+                        Text(DateFormatter.session.string(from: viewModel.date))
+                            .font(.Caption.regular)
+                            .foregroundColor(.gray)
+                    }
                 }
 
                 Spacer()
             }
-        }
+//        }
     }
 }
 

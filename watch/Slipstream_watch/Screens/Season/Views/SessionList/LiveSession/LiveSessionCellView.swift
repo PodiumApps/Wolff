@@ -32,7 +32,7 @@ struct LiveSessionCellView<ViewModel: LiveSessionCellViewModelRepresentable>: Vi
 
         VStack(alignment: .leading, spacing: .Spacing.default) {
 
-            HStack(spacing: .Spacing.default2) {
+            HStack(alignment: .bottom, spacing: .Spacing.default2) {
                 ForEach(0 ..< podium.count, id: \.self) { index in
                     HStack(spacing: .Spacing.default) {
                         HStack(spacing: .Spacing.none) {
@@ -40,11 +40,11 @@ struct LiveSessionCellView<ViewModel: LiveSessionCellViewModelRepresentable>: Vi
                             Text((index + 1).getPositionString)
                                 .offset(y: Constants.Podium.OrdinalComponent.yOffset)
                         }
-                        .font(.Caption.regular)
+                        .font(.Caption2.medium)
                         .lineLimit(Constants.Podium.DriverTicker.lineLimit)
                         .minimumScaleFactor(Constants.Podium.DriverTicker.minimumScalingFactor)
                         Text(podium[index])
-                            .font(.Caption.bold)
+                            .font(.Caption2.bold)
                             .lineLimit(Constants.Podium.DriverTicker.lineLimit)
                             .minimumScaleFactor(Constants.Podium.DriverTicker.minimumScalingFactor)
                     }

@@ -18,20 +18,32 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
                 case .results(let cells):
                     ScrollViewReader { proxy in
                         List(0 ..< cells.count, id: \.self) { index in
-                            NavigationLink(destination: EmptyView()) {
+                            Group {
                                 switch cells[index] {
-                                case .upcoming(let viewModel):
-                                    UpcomingEventCardView(viewModel: viewModel)
-                                        .id(index)
-                                        .padding(.vertical, 7)
-                                case .live(let viewModel):
-                                    LiveEventCardView(viewModel: viewModel)
-                                        .id(index)
-                                        .padding(.vertical, 7)
-                                case .finished(let viewModel):
-                                    FinishedEventCardView(viewModel: viewModel)
-                                        .id(index)
-                                        .padding(.vertical, 7)
+                                case .upcoming(let viewModel, let sessionListViewModel):
+                                    NavigationLink(destination: {
+                                        SessionListView(viewModel: sessionListViewModel)
+                                    }) {
+                                        UpcomingEventCardView(viewModel: viewModel)
+                                            .id(index)
+                                            .padding(.vertical, 7)
+                                    }
+                                case .live(let viewModel, let sessionListViewModel):
+                                    NavigationLink(destination: {
+                                        SessionListView(viewModel: sessionListViewModel)
+                                    }) {
+                                        LiveEventCardView(viewModel: viewModel)
+                                            .id(index)
+                                            .padding(.vertical, 7)
+                                    }
+                                case .finished(let viewModel, let sessionListViewModel):
+                                    NavigationLink(destination: {
+                                        SessionListView(viewModel: sessionListViewModel)
+                                    }) {
+                                        FinishedEventCardView(viewModel: viewModel)
+                                            .id(index)
+                                            .padding(.vertical, 7)
+                                    }
                                 }
                             }
                             .listRowBackground(

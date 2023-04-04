@@ -9,18 +9,60 @@ protocol SessionListViewModelRepresentable {
 final class SessionListViewModel: SessionListViewModelRepresentable {
 
     private let event: Event
+    private var constructors: [Constructor]
+    private var drivers: [Driver]
+
+    private let eventService: EventServiceRepresentable
+    private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
 
     @Published var state: State
     @Published private var sessionCells: [Cell]
 
-    init(event: Event) {
+    init(
+        event: Event,
+        eventService: EventServiceRepresentable,
+        driverAndConstructorService: DriverAndConstructorServiceRepresentable
+    ) {
 
         self.event = event
+        self.drivers = []
+        self.constructors = []
+
+        self.eventService = eventService
+        self.driverAndConstructorService = driverAndConstructorService
 
         self.state = .loading
         self.sessionCells = []
 
         self.state = buildSessionRows()
+
+        self.setUpServices()
+    }
+
+    private func setUpServices() {
+
+        eventService.statePublisher
+            .combineLatest(driverAndConstructorService.statePublisher)
+            .receive(on: DispatchQueue.main)
+            .compactMap { [weak self] eventService, driverAndConstructorService -> SessionListViewModel.State? in
+
+                guard let self else { return nil }
+
+                switch (eventService, driverAndConstructorService) {
+                case (.error(let error), _), (_, .error(let error)):
+                    return .error(error.localizedDescription)
+                case (_, .refreshed(let drivers, let constructors)):
+
+                    self.constructors = constructors
+                    self.drivers = drivers
+
+                    return self.buildSessionRows()
+
+                case (.refreshing, _), (_, .refreshing):
+                    return .loading
+                }
+            }
+            .assign(to: &$state)
     }
 
     private func buildSessionRows() -> State {
@@ -33,37 +75,25 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                 if session.winners.isEmpty && !liveEventCellBuilt {
                     liveEventCellBuilt = true
                     return .live(
-                        buildLiveSessionCellViewModel(sessionName: session.name, podium: [])
+                        buildLiveSessionCellViewModel(
+                            sessionName: session.name, podium: []
+                        )
                     )
-                } else {
-                    if session.winners.isEmpty {
-                        return .upcoming(
-                            buildUpcomingSessionCellViewModel(
-                                sessionName: session.name, date: session.date
-                            )
-                        )
-                    } else {
-                        return .finished(
-                            buildFinishedSessionCellViewModel(
-                                sessionName: session.name, winners: session.winners
-                            )
-                        )
-                    }
                 }
+            }
+
+            if session.winners.isEmpty {
+                return .upcoming(
+                    buildUpcomingSessionCellViewModel(
+                        sessionName: session.name, date: session.date
+                    )
+                )
             } else {
-                if session.winners.isEmpty {
-                    return .upcoming(
-                        buildUpcomingSessionCellViewModel(
-                            sessionName: session.name, date: session.date
-                        )
+                return .finished(
+                    buildFinishedSessionCellViewModel(
+                        sessionName: session.name, podium: session.winners
                     )
-                } else {
-                    return .finished(
-                        buildFinishedSessionCellViewModel(
-                            sessionName: session.name, winners: session.winners
-                        )
-                    )
-                }
+                )
             }
         }
 
@@ -82,16 +112,27 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
 
         return LiveSessionCellViewModel(
             sessionName: sessionName.label,
-            podium: ["VER", "HAM", "ALO"]
+            podium: getPodiumTickers(podium: podium)
         )
     }
 
-    private func buildFinishedSessionCellViewModel(sessionName: Session.Name, winners: [Driver.ID]) -> FinishedSessionCellViewModel {
+    private func buildFinishedSessionCellViewModel(sessionName: Session.Name, podium: [Driver.ID]) -> FinishedSessionCellViewModel {
 
         return FinishedSessionCellViewModel(
             session: sessionName.label,
-            winners: ["HAM", "ALO", "VER"]
+            winners: getPodiumTickers(podium: podium)
         )
+    }
+
+    private func getPodiumTickers(podium: [Driver.ID]) -> [String] {
+
+        let tickers: [String] = podium.lazy.enumerated().compactMap { index, driverID in
+
+            guard let driver = drivers.lazy.first(where: { $0.id == driverID }) else { return nil }
+            return driver.driverTicker
+        }
+
+        return tickers
     }
 }
 
@@ -150,5 +191,16 @@ extension SessionListViewModel {
     enum Action {
 
         case tap(Int)
+    }
+}
+
+extension SessionListViewModel {
+
+    static func make(event: Event) -> SessionListViewModel {
+        .init(
+            event: event,
+            eventService: ServiceLocator.shared.eventService,
+            driverAndConstructorService: ServiceLocator.shared.driverAndConstructorService
+        )
     }
 }
