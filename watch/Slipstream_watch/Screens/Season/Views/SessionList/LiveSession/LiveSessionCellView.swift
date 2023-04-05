@@ -22,10 +22,8 @@ struct LiveSessionCellView<ViewModel: LiveSessionCellViewModelRepresentable>: Vi
                         .foregroundColor(.red)
                 case .happeningNow(let podium):
                     createPodiumSection(podium: podium)
-                case .betweenOneMinuteAndFourHoursToGo:
-                    Text("Today, 10:00 AM")
-                        .font(.Caption.regular)
-                        .foregroundColor(.red)
+                case .betweenOneMinuteAndFourHoursToGo(let date):
+                    createDateSection(date: date)
                 }
 
 //                createPodiumSection(podium: viewModel.podium)
@@ -58,6 +56,13 @@ struct LiveSessionCellView<ViewModel: LiveSessionCellViewModelRepresentable>: Vi
                 }
             }
         }
+    }
+
+    private func createDateSection(date: Date) -> some View {
+
+        Text("Today, \(DateFormatter.timeForSession.string(from: date))")
+            .font(.Caption.regular)
+            .foregroundColor(.red)
     }
 }
 
