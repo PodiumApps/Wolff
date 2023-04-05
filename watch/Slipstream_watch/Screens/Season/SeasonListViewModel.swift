@@ -118,6 +118,8 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                 switch liveEventService {
                 case .refreshed(let positions):
 
+                    guard !positions.isEmpty else { return nil }
+
                     let podium: [String] = positions[0 ..< 3].compactMap { [weak self] position in
 
                         guard let self else { return nil }

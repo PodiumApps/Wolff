@@ -15,11 +15,18 @@ struct FinishedSessionCellView<ViewModel: FinishedSessionCellViewModelRepresenta
 
         }) {
             HStack {
-                VStack(alignment: .leading, spacing: .Spacing.default) {
+                VStack(alignment: .leading, spacing: 2) {
                     Text(viewModel.session)
                         .font(.Body.semibold)
 
-                    createPodiumSection(podium: viewModel.winners)
+                    HStack(alignment: .bottom, spacing: .Spacing.default) {
+                        Text("🏆")
+                            .font(.Caption2.medium)
+                            .offset(y:-1)
+                        Text(viewModel.winners.first!)
+                            .font(.Caption.regular)
+                    }
+                    .foregroundColor(.gray)
                 }
 
                 Spacer()
@@ -31,9 +38,9 @@ struct FinishedSessionCellView<ViewModel: FinishedSessionCellViewModelRepresenta
 
         VStack(alignment: .leading, spacing: .Spacing.default) {
 
-            HStack(alignment: .bottom, spacing: .Spacing.default4) {
+            HStack(alignment: .bottom, spacing: .Spacing.default2) {
                 ForEach(0 ..< podium.count, id: \.self) { index in
-                    HStack(spacing: .Spacing.default) {
+                    HStack(alignment: .bottom, spacing: .Spacing.default) {
                         HStack(spacing: .Spacing.none) {
                             Text("\(index + 1)")
                             Text((index + 1).getPositionString)
@@ -47,6 +54,8 @@ struct FinishedSessionCellView<ViewModel: FinishedSessionCellViewModelRepresenta
                             .lineLimit(Constants.Podium.DriverTicker.lineLimit)
                             .minimumScaleFactor(Constants.Podium.DriverTicker.minimumScalingFactor)
                     }
+
+                    Spacer()
                 }
             }
 //            .foregroundColor(.gray)

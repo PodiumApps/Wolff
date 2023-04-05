@@ -132,5 +132,146 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FAAFECF9-55D5-487C-8100-84D9C592229A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "watch/Slipstream_watch/Screens/Season/Views/SessionList/LiveSession/LiveSessionCellViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "init(sessionName:podium:state:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "FAAFECF9-55D5-487C-8100-84D9C592229A - 4aa52422689fff0f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Slipstream.LiveSessionCellViewModel.init(sessionName: Swift.String, podium: Swift.Array&lt;Swift.String&gt;, state: Slipstream.LiveEventCardViewModel.State) -&gt; Slipstream.LiveSessionCellViewModel"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Screens/Season/Views/SessionList/LiveSession/LiveSessionCellViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "236">
+               </Location>
+               <Location
+                  uuid = "FAAFECF9-55D5-487C-8100-84D9C592229A - c45a590bc98bb23b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Slipstream.LiveSessionCellViewModel.init(sessionName: Swift.String, podium: Swift.Array&lt;Swift.String&gt;, state: Slipstream.LiveSessionCellViewModel.State) -&gt; Slipstream.LiveSessionCellViewModel"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Screens/Season/Views/SessionList/LiveSession/LiveSessionCellViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "264">
+               </Location>
+               <Location
+                  uuid = "FAAFECF9-55D5-487C-8100-84D9C592229A - ce10d662d630f815"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Slipstream.LiveSessionCellViewModel.init(sessionName: Swift.String, podium: Swift.Optional&lt;Swift.Array&lt;Swift.String&gt;&gt;, state: Slipstream.LiveSessionCellViewModel.State) -&gt; Slipstream.LiveSessionCellViewModel"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Screens/Season/Views/SessionList/LiveSession/LiveSessionCellViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "276">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CEA3347F-A3F4-4D52-AFAC-783A38FBFC1E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "watch/Slipstream_watch/Screens/Season/Views/SessionList/SessionListViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "setUpLiveSessionState(podium:date:timeInterval:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "CEA3347F-A3F4-4D52-AFAC-783A38FBFC1E - 4cf8d0e55e2686d3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Slipstream.SessionListViewModel.setUpLiveSessionState(podium: Swift.Optional&lt;Swift.Array&lt;Slipstream.Identifier&lt;Slipstream.Driver&gt;&gt;&gt;, date: Foundation.Date, timeInterval: Swift.Double) -&gt; Slipstream.LiveSessionCellViewModel.State"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Screens/Season/Views/SessionList/SessionListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "152"
+                  endingLineNumber = "152"
+                  offsetFromSymbolStart = "152">
+               </Location>
+               <Location
+                  uuid = "CEA3347F-A3F4-4D52-AFAC-783A38FBFC1E - 4cf8d0e55e2686d3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Slipstream.SessionListViewModel.setUpLiveSessionState(podium: Swift.Optional&lt;Swift.Array&lt;Slipstream.Identifier&lt;Slipstream.Driver&gt;&gt;&gt;, date: Foundation.Date, timeInterval: Swift.Double) -&gt; Slipstream.LiveSessionCellViewModel.State"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Screens/Season/Views/SessionList/SessionListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "152"
+                  endingLineNumber = "152"
+                  offsetFromSymbolStart = "188">
+               </Location>
+               <Location
+                  uuid = "CEA3347F-A3F4-4D52-AFAC-783A38FBFC1E - 4cf8d0e55e2686b2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Slipstream.SessionListViewModel.setUpLiveSessionState(podium: Swift.Optional&lt;Swift.Array&lt;Slipstream.Identifier&lt;Slipstream.Driver&gt;&gt;&gt;, date: Foundation.Date, timeInterval: Swift.Double) -&gt; Slipstream.LiveSessionCellViewModel.State"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Screens/Season/Views/SessionList/SessionListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "152">
+               </Location>
+               <Location
+                  uuid = "CEA3347F-A3F4-4D52-AFAC-783A38FBFC1E - 4cf8d0e55e2686b2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Slipstream.SessionListViewModel.setUpLiveSessionState(podium: Swift.Optional&lt;Swift.Array&lt;Slipstream.Identifier&lt;Slipstream.Driver&gt;&gt;&gt;, date: Foundation.Date, timeInterval: Swift.Double) -&gt; Slipstream.LiveSessionCellViewModel.State"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Screens/Season/Views/SessionList/SessionListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "188">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

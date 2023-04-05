@@ -71,12 +71,14 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
 
         sessionCells = event.sessions.compactMap { session in
 
-            if case .live = event.status {
+            if case .live(let timeInterval, _) = event.status {
                 if session.winners.isEmpty && !liveEventCellBuilt {
                     liveEventCellBuilt = true
                     return .live(
                         buildLiveSessionCellViewModel(
-                            sessionName: session.name, podium: []
+                            sessionName: session.name,
+                            sessionDate: session.date,
+                            timeInterval: timeInterval
                         )
                     )
                 }
@@ -108,11 +110,16 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
         )
     }
 
-    private func buildLiveSessionCellViewModel(sessionName: Session.Name, podium: [Driver.ID]) -> LiveSessionCellViewModel {
+    private func buildLiveSessionCellViewModel(
+        sessionName: Session.Name,
+        podium: [Driver.ID]? = nil,
+        sessionDate: Date,
+        timeInterval: TimeInterval
+    ) -> LiveSessionCellViewModel {
 
         return LiveSessionCellViewModel(
             sessionName: sessionName.label,
-            podium: getPodiumTickers(podium: podium)
+            state: setUpLiveSessionState(podium: podium, date: sessionDate, timeInterval: timeInterval)
         )
     }
 
@@ -129,10 +136,32 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
         let tickers: [String] = podium.lazy.enumerated().compactMap { index, driverID in
 
             guard let driver = drivers.lazy.first(where: { $0.id == driverID }) else { return nil }
-            return driver.driverTicker
+            return driver.fullName
         }
 
         return tickers
+    }
+
+    private func setUpLiveSessionState(
+        podium: [Driver.ID]?,
+        date: Date,
+        timeInterval: TimeInterval
+    ) -> LiveSessionCellViewModel.State {
+
+        guard let podium, timeInterval <= 0 else {
+
+            if timeInterval < .minuteInterval { return .aboutToStart }
+
+            let timeToStart = timeInterval.hoursAndMinutes
+
+            return
+                .betweenOneMinuteAndFourHoursToGo(
+                    date: date
+                )
+        }
+
+        let driverTickers = getPodiumTickers(podium: podium)
+        return .happeningNow(podium: driverTickers)
     }
 }
 

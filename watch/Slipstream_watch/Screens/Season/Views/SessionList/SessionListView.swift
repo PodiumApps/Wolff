@@ -18,16 +18,33 @@ struct SessionListView<ViewModel: SessionListViewModelRepresentable>: View {
                     ProgressView()
                 case .results(let cells):
                     List(0 ..< cells.count, id: \.self) { index in
-                        NavigationLink(destination: EmptyView()) {
+                        Group {
                             switch cells[index] {
                             case .live(let viewModel):
-                                LiveSessionCellView(viewModel: viewModel)
+                                NavigationLink(destination: {
+
+                                }) {
+                                    LiveSessionCellView(viewModel: viewModel)
+                                }
                             case .upcoming(let viewModel):
-                                UpcomingSessionView(viewModel: viewModel)
+                                NavigationLink(destination: {
+
+                                }) {
+                                    UpcomingSessionView(viewModel: viewModel)
+                                }
                             case .finished(let viewModel):
-                                FinishedSessionCellView(viewModel: viewModel)
+                                NavigationLink(destination: {
+
+                                }) {
+                                    FinishedSessionCellView(viewModel: viewModel)
+                                }
                             }
                         }
+                        .listRowBackground(
+                            cells[index].id == .live
+                            ? Color.red.opacity(0.40).clipped().cornerRadius(7)
+                            : nil
+                        )
                     }
                 }
             }
@@ -36,9 +53,3 @@ struct SessionListView<ViewModel: SessionListViewModelRepresentable>: View {
         }
     }
 }
-
-//struct SessionListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SessionListView(viewModel: <#_#>)
-//    }
-//}

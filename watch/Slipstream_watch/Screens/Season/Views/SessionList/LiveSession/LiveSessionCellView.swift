@@ -10,21 +10,28 @@ struct LiveSessionCellView<ViewModel: LiveSessionCellViewModelRepresentable>: Vi
     }
 
     var body: some View {
-        Button(action: {
+        HStack {
+            VStack(alignment: .leading, spacing: .Spacing.default) {
+                Text(viewModel.sessionName)
+                    .font(.Body.semibold)
 
-        }) {
-            HStack {
-                VStack(alignment: .leading, spacing: .Spacing.default) {
-                    Text(viewModel.sessionName)
-                        .font(.Body.semibold)
-                    Text(Localization.LiveCardCell.Title.now)
-                        .font(.Caption2.regular)
-
-                    createPodiumSection(podium: viewModel.podium)
+                switch viewModel.state {
+                case .aboutToStart:
+                    Text(Localization.LiveCardCell.aboutToStart.uppercased())
+                        .font(.Caption.regular)
+                        .foregroundColor(.red)
+                case .happeningNow(let podium):
+                    createPodiumSection(podium: podium)
+                case .betweenOneMinuteAndFourHoursToGo:
+                    Text("Today, 10:00 AM")
+                        .font(.Caption.regular)
+                        .foregroundColor(.red)
                 }
 
-                Spacer()
+//                createPodiumSection(podium: viewModel.podium)
             }
+
+            Spacer()
         }
     }
 
@@ -76,7 +83,7 @@ struct LiveSessionCellView_Previews: PreviewProvider {
         LiveSessionCellView(
             viewModel: LiveSessionCellViewModel(
                 sessionName: "Practice 3",
-                podium: ["ALO", "HAM", "VER"]
+                podium: ["ALO", "HAM", "VER"], state: .aboutToStart
             )
         )
     }
