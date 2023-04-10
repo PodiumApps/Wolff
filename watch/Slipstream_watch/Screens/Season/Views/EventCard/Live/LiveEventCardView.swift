@@ -11,9 +11,9 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
     }
 
     var body: some View {
-
-        Button(action: {
-
+        
+        NavigationLink(destination: {
+            Text("Hello!")
         }) {
             HStack {
                 VStack(alignment: .leading, spacing: .Spacing.default2) {
@@ -54,6 +54,9 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
                 Spacer()
             }
         }
+        .listRowBackground(
+            Color.red.opacity(0.35).clipped().cornerRadius(17)
+        )
     }
 
     private func createAboutToStartSection() -> some View {
