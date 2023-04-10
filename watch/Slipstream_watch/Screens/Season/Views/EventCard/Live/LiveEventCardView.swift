@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
+    
+    @State private var animateOpacity = false
 
     private let viewModel: ViewModel
 

@@ -3,6 +3,8 @@ import SwiftUI
 struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
 
     @ObservedObject private var viewModel: ViewModel
+    
+    @State private var animateOpacity = false
 
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
@@ -35,6 +37,13 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
                                         LiveEventCardView(viewModel: viewModel)
                                             .id(index)
                                             .padding(.vertical, 7)
+                                            .onAppear {
+                                                if case .betweenOneMinuteAndFourHoursToGo = viewModel.state {
+                                                    withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true)) {
+                                                        animateOpacity.toggle()
+                                                    }
+                                                }
+                                            }
                                     }
                                 case .finished(let viewModel, let sessionListViewModel):
                                     NavigationLink(destination: {
@@ -48,7 +57,7 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
                             }
                             .listRowBackground(
                                 cells[index].id == .live
-                                ? Color.red.opacity(0.40).clipped().cornerRadius(15)
+                                ? Color.red.opacity(animateOpacity ? 0.25 : 0.40).clipped().cornerRadius(15)
                                 : Color.Event.completedOrUpcomingEvent.opacity(0.4).clipped().cornerRadius(15)
                             )
                         }
