@@ -15,16 +15,15 @@ struct FinishedSessionCellView<ViewModel: FinishedSessionCellViewModelRepresenta
 
         }) {
             HStack {
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: Constants.Cell.verticalSpacing) {
                     Text(viewModel.session)
                         .font(.Body.semibold)
 
                     HStack(alignment: .bottom, spacing: .Spacing.default) {
-                        Text("🏆")
-                            .font(.Caption2.medium)
-                            .offset(y:-1)
-                        Text(viewModel.winners.first!)
+                        Text("Winner:")
                             .font(.Caption.regular)
+                        Text(viewModel.winners.first!)
+                            .font(.Caption.semibold)
                     }
                     .foregroundColor(.gray)
                 }
@@ -58,12 +57,16 @@ struct FinishedSessionCellView<ViewModel: FinishedSessionCellViewModelRepresenta
                     Spacer()
                 }
             }
-//            .foregroundColor(.gray)
         }
     }
 }
 
 fileprivate enum Constants {
+
+    enum Cell {
+
+        static let verticalSpacing: CGFloat = 2
+    }
 
     enum Podium {
 

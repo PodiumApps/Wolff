@@ -25,8 +25,6 @@ struct LiveSessionCellView<ViewModel: LiveSessionCellViewModelRepresentable>: Vi
                 case .betweenOneMinuteAndFourHoursToGo(let date):
                     createDateSection(date: date)
                 }
-
-//                createPodiumSection(podium: viewModel.podium)
             }
 
             Spacer()

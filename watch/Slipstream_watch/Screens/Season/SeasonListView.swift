@@ -24,15 +24,15 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
                             case .upcoming(let viewModel):
                                 UpcomingEventCardView(viewModel: viewModel)
                                     .id(index)
-                                    .padding(.vertical, 7)
+                                    .padding(.vertical, Constants.Card.verticalPadding)
                             case .live(let viewModel):
                                 LiveEventCardView(viewModel: viewModel)
                                     .id(index)
-                                    .padding(.vertical, 7)
+                                    .padding(.vertical, Constants.Card.verticalPadding)
                             case .finished(let viewModel):
                                 FinishedEventCardView(viewModel: viewModel)
                                     .id(index)
-                                    .padding(.vertical, 7)
+                                    .padding(.vertical, Constants.Card.verticalPadding)
                             }
                         }
                         .listStyle(.carousel)
@@ -48,5 +48,13 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
             }
             .navigationTitle("Season")
         }
+    }
+}
+
+fileprivate enum Constants {
+
+    enum Card {
+
+        static let verticalPadding: CGFloat = 7
     }
 }
