@@ -7,6 +7,7 @@ protocol FinishedEventCardViewModelRepresentable {
     var country: String { get }
     var round: Int { get }
     var podium: [String] { get }
+    var sessionListViewModel: SessionListViewModel { get }
 }
 
 final class FinishedEventCardViewModel: FinishedEventCardViewModelRepresentable {
@@ -16,13 +17,15 @@ final class FinishedEventCardViewModel: FinishedEventCardViewModelRepresentable 
     var country: String
     var round: Int
     var podium: [String]
+    var sessionListViewModel: SessionListViewModel
 
     init(
         id: Event.ID,
         title: String,
         country: String,
         round: Int,
-        podium: [String]
+        podium: [String],
+        sessionListViewModel: SessionListViewModel
     ) {
         
         self.id = id
@@ -30,5 +33,6 @@ final class FinishedEventCardViewModel: FinishedEventCardViewModelRepresentable 
         self.country = country
         self.round = round
         self.podium = podium
+        self.sessionListViewModel = sessionListViewModel
     }
 }

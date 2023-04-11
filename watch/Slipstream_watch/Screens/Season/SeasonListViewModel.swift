@@ -133,9 +133,9 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                             event: self.events[index],
                             timeInterval: timeInterval,
                             sessionName: sessionName,
-                            podium: podium
-                        ),
-                        sessionListViewModel
+                            podium: podium,
+                            sessionListViewModel: sessionListViewModel
+                        )
                     )
 
                     return .results(cells)
@@ -146,9 +146,9 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                         self.buildLiveViewModel(
                             event: self.events[index],
                             timeInterval: timeInterval,
-                            sessionName: sessionName
-                        ),
-                        sessionListViewModel
+                            sessionName: sessionName,
+                            sessionListViewModel: sessionListViewModel
+                        )
                     )
 
                     return .results(cells)
@@ -190,9 +190,9 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                     buildLiveViewModel(
                         event: event,
                         timeInterval: timeInterval,
-                        sessionName: sessionName
-                    ),
-                    sessionListViewModel
+                        sessionName: sessionName,
+                        sessionListViewModel: sessionListViewModel
+                    )
                 )
             case .upcoming(let start, let end, let sessionName, let timeInterval):
 
@@ -206,9 +206,9 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                         start: start,
                         end: end,
                         sessionName: sessionName,
-                        timeInterval: timeInterval
-                    ),
-                    sessionListViewModel
+                        timeInterval: timeInterval,
+                        sessionListViewModel: sessionListViewModel
+                    )
                 )
             case .finished(let driversOnPodium):
 
@@ -221,9 +221,9 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                 return .finished(
                     buildFinishedCardViewModel(
                         event: event,
-                        podium: tickers
-                    ),
-                    sessionListViewModel
+                        podium: tickers,
+                        sessionListViewModel: sessionListViewModel
+                    )
                 )
             }
         }
@@ -245,7 +245,8 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         event: Event,
         timeInterval: TimeInterval,
         sessionName: String,
-        podium: [String]? = nil
+        podium: [String]? = nil,
+        sessionListViewModel: SessionListViewModel
     ) -> LiveEventCardViewModel {
 
         return LiveEventCardViewModel(
@@ -256,7 +257,8 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
             timeInterval: timeInterval,
             sessionName: sessionName,
             podium: podium,
-            state: setUpLiveEventState(podium: podium, timeInterval: timeInterval)
+            state: setUpLiveEventState(podium: podium, timeInterval: timeInterval),
+            sessionListViewModel: sessionListViewModel
         )
     }
 
@@ -265,7 +267,8 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         start: String,
         end: String,
         sessionName: String,
-        timeInterval: TimeInterval?
+        timeInterval: TimeInterval?,
+        sessionListViewModel: SessionListViewModel
     ) -> UpcomingEventCardViewModel {
 
         return UpcomingEventCardViewModel(
@@ -276,13 +279,15 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
             start: start,
             end: end,
             sessionName: sessionName,
-            timeInterval: timeInterval
+            timeInterval: timeInterval,
+            sessionListViewModel: sessionListViewModel
         )
     }
 
     private func buildFinishedCardViewModel(
         event: Event,
-        podium: [String]
+        podium: [String],
+        sessionListViewModel: SessionListViewModel
     ) -> FinishedEventCardViewModel {
 
         return FinishedEventCardViewModel(
@@ -290,7 +295,8 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
             title: event.title,
             country: event.country,
             round: event.round,
-            podium: podium
+            podium: podium,
+            sessionListViewModel: sessionListViewModel
         )
     }
 
@@ -317,16 +323,16 @@ extension SeasonListViewModel {
 
     enum Cell: Hashable, Identifiable {
         
-        case live(LiveEventCardViewModel, SessionListViewModel)
-        case upcoming(UpcomingEventCardViewModel, SessionListViewModel)
-        case finished(FinishedEventCardViewModel, SessionListViewModel)
+        case live(LiveEventCardViewModel)
+        case upcoming(UpcomingEventCardViewModel)
+        case finished(FinishedEventCardViewModel)
 
         var id: Identifier {
 
             switch self {
             case .live: return .live
-            case .upcoming(let viewModel, _): return .upcoming(viewModel.id.string)
-            case .finished(let viewModel, _): return .finished(viewModel.id.string)
+            case .upcoming(let viewModel): return .upcoming(viewModel.id.string)
+            case .finished(let viewModel): return .finished(viewModel.id.string)
             }
         }
 

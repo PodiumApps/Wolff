@@ -19,9 +19,11 @@ extension Color {
 
     enum Event {
 
+        static let watchCompletedOrUpcomingEvent = Color.init("watchCompletedOrUpcomingEvent")
         static let completedOrUpcomingEvent: Color = .gray // UIColor.systemGray3
         static let liveSession: Color = Color.accentColor
         static let current: Color = .gray // UIColor.systemGray
+
     }
 
     enum SessionDriverRow {

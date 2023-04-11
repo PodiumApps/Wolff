@@ -10,6 +10,7 @@ protocol LiveEventCardViewModelRepresentable {
     var sessionName: String { get }
     var podium: [String]? { get }
     var state: LiveEventCardViewModel.State { get }
+    var sessionListViewModel: SessionListViewModel{ get }
 }
 
 final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
@@ -22,6 +23,7 @@ final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
     var sessionName: String
     var podium: [String]?
     var state: State
+    var sessionListViewModel: SessionListViewModel
 
     init(
         id: Event.ID,
@@ -31,7 +33,8 @@ final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
         timeInterval: TimeInterval,
         sessionName: String,
         podium: [String]? = nil,
-        state: State
+        state: State,
+        sessionListViewModel: SessionListViewModel
     ) {
 
         self.id = id
@@ -42,6 +45,7 @@ final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
         self.sessionName = sessionName
         self.podium = podium
         self.state = state
+        self.sessionListViewModel = sessionListViewModel
     }
 }
 

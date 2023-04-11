@@ -2,7 +2,7 @@ import SwiftUI
 
 struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
     
-    @State private var animateOpacity = false
+    @State private var backgroundOpacity = Constants.Background.opacityStartValue
 
     private let viewModel: ViewModel
 
@@ -13,7 +13,7 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
     var body: some View {
         
         NavigationLink(destination: {
-            Text("Hello!")
+            SessionListView(viewModel: viewModel.sessionListViewModel)
         }) {
             HStack {
                 VStack(alignment: .leading, spacing: .Spacing.default2) {
@@ -53,9 +53,20 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
 
                 Spacer()
             }
+            .padding(.horizontal, Constants.Card.horizontalPadding)
         }
         .listRowBackground(
-            Color.red.opacity(0.35).clipped().cornerRadius(17)
+            RoundedRectangle(cornerRadius: Constants.Background.cornerRadius)
+                .fill(Color.red)
+                .opacity(backgroundOpacity)
+                .animation(
+                    .easeInOut(duration: Constants.Background.opacityAnimationDuration)
+                    .repeatForever(autoreverses: true),
+                    value: backgroundOpacity
+                )
+                .onAppear {
+                    backgroundOpacity = Constants.Background.opacityFinalValue
+                }
         )
     }
 
@@ -142,6 +153,19 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
 
 fileprivate enum Constants {
 
+    enum Card {
+
+        static let horizontalPadding: CGFloat = 3
+    }
+
+    enum Background {
+
+        static let cornerRadius: CGFloat = 17
+        static let opacityAnimationDuration: CGFloat = 1.2
+        static let opacityStartValue: Double = 0.35
+        static let opacityFinalValue: Double = 0.25
+    }
+
     enum Title {
 
         static let lineLimit: Int = 1
@@ -162,22 +186,5 @@ fileprivate enum Constants {
     enum Round {
 
         static let opacity: CGFloat = 0.9
-    }
-}
-
-struct LiveEventCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        LiveEventCardView(
-            viewModel: LiveEventCardViewModel(
-                id: .init("event"),
-                title: "Spa-Francorchamps",
-                country: "Belgium",
-                round: 18,
-                timeInterval: .init(150),
-                sessionName: "Qualifying",
-                state: .aboutToStart
-                //podium: ["VER", "LEC", "ALO"]
-            )
-        )
     }
 }

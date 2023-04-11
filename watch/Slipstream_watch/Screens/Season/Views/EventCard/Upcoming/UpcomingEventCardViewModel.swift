@@ -11,6 +11,7 @@ protocol UpcomingEventCardViewModelRepresentable {
     var sessionName: String { get }
     var timeInterval: TimeInterval? { get }
     var state: UpcomingEventCardViewModel.State { get }
+    var sessionListViewModel: SessionListViewModel { get }
 }
 
 final class UpcomingEventCardViewModel: UpcomingEventCardViewModelRepresentable {
@@ -24,7 +25,7 @@ final class UpcomingEventCardViewModel: UpcomingEventCardViewModelRepresentable 
     var sessionName: String
     var timeInterval: TimeInterval?
     var state: State { setUpUpcomingEventsState() }
-    
+    var sessionListViewModel: SessionListViewModel
 
     init(
         id: Event.ID,
@@ -34,7 +35,8 @@ final class UpcomingEventCardViewModel: UpcomingEventCardViewModelRepresentable 
         start: String,
         end: String,
         sessionName: String,
-        timeInterval: TimeInterval? = nil
+        timeInterval: TimeInterval? = nil,
+        sessionListViewModel: SessionListViewModel
     ) {
 
         self.id = id
@@ -45,6 +47,7 @@ final class UpcomingEventCardViewModel: UpcomingEventCardViewModelRepresentable 
         self.end = end
         self.sessionName = sessionName
         self.timeInterval = timeInterval
+        self.sessionListViewModel = sessionListViewModel
     }
 }
 

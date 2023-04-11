@@ -10,9 +10,9 @@ struct FinishedEventCardView<ViewModel: FinishedEventCardViewModelRepresentable>
     }
 
     var body: some View {
-        
-        Button(action: {
 
+        NavigationLink(destination: {
+            SessionListView(viewModel: viewModel.sessionListViewModel)
         }) {
             HStack {
                 VStack(alignment: .leading, spacing: .Spacing.default2) {
@@ -42,6 +42,10 @@ struct FinishedEventCardView<ViewModel: FinishedEventCardViewModelRepresentable>
             }
             .padding(.horizontal, Constants.Padding.horizontal)
         }
+        .listRowBackground(
+            RoundedRectangle(cornerRadius: Constants.Background.cornerRadius)
+                .fill(Color.Event.watchCompletedOrUpcomingEvent)
+        )
     }
 
     private func createPodiumSection(podium: [String]) -> some View {
@@ -75,6 +79,11 @@ struct FinishedEventCardView<ViewModel: FinishedEventCardViewModelRepresentable>
 
 fileprivate enum Constants {
 
+    enum Background {
+
+        static let cornerRadius: CGFloat = 17
+    }
+
     enum Title {
 
         static let lineLimit: Int = 1
@@ -94,7 +103,7 @@ fileprivate enum Constants {
 
     enum Padding {
 
-        static let horizontal: CGFloat = 3
+        static let horizontal: CGFloat = 2
     }
 
     enum Finished {
@@ -114,19 +123,5 @@ fileprivate enum Constants {
 
             static let yOffset: CGFloat = -1
         }
-    }
-}
-
-struct FinishedEventCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        FinishedEventCardView(
-            viewModel: FinishedEventCardViewModel(
-                id: .init("event"),
-                title: "Monza",
-                country: "Italy",
-                round: 8,
-                podium: ["ALO", "LEC", "VER"]
-            )
-        )
     }
 }

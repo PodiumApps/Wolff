@@ -11,8 +11,8 @@ struct UpcomingEventCardView<ViewModel: UpcomingEventCardViewModelRepresentable>
 
     var body: some View {
 
-        Button(action: {
-
+        NavigationLink(destination: {
+            SessionListView(viewModel: viewModel.sessionListViewModel)
         }) {
             HStack {
                 VStack(alignment: .leading, spacing: .Spacing.default2) {
@@ -52,8 +52,11 @@ struct UpcomingEventCardView<ViewModel: UpcomingEventCardViewModelRepresentable>
                 Spacer()
             }
             .padding(.horizontal, Constants.Padding.horizontal)
-            
         }
+        .listRowBackground(
+            RoundedRectangle(cornerRadius: Constants.Background.cornerRadius)
+                .fill(Color.Event.watchCompletedOrUpcomingEvent)
+        )
     }
 
     private func createLessThanFortyEightHoursLeftSection(
@@ -103,6 +106,11 @@ struct UpcomingEventCardView<ViewModel: UpcomingEventCardViewModelRepresentable>
 
 fileprivate enum Constants {
 
+    enum Background {
+
+        static let cornerRadius: CGFloat = 17
+    }
+
     enum Title {
 
         static let lineLimit: Int = 1
@@ -111,7 +119,7 @@ fileprivate enum Constants {
 
     enum Padding {
 
-        static let horizontal: CGFloat = 3
+        static let horizontal: CGFloat = 2
     }
 
     enum Country {
@@ -123,23 +131,5 @@ fileprivate enum Constants {
     enum Round {
 
         static let opacity: CGFloat = 0.9
-    }
-}
-
-struct UpcomingEventCardView_Previews: PreviewProvider {
-    static var previews: some View {
-
-        UpcomingEventCardView(
-            viewModel: UpcomingEventCardViewModel(
-                id: .init("event"),
-                title: "Silverstone",
-                country: "Great Britain",
-                round: 11,
-                start: "30 May",
-                end: "2 Jun",
-                sessionName: "Practice 3",
-                timeInterval: 20000
-            )
-        )
     }
 }

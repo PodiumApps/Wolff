@@ -20,44 +20,20 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
                 case .results(let cells):
                     ScrollViewReader { proxy in
                         List(0 ..< cells.count, id: \.self) { index in
-//                            Group {
-                                switch cells[index] {
-                                case .upcoming(let viewModel, let sessionListViewModel):
-                                    NavigationLink(destination: {
-                                        SessionListView(viewModel: sessionListViewModel)
-                                    }) {
-                                        UpcomingEventCardView(viewModel: viewModel)
-                                            .id(index)
-                                            .padding(.vertical, 7)
-                                    }
-                                case .live(let viewModel, let sessionListViewModel):
-                                    LiveEventCardView(viewModel: viewModel)
-                                        .id(index)
-                                        .padding(.vertical, 7)
-//                                    NavigationLink(destination: {
-//                                        SessionListView(viewModel: sessionListViewModel)
-//                                    }) {
-//                                        LiveEventCardView(viewModel: viewModel)
-//                                            .id(index)
-//                                            .padding(.vertical, 7)
-//                                    }
-//                                    .listRowBackground(Color.red)
-                                case .finished(let viewModel, let sessionListViewModel):
-                                    NavigationLink(destination: {
-                                        SessionListView(viewModel: sessionListViewModel)
-                                    }) {
-                                        FinishedEventCardView(viewModel: viewModel)
-                                            .id(index)
-                                            .padding(.vertical, 7)
-                                    }
-                                }
-//                            }
-//                            .listRowBackground(Color.clear)
-//                            .listRowBackground(
-//                                cells[index].id == .live
-//                                ? Color.red.opacity(animateOpacity ? 0.25 : 0.40).clipped().cornerRadius(15)
-//                                : Color.Event.completedOrUpcomingEvent.opacity(0.4).clipped().cornerRadius(15)
-//                            )
+                            switch cells[index] {
+                            case .upcoming(let viewModel):
+                                UpcomingEventCardView(viewModel: viewModel)
+                                    .id(index)
+                                    .padding(.vertical, 7)
+                            case .live(let viewModel):
+                                LiveEventCardView(viewModel: viewModel)
+                                    .id(index)
+                                    .padding(.vertical, 7)
+                            case .finished(let viewModel):
+                                FinishedEventCardView(viewModel: viewModel)
+                                    .id(index)
+                                    .padding(.vertical, 7)
+                            }
                         }
                         .listStyle(.carousel)
                         .onAppear {
@@ -74,9 +50,3 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
         }
     }
 }
-
-//struct SeasonListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SeasonListView()
-//    }
-//}
