@@ -216,7 +216,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
         let tickers: [String] = podium.lazy.enumerated().compactMap { index, driverID in
 
             guard let driver = drivers.lazy.first(where: { $0.id == driverID }) else { return nil }
-            return driver.fullName
+            return driver.driverTicker
         }
 
         return tickers
@@ -231,8 +231,6 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
         guard let podium, timeInterval <= 0 else {
 
             if timeInterval < .minuteInterval { return .aboutToStart }
-
-            let timeToStart = timeInterval.hoursAndMinutes
 
             return
                 .betweenOneMinuteAndFourHoursToGo(

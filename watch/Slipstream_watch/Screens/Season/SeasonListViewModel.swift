@@ -118,7 +118,11 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                 switch liveEventService {
                 case .refreshed(let positions):
 
-                    guard !positions.isEmpty else { return nil }
+                    guard !positions.isEmpty else {
+
+                        self.eventService.action.send(.updateAll)
+                        return nil
+                    }
 
                     let podium: [String] = positions[0 ..< 3].compactMap { [weak self] position in
 
@@ -169,9 +173,10 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                 if timeInterval < .minuteInterval {
 
                     self.liveEventService.action.send(.updatePositions)
-                }
+                } else {
 
-                self.state = self.buildAllEventCells()
+                    self.state = self.buildAllEventCells()
+                }
         }
     }
 

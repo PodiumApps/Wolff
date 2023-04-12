@@ -11,8 +11,8 @@ struct FinishedSessionCellView<ViewModel: FinishedSessionCellViewModelRepresenta
 
     var body: some View {
 
-        Button(action: {
-
+        NavigationLink(destination: {
+            Text("Session Details")
         }) {
             HStack {
                 VStack(alignment: .leading, spacing: Constants.Cell.verticalSpacing) {
@@ -20,7 +20,7 @@ struct FinishedSessionCellView<ViewModel: FinishedSessionCellViewModelRepresenta
                         .font(.Body.semibold)
 
                     HStack(alignment: .bottom, spacing: .Spacing.default) {
-                        Text("Winner:")
+                        Text(Localization.FinishedSessionCell.winner)
                             .font(.Caption.regular)
                         Text(viewModel.winners.first!)
                             .font(.Caption.semibold)
@@ -31,6 +31,10 @@ struct FinishedSessionCellView<ViewModel: FinishedSessionCellViewModelRepresenta
                 Spacer()
             }
         }
+        .listRowBackground(
+            RoundedRectangle(cornerRadius: Constants.Background.cornerRadius)
+                .fill(Color.Event.watchCompletedOrUpcomingEvent)
+        )
     }
 
     private func createPodiumSection(podium: [String]) -> some View {
@@ -62,6 +66,11 @@ struct FinishedSessionCellView<ViewModel: FinishedSessionCellViewModelRepresenta
 }
 
 fileprivate enum Constants {
+
+    enum Background {
+
+        static let cornerRadius: CGFloat = 10
+    }
 
     enum Cell {
 

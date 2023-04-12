@@ -3,11 +3,28 @@ import SwiftUI
 struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
     
     @State private var backgroundOpacity = Constants.Background.opacityStartValue
+    @State private var timer: Timer? = nil
 
     private let viewModel: ViewModel
 
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
+    }
+
+    private func startAnimation() {
+
+        self.timer?.invalidate()
+
+        timer = Timer.scheduledTimer(withTimeInterval: 1.1, repeats: false) { _ in
+
+            if self.backgroundOpacity == 0.35 {
+                self.backgroundOpacity = 0.25
+            } else {
+                self.backgroundOpacity = 0.35
+            }
+
+            startAnimation()
+        }
     }
 
     var body: some View {
@@ -33,8 +50,8 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
                             Spacer()
 
                             Text(Localization.LiveCardCell.Top.round(viewModel.round))
-                                .font(.Caption2.medium)
-                                .foregroundColor(.primary.opacity(Constants.Round.opacity))
+                                .font(.Caption2.semibold)
+                                .foregroundColor(.red)
                         }
                     }
 
@@ -60,14 +77,13 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
                 .fill(Color.red)
                 .opacity(backgroundOpacity)
                 .animation(
-                    .easeInOut(duration: Constants.Background.opacityAnimationDuration)
-                    .repeatForever(autoreverses: true),
+                    .easeInOut(duration: Constants.Background.opacityAnimationDuration),
                     value: backgroundOpacity
                 )
-                .onAppear {
-                    backgroundOpacity = Constants.Background.opacityFinalValue
-                }
         )
+        .onAppear {
+            self.startAnimation()
+        }
     }
 
     private func createAboutToStartSection() -> some View {
@@ -76,7 +92,7 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
             Text(viewModel.sessionName)
                 .font(.Caption.bold)
             Text(Localization.LiveCardCell.aboutToStart.uppercased())
-                .font(.Caption.regular)
+                .font(.Caption.semibold)
                 .foregroundColor(.red)
         }
     }
@@ -93,7 +109,7 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
                         Text(hours.description)
                             .font(.Caption.bold)
                         Text(hours != 1 ? Localization.LiveCardCell.Time.hours : Localization.LiveCardCell.Time.hours)
-                            .font(.Caption2.semibold)
+                            .font(.Caption2.bold)
                             .foregroundColor(.red)
                     }
                 }
@@ -106,7 +122,7 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
                             ? Localization.LiveCardCell.Time.minutes
                             : Localization.LiveCardCell.Time.minute
                         )
-                        .font(.Caption2.semibold)
+                        .font(.Caption2.bold)
                             .foregroundColor(.red)
                     }
                 }
@@ -114,7 +130,7 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
 
             HStack(alignment: .bottom) {
                 Text(Localization.LiveCardCell.to)
-                    .font(.Caption2.semibold)
+                    .font(.Caption2.bold)
                     .foregroundColor(.red)
                 Text(viewModel.sessionName)
                     .font(.Caption.bold)
@@ -127,23 +143,25 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
         VStack(alignment: .leading, spacing: .Spacing.default) {
             VStack(alignment: .leading) {
                 Text(Localization.LiveCardCell.Title.now)
-                    .font(.Caption2.semibold)
+                    .font(.Caption.semibold)
                     .foregroundColor(.red)
                 Text(viewModel.sessionName)
                     .font(.Caption.bold)
             }
 
-            HStack(spacing: .Spacing.default2) {
+            HStack(alignment: .bottom, spacing: .Spacing.default2) {
                 ForEach(0 ..< podium.count, id: \.self) { index in
-                    HStack(spacing: .Spacing.default) {
+                    HStack(alignment: .bottom, spacing: .Spacing.default) {
                         HStack(spacing: .Spacing.none) {
-                            Text("\(index + 1)")
-                            Text((index + 1).getPositionString)
-                                .offset(y: Constants.OrdinalComponent.yOffset)
+                            Text("\(index + 1).")
+                                .opacity(0.70)
                         }
-                        .font(.Caption2.regular)
+                        .font(.Caption.medium)
+                        .lineLimit(Constants.Podium.DriverTicker.lineLimit)
+
                         Text(podium[index])
-                            .font(.Caption2.bold)
+                            .font(.Caption.semibold)
+                            .lineLimit(Constants.Podium.DriverTicker.lineLimit)
                     }
                 }
             }
@@ -175,12 +193,21 @@ fileprivate enum Constants {
     enum Country {
 
         static let lineLimit: Int = 1
-        static let minimumScalingFactor: CGFloat = 0.1
+        static let minimumScalingFactor: CGFloat = 0.85
     }
 
-    enum OrdinalComponent {
+    enum Podium {
 
-        static let yOffset: CGFloat = -1
+        enum DriverTicker {
+
+            static let lineLimit: Int = 1
+            static let minimumScalingFactor: CGFloat = 0.85
+        }
+
+        enum OrdinalComponent {
+
+            static let yOffset: CGFloat = -1
+        }
     }
 
     enum Round {

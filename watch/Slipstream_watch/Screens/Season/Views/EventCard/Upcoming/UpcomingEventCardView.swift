@@ -32,15 +32,16 @@ struct UpcomingEventCardView<ViewModel: UpcomingEventCardViewModelRepresentable>
                             Spacer()
 
                             Text(Localization.LiveCardCell.Top.round(viewModel.round))
-                                .font(.Caption2.medium)
-                                .foregroundColor(.primary.opacity(Constants.Round.opacity))
+                                .lineLimit(Constants.Round.lineLimit)
+                                .font(.Caption2.semibold)
                         }
+                        .foregroundColor(.gray)
                     }
 
                     switch viewModel.state {
                     case .moreThanFortyEightHours(let date):
                         Text(date)
-                            .font(.Caption.medium)
+                            .font(.Caption.semibold)
                     case .lessThanFortyEightHours(let hours, let minutes):
                         createLessThanFortyEightHoursLeftSection(
                             hours: hours,
@@ -74,7 +75,7 @@ struct UpcomingEventCardView<ViewModel: UpcomingEventCardViewModelRepresentable>
                              ? Localization.LiveCardCell.Time.hours
                              : Localization.LiveCardCell.Time.hour
                         )
-                            .font(.Caption2.semibold)
+                            .font(.Caption2.bold)
                             .foregroundColor(.gray)
                     }
                 }
@@ -87,7 +88,7 @@ struct UpcomingEventCardView<ViewModel: UpcomingEventCardViewModelRepresentable>
                              ? Localization.LiveCardCell.Time.minutes
                              : Localization.LiveCardCell.Time.minute
                         )
-                            .font(.Caption2.semibold)
+                            .font(.Caption2.bold)
                             .foregroundColor(.gray)
                     }
                 }
@@ -95,7 +96,7 @@ struct UpcomingEventCardView<ViewModel: UpcomingEventCardViewModelRepresentable>
 
             HStack(alignment: .bottom) {
                 Text(Localization.LiveCardCell.to)
-                    .font(.Caption2.semibold)
+                    .font(.Caption2.bold)
                     .foregroundColor(.gray)
                 Text(viewModel.sessionName)
                     .font(.Caption.bold)
@@ -131,5 +132,6 @@ fileprivate enum Constants {
     enum Round {
 
         static let opacity: CGFloat = 0.9
+        static let lineLimit: Int = 1
     }
 }

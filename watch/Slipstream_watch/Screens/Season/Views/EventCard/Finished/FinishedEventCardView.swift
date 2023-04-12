@@ -32,9 +32,10 @@ struct FinishedEventCardView<ViewModel: FinishedEventCardViewModelRepresentable>
                             Spacer()
 
                             Text(Localization.LiveCardCell.Top.round(viewModel.round))
-                                .font(.Caption2.medium)
-                                .foregroundColor(.primary.opacity(Constants.Round.opacity))
+                                .lineLimit(Constants.Round.lineLimit)
+                                .font(.Caption2.semibold)
                         }
+                        .foregroundColor(.gray)
                     }
 
                     createPodiumSection(podium: viewModel.podium)
@@ -52,22 +53,21 @@ struct FinishedEventCardView<ViewModel: FinishedEventCardViewModelRepresentable>
 
         VStack(alignment: .leading, spacing: .Spacing.default) {
             Text(Localization.FinishedCardCell.finished)
-                .font(.Caption2.semibold)
-                .foregroundColor(.primary.opacity(Constants.Finished.opacity))
+                .font(.Caption.bold)
 
-            HStack(spacing: .Spacing.default2) {
+            HStack(alignment: .bottom, spacing: .Spacing.default2) {
                 ForEach(0 ..< podium.count, id: \.self) { index in
-                    HStack(spacing: .Spacing.default) {
+                    HStack(alignment: .bottom, spacing: .Spacing.default) {
                         HStack(spacing: .Spacing.none) {
-                            Text("\(index + 1)")
-                            Text((index + 1).getPositionString)
-                                .offset(y: Constants.Podium.OrdinalComponent.yOffset)
+                            Text("\(index + 1).")
                         }
-                        .font(.Caption.regular)
+                        .font(.Caption.medium)
                         .lineLimit(Constants.Podium.DriverTicker.lineLimit)
                         .minimumScaleFactor(Constants.Podium.DriverTicker.minimumScalingFactor)
+                        .foregroundColor(.gray)
+
                         Text(podium[index])
-                            .font(.Caption.bold)
+                            .font(.Caption.semibold)
                             .lineLimit(Constants.Podium.DriverTicker.lineLimit)
                             .minimumScaleFactor(Constants.Podium.DriverTicker.minimumScalingFactor)
                     }
@@ -93,12 +93,13 @@ fileprivate enum Constants {
     enum Country {
 
         static let lineLimit: Int = 1
-        static let minimumScalingFactor: CGFloat = 0.1
+        static let minimumScalingFactor: CGFloat = 0.85
     }
 
     enum Round {
 
         static let opacity: CGFloat = 0.9
+        static let lineLimit: Int = 1
     }
 
     enum Padding {
@@ -116,7 +117,7 @@ fileprivate enum Constants {
         enum DriverTicker {
 
             static let lineLimit: Int = 1
-            static let minimumScalingFactor: CGFloat = 0.1
+            static let minimumScalingFactor: CGFloat = 0
         }
 
         enum OrdinalComponent {

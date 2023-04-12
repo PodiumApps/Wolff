@@ -14,6 +14,10 @@ internal enum Localization {
     /// FINISHED
     internal static let finished = Localization.tr("Localizable", "finished_card_cell.finished", fallback: "FINISHED")
   }
+  internal enum FinishedSessionCell {
+    /// Winner:
+    internal static let winner = Localization.tr("Localizable", "finished_session_cell.winner", fallback: "Winner:")
+  }
   internal enum GrandPrixCard {
     internal enum Label {
       /// in %@
@@ -72,6 +76,16 @@ internal enum Localization {
       internal static let cta = Localization.tr("Localizable", "session_driver_list.error.cta", fallback: "Refresh")
       /// Something went wrong
       internal static let text = Localization.tr("Localizable", "session_driver_list.error.text", fallback: "Something went wrong")
+    }
+  }
+  internal enum SessionTime {
+    /// Today at %@
+    internal static func today(_ p1: Any) -> String {
+      return Localization.tr("Localizable", "session_time.today", String(describing: p1), fallback: "Today at %@")
+    }
+    /// Tomorrow at %@
+    internal static func tomorrow(_ p1: Any) -> String {
+      return Localization.tr("Localizable", "session_time.tomorrow", String(describing: p1), fallback: "Tomorrow at %@")
     }
   }
   internal enum UpcomingAndStandingsCell {

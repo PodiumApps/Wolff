@@ -21,23 +21,11 @@ struct SessionListView<ViewModel: SessionListViewModelRepresentable>: View {
                         Group {
                             switch cells[index] {
                             case .live(let viewModel):
-                                NavigationLink(destination: {
-
-                                }) {
-                                    LiveSessionCellView(viewModel: viewModel)
-                                }
+                                LiveSessionCellView(viewModel: viewModel)
                             case .upcoming(let viewModel):
-                                NavigationLink(destination: {
-
-                                }) {
-                                    UpcomingSessionView(viewModel: viewModel)
-                                }
+                                UpcomingSessionView(viewModel: viewModel)
                             case .finished(let viewModel):
-                                NavigationLink(destination: {
-
-                                }) {
-                                    FinishedSessionCellView(viewModel: viewModel)
-                                }
+                                FinishedSessionCellView(viewModel: viewModel)
                             }
                         }
                         .listRowBackground(

@@ -31,3 +31,10 @@
 "upcoming_and_standings_cell.segment.upcoming" = "Upcoming";
 "upcoming_and_standings_cell.segment.past" = "Past";
 "upcoming_and_standings_cell.standings.title" = "Current Standings";
+
+// MARK: - FinishedSessionCell
+"finished_session_cell.winner" = "Winner:";
+
+// MARK: - SessionTime
+"session_time.today" = "Today at %@";
+"session_time.tomorrow" = "Tomorrow at %@";

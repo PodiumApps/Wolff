@@ -11,9 +11,9 @@ struct UpcomingSessionView<ViewModel: UpcomingSessionCellViewModelRepresentable>
 
     var body: some View {
 
-//        Button(action: {
-
-//        }) {
+        NavigationLink(destination: {
+            Text("Session Details")
+        }) {
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
 
@@ -21,11 +21,13 @@ struct UpcomingSessionView<ViewModel: UpcomingSessionCellViewModelRepresentable>
                         .font(.Body.semibold)
 
                     if viewModel.date.isSessionToday {
-                        Text("Today, \(DateFormatter.timeForSession.string(from: viewModel.date))")
+                        Text(Localization.SessionTime.today(DateFormatter.timeForSession.string(from: viewModel.date)))
                             .font(.Caption.regular)
                             .foregroundColor(.gray)
                     } else if viewModel.date.isSessionTomorrow {
-                        Text("Tomorrow, \(DateFormatter.timeForSession.string(from: viewModel.date))")
+                        Text(Localization.SessionTime.tomorrow(
+                            DateFormatter.timeForSession.string(from: viewModel.date)
+                        ))
                             .font(.Caption.regular)
                             .foregroundColor(.gray)
                     } else {
@@ -37,7 +39,19 @@ struct UpcomingSessionView<ViewModel: UpcomingSessionCellViewModelRepresentable>
 
                 Spacer()
             }
-//        }
+        }
+        .listRowBackground(
+            RoundedRectangle(cornerRadius: Constants.Background.cornerRadius)
+                .fill(Color.Event.watchCompletedOrUpcomingEvent)
+        )
+    }
+}
+
+fileprivate enum Constants {
+
+    enum Background {
+
+        static let cornerRadius: CGFloat = 10
     }
 }
 

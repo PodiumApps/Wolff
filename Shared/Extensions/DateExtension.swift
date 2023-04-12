@@ -46,7 +46,7 @@ extension DateFormatter {
         var timeZone = TimeZone.current
 
         var dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM d, hh:mm a"
+        dateFormatter.dateFormat = "MMMM d 'at' hh:mm a"
         dateFormatter.timeZone = timeZone
         
         return dateFormatter
