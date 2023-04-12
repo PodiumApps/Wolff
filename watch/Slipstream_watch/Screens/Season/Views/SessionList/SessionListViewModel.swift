@@ -207,7 +207,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
 
         return FinishedSessionCellViewModel(
             session: sessionName.label,
-            winners: getPodiumTickers(podium: podium)
+            winners: getPodiumFullName(podium: podium)
         )
     }
 
@@ -217,6 +217,17 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
 
             guard let driver = drivers.lazy.first(where: { $0.id == driverID }) else { return nil }
             return driver.driverTicker
+        }
+
+        return tickers
+    }
+
+    private func getPodiumFullName(podium: [Driver.ID]) -> [String] {
+
+        let tickers: [String] = podium.lazy.enumerated().compactMap { index, driverID in
+
+            guard let driver = drivers.lazy.first(where: { $0.id == driverID }) else { return nil }
+            return driver.fullName
         }
 
         return tickers
