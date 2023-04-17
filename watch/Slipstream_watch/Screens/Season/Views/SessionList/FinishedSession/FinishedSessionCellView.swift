@@ -44,7 +44,7 @@ struct FinishedSessionCellView<ViewModel: FinishedSessionCellViewModelRepresenta
             HStack(alignment: .bottom, spacing: .Spacing.default2) {
                 ForEach(0 ..< podium.count, id: \.self) { index in
                     HStack(alignment: .bottom, spacing: .Spacing.default) {
-                        HStack(spacing: .Spacing.none) {
+                        HStack(spacing: .zero) {
                             Text("\(index + 1)")
                             Text((index + 1).getPositionString)
                                 .offset(y: Constants.Podium.OrdinalComponent.yOffset)

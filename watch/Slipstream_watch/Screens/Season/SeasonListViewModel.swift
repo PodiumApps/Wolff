@@ -124,20 +124,14 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                         return nil
                     }
 
-                    let podium: [String] = positions[0 ..< 3].compactMap { [weak self] position in
-
-                        guard let self else { return nil }
-
-                        guard let driver = self.drivers.first(where: { $0.id == position.id }) else { return nil }
-                        return driver.driverTicker
-                    }
+                    let podium: [Driver.ID] = positions.map { $0.id }
 
                     cells[index] = .live(
                         self.buildLiveViewModel(
                             event: self.events[index],
                             timeInterval: timeInterval,
                             sessionName: sessionName,
-                            podium: podium,
+                            podium: Driver.getPodiumDriverTickers(podium: podium, drivers: drivers),
                             sessionListViewModel: sessionListViewModel
                         )
                     )
@@ -173,6 +167,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                 if timeInterval < .minuteInterval {
 
                     self.liveEventService.action.send(.updatePositions)
+                    liveEventTimer?.invalidate()
                 } else {
 
                     self.state = self.buildAllEventCells()
@@ -201,7 +196,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                 )
             case .upcoming(let start, let end, let sessionName, let timeInterval):
 
-                if let timeInterval, timeInterval > (4 * .hourInterval) {
+                if let timeInterval, timeInterval > .liveInSeconds {
                     updateLiveEventTimer(timeInterval: timeInterval, triggerInterval: .minuteInterval)
                 }
 
@@ -254,7 +249,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         sessionListViewModel: SessionListViewModel
     ) -> LiveEventCardViewModel {
 
-        return LiveEventCardViewModel(
+        LiveEventCardViewModel(
             id: event.id,
             title: event.title,
             country: event.country,
@@ -276,7 +271,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         sessionListViewModel: SessionListViewModel
     ) -> UpcomingEventCardViewModel {
 
-        return UpcomingEventCardViewModel(
+        UpcomingEventCardViewModel(
             id: event.id,
             title: event.title,
             country: event.country,
@@ -295,7 +290,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         sessionListViewModel: SessionListViewModel
     ) -> FinishedEventCardViewModel {
 
-        return FinishedEventCardViewModel(
+        FinishedEventCardViewModel(
             id: event.id,
             title: event.title,
             country: event.country,

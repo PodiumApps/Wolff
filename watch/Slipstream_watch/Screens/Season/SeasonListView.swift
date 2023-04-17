@@ -3,8 +3,6 @@ import SwiftUI
 struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
 
     @ObservedObject private var viewModel: ViewModel
-    
-    @State private var animateOpacity = false
 
     init(viewModel: ViewModel) {
         self.viewModel = viewModel

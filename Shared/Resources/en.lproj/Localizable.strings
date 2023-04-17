@@ -38,3 +38,9 @@
 // MARK: - SessionTime
 "session_time.today" = "Today at %@";
 "session_time.tomorrow" = "Tomorrow at %@";
+
+// MARK: - Podium
+"podium.ordinal_component" = "%@.";
+
+// MARK: - Session
+"session.screen_title" = "Sessions";

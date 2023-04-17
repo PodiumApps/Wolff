@@ -75,7 +75,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
 
                 guard
                     let self,
-                    case .results(var cells) = self.state,
+                    case .results(let cells) = self.state,
                     let index = cells.firstIndex(where: { $0.id == .live }),
                     case .live(let timeInterval, _) = event.status
                 else {
@@ -97,8 +97,8 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                     sessionCells[index] = .live(
                         buildLiveSessionCellViewModel(
                             sessionName: event.sessions[index].name,
-                            podium: podium,
                             sessionDate: event.sessions[index].date,
+                            podium: podium,
                             timeInterval: timeInterval
                         )
                     )
@@ -111,6 +111,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                         buildLiveSessionCellViewModel(
                             sessionName: event.sessions[index].name,
                             sessionDate: event.sessions[index].date,
+                            podium: [],
                             timeInterval: timeInterval
                         )
                     )
@@ -155,25 +156,16 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                         buildLiveSessionCellViewModel(
                             sessionName: session.name,
                             sessionDate: session.date,
+                            podium: [],
                             timeInterval: timeInterval
                         )
                     )
                 }
             }
 
-            if session.winners.isEmpty {
-                return .upcoming(
-                    buildUpcomingSessionCellViewModel(
-                        sessionName: session.name, date: session.date
-                    )
-                )
-            } else {
-                return .finished(
-                    buildFinishedSessionCellViewModel(
-                        sessionName: session.name, podium: session.winners
-                    )
-                )
-            }
+            return session.winners.isEmpty
+                ? .upcoming(buildUpcomingSessionCellViewModel(sessionName: session.name, date: session.date))
+                : .finished(buildFinishedSessionCellViewModel(sessionName: session.name, podium: session.winners))
         }
 
         return .results(sessionCells)
@@ -192,13 +184,14 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
 
     private func buildLiveSessionCellViewModel(
         sessionName: Session.Name,
-        podium: [Driver.ID]? = nil,
         sessionDate: Date,
+        podium: [Driver.ID],
         timeInterval: TimeInterval
     ) -> LiveSessionCellViewModel {
 
         return LiveSessionCellViewModel(
             sessionName: sessionName.label,
+            podium: Driver.getPodiumDriverTickers(podium: podium, drivers: drivers),
             state: setUpLiveSessionState(podium: podium, date: sessionDate, timeInterval: timeInterval)
         )
     }
@@ -207,30 +200,8 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
 
         return FinishedSessionCellViewModel(
             session: sessionName.label,
-            winners: getPodiumFullName(podium: podium)
+            winners: Driver.getPodiumDriverFullName(podium: podium, drivers: drivers)
         )
-    }
-
-    private func getPodiumTickers(podium: [Driver.ID]) -> [String] {
-
-        let tickers: [String] = podium.lazy.enumerated().compactMap { index, driverID in
-
-            guard let driver = drivers.lazy.first(where: { $0.id == driverID }) else { return nil }
-            return driver.driverTicker
-        }
-
-        return tickers
-    }
-
-    private func getPodiumFullName(podium: [Driver.ID]) -> [String] {
-
-        let tickers: [String] = podium.lazy.enumerated().compactMap { index, driverID in
-
-            guard let driver = drivers.lazy.first(where: { $0.id == driverID }) else { return nil }
-            return driver.fullName
-        }
-
-        return tickers
     }
 
     private func setUpLiveSessionState(
@@ -241,15 +212,12 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
 
         guard let podium, timeInterval <= 0 else {
 
-            if timeInterval < .minuteInterval { return .aboutToStart }
-
-            return
-                .betweenOneMinuteAndFourHoursToGo(
-                    date: date
-                )
+            return timeInterval < .minuteInterval
+                ? .aboutToStart
+                : .betweenOneMinuteAndFourHoursToGo(date: date)
         }
 
-        let driverTickers = getPodiumTickers(podium: podium)
+        let driverTickers = Driver.getPodiumDriverTickers(podium: podium, drivers: drivers)
         return .happeningNow(podium: driverTickers)
     }
 }
@@ -304,11 +272,6 @@ extension SessionListViewModel {
         static func == (lhs: SessionListViewModel.Cell, rhs: SessionListViewModel.Cell) -> Bool {
             lhs.id == rhs.id
         }
-    }
-
-    enum Action {
-
-        case tap(Int)
     }
 }
 

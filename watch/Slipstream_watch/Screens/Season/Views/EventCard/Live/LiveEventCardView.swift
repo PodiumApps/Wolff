@@ -15,13 +15,14 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
 
         self.timer?.invalidate()
 
-        timer = Timer.scheduledTimer(withTimeInterval: 1.1, repeats: false) { _ in
+        timer = Timer.scheduledTimer(
+            withTimeInterval: Constants.Background.opacityAnimationDuration,
+            repeats: false
+        ) { _ in
 
-            if self.backgroundOpacity == 0.35 {
-                self.backgroundOpacity = 0.25
-            } else {
-                self.backgroundOpacity = 0.35
-            }
+            self.backgroundOpacity = self.backgroundOpacity == Constants.Background.opacityStartValue
+                ? Constants.Background.opacityFinalValue
+                : Constants.Background.opacityStartValue
 
             startAnimation()
         }
@@ -152,9 +153,9 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
             HStack(alignment: .bottom, spacing: .Spacing.default2) {
                 ForEach(0 ..< podium.count, id: \.self) { index in
                     HStack(alignment: .bottom, spacing: .Spacing.default) {
-                        HStack(spacing: .Spacing.none) {
-                            Text("\(index + 1).")
-                                .opacity(0.70)
+                        HStack(spacing: .zero) {
+                            Text(Localization.Podium.ordinalComponent(index + 1))
+                                .opacity(Constants.Podium.OrdinalComponent.opacity)
                         }
                         .font(.Caption.medium)
                         .lineLimit(Constants.Podium.DriverTicker.lineLimit)
@@ -179,7 +180,7 @@ fileprivate enum Constants {
     enum Background {
 
         static let cornerRadius: CGFloat = 17
-        static let opacityAnimationDuration: CGFloat = 1.2
+        static let opacityAnimationDuration: CGFloat = 1.1
         static let opacityStartValue: Double = 0.35
         static let opacityFinalValue: Double = 0.25
     }
@@ -206,6 +207,7 @@ fileprivate enum Constants {
 
         enum OrdinalComponent {
 
+            static let opacity: CGFloat = 0.70
             static let yOffset: CGFloat = -1
         }
     }

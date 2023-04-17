@@ -30,14 +30,26 @@ struct SessionListView<ViewModel: SessionListViewModelRepresentable>: View {
                         }
                         .listRowBackground(
                             cells[index].id == .live
-                            ? Color.red.opacity(0.40).clipped().cornerRadius(7)
-                            : nil
+                                ? Color.red
+                                    .opacity(Constants.RowBackground.opacity)
+                                    .clipped()
+                                    .cornerRadius(Constants.RowBackground.cornerRadius)
+                                : nil
                         )
                     }
                 }
             }
-            .navigationTitle("Sessions")
+            .navigationTitle(Localization.Session.screenTitle)
             .navigationBarTitleDisplayMode(.inline)
         }
+    }
+}
+
+fileprivate enum Constants {
+
+    enum RowBackground {
+
+        static let opacity: CGFloat = 0.40
+        static let cornerRadius: CGFloat = 7
     }
 }

@@ -212,8 +212,6 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
             .store(in: &subscriptions)
         
         return viewModel
-        
-        
     }
     
     private func buildUpcomingAndStandingsViewModel(

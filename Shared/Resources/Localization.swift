@@ -64,11 +64,21 @@ internal enum Localization {
       }
     }
   }
+  internal enum Podium {
+    /// %@.
+    internal static func ordinalComponent(_ p1: Any) -> String {
+      return Localization.tr("Localizable", "podium.ordinal_component", String(describing: p1), fallback: "%@.")
+    }
+  }
   internal enum SeasonListView {
     internal enum Navigation {
       /// Season 2023
       internal static let title = Localization.tr("Localizable", "season_list_view.navigation.title", fallback: "Season 2023")
     }
+  }
+  internal enum Session {
+    /// Sessions
+    internal static let screenTitle = Localization.tr("Localizable", "session.screen_title", fallback: "Sessions")
   }
   internal enum SessionDriverList {
     internal enum Error {

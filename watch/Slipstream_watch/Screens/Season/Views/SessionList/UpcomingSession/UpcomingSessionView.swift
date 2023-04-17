@@ -15,7 +15,7 @@ struct UpcomingSessionView<ViewModel: UpcomingSessionCellViewModelRepresentable>
             Text("Session Details")
         }) {
             HStack {
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: .Spacing.default0) {
 
                     Text(viewModel.sessionName)
                         .font(.Body.semibold)

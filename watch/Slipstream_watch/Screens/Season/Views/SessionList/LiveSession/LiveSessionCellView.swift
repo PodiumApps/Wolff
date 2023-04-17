@@ -76,7 +76,7 @@ struct LiveSessionCellView<ViewModel: LiveSessionCellViewModelRepresentable>: Vi
             HStack(alignment: .bottom, spacing: .Spacing.default2) {
                 ForEach(0 ..< podium.count, id: \.self) { index in
                     HStack(alignment: .bottom, spacing: .Spacing.default) {
-                        HStack(spacing: .Spacing.none) {
+                        HStack(spacing: .zero) {
                             Text("\(index + 1).")
                                 .opacity(0.70)
                         }
