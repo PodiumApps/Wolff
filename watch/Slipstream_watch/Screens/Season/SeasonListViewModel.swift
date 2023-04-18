@@ -145,6 +145,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                             event: self.events[index],
                             timeInterval: timeInterval,
                             sessionName: sessionName,
+                            podium: [],
                             sessionListViewModel: sessionListViewModel
                         )
                     )
@@ -170,7 +171,27 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                     liveEventTimer?.invalidate()
                 } else {
 
-                    self.state = self.buildAllEventCells()
+                    guard
+                        case .results(var cells) = self.state,
+                        let index = cells.firstIndex(where: { $0.id == .live }),
+                        case .live(let timeInterval, let sessionName) = events[index].status
+                    else {
+                        return
+                    }
+
+                    let sessionListViewModel = SessionListViewModel.make(event: events[index])
+
+                    cells[index] = .live(
+                        buildLiveViewModel(
+                            event: events[index],
+                            timeInterval: timeInterval,
+                            sessionName: sessionName,
+                            podium: [],
+                            sessionListViewModel: sessionListViewModel
+                        )
+                    )
+
+                    state = .results(cells)
                 }
         }
     }
@@ -191,6 +212,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                         event: event,
                         timeInterval: timeInterval,
                         sessionName: sessionName,
+                        podium: [],
                         sessionListViewModel: sessionListViewModel
                     )
                 )
@@ -245,7 +267,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         event: Event,
         timeInterval: TimeInterval,
         sessionName: String,
-        podium: [String]? = nil,
+        podium: [String],
         sessionListViewModel: SessionListViewModel
     ) -> LiveEventCardViewModel {
 

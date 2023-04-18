@@ -21,10 +21,10 @@ struct LiveSessionCellView<ViewModel: LiveSessionCellViewModelRepresentable>: Vi
             repeats: false
         ) { _ in
 
-            if self.backgroundOpacity == 0.35 {
-                self.backgroundOpacity = 0.25
+            if self.backgroundOpacity == Constants.Background.opacityStartValue {
+                self.backgroundOpacity = Constants.Background.opacityFinalValue
             } else {
-                self.backgroundOpacity = 0.35
+                self.backgroundOpacity = Constants.Background.opacityStartValue
             }
 
             startAnimation()
@@ -77,8 +77,8 @@ struct LiveSessionCellView<ViewModel: LiveSessionCellViewModelRepresentable>: Vi
                 ForEach(0 ..< podium.count, id: \.self) { index in
                     HStack(alignment: .bottom, spacing: .Spacing.default) {
                         HStack(spacing: .zero) {
-                            Text("\(index + 1).")
-                                .opacity(0.70)
+                            Text(Localization.Podium.ordinalComponent(index + 1))
+                                .opacity(Constants.Podium.OrdinalComponent.opacity)
                         }
                         .font(.Caption.medium)
                         .lineLimit(Constants.Podium.DriverTicker.lineLimit)
@@ -121,6 +121,7 @@ fileprivate enum Constants {
         enum OrdinalComponent {
 
             static let yOffset: CGFloat = -1
+            static let opacity: CGFloat = 0.70
         }
     }
 }

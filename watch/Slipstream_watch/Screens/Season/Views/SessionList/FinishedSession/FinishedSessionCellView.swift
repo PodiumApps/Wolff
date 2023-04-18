@@ -22,8 +22,10 @@ struct FinishedSessionCellView<ViewModel: FinishedSessionCellViewModelRepresenta
                     HStack(alignment: .bottom, spacing: .Spacing.default) {
                         Text(Localization.FinishedSessionCell.winner)
                             .font(.Caption.regular)
-                        Text(viewModel.winners.first!)
-                            .font(.Caption.semibold)
+                        if let winner = viewModel.winners.first {
+                            Text(winner)
+                                .font(.Caption.semibold)
+                        }
                     }
                     .foregroundColor(.gray)
                 }
