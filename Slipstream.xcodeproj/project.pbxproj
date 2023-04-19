@@ -96,6 +96,8 @@
 		42BCAD5D29BB7B000089B46A /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5B29BB7B000089B46A /* EventService.swift */; };
 		42BCAD6229BBD7F10089B46A /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD6129BBD7F10089B46A /* Identifier.swift */; };
 		42BCAD6329BBD7F10089B46A /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD6129BBD7F10089B46A /* Identifier.swift */; };
+		42D5288D29E59AC900142AC2 /* SessionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D5288C29E59AC900142AC2 /* SessionDetail.swift */; };
+		42D5288E29E59AC900142AC2 /* SessionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D5288C29E59AC900142AC2 /* SessionDetail.swift */; };
 		CF054422294CECCD00A39FE3 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF054421294CECCD00A39FE3 /* Driver.swift */; };
 		CF054428294F7D4E00A39FE3 /* Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF054427294F7D4E00A39FE3 /* Constructor.swift */; };
 		CF05443A29507C1000A39FE3 /* Circuit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF05443929507C1000A39FE3 /* Circuit.swift */; };
@@ -225,6 +227,7 @@
 		42BCAD5829BB742B0089B46A /* UserDefaultsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsWrapper.swift; sourceTree = "<group>"; };
 		42BCAD5B29BB7B000089B46A /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		42BCAD6129BBD7F10089B46A /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
+		42D5288C29E59AC900142AC2 /* SessionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetail.swift; sourceTree = "<group>"; };
 		CF054421294CECCD00A39FE3 /* Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
 		CF054427294F7D4E00A39FE3 /* Constructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constructor.swift; sourceTree = "<group>"; };
 		CF05443929507C1000A39FE3 /* Circuit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circuit.swift; sourceTree = "<group>"; };
@@ -539,6 +542,7 @@
 			children = (
 				42B2196D295D9EFB00515097 /* SessionResult.swift */,
 				42B2196F295DA4D400515097 /* Session.swift */,
+				42D5288C29E59AC900142AC2 /* SessionDetail.swift */,
 			);
 			path = Session;
 			sourceTree = "<group>";
@@ -1038,6 +1042,8 @@
 				CFCD656229DAD9080079BE9F /* LiveSessionCellViewModel.swift in Sources */,
 				42BCAD5529BB4B360089B46A /* EventMock.swift in Sources */,
 				42B2196E295D9EFB00515097 /* SessionResult.swift in Sources */,
+				CF20D361297577D80038A860 /* ConstructorStyler.swift in Sources */,
+				42D5288D29E59AC900142AC2 /* SessionDetail.swift in Sources */,
 				CFCD655B29DA4BCC0079BE9F /* UpcomingSessionView.swift in Sources */,
 				42B2198F295EEAA500515097 /* SessionMock.swift in Sources */,
 				42BCAD5929BB742B0089B46A /* UserDefaultsWrapper.swift in Sources */,
@@ -1144,6 +1150,7 @@
 				4207B43E29C1E47F00AA4758 /* UpcomingAndStandingsEventCellViewModel.swift in Sources */,
 				42521D0B29B799C700000586 /* LiveSessionDriverDetailsSheetViewModel.swift in Sources */,
 				42521CB329B1006000000586 /* ServiceLocator.swift in Sources */,
+				42D5288E29E59AC900142AC2 /* SessionDetail.swift in Sources */,
 				4245E81229B7E0EE00843B02 /* SeasonListViewModel.swift in Sources */,
 				42521CB029B0FCD700000586 /* AppView.swift in Sources */,
 				42521D0D29B799EC00000586 /* SessionStandingsListView.swift in Sources */,
