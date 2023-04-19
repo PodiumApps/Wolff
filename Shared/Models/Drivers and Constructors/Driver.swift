@@ -31,4 +31,26 @@ extension Driver {
 
         return Resource(url: url, method: .get(accessToken: Date().tokenString))
     }
+
+    static func getPodiumDriverTickers(podium: [Driver.ID], drivers: [Driver]) -> [String] {
+
+        let tickers: [String] = podium.lazy.enumerated().compactMap { index, driverID in
+
+            guard let driver = drivers.lazy.first(where: { $0.id == driverID }) else { return nil }
+            return driver.driverTicker
+        }
+
+        return tickers
+    }
+
+    static func getPodiumDriverFullName(podium: [Driver.ID], drivers: [Driver]) -> [String] {
+
+        let tickers: [String] = podium.lazy.enumerated().compactMap { index, driverID in
+
+            guard let driver = drivers.lazy.first(where: { $0.id == driverID }) else { return nil }
+            return driver.fullName
+        }
+
+        return tickers
+    }
 }

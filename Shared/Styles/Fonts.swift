@@ -43,7 +43,16 @@ extension Font {
         static let regular: Font = .system(size: 12)
         static let heavy: Font = .system(size: 12, weight: .heavy)
         static let bold: Font = .system(size: 12, weight: .bold)
+        static let medium: Font = .system(size: 12, weight: .medium)
         static let semibold: Font = .system(size: 12, weight: .semibold)
+    }
+
+    enum Caption2 {
+        static let regular: Font = .system(size: 10)
+        static let heavy: Font = .system(size: 10, weight: .heavy)
+        static let bold: Font = .system(size: 10, weight: .bold)
+        static let medium: Font = .system(size: 10, weight: .medium)
+        static let semibold: Font = .system(size: 10, weight: .semibold)
     }
     
     enum Superscript {
