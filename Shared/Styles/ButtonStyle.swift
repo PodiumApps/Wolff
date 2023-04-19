@@ -14,15 +14,24 @@ struct ButtonRowStyle: ButtonStyle {
     }
     
     func makeBody(configuration: Self.Configuration) -> some View {
-        
-      configuration.label
-        .background(
-            configuration.isPressed
-                ? Color.SessionDriverRow.rowBackground.opacity(0.25)
-                //: isSelected ? selectedColor.opacity(0.2) : Color(UIColor.systemBackground)
-                : isSelected ? selectedColor.opacity(0.2) : Color.gray
+        #if os(iOS)
+            configuration.label
+                .background(
+                    configuration.isPressed
+                        ? Color.SessionDriverRow.rowBackground.opacity(0.25)
+                        : isSelected ? selectedColor.opacity(0.2) : Color(UIColor.systemBackground)
 
-        )
-        .cornerRadius(cornerRadius)
+                )
+                .cornerRadius(cornerRadius)
+        #elseif os(watchOS)
+            configuration.label
+                .background(
+                    configuration.isPressed
+                        ? Color.SessionDriverRow.rowBackground.opacity(0.25)
+                        : isSelected ? selectedColor.opacity(0.2) : Color.gray
+
+                )
+                .cornerRadius(cornerRadius)
+        #endif
     }
-  }
+}
