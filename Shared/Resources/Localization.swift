@@ -10,6 +10,14 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum Localization {
+  internal enum FinishedCardCell {
+    /// FINISHED
+    internal static let finished = Localization.tr("Localizable", "finished_card_cell.finished", fallback: "FINISHED")
+  }
+  internal enum FinishedSessionCell {
+    /// Winner:
+    internal static let winner = Localization.tr("Localizable", "finished_session_cell.winner", fallback: "Winner:")
+  }
   internal enum GrandPrixCard {
     internal enum Label {
       /// in %@
@@ -27,11 +35,17 @@ internal enum Localization {
   internal enum LiveCardCell {
     /// About to Start
     internal static let aboutToStart = Localization.tr("Localizable", "live_card_cell.about_to_start", fallback: "About to Start")
+    /// TO
+    internal static let to = Localization.tr("Localizable", "live_card_cell.to", fallback: "TO")
     internal enum Time {
+      /// HOUR
+      internal static let hour = Localization.tr("Localizable", "live_card_cell.time.hour", fallback: "HOUR")
       /// HOURS
       internal static let hours = Localization.tr("Localizable", "live_card_cell.time.hours", fallback: "HOURS")
       /// left
       internal static let `left` = Localization.tr("Localizable", "live_card_cell.time.left", fallback: "left")
+      /// MINUTE
+      internal static let minute = Localization.tr("Localizable", "live_card_cell.time.minute", fallback: "MINUTE")
       /// MINUTES
       internal static let minutes = Localization.tr("Localizable", "live_card_cell.time.minutes", fallback: "MINUTES")
       /// SECONDS
@@ -50,11 +64,21 @@ internal enum Localization {
       }
     }
   }
+  internal enum Podium {
+    /// %@.
+    internal static func ordinalComponent(_ p1: Any) -> String {
+      return Localization.tr("Localizable", "podium.ordinal_component", String(describing: p1), fallback: "%@.")
+    }
+  }
   internal enum SeasonListView {
     internal enum Navigation {
       /// Season 2023
       internal static let title = Localization.tr("Localizable", "season_list_view.navigation.title", fallback: "Season 2023")
     }
+  }
+  internal enum Session {
+    /// Sessions
+    internal static let screenTitle = Localization.tr("Localizable", "session.screen_title", fallback: "Sessions")
   }
   internal enum SessionDriverList {
     internal enum Error {
@@ -62,6 +86,16 @@ internal enum Localization {
       internal static let cta = Localization.tr("Localizable", "session_driver_list.error.cta", fallback: "Refresh")
       /// Something went wrong
       internal static let text = Localization.tr("Localizable", "session_driver_list.error.text", fallback: "Something went wrong")
+    }
+  }
+  internal enum SessionTime {
+    /// Today at %@
+    internal static func today(_ p1: Any) -> String {
+      return Localization.tr("Localizable", "session_time.today", String(describing: p1), fallback: "Today at %@")
+    }
+    /// Tomorrow at %@
+    internal static func tomorrow(_ p1: Any) -> String {
+      return Localization.tr("Localizable", "session_time.tomorrow", String(describing: p1), fallback: "Tomorrow at %@")
     }
   }
   internal enum UpcomingAndStandingsCell {

@@ -18,14 +18,47 @@ extension Date {
         return SHA512.hash(data: data).description
             .replacingOccurrences(of: "SHA512 digest:", with: "")
     }
+
+    var isSessionToday: Bool {
+
+        return Calendar.current.isDateInToday(self)
+    }
+
+    var isSessionTomorrow: Bool {
+
+        return Calendar.current.isDateInTomorrow(self)
+    }
 }
 
 
 extension DateFormatter {
     
     static let standard: DateFormatter = {
+        var timeZone = TimeZone.current
+
         var dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.sssssZ"
+        dateFormatter.timeZone = timeZone
+        return dateFormatter
+    }()
+
+    static let session: DateFormatter = {
+        var timeZone = TimeZone.current
+
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM d 'at' hh:mm a"
+        dateFormatter.timeZone = timeZone
+        
+        return dateFormatter
+    }()
+
+    static let timeForSession: DateFormatter = {
+        var timeZone = TimeZone.current
+
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm a"
+        dateFormatter.timeZone = timeZone
+
         return dateFormatter
     }()
 }
