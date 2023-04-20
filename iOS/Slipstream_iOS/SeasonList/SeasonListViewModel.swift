@@ -66,9 +66,9 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                 }
                 
                 switch liveEventService {
-                case .refreshed(let livePositions):
+                case .refreshed(let liveSession):
                     
-                    return .results(self.loadLiveData(livePositions: livePositions))
+                    return .results(self.loadLiveData(livePositions: liveSession.standings))
                     
                 case .refreshing, .error:
                     cells[index] = .live(LiveCardCellViewModel.mockLiveAboutToStart, isLoading: true)
@@ -140,7 +140,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
         }
     }
     
-    private func loadLiveData(livePositions: [LivePosition] = []) -> [Section] {
+    private func loadLiveData(livePositions: [LiveSession.Position] = []) -> [Section] {
         
         switch state {
         case .loading(var cells), .results(var cells):
@@ -181,7 +181,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
     private func buildLiveViewModel(
         with eventDetails: Event.ShortDetails,
         index: Int,
-        livePositions: [LivePosition]
+        livePositions: [LiveSession.Position]
     ) -> LiveCardCellViewModel {
         
         var liveDrivers: [Driver] = []
@@ -245,7 +245,7 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
         route.append(.sessionStandings(sessionStandingsVM))
     }
     
-    private func updateTodayEvent(livePositions: [LivePosition] = [], timeInterval: TimeInterval) {
+    private func updateTodayEvent(livePositions: [LiveSession.Position] = [], timeInterval: TimeInterval) {
         
         timer = Timer.scheduledTimer(
             withTimeInterval: timeInterval > 0 && timeInterval < .hourInterval && livePositions.isEmpty ? 1 : 60,

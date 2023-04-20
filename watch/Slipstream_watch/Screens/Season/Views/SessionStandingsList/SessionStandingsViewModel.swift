@@ -38,9 +38,9 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
             .compactMap { [weak self] liveEventService -> SessionStandingsListViewModel.State? in
 
                 switch liveEventService {
-                case .refreshed(let positions):
+                case .refreshed(let liveSession):
 
-                    guard !positions.isEmpty else { return nil }
+                    guard !liveSession.standings.isEmpty else { return nil }
 
                     return .results([])
 
@@ -53,6 +53,8 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
     }
 
     private func buildStandingsCells() -> State {
+
+
 
         return .results([])
     }

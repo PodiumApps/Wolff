@@ -49,9 +49,9 @@ class LiveSessionService: LiveSessionServiceRepresentable {
     private func fetchPositions() async {
         
         do {
-            let positions = try await networkManager.load(LivePosition.getLivePositions())
-            Logger.liveSessionService.info("Fetch \(positions.count) positions")
-            state = .refreshed(positions)
+            let liveSession = try await networkManager.load(LiveSession.getLiveSession())
+            Logger.liveSessionService.info("Fetch \(liveSession.standings.count) positions")
+            state = .refreshed(liveSession)
         } catch {
             Logger.liveSessionService.error("Fetch failed with \(error)")
             state = .error(error)
@@ -70,7 +70,7 @@ extension LiveSessionService {
     enum State {
         
         case refreshing
-        case refreshed([LivePosition])
+        case refreshed(LiveSession)
         case error(Error)
     }
 }
