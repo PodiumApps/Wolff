@@ -26,7 +26,7 @@ final class DriverStandingCellViewModel: DriverStandingCellViewModelRepresentabl
         lastName: String,
         team: Constructor,
         position: Int,
-        time: String? = "",
+        time: String?,
         carNumber: Int,
         tyre: SessionResult.Tyre
     ) {
