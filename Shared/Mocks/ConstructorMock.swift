@@ -14,7 +14,7 @@ extension Constructor {
     static let mockRedBull: Self = .init(
         id: .init("red_bull"),
         name: "Red bull",
-        fullName: "Oi",
+        fullName: "Red Bull Racing",
         teamPrinciple: "tEamy",
         position: 1,
         points: 0
