@@ -2,7 +2,7 @@ import SwiftUI
 
 struct DriverStandingCellView<ViewModel: DriverStandingCellViewModel>: View {
 
-    private let viewModel: ViewModel
+    @ObservedObject private var viewModel: ViewModel
 
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
@@ -11,7 +11,7 @@ struct DriverStandingCellView<ViewModel: DriverStandingCellViewModel>: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: Constants.Card.verticalSpacing) {
-                HStack(alignment: .center) {
+                HStack(alignment: .top) {
                     VStack(alignment: .leading) {
                         HStack(alignment: .center) {
                             Text(Localization.Podium.ordinalComponent(viewModel.position))
@@ -20,7 +20,7 @@ struct DriverStandingCellView<ViewModel: DriverStandingCellViewModel>: View {
                             Spacer()
 
                         }
-                        .font(.Caption.semibold)
+                        .font(.Body.regular)
 
                         VStack(alignment: .leading, spacing: Constants.LastNameTeamNameSection.verticalSpacing) {
                             Text(viewModel.lastName)

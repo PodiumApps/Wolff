@@ -670,6 +670,7 @@
 		CF37156929F1316D00AF14AA /* SessionStandingsList */ = {
 			isa = PBXGroup;
 			children = (
+				CF37156F29F133FA00AF14AA /* DriverStandingCell */,
 				CF37156A29F1319D00AF14AA /* SessionStandingsViewModel.swift */,
 				CF37156D29F131C000AF14AA /* SessionStandingsView.swift */,
 			);
@@ -769,7 +770,6 @@
 		CFE46F9929C9085A0063805A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CF37156F29F133FA00AF14AA /* DriverStandingCell */,
 				CF37156929F1316D00AF14AA /* SessionStandingsList */,
 				CFCD655329DA40340079BE9F /* SessionList */,
 				CFEBC06A29CC8FD4000A2472 /* EventCard */,

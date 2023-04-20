@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-protocol SessionListViewModelRepresentable {
+protocol SessionListViewModelRepresentable: ObservableObject {
 
     var state: SessionListViewModel.State { get }
 }

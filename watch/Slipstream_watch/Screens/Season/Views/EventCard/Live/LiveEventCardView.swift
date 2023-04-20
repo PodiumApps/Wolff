@@ -5,7 +5,7 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
     @State private var backgroundOpacity = Constants.Background.opacityStartValue
     @State private var timer: Timer? = nil
 
-    private let viewModel: ViewModel
+    @ObservedObject private var viewModel: ViewModel
 
     init(viewModel: ViewModel) {
         self.viewModel = viewModel

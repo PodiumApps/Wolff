@@ -27,11 +27,34 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
         self.state = .loading
         self.cells = []
 
+        self.state = self.buildStandingsCells()
         self.setUpServices()
     }
 
     private func setUpServices() {
 
+        liveEventService.statePublisher
+            .receive(on: DispatchQueue.main)
+            .compactMap { [weak self] liveEventService -> SessionStandingsListViewModel.State? in
+
+                switch liveEventService {
+                case .refreshed(let positions):
+
+                    guard !positions.isEmpty else { return nil }
+
+                    return .results([])
+
+                case .refreshing, .error:
+
+                    return .results([])
+                }
+            }
+            .assign(to: &$state)
+    }
+
+    private func buildStandingsCells() -> State {
+
+        return .results([])
     }
 }
 
