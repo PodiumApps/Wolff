@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-protocol SessionListViewModelRepresentable {
+protocol SessionListViewModelRepresentable: ObservableObject {
 
     var state: SessionListViewModel.State { get }
 }
@@ -83,8 +83,9 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                 }
 
                 switch liveEventService {
-                case .refreshed(let positions):
+                case .refreshed(let liveSession):
 
+                    let positions = liveSession.standings
                     guard !positions.isEmpty else { return nil }
 
                     let podium: [Driver.ID] = positions[0 ..< 3].compactMap { [weak self] position in

@@ -10,6 +10,18 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum Localization {
+  internal enum DriverStandingsCell {
+    /// Car %@
+    internal static func carNumber(_ p1: Any) -> String {
+      return Localization.tr("Localizable", "driver_standings_cell.car_number", String(describing: p1), fallback: "Car %@")
+    }
+    /// Leader
+    internal static let leader = Localization.tr("Localizable", "driver_standings_cell.leader", fallback: "Leader")
+    /// Time / Gap
+    internal static let timeGap = Localization.tr("Localizable", "driver_standings_cell.time_gap", fallback: "Time / Gap")
+    /// Tyre
+    internal static let tyre = Localization.tr("Localizable", "driver_standings_cell.tyre", fallback: "Tyre")
+  }
   internal enum FinishedCardCell {
     /// FINISHED
     internal static let finished = Localization.tr("Localizable", "finished_card_cell.finished", fallback: "FINISHED")

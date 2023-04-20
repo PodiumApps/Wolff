@@ -61,7 +61,7 @@
 		42521D0D29B799EC00000586 /* SessionStandingsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DE929ABF08100A8D1CD /* SessionStandingsListView.swift */; };
 		42521D0F29B79A3400000586 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521D0E29B79A3400000586 /* AppViewModel.swift */; };
 		42521D1D29B79D2100000586 /* SessionStandingsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521D0629B799C700000586 /* SessionStandingsListViewModel.swift */; };
-		42521D1E29B79D6800000586 /* LivePosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DEC29ADFA9900A8D1CD /* LivePosition.swift */; };
+		42521D1E29B79D6800000586 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DEC29ADFA9900A8D1CD /* Position.swift */; };
 		42521D1F29B79DED00000586 /* ResultCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBD88D6296C1FB50068AB54 /* ResultCardViewModel.swift */; };
 		42521D2029B79E1400000586 /* SessionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2196D295D9EFB00515097 /* SessionResult.swift */; };
 		42B2196E295D9EFB00515097 /* SessionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2196D295D9EFB00515097 /* SessionResult.swift */; };
@@ -109,11 +109,15 @@
 		CF233DDE29A8D98800A8D1CD /* GrandPrixSchedulePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DDD29A8D98800A8D1CD /* GrandPrixSchedulePickerViewModel.swift */; };
 		CF233DE029A8DB7C00A8D1CD /* GrandPrixSchedulePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DDF29A8DB7C00A8D1CD /* GrandPrixSchedulePickerView.swift */; };
 		CF233DE529ABE17B00A8D1CD /* SessionDriverRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DE429ABE17B00A8D1CD /* SessionDriverRowView.swift */; };
-		CF233DED29ADFA9900A8D1CD /* LivePosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DEC29ADFA9900A8D1CD /* LivePosition.swift */; };
+		CF233DED29ADFA9900A8D1CD /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DEC29ADFA9900A8D1CD /* Position.swift */; };
 		CF277A1E297017C50048DE75 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A1D297017C50048DE75 /* Fonts.swift */; };
 		CF277A1F297017C50048DE75 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A1D297017C50048DE75 /* Fonts.swift */; };
 		CF277A21297303430048DE75 /* StandingsCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A20297303430048DE75 /* StandingsCarouselView.swift */; };
 		CF277A23297313260048DE75 /* StandingsCarouselViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A22297313260048DE75 /* StandingsCarouselViewModel.swift */; };
+		CF37156B29F1319D00AF14AA /* SessionStandingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF37156A29F1319D00AF14AA /* SessionStandingsViewModel.swift */; };
+		CF37156E29F131C000AF14AA /* SessionStandingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF37156D29F131C000AF14AA /* SessionStandingsView.swift */; };
+		CF37157129F1341500AF14AA /* DriverStandingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF37157029F1341500AF14AA /* DriverStandingCellView.swift */; };
+		CF37157329F1343200AF14AA /* DriverStandingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF37157229F1343200AF14AA /* DriverStandingCellViewModel.swift */; };
 		CF5F07772996CC3D00E79996 /* ScheduleCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5F07762996CC3D00E79996 /* ScheduleCarouselView.swift */; };
 		CF78D01E2996C58600D45EDE /* ScheduleCarouselViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF78D01D2996C58600D45EDE /* ScheduleCarouselViewModel.swift */; };
 		CF8EB9D429A77AA700F38158 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8EB9D229A77AA700F38158 /* Event.swift */; };
@@ -245,10 +249,14 @@
 		CF233DE429ABE17B00A8D1CD /* SessionDriverRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDriverRowView.swift; sourceTree = "<group>"; };
 		CF233DE729ABEF7600A8D1CD /* SessionStandingsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStandingsListViewModel.swift; sourceTree = "<group>"; };
 		CF233DE929ABF08100A8D1CD /* SessionStandingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStandingsListView.swift; sourceTree = "<group>"; };
-		CF233DEC29ADFA9900A8D1CD /* LivePosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePosition.swift; sourceTree = "<group>"; };
+		CF233DEC29ADFA9900A8D1CD /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		CF277A1D297017C50048DE75 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		CF277A20297303430048DE75 /* StandingsCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsCarouselView.swift; sourceTree = "<group>"; };
 		CF277A22297313260048DE75 /* StandingsCarouselViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsCarouselViewModel.swift; sourceTree = "<group>"; };
+		CF37156A29F1319D00AF14AA /* SessionStandingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStandingsViewModel.swift; sourceTree = "<group>"; };
+		CF37156D29F131C000AF14AA /* SessionStandingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStandingsView.swift; sourceTree = "<group>"; };
+		CF37157029F1341500AF14AA /* DriverStandingCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverStandingCellView.swift; sourceTree = "<group>"; };
+		CF37157229F1343200AF14AA /* DriverStandingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverStandingCellViewModel.swift; sourceTree = "<group>"; };
 		CF5F07762996CC3D00E79996 /* ScheduleCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCarouselView.swift; sourceTree = "<group>"; };
 		CF78D01D2996C58600D45EDE /* ScheduleCarouselViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCarouselViewModel.swift; sourceTree = "<group>"; };
 		CF8EB9D229A77AA700F38158 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -654,9 +662,28 @@
 		CF233DEB29ADFA6C00A8D1CD /* LiveSession */ = {
 			isa = PBXGroup;
 			children = (
-				CF233DEC29ADFA9900A8D1CD /* LivePosition.swift */,
+				CF233DEC29ADFA9900A8D1CD /* Position.swift */,
 			);
 			path = LiveSession;
+			sourceTree = "<group>";
+		};
+		CF37156929F1316D00AF14AA /* SessionStandingsList */ = {
+			isa = PBXGroup;
+			children = (
+				CF37156F29F133FA00AF14AA /* DriverStandingCell */,
+				CF37156A29F1319D00AF14AA /* SessionStandingsViewModel.swift */,
+				CF37156D29F131C000AF14AA /* SessionStandingsView.swift */,
+			);
+			path = SessionStandingsList;
+			sourceTree = "<group>";
+		};
+		CF37156F29F133FA00AF14AA /* DriverStandingCell */ = {
+			isa = PBXGroup;
+			children = (
+				CF37157029F1341500AF14AA /* DriverStandingCellView.swift */,
+				CF37157229F1343200AF14AA /* DriverStandingCellViewModel.swift */,
+			);
+			path = DriverStandingCell;
 			sourceTree = "<group>";
 		};
 		CF8EB9D129A77A8D00F38158 /* Event */ = {
@@ -743,6 +770,7 @@
 		CFE46F9929C9085A0063805A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CF37156929F1316D00AF14AA /* SessionStandingsList */,
 				CFCD655329DA40340079BE9F /* SessionList */,
 				CFEBC06A29CC8FD4000A2472 /* EventCard */,
 			);
@@ -980,7 +1008,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		CFE23F482982E92F00412DB6 /* swiftgen */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputFileListPaths = (
@@ -992,7 +1020,7 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "if [[ -z $CI ]]; then\n    swiftgen config run --config \"$SRCROOT/Shared/Resources/swiftgen.yml\"\nfi\n";
 		};
@@ -1035,20 +1063,21 @@
 				42B21982295EEA2600515097 /* SessionResultMock.swift in Sources */,
 				CFE46FA329C9B4A30063805A /* SessionDriverStyler.swift in Sources */,
 				420967F4294C9A8D0075D75E /* SlipstreamWatchApp.swift in Sources */,
-				CF233DED29ADFA9900A8D1CD /* LivePosition.swift in Sources */,
+				CF233DED29ADFA9900A8D1CD /* Position.swift in Sources */,
 				42B21970295DA4D400515097 /* Session.swift in Sources */,
 				CF05443A29507C1000A39FE3 /* Circuit.swift in Sources */,
+				CF37156E29F131C000AF14AA /* SessionStandingsView.swift in Sources */,
 				42B21988295EEA9400515097 /* ConstructorMock.swift in Sources */,
 				CFCD656229DAD9080079BE9F /* LiveSessionCellViewModel.swift in Sources */,
 				42BCAD5529BB4B360089B46A /* EventMock.swift in Sources */,
 				42B2196E295D9EFB00515097 /* SessionResult.swift in Sources */,
-				CF20D361297577D80038A860 /* ConstructorStyler.swift in Sources */,
 				42D5288D29E59AC900142AC2 /* SessionDetail.swift in Sources */,
 				CFCD655B29DA4BCC0079BE9F /* UpcomingSessionView.swift in Sources */,
 				42B2198F295EEAA500515097 /* SessionMock.swift in Sources */,
 				42BCAD5929BB742B0089B46A /* UserDefaultsWrapper.swift in Sources */,
 				42B2199A295F3A2300515097 /* DoubleExtension.swift in Sources */,
 				CFEBC07829CD0C76000A2472 /* UpcomingEventCardView.swift in Sources */,
+				CF37157329F1343200AF14AA /* DriverStandingCellViewModel.swift in Sources */,
 				CFEBC07129CCBE47000A2472 /* LiveEventCardViewModel.swift in Sources */,
 				CFEBC07D29CD147B000A2472 /* FinishedEventCardView.swift in Sources */,
 				CFE46FA229C9B4A00063805A /* EventStatusBackgroundStyler.swift in Sources */,
@@ -1075,7 +1104,9 @@
 				CFE46FA529C9B4AD0063805A /* ButtonStyle.swift in Sources */,
 				42BCAD6229BBD7F10089B46A /* Identifier.swift in Sources */,
 				CFE46FA429C9B4A80063805A /* Colors.swift in Sources */,
+				CF37156B29F1319D00AF14AA /* SessionStandingsViewModel.swift in Sources */,
 				42B2198C295EEAA100515097 /* DriverMock.swift in Sources */,
+				CF37157129F1341500AF14AA /* DriverStandingCellView.swift in Sources */,
 				CFCD655F29DA4F1A0079BE9F /* FinishedSessionCellView.swift in Sources */,
 				CFCD656429DAD9A90079BE9F /* LiveSessionCellView.swift in Sources */,
 				42521CB229B1006000000586 /* ServiceLocator.swift in Sources */,
@@ -1121,7 +1152,7 @@
 				4207B44C29C216DC00AA4758 /* StandingsCellView.swift in Sources */,
 				4207B45329C4662800AA4758 /* Spacing.swift in Sources */,
 				4209686029537AF70075D75E /* Driver.swift in Sources */,
-				42521D1E29B79D6800000586 /* LivePosition.swift in Sources */,
+				42521D1E29B79D6800000586 /* Position.swift in Sources */,
 				4207B45429C7230C00AA4758 /* DriverResult.swift in Sources */,
 				42521CB929B1F37D00000586 /* LiveSessionDriverDetailsSheet.swift in Sources */,
 				CF78D01E2996C58600D45EDE /* ScheduleCarouselViewModel.swift in Sources */,

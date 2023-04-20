@@ -94,8 +94,8 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                 switch liveSessionService {
                 case .error(let error):
                     return .error(error.localizedDescription)
-                case .refreshed(let livePositions):
-                    return self.buildRowsViewModel(for: livePositions)
+                case .refreshed(let liveSession):
+                    return self.buildRowsViewModel(for: liveSession.standings)
                 default:
                     return .loading([.header("Skeleton View"), .positionList(SessionDriverRowViewModel.mockArray)])
                 }
@@ -141,7 +141,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
         }
         
     }
-    private func buildRowsViewModel(for livePositions: [LivePosition]) -> State {
+    private func buildRowsViewModel(for livePositions: [LiveSession.Position]) -> State {
         
         let standings: [SessionDriverRowViewModel] = livePositions
             .enumerated()

@@ -116,8 +116,9 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                 let sessionListViewModel = SessionListViewModel.make(event: events[index])
 
                 switch liveEventService {
-                case .refreshed(let positions):
+                case .refreshed(let liveSession):
 
+                    let positions = liveSession.standings
                     guard !positions.isEmpty else {
 
                         self.eventService.action.send(.updateAll)

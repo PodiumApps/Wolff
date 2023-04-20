@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SessionListView<ViewModel: SessionListViewModelRepresentable>: View {
 
-    private let viewModel: ViewModel
+    @ObservedObject private var viewModel: ViewModel
 
     init(viewModel: ViewModel) {
         self.viewModel = viewModel

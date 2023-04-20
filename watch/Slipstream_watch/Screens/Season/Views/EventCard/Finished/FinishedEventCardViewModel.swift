@@ -1,6 +1,6 @@
 import Foundation
 
-protocol FinishedEventCardViewModelRepresentable {
+protocol FinishedEventCardViewModelRepresentable: ObservableObject {
 
     var id: Event.ID { get }
     var title: String { get }

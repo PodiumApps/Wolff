@@ -44,3 +44,9 @@
 
 // MARK: - Session
 "session.screen_title" = "Sessions";
+
+// MARK: - DriverStandingsCell
+"driver_standings_cell.time_gap" = "Time / Gap";
+"driver_standings_cell.leader" = "Leader";
+"driver_standings_cell.tyre" = "Tyre";
+"driver_standings_cell.car_number" = "Car %@";

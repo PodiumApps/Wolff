@@ -37,6 +37,7 @@ extension Font {
         static let heavy: Font = .system(size: 16, weight: .heavy)
         static let bold: Font = .system(size: 16, weight: .bold)
         static let semibold: Font = .system(size: 16, weight: .semibold)
+        static let medium: Font = .system(size: 16, weight: .medium)
     }
     
     enum Caption {

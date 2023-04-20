@@ -2,7 +2,7 @@ import SwiftUI
 
 struct FinishedEventCardView<ViewModel: FinishedEventCardViewModelRepresentable>: View {
 
-    private let viewModel: ViewModel
+    @ObservedObject private var viewModel: ViewModel
 
     init(viewModel: ViewModel) {
 
