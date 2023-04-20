@@ -10,11 +10,11 @@ struct DriverStandingCellView<ViewModel: DriverStandingCellViewModel>: View {
 
     var body: some View {
         HStack {
-            VStack(alignment: .leading, spacing: 10) {
-                HStack(alignment: .top) {
+            VStack(alignment: .leading, spacing: Constants.Card.verticalSpacing) {
+                HStack(alignment: .center) {
                     VStack(alignment: .leading) {
                         HStack(alignment: .center) {
-                            Text("\(String(viewModel.position)).")
+                            Text(Localization.Podium.ordinalComponent(viewModel.position))
                             Text(viewModel.firstName)
 
                             Spacer()
@@ -22,35 +22,33 @@ struct DriverStandingCellView<ViewModel: DriverStandingCellViewModel>: View {
                         }
                         .font(.Caption.semibold)
 
-                        VStack(alignment: .leading, spacing: 3) {
+                        VStack(alignment: .leading, spacing: Constants.LastNameTeamNameSection.verticalSpacing) {
                             Text(viewModel.lastName)
                                 .font(.Body.semibold)
                             Text(viewModel.team.fullName)
+                                .lineLimit(Constants.LastNameTeamNameSection.teamLineLimit)
                                 .font(.Caption.semibold)
                                 .foregroundColor(Color.Constructor.redBull)
                         }
                     }
 
-                    Text("Car \(viewModel.carNumber)")
-                        .font(.Caption2.bold)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 5)
-                        .background(Color.Constructor.redBull)
-                        .clipShape(Capsule())
+                    Text(Localization.DriverStandingsCell.carNumber(viewModel.carNumber))
+                        .font(.Caption.semibold)
+                        .foregroundColor(Color.Constructor.redBull)
                 }
 
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("Time / Gap")
+                        Text(Localization.DriverStandingsCell.timeGap)
                             .font(.Caption.semibold)
-                        Text(viewModel.time ?? "Leader")
+                        Text(viewModel.time ?? Localization.DriverStandingsCell.leader)
                             .font(.Caption.regular)
                     }
 
                     Spacer()
 
                     VStack(alignment: .leading) {
-                        Text("Tyre")
+                        Text(Localization.DriverStandingsCell.tyre)
                             .font(.Caption.semibold)
                         Text("Medium")
                             .font(.Caption.semibold)
@@ -61,17 +59,27 @@ struct DriverStandingCellView<ViewModel: DriverStandingCellViewModel>: View {
 
             Spacer()
         }
-        .padding(15)
-        .background(Color.Constructor.redBull.opacity(0.35))
-        .cornerRadius(20)
+        .padding(Constants.Card.padding)
+        .background(Color.Constructor.redBull.opacity(Constants.Card.backgroundOpacity))
+        .cornerRadius(Constants.Card.cornerRadius)
+    }
+}
+
+fileprivate enum Constants {
+
+    enum Card {
+
+        static let verticalSpacing: CGFloat = 10
+        static let padding: CGFloat = 15
+        static let backgroundOpacity: CGFloat = 0.35
+        static let cornerRadius: CGFloat = 20
     }
 
-//    private func getBackgroundColor(for constructor: Constructor) {
-//
-//        switch constructor.id {
-//        case
-//        }
-//    }
+    enum LastNameTeamNameSection {
+
+        static let verticalSpacing: CGFloat = 3
+        static let teamLineLimit: Int = 2
+    }
 }
 
 struct DriverStandingCellView_Previews: PreviewProvider {
