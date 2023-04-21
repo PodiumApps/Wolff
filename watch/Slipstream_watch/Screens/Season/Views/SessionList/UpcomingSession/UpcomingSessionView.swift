@@ -11,34 +11,30 @@ struct UpcomingSessionView<ViewModel: UpcomingSessionCellViewModelRepresentable>
 
     var body: some View {
 
-        NavigationLink(destination: {
-            Text("Session Details")
-        }) {
-            HStack {
-                VStack(alignment: .leading, spacing: .Spacing.default0) {
+        HStack {
+            VStack(alignment: .leading, spacing: .Spacing.default0) {
 
-                    Text(viewModel.sessionName)
-                        .font(.Body.semibold)
+                Text(viewModel.sessionName)
+                    .font(.Body.semibold)
 
-                    if viewModel.date.isSessionToday {
-                        Text(Localization.SessionTime.today(DateFormatter.timeForSession.string(from: viewModel.date)))
-                            .font(.Caption.regular)
-                            .foregroundColor(.gray)
-                    } else if viewModel.date.isSessionTomorrow {
-                        Text(Localization.SessionTime.tomorrow(
-                            DateFormatter.timeForSession.string(from: viewModel.date)
-                        ))
-                            .font(.Caption.regular)
-                            .foregroundColor(.gray)
-                    } else {
-                        Text(DateFormatter.session.string(from: viewModel.date))
-                            .font(.Caption.regular)
-                            .foregroundColor(.gray)
-                    }
+                if viewModel.date.isSessionToday {
+                    Text(Localization.SessionTime.today(DateFormatter.timeForSession.string(from: viewModel.date)))
+                        .font(.Caption.regular)
+                        .foregroundColor(.gray)
+                } else if viewModel.date.isSessionTomorrow {
+                    Text(Localization.SessionTime.tomorrow(
+                        DateFormatter.timeForSession.string(from: viewModel.date)
+                    ))
+                        .font(.Caption.regular)
+                        .foregroundColor(.gray)
+                } else {
+                    Text(DateFormatter.session.string(from: viewModel.date))
+                        .font(.Caption.regular)
+                        .foregroundColor(.gray)
                 }
-
-                Spacer()
             }
+
+            Spacer()
         }
         .listRowBackground(
             RoundedRectangle(cornerRadius: Constants.Background.cornerRadius)

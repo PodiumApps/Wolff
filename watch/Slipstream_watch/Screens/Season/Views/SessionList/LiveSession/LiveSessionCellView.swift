@@ -35,7 +35,8 @@ struct LiveSessionCellView<ViewModel: LiveSessionCellViewModelRepresentable>: Vi
         NavigationLink(destination: {
             SessionStandingsListView(
                 viewModel: SessionStandingsListViewModel.make(
-                    sessionID: viewModel.sessionID
+                    sessionID: viewModel.sessionID,
+                    sessionName: viewModel.sessionName
                 ))
         }) {
             HStack {

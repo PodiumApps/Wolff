@@ -5,6 +5,7 @@ protocol SessionStandingsListViewModelRepresentable: ObservableObject {
 
     var state: SessionStandingsListViewModel.State { get }
     var cells: [DriverStandingCellViewModel] { get }
+    var sessionName: String { get }
 }
 
 final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresentable {
@@ -21,15 +22,18 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
 
     @Published var state: State
     @Published var cells: [DriverStandingCellViewModel]
+    let sessionName: String
 
     init(
         sessionID: Session.ID,
+        sessionName: String,
         liveEventService: LiveSessionServiceRepresentable,
         driverAndConstructorService: DriverAndConstructorServiceRepresentable,
         networkManager: NetworkManagerRepresentable
     ) {
 
         self.sessionID = sessionID
+        self.sessionName = sessionName
         self.liveEventService = liveEventService
         self.driverAndConstructorService = driverAndConstructorService
         self.networkManager = networkManager
@@ -53,7 +57,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                 switch liveEventService {
                 case .refreshed(let liveSession):
 
-                    if self.sessionID.string == liveSession.id && !liveSession.standings.isEmpty {
+                    if self.sessionID.string == liveSession.id.string && !liveSession.standings.isEmpty {
 
                         self.state = buildLiveStandingsCells(standings: liveSession.standings)
                     } else {
@@ -100,8 +104,6 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                 }
             }
             .assign(to: &$state)
-
-//        liveEventService.action.send(.fetchPositions)
     }
 
     private func buildLiveStandingsCells(standings: [LiveSession.Position]) -> State {
@@ -109,14 +111,15 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
         cells = standings.compactMap { position in
 
             let driver = self.drivers.first(where: { $0.id == position.id })
+            let constructor = self.constructors.first(where: { $0.id == driver?.constructorId })
 
-            guard let driver else { return nil }
+            guard let driver, let constructor else { return nil }
 
             return .init(
                 driverID: driver.id,
                 firstName: driver.firstName,
                 lastName: driver.lastName,
-                team: driver.constructorId,
+                team: constructor,
                 position: position.position,
                 time: position.time != nil ? [position.time!] : [],
                 tyre: position.tyre
@@ -131,14 +134,15 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
         cells = standings.compactMap { position in
 
             let driver = self.drivers.first(where: { $0.id == position.driverId })
+            let constructor = self.constructors.first(where: { $0.id == driver?.constructorId })
 
-            guard let driver else { return nil }
+            guard let driver, let constructor else { return nil }
 
             return .init(
                 driverID: driver.id,
                 firstName: driver.firstName,
                 lastName: driver.lastName,
-                team: driver.constructorId,
+                team: constructor,
                 position: position.position,
                 time: position.time,
                 tyre: nil
@@ -183,10 +187,11 @@ extension SessionStandingsListViewModel {
 
 extension SessionStandingsListViewModel {
 
-    static func make(sessionID: Session.ID) -> SessionStandingsListViewModel {
+    static func make(sessionID: Session.ID, sessionName: String) -> SessionStandingsListViewModel {
 
         .init(
             sessionID: sessionID,
+            sessionName: sessionName,
             liveEventService: ServiceLocator.shared.liveSessionService,
             driverAndConstructorService: ServiceLocator.shared.driverAndConstructorService,
             networkManager: NetworkManager.shared

@@ -5,7 +5,7 @@ protocol DriverStandingCellViewModelRepresentable: ObservableObject {
     var driverID: Driver.ID { get }
     var firstName: String { get }
     var lastName: String { get }
-    var team: Constructor.ID { get }
+    var constructor: Constructor { get }
     var position: Int { get }
     var time: [String] { get }
     var tyre: SessionResult.Tyre? { get }
@@ -16,7 +16,7 @@ final class DriverStandingCellViewModel: DriverStandingCellViewModelRepresentabl
     let driverID: Driver.ID
     let firstName: String
     let lastName: String
-    let team: Constructor.ID
+    let constructor: Constructor
     let position: Int
     let time: [String]
     let tyre: SessionResult.Tyre?
@@ -25,7 +25,7 @@ final class DriverStandingCellViewModel: DriverStandingCellViewModelRepresentabl
         driverID: Driver.ID,
         firstName: String,
         lastName: String,
-        team: Constructor.ID,
+        team: Constructor,
         position: Int,
         time: [String],
         tyre: SessionResult.Tyre?
@@ -34,7 +34,7 @@ final class DriverStandingCellViewModel: DriverStandingCellViewModelRepresentabl
         self.driverID = driverID
         self.firstName = firstName
         self.lastName = lastName
-        self.team = team
+        self.constructor = team
         self.position = position
         self.time = time
         self.tyre = tyre

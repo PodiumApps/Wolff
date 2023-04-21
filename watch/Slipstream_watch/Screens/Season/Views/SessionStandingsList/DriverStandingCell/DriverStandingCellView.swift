@@ -3,9 +3,11 @@ import SwiftUI
 struct DriverStandingCellView<ViewModel: DriverStandingCellViewModel>: View {
 
     @ObservedObject private var viewModel: ViewModel
+    private var constructorStyler: ConstructorStylerRepresentable
 
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
+        self.constructorStyler = ConstructorStyler(constructor: viewModel.constructor.id)
     }
 
     var body: some View {
@@ -25,10 +27,10 @@ struct DriverStandingCellView<ViewModel: DriverStandingCellViewModel>: View {
                         VStack(alignment: .leading, spacing: Constants.LastNameTeamNameSection.verticalSpacing) {
                             Text(viewModel.lastName)
                                 .font(.Body.semibold)
-//                            Text(viewModel.team.fullName)
-//                                .lineLimit(Constants.LastNameTeamNameSection.teamLineLimit)
-//                                .font(.Caption.semibold)
-//                                .foregroundColor(Color.Constructor.redBull)
+                            Text(viewModel.constructor.fullName)
+                                .lineLimit(Constants.LastNameTeamNameSection.teamLineLimit)
+                                .font(.Caption.semibold)
+                                .foregroundColor(constructorStyler.constructor.color)
                         }
                     }
                 }
@@ -58,7 +60,7 @@ struct DriverStandingCellView<ViewModel: DriverStandingCellViewModel>: View {
             Spacer()
         }
         .padding(Constants.Card.padding)
-        .background(Color.Constructor.redBull.opacity(Constants.Card.backgroundOpacity))
+        .background(constructorStyler.constructor.color.opacity(Constants.Card.backgroundOpacity))
         .cornerRadius(Constants.Card.cornerRadius)
     }
 }
@@ -68,8 +70,8 @@ fileprivate enum Constants {
     enum Card {
 
         static let verticalSpacing: CGFloat = 10
-        static let padding: CGFloat = 15
-        static let backgroundOpacity: CGFloat = 0.35
+        static let padding: CGFloat = 10
+        static let backgroundOpacity: CGFloat = 0.20
         static let cornerRadius: CGFloat = 20
     }
 
@@ -79,9 +81,3 @@ fileprivate enum Constants {
         static let teamLineLimit: Int = 2
     }
 }
-
-//struct DriverStandingCellView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DriverStandingCellView(viewModel: DriverStandingCellViewModel(firstName: "Max", lastName: "Verstappen", team: .mockRedBull, position: 1, time: "+1.539", carNumber: 1, tyre: .medium))
-//    }
-//}

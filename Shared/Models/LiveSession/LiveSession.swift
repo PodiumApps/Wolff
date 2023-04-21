@@ -3,7 +3,9 @@ import OSLog
 
 struct LiveSession: Decodable, Identifiable {
 
-    let id: String
+    typealias ID = Identifier<LiveSession>
+
+    let id: ID
     let standings: [Position]
 
     struct Position: Decodable, Identifiable {

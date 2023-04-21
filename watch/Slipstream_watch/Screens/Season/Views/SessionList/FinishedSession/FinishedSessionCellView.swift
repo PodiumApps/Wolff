@@ -12,11 +12,16 @@ struct FinishedSessionCellView<ViewModel: FinishedSessionCellViewModelRepresenta
     var body: some View {
 
         NavigationLink(destination: {
-            Text("Session Details")
+            SessionStandingsListView(
+                viewModel: SessionStandingsListViewModel.make(
+                    sessionID: viewModel.sessionID,
+                    sessionName: viewModel.sessionName
+                )
+            )
         }) {
             HStack {
                 VStack(alignment: .leading, spacing: Constants.Cell.verticalSpacing) {
-                    Text(viewModel.session)
+                    Text(viewModel.sessionName)
                         .font(.Body.semibold)
 
                     HStack(alignment: .bottom, spacing: .Spacing.default) {
@@ -94,13 +99,13 @@ fileprivate enum Constants {
     }
 }
 
-struct FinishedCellView_Previews: PreviewProvider {
-    static var previews: some View {
-        FinishedSessionCellView(
-            viewModel: FinishedSessionCellViewModel(
-                session: "Race",
-                winners: ["VER", "ALO", "LEC"]
-            )
-        )
-    }
-}
+//struct FinishedCellView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FinishedSessionCellView(
+//            viewModel: FinishedSessionCellViewModel(
+//                session: "Race",
+//                winners: ["VER", "ALO", "LEC"]
+//            )
+//        )
+//    }
+//}

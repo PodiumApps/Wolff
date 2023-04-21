@@ -74,8 +74,6 @@ class SeasonListViewModel: SeasonListViewModelRepresentable {
                     cells[index] = .live(LiveCardCellViewModel.mockLiveAboutToStart, isLoading: true)
                     return .results(cells)
                 }
-                
-                
             }
             .assign(to: &$state)
         
