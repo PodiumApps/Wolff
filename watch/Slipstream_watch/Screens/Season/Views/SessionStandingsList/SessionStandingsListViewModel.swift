@@ -1,8 +1,10 @@
 import Foundation
+import Combine
 
-protocol SessionStandingsListViewModelRepresentable {
+protocol SessionStandingsListViewModelRepresentable: ObservableObject {
 
     var state: SessionStandingsListViewModel.State { get }
+    var cells: [DriverStandingCellViewModel] { get }
 }
 
 final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresentable {
@@ -15,8 +17,10 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
     private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
     private let networkManager: NetworkManagerRepresentable
 
+    private var subscribers = Set<AnyCancellable>()
+
     @Published var state: State
-    @Published private var cells: [DriverStandingCellViewModel]
+    @Published var cells: [DriverStandingCellViewModel]
 
     init(
         sessionID: Session.ID,
@@ -31,6 +35,8 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
         self.networkManager = networkManager
 
         self.state = .loading
+        self.drivers = []
+        self.constructors = []
         self.cells = []
 
         self.setUpServices()
@@ -40,28 +46,39 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
 
         liveEventService.statePublisher
             .receive(on: DispatchQueue.main)
-            .compactMap { [weak self] liveEventService -> SessionStandingsListViewModel.State? in
+            .sink { [weak self] liveEventService in
 
-                guard let self else { return nil}
+                guard let self else { return }
 
                 switch liveEventService {
                 case .refreshed(let liveSession):
 
-                    guard !liveSession.standings.isEmpty else {
+                    if self.sessionID.string == liveSession.id && !liveSession.standings.isEmpty {
 
-                        Task { await self.buildFinishedStandingsCells() }
-                        return nil
+                        self.state = buildLiveStandingsCells(standings: liveSession.standings)
+                    } else {
+
+                        Task { @MainActor [weak self] in
+                            guard let self else { return }
+
+                            do {
+                                let standings = try await self.networkManager
+                                    .load(SessionDetail.getSession(for: SessionDetail.self, id: self.sessionID.string))
+
+                                self.state = self.buildFinishedSessionCells(standings: standings)
+                            } catch {
+
+                                self.state = .error(error.localizedDescription)
+                            }
+                        }
                     }
-
-                    return buildStandingsCells(standings: liveSession.standings)
-
                 case .refreshing:
-                    return .loading
+                    self.state = .loading
                 case .error(let error):
-                    return .error(error.localizedDescription)
+                    self.state = .error(error.localizedDescription)
                 }
             }
-            .assign(to: &$state)
+            .store(in: &subscribers)
 
         driverAndConstructorService.statePublisher
             .receive(on: DispatchQueue.main)
@@ -74,6 +91,8 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
 
                     self.drivers = drivers
                     self.constructors = constructors
+                    return .loading
+                    
                 case .refreshing:
                     return .loading
                 case .error(let error):
@@ -81,35 +100,52 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                 }
             }
             .assign(to: &$state)
+
+//        liveEventService.action.send(.fetchPositions)
     }
 
-    private func buildStandingsCells(standings: [LiveSession.Position]) -> State {
+    private func buildLiveStandingsCells(standings: [LiveSession.Position]) -> State {
 
-        let cells: [DriverStandingCellViewModel] = standings.compactMap { position in
+        cells = standings.compactMap { position in
 
             let driver = self.drivers.first(where: { $0.id == position.id })
 
-            guard let driver else {   }
+            guard let driver else { return nil }
 
             return .init(
-                firstName: driver.fullName,
+                driverID: driver.id,
+                firstName: driver.firstName,
                 lastName: driver.lastName,
                 team: driver.constructorId,
                 position: position.position,
-                time: position.time,
-                carNumber: driver.carNumber,
+                time: position.time != nil ? [position.time!] : [],
                 tyre: position.tyre
             )
         }
 
-        return .results([])
+        return .results(cells)
     }
 
-    private func buildFinishedStandingsCells() async {
+    private func buildFinishedSessionCells(standings: [SessionDetail]) -> State {
 
-//        let sessionDetails = try? await networkManager.load(SessionDetail.getSession(id: sessionID.string))
+        cells = standings.compactMap { position in
 
-        self.state = .results([])
+            let driver = self.drivers.first(where: { $0.id == position.driverId })
+
+            guard let driver else { return nil }
+
+            return .init(
+                driverID: driver.id,
+                firstName: driver.firstName,
+                lastName: driver.lastName,
+                team: driver.constructorId,
+                position: position.position,
+                time: position.time,
+                tyre: nil
+            )
+        }
+
+        return .results(cells)
     }
 }
 

@@ -99,6 +99,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                         buildLiveSessionCellViewModel(
                             sessionName: event.sessions[index].name,
                             sessionDate: event.sessions[index].date,
+                            sessionID: event.sessions[index].id,
                             podium: podium,
                             timeInterval: timeInterval
                         )
@@ -112,6 +113,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                         buildLiveSessionCellViewModel(
                             sessionName: event.sessions[index].name,
                             sessionDate: event.sessions[index].date,
+                            sessionID: event.sessions[index].id,
                             podium: [],
                             timeInterval: timeInterval
                         )
@@ -157,6 +159,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                         buildLiveSessionCellViewModel(
                             sessionName: session.name,
                             sessionDate: session.date,
+                            sessionID: session.id,
                             podium: [],
                             timeInterval: timeInterval
                         )
@@ -186,12 +189,14 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
     private func buildLiveSessionCellViewModel(
         sessionName: Session.Name,
         sessionDate: Date,
+        sessionID: Session.ID,
         podium: [Driver.ID],
         timeInterval: TimeInterval
     ) -> LiveSessionCellViewModel {
 
         return LiveSessionCellViewModel(
             sessionName: sessionName.label,
+            sessionID: sessionID,
             podium: Driver.getPodiumDriverTickers(podium: podium, drivers: drivers),
             state: setUpLiveSessionState(podium: podium, date: sessionDate, timeInterval: timeInterval)
         )

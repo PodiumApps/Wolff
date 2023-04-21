@@ -25,34 +25,32 @@ struct DriverStandingCellView<ViewModel: DriverStandingCellViewModel>: View {
                         VStack(alignment: .leading, spacing: Constants.LastNameTeamNameSection.verticalSpacing) {
                             Text(viewModel.lastName)
                                 .font(.Body.semibold)
-                            Text(viewModel.team.fullName)
-                                .lineLimit(Constants.LastNameTeamNameSection.teamLineLimit)
-                                .font(.Caption.semibold)
-                                .foregroundColor(Color.Constructor.redBull)
+//                            Text(viewModel.team.fullName)
+//                                .lineLimit(Constants.LastNameTeamNameSection.teamLineLimit)
+//                                .font(.Caption.semibold)
+//                                .foregroundColor(Color.Constructor.redBull)
                         }
                     }
-
-                    Text(Localization.DriverStandingsCell.carNumber(viewModel.carNumber))
-                        .font(.Caption.semibold)
-                        .foregroundColor(Color.Constructor.redBull)
                 }
 
                 HStack {
                     VStack(alignment: .leading) {
                         Text(Localization.DriverStandingsCell.timeGap)
                             .font(.Caption.semibold)
-                        Text(viewModel.time ?? Localization.DriverStandingsCell.leader)
+                        Text(viewModel.time.last ?? Localization.DriverStandingsCell.leader)
                             .font(.Caption.regular)
                     }
 
                     Spacer()
 
-                    VStack(alignment: .leading) {
-                        Text(Localization.DriverStandingsCell.tyre)
-                            .font(.Caption.semibold)
-                        Text("Medium")
-                            .font(.Caption.semibold)
-                            .foregroundColor(Color.Tyre.medium)
+                    if let tyre = viewModel.tyre {
+                        VStack(alignment: .leading) {
+                            Text(Localization.DriverStandingsCell.tyre)
+                                .font(.Caption.semibold)
+                            Text("Medium")
+                                .font(.Caption.semibold)
+                                .foregroundColor(Color.Tyre.medium)
+                        }
                     }
                 }
             }
@@ -82,8 +80,8 @@ fileprivate enum Constants {
     }
 }
 
-struct DriverStandingCellView_Previews: PreviewProvider {
-    static var previews: some View {
-        DriverStandingCellView(viewModel: DriverStandingCellViewModel(firstName: "Max", lastName: "Verstappen", team: .mockRedBull, position: 1, time: "+1.539", carNumber: 1, tyre: .medium))
-    }
-}
+//struct DriverStandingCellView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DriverStandingCellView(viewModel: DriverStandingCellViewModel(firstName: "Max", lastName: "Verstappen", team: .mockRedBull, position: 1, time: "+1.539", carNumber: 1, tyre: .medium))
+//    }
+//}
