@@ -9,21 +9,23 @@ struct SessionStandingsListView<ViewModel: SessionStandingsListViewModelRepresen
     }
 
     var body: some View {
-        NavigationView {
-            Group {
-                switch viewModel.state {
-                case .error(let error):
-                    Text(error)
-                case .loading:
-                    ProgressView()
-                case .results(let cells):
-                    List(0 ..< cells.count, id: \.self) { index in
-                        DriverStandingCellView(viewModel: viewModel.cells[index])
-                    }
+        Group {
+            switch viewModel.state {
+            case .error(let error):
+                Text(error)
+            case .loading:
+                ProgressView()
+            case .results(let cells):
+                List(0 ..< cells.count, id: \.self) { index in
+                    DriverStandingCellView(viewModel: viewModel.cells[index], position: index + 1)
                 }
+                .listStyle(.carousel)
             }
-            .navigationTitle(viewModel.sessionName)
-            .navigationBarTitleDisplayMode(.inline)
+        }
+        .navigationBarTitle(viewModel.sessionName)
+        .navigationBarTitleDisplayMode(.large)
+        .task {
+            await viewModel.loadSession()
         }
     }
 }

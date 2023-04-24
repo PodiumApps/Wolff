@@ -56,6 +56,7 @@ extension SessionDetail {
     static func getSession<T: Decodable>(for: T.Type = T.self, id: String, detail: Detail? = nil) -> Resource<[T]> {
 
         guard let url = URL(string: "\(Global.url)/v1/session/\(id)") else { fatalError("URL not found.") }
+        print(url)
         
         let method: HttpMethod
         

@@ -16,8 +16,7 @@ struct FinishedSessionCellView<ViewModel: FinishedSessionCellViewModelRepresenta
                 viewModel: SessionStandingsListViewModel.make(
                     sessionID: viewModel.sessionID,
                     sessionName: viewModel.sessionName
-                )
-            )
+                ))
         }) {
             HStack {
                 VStack(alignment: .leading, spacing: Constants.Cell.verticalSpacing) {

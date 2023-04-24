@@ -6,6 +6,7 @@ protocol SessionStandingsListViewModelRepresentable: ObservableObject {
     var state: SessionStandingsListViewModel.State { get }
     var cells: [DriverStandingCellViewModel] { get }
     var sessionName: String { get }
+    func loadSession() async
 }
 
 final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresentable {
@@ -60,21 +61,6 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                     if self.sessionID.string == liveSession.id.string && !liveSession.standings.isEmpty {
 
                         self.state = buildLiveStandingsCells(standings: liveSession.standings)
-                    } else {
-
-                        Task { @MainActor [weak self] in
-                            guard let self else { return }
-
-                            do {
-                                let standings = try await self.networkManager
-                                    .load(SessionDetail.getSession(for: SessionDetail.self, id: self.sessionID.string))
-
-                                self.state = self.buildFinishedSessionCells(standings: standings)
-                            } catch {
-
-                                self.state = .error(error.localizedDescription)
-                            }
-                        }
                     }
                 case .refreshing:
                     self.state = .loading
@@ -104,6 +90,17 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                 }
             }
             .assign(to: &$state)
+    }
+
+     @MainActor func loadSession() async {
+        do {
+            let standings = try await self.networkManager
+                .load(SessionDetail.getSession(for: SessionDetail.self, id: self.sessionID.string))
+
+            self.state = self.buildFinishedSessionCells(standings: standings)
+        } catch {
+            self.state = .error(error.localizedDescription)
+        }
     }
 
     private func buildLiveStandingsCells(standings: [LiveSession.Position]) -> State {
