@@ -5,7 +5,7 @@ extension Color {
     enum Constructor {
 
         static let alphaRomeo: Color = .init("alphaRomeo")
-        static let alphaTauri: Color = .init("alphaTauri")
+        static let alphaTauri: Color = .init("alphatauri")
         static let alpine: Color = .init("alpine")
         static let astonMartin: Color = .init("astonMartin")
         static let ferrari: Color = .init("ferrari")

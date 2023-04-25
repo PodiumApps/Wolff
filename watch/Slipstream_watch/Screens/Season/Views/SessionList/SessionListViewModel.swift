@@ -16,8 +16,6 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
     private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
     private let liveEventService: LiveSessionServiceRepresentable
 
-    private var liveEventTimer: Timer? = nil
-
     @Published var state: State
     @Published private var sessionCells: [Cell]
 
@@ -99,6 +97,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                         buildLiveSessionCellViewModel(
                             sessionName: event.sessions[index].name,
                             sessionDate: event.sessions[index].date,
+                            sessionID: event.sessions[index].id,
                             podium: podium,
                             timeInterval: timeInterval
                         )
@@ -112,6 +111,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                         buildLiveSessionCellViewModel(
                             sessionName: event.sessions[index].name,
                             sessionDate: event.sessions[index].date,
+                            sessionID: event.sessions[index].id,
                             podium: [],
                             timeInterval: timeInterval
                         )
@@ -121,24 +121,6 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                 }
             }
             .assign(to: &$state)
-    }
-
-    private func updateLiveEventTimer(timeInterval: TimeInterval, triggerInterval: Double) {
-
-        liveEventTimer?.invalidate()
-
-        liveEventTimer =
-        Timer.scheduledTimer(withTimeInterval: triggerInterval, repeats: true) { [weak self, timeInterval] _ in
-
-                guard let self else { return }
-
-                if timeInterval < .minuteInterval {
-
-                    self.liveEventService.action.send(.updatePositions)
-                }
-
-                self.state = self.buildSessionRows()
-        }
     }
 
     private func buildSessionRows() -> State {
@@ -151,12 +133,11 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                 if session.winners.isEmpty && !liveEventCellBuilt {
                     liveEventCellBuilt = true
 
-                    updateLiveEventTimer(timeInterval: timeInterval, triggerInterval: 10)
-
                     return .live(
                         buildLiveSessionCellViewModel(
                             sessionName: session.name,
                             sessionDate: session.date,
+                            sessionID: session.id,
                             podium: [],
                             timeInterval: timeInterval
                         )
@@ -166,7 +147,11 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
 
             return session.winners.isEmpty
                 ? .upcoming(buildUpcomingSessionCellViewModel(sessionName: session.name, date: session.date))
-                : .finished(buildFinishedSessionCellViewModel(sessionName: session.name, podium: session.winners))
+                : .finished(buildFinishedSessionCellViewModel(
+                    sessionID: session.id,
+                    sessionName: session.name,
+                    podium: session.winners)
+                )
         }
 
         return .results(sessionCells)
@@ -186,20 +171,27 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
     private func buildLiveSessionCellViewModel(
         sessionName: Session.Name,
         sessionDate: Date,
+        sessionID: Session.ID,
         podium: [Driver.ID],
         timeInterval: TimeInterval
     ) -> LiveSessionCellViewModel {
 
         return LiveSessionCellViewModel(
             sessionName: sessionName.label,
+            sessionID: sessionID,
             podium: Driver.getPodiumDriverTickers(podium: podium, drivers: drivers),
             state: setUpLiveSessionState(podium: podium, date: sessionDate, timeInterval: timeInterval)
         )
     }
 
-    private func buildFinishedSessionCellViewModel(sessionName: Session.Name, podium: [Driver.ID]) -> FinishedSessionCellViewModel {
+    private func buildFinishedSessionCellViewModel(
+        sessionID: Session.ID,
+        sessionName: Session.Name,
+        podium: [Driver.ID]
+    ) -> FinishedSessionCellViewModel {
 
         return FinishedSessionCellViewModel(
+            sessionID: sessionID,
             session: sessionName.label,
             winners: Driver.getPodiumDriverFullName(podium: podium, drivers: drivers)
         )

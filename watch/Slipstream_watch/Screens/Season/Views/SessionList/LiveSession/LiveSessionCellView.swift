@@ -33,7 +33,11 @@ struct LiveSessionCellView<ViewModel: LiveSessionCellViewModelRepresentable>: Vi
 
     var body: some View {
         NavigationLink(destination: {
-            Text("Session Details")
+            SessionStandingsListView(
+                viewModel: SessionStandingsListViewModel.make(
+                    sessionID: viewModel.sessionID,
+                    sessionName: viewModel.sessionName
+                ))
         }) {
             HStack {
                 VStack(alignment: .leading, spacing: .Spacing.default) {
@@ -123,16 +127,5 @@ fileprivate enum Constants {
             static let yOffset: CGFloat = -1
             static let opacity: CGFloat = 0.70
         }
-    }
-}
-
-struct LiveSessionCellView_Previews: PreviewProvider {
-    static var previews: some View {
-        LiveSessionCellView(
-            viewModel: LiveSessionCellViewModel(
-                sessionName: "Practice 3",
-                podium: ["ALO", "HAM", "VER"], state: .aboutToStart
-            )
-        )
     }
 }

@@ -155,6 +155,8 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                 }
             }
             .assign(to: &$state)
+
+        liveEventService.action.send(.fetchPositions)
     }
 
     private func updateLiveEventTimer(timeInterval: TimeInterval, triggerInterval: Double) {
@@ -167,7 +169,6 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                 guard let self else { return }
 
                 if timeInterval < .minuteInterval {
-
                     self.liveEventService.action.send(.updatePositions)
                     liveEventTimer?.invalidate()
                 } else {

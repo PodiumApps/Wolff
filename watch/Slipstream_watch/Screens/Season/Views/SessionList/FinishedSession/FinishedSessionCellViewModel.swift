@@ -2,18 +2,21 @@ import Foundation
 
 protocol FinishedSessionCellViewModelRepresentable {
 
-    var session: String { get }
+    var sessionID: Session.ID { get }
+    var sessionName: String { get }
     var winners: [String] { get }
 }
 
 final class FinishedSessionCellViewModel: FinishedSessionCellViewModelRepresentable {
 
-    var session: String
+    var sessionID: Session.ID
+    var sessionName: String
     var winners: [String]
 
-    init(session: String, winners: [String]) {
+    init(sessionID: Session.ID, session: String, winners: [String]) {
 
-        self.session = session
+        self.sessionID = sessionID
+        self.sessionName = session
         self.winners = winners
     }
 }
