@@ -73,7 +73,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
 
                 guard
                     let self,
-                    case .results(let cells) = self.state,
+                    case .results(let cells, _) = self.state,
                     let index = cells.firstIndex(where: { $0.id == .live }),
                     case .live(let timeInterval, _) = event.status
                 else {
@@ -103,7 +103,9 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                         )
                     )
 
-                    return .results(sessionCells)
+                    let trackInfoCellViewModel = TrackInfoCellViewModel(trackName: "Monza International Circuit")
+
+                    return .results(sessionCells, trackInfoCellViewModel)
 
                 case .refreshing, .error:
 
@@ -117,7 +119,9 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                         )
                     )
 
-                    return .results(sessionCells)
+                    let trackInfoCellViewModel = TrackInfoCellViewModel(trackName: "Monza International Circuit")
+
+                    return .results(sessionCells, trackInfoCellViewModel)
                 }
             }
             .assign(to: &$state)
@@ -154,7 +158,9 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                 )
         }
 
-        return .results(sessionCells)
+        let trackInfoCellViewModel = TrackInfoCellViewModel(trackName: "Monza International Circuit")
+
+        return .results(sessionCells, trackInfoCellViewModel)
     }
 
     private func buildUpcomingSessionCellViewModel(
@@ -220,7 +226,7 @@ extension SessionListViewModel {
     enum State: Equatable {
 
         case loading
-        case results([Cell])
+        case results([Cell], TrackInfoCellViewModel)
         case error(String)
 
         enum Identifier {
@@ -237,6 +243,10 @@ extension SessionListViewModel {
             case .results: return .results
             case .error: return .error
             }
+        }
+
+        static func == (lhs: SessionListViewModel.State, rhs: SessionListViewModel.State) -> Bool {
+            lhs.id == rhs.id
         }
     }
 

@@ -1,5 +1,4 @@
 // MARK: - GrandPrixCard
-
 "grand_prix_card.top.round" = "Round %@";
 "grand_prix_card.label.time" = "in %@";
 
@@ -44,6 +43,7 @@
 
 // MARK: - Session
 "session.screen_title" = "Sessions";
+"session.track_info" = "Track Info";
 
 // MARK: - DriverStandingsCell
 "driver_standings_cell.time_gap" = "Time / Gap";
