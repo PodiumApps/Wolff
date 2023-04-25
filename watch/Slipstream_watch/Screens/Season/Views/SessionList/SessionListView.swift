@@ -22,7 +22,7 @@ struct SessionListView<ViewModel: SessionListViewModelRepresentable>: View {
                         case .live(let viewModel):
                             LiveSessionCellView(viewModel: viewModel)
                         case .upcoming(let viewModel):
-                            UpcomingSessionView(viewModel: viewModel)
+                            UpcomingSessionCellView(viewModel: viewModel)
                         case .finished(let viewModel):
                             FinishedSessionCellView(viewModel: viewModel)
                         }

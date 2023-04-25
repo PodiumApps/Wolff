@@ -97,14 +97,3 @@ fileprivate enum Constants {
         }
     }
 }
-
-//struct FinishedCellView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FinishedSessionCellView(
-//            viewModel: FinishedSessionCellViewModel(
-//                session: "Race",
-//                winners: ["VER", "ALO", "LEC"]
-//            )
-//        )
-//    }
-//}

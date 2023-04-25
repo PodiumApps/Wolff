@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct UpcomingSessionView<ViewModel: UpcomingSessionCellViewModelRepresentable>: View {
+struct UpcomingSessionCellView<ViewModel: UpcomingSessionCellViewModelRepresentable>: View {
 
     private let viewModel: ViewModel
 
@@ -17,21 +17,9 @@ struct UpcomingSessionView<ViewModel: UpcomingSessionCellViewModelRepresentable>
                 Text(viewModel.sessionName)
                     .font(.Body.semibold)
 
-                if viewModel.date.isSessionToday {
-                    Text(Localization.SessionTime.today(DateFormatter.timeForSession.string(from: viewModel.date)))
-                        .font(.Caption.regular)
-                        .foregroundColor(.gray)
-                } else if viewModel.date.isSessionTomorrow {
-                    Text(Localization.SessionTime.tomorrow(
-                        DateFormatter.timeForSession.string(from: viewModel.date)
-                    ))
-                        .font(.Caption.regular)
-                        .foregroundColor(.gray)
-                } else {
-                    Text(DateFormatter.session.string(from: viewModel.date))
-                        .font(.Caption.regular)
-                        .foregroundColor(.gray)
-                }
+                Text(viewModel.formattedDate)
+                    .font(.Caption.regular)
+                    .foregroundColor(.gray)
             }
 
             Spacer()
@@ -53,7 +41,7 @@ fileprivate enum Constants {
 
 struct UpcomingSessionView_Previews: PreviewProvider {
     static var previews: some View {
-        UpcomingSessionView(
+        UpcomingSessionCellView(
             viewModel: UpcomingSessionCellViewModel(
                 sessionName: "Practice 2",
                 date: Date()

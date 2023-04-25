@@ -129,14 +129,3 @@ fileprivate enum Constants {
         }
     }
 }
-
-//struct LiveSessionCellView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LiveSessionCellView(
-//            viewModel: LiveSessionCellViewModel(
-//                sessionName: "Practice 3",
-//                podium: ["ALO", "HAM", "VER"], state: .aboutToStart
-//            )
-//        )
-//    }
-//}
