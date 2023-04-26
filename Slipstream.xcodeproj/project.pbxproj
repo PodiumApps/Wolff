@@ -1036,7 +1036,8 @@
 /* Begin PBXShellScriptBuildPhase section */
 		CFE23F482982E92F00412DB6 /* swiftgen */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			alwaysOutOfDate = 1;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -1048,7 +1049,7 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [[ -z $CI ]]; then\n    swiftgen config run --config \"$SRCROOT/Shared/Resources/swiftgen.yml\"\nfi\n";
 		};

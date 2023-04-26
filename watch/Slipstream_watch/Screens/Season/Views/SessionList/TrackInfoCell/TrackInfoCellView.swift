@@ -12,24 +12,28 @@ struct TrackInfoCellView<ViewModel: TrackInfoCellViewModelRepresentable>: View {
     var body: some View {
 
         NavigationLink(destination: {
-            Text("Track Info Details")
+            TrackInfoView(viewModel: TrackInfoViewModel(
+                raceDistance: viewModel.event.raceDistance,
+                trackLength: viewModel.event.length,
+                firstGrandPrix: viewModel.event.firstGrandPrix,
+                lapRecord: viewModel.event.lapRecord
+            ))
         }) {
-
             HStack {
                 VStack(alignment: .leading, spacing: .Spacing.default0) {
 
                     Text("Track Info")
                         .font(.Body.semibold)
 
-                    Text(viewModel.trackName)
-                        .font(.Caption.regular)
+                    Text(viewModel.event.name)
+                        .font(.Caption.medium)
                         .foregroundColor(.gray)
                 }
 
                 Spacer()
             }
         }
-        .background(
+        .listRowBackground(
             RoundedRectangle(cornerRadius: Constants.Background.cornerRadius)
                 .fill(Color.Event.watchCompletedOrUpcomingEvent)
         )

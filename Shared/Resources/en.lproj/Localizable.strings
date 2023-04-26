@@ -43,10 +43,16 @@
 
 // MARK: - Session
 "session.screen_title" = "Sessions";
-"session.track_info" = "Track Info";
 
 // MARK: - DriverStandingsCell
 "driver_standings_cell.time_gap" = "Time / Gap";
 "driver_standings_cell.leader" = "Leader";
 "driver_standings_cell.tyre" = "Tyre";
 "driver_standings_cell.car_number" = "Car %@";
+
+// MARK: - TrackInfo
+"track_info.screen_title" = "Track Info";
+"track_info.first_grand_prix" = "First Grand Prix";
+"track_info.lap_record" = "Lap Record";
+"track_info.track_length" = "Track Length";
+"track_info.race_distance" = "Race Distance";

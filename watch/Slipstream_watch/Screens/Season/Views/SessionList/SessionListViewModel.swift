@@ -73,7 +73,9 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
 
                 guard
                     let self,
-                    case .results(let cells, _) = self.state,
+                    case .results(var sections) = self.state,
+                    let sectionIndex = sections.firstIndex(where: { $0.id == .cells }),
+                    case .cells(let cells) = sections[sectionIndex],
                     let index = cells.firstIndex(where: { $0.id == .live }),
                     case .live(let timeInterval, _) = event.status
                 else {
@@ -93,6 +95,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                         guard let driver = self.drivers.first(where: { $0.id == position.id }) else { return nil }
                         return driver.id
                     }
+
                     sessionCells[index] = .live(
                         buildLiveSessionCellViewModel(
                             sessionName: event.sessions[index].name,
@@ -103,9 +106,8 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                         )
                     )
 
-                    let trackInfoCellViewModel = TrackInfoCellViewModel(trackName: "Monza International Circuit")
-
-                    return .results(sessionCells, trackInfoCellViewModel)
+                    sections[sectionIndex] = .cells(sessionCells)
+                    return .results(sections)
 
                 case .refreshing, .error:
 
@@ -119,15 +121,16 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                         )
                     )
 
-                    let trackInfoCellViewModel = TrackInfoCellViewModel(trackName: "Monza International Circuit")
-
-                    return .results(sessionCells, trackInfoCellViewModel)
+                    sections[sectionIndex] = .cells(sessionCells)
+                    return .results(sections)
                 }
             }
             .assign(to: &$state)
     }
 
     private func buildSessionRows() -> State {
+
+        let trackInfoCellViewModel = TrackInfoCellViewModel(event: event)
 
         var liveEventCellBuilt = false
 
@@ -158,9 +161,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                 )
         }
 
-        let trackInfoCellViewModel = TrackInfoCellViewModel(trackName: "Monza International Circuit")
-
-        return .results(sessionCells, trackInfoCellViewModel)
+        return .results([.header(trackInfoCellViewModel), .cells(sessionCells)])
     }
 
     private func buildUpcomingSessionCellViewModel(
@@ -226,7 +227,7 @@ extension SessionListViewModel {
     enum State: Equatable {
 
         case loading
-        case results([Cell], TrackInfoCellViewModel)
+        case results([SessionListViewModel.Section])
         case error(String)
 
         enum Identifier {
@@ -245,7 +246,31 @@ extension SessionListViewModel {
             }
         }
 
-        static func == (lhs: SessionListViewModel.State, rhs: SessionListViewModel.State) -> Bool {
+        static func == (lhs: Self, rhs: Self) -> Bool {
+            lhs.id == rhs.id
+        }
+    }
+
+    enum Section: Equatable, Identifiable {
+
+        case header(TrackInfoCellViewModel)
+        case cells([Cell])
+
+        enum Identifier {
+
+            case header
+            case cells
+        }
+
+        var id: Identifier {
+
+            switch self {
+            case .header: return .header
+            case .cells: return .cells
+            }
+        }
+
+        static func == (lhs: Self, rhs: Self) -> Bool {
             lhs.id == rhs.id
         }
     }
@@ -272,7 +297,7 @@ extension SessionListViewModel {
             }
         }
 
-        static func == (lhs: SessionListViewModel.Cell, rhs: SessionListViewModel.Cell) -> Bool {
+        static func == (lhs: Self, rhs: Self) -> Bool {
             lhs.id == rhs.id
         }
     }

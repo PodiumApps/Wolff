@@ -2,14 +2,14 @@ import Foundation
 
 protocol TrackInfoCellViewModelRepresentable {
 
-    var trackName: String { get }
+    var event: Event { get }
 }
 
 final class TrackInfoCellViewModel: TrackInfoCellViewModelRepresentable {
 
-    var trackName: String
+    var event: Event
 
-    init(trackName: String) {
-        self.trackName = trackName
+    init(event: Event) {
+        self.event = event
     }
 }

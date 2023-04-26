@@ -1,20 +1,30 @@
-//
-//  TrackInfoView.swift
-//  Slipstream_watch
-//
-//  Created by Tomás Mamede on 25/04/2023.
-//
-
 import SwiftUI
 
-struct TrackInfoView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+struct TrackInfoView<ViewModel: TrackInfoViewModelRepresentable>: View {
 
-struct TrackInfoView_Previews: PreviewProvider {
-    static var previews: some View {
-        TrackInfoView()
+    private let viewModel: ViewModel
+
+    init(viewModel: ViewModel) {
+        self.viewModel = viewModel
+    }
+
+    var body: some View {
+
+        VStack(alignment: .leading) {
+            ScrollView {
+                ForEach(0 ..< viewModel.infoComponents.count, id: \.self) { index in
+                    VStack(alignment: .leading) {
+                        Divider()
+                        Text(viewModel.infoComponents[index].key.uppercased())
+                            .font(.Body.regular)
+                            .foregroundColor(.accentColor)
+                        Text(viewModel.infoComponents[index].value)
+                            .font(.Body.medium)
+                    }
+                    .padding(.horizontal, 5)
+                }
+            }
+        }
+        .navigationTitle(Localization.TrackInfo.screenTitle)
     }
 }

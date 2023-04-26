@@ -5,7 +5,6 @@ struct Event: Decodable {
     typealias ID = Identifier<Event>
     
     let id: ID
-//    let circuitName: String
     let firstGrandPrix: Int
     let lapRecord: String
     let name: String
