@@ -10,3 +10,5 @@ struct Details: Decodable, Hashable {
     let timesHighestRacePos: Int
     let highestGridPos: Int
 }
+
+

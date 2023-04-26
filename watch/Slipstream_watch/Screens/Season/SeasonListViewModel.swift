@@ -400,13 +400,6 @@ extension SeasonListViewModel {
 
     enum State: Equatable {
 
-        static func == (
-            lhs: SeasonListViewModel.State,
-            rhs: SeasonListViewModel.State
-        ) -> Bool {
-            lhs.id == rhs.id
-        }
-
         case error(String)
         case results([Cell])
         case loading
@@ -426,18 +419,18 @@ extension SeasonListViewModel {
             case .error: return .error
             }
         }
+
+        static func == (
+            lhs: Self,
+            rhs: Self
+        ) -> Bool {
+            lhs.id == rhs.id
+        }
     }
 
     enum Route: Hashable {
 
         case sessionStandings // SessionStandingsViewModel
-
-        static func == (
-            lhs: SeasonListViewModel.Route,
-            rhs: SeasonListViewModel.Route
-        ) -> Bool {
-            lhs.id == rhs.id
-        }
 
         func hash(into hasher: inout Hasher) {
             hasher.combine(id)
@@ -447,6 +440,13 @@ extension SeasonListViewModel {
             switch self {
             case .sessionStandings: return "sessionStandings"
             }
+        }
+
+        static func == (
+            lhs: Self,
+            rhs: Self
+        ) -> Bool {
+            lhs.id == rhs.id
         }
     }
 }
