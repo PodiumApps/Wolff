@@ -7,7 +7,7 @@ protocol TrackInfoCellViewModelRepresentable {
 
 final class TrackInfoCellViewModel: TrackInfoCellViewModelRepresentable {
 
-    var event: Event
+    let event: Event
 
     init(event: Event) {
         self.event = event

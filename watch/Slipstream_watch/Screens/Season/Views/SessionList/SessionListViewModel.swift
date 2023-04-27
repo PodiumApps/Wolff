@@ -130,7 +130,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
 
     private func buildSessionRows() -> State {
 
-        let trackInfoCellViewModel = TrackInfoCellViewModel(event: event)
+        let trackInfoCellViewModel: TrackInfoCellViewModel = .init(event: event)
 
         var liveEventCellBuilt = false
 
@@ -227,7 +227,7 @@ extension SessionListViewModel {
     enum State: Equatable {
 
         case loading
-        case results([SessionListViewModel.Section])
+        case results([Section])
         case error(String)
 
         enum Identifier {

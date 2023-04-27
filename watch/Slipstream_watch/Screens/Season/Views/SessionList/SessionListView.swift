@@ -8,6 +8,13 @@ struct SessionListView<ViewModel: SessionListViewModelRepresentable>: View {
         self.viewModel = viewModel
     }
 
+    private var listRowBackground: some View {
+        Color.red
+            .opacity(Constants.RowBackground.opacity)
+            .clipped()
+            .cornerRadius(Constants.RowBackground.cornerRadius)
+    }
+
     var body: some View {
         Group {
             switch viewModel.state {
@@ -35,13 +42,8 @@ struct SessionListView<ViewModel: SessionListViewModelRepresentable>: View {
                                         FinishedSessionCellView(viewModel: viewModel)
                                     }
                                 }
-                                .background(
-                                    cells[index].id == .live
-                                        ? Color.red
-                                            .opacity(Constants.RowBackground.opacity)
-                                            .clipped()
-                                            .cornerRadius(Constants.RowBackground.cornerRadius)
-                                        : nil
+                                .listRowBackground(
+                                    cells[index].id == .live ? listRowBackground : nil
                                 )
                             }
                         }

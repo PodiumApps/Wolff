@@ -5,6 +5,7 @@ struct TrackInfoView<ViewModel: TrackInfoViewModelRepresentable>: View {
     private let viewModel: ViewModel
 
     init(viewModel: ViewModel) {
+        
         self.viewModel = viewModel
     }
 
@@ -21,10 +22,18 @@ struct TrackInfoView<ViewModel: TrackInfoViewModelRepresentable>: View {
                         Text(viewModel.infoComponents[index].value)
                             .font(.Body.medium)
                     }
-                    .padding(.horizontal, 5)
+                    .padding(.horizontal, Constants.Padding.horizontal)
                 }
             }
         }
         .navigationTitle(Localization.TrackInfo.screenTitle)
+    }
+}
+
+fileprivate enum Constants {
+
+    enum Padding {
+
+        static let horizontal: CGFloat = 5
     }
 }

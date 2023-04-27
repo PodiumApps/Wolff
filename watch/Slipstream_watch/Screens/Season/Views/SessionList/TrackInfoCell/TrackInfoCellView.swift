@@ -22,7 +22,7 @@ struct TrackInfoCellView<ViewModel: TrackInfoCellViewModelRepresentable>: View {
             HStack {
                 VStack(alignment: .leading, spacing: .Spacing.default0) {
 
-                    Text("Track Info")
+                    Text(Localization.TrackInfo.screenTitle)
                         .font(.Body.semibold)
 
                     Text(viewModel.event.name)
