@@ -8,6 +8,13 @@ struct SessionListView<ViewModel: SessionListViewModelRepresentable>: View {
         self.viewModel = viewModel
     }
 
+    private var listRowBackground: some View {
+        Color.red
+            .opacity(Constants.RowBackground.opacity)
+            .clipped()
+            .cornerRadius(Constants.RowBackground.cornerRadius)
+    }
+
     var body: some View {
         Group {
             switch viewModel.state {
@@ -15,26 +22,32 @@ struct SessionListView<ViewModel: SessionListViewModelRepresentable>: View {
                 Text(error)
             case .loading:
                 ProgressView()
-            case .results(let cells):
-                List(0 ..< cells.count, id: \.self) { index in
-                    Group {
-                        switch cells[index] {
-                        case .live(let viewModel):
-                            LiveSessionCellView(viewModel: viewModel)
-                        case .upcoming(let viewModel):
-                            UpcomingSessionCellView(viewModel: viewModel)
-                        case .finished(let viewModel):
-                            FinishedSessionCellView(viewModel: viewModel)
+            case .results(let sections):
+                List {
+                    ForEach(0 ..< sections.count, id: \.self) { sectionIndex in
+                        switch sections[sectionIndex] {
+                        case .header(let trackInfoViewModel):
+                            Section {
+                                TrackInfoCellView(viewModel: trackInfoViewModel)
+                            }
+                        case .cells(let cells):
+                            ForEach(0 ..< cells.count, id: \.self) { index in
+                                Group {
+                                    switch cells[index] {
+                                    case .live(let viewModel):
+                                        LiveSessionCellView(viewModel: viewModel)
+                                    case .upcoming(let viewModel):
+                                        UpcomingSessionCellView(viewModel: viewModel)
+                                    case .finished(let viewModel):
+                                        FinishedSessionCellView(viewModel: viewModel)
+                                    }
+                                }
+                                .listRowBackground(
+                                    cells[index].id == .live ? listRowBackground : nil
+                                )
+                            }
                         }
                     }
-                    .listRowBackground(
-                        cells[index].id == .live
-                            ? Color.red
-                                .opacity(Constants.RowBackground.opacity)
-                                .clipped()
-                                .cornerRadius(Constants.RowBackground.cornerRadius)
-                            : nil
-                    )
                 }
             }
         }

@@ -1,5 +1,4 @@
 // MARK: - GrandPrixCard
-
 "grand_prix_card.top.round" = "Round %@";
 "grand_prix_card.label.time" = "in %@";
 
@@ -50,3 +49,12 @@
 "driver_standings_cell.leader" = "Leader";
 "driver_standings_cell.tyre" = "Tyre";
 "driver_standings_cell.car_number" = "Car %@";
+
+// MARK: - TrackInfo
+"track_info.screen_title" = "Track Info";
+"track_info.first_grand_prix" = "First Grand Prix";
+"track_info.lap_record" = "Lap Record";
+"track_info.track_length" = "Track Length";
+"track_info.track_length_value" = "%@ km";
+"track_info.race_distance" = "Race Distance";
+"track_info.race_distance_value" = "%@ km";

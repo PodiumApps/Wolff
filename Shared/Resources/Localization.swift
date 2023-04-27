@@ -110,6 +110,26 @@ internal enum Localization {
       return Localization.tr("Localizable", "session_time.tomorrow", String(describing: p1), fallback: "Tomorrow at %@")
     }
   }
+  internal enum TrackInfo {
+    /// First Grand Prix
+    internal static let firstGrandPrix = Localization.tr("Localizable", "track_info.first_grand_prix", fallback: "First Grand Prix")
+    /// Lap Record
+    internal static let lapRecord = Localization.tr("Localizable", "track_info.lap_record", fallback: "Lap Record")
+    /// Race Distance
+    internal static let raceDistance = Localization.tr("Localizable", "track_info.race_distance", fallback: "Race Distance")
+    /// %@ km
+    internal static func raceDistanceValue(_ p1: Any) -> String {
+      return Localization.tr("Localizable", "track_info.race_distance_value", String(describing: p1), fallback: "%@ km")
+    }
+    /// Track Info
+    internal static let screenTitle = Localization.tr("Localizable", "track_info.screen_title", fallback: "Track Info")
+    /// Track Length
+    internal static let trackLength = Localization.tr("Localizable", "track_info.track_length", fallback: "Track Length")
+    /// %@ km
+    internal static func trackLengthValue(_ p1: Any) -> String {
+      return Localization.tr("Localizable", "track_info.track_length_value", String(describing: p1), fallback: "%@ km")
+    }
+  }
   internal enum UpcomingAndStandingsCell {
     internal enum Segment {
       /// Past
