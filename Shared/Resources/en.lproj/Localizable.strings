@@ -55,4 +55,6 @@
 "track_info.first_grand_prix" = "First Grand Prix";
 "track_info.lap_record" = "Lap Record";
 "track_info.track_length" = "Track Length";
+"track_info.track_length_value" = "%@ km";
 "track_info.race_distance" = "Race Distance";
+"track_info.race_distance_value" = "%@ km";

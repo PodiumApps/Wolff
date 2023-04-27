@@ -14,8 +14,8 @@ final class TrackInfoViewModel: TrackInfoViewModelRepresentable {
         self.infoComponents = [
             (key: Localization.TrackInfo.lapRecord, value: lapRecord),
             (key: Localization.TrackInfo.firstGrandPrix, value: String(firstGrandPrix)),
-            (key: Localization.TrackInfo.trackLength, value: String(trackLength)),
-            (key: Localization.TrackInfo.raceDistance, value: String(raceDistance))
+            (key: Localization.TrackInfo.trackLength, value: Localization.TrackInfo.trackLengthValue(trackLength)),
+            (key: Localization.TrackInfo.raceDistance, value: Localization.TrackInfo.raceDistanceValue(raceDistance))
         ]
     }
 }

@@ -22,18 +22,10 @@ struct TrackInfoView<ViewModel: TrackInfoViewModelRepresentable>: View {
                         Text(viewModel.infoComponents[index].value)
                             .font(.Body.medium)
                     }
-                    .padding(.horizontal, Constants.Padding.horizontal)
+                    .padding(.horizontal, .Spacing.default)
                 }
             }
         }
         .navigationTitle(Localization.TrackInfo.screenTitle)
-    }
-}
-
-fileprivate enum Constants {
-
-    enum Padding {
-
-        static let horizontal: CGFloat = 5
     }
 }
