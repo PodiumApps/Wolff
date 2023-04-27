@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 import Combine
 
 protocol AppViewModelRepresentable: ObservableObject {
@@ -10,11 +10,18 @@ class AppViewModel: AppViewModelRepresentable {
     
     @Published var state: State = .loading
     
-    private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
+    @AppStorage(UserDefaultsKeys.firstTime.rawValue) private var firstTime: Bool = false
     
-    init(driverAndConstructorService: DriverAndConstructorServiceRepresentable) {
+    private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
+    private let networkManager: NetworkManagerRepresentable
+    
+    init(
+        driverAndConstructorService: DriverAndConstructorServiceRepresentable,
+        networkManager: NetworkManagerRepresentable
+    ) {
         
         self.driverAndConstructorService = driverAndConstructorService
+        self.networkManager = networkManager
         
         load()
     }
@@ -25,6 +32,10 @@ class AppViewModel: AppViewModelRepresentable {
         driverAndConstructorService.action.send(.fetchAll)
         let seasonListViewModel = SeasonListViewModel.make()
         state = .results(seasonListViewModel)
+        
+        Task {
+            let _ = try? await networkManager.load(User.createOrUpdate(isPremium: false))
+        }
     }
     
 }
@@ -43,6 +54,9 @@ extension AppViewModel {
     
     static func make() -> AppViewModel {
         
-        .init(driverAndConstructorService: ServiceLocator.shared.driverAndConstructorService)
+        .init(
+            driverAndConstructorService: ServiceLocator.shared.driverAndConstructorService,
+            networkManager: NetworkManager.shared
+        )
     }
 }

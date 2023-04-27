@@ -2,8 +2,10 @@ import Foundation
 
 enum UserDefaultsKeys: String {
     
-    case drivers = "drivers"
-    case constructors = "constructors"
+    case drivers = "com.tomasmamede.slipstream-drivers"
+    case constructors = "com.tomasmamede.slipstream-constructors"
+    case user = "com.tomasmamede.slipstream-user"
+    case firstTime = "com.tomasmamede.slipstream-first-time"
 }
 
 @propertyWrapper

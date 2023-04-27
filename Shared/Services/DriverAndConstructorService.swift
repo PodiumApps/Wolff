@@ -62,15 +62,15 @@ class DriverAndConstructorService: DriverAndConstructorServiceRepresentable {
         }
         
         do {
-            let drivers = try await networkManager.load(Driver.getDrivers())
-            self.persistedDrivers = drivers
-            Logger.driverAndConstructorService.info("Fetched \(drivers.count) drivers")
+            async let drivers = networkManager.load(Driver.getDrivers())
+            self.persistedDrivers = try await drivers
+            Logger.driverAndConstructorService.info("Fetched \(self.persistedDrivers?.count ?? 0) drivers")
             
-            let constructors = try await networkManager.load(Constructor.getConstructors())
-            self.persistedConstructors = constructors
-            Logger.driverAndConstructorService.info("Fetched \(constructors.count) constructors")
+            async let constructors = networkManager.load(Constructor.getConstructors())
+            self.persistedConstructors = try await constructors
+            Logger.driverAndConstructorService.info("Fetched \(self.persistedConstructors?.count ?? 0) constructors")
             
-            state = .refreshed(drivers, constructors)
+            state = try await .refreshed(drivers, constructors)
         } catch {
             Logger.driverAndConstructorService.error("Fetch all drivers failed with \(error)")
             state = .error(error)
