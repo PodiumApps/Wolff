@@ -5,12 +5,14 @@ import OSLog
 protocol SeasonListViewModelRepresentable: ObservableObject {
 
     var state: SeasonListViewModel.State { get }
-    var route: [SeasonListViewModel.Route] { get set }
+    var route: [AppViewModel.Route] { get set }
     var action: PassthroughSubject<SeasonListViewModel.Action, Never> { get }
     var indexFirstToAppear: Int { get set }
 }
 
 final class SeasonListViewModel: SeasonListViewModelRepresentable {
+
+    var route: [AppViewModel.Route]
 
     private var firstReload: Bool = true
 
@@ -40,17 +42,19 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
     private var subscriptions = Set<AnyCancellable>()
     var action = PassthroughSubject<Action, Never>()
     @Published var state: SeasonListViewModel.State
-    @Published var route: [SeasonListViewModel.Route]
+//    @Published var route: [SeasonListViewModel.Route]
 
     @Published var indexFirstToAppear: Int = 0
 
     var eventCells: [Cell]
 
     init(
+        path: [AppViewModel.Route],
         driversAndConstructorService: DriverAndConstructorServiceRepresentable,
         eventService: EventServiceRepresentable,
         liveEventService: LiveSessionServiceRepresentable
     ) {
+        self.route = path
 
         self.drivers = []
         self.constructors = []
@@ -274,6 +278,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
     ) -> LiveEventCardViewModel {
 
         LiveEventCardViewModel(
+            route: route,
             id: event.id,
             title: event.title,
             country: event.country,
@@ -315,6 +320,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
     ) -> FinishedEventCardViewModel {
 
         FinishedEventCardViewModel(
+            route: route,
             id: event.id,
             title: event.title,
             country: event.country,
@@ -439,9 +445,10 @@ extension SeasonListViewModel {
 
 extension SeasonListViewModel {
 
-    static func make() -> SeasonListViewModel {
+    static func make(route: [AppViewModel.Route]) -> SeasonListViewModel {
 
         .init(
+            path: route,
             driversAndConstructorService: ServiceLocator.shared.driverAndConstructorService,
             eventService: ServiceLocator.shared.eventService,
             liveEventService: ServiceLocator.shared.liveSessionService

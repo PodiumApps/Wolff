@@ -10,7 +10,7 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
 
     var body: some View {
 
-        NavigationView {
+        NavigationStack(path: $viewModel.route) {
             Group {
                 switch viewModel.state {
                 case .error(let error):

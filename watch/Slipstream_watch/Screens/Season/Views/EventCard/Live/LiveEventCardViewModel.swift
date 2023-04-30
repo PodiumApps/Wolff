@@ -10,10 +10,14 @@ protocol LiveEventCardViewModelRepresentable: ObservableObject {
     var sessionName: String { get }
     var podium: [String]? { get }
     var state: LiveEventCardViewModel.State { get }
-    var sessionListViewModel: SessionListViewModel{ get }
+    var sessionListViewModel: SessionListViewModel { get }
+
+    func tapEvent() -> Void
 }
 
 final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
+
+    var route: [AppViewModel.Route]
 
     var id: Event.ID
     var title: String
@@ -26,6 +30,7 @@ final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
     var sessionListViewModel: SessionListViewModel
 
     init(
+        route: [AppViewModel.Route],
         id: Event.ID,
         title: String,
         country: String,
@@ -36,7 +41,8 @@ final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
         state: State,
         sessionListViewModel: SessionListViewModel
     ) {
-
+        self.route = route
+        
         self.id = id
         self.title = title
         self.country = country
@@ -46,6 +52,11 @@ final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
         self.podium = podium
         self.state = state
         self.sessionListViewModel = sessionListViewModel
+    }
+
+    func tapEvent() {
+
+        route.append(.sessionsList(self.sessionListViewModel))
     }
 }
 

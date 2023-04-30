@@ -30,8 +30,8 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
 
     var body: some View {
         
-        NavigationLink(destination: {
-            SessionListView(viewModel: viewModel.sessionListViewModel)
+        Button(action: {
+            viewModel.tapEvent()
         }) {
             HStack {
                 VStack(alignment: .leading, spacing: .Spacing.default2) {
@@ -47,15 +47,15 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
                                     .minimumScaleFactor(Constants.Country.minimumScalingFactor)
                                     .font(.Caption.semibold)
                             }
-
+                            
                             Spacer()
-
+                            
                             Text(Localization.LiveCardCell.Top.round(viewModel.round))
                                 .font(.Caption2.semibold)
                                 .foregroundColor(.red)
                         }
                     }
-
+                    
                     switch viewModel.state {
                     case .aboutToStart:
                         createAboutToStartSection()
@@ -68,12 +68,12 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
                         createHappeningNowSection(podium: podium)
                     }
                 }
-
+                
                 Spacer()
             }
             .padding(.horizontal, Constants.Card.horizontalPadding)
         }
-        .listRowBackground(
+        .background(
             RoundedRectangle(cornerRadius: Constants.Background.cornerRadius)
                 .fill(Color.red)
                 .opacity(backgroundOpacity)

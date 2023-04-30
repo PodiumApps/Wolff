@@ -3,17 +3,20 @@ import Foundation
 protocol AppViewModelRepresentable: ObservableObject {
 
     var state: AppViewModel.State { get }
+    var route: [AppViewModel.Route] { get set }
 }
 
 final class AppViewModel: AppViewModelRepresentable {
 
     @Published var state: State = .loading
+    @Published var route: [Route]
 
     private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
 
     init(driverAndConstructorService: DriverAndConstructorServiceRepresentable) {
 
         self.driverAndConstructorService = driverAndConstructorService
+        self.route = []
 
         load()
     }
@@ -22,7 +25,7 @@ final class AppViewModel: AppViewModelRepresentable {
 
         driverAndConstructorService.action.send(.fetchAll)
 
-        let seasonListViewModel = SeasonListViewModel.make()
+        let seasonListViewModel = SeasonListViewModel.make(route: route)
         state = .results(seasonListViewModel)
     }
 }
@@ -34,6 +37,29 @@ extension AppViewModel {
         case loading
         case error(String)
         case results(SeasonListViewModel)
+    }
+
+    enum Route: Hashable {
+
+        case seasonList(SeasonListViewModel)
+        case sessionsList(SessionListViewModel)
+        case sessionStandingsList(SessionStandingsListViewModel)
+
+        var id: String {
+            switch self {
+            case .seasonList: return "seasonList"
+            case .sessionsList: return "sessionList"
+            case .sessionStandingsList: return "sessionStandingsList"
+            }
+        }
+
+        static func == (lhs: Self, rhs: Self) -> Bool {
+            lhs.id == rhs.id
+        }
+
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
+        }
     }
 }
 
