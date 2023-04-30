@@ -12,7 +12,7 @@ protocol SeasonListViewModelRepresentable: ObservableObject {
 
 final class SeasonListViewModel: SeasonListViewModelRepresentable {
 
-    var route: [AppViewModel.Route]
+    @Published var route: [AppViewModel.Route]
 
     private var firstReload: Bool = true
 

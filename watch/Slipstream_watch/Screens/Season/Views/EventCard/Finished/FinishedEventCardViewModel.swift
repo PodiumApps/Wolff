@@ -15,7 +15,7 @@ protocol FinishedEventCardViewModelRepresentable: ObservableObject {
 
 final class FinishedEventCardViewModel: FinishedEventCardViewModelRepresentable {
 
-    var route: [AppViewModel.Route]
+    @Published var route: [AppViewModel.Route]
 
     var id: Event.ID
     var title: String
