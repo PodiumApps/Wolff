@@ -12,24 +12,16 @@ protocol SeasonListViewModelRepresentable: ObservableObject {
 
 final class SeasonListViewModel: SeasonListViewModelRepresentable {
 
-    @Published var route: [AppViewModel.Route]
-
     private var firstReload: Bool = true
-
-    // Models
 
     private var drivers: [Driver]
     private var constructors: [Constructor]
     private var events: [Event]
     private var nextEvent: Event?
 
-    // Services
-
     private let eventService: EventServiceRepresentable
     private let driversAndConstructorService: DriverAndConstructorServiceRepresentable
     private let liveEventService: LiveSessionServiceRepresentable
-
-    // Timer
 
     private let fiveMinutesInSeconds: Double = 5 * 60
     private var updateAllEventsTimer: Timer? = nil
@@ -37,24 +29,20 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
     private let oneMinuteInSeconds: Double = 60
     private var liveEventTimer: Timer? = nil
 
-    // Published / Combine
-
     private var subscriptions = Set<AnyCancellable>()
     var action = PassthroughSubject<Action, Never>()
-    @Published var state: SeasonListViewModel.State
-//    @Published var route: [SeasonListViewModel.Route]
 
+    @Published var route: [AppViewModel.Route]
+    @Published var state: SeasonListViewModel.State
     @Published var indexFirstToAppear: Int = 0
 
     var eventCells: [Cell]
 
     init(
-        path: [AppViewModel.Route],
         driversAndConstructorService: DriverAndConstructorServiceRepresentable,
         eventService: EventServiceRepresentable,
         liveEventService: LiveSessionServiceRepresentable
     ) {
-        self.route = path
 
         self.drivers = []
         self.constructors = []
@@ -445,10 +433,9 @@ extension SeasonListViewModel {
 
 extension SeasonListViewModel {
 
-    static func make(route: [AppViewModel.Route]) -> SeasonListViewModel {
+    static func make() -> SeasonListViewModel {
 
         .init(
-            path: route,
             driversAndConstructorService: ServiceLocator.shared.driverAndConstructorService,
             eventService: ServiceLocator.shared.eventService,
             liveEventService: ServiceLocator.shared.liveSessionService
