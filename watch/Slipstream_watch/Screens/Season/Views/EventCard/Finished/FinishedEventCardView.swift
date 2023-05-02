@@ -11,54 +11,42 @@ struct FinishedEventCardView<ViewModel: FinishedEventCardViewModelRepresentable>
 
     var body: some View {
 
-        NavigationStack(path: $viewModel.route) {
-            Button(action: {
-                viewModel.tapEvent()
-            }) {
-                HStack {
-                    VStack(alignment: .leading, spacing: .Spacing.default2) {
-                        VStack(alignment: .leading) {
-                            Text(viewModel.title)
-                                .lineLimit(Constants.Title.lineLimit)
-                                .minimumScaleFactor(Constants.Title.minimumScalingFactor)
-                                .font(.Body.semibold)
-                            HStack(spacing: .Spacing.default3) {
-                                HStack {
-                                    Text(viewModel.country)
-                                        .lineLimit(Constants.Country.lineLimit)
-                                        .minimumScaleFactor(Constants.Country.minimumScalingFactor)
-                                        .font(.Caption.semibold)
-                                }
-
-                                Spacer()
-
-                                Text(Localization.LiveCardCell.Top.round(viewModel.round))
-                                    .lineLimit(Constants.Round.lineLimit)
-                                    .font(.Caption2.semibold)
+        Button(action: {
+            viewModel.tapEvent()
+        }) {
+            HStack {
+                VStack(alignment: .leading, spacing: .Spacing.default2) {
+                    VStack(alignment: .leading) {
+                        Text(viewModel.title)
+                            .lineLimit(Constants.Title.lineLimit)
+                            .minimumScaleFactor(Constants.Title.minimumScalingFactor)
+                            .font(.Body.semibold)
+                        HStack(spacing: .Spacing.default3) {
+                            HStack {
+                                Text(viewModel.country)
+                                    .lineLimit(Constants.Country.lineLimit)
+                                    .minimumScaleFactor(Constants.Country.minimumScalingFactor)
+                                    .font(.Caption.semibold)
                             }
-                            .foregroundColor(.gray)
+                            
+                            Spacer()
+                            
+                            Text(Localization.LiveCardCell.Top.round(viewModel.round))
+                                .lineLimit(Constants.Round.lineLimit)
+                                .font(.Caption2.semibold)
                         }
-
-                        createPodiumSection(podium: viewModel.podium)
+                        .foregroundColor(.gray)
                     }
-                }
-                .padding(.horizontal, Constants.Padding.horizontal)
-            }
-            .background(
-                RoundedRectangle(cornerRadius: Constants.Background.cornerRadius)
-                    .fill(Color.Event.watchCompletedOrUpcomingEvent)
-            )
-            .navigationDestination(for: AppViewModel.Route.self) { route in
-                switch route {
-                case .sessionsList(let viewModel):
-                    SessionListView(viewModel: viewModel)
-                case .seasonList(let viewModel):
-                    SeasonListView(viewModel: viewModel)
-                case .sessionStandingsList(let viewModel):
-                    SessionStandingsListView(viewModel: viewModel)
+                    
+                    createPodiumSection(podium: viewModel.podium)
                 }
             }
+            .padding(.horizontal, Constants.Padding.horizontal)
         }
+        .background(
+            RoundedRectangle(cornerRadius: Constants.Background.cornerRadius)
+                .fill(Color.Event.watchCompletedOrUpcomingEvent)
+        )
     }
 
     private func createPodiumSection(podium: [String]) -> some View {

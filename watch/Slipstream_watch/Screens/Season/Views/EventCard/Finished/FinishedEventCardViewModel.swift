@@ -2,7 +2,6 @@ import Foundation
 
 protocol FinishedEventCardViewModelRepresentable: ObservableObject {
 
-    var route: [AppViewModel.Route] { get set }
     var id: Event.ID { get }
     var title: String { get }
     var country: String { get }
@@ -15,7 +14,7 @@ protocol FinishedEventCardViewModelRepresentable: ObservableObject {
 
 final class FinishedEventCardViewModel: FinishedEventCardViewModelRepresentable {
 
-    @Published var route: [AppViewModel.Route]
+    private let navigation: SeasonNavigation
 
     var id: Event.ID
     var title: String
@@ -25,7 +24,7 @@ final class FinishedEventCardViewModel: FinishedEventCardViewModelRepresentable 
     var sessionListViewModel: SessionListViewModel
 
     init(
-        route: [AppViewModel.Route],
+        navigation: SeasonNavigation,
         id: Event.ID,
         title: String,
         country: String,
@@ -34,7 +33,7 @@ final class FinishedEventCardViewModel: FinishedEventCardViewModelRepresentable 
         sessionListViewModel: SessionListViewModel
     ) {
 
-        self.route = route
+        self.navigation = navigation
         
         self.id = id
         self.title = title
@@ -46,6 +45,6 @@ final class FinishedEventCardViewModel: FinishedEventCardViewModelRepresentable 
 
     func tapEvent() {
         
-        route.append(.sessionsList(self.sessionListViewModel))
+        navigation.action.send(.goTo(route: .sessionsList(sessionListViewModel)))
     }
 }

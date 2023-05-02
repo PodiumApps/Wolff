@@ -15,6 +15,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
     private let eventService: EventServiceRepresentable
     private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
     private let liveEventService: LiveSessionServiceRepresentable
+    private let navigation: SeasonNavigation
 
     @Published var state: State
     @Published private var sessionCells: [Cell]
@@ -23,7 +24,8 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
         event: Event,
         eventService: EventServiceRepresentable,
         driverAndConstructorService: DriverAndConstructorServiceRepresentable,
-        liveEventService: LiveSessionServiceRepresentable
+        liveEventService: LiveSessionServiceRepresentable,
+        navigation: SeasonNavigation
     ) {
 
         self.event = event
@@ -33,6 +35,8 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
         self.eventService = eventService
         self.driverAndConstructorService = driverAndConstructorService
         self.liveEventService = liveEventService
+        
+        self.navigation = navigation
 
         self.state = .loading
         self.sessionCells = []
@@ -196,12 +200,22 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
         sessionName: Session.Name,
         podium: [Driver.ID]
     ) -> FinishedSessionCellViewModel {
-
-        return FinishedSessionCellViewModel(
+        
+        let viewModel = FinishedSessionCellViewModel(
             sessionID: sessionID,
             session: sessionName.label,
             winners: Driver.getPodiumDriverFullName(podium: podium, drivers: drivers)
         )
+        
+//        viewModel.action
+//            .receive(on: DispatchQueue.main)
+//            .sink {
+//                let sessionStandingViewModel = SessionStandingsListViewModel...
+//                self.navigation.action.send(.goTo(route: .sessionStandingsList(sessionStandingViewModel)))
+//            }
+//            .store(in: &subscriptions)
+
+        return viewModel
     }
 
     private func setUpLiveSessionState(
@@ -305,12 +319,13 @@ extension SessionListViewModel {
 
 extension SessionListViewModel {
 
-    static func make(event: Event) -> SessionListViewModel {
+    static func make(event: Event, navigation: SeasonNavigation) -> SessionListViewModel {
         .init(
             event: event,
             eventService: ServiceLocator.shared.eventService,
             driverAndConstructorService: ServiceLocator.shared.driverAndConstructorService,
-            liveEventService: ServiceLocator.shared.liveSessionService
+            liveEventService: ServiceLocator.shared.liveSessionService,
+            navigation: navigation
         )
     }
 }

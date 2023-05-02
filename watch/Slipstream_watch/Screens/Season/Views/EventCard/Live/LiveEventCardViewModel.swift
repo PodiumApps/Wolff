@@ -17,8 +17,6 @@ protocol LiveEventCardViewModelRepresentable: ObservableObject {
 
 final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
 
-    var route: [AppViewModel.Route]
-
     var id: Event.ID
     var title: String
     var country: String
@@ -30,7 +28,6 @@ final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
     var sessionListViewModel: SessionListViewModel
 
     init(
-        route: [AppViewModel.Route],
         id: Event.ID,
         title: String,
         country: String,
@@ -41,7 +38,6 @@ final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
         state: State,
         sessionListViewModel: SessionListViewModel
     ) {
-        self.route = route
         
         self.id = id
         self.title = title
@@ -56,7 +52,7 @@ final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
 
     func tapEvent() {
 
-        route.append(.sessionsList(self.sessionListViewModel))
+//        route.append(.sessionsList(self.sessionListViewModel))
     }
 }
 
