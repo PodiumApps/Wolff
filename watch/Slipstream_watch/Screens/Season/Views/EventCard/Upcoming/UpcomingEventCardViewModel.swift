@@ -12,9 +12,13 @@ protocol UpcomingEventCardViewModelRepresentable: ObservableObject {
     var timeInterval: TimeInterval? { get }
     var state: UpcomingEventCardViewModel.State { get }
     var sessionListViewModel: SessionListViewModel { get }
+
+    func tapEvent() -> Void 
 }
 
 final class UpcomingEventCardViewModel: UpcomingEventCardViewModelRepresentable {
+
+    private let navigation: SeasonNavigation
 
     var id: Event.ID
     var title: String
@@ -28,6 +32,7 @@ final class UpcomingEventCardViewModel: UpcomingEventCardViewModelRepresentable 
     var sessionListViewModel: SessionListViewModel
 
     init(
+        navigation: SeasonNavigation,
         id: Event.ID,
         title: String,
         country: String,
@@ -38,6 +43,7 @@ final class UpcomingEventCardViewModel: UpcomingEventCardViewModelRepresentable 
         timeInterval: TimeInterval? = nil,
         sessionListViewModel: SessionListViewModel
     ) {
+        self.navigation = navigation
 
         self.id = id
         self.title = title
@@ -48,6 +54,11 @@ final class UpcomingEventCardViewModel: UpcomingEventCardViewModelRepresentable 
         self.sessionName = sessionName
         self.timeInterval = timeInterval
         self.sessionListViewModel = sessionListViewModel
+    }
+
+    func tapEvent() {
+
+        navigation.action.send(.goTo(route: .sessionsList(sessionListViewModel)))
     }
 }
 

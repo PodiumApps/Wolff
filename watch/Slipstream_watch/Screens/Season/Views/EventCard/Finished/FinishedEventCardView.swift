@@ -43,7 +43,7 @@ struct FinishedEventCardView<ViewModel: FinishedEventCardViewModelRepresentable>
             }
             .padding(.horizontal, Constants.Padding.horizontal)
         }
-        .background(
+        .listRowBackground(
             RoundedRectangle(cornerRadius: Constants.Background.cornerRadius)
                 .fill(Color.Event.watchCompletedOrUpcomingEvent)
         )

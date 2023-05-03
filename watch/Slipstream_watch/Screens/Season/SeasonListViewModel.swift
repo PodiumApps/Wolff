@@ -30,7 +30,6 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
     private var liveEventTimer: Timer? = nil
     
     @Published var route: [SeasonNavigation.Route]
-    
     private var navigation: SeasonNavigation
 
     private var subscriptions = Set<AnyCancellable>()
@@ -286,6 +285,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
     ) -> LiveEventCardViewModel {
 
         LiveEventCardViewModel(
+            navigation: navigation,
             id: event.id,
             title: event.title,
             country: event.country,
@@ -308,6 +308,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
     ) -> UpcomingEventCardViewModel {
 
         UpcomingEventCardViewModel(
+            navigation: navigation,
             id: event.id,
             title: event.title,
             country: event.country,

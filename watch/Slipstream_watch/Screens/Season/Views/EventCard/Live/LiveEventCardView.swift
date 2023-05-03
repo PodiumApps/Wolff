@@ -73,7 +73,7 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
             }
             .padding(.horizontal, Constants.Card.horizontalPadding)
         }
-        .background(
+        .listRowBackground(
             RoundedRectangle(cornerRadius: Constants.Background.cornerRadius)
                 .fill(Color.red)
                 .opacity(backgroundOpacity)

@@ -32,12 +32,9 @@ struct LiveSessionCellView<ViewModel: LiveSessionCellViewModelRepresentable>: Vi
     }
 
     var body: some View {
-        NavigationLink(destination: {
-            SessionStandingsListView(
-                viewModel: SessionStandingsListViewModel.make(
-                    sessionID: viewModel.sessionID,
-                    sessionName: viewModel.sessionName
-                ))
+
+        Button(action: {
+
         }) {
             HStack {
                 VStack(alignment: .leading, spacing: .Spacing.default) {

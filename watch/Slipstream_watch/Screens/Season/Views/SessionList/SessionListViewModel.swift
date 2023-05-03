@@ -187,11 +187,18 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
         timeInterval: TimeInterval
     ) -> LiveSessionCellViewModel {
 
+        let sessionStandingsListViewModel = SessionStandingsListViewModel.make(
+            sessionID: sessionID,
+            sessionName: sessionName.label
+        )
+
         return LiveSessionCellViewModel(
+            navigation: navigation,
             sessionName: sessionName.label,
             sessionID: sessionID,
             podium: Driver.getPodiumDriverTickers(podium: podium, drivers: drivers),
-            state: setUpLiveSessionState(podium: podium, date: sessionDate, timeInterval: timeInterval)
+            state: setUpLiveSessionState(podium: podium, date: sessionDate, timeInterval: timeInterval),
+            sessionStandingsListViewModel: sessionStandingsListViewModel
         )
     }
 
@@ -200,22 +207,19 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
         sessionName: Session.Name,
         podium: [Driver.ID]
     ) -> FinishedSessionCellViewModel {
-        
-        let viewModel = FinishedSessionCellViewModel(
+
+        let sessionStandingsListViewModel = SessionStandingsListViewModel.make(
             sessionID: sessionID,
-            session: sessionName.label,
-            winners: Driver.getPodiumDriverFullName(podium: podium, drivers: drivers)
+            sessionName: sessionName.label
         )
         
-//        viewModel.action
-//            .receive(on: DispatchQueue.main)
-//            .sink {
-//                let sessionStandingViewModel = SessionStandingsListViewModel...
-//                self.navigation.action.send(.goTo(route: .sessionStandingsList(sessionStandingViewModel)))
-//            }
-//            .store(in: &subscriptions)
-
-        return viewModel
+        return FinishedSessionCellViewModel(
+            navigation: navigation,
+            sessionID: sessionID,
+            session: sessionName.label,
+            winners: Driver.getPodiumDriverFullName(podium: podium, drivers: drivers),
+            sessionStandingsListViewModel: sessionStandingsListViewModel
+        )
     }
 
     private func setUpLiveSessionState(

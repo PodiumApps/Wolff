@@ -6,9 +6,14 @@ protocol LiveSessionCellViewModelRepresentable {
     var sessionID: Session.ID { get }
     var podium: [String] { get }
     var state: LiveSessionCellViewModel.State { get }
+
+    func tapSession() -> Void
 }
 
 final class LiveSessionCellViewModel: LiveSessionCellViewModelRepresentable {
+
+    private let navigation: SeasonNavigation
+    private let sessionStandingsListViewModel: SessionStandingsListViewModel
 
     var sessionName: String
     var sessionID: Session.ID
@@ -16,16 +21,25 @@ final class LiveSessionCellViewModel: LiveSessionCellViewModelRepresentable {
     var state: LiveSessionCellViewModel.State
 
     init(
+        navigation: SeasonNavigation,
         sessionName: String,
         sessionID: Session.ID,
         podium: [String],
-        state: LiveSessionCellViewModel.State
+        state: LiveSessionCellViewModel.State,
+        sessionStandingsListViewModel: SessionStandingsListViewModel
     ) {
 
+        self.navigation = navigation
         self.sessionName = sessionName
         self.sessionID = sessionID
         self.podium = podium
         self.state = state
+        self.sessionStandingsListViewModel = sessionStandingsListViewModel
+    }
+
+    func tapSession() {
+
+        navigation.action.send(.goTo(route: .sessionStandingsList(sessionStandingsListViewModel)))
     }
 }
 
