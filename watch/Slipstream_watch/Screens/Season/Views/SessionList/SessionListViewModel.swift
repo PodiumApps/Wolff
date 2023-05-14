@@ -15,6 +15,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
     private let eventService: EventServiceRepresentable
     private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
     private let liveEventService: LiveSessionServiceRepresentable
+    private let navigation: SeasonNavigation
 
     @Published var state: State
     @Published private var sessionCells: [Cell]
@@ -23,7 +24,8 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
         event: Event,
         eventService: EventServiceRepresentable,
         driverAndConstructorService: DriverAndConstructorServiceRepresentable,
-        liveEventService: LiveSessionServiceRepresentable
+        liveEventService: LiveSessionServiceRepresentable,
+        navigation: SeasonNavigation
     ) {
 
         self.event = event
@@ -33,6 +35,8 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
         self.eventService = eventService
         self.driverAndConstructorService = driverAndConstructorService
         self.liveEventService = liveEventService
+        
+        self.navigation = navigation
 
         self.state = .loading
         self.sessionCells = []
@@ -183,11 +187,18 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
         timeInterval: TimeInterval
     ) -> LiveSessionCellViewModel {
 
+        let sessionStandingsListViewModel = SessionStandingsListViewModel.make(
+            sessionID: sessionID,
+            sessionName: sessionName.label
+        )
+
         return LiveSessionCellViewModel(
+            navigation: navigation,
             sessionName: sessionName.label,
             sessionID: sessionID,
             podium: Driver.getPodiumDriverTickers(podium: podium, drivers: drivers),
-            state: setUpLiveSessionState(podium: podium, date: sessionDate, timeInterval: timeInterval)
+            state: setUpLiveSessionState(podium: podium, date: sessionDate, timeInterval: timeInterval),
+            sessionStandingsListViewModel: sessionStandingsListViewModel
         )
     }
 
@@ -197,10 +208,17 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
         podium: [Driver.ID]
     ) -> FinishedSessionCellViewModel {
 
+        let sessionStandingsListViewModel = SessionStandingsListViewModel.make(
+            sessionID: sessionID,
+            sessionName: sessionName.label
+        )
+        
         return FinishedSessionCellViewModel(
+            navigation: navigation,
             sessionID: sessionID,
             session: sessionName.label,
-            winners: Driver.getPodiumDriverFullName(podium: podium, drivers: drivers)
+            winners: Driver.getPodiumDriverFullName(podium: podium, drivers: drivers),
+            sessionStandingsListViewModel: sessionStandingsListViewModel
         )
     }
 
@@ -305,12 +323,13 @@ extension SessionListViewModel {
 
 extension SessionListViewModel {
 
-    static func make(event: Event) -> SessionListViewModel {
+    static func make(event: Event, navigation: SeasonNavigation) -> SessionListViewModel {
         .init(
             event: event,
             eventService: ServiceLocator.shared.eventService,
             driverAndConstructorService: ServiceLocator.shared.driverAndConstructorService,
-            liveEventService: ServiceLocator.shared.liveSessionService
+            liveEventService: ServiceLocator.shared.liveSessionService,
+            navigation: navigation
         )
     }
 }

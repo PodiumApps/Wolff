@@ -11,12 +11,8 @@ struct FinishedSessionCellView<ViewModel: FinishedSessionCellViewModelRepresenta
 
     var body: some View {
 
-        NavigationLink(destination: {
-            SessionStandingsListView(
-                viewModel: SessionStandingsListViewModel.make(
-                    sessionID: viewModel.sessionID,
-                    sessionName: viewModel.sessionName
-                ))
+        Button(action: {
+            viewModel.tapSession()
         }) {
             HStack {
                 VStack(alignment: .leading, spacing: Constants.Cell.verticalSpacing) {

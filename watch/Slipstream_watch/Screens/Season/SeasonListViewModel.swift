@@ -1,11 +1,11 @@
-import Foundation
+import SwiftUI
 import Combine
 import OSLog
 
 protocol SeasonListViewModelRepresentable: ObservableObject {
 
     var state: SeasonListViewModel.State { get }
-    var route: [SeasonListViewModel.Route] { get set }
+    var route: [SeasonNavigation.Route] { get set }
     var action: PassthroughSubject<SeasonListViewModel.Action, Never> { get }
     var indexFirstToAppear: Int { get set }
 }
@@ -14,62 +14,73 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
 
     private var firstReload: Bool = true
 
-    // Models
-
     private var drivers: [Driver]
     private var constructors: [Constructor]
     private var events: [Event]
     private var nextEvent: Event?
 
-    // Services
-
     private let eventService: EventServiceRepresentable
     private let driversAndConstructorService: DriverAndConstructorServiceRepresentable
     private let liveEventService: LiveSessionServiceRepresentable
-
-    // Timer
 
     private let fiveMinutesInSeconds: Double = 5 * 60
     private var updateAllEventsTimer: Timer? = nil
 
     private let oneMinuteInSeconds: Double = 60
     private var liveEventTimer: Timer? = nil
-
-    // Published / Combine
+    
+    @Published var route: [SeasonNavigation.Route]
+    private var navigation: SeasonNavigation
 
     private var subscriptions = Set<AnyCancellable>()
     var action = PassthroughSubject<Action, Never>()
     @Published var state: SeasonListViewModel.State
-    @Published var route: [SeasonListViewModel.Route]
-
     @Published var indexFirstToAppear: Int = 0
 
     var eventCells: [Cell]
 
     init(
+        navigation: SeasonNavigation,
         driversAndConstructorService: DriverAndConstructorServiceRepresentable,
         eventService: EventServiceRepresentable,
         liveEventService: LiveSessionServiceRepresentable
     ) {
 
+        self.navigation = navigation
         self.drivers = []
         self.constructors = []
         self.events = []
         self.nextEvent = nil
+        self.route = []
 
         self.eventService = eventService
         self.driversAndConstructorService = driversAndConstructorService
         self.liveEventService = liveEventService
 
         self.state = .loading
-        self.route = []
 
         self.eventCells = []
 
         self.loadEvents()
+        self.setupNavigation()
     }
 
     // MARK: - Private
+    
+    private func setupNavigation() {
+        
+        navigation.routePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] navigation in
+                guard let navigation else {
+                    self?.route = []
+                    return
+                }
+                
+                self?.route.append(navigation)
+            }
+            .store(in: &subscriptions)
+    }
 
     private func loadEvents() {
 
@@ -113,7 +124,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                     return nil
                 }
 
-                let sessionListViewModel = SessionListViewModel.make(event: events[index])
+                let sessionListViewModel = SessionListViewModel.make(event: events[index], navigation: navigation)
 
                 switch liveEventService {
                 case .refreshed(let liveSession):
@@ -181,7 +192,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                         return
                     }
 
-                    let sessionListViewModel = SessionListViewModel.make(event: events[index])
+                    let sessionListViewModel = SessionListViewModel.make(event: events[index], navigation: navigation)
 
                     cells[index] = .live(
                         buildLiveViewModel(
@@ -202,7 +213,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
 
         eventCells = events.compactMap { event in
 
-            let sessionListViewModel = SessionListViewModel.make(event: event)
+            let sessionListViewModel = SessionListViewModel.make(event: event, navigation: navigation)
 
             switch event.status {
             case .live(let timeInterval, let sessionName):
@@ -274,6 +285,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
     ) -> LiveEventCardViewModel {
 
         LiveEventCardViewModel(
+            navigation: navigation,
             id: event.id,
             title: event.title,
             country: event.country,
@@ -296,6 +308,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
     ) -> UpcomingEventCardViewModel {
 
         UpcomingEventCardViewModel(
+            navigation: navigation,
             id: event.id,
             title: event.title,
             country: event.country,
@@ -315,6 +328,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
     ) -> FinishedEventCardViewModel {
 
         FinishedEventCardViewModel(
+            navigation: navigation,
             id: event.id,
             title: event.title,
             country: event.country,
@@ -442,6 +456,7 @@ extension SeasonListViewModel {
     static func make() -> SeasonListViewModel {
 
         .init(
+            navigation: SeasonNavigation(),
             driversAndConstructorService: ServiceLocator.shared.driverAndConstructorService,
             eventService: ServiceLocator.shared.eventService,
             liveEventService: ServiceLocator.shared.liveSessionService

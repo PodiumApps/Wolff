@@ -19,6 +19,7 @@ extension Session {
         case secondPractice = "Practice 2"
         case thirdPractice = "Practice 3"
         case qualifying = "Qualifying"
+        case sprintShootout = "Sprint Shootout"
         case sprint = "Sprint"
         case race = "Race"
 
@@ -29,6 +30,7 @@ extension Session {
             case .secondPractice: return "Practice 2"
             case .thirdPractice: return "Practice 3"
             case .qualifying: return "Qualifying"
+            case .sprintShootout: return "Sprint Shootout"
             case .sprint: return "Sprint Race"
             case .race: return "Race"
             }

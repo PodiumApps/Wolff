@@ -11,8 +11,8 @@ struct UpcomingEventCardView<ViewModel: UpcomingEventCardViewModelRepresentable>
 
     var body: some View {
 
-        NavigationLink(destination: {
-            SessionListView(viewModel: viewModel.sessionListViewModel)
+        Button(action: {
+            viewModel.tapEvent()
         }) {
             HStack {
                 VStack(alignment: .leading, spacing: .Spacing.default2) {

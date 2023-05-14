@@ -8,9 +8,13 @@ protocol FinishedEventCardViewModelRepresentable: ObservableObject {
     var round: Int { get }
     var podium: [String] { get }
     var sessionListViewModel: SessionListViewModel { get }
+
+    func tapEvent() -> Void
 }
 
 final class FinishedEventCardViewModel: FinishedEventCardViewModelRepresentable {
+
+    private let navigation: SeasonNavigation
 
     var id: Event.ID
     var title: String
@@ -20,6 +24,7 @@ final class FinishedEventCardViewModel: FinishedEventCardViewModelRepresentable 
     var sessionListViewModel: SessionListViewModel
 
     init(
+        navigation: SeasonNavigation,
         id: Event.ID,
         title: String,
         country: String,
@@ -27,6 +32,8 @@ final class FinishedEventCardViewModel: FinishedEventCardViewModelRepresentable 
         podium: [String],
         sessionListViewModel: SessionListViewModel
     ) {
+
+        self.navigation = navigation
         
         self.id = id
         self.title = title
@@ -34,5 +41,10 @@ final class FinishedEventCardViewModel: FinishedEventCardViewModelRepresentable 
         self.round = round
         self.podium = podium
         self.sessionListViewModel = sessionListViewModel
+    }
+
+    func tapEvent() {
+        
+        navigation.action.send(.goTo(route: .sessionsList(sessionListViewModel)))
     }
 }
