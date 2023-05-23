@@ -21,7 +21,6 @@ extension Session {
         case qualifying = "Qualifying"
         case sprintShootout = "Sprint Shootout"
         case sprint = "Sprint"
-        case sprintShootout = "Sprint Shootout"
         case race = "Race"
 
         var label: String {
@@ -33,7 +32,6 @@ extension Session {
             case .qualifying: return "Qualifying"
             case .sprintShootout: return "Sprint Shootout"
             case .sprint: return "Sprint Race"
-            case .sprintShootout: return "Sprint Shootout"
             case .race: return "Race"
             }
         }

@@ -3,20 +3,28 @@ import Foundation
 protocol StandingsViewModelRepresentable: ObservableObject {
 
     var state: StandingsViewModel.State { get }
+    var route: [StandingsNavigation.Route] { get set }
+    var selection: StandingsViewModel.Selection { get set }
 }
 
 final class StandingsViewModel: StandingsViewModelRepresentable {
 
+    private var navigation: StandingsNavigation
     private var constructors: [Constructor]
     private var drivers: [Driver]
 
     private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
 
     @Published var state: StandingsViewModel.State
+    @Published var route: [StandingsNavigation.Route]
+    @Published var selection: Selection
 
-    init(driverAndConstructorService: DriverAndConstructorServiceRepresentable) {
+    init(navigation: StandingsNavigation, driverAndConstructorService: DriverAndConstructorServiceRepresentable) {
 
+        self.navigation = navigation
+        self.selection = .drivers
         self.state = .loading
+        self.route = []
 
         self.drivers = []
         self.constructors = []
@@ -43,15 +51,10 @@ final class StandingsViewModel: StandingsViewModelRepresentable {
                     self.drivers = drivers
                     self.constructors = constructors
 
-                    return self.buildStandingsCells()
+                    return .results
                 }
             }
             .assign(to: &$state)
-    }
-
-    private func buildStandingsCells() -> StandingsViewModel.State {
-
-        return .results([])
     }
 }
 
@@ -61,7 +64,7 @@ extension StandingsViewModel {
 
         case loading
         case error(String)
-        case results([Cell])
+        case results
 
         enum Identifier: String {
 
@@ -80,26 +83,31 @@ extension StandingsViewModel {
         }
     }
 
-    enum Cell: Equatable, Identifiable {
+    enum Selection: String, Identifiable, CaseIterable {
 
-        case driver
-        case constructor
+        case drivers
+        case constructors
 
-//        case driver(DriverStandingsCellViewModel)
-//        case constructor(ConstructorStandingsCellViewModel)
-
-        enum Identifer: String {
-
-            case driver
-            case constructor
+        static var allCases: [Self] {
+            return [.drivers, .constructors]
         }
 
-        var id: Identifer {
-
+        var id: String {
             switch self {
-            case .driver: return .driver
-            case .constructor: return .constructor
+            case .drivers: return "Drivers"
+            case .constructors: return "Constructors"
             }
         }
+    }
+}
+
+extension StandingsViewModel {
+
+    static func make() -> StandingsViewModel {
+
+        .init(
+            navigation: StandingsNavigation(),
+            driverAndConstructorService: ServiceLocator.shared.driverAndConstructorService
+        )
     }
 }
