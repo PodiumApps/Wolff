@@ -18,22 +18,24 @@ struct StandingsView<ViewModel: StandingsViewModelRepresentable>: View {
                     Text(error)
                 case .loading:
                     ProgressView()
-                case .results:
-                    Form {
-                        Picker("Selection", selection: $viewModel.selection) {
-                            ForEach(StandingsViewModel.Selection.allCases) { selection in
-                                HStack {
-                                    Text(selection.rawValue.capitalized)
-                                        .tag(selection)
-                                    Spacer()
+                case .results(let driverCells):
+                    VStack {
+                        Form {
+                            Picker("Selection", selection: $viewModel.selection) {
+                                ForEach(StandingsViewModel.Selection.allCases) { selection in
+                                    HStack {
+                                        Text(selection.rawValue.capitalized)
+                                            .tag(selection)
+                                        Spacer()
+                                    }
                                 }
                             }
-                        }
-                        .pickerStyle(.navigationLink)
+                            .pickerStyle(.navigationLink)
 
-                        switch viewModel.selection {
-                        case .drivers: buildDriverStandingsListView()
-                        case .constructors: buildConstructorStandingsListView()
+                            switch viewModel.selection {
+                            case .drivers: buildDriverStandingsListView(cells: driverCells)
+                            case .constructors: buildConstructorStandingsListView()
+                            }
                         }
                     }
                 }
@@ -47,9 +49,13 @@ struct StandingsView<ViewModel: StandingsViewModelRepresentable>: View {
         }
     }
 
-    private func buildDriverStandingsListView() -> some View {
+    private func buildDriverStandingsListView(cells: [DriverStandingsCellViewModel]) -> some View {
 
-        return EmptyView()
+        ForEach(0 ..< cells.count, id: \.self) { index in
+            DriverStandingsCellView(viewModel: cells[index])
+        }
+        .listStyle(.carousel)
+        .frame(width: .infinity, height: .infinity)
     }
 
     private func buildConstructorStandingsListView() -> some View {

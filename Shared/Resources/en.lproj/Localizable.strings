@@ -44,11 +44,15 @@
 // MARK: - Session
 "session.screen_title" = "Sessions";
 
-// MARK: - DriverStandingsCell
+// MARK: - LiveDriverStandingsCell
 "driver_standings_cell.time_gap" = "Time / Gap";
 "driver_standings_cell.leader" = "Leader";
 "driver_standings_cell.tyre" = "Tyre";
 "driver_standings_cell.car_number" = "Car %@";
+
+// MARK: - SeasonDriverStandingsCell
+"season_driver_standings.points" = "Points";
+"season_driver_standings.car_no" = "Car";
 
 // MARK: - TrackInfo
 "track_info.screen_title" = "Track Info";
@@ -58,3 +62,11 @@
 "track_info.track_length_value" = "%@ km";
 "track_info.race_distance" = "Race Distance";
 "track_info.race_distance_value" = "%@ km";
+
+// MARK: - DriverDetails
+"driver_details.place_of_birth" = "Place of Birth";
+"driver_details.championships" = "Championships";
+"driver_details.number_of_podiums" = "Number of Podiums";
+"driver_details.grand_prix_entered" = "Grand Prix Entered";
+"driver_details.highest_grid_position" = "Highest Grid Position";
+"driver_details.all_time_points" = "All Time Points";

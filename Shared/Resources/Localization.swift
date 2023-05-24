@@ -10,6 +10,20 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum Localization {
+  internal enum DriverDetails {
+    /// All Time Points
+    internal static let allTimePoints = Localization.tr("Localizable", "driver_details.all_time_points", fallback: "All Time Points")
+    /// Championships
+    internal static let championships = Localization.tr("Localizable", "driver_details.championships", fallback: "Championships")
+    /// Grand Prix Entered
+    internal static let grandPrixEntered = Localization.tr("Localizable", "driver_details.grand_prix_entered", fallback: "Grand Prix Entered")
+    /// Highest Grid Position
+    internal static let highestGridPosition = Localization.tr("Localizable", "driver_details.highest_grid_position", fallback: "Highest Grid Position")
+    /// Number of Podiums
+    internal static let numberOfPodiums = Localization.tr("Localizable", "driver_details.number_of_podiums", fallback: "Number of Podiums")
+    /// Place of Birth
+    internal static let placeOfBirth = Localization.tr("Localizable", "driver_details.place_of_birth", fallback: "Place of Birth")
+  }
   internal enum DriverStandingsCell {
     /// Car %@
     internal static func carNumber(_ p1: Any) -> String {
@@ -81,6 +95,12 @@ internal enum Localization {
     internal static func ordinalComponent(_ p1: Any) -> String {
       return Localization.tr("Localizable", "podium.ordinal_component", String(describing: p1), fallback: "%@.")
     }
+  }
+  internal enum SeasonDriverStandings {
+    /// Car
+    internal static let carNo = Localization.tr("Localizable", "season_driver_standings.car_no", fallback: "Car")
+    /// Points
+    internal static let points = Localization.tr("Localizable", "season_driver_standings.points", fallback: "Points")
   }
   internal enum SeasonListView {
     internal enum Navigation {

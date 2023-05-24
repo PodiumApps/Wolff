@@ -2,24 +2,30 @@ import Foundation
 
 protocol DriverStandingsCellViewModelRepresentable {
 
-    var name: String { get }
-    var constructor: String { get }
+    var firstName: String { get }
+    var lastName: String { get }
+    var constructor: Constructor { get }
     var points: Int { get }
+    var position: Int { get }
     var carNumber: Int { get }
 }
 
 final class DriverStandingsCellViewModel: DriverStandingsCellViewModelRepresentable {
 
-    let name: String
-    let constructor: String
+    let firstName: String
+    var lastName: String
+    let constructor: Constructor
     let points: Int
+    let position: Int
     let carNumber: Int
 
-    init(driver: Driver, constructor: Constructor) {
+    init(driver: Driver, constructor: Constructor, position: Int) {
 
-        self.name = driver.fullName
-        self.constructor = constructor.name
+        self.firstName = driver.firstName
+        self.lastName = driver.lastName
+        self.constructor = constructor
         self.points = driver.points
+        self.position = position
         self.carNumber = driver.carNumber
     }
 
