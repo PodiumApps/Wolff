@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct DriverStandingCellView<ViewModel: DriverStandingCellViewModel>: View {
+struct LiveDriverStandingCellView<ViewModel: LiveDriverStandingCellViewModel>: View {
 
     @State private var showDriverSessionDetails: Bool = false
 

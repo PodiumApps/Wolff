@@ -4,7 +4,7 @@ import Combine
 protocol SessionStandingsListViewModelRepresentable: ObservableObject {
 
     var state: SessionStandingsListViewModel.State { get }
-    var cells: [DriverStandingCellViewModel] { get }
+    var cells: [LiveDriverStandingCellViewModel] { get }
     var sessionName: String { get }
     func loadSession() async
 }
@@ -22,7 +22,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
     private var subscribers = Set<AnyCancellable>()
 
     @Published var state: State
-    @Published var cells: [DriverStandingCellViewModel]
+    @Published var cells: [LiveDriverStandingCellViewModel]
     let sessionName: String
 
     init(
@@ -155,7 +155,7 @@ extension SessionStandingsListViewModel {
     enum State: Equatable {
 
         case loading
-        case results([DriverStandingCellViewModel])
+        case results([LiveDriverStandingCellViewModel])
         case error(String)
 
         enum Identifier {

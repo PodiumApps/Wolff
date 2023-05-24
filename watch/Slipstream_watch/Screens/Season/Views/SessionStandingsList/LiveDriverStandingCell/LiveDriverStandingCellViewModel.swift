@@ -1,6 +1,6 @@
 import Foundation
 
-protocol DriverStandingCellViewModelRepresentable: ObservableObject {
+protocol LiveDriverStandingCellViewModelRepresentable: ObservableObject {
 
     var driverID: Driver.ID { get }
     var firstName: String { get }
@@ -11,7 +11,7 @@ protocol DriverStandingCellViewModelRepresentable: ObservableObject {
     var tyre: SessionResult.Tyre? { get }
 }
 
-final class DriverStandingCellViewModel: DriverStandingCellViewModelRepresentable {
+final class LiveDriverStandingCellViewModel: LiveDriverStandingCellViewModelRepresentable {
 
     let driverID: Driver.ID
     let firstName: String

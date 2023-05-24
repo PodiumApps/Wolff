@@ -17,7 +17,7 @@ final class StandingsViewModel: StandingsViewModelRepresentable {
 
     @Published var state: StandingsViewModel.State
     @Published var route: [StandingsNavigation.Route]
-    @Published var selection: Selection
+    @Published var selection: StandingsViewModel.Selection
 
     init(navigation: StandingsNavigation, driverAndConstructorService: DriverAndConstructorServiceRepresentable) {
 
@@ -88,16 +88,7 @@ extension StandingsViewModel {
         case drivers
         case constructors
 
-        static var allCases: [Self] {
-            return [.drivers, .constructors]
-        }
-
-        var id: String {
-            switch self {
-            case .drivers: return "Drivers"
-            case .constructors: return "Constructors"
-            }
-        }
+        var id: Selection { return self }
     }
 }
 

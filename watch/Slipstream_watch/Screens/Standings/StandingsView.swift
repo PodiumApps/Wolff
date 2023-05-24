@@ -19,11 +19,13 @@ struct StandingsView<ViewModel: StandingsViewModelRepresentable>: View {
                 case .loading:
                     ProgressView()
                 case .results:
-                    VStack {
-                        VStack {
-                            Picker("Selection", selection: $viewModel.selection) {
-                                ForEach(DriverStandingsEntryPointCellViewModel.Selection.allCases, id: \.self) { selection in
+                    Form {
+                        Picker("Selection", selection: $viewModel.selection) {
+                            ForEach(StandingsViewModel.Selection.allCases) { selection in
+                                HStack {
                                     Text(selection.rawValue.capitalized)
+                                        .tag(selection)
+                                    Spacer()
                                 }
                             }
                         }
