@@ -41,11 +41,12 @@ struct StandingsView<ViewModel: StandingsViewModelRepresentable>: View {
                 }
             }
             .navigationTitle("Standings")
-            .navigationDestination(for: StandingsNavigation.Route.self) { route in
-                switch route {
-                default: EmptyView()
-                }
-            }
+//            .navigationDestination(for: StandingsNavigation.Route.self) { route in
+//                switch route {
+//                case .driverDetailsView(let viewModel):
+//                    DriverStandingsDetailsView(viewModel: viewModel)
+//                }
+//            }
         }
     }
 

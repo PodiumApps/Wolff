@@ -68,8 +68,12 @@ struct DriverStandingsCellView<ViewModel: DriverStandingsCellViewModelRepresenta
             RoundedRectangle(cornerRadius: Constants.Card.cornerRadius)
                 .fill(constructorStyler.constructor.color.opacity(Constants.Card.backgroundOpacity))
         )
-        .sheet(isPresented: $showDriverDetails) {
-            EmptyView()
+        .fullScreenCover(isPresented: $showDriverDetails) {
+            DriverStandingsDetailsView(viewModel: DriverStandingsDetailsViewModel.make(
+                driverName: "\(viewModel.firstName) \(viewModel.lastName)",
+                driverID: viewModel.driverID,
+                constructorID: viewModel.constructor.id
+            ))
         }
     }
 }

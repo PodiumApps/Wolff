@@ -6,10 +6,10 @@ extension DriverDetails {
         placeOfBirth: "Portugal",
         podiums: 10,
         allTimePoints: 150,
-        grandPrixEntered: 2,
+        grandPrix: 2,
         championships: 1,
-        highestRacePosition: 2,
-        timesHighestRacePosition: 3,
+        highestRacePos: 2,
+        timesHighestRacePos: 3,
         highestGridPos: 1
     )
     
@@ -17,10 +17,10 @@ extension DriverDetails {
         placeOfBirth: "Portugal",
         podiums: 120,
         allTimePoints: 150,
-        grandPrixEntered: 2,
+        grandPrix: 2,
         championships: 1,
-        highestRacePosition: 2,
-        timesHighestRacePosition: 3,
+        highestRacePos: 2,
+        timesHighestRacePos: 3,
         highestGridPos: 1
     )
 }

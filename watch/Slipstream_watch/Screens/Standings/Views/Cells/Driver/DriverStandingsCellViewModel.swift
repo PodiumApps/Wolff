@@ -2,6 +2,7 @@ import Foundation
 
 protocol DriverStandingsCellViewModelRepresentable {
 
+    var driverID: Driver.ID { get }
     var firstName: String { get }
     var lastName: String { get }
     var constructor: Constructor { get }
@@ -12,6 +13,7 @@ protocol DriverStandingsCellViewModelRepresentable {
 
 final class DriverStandingsCellViewModel: DriverStandingsCellViewModelRepresentable {
 
+    let driverID: Driver.ID
     let firstName: String
     var lastName: String
     let constructor: Constructor
@@ -21,6 +23,7 @@ final class DriverStandingsCellViewModel: DriverStandingsCellViewModelRepresenta
 
     init(driver: Driver, constructor: Constructor, position: Int) {
 
+        self.driverID = driver.id
         self.firstName = driver.firstName
         self.lastName = driver.lastName
         self.constructor = constructor
