@@ -96,6 +96,10 @@ internal enum Localization {
       return Localization.tr("Localizable", "podium.ordinal_component", String(describing: p1), fallback: "%@.")
     }
   }
+  internal enum SeasonConstructorStandings {
+    /// Team Principle
+    internal static let teamPrinciple = Localization.tr("Localizable", "season_constructor_standings.team_principle", fallback: "Team Principle")
+  }
   internal enum SeasonDriverStandings {
     /// Car
     internal static let carNo = Localization.tr("Localizable", "season_driver_standings.car_no", fallback: "Car")

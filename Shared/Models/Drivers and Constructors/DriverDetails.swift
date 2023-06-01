@@ -20,8 +20,6 @@ extension DriverDetails {
             fatalError("URL not found.")
         }
 
-        print(url)
-
         return Resource(url: url, method: .get(accessToken: Date().tokenString))
     }
 }

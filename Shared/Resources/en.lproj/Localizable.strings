@@ -54,6 +54,9 @@
 "season_driver_standings.points" = "Points";
 "season_driver_standings.car_no" = "Car";
 
+// MARK: - SeasonConstructorStandingsCell
+"season_constructor_standings.team_principle" = "Team Principle";
+
 // MARK: - TrackInfo
 "track_info.screen_title" = "Track Info";
 "track_info.first_grand_prix" = "First Grand Prix";

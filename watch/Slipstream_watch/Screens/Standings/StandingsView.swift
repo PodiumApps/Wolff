@@ -18,7 +18,7 @@ struct StandingsView<ViewModel: StandingsViewModelRepresentable>: View {
                     Text(error)
                 case .loading:
                     ProgressView()
-                case .results(let driverCells):
+                case .results(let driverCells, let constructorCells):
                     VStack {
                         Form {
                             Picker("Selection", selection: $viewModel.selection) {
@@ -34,7 +34,7 @@ struct StandingsView<ViewModel: StandingsViewModelRepresentable>: View {
 
                             switch viewModel.selection {
                             case .drivers: buildDriverStandingsListView(cells: driverCells)
-                            case .constructors: buildConstructorStandingsListView()
+                            case .constructors: buildConstructorStandingsListView(cells: constructorCells)
                             }
                         }
                     }
@@ -59,8 +59,12 @@ struct StandingsView<ViewModel: StandingsViewModelRepresentable>: View {
         .frame(width: .infinity, height: .infinity)
     }
 
-    private func buildConstructorStandingsListView() -> some View {
+    private func buildConstructorStandingsListView(cells: [ConstructorStandingsCellViewModel]) -> some View {
 
-        return EmptyView()
+        ForEach(0 ..< cells.count, id: \.self) { index in
+            ConstructorStandingsCellView(viewModel: cells[index])
+        }
+        .listStyle(.carousel)
+        .frame(width: .infinity, height: .infinity)
     }
 }

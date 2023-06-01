@@ -51,7 +51,7 @@ final class StandingsViewModel: StandingsViewModelRepresentable {
                     self.drivers = drivers
                     self.constructors = constructors
 
-                    let cells: [DriverStandingsCellViewModel] = drivers.enumerated().compactMap { index, driver in
+                    let driverCells: [DriverStandingsCellViewModel] = drivers.enumerated().compactMap { index, driver in
 
                         guard let constructor = constructors.first(where: { $0.id == driver.constructorId}) else {
                             return nil
@@ -64,7 +64,13 @@ final class StandingsViewModel: StandingsViewModelRepresentable {
                         )
                     }
 
-                    return .results(cells)
+                    let constructorCells: [ConstructorStandingsCellViewModel] = constructors.enumerated()
+                        .compactMap { index, constructor in
+
+                            return ConstructorStandingsCellViewModel(constructor: constructor, position: index + 1)
+                        }
+
+                    return .results(driverCells, constructorCells)
                 }
             }
             .assign(to: &$state)
@@ -77,7 +83,7 @@ extension StandingsViewModel {
 
         case loading
         case error(String)
-        case results([DriverStandingsCellViewModel])
+        case results([DriverStandingsCellViewModel], [ConstructorStandingsCellViewModel])
 
         enum Identifier: String {
 

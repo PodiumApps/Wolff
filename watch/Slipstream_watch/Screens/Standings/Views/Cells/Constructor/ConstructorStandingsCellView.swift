@@ -1,8 +1,8 @@
 import SwiftUI
 
-struct DriverStandingsCellView<ViewModel: DriverStandingsCellViewModelRepresentable>: View {
+struct ConstructorStandingsCellView<ViewModel: ConstructorStandingsCellViewModelRepresentable>: View {
 
-    @State private var showDriverDetails: Bool = false
+    @State private var showConstructorDetails: Bool = false
 
     @ObservedObject var viewModel: ViewModel
     private let constructorStyler: ConstructorStylerRepresentable
@@ -10,46 +10,38 @@ struct DriverStandingsCellView<ViewModel: DriverStandingsCellViewModelRepresenta
     init(viewModel: ViewModel) {
 
         self.viewModel = viewModel
-        self.constructorStyler = ConstructorStyler(constructor: viewModel.constructor.id)
+        self.constructorStyler = ConstructorStyler(constructor: viewModel.constructorID)
     }
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: Constants.Card.verticalSpacing) {
-            HStack(alignment: .top) {
+            HStack {
                 VStack(alignment: .leading) {
                     HStack(alignment: .center) {
                         Text(Localization.Podium.ordinalComponent(viewModel.position))
-                        Text(viewModel.firstName)
+                        Text(viewModel.name)
+                            .font(.Body.semibold)
+                            .foregroundColor(constructorStyler.constructor.color)
 
                         Spacer()
 
                     }
                     .font(.Body.regular)
-
-                    VStack(alignment: .leading, spacing: Constants.LastNameTeamNameSection.verticalSpacing) {
-                        Text(viewModel.lastName)
-                            .font(.Body.semibold)
-                        Text(viewModel.constructor.fullName)
-                            .lineLimit(Constants.LastNameTeamNameSection.teamLineLimit)
-                            .font(.Caption.semibold)
-                            .foregroundColor(constructorStyler.constructor.color)
-                    }
                 }
 
                 Button(action: {
-                    showDriverDetails.toggle()
+                    showConstructorDetails.toggle()
                 }) {
                     Image(systemName: "ellipsis.circle.fill")
-                        .padding(5)
                 }
             }
 
-            HStack {
+            HStack(alignment: .bottom) {
 
-                HStack(alignment: .bottom, spacing: 2) {
-                    Text(Localization.SeasonDriverStandings.carNo)
+                VStack(alignment: .leading) {
+                    Text(Localization.SeasonConstructorStandings.teamPrinciple)
                         .font(.Caption.regular)
-                    Text(viewModel.carNumber.description)
+                    Text(viewModel.teamPrinciple)
                         .font(.Caption.semibold)
                 }
 
@@ -68,12 +60,8 @@ struct DriverStandingsCellView<ViewModel: DriverStandingsCellViewModelRepresenta
             RoundedRectangle(cornerRadius: Constants.Card.cornerRadius)
                 .fill(constructorStyler.constructor.color.opacity(Constants.Card.backgroundOpacity))
         )
-        .fullScreenCover(isPresented: $showDriverDetails) {
-            DriverStandingsDetailsView(viewModel: DriverStandingsDetailsViewModel.make(
-                driverName: "\(viewModel.firstName) \(viewModel.lastName)",
-                driverID: viewModel.driverID,
-                constructorID: viewModel.constructor.id
-            ))
+        .fullScreenCover(isPresented: $showConstructorDetails) {
+            EmptyView()
         }
     }
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-protocol DriverStandingsCellViewModelRepresentable {
+protocol DriverStandingsCellViewModelRepresentable: ObservableObject {
 
     var driverID: Driver.ID { get }
     var firstName: String { get }
