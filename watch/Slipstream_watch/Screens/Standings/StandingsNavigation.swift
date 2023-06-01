@@ -45,11 +45,13 @@ extension StandingsNavigation {
 
     enum Route: Hashable {
 
-        case driverDetailsView(DriverStandingsDetailsViewModel)
+        case driverDetailsView
+        case constructorDetailsView
 
         var id: String {
             switch self {
             case .driverDetailsView: return "driverDetailsView"
+            case .constructorDetailsView: return "constructorDetailsView"
             }
         }
 

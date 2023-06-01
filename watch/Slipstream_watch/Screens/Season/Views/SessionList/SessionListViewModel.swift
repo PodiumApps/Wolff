@@ -212,6 +212,8 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
             sessionID: sessionID,
             sessionName: sessionName.label
         )
+
+        print(podium)
         
         return FinishedSessionCellViewModel(
             navigation: navigation,
