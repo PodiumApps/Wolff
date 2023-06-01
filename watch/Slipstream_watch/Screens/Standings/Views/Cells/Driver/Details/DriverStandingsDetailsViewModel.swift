@@ -38,7 +38,6 @@ final class DriverStandingsDetailsViewModel: DriverStandingsDetailsViewModelRepr
         do {
 
             let details = try await self.networkManager.load(DriverDetails.getDetails(for: driverID))
-            print(details)
             
             self.buildInfoComponents(details: details)
         } catch {

@@ -61,7 +61,10 @@ struct ConstructorStandingsCellView<ViewModel: ConstructorStandingsCellViewModel
                 .fill(constructorStyler.constructor.color.opacity(Constants.Card.backgroundOpacity))
         )
         .fullScreenCover(isPresented: $showConstructorDetails) {
-            EmptyView()
+            ConstructorStandingsDetailsView(viewModel: ConstructorStandingsDetailsViewModel.make(
+                constructorID: viewModel.constructorID,
+                constructorName: viewModel.fullName
+            ))
         }
     }
 }

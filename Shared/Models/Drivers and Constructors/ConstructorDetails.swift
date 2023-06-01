@@ -16,7 +16,7 @@ extension ConstructorDetails {
 
     static func getDetails(for constructorID: Constructor.ID) -> Resource<Self> {
 
-        guard let url = URL(string: "") else {
+        guard let url = URL(string: "\(Global.url)/v1/constructor-details/\(constructorID.string)") else {
             fatalError("URL not found")
         }
 
