@@ -58,7 +58,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                 switch liveEventService {
                 case .refreshed(let liveSession):
 
-                    if self.sessionID.string == liveSession.id.string && !liveSession.standings.isEmpty {
+                    if self.sessionID == liveSession.id && !liveSession.standings.isEmpty {
 
                         self.state = buildLiveStandingsCells(standings: liveSession.standings)
                     }
@@ -93,11 +93,16 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
     }
 
      @MainActor func loadSession() async {
+
         do {
             let standings = try await self.networkManager
                 .load(SessionDetail.getSession(for: SessionDetail.self, id: self.sessionID.string))
 
-            self.state = self.buildFinishedSessionCells(standings: standings)
+            if standings.isEmpty {
+                self.liveEventService.action.send(.updatePositions)
+            } else {
+                self.state = self.buildFinishedSessionCells(standings: standings)
+            }
         } catch {
             self.state = .error(error.localizedDescription)
         }

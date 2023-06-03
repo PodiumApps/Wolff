@@ -34,7 +34,7 @@ struct LiveSessionCellView<ViewModel: LiveSessionCellViewModelRepresentable>: Vi
     var body: some View {
 
         Button(action: {
-
+            viewModel.action.send(.tapSession)
         }) {
             HStack {
                 VStack(alignment: .leading, spacing: .Spacing.default) {

@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 protocol LiveSessionCellViewModelRepresentable {
 
@@ -6,19 +7,20 @@ protocol LiveSessionCellViewModelRepresentable {
     var sessionID: Session.ID { get }
     var podium: [String] { get }
     var state: LiveSessionCellViewModel.State { get }
-
-    func tapSession() -> Void
+    var action: PassthroughSubject<LiveSessionCellViewModel.Action, Never> { get }
 }
 
 final class LiveSessionCellViewModel: LiveSessionCellViewModelRepresentable {
 
     private let navigation: SeasonNavigation
     private let sessionStandingsListViewModel: SessionStandingsListViewModel
+    private var subscriptions = Set<AnyCancellable>()
 
     var sessionName: String
     var sessionID: Session.ID
     var podium: [String]
     var state: LiveSessionCellViewModel.State
+    var action = PassthroughSubject<Action, Never>()
 
     init(
         navigation: SeasonNavigation,
@@ -35,15 +37,32 @@ final class LiveSessionCellViewModel: LiveSessionCellViewModelRepresentable {
         self.podium = podium
         self.state = state
         self.sessionStandingsListViewModel = sessionStandingsListViewModel
+
+        self.setUpBindings()
     }
 
-    func tapSession() {
+    private func setUpBindings() {
 
-        navigation.action.send(.goTo(route: .sessionStandingsList(sessionStandingsListViewModel)))
+        action
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self ]action in
+                guard let self else { return }
+
+                switch action {
+                case .tapSession:
+                    navigation.action.send(.goTo(route: .sessionStandingsList(sessionStandingsListViewModel)))
+                }
+            }
+            .store(in: &subscriptions)
     }
 }
 
 extension LiveSessionCellViewModel {
+
+    enum Action {
+
+        case tapSession
+    }
 
     enum State {
         case aboutToStart

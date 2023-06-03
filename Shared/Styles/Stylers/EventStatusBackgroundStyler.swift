@@ -56,7 +56,7 @@ extension EventStatusBackgroundStyler {
             status = .liveSession
         case .upcoming(_, _, _, let session):
             status = .upcoming(hasSession: session != nil)
-        case .finished:
+        case .finished, .calledOff:
             status = .complete
         }
 

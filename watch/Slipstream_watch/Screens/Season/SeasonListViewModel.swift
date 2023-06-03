@@ -260,6 +260,9 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                         sessionListViewModel: sessionListViewModel
                     )
                 )
+            case .calledOff:
+
+                return .calledOff(buildCalledOffCardViewModel(event: event))
             }
         }
 
@@ -268,7 +271,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
             case .live, .upcoming:
                 indexFirstToAppear = index
                 return .results(eventCells)
-            case .finished:
+            case .finished, .calledOff:
                 continue
             }
         }
@@ -338,6 +341,11 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         )
     }
 
+    private func buildCalledOffCardViewModel(event: Event) -> CalledOffEventCardViewModel {
+
+        CalledOffEventCardViewModel(title: event.title, country: event.country, round: event.round)
+    }
+
     private func setUpLiveEventState(podium: [String]?, timeInterval: TimeInterval) -> LiveEventCardViewModel.State {
 
         guard let podium, timeInterval <= 0 else {
@@ -364,6 +372,7 @@ extension SeasonListViewModel {
         case live(LiveEventCardViewModel)
         case upcoming(UpcomingEventCardViewModel)
         case finished(FinishedEventCardViewModel)
+        case calledOff(CalledOffEventCardViewModel)
 
         var id: Identifier {
 
@@ -371,6 +380,7 @@ extension SeasonListViewModel {
             case .live: return .live
             case .upcoming(let viewModel): return .upcoming(viewModel.id.string)
             case .finished(let viewModel): return .finished(viewModel.id.string)
+            case .calledOff: return .calledOff
             }
         }
 
@@ -379,6 +389,7 @@ extension SeasonListViewModel {
             case live
             case upcoming(String)
             case finished(String)
+            case calledOff
         }
 
         func hash(into hasher: inout Hasher) {

@@ -13,6 +13,7 @@ struct Event: Decodable {
     let length: Double
     let raceDistance: Double
     let round: Int
+    let isCanceled: Bool
     let sessions: [Session]
 }
 
@@ -23,6 +24,8 @@ extension Event {
     }
 
     var status: Status {
+
+        if isCanceled { return .calledOff }
         
         if let nextSession = sessions.first(where: {
             $0.date.timeIntervalSince(Date()) > -.maximumSessionTime
@@ -91,12 +94,14 @@ extension Event {
         case upcoming(start: String, end: String, sessionName: String, timeInterval: TimeInterval? = nil)
         case live(timeInterval: TimeInterval, sessionName: String)
         case finished(winner: [Driver.ID])
+        case calledOff
         
         
         enum Identifier {
             case live
             case upcoming
             case finished
+            case calledOff
         }
         
         var id: Identifier {
@@ -105,6 +110,7 @@ extension Event {
             case .upcoming: return .upcoming
             case .live: return .live
             case .finished: return .finished
+            case .calledOff: return .calledOff
             }
         }
     }

@@ -31,6 +31,10 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
                                 FinishedEventCardView(viewModel: viewModel)
                                     .id(index)
                                     .padding(.vertical, Constants.Card.verticalPadding)
+                            case .calledOff(let viewModel):
+                                CalledOffEventCardView(viewModel: viewModel)
+                                    .id(index)
+                                    .padding(.vertical, Constants.Card.verticalPadding)
                             }
                         }
                         .listStyle(.carousel)

@@ -128,6 +128,8 @@
 		CF37157329F1343200AF14AA /* LiveDriverStandingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF37157229F1343200AF14AA /* LiveDriverStandingCellViewModel.swift */; };
 		CF5F07772996CC3D00E79996 /* ScheduleCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5F07762996CC3D00E79996 /* ScheduleCarouselView.swift */; };
 		CF6804062A28DD3500B24AA0 /* ConstructorStandingsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6804052A28DD3500B24AA0 /* ConstructorStandingsDetailsView.swift */; };
+		CF6804092A29FA1400B24AA0 /* CalledOffEventCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6804082A29FA1400B24AA0 /* CalledOffEventCardViewModel.swift */; };
+		CF68040B2A29FA2700B24AA0 /* CalledOffEventCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF68040A2A29FA2700B24AA0 /* CalledOffEventCardView.swift */; };
 		CF78D01E2996C58600D45EDE /* ScheduleCarouselViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF78D01D2996C58600D45EDE /* ScheduleCarouselViewModel.swift */; };
 		CF8959FE2A2609C9007A0C55 /* ConstructorDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8959FD2A2609C9007A0C55 /* ConstructorDetails.swift */; };
 		CF8959FF2A2609C9007A0C55 /* ConstructorDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8959FD2A2609C9007A0C55 /* ConstructorDetails.swift */; };
@@ -286,6 +288,8 @@
 		CF37157229F1343200AF14AA /* LiveDriverStandingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDriverStandingCellViewModel.swift; sourceTree = "<group>"; };
 		CF5F07762996CC3D00E79996 /* ScheduleCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCarouselView.swift; sourceTree = "<group>"; };
 		CF6804052A28DD3500B24AA0 /* ConstructorStandingsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorStandingsDetailsView.swift; sourceTree = "<group>"; };
+		CF6804082A29FA1400B24AA0 /* CalledOffEventCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalledOffEventCardViewModel.swift; sourceTree = "<group>"; };
+		CF68040A2A29FA2700B24AA0 /* CalledOffEventCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalledOffEventCardView.swift; sourceTree = "<group>"; };
 		CF78D01D2996C58600D45EDE /* ScheduleCarouselViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCarouselViewModel.swift; sourceTree = "<group>"; };
 		CF8959FD2A2609C9007A0C55 /* ConstructorDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorDetails.swift; sourceTree = "<group>"; };
 		CF895A012A260B9A007A0C55 /* ConstructorStandingsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorStandingsCellViewModel.swift; sourceTree = "<group>"; };
@@ -762,6 +766,15 @@
 			path = LiveDriverStandingCell;
 			sourceTree = "<group>";
 		};
+		CF6804072A29F9EF00B24AA0 /* CalledOff */ = {
+			isa = PBXGroup;
+			children = (
+				CF6804082A29FA1400B24AA0 /* CalledOffEventCardViewModel.swift */,
+				CF68040A2A29FA2700B24AA0 /* CalledOffEventCardView.swift */,
+			);
+			path = CalledOff;
+			sourceTree = "<group>";
+		};
 		CF895A002A260B6B007A0C55 /* Constructor */ = {
 			isa = PBXGroup;
 			children = (
@@ -943,6 +956,7 @@
 		CFEBC06A29CC8FD4000A2472 /* EventCard */ = {
 			isa = PBXGroup;
 			children = (
+				CF6804072A29F9EF00B24AA0 /* CalledOff */,
 				CFEBC07929CD13B7000A2472 /* Finished */,
 				CFEBC07429CD0910000A2472 /* Upcoming */,
 				CFEBC06F29CCBE28000A2472 /* Live */,
@@ -1210,6 +1224,7 @@
 				CFE46FA329C9B4A30063805A /* SessionDriverStyler.swift in Sources */,
 				420967F4294C9A8D0075D75E /* SlipstreamWatchApp.swift in Sources */,
 				CF233DED29ADFA9900A8D1CD /* LiveSession.swift in Sources */,
+				CF68040B2A29FA2700B24AA0 /* CalledOffEventCardView.swift in Sources */,
 				42B21970295DA4D400515097 /* Session.swift in Sources */,
 				CF05443A29507C1000A39FE3 /* Circuit.swift in Sources */,
 				CF37156E29F131C000AF14AA /* SessionStandingsListView.swift in Sources */,
@@ -1222,6 +1237,7 @@
 				42B2198F295EEAA500515097 /* SessionMock.swift in Sources */,
 				42BCAD5929BB742B0089B46A /* UserDefaultsWrapper.swift in Sources */,
 				42B2199A295F3A2300515097 /* DoubleExtension.swift in Sources */,
+				CF6804092A29FA1400B24AA0 /* CalledOffEventCardViewModel.swift in Sources */,
 				CFEBC07829CD0C76000A2472 /* UpcomingEventCardView.swift in Sources */,
 				CF37157329F1343200AF14AA /* LiveDriverStandingCellViewModel.swift in Sources */,
 				CFEBC07129CCBE47000A2472 /* LiveEventCardViewModel.swift in Sources */,
