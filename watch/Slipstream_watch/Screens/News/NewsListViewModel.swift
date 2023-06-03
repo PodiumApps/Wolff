@@ -74,11 +74,13 @@ final class NewsListViewModel: NewsListViewModelRepresentable {
 
 
             }
-            .assign(to: &state)
+            .assign(to: &$state)
     }
 
     private func buildNewsCells() -> NewsListViewModel.State {
 
+
+        return .results
     }
 }
 
