@@ -122,6 +122,11 @@
 		CF37157129F1341500AF14AA /* DriverStandingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF37157029F1341500AF14AA /* DriverStandingCellView.swift */; };
 		CF37157329F1343200AF14AA /* DriverStandingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF37157229F1343200AF14AA /* DriverStandingCellViewModel.swift */; };
 		CF5F07772996CC3D00E79996 /* ScheduleCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5F07762996CC3D00E79996 /* ScheduleCarouselView.swift */; };
+		CF68040D2A2B968D00B24AA0 /* NewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF68040C2A2B968D00B24AA0 /* NewsService.swift */; };
+		CF68040E2A2B968D00B24AA0 /* NewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF68040C2A2B968D00B24AA0 /* NewsService.swift */; };
+		CF6804112A2BA0AB00B24AA0 /* NewsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6804102A2BA0AB00B24AA0 /* NewsListView.swift */; };
+		CF6804132A2BA0FB00B24AA0 /* NewsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6804122A2BA0FB00B24AA0 /* NewsListViewModel.swift */; };
+		CF6804172A2BA15F00B24AA0 /* NewsNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6804162A2BA15F00B24AA0 /* NewsNavigation.swift */; };
 		CF78D01E2996C58600D45EDE /* ScheduleCarouselViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF78D01D2996C58600D45EDE /* ScheduleCarouselViewModel.swift */; };
 		CF8EB9D429A77AA700F38158 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8EB9D229A77AA700F38158 /* Event.swift */; };
 		CFA9339E29F7DC0F007F645E /* TrackInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA9339D29F7DC0F007F645E /* TrackInfoView.swift */; };
@@ -267,6 +272,10 @@
 		CF37157029F1341500AF14AA /* DriverStandingCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverStandingCellView.swift; sourceTree = "<group>"; };
 		CF37157229F1343200AF14AA /* DriverStandingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverStandingCellViewModel.swift; sourceTree = "<group>"; };
 		CF5F07762996CC3D00E79996 /* ScheduleCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCarouselView.swift; sourceTree = "<group>"; };
+		CF68040C2A2B968D00B24AA0 /* NewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsService.swift; sourceTree = "<group>"; };
+		CF6804102A2BA0AB00B24AA0 /* NewsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListView.swift; sourceTree = "<group>"; };
+		CF6804122A2BA0FB00B24AA0 /* NewsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListViewModel.swift; sourceTree = "<group>"; };
+		CF6804162A2BA15F00B24AA0 /* NewsNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsNavigation.swift; sourceTree = "<group>"; };
 		CF78D01D2996C58600D45EDE /* ScheduleCarouselViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCarouselViewModel.swift; sourceTree = "<group>"; };
 		CF8EB9D229A77AA700F38158 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		CFA9339D29F7DC0F007F645E /* TrackInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfoView.swift; sourceTree = "<group>"; };
@@ -504,6 +513,7 @@
 				42521CA629B0F21700000586 /* DriverAndConstructorService.swift */,
 				42521CB129B1006000000586 /* ServiceLocator.swift */,
 				42BCAD5B29BB7B000089B46A /* EventService.swift */,
+				CF68040C2A2B968D00B24AA0 /* NewsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -708,6 +718,24 @@
 			path = DriverStandingCell;
 			sourceTree = "<group>";
 		};
+		CF68040F2A2B9C1800B24AA0 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				CF6804152A2BA15000B24AA0 /* Views */,
+				CF6804102A2BA0AB00B24AA0 /* NewsListView.swift */,
+				CF6804122A2BA0FB00B24AA0 /* NewsListViewModel.swift */,
+				CF6804162A2BA15F00B24AA0 /* NewsNavigation.swift */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		CF6804152A2BA15000B24AA0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		CF8EB9D129A77A8D00F38158 /* Event */ = {
 			isa = PBXGroup;
 			children = (
@@ -822,6 +850,7 @@
 		CFE46F9A29C908640063805A /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				CF68040F2A2B9C1800B24AA0 /* News */,
 				CFE46FA929CA07DF0063805A /* Season */,
 			);
 			path = Screens;
@@ -1103,6 +1132,7 @@
 				CFEBC07629CD092F000A2472 /* UpcomingEventCardViewModel.swift in Sources */,
 				CFCD656629DAE5330079BE9F /* SessionListView.swift in Sources */,
 				42521CA729B0F21700000586 /* DriverAndConstructorService.swift in Sources */,
+				CF68040D2A2B968D00B24AA0 /* NewsService.swift in Sources */,
 				CF0544462951CB8D00A39FE3 /* DateExtension.swift in Sources */,
 				CFA9339E29F7DC0F007F645E /* TrackInfoView.swift in Sources */,
 				42521CA429B0ECBD00000586 /* LiveSessionService.swift in Sources */,
@@ -1136,8 +1166,11 @@
 				CFE46F9F29C90D0F0063805A /* AppView.swift in Sources */,
 				CF054428294F7D4E00A39FE3 /* Constructor.swift in Sources */,
 				CFA933A029F7DC1F007F645E /* TrackInfoViewModel.swift in Sources */,
+				CF6804112A2BA0AB00B24AA0 /* NewsListView.swift in Sources */,
 				42521CAA29B0F9FF00000586 /* Global.swift in Sources */,
 				CFE46FA829CA07D60063805A /* SeasonListViewModel.swift in Sources */,
+				CF6804172A2BA15F00B24AA0 /* NewsNavigation.swift in Sources */,
+				CF6804132A2BA0FB00B24AA0 /* NewsListViewModel.swift in Sources */,
 				42521CB529B1033600000586 /* LoggerExtension.swift in Sources */,
 				42B21995295EEAC600515097 /* StandingsMock.swift in Sources */,
 				CF277A1E297017C50048DE75 /* Fonts.swift in Sources */,
@@ -1245,6 +1278,7 @@
 				CF20D372297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */,
 				42096834295378A10075D75E /* Slipstream_iOSApp.swift in Sources */,
 				CF233DDE29A8D98800A8D1CD /* GrandPrixSchedulePickerViewModel.swift in Sources */,
+				CF68040E2A2B968D00B24AA0 /* NewsService.swift in Sources */,
 				42521D0F29B79A3400000586 /* AppViewModel.swift in Sources */,
 				4209686B29537B0D0075D75E /* Circuit.swift in Sources */,
 				42BCAD5629BB4B360089B46A /* EventMock.swift in Sources */,
