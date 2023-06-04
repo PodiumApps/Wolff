@@ -79,8 +79,12 @@ final class NewsListViewModel: NewsListViewModelRepresentable {
 
     private func buildNewsCells() -> NewsListViewModel.State {
 
+        let cells: [NewsCellViewModel] = news.compactMap { news in
 
-        return .results
+            return NewsCellViewModel(news: news)
+        }
+
+        return .results(cells)
     }
 }
 
@@ -89,7 +93,7 @@ extension NewsListViewModel {
     enum State: Equatable {
 
         case error(String)
-        case results
+        case results([NewsCellViewModel])
         case loading
 
         enum Identifier: String {
