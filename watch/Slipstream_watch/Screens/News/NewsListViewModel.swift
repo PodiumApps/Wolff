@@ -116,3 +116,11 @@ extension NewsListViewModel {
         }
     }
 }
+
+extension NewsListViewModel {
+
+    static func make() -> NewsListViewModel {
+
+        .init(navigation: NewsNavigation(), newsService: ServiceLocator.shared.newsService)
+    }
+}
