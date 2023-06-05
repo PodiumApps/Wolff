@@ -1,20 +1,23 @@
 import Foundation
+import Combine
 
 protocol ConstructorStandingsDetailsViewModelRepresentable: ObservableObject {
 
     var state: ConstructorStandingsDetailsViewModel.State { get }
     var constructorID: Constructor.ID { get }
-    func loadConstructorDetails() async
+    var action: PassthroughSubject<ConstructorStandingsDetailsViewModel.Action, Never> { get }
 }
 
 final class ConstructorStandingsDetailsViewModel: ConstructorStandingsDetailsViewModelRepresentable {
 
     @Published var state: State
+    var action = PassthroughSubject<Action, Never>()
 
     let constructorID: Constructor.ID
 
     private let networkManager: NetworkManagerRepresentable
     private let constructorName: String
+    private var subscribers = Set<AnyCancellable>()
 
     init(
         constructorID: Constructor.ID,
@@ -27,6 +30,24 @@ final class ConstructorStandingsDetailsViewModel: ConstructorStandingsDetailsVie
         self.constructorID = constructorID
         self.constructorName = constructorName
         self.networkManager = networkManager
+
+        self.setUpBindings()
+    }
+
+    private func setUpBindings() {
+
+        action
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+
+                guard let self else { return }
+
+                switch action {
+                case .loadConstructorDetails:
+                    Task { await self.loadConstructorDetails() }
+                }
+            }
+            .store(in: &subscribers)
     }
 
     @MainActor func loadConstructorDetails() async {
