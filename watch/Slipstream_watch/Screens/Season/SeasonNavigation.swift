@@ -33,6 +33,8 @@ class SeasonNavigation: SeasonNavigationProtocol {
                 switch action {
                 case .goTo(let route):
                     self.route = route
+                case .removeRout:
+                    self.route = nil
                 }
             }
             .store(in: &subscriptions)
@@ -44,6 +46,7 @@ extension SeasonNavigation {
     enum Action {
         
         case goTo(route: Route?)
+        case removeRout
     }
     
     enum Route: Hashable {

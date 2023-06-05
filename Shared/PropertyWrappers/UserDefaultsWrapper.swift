@@ -6,6 +6,7 @@ enum UserDefaultsKeys: String {
     case constructors = "com.tomasmamede.slipstream-constructors"
     case user = "com.tomasmamede.slipstream-user"
     case firstTime = "com.tomasmamede.slipstream-first-time"
+    case countErrors = "com.tomasmamede.slipstream-count-error"
 }
 
 @propertyWrapper

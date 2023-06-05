@@ -22,6 +22,10 @@ struct AppView<ViewModel: AppViewModelRepresentable>: View {
                 StandingsView(viewModel: standingsViewModel)
                 Text("Settings")
             }
+            .sheet(isPresented: $viewModel.presentPremiumSheet) {
+                Text("Give me your money motherfucker")
+            }
+            
         }
     }
 }

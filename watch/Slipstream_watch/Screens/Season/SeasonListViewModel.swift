@@ -22,6 +22,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
     private let eventService: EventServiceRepresentable
     private let driversAndConstructorService: DriverAndConstructorServiceRepresentable
     private let liveEventService: LiveSessionServiceRepresentable
+    private let purchaseService: PurchaseServiceRepresentable
 
     private let fiveMinutesInSeconds: Double = 5 * 60
     private var updateAllEventsTimer: Timer? = nil
@@ -43,7 +44,8 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         navigation: SeasonNavigation,
         driversAndConstructorService: DriverAndConstructorServiceRepresentable,
         eventService: EventServiceRepresentable,
-        liveEventService: LiveSessionServiceRepresentable
+        liveEventService: LiveSessionServiceRepresentable,
+        purchaseService: PurchaseServiceRepresentable
     ) {
 
         self.navigation = navigation
@@ -56,6 +58,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         self.eventService = eventService
         self.driversAndConstructorService = driversAndConstructorService
         self.liveEventService = liveEventService
+        self.purchaseService = purchaseService
 
         self.state = .loading
 
@@ -72,12 +75,33 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         navigation.routePublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] navigation in
+                
+                guard let self else { return }
+                
                 guard let navigation else {
-                    self?.route = []
+                    if !route.isEmpty {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            self.route.removeLast()
+                        }
+                    }
                     return
                 }
                 
-                self?.route.append(navigation)
+                purchaseService.action.send(.checkPremium)
+                
+                route.append(navigation)
+            }
+            .store(in: &subscriptions)
+        
+        purchaseService.statePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] purchaseServiceStatus in
+                
+                guard let self else { return }
+                
+                if case .dismissed = purchaseServiceStatus {
+                    self.navigation.action.send(.removeRout)
+                }
             }
             .store(in: &subscriptions)
     }
@@ -406,6 +430,7 @@ extension SeasonListViewModel {
 
     enum Action {
 
+        case verifyPremium
         case tap(index: Int)
     }
 
@@ -470,7 +495,8 @@ extension SeasonListViewModel {
             navigation: SeasonNavigation(),
             driversAndConstructorService: ServiceLocator.shared.driverAndConstructorService,
             eventService: ServiceLocator.shared.eventService,
-            liveEventService: ServiceLocator.shared.liveSessionService
+            liveEventService: ServiceLocator.shared.liveSessionService,
+            purchaseService: ServiceLocator.shared.purchaseService
         )
     }
 }
