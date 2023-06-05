@@ -134,6 +134,12 @@ internal enum Localization {
       return Localization.tr("Localizable", "session_time.tomorrow", String(describing: p1), fallback: "Tomorrow at %@")
     }
   }
+  internal enum StandingsListView {
+    /// Standings
+    internal static let screenTitle = Localization.tr("Localizable", "standings_list_view.screen_title", fallback: "Standings")
+    /// Selection
+    internal static let selectionLabel = Localization.tr("Localizable", "standings_list_view.selection_label", fallback: "Selection")
+  }
   internal enum TrackInfo {
     /// First Grand Prix
     internal static let firstGrandPrix = Localization.tr("Localizable", "track_info.first_grand_prix", fallback: "First Grand Prix")

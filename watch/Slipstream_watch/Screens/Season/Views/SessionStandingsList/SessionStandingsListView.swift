@@ -24,8 +24,8 @@ struct SessionStandingsListView<ViewModel: SessionStandingsListViewModelRepresen
         }
         .navigationBarTitle(viewModel.sessionName)
         .navigationBarTitleDisplayMode(.large)
-        .task {
-            await viewModel.loadSession()
+        .onAppear {
+            viewModel.action.send(.loadSession)
         }
     }
 }

@@ -6,7 +6,7 @@ protocol SessionStandingsListViewModelRepresentable: ObservableObject {
     var state: SessionStandingsListViewModel.State { get }
     var cells: [LiveDriverStandingCellViewModel] { get }
     var sessionName: String { get }
-    func loadSession() async
+    var action: PassthroughSubject<SessionStandingsListViewModel.Action, Never> { get }
 }
 
 final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresentable {
@@ -20,6 +20,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
     private let networkManager: NetworkManagerRepresentable
 
     private var subscribers = Set<AnyCancellable>()
+    var action = PassthroughSubject<SessionStandingsListViewModel.Action, Never>()
 
     @Published var state: State
     @Published var cells: [LiveDriverStandingCellViewModel]
@@ -45,6 +46,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
         self.cells = []
 
         self.setUpServices()
+        self.setUpBindings()
     }
 
     private func setUpServices() {
@@ -90,6 +92,21 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                 }
             }
             .assign(to: &$state)
+    }
+
+    private func setUpBindings() {
+
+        action
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                guard let self else { return }
+
+                switch action {
+                case .loadSession:
+                    Task { await self.loadSession() }
+                }
+            }
+            .store(in: &subscribers)
     }
 
      @MainActor func loadSession() async {
@@ -156,6 +173,11 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
 }
 
 extension SessionStandingsListViewModel {
+
+    enum Action {
+
+        case loadSession
+    }
 
     enum State: Equatable {
 

@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 protocol UpcomingEventCardViewModelRepresentable: ObservableObject {
 
@@ -11,14 +12,14 @@ protocol UpcomingEventCardViewModelRepresentable: ObservableObject {
     var sessionName: String { get }
     var timeInterval: TimeInterval? { get }
     var state: UpcomingEventCardViewModel.State { get }
+    var action: PassthroughSubject<UpcomingEventCardViewModel.Action, Never> { get }
     var sessionListViewModel: SessionListViewModel { get }
-
-    func tapEvent() -> Void 
 }
 
 final class UpcomingEventCardViewModel: UpcomingEventCardViewModelRepresentable {
 
     private let navigation: SeasonNavigation
+    private var subscriptions = Set<AnyCancellable>()
 
     var id: Event.ID
     var title: String
@@ -28,7 +29,10 @@ final class UpcomingEventCardViewModel: UpcomingEventCardViewModelRepresentable 
     var end: String
     var sessionName: String
     var timeInterval: TimeInterval?
+
     var state: State { setUpUpcomingEventsState() }
+    var action = PassthroughSubject<Action, Never>()
+    
     var sessionListViewModel: SessionListViewModel
 
     init(
@@ -54,20 +58,23 @@ final class UpcomingEventCardViewModel: UpcomingEventCardViewModelRepresentable 
         self.sessionName = sessionName
         self.timeInterval = timeInterval
         self.sessionListViewModel = sessionListViewModel
+
+        self.setUpBindings()
     }
 
-    func tapEvent() {
+    private func setUpBindings() {
 
-        navigation.action.send(.goTo(route: .sessionsList(sessionListViewModel)))
-    }
-}
+        action
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                guard let self else { return }
 
-extension UpcomingEventCardViewModel {
-
-    enum State {
-
-        case moreThanFortyEightHours(eventDate: String)
-        case lessThanFortyEightHours(hours: Int, minutes: Int)
+                switch action {
+                case .tapEvent:
+                    navigation.action.send(.goTo(route: .sessionsList(sessionListViewModel)))
+                }
+            }
+            .store(in: &subscriptions)
     }
 
     private func setUpUpcomingEventsState() -> State {
@@ -85,5 +92,19 @@ extension UpcomingEventCardViewModel {
         }
 
         return .moreThanFortyEightHours(eventDate: eventDate)
+    }
+}
+
+extension UpcomingEventCardViewModel {
+
+    enum Action {
+
+        case tapEvent
+    }
+
+    enum State {
+
+        case moreThanFortyEightHours(eventDate: String)
+        case lessThanFortyEightHours(hours: Int, minutes: Int)
     }
 }

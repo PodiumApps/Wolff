@@ -1,6 +1,6 @@
 import Foundation
 
-protocol ConstructorStandingsCellViewModelRepresentable: ObservableObject {
+protocol ConstructorStandingsCellViewModelRepresentable: Identifiable, ObservableObject {
 
     var constructorID: Constructor.ID { get }
     var name: String { get }

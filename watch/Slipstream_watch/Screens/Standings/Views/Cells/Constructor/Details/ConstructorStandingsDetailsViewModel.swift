@@ -61,6 +61,11 @@ final class ConstructorStandingsDetailsViewModel: ConstructorStandingsDetailsVie
 
 extension ConstructorStandingsDetailsViewModel {
 
+    enum Action {
+
+        case loadConstructorDetails
+    }
+
     enum State: Equatable {
 
         case error(String)

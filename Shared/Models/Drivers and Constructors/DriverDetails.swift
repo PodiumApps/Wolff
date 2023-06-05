@@ -1,6 +1,6 @@
 import Foundation
 
-struct DriverDetails: Decodable, Hashable {
+struct DriverDetails: Decodable {
 
     let placeOfBirth: String
     let podiums: Int

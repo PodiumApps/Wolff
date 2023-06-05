@@ -51,7 +51,6 @@ final class NetworkManager: NetworkManagerRepresentable {
             do {
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .formatted(.standard)
-                
                 return try decoder.decode(T.self, from: data)
             } catch {
                 throw NetworkError.decodingError(error)

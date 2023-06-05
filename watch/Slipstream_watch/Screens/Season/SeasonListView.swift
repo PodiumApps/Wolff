@@ -22,19 +22,19 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
                             case .upcoming(let viewModel):
                                 UpcomingEventCardView(viewModel: viewModel)
                                     .id(index)
-                                    .padding(.vertical, Constants.Card.verticalPadding)
+                                    .padding(.vertical, .Spacing.default2)
                             case .live(let viewModel):
                                 LiveEventCardView(viewModel: viewModel)
                                     .id(index)
-                                    .padding(.vertical, Constants.Card.verticalPadding)
+                                    .padding(.vertical, .Spacing.default2)
                             case .finished(let viewModel):
                                 FinishedEventCardView(viewModel: viewModel)
                                     .id(index)
-                                    .padding(.vertical, Constants.Card.verticalPadding)
+                                    .padding(.vertical, .Spacing.default2)
                             case .calledOff(let viewModel):
                                 CalledOffEventCardView(viewModel: viewModel)
                                     .id(index)
-                                    .padding(.vertical, Constants.Card.verticalPadding)
+                                    .padding(.vertical, .Spacing.default2)
                             }
                         }
                         .listStyle(.carousel)
