@@ -2,8 +2,6 @@ import SwiftUI
 
 struct DriverStandingsCellView<ViewModel: DriverStandingsCellViewModelRepresentable>: View {
 
-    @State private var showDriverDetails: Bool = false
-
     @ObservedObject var viewModel: ViewModel
     private let constructorStyler: ConstructorStylerRepresentable
 
@@ -37,7 +35,7 @@ struct DriverStandingsCellView<ViewModel: DriverStandingsCellViewModelRepresenta
                 }
 
                 Button(action: {
-                    showDriverDetails.toggle()
+                    viewModel.action.send(.openDetailsView)
                 }) {
                     Image(systemName: "ellipsis.circle.fill")
                         .padding(5)
@@ -68,7 +66,7 @@ struct DriverStandingsCellView<ViewModel: DriverStandingsCellViewModelRepresenta
             RoundedRectangle(cornerRadius: Constants.Card.cornerRadius)
                 .fill(constructorStyler.constructor.color.opacity(Constants.Card.backgroundOpacity))
         )
-        .fullScreenCover(isPresented: $showDriverDetails) {
+        .fullScreenCover(isPresented: $viewModel.showDriverDetailsSheet) {
             DriverStandingsDetailsView(viewModel: DriverStandingsDetailsViewModel.make(
                 driverName: "\(viewModel.firstName) \(viewModel.lastName)",
                 driverID: viewModel.driverID,

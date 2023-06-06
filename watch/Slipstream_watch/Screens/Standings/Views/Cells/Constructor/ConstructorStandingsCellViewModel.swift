@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 protocol ConstructorStandingsCellViewModelRepresentable: Identifiable, ObservableObject {
 
@@ -8,6 +9,8 @@ protocol ConstructorStandingsCellViewModelRepresentable: Identifiable, Observabl
     var teamPrinciple: String { get }
     var points: Int { get }
     var position: Int { get }
+    var showConstructorDetailsSheet: Bool { get set }
+    var action: PassthroughSubject<ConstructorStandingsCellViewModel.Action, Never> { get }
 }
 
 final class ConstructorStandingsCellViewModel: ConstructorStandingsCellViewModelRepresentable {
@@ -19,6 +22,11 @@ final class ConstructorStandingsCellViewModel: ConstructorStandingsCellViewModel
     var points: Int
     var position: Int
 
+    @Published var showConstructorDetailsSheet: Bool = false
+
+    var action = PassthroughSubject<ConstructorStandingsCellViewModel.Action, Never>()
+    private var subscribers = Set<AnyCancellable>()
+
     init(constructor: Constructor, position: Int) {
 
         self.constructorID = constructor.id
@@ -27,6 +35,31 @@ final class ConstructorStandingsCellViewModel: ConstructorStandingsCellViewModel
         self.teamPrinciple = constructor.teamPrinciple
         self.points = constructor.points
         self.position = position
+
+        self.setUpBindings()
+    }
+
+    private func setUpBindings() {
+
+        action
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                guard let self else { return }
+
+                switch action {
+                case .openDetailsView:
+                    showConstructorDetailsSheet.toggle()
+                }
+            }
+            .store(in: &subscribers)
+    }
+}
+
+extension ConstructorStandingsCellViewModel {
+
+    enum Action {
+
+        case openDetailsView
     }
 }
 

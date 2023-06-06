@@ -1,8 +1,6 @@
 import SwiftUI
 
-struct LiveDriverStandingCellView<ViewModel: LiveDriverStandingCellViewModel>: View {
-
-    @State private var showDriverSessionDetails: Bool = false
+struct LiveDriverStandingCellView<ViewModel: LiveDriverStandingCellViewModelRepresentable>: View {
 
     @ObservedObject private var viewModel: ViewModel
     private var constructorStyler: ConstructorStylerRepresentable
@@ -38,7 +36,7 @@ struct LiveDriverStandingCellView<ViewModel: LiveDriverStandingCellViewModel>: V
                 }
 
                 Button(action: {
-                    showDriverSessionDetails.toggle()
+                    viewModel.action.send(.showLiveDriverDetails)
                 }) {
                     Image(systemName: "ellipsis.circle.fill")
                         .padding(5)
@@ -55,11 +53,11 @@ struct LiveDriverStandingCellView<ViewModel: LiveDriverStandingCellViewModel>: V
 
                 Spacer()
 
-                if let _ = viewModel.tyre {
+                if let tyre = viewModel.tyre {
                     VStack(alignment: .leading) {
                         Text(Localization.DriverStandingsCell.tyre)
                             .font(.Caption.semibold)
-                        Text("Medium")
+                        Text(tyre.rawValue.capitalized)
                             .font(.Caption.semibold)
                             .foregroundColor(Color.Tyre.medium)
                     }
@@ -71,7 +69,7 @@ struct LiveDriverStandingCellView<ViewModel: LiveDriverStandingCellViewModel>: V
             RoundedRectangle(cornerRadius: Constants.Card.cornerRadius)
                 .fill(constructorStyler.constructor.color.opacity(Constants.Card.backgroundOpacity))
         )
-        .sheet(isPresented: $showDriverSessionDetails) {
+        .sheet(isPresented: $viewModel.showDriverSessionDetails) {
             Text("Driver details for session")
         }
     }
