@@ -15,7 +15,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
     private let eventService: EventServiceRepresentable
     private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
     private let liveEventService: LiveSessionServiceRepresentable
-    private let navigation: SeasonNavigation
+    private let navigation: AppNavigationRepresentable
 
     @Published var state: State
     @Published private var sessionCells: [Cell]
@@ -25,7 +25,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
         eventService: EventServiceRepresentable,
         driverAndConstructorService: DriverAndConstructorServiceRepresentable,
         liveEventService: LiveSessionServiceRepresentable,
-        navigation: SeasonNavigation
+        navigation: AppNavigationRepresentable
     ) {
 
         self.event = event
@@ -323,7 +323,7 @@ extension SessionListViewModel {
 
 extension SessionListViewModel {
 
-    static func make(event: Event, navigation: SeasonNavigation) -> SessionListViewModel {
+    static func make(event: Event, navigation: AppNavigationRepresentable) -> SessionListViewModel {
         .init(
             event: event,
             eventService: ServiceLocator.shared.eventService,

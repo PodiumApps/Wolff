@@ -11,7 +11,7 @@ protocol FinishedSessionCellViewModelRepresentable {
 
 final class FinishedSessionCellViewModel: FinishedSessionCellViewModelRepresentable {
 
-    private let navigation: SeasonNavigation
+    private let navigation: AppNavigationRepresentable
     private let sessionStandingsListViewModel: SessionStandingsListViewModel
 
     var sessionID: Session.ID
@@ -19,7 +19,7 @@ final class FinishedSessionCellViewModel: FinishedSessionCellViewModelRepresenta
     var winners: [String]
 
     init(
-        navigation: SeasonNavigation,
+        navigation: AppNavigationRepresentable,
         sessionID: Session.ID,
         session: String,
         winners: [String],
@@ -36,6 +36,6 @@ final class FinishedSessionCellViewModel: FinishedSessionCellViewModelRepresenta
 
     func tapSession() {
 
-        navigation.action.send(.goTo(route: .sessionStandingsList(sessionStandingsListViewModel)))
+        navigation.action.send(.append(route: .sessionStandingsList(sessionStandingsListViewModel)))
     }
 }

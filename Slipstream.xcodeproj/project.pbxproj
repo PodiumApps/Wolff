@@ -44,6 +44,7 @@
 		4212E4D32A2E38B200456B68 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 4212E4D22A2E38B200456B68 /* RevenueCat */; };
 		4212E4D42A2E38BB00456B68 /* PurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4212E4CB2A2DEAA300456B68 /* PurchaseService.swift */; };
 		4212E4D52A2E38C900456B68 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42521CB129B1006000000586 /* ServiceLocator.swift */; };
+		4212E4D72A2F47CE00456B68 /* AppNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4212E4D62A2F47CE00456B68 /* AppNavigation.swift */; };
 		4245E81029B7E0DD00843B02 /* SeasonListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4245E80F29B7E0DD00843B02 /* SeasonListView.swift */; };
 		4245E81229B7E0EE00843B02 /* SeasonListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4245E81129B7E0EE00843B02 /* SeasonListViewModel.swift */; };
 		4245E81329B7E9E800843B02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42096837295378A20075D75E /* Assets.xcassets */; };
@@ -96,7 +97,6 @@
 		42B219A5295F450200515097 /* InfiniteScroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B219A3295F450200515097 /* InfiniteScroller.swift */; };
 		42B5DC8D29F91FC2005DFD6D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B5DC8C29F91FC2005DFD6D /* User.swift */; };
 		42B5DC8E29F923D5005DFD6D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B5DC8C29F91FC2005DFD6D /* User.swift */; };
-		42B5DC902A011A8B005DFD6D /* SeasonNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B5DC8F2A011A8B005DFD6D /* SeasonNavigation.swift */; };
 		42BCAD5529BB4B360089B46A /* EventMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5429BB4B360089B46A /* EventMock.swift */; };
 		42BCAD5629BB4B360089B46A /* EventMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5429BB4B360089B46A /* EventMock.swift */; };
 		42BCAD5929BB742B0089B46A /* UserDefaultsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BCAD5829BB742B0089B46A /* UserDefaultsWrapper.swift */; };
@@ -123,7 +123,6 @@
 		CF233DE029A8DB7C00A8D1CD /* GrandPrixSchedulePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DDF29A8DB7C00A8D1CD /* GrandPrixSchedulePickerView.swift */; };
 		CF233DE529ABE17B00A8D1CD /* SessionDriverRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DE429ABE17B00A8D1CD /* SessionDriverRowView.swift */; };
 		CF233DED29ADFA9900A8D1CD /* LiveSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DEC29ADFA9900A8D1CD /* LiveSession.swift */; };
-		CF2504182A11050400F0290E /* StandingsNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2504172A11050400F0290E /* StandingsNavigation.swift */; };
 		CF277A1E297017C50048DE75 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A1D297017C50048DE75 /* Fonts.swift */; };
 		CF277A1F297017C50048DE75 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A1D297017C50048DE75 /* Fonts.swift */; };
 		CF277A21297303430048DE75 /* StandingsCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A20297303430048DE75 /* StandingsCarouselView.swift */; };
@@ -227,6 +226,7 @@
 		42096844295378A30075D75E /* Slipstream_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slipstream_iOSTests.swift; sourceTree = "<group>"; };
 		4212E4CB2A2DEAA300456B68 /* PurchaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseService.swift; sourceTree = "<group>"; };
 		4212E4CE2A2E29CC00456B68 /* CombineExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineExtension.swift; sourceTree = "<group>"; };
+		4212E4D62A2F47CE00456B68 /* AppNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigation.swift; sourceTree = "<group>"; };
 		4245E80F29B7E0DD00843B02 /* SeasonListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonListView.swift; sourceTree = "<group>"; };
 		4245E81129B7E0EE00843B02 /* SeasonListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonListViewModel.swift; sourceTree = "<group>"; };
 		42521C9F29B0EB9500000586 /* NetworkManagerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerRepresentable.swift; sourceTree = "<group>"; };
@@ -258,7 +258,6 @@
 		42B2199F295F426200515097 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		42B219A3295F450200515097 /* InfiniteScroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteScroller.swift; sourceTree = "<group>"; };
 		42B5DC8C29F91FC2005DFD6D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		42B5DC8F2A011A8B005DFD6D /* SeasonNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonNavigation.swift; sourceTree = "<group>"; };
 		42BCAD5429BB4B360089B46A /* EventMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMock.swift; sourceTree = "<group>"; };
 		42BCAD5829BB742B0089B46A /* UserDefaultsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsWrapper.swift; sourceTree = "<group>"; };
 		42BCAD5B29BB7B000089B46A /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
@@ -286,7 +285,6 @@
 		CF233DE729ABEF7600A8D1CD /* SessionStandingsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStandingsListViewModel.swift; sourceTree = "<group>"; };
 		CF233DE929ABF08100A8D1CD /* SessionStandingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStandingsListView.swift; sourceTree = "<group>"; };
 		CF233DEC29ADFA9900A8D1CD /* LiveSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveSession.swift; sourceTree = "<group>"; };
-		CF2504172A11050400F0290E /* StandingsNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsNavigation.swift; sourceTree = "<group>"; };
 		CF277A1D297017C50048DE75 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		CF277A20297303430048DE75 /* StandingsCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsCarouselView.swift; sourceTree = "<group>"; };
 		CF277A22297313260048DE75 /* StandingsCarouselViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsCarouselViewModel.swift; sourceTree = "<group>"; };
@@ -939,6 +937,7 @@
 			children = (
 				CFE46F9C29C90A0F0063805A /* AppViewModel.swift */,
 				CFE46F9E29C90D0F0063805A /* AppView.swift */,
+				4212E4D62A2F47CE00456B68 /* AppNavigation.swift */,
 			);
 			path = AppViewModel;
 			sourceTree = "<group>";
@@ -949,7 +948,6 @@
 				CFE46FA729CA07D60063805A /* SeasonListViewModel.swift */,
 				CFEBC08329D33895000A2472 /* SeasonListView.swift */,
 				CFE46F9929C9085A0063805A /* Views */,
-				42B5DC8F2A011A8B005DFD6D /* SeasonNavigation.swift */,
 			);
 			path = Season;
 			sourceTree = "<group>";
@@ -960,7 +958,6 @@
 				CFE821A429FA6A35003334F9 /* Views */,
 				CFE821A029F9D2F0003334F9 /* StandingsViewModel.swift */,
 				CFE821A229F9D30D003334F9 /* StandingsView.swift */,
-				CF2504172A11050400F0290E /* StandingsNavigation.swift */,
 			);
 			path = Standings;
 			sourceTree = "<group>";
@@ -1239,7 +1236,6 @@
 				CF895A072A264E3C007A0C55 /* ConstructorStandingsDetailsViewModel.swift in Sources */,
 				42B21972295DDBAB00515097 /* DriverDetails.swift in Sources */,
 				CFE821A329F9D30D003334F9 /* StandingsView.swift in Sources */,
-				CF2504182A11050400F0290E /* StandingsNavigation.swift in Sources */,
 				CFEBC08429D33895000A2472 /* SeasonListView.swift in Sources */,
 				CFEBC07629CD092F000A2472 /* UpcomingEventCardViewModel.swift in Sources */,
 				CFCD656629DAE5330079BE9F /* SessionListView.swift in Sources */,
@@ -1268,6 +1264,7 @@
 				CF6804092A29FA1400B24AA0 /* CalledOffEventCardViewModel.swift in Sources */,
 				CFEBC07829CD0C76000A2472 /* UpcomingEventCardView.swift in Sources */,
 				CF37157329F1343200AF14AA /* LiveDriverStandingCellViewModel.swift in Sources */,
+				4212E4D72A2F47CE00456B68 /* AppNavigation.swift in Sources */,
 				CFEBC07129CCBE47000A2472 /* LiveEventCardViewModel.swift in Sources */,
 				CFEBC07D29CD147B000A2472 /* FinishedEventCardView.swift in Sources */,
 				CF0834832A1E235C00FA61E4 /* DriverStandingsCellViewModel.swift in Sources */,
@@ -1309,7 +1306,6 @@
 				42521CB229B1006000000586 /* ServiceLocator.swift in Sources */,
 				CF05443C29507D3A00A39FE3 /* News.swift in Sources */,
 				4212E4CC2A2DEAA300456B68 /* PurchaseService.swift in Sources */,
-				42B5DC902A011A8B005DFD6D /* SeasonNavigation.swift in Sources */,
 				CF895A042A263D1F007A0C55 /* ConstructorStandingsCellView.swift in Sources */,
 				CFE46FA129C9B49D0063805A /* ConstructorStyler.swift in Sources */,
 			);
@@ -1452,7 +1448,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"watch/Slipstream_watch/Preview Content\"";
-				DEVELOPMENT_TEAM = Y4642869FB;
+				DEVELOPMENT_TEAM = U5QL3W6RAW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -1482,7 +1478,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"watch/Slipstream_watch/Preview Content\"";
-				DEVELOPMENT_TEAM = Y4642869FB;
+				DEVELOPMENT_TEAM = U5QL3W6RAW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -1554,7 +1550,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iOS/Slipstream_iOS/Preview Content\"";
-				DEVELOPMENT_TEAM = Y4642869FB;
+				DEVELOPMENT_TEAM = U5QL3W6RAW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Slipstream;
@@ -1588,7 +1584,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iOS/Slipstream_iOS/Preview Content\"";
-				DEVELOPMENT_TEAM = Y4642869FB;
+				DEVELOPMENT_TEAM = U5QL3W6RAW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Slipstream;

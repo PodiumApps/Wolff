@@ -18,7 +18,7 @@ protocol UpcomingEventCardViewModelRepresentable: ObservableObject {
 
 final class UpcomingEventCardViewModel: UpcomingEventCardViewModelRepresentable {
 
-    private let navigation: SeasonNavigation
+    private let navigation: AppNavigationRepresentable
 
     var id: Event.ID
     var title: String
@@ -32,7 +32,7 @@ final class UpcomingEventCardViewModel: UpcomingEventCardViewModelRepresentable 
     var sessionListViewModel: SessionListViewModel
 
     init(
-        navigation: SeasonNavigation,
+        navigation: AppNavigationRepresentable,
         id: Event.ID,
         title: String,
         country: String,
@@ -58,7 +58,7 @@ final class UpcomingEventCardViewModel: UpcomingEventCardViewModelRepresentable 
 
     func tapEvent() {
 
-        navigation.action.send(.goTo(route: .sessionsList(sessionListViewModel)))
+        navigation.action.send(.append(route: .sessionsList(sessionListViewModel)))
     }
 }
 

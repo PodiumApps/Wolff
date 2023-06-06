@@ -5,7 +5,6 @@ import OSLog
 protocol SeasonListViewModelRepresentable: ObservableObject {
 
     var state: SeasonListViewModel.State { get }
-    var route: [SeasonNavigation.Route] { get set }
     var action: PassthroughSubject<SeasonListViewModel.Action, Never> { get }
     var indexFirstToAppear: Int { get set }
 }
@@ -30,10 +29,10 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
     private let oneMinuteInSeconds: Double = 60
     private var liveEventTimer: Timer? = nil
     
-    @Published var route: [SeasonNavigation.Route]
-    private var navigation: SeasonNavigation
+    private var navigation: AppNavigationRepresentable
 
     private var subscriptions = Set<AnyCancellable>()
+    private var subscriptionsPurchase = Set<AnyCancellable>()
     var action = PassthroughSubject<Action, Never>()
     @Published var state: SeasonListViewModel.State
     @Published var indexFirstToAppear: Int = 0
@@ -41,7 +40,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
     var eventCells: [Cell]
 
     init(
-        navigation: SeasonNavigation,
+        navigation: AppNavigationRepresentable,
         driversAndConstructorService: DriverAndConstructorServiceRepresentable,
         eventService: EventServiceRepresentable,
         liveEventService: LiveSessionServiceRepresentable,
@@ -53,7 +52,6 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         self.constructors = []
         self.events = []
         self.nextEvent = nil
-        self.route = []
 
         self.eventService = eventService
         self.driversAndConstructorService = driversAndConstructorService
@@ -65,46 +63,9 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         self.eventCells = []
 
         self.loadEvents()
-        self.setupNavigation()
     }
 
     // MARK: - Private
-    
-    private func setupNavigation() {
-        
-        navigation.routePublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] navigation in
-                
-                guard let self else { return }
-                
-                guard let navigation else {
-                    if !route.isEmpty {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            self.route.removeLast()
-                        }
-                    }
-                    return
-                }
-                
-                purchaseService.action.send(.checkPremium)
-                
-                route.append(navigation)
-            }
-            .store(in: &subscriptions)
-        
-        purchaseService.statePublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] purchaseServiceStatus in
-                
-                guard let self else { return }
-                
-                if case .dismissed = purchaseServiceStatus {
-                    self.navigation.action.send(.removeRout)
-                }
-            }
-            .store(in: &subscriptions)
-    }
 
     private func loadEvents() {
 
@@ -489,10 +450,10 @@ extension SeasonListViewModel {
 
 extension SeasonListViewModel {
 
-    static func make() -> SeasonListViewModel {
+    static func make(navigation: AppNavigationRepresentable) -> SeasonListViewModel {
 
         .init(
-            navigation: SeasonNavigation(),
+            navigation: navigation,
             driversAndConstructorService: ServiceLocator.shared.driverAndConstructorService,
             eventService: ServiceLocator.shared.eventService,
             liveEventService: ServiceLocator.shared.liveSessionService,

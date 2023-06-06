@@ -17,13 +17,23 @@ struct AppView<ViewModel: AppViewModelRepresentable>: View {
         case .loading:
             ProgressView()
         case .results(let seasonViewModel, let standingsViewModel):
-            TabView {
-                SeasonListView(viewModel: seasonViewModel)
-                StandingsView(viewModel: standingsViewModel)
-                Text("Settings")
-            }
-            .sheet(isPresented: $viewModel.presentPremiumSheet) {
-                Text("Give me your money motherfucker")
+            NavigationStack(path: $viewModel.route) {
+                TabView {
+                    SeasonListView(viewModel: seasonViewModel)
+                    StandingsView(viewModel: standingsViewModel)
+                    Text("Settings")
+                }
+                .navigationDestination(for: AppNavigation.Route.self) { route in
+                    switch route {
+                    case .sessionsList(let viewModel):
+                        SessionListView(viewModel: viewModel)
+                    case .sessionStandingsList(let viewModel):
+                        SessionStandingsListView(viewModel: viewModel)
+                    }
+                }
+                .sheet(isPresented: $viewModel.presentPremiumSheet) {
+                    Text("Give me your money motherfucker")
+                }
             }
             
         }

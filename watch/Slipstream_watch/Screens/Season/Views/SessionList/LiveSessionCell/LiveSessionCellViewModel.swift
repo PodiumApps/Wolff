@@ -12,7 +12,7 @@ protocol LiveSessionCellViewModelRepresentable {
 
 final class LiveSessionCellViewModel: LiveSessionCellViewModelRepresentable {
 
-    private let navigation: SeasonNavigation
+    private let navigation: AppNavigationRepresentable
     private let sessionStandingsListViewModel: SessionStandingsListViewModel
     private var subscriptions = Set<AnyCancellable>()
 
@@ -23,7 +23,7 @@ final class LiveSessionCellViewModel: LiveSessionCellViewModelRepresentable {
     var action = PassthroughSubject<Action, Never>()
 
     init(
-        navigation: SeasonNavigation,
+        navigation: AppNavigationRepresentable,
         sessionName: String,
         sessionID: Session.ID,
         podium: [String],
@@ -50,7 +50,7 @@ final class LiveSessionCellViewModel: LiveSessionCellViewModelRepresentable {
 
                 switch action {
                 case .tapSession:
-                    navigation.action.send(.goTo(route: .sessionStandingsList(sessionStandingsListViewModel)))
+                    navigation.action.send(.append(route: .sessionStandingsList(sessionStandingsListViewModel)))
                 }
             }
             .store(in: &subscriptions)

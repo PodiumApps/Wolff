@@ -33,7 +33,8 @@ class PurchaseService: PurchaseServiceRepresentable {
     private func load() {
         
         action
-            .receive(on: DispatchQueue.main)
+            .debounce(for: 1.5, scheduler: DispatchQueue.main)
+            .receive(on: DispatchQueue.global())
             .sink { [weak self] action in
                 
                 guard let self else { return }

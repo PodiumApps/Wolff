@@ -11,43 +11,35 @@ struct StandingsView<ViewModel: StandingsViewModelRepresentable>: View {
 
     var body: some View {
 
-        NavigationStack(path: $viewModel.route) {
-            Group {
-                switch viewModel.state {
-                case .error(let error):
-                    Text(error)
-                case .loading:
-                    ProgressView()
-                case .results(let driverCells, let constructorCells):
-                    VStack {
-                        Form {
-                            Picker("Selection", selection: $viewModel.selection) {
-                                ForEach(StandingsViewModel.Selection.allCases) { selection in
-                                    HStack {
-                                        Text(selection.rawValue.capitalized)
-                                            .tag(selection)
-                                        Spacer()
-                                    }
+        Group {
+            switch viewModel.state {
+            case .error(let error):
+                Text(error)
+            case .loading:
+                ProgressView()
+            case .results(let driverCells, let constructorCells):
+                VStack {
+                    Form {
+                        Picker("Selection", selection: $viewModel.selection) {
+                            ForEach(StandingsViewModel.Selection.allCases) { selection in
+                                HStack {
+                                    Text(selection.rawValue.capitalized)
+                                        .tag(selection)
+                                    Spacer()
                                 }
                             }
-                            .pickerStyle(.navigationLink)
+                        }
+                        .pickerStyle(.navigationLink)
 
-                            switch viewModel.selection {
-                            case .drivers: buildDriverStandingsListView(cells: driverCells)
-                            case .constructors: buildConstructorStandingsListView(cells: constructorCells)
-                            }
+                        switch viewModel.selection {
+                        case .drivers: buildDriverStandingsListView(cells: driverCells)
+                        case .constructors: buildConstructorStandingsListView(cells: constructorCells)
                         }
                     }
                 }
             }
-            .navigationTitle("Standings")
-//            .navigationDestination(for: StandingsNavigation.Route.self) { route in
-//                switch route {
-//                case .driverDetailsView(let viewModel):
-//                    DriverStandingsDetailsView(viewModel: viewModel)
-//                }
-//            }
         }
+        .navigationTitle("Standings")
     }
 
     private func buildDriverStandingsListView(cells: [DriverStandingsCellViewModel]) -> some View {
