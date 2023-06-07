@@ -45,7 +45,7 @@ final class LiveSessionCellViewModel: LiveSessionCellViewModelRepresentable {
 
         action
             .receive(on: DispatchQueue.main)
-            .sink { [weak self ]action in
+            .sink { [weak self] action in
                 guard let self else { return }
 
                 switch action {

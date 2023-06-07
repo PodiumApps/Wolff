@@ -1,6 +1,7 @@
 import Foundation
+import Combine
 
-protocol DriverStandingsCellViewModelRepresentable: ObservableObject {
+protocol DriverStandingsCellViewModelRepresentable: Identifiable, ObservableObject {
 
     var driverID: Driver.ID { get }
     var firstName: String { get }
@@ -9,6 +10,8 @@ protocol DriverStandingsCellViewModelRepresentable: ObservableObject {
     var points: Int { get }
     var position: Int { get }
     var carNumber: Int { get }
+    var showDriverDetailsSheet: Bool { get set }
+    var action: PassthroughSubject<DriverStandingsCellViewModel.Action, Never> { get }
 }
 
 final class DriverStandingsCellViewModel: DriverStandingsCellViewModelRepresentable {
@@ -21,6 +24,11 @@ final class DriverStandingsCellViewModel: DriverStandingsCellViewModelRepresenta
     let position: Int
     let carNumber: Int
 
+    @Published var showDriverDetailsSheet: Bool = false
+
+    var action = PassthroughSubject<DriverStandingsCellViewModel.Action, Never>()
+    private var subscribers = Set<AnyCancellable>()
+
     init(driver: Driver, constructor: Constructor, position: Int) {
 
         self.driverID = driver.id
@@ -30,8 +38,32 @@ final class DriverStandingsCellViewModel: DriverStandingsCellViewModelRepresenta
         self.points = driver.points
         self.position = position
         self.carNumber = driver.carNumber
+
+        self.setUpBindings()
     }
 
+    private func setUpBindings() {
+
+        action
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                guard let self else { return }
+
+                switch action {
+                case .openDetailsView:
+                    showDriverDetailsSheet = true
+                }
+            }
+            .store(in: &subscribers)
+    }
+}
+
+extension DriverStandingsCellViewModel {
+
+    enum Action {
+
+        case openDetailsView
+    }
 }
 
 

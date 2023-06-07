@@ -6,7 +6,6 @@ protocol SeasonListViewModelRepresentable: ObservableObject {
 
     var state: SeasonListViewModel.State { get }
     var action: PassthroughSubject<SeasonListViewModel.Action, Never> { get }
-    var indexFirstToAppear: Int { get set }
 }
 
 final class SeasonListViewModel: SeasonListViewModelRepresentable {
@@ -35,7 +34,6 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
     private var subscriptionsPurchase = Set<AnyCancellable>()
     var action = PassthroughSubject<Action, Never>()
     @Published var state: SeasonListViewModel.State
-    @Published var indexFirstToAppear: Int = 0
 
     var eventCells: [Cell]
 
@@ -102,7 +100,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
 
                 guard
                     let self,
-                    case .results(var cells) = self.state,
+                    case .results(var cells, let indexFirstToAppear) = self.state,
                     let index = cells.firstIndex(where: { $0.id == .live }),
                     case .live(let timeInterval, let sessionName) = self.events[index].status
                 else {
@@ -133,7 +131,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                         )
                     )
 
-                    return .results(cells)
+                    return .results(cells: cells, indexFirstToAppear: indexFirstToAppear)
 
                 case .refreshing, .error:
 
@@ -147,7 +145,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                         )
                     )
 
-                    return .results(cells)
+                    return .results(cells: cells, indexFirstToAppear: indexFirstToAppear)
                 }
             }
             .assign(to: &$state)
@@ -170,7 +168,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                 } else {
 
                     guard
-                        case .results(var cells) = self.state,
+                        case .results(var cells, let indexFirstToAppear) = self.state,
                         let index = cells.firstIndex(where: { $0.id == .live }),
                         case .live(let timeInterval, let sessionName) = events[index].status
                     else {
@@ -189,7 +187,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                         )
                     )
 
-                    state = .results(cells)
+                    state = .results(cells: cells, indexFirstToAppear: indexFirstToAppear)
                 }
         }
     }
@@ -254,14 +252,13 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         for (index, cell) in eventCells.enumerated() {
             switch cell {
             case .live, .upcoming:
-                indexFirstToAppear = index
-                return .results(eventCells)
+                return .results(cells: eventCells, indexFirstToAppear: index)
             case .finished, .calledOff:
                 continue
             }
         }
 
-        return .results(eventCells)
+        return .results(cells: eventCells, indexFirstToAppear: 0)
     }
 
     private func buildLiveViewModel(
@@ -398,7 +395,7 @@ extension SeasonListViewModel {
     enum State: Equatable {
 
         case error(String)
-        case results([Cell])
+        case results(cells: [Cell], indexFirstToAppear: Int)
         case loading
 
         enum Identifier: String {
@@ -427,6 +424,7 @@ extension SeasonListViewModel {
 
     enum Route: Hashable {
 
+        // TODO: Remove from here and add it to AppNavigation
         case sessionStandings // SessionStandingsViewModel
 
         func hash(into hasher: inout Hasher) {

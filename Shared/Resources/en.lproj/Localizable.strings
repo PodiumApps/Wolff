@@ -73,3 +73,7 @@
 "driver_details.grand_prix_entered" = "Grand Prix Entered";
 "driver_details.highest_grid_position" = "Highest Grid Position";
 "driver_details.all_time_points" = "All Time Points";
+
+// MARK: - StandingsListView
+"standings_list_view.screen_title" = "Standings";
+"standings_list_view.selection_label" = "Selection";

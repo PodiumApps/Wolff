@@ -3,7 +3,8 @@ import SwiftUI
 struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
     
     @ObservedObject private var viewModel: ViewModel
-    
+    @State private var listHasAlreadyScrolled = false
+
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
     }
@@ -38,11 +39,14 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
                     }
                     .listStyle(.carousel)
                     .onAppear {
-                        withAnimation {
-                            proxy.scrollTo(viewModel.indexFirstToAppear)
+                        if !listHasAlreadyScrolled {
+                            withAnimation {
+                                proxy.scrollTo(indexFirstToAppear)
+                            }
+                            
+                            listHasAlreadyScrolled = true
                         }
                     }
-                }
             case .loading:
                 ProgressView()
             }

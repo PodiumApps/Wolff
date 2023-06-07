@@ -2,8 +2,6 @@ import SwiftUI
 
 struct ConstructorStandingsCellView<ViewModel: ConstructorStandingsCellViewModelRepresentable>: View {
 
-    @State private var showConstructorDetails: Bool = false
-
     @ObservedObject var viewModel: ViewModel
     private let constructorStyler: ConstructorStylerRepresentable
 
@@ -30,7 +28,7 @@ struct ConstructorStandingsCellView<ViewModel: ConstructorStandingsCellViewModel
                 }
 
                 Button(action: {
-                    showConstructorDetails.toggle()
+                    viewModel.action.send(.openDetailsView)
                 }) {
                     Image(systemName: "ellipsis.circle.fill")
                 }
@@ -60,7 +58,7 @@ struct ConstructorStandingsCellView<ViewModel: ConstructorStandingsCellViewModel
             RoundedRectangle(cornerRadius: Constants.Card.cornerRadius)
                 .fill(constructorStyler.constructor.color.opacity(Constants.Card.backgroundOpacity))
         )
-        .fullScreenCover(isPresented: $showConstructorDetails) {
+        .fullScreenCover(isPresented: $viewModel.showConstructorDetailsSheet) {
             ConstructorStandingsDetailsView(viewModel: ConstructorStandingsDetailsViewModel.make(
                 constructorID: viewModel.constructorID,
                 constructorName: viewModel.fullName

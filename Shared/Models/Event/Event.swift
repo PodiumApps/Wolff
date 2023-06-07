@@ -13,7 +13,6 @@ struct Event: Decodable {
     let length: Double
     let raceDistance: Double
     let round: Int
-    let isCanceled: Bool
     let sessions: [Session]
 }
 
@@ -25,7 +24,7 @@ extension Event {
 
     var status: Status {
 
-        if isCanceled { return .calledOff }
+        if sessions.isEmpty { return .calledOff }
         
         if let nextSession = sessions.first(where: {
             $0.date.timeIntervalSince(Date()) > -.maximumSessionTime

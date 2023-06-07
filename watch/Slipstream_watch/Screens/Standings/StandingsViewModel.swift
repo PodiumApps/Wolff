@@ -20,7 +20,6 @@ final class StandingsViewModel: StandingsViewModelRepresentable {
 
         self.selection = .drivers
         self.state = .loading
-
         self.drivers = []
         self.constructors = []
         self.driverAndConstructorService = driverAndConstructorService
@@ -114,8 +113,6 @@ extension StandingsViewModel {
 
     static func make() -> StandingsViewModel {
 
-        .init(
-            driverAndConstructorService: ServiceLocator.shared.driverAndConstructorService
-        )
+        .init(driverAndConstructorService: ServiceLocator.shared.driverAndConstructorService)
     }
 }

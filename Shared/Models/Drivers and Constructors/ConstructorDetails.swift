@@ -1,6 +1,6 @@
 import Foundation
 
-struct ConstructorDetails: Decodable, Hashable {
+struct ConstructorDetails: Decodable {
 
     let base: String
     let firstTeamEntry: Int

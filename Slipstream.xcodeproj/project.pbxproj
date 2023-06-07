@@ -123,6 +123,7 @@
 		CF233DE029A8DB7C00A8D1CD /* GrandPrixSchedulePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DDF29A8DB7C00A8D1CD /* GrandPrixSchedulePickerView.swift */; };
 		CF233DE529ABE17B00A8D1CD /* SessionDriverRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DE429ABE17B00A8D1CD /* SessionDriverRowView.swift */; };
 		CF233DED29ADFA9900A8D1CD /* LiveSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DEC29ADFA9900A8D1CD /* LiveSession.swift */; };
+		CF2504182A11050400F0290E /* StandingsNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2504172A11050400F0290E /* StandingsNavigation.swift */; };
 		CF277A1E297017C50048DE75 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A1D297017C50048DE75 /* Fonts.swift */; };
 		CF277A1F297017C50048DE75 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A1D297017C50048DE75 /* Fonts.swift */; };
 		CF277A21297303430048DE75 /* StandingsCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A20297303430048DE75 /* StandingsCarouselView.swift */; };
@@ -285,6 +286,7 @@
 		CF233DE729ABEF7600A8D1CD /* SessionStandingsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStandingsListViewModel.swift; sourceTree = "<group>"; };
 		CF233DE929ABF08100A8D1CD /* SessionStandingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStandingsListView.swift; sourceTree = "<group>"; };
 		CF233DEC29ADFA9900A8D1CD /* LiveSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveSession.swift; sourceTree = "<group>"; };
+		CF2504172A11050400F0290E /* StandingsNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsNavigation.swift; sourceTree = "<group>"; };
 		CF277A1D297017C50048DE75 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		CF277A20297303430048DE75 /* StandingsCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsCarouselView.swift; sourceTree = "<group>"; };
 		CF277A22297313260048DE75 /* StandingsCarouselViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsCarouselViewModel.swift; sourceTree = "<group>"; };

@@ -20,7 +20,7 @@ struct StandingsView<ViewModel: StandingsViewModelRepresentable>: View {
             case .results(let driverCells, let constructorCells):
                 VStack {
                     Form {
-                        Picker("Selection", selection: $viewModel.selection) {
+                        Picker(Localization.StandingsListView.selectionLabel, selection: $viewModel.selection) {
                             ForEach(StandingsViewModel.Selection.allCases) { selection in
                                 HStack {
                                     Text(selection.rawValue.capitalized)
@@ -30,7 +30,7 @@ struct StandingsView<ViewModel: StandingsViewModelRepresentable>: View {
                             }
                         }
                         .pickerStyle(.navigationLink)
-
+                        
                         switch viewModel.selection {
                         case .drivers: buildDriverStandingsListView(cells: driverCells)
                         case .constructors: buildConstructorStandingsListView(cells: constructorCells)
@@ -39,13 +39,13 @@ struct StandingsView<ViewModel: StandingsViewModelRepresentable>: View {
                 }
             }
         }
-        .navigationTitle("Standings")
+        .navigationTitle(Localization.StandingsListView.screenTitle)
     }
 
     private func buildDriverStandingsListView(cells: [DriverStandingsCellViewModel]) -> some View {
 
-        ForEach(0 ..< cells.count, id: \.self) { index in
-            DriverStandingsCellView(viewModel: cells[index])
+        ForEach(cells) { cell in
+            DriverStandingsCellView(viewModel: cell)
         }
         .listStyle(.carousel)
         .frame(width: .infinity, height: .infinity)
@@ -53,8 +53,8 @@ struct StandingsView<ViewModel: StandingsViewModelRepresentable>: View {
 
     private func buildConstructorStandingsListView(cells: [ConstructorStandingsCellViewModel]) -> some View {
 
-        ForEach(0 ..< cells.count, id: \.self) { index in
-            ConstructorStandingsCellView(viewModel: cells[index])
+        ForEach(cells) { cell in
+            ConstructorStandingsCellView(viewModel: cell)
         }
         .listStyle(.carousel)
         .frame(width: .infinity, height: .infinity)

@@ -41,8 +41,8 @@ struct ConstructorStandingsDetailsView<ViewModel: ConstructorStandingsDetailsVie
                 }
             }
         }
-        .task {
-            await viewModel.loadConstructorDetails()
+        .onAppear {
+            viewModel.action.send(.loadConstructorDetails)
         }
     }
 }

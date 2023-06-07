@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 protocol LiveEventCardViewModelRepresentable: ObservableObject {
 
@@ -11,13 +12,13 @@ protocol LiveEventCardViewModelRepresentable: ObservableObject {
     var podium: [String]? { get }
     var state: LiveEventCardViewModel.State { get }
     var sessionListViewModel: SessionListViewModel { get }
-
-    func tapEvent() -> Void
+    var action: PassthroughSubject<LiveEventCardViewModel.Action, Never> { get }
 }
 
 final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
 
     private let navigation: AppNavigationRepresentable
+    private var subscriptions = Set<AnyCancellable>()
 
     var id: Event.ID
     var title: String
@@ -26,7 +27,10 @@ final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
     var timeInterval: TimeInterval
     var sessionName: String
     var podium: [String]?
+
     var state: State
+    var action = PassthroughSubject<Action, Never>()
+
     var sessionListViewModel: SessionListViewModel
 
     init(
@@ -53,11 +57,23 @@ final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
         self.podium = podium
         self.state = state
         self.sessionListViewModel = sessionListViewModel
+
+        self.setUpBindings()
     }
 
-    func tapEvent() {
+    private func setUpBindings() {
 
-        navigation.action.send(.append(route: .sessionsList(sessionListViewModel)))
+        action
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                guard let self else { return }
+
+                switch action {
+                case .tapEvent:
+                    navigation.action.send(.append(route: .sessionsList(sessionListViewModel)))
+                }
+            }
+            .store(in: &subscriptions)
     }
 }
 
