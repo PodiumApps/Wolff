@@ -12,7 +12,6 @@ extension Event {
         length: 1.0,
         raceDistance: 2.0,
         round: 0,
-        isCanceled: false,
         sessions: Session.mockArray
     )
     
@@ -27,7 +26,6 @@ extension Event {
             length: 1.0,
             raceDistance: 2.0,
             round: 0,
-            isCanceled: false,
             sessions: Session.mockArray
         ),
         .init(
@@ -40,7 +38,6 @@ extension Event {
             length: 1.0,
             raceDistance: 2.0,
             round: 0,
-            isCanceled: false,
             sessions: Session.mockArray
         ),
         .init(
@@ -53,7 +50,6 @@ extension Event {
             length: 1.0,
             raceDistance: 2.0,
             round: 0,
-            isCanceled: false,
             sessions: Session.mockArray
         ),
         .init(
@@ -66,7 +62,6 @@ extension Event {
             length: 1.0,
             raceDistance: 2.0,
             round: 0,
-            isCanceled: false,
             sessions: Session.mockArray
         ),
         .init(
@@ -79,7 +74,6 @@ extension Event {
             length: 1.0,
             raceDistance: 2.0,
             round: 0,
-            isCanceled: false,
             sessions: Session.mockArray
         ),
         .init(
@@ -92,7 +86,6 @@ extension Event {
             length: 1.0,
             raceDistance: 2.0,
             round: 0,
-            isCanceled: false,
             sessions: Session.mockArray
         ),
         .init(
@@ -105,7 +98,6 @@ extension Event {
             length: 1.0,
             raceDistance: 2.0,
             round: 0,
-            isCanceled: false,
             sessions: Session.mockArray
         ),
         .init(
@@ -118,7 +110,6 @@ extension Event {
             length: 1.0,
             raceDistance: 2.0,
             round: 0,
-            isCanceled: false,
             sessions: Session.mockArray
         ),
         .init(
@@ -131,7 +122,6 @@ extension Event {
             length: 1.0,
             raceDistance: 2.0,
             round: 0,
-            isCanceled: false,
             sessions: Session.mockArray
         ),
         .init(
@@ -144,7 +134,6 @@ extension Event {
             length: 1.0,
             raceDistance: 2.0,
             round: 0,
-            isCanceled: false,
             sessions: Session.mockArray
         ),
         .init(
@@ -157,7 +146,6 @@ extension Event {
             length: 1.0,
             raceDistance: 2.0,
             round: 0,
-            isCanceled: false,
             sessions: Session.mockArray
         )
     ]
