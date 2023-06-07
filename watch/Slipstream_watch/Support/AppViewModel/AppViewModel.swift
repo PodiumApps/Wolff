@@ -32,7 +32,6 @@ final class AppViewModel: AppViewModelRepresentable {
     private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
     private let purchaseService: PurchaseServiceRepresentable
     private let navigation: AppNavigationRepresentable
-    private var tempRoutes: [AppNavigation.Route] = []
     
     private var subscriptions = Set<AnyCancellable>()
 
@@ -66,17 +65,21 @@ final class AppViewModel: AppViewModelRepresentable {
     private func setupBindings() {
         
         navigation
-            .routePublisher
+            .statePublisher
             .receive(on: DispatchQueue.main)
-            .map { [weak self] navigation in
+            .map { [weak self] state in
 
                 guard let self else { return [] }
-
-                if navigation.contains(where: { $0.id == .sessionStandingsList }) {
-                    purchaseService.action.send(.checkPremium)
+                
+                switch state {
+                case .started:
+                    return []
+                case .update(let routes, let containsPremium):
+                    if containsPremium {
+                        purchaseService.action.send(.checkPremium)
+                    }
+                    return routes
                 }
-
-                return navigation
             }
             .assign(to: &$route)
         

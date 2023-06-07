@@ -3,28 +3,23 @@ import Foundation
 protocol StandingsViewModelRepresentable: ObservableObject {
 
     var state: StandingsViewModel.State { get }
-    var route: [StandingsNavigation.Route] { get set }
     var selection: StandingsViewModel.Selection { get set }
 }
 
 final class StandingsViewModel: StandingsViewModelRepresentable {
 
-    private var navigation: StandingsNavigation
     private var constructors: [Constructor]
     private var drivers: [Driver]
 
     private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
 
     @Published var state: StandingsViewModel.State
-    @Published var route: [StandingsNavigation.Route]
     @Published var selection: StandingsViewModel.Selection
 
-    init(navigation: StandingsNavigation, driverAndConstructorService: DriverAndConstructorServiceRepresentable) {
+    init(driverAndConstructorService: DriverAndConstructorServiceRepresentable) {
 
-        self.navigation = navigation
         self.selection = .drivers
         self.state = .loading
-        self.route = []
 
         self.drivers = []
         self.constructors = []
@@ -120,7 +115,6 @@ extension StandingsViewModel {
     static func make() -> StandingsViewModel {
 
         .init(
-            navigation: StandingsNavigation(),
             driverAndConstructorService: ServiceLocator.shared.driverAndConstructorService
         )
     }
