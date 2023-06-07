@@ -51,7 +51,7 @@ final class DriverStandingsCellViewModel: DriverStandingsCellViewModelRepresenta
 
                 switch action {
                 case .openDetailsView:
-                    showDriverDetailsSheet.toggle()
+                    showDriverDetailsSheet = true
                 }
             }
             .store(in: &subscribers)

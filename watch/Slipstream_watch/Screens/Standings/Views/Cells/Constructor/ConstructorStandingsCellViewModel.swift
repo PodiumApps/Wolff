@@ -48,7 +48,7 @@ final class ConstructorStandingsCellViewModel: ConstructorStandingsCellViewModel
 
                 switch action {
                 case .openDetailsView:
-                    showConstructorDetailsSheet.toggle()
+                    showConstructorDetailsSheet = true
                 }
             }
             .store(in: &subscribers)

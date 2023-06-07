@@ -59,7 +59,7 @@ final class LiveDriverStandingCellViewModel: LiveDriverStandingCellViewModelRepr
 
                 switch action {
                 case .showLiveDriverDetails:
-                    showDriverSessionDetails.toggle()
+                    showDriverSessionDetails = true
                 }
             }
             .store(in: &subscribers)
