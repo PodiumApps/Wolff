@@ -17,15 +17,15 @@ struct SessionStandingsListView<ViewModel: SessionStandingsListViewModelRepresen
                 ProgressView()
             case .results(let cells):
                 List(0 ..< cells.count, id: \.self) { index in
-                    DriverStandingCellView(viewModel: viewModel.cells[index], position: index + 1)
+                    LiveDriverStandingCellView(viewModel: viewModel.cells[index])
                 }
                 .listStyle(.carousel)
             }
         }
         .navigationBarTitle(viewModel.sessionName)
         .navigationBarTitleDisplayMode(.large)
-        .task {
-            await viewModel.loadSession()
+        .onAppear {
+            viewModel.action.send(.loadSession)
         }
     }
 }

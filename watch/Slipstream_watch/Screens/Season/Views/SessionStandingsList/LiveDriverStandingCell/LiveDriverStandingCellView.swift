@@ -1,17 +1,13 @@
 import SwiftUI
 
-struct DriverStandingCellView<ViewModel: DriverStandingCellViewModel>: View {
-
-    @State private var showDriverSessionDetails: Bool = false
+struct LiveDriverStandingCellView<ViewModel: LiveDriverStandingCellViewModelRepresentable>: View {
 
     @ObservedObject private var viewModel: ViewModel
     private var constructorStyler: ConstructorStylerRepresentable
-    private let position: Int
 
-    init(viewModel: ViewModel, position: Int) {
+    init(viewModel: ViewModel) {
         self.viewModel = viewModel
         self.constructorStyler = ConstructorStyler(constructor: viewModel.constructor.id)
-        self.position = position
     }
 
     var body: some View {
@@ -19,7 +15,7 @@ struct DriverStandingCellView<ViewModel: DriverStandingCellViewModel>: View {
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {
                     HStack(alignment: .center) {
-                        Text(Localization.Podium.ordinalComponent(position))
+                        Text(Localization.Podium.ordinalComponent(viewModel.position))
                         Text(viewModel.firstName)
 
                         Spacer()
@@ -38,7 +34,7 @@ struct DriverStandingCellView<ViewModel: DriverStandingCellViewModel>: View {
                 }
 
                 Button(action: {
-                    showDriverSessionDetails.toggle()
+                    viewModel.action.send(.showLiveDriverDetails)
                 }) {
                     Image(systemName: "ellipsis.circle.fill")
                         .padding(5)
@@ -55,11 +51,11 @@ struct DriverStandingCellView<ViewModel: DriverStandingCellViewModel>: View {
 
                 Spacer()
 
-                if let _ = viewModel.tyre {
+                if let tyre = viewModel.tyre {
                     VStack(alignment: .leading) {
                         Text(Localization.DriverStandingsCell.tyre)
                             .font(.Caption.semibold)
-                        Text("Medium")
+                        Text(tyre.rawValue.capitalized)
                             .font(.Caption.semibold)
                             .foregroundColor(Color.Tyre.medium)
                     }
@@ -71,7 +67,7 @@ struct DriverStandingCellView<ViewModel: DriverStandingCellViewModel>: View {
             RoundedRectangle(cornerRadius: Constants.Card.cornerRadius)
                 .fill(constructorStyler.constructor.color.opacity(Constants.Card.backgroundOpacity))
         )
-        .sheet(isPresented: $showDriverSessionDetails) {
+        .sheet(isPresented: $viewModel.showDriverSessionDetails) {
             Text("Driver details for session")
         }
     }

@@ -31,7 +31,7 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
     var body: some View {
         
         Button(action: {
-            viewModel.tapEvent()
+            viewModel.action.send(.tapEvent)
         }) {
             HStack {
                 VStack(alignment: .leading, spacing: .Spacing.default2) {
