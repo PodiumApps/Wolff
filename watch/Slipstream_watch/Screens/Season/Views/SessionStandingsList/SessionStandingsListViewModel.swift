@@ -4,9 +4,9 @@ import Combine
 protocol SessionStandingsListViewModelRepresentable: ObservableObject {
 
     var state: SessionStandingsListViewModel.State { get }
-    var cells: [DriverStandingCellViewModel] { get }
+    var cells: [LiveDriverStandingCellViewModel] { get }
     var sessionName: String { get }
-    func loadSession() async
+    var action: PassthroughSubject<SessionStandingsListViewModel.Action, Never> { get }
 }
 
 final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresentable {
@@ -20,9 +20,10 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
     private let networkManager: NetworkManagerRepresentable
 
     private var subscribers = Set<AnyCancellable>()
+    var action = PassthroughSubject<SessionStandingsListViewModel.Action, Never>()
 
     @Published var state: State
-    @Published var cells: [DriverStandingCellViewModel]
+    @Published var cells: [LiveDriverStandingCellViewModel]
     let sessionName: String
 
     init(
@@ -45,6 +46,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
         self.cells = []
 
         self.setUpServices()
+        self.setUpBindings()
     }
 
     private func setUpServices() {
@@ -58,7 +60,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
                 switch liveEventService {
                 case .refreshed(let liveSession):
 
-                    if self.sessionID.string == liveSession.id.string && !liveSession.standings.isEmpty {
+                    if self.sessionID == liveSession.id && !liveSession.standings.isEmpty {
 
                         self.state = buildLiveStandingsCells(standings: liveSession.standings)
                     }
@@ -92,12 +94,32 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
             .assign(to: &$state)
     }
 
+    private func setUpBindings() {
+
+        action
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                guard let self else { return }
+
+                switch action {
+                case .loadSession:
+                    Task { await self.loadSession() }
+                }
+            }
+            .store(in: &subscribers)
+    }
+
      @MainActor func loadSession() async {
+
         do {
             let standings = try await self.networkManager
                 .load(SessionDetail.getSession(for: SessionDetail.self, id: self.sessionID.string))
 
-            self.state = self.buildFinishedSessionCells(standings: standings)
+            if standings.isEmpty {
+                self.liveEventService.action.send(.updatePositions)
+            } else {
+                self.state = self.buildFinishedSessionCells(standings: standings)
+            }
         } catch {
             self.state = .error(error.localizedDescription)
         }
@@ -152,10 +174,15 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
 
 extension SessionStandingsListViewModel {
 
+    enum Action {
+
+        case loadSession
+    }
+
     enum State: Equatable {
 
         case loading
-        case results([DriverStandingCellViewModel])
+        case results([LiveDriverStandingCellViewModel])
         case error(String)
 
         enum Identifier {

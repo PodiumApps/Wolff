@@ -26,7 +26,9 @@ final class AppViewModel: AppViewModelRepresentable {
         driverAndConstructorService.action.send(.fetchAll)
 
         let seasonListViewModel = SeasonListViewModel.make()
-        state = .results(seasonListViewModel)
+        let standingsViewModel = StandingsViewModel.make()
+
+        state = .results(seasonListViewModel, standingsViewModel)
     }
 }
 
@@ -36,7 +38,7 @@ extension AppViewModel {
 
         case loading
         case error(String)
-        case results(SeasonListViewModel)
+        case results(SeasonListViewModel, StandingsViewModel)
     }
 
     enum Route: Hashable {

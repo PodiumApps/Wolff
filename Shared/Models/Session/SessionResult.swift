@@ -19,7 +19,7 @@ struct SessionResult: Decodable, Identifiable {
 
 extension SessionResult {
     
-    enum Tyre: Decodable {
+    enum Tyre: String, Decodable {
         case soft
         case medium
         case hard

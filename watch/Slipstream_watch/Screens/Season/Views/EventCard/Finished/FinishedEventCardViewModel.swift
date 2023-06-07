@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 protocol FinishedEventCardViewModelRepresentable: ObservableObject {
 
@@ -8,13 +9,13 @@ protocol FinishedEventCardViewModelRepresentable: ObservableObject {
     var round: Int { get }
     var podium: [String] { get }
     var sessionListViewModel: SessionListViewModel { get }
-
-    func tapEvent() -> Void
+    var action: PassthroughSubject<FinishedEventCardViewModel.Action, Never> { get }
 }
 
 final class FinishedEventCardViewModel: FinishedEventCardViewModelRepresentable {
 
     private let navigation: SeasonNavigation
+    private var subscribers = Set<AnyCancellable>()
 
     var id: Event.ID
     var title: String
@@ -22,6 +23,8 @@ final class FinishedEventCardViewModel: FinishedEventCardViewModelRepresentable 
     var round: Int
     var podium: [String]
     var sessionListViewModel: SessionListViewModel
+
+    var action = PassthroughSubject<Action, Never>()
 
     init(
         navigation: SeasonNavigation,
@@ -41,10 +44,30 @@ final class FinishedEventCardViewModel: FinishedEventCardViewModelRepresentable 
         self.round = round
         self.podium = podium
         self.sessionListViewModel = sessionListViewModel
+
+        self.setUpBindings()
     }
 
-    func tapEvent() {
-        
-        navigation.action.send(.goTo(route: .sessionsList(sessionListViewModel)))
+    private func setUpBindings() {
+
+        action
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                guard let self else { return }
+
+                switch action {
+                case .tapEvent:
+                    navigation.action.send(.goTo(route: .sessionsList(sessionListViewModel)))
+                }
+            }
+            .store(in: &subscribers)
+    }
+}
+
+extension FinishedEventCardViewModel {
+
+    enum Action {
+
+        case tapEvent
     }
 }

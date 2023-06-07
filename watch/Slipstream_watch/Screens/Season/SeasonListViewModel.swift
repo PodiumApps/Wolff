@@ -7,7 +7,6 @@ protocol SeasonListViewModelRepresentable: ObservableObject {
     var state: SeasonListViewModel.State { get }
     var route: [SeasonNavigation.Route] { get set }
     var action: PassthroughSubject<SeasonListViewModel.Action, Never> { get }
-    var indexFirstToAppear: Int { get set }
 }
 
 final class SeasonListViewModel: SeasonListViewModelRepresentable {
@@ -35,7 +34,6 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
     private var subscriptions = Set<AnyCancellable>()
     var action = PassthroughSubject<Action, Never>()
     @Published var state: SeasonListViewModel.State
-    @Published var indexFirstToAppear: Int = 0
 
     var eventCells: [Cell]
 
@@ -117,7 +115,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
 
                 guard
                     let self,
-                    case .results(var cells) = self.state,
+                    case .results(var cells, let indexFirstToAppear) = self.state,
                     let index = cells.firstIndex(where: { $0.id == .live }),
                     case .live(let timeInterval, let sessionName) = self.events[index].status
                 else {
@@ -148,7 +146,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                         )
                     )
 
-                    return .results(cells)
+                    return .results(cells: cells, indexFirstToAppear: indexFirstToAppear)
 
                 case .refreshing, .error:
 
@@ -162,7 +160,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                         )
                     )
 
-                    return .results(cells)
+                    return .results(cells: cells, indexFirstToAppear: indexFirstToAppear)
                 }
             }
             .assign(to: &$state)
@@ -185,7 +183,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                 } else {
 
                     guard
-                        case .results(var cells) = self.state,
+                        case .results(var cells, let indexFirstToAppear) = self.state,
                         let index = cells.firstIndex(where: { $0.id == .live }),
                         case .live(let timeInterval, let sessionName) = events[index].status
                     else {
@@ -204,7 +202,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                         )
                     )
 
-                    state = .results(cells)
+                    state = .results(cells: cells, indexFirstToAppear: indexFirstToAppear)
                 }
         }
     }
@@ -260,20 +258,22 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                         sessionListViewModel: sessionListViewModel
                     )
                 )
+            case .calledOff:
+
+                return .calledOff(buildCalledOffCardViewModel(event: event))
             }
         }
 
         for (index, cell) in eventCells.enumerated() {
             switch cell {
             case .live, .upcoming:
-                indexFirstToAppear = index
-                return .results(eventCells)
-            case .finished:
+                return .results(cells: eventCells, indexFirstToAppear: index)
+            case .finished, .calledOff:
                 continue
             }
         }
 
-        return .results(eventCells)
+        return .results(cells: eventCells, indexFirstToAppear: 0)
     }
 
     private func buildLiveViewModel(
@@ -338,6 +338,11 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         )
     }
 
+    private func buildCalledOffCardViewModel(event: Event) -> CalledOffEventCardViewModel {
+
+        CalledOffEventCardViewModel(title: event.title, country: event.country, round: event.round)
+    }
+
     private func setUpLiveEventState(podium: [String]?, timeInterval: TimeInterval) -> LiveEventCardViewModel.State {
 
         guard let podium, timeInterval <= 0 else {
@@ -364,6 +369,7 @@ extension SeasonListViewModel {
         case live(LiveEventCardViewModel)
         case upcoming(UpcomingEventCardViewModel)
         case finished(FinishedEventCardViewModel)
+        case calledOff(CalledOffEventCardViewModel)
 
         var id: Identifier {
 
@@ -371,6 +377,7 @@ extension SeasonListViewModel {
             case .live: return .live
             case .upcoming(let viewModel): return .upcoming(viewModel.id.string)
             case .finished(let viewModel): return .finished(viewModel.id.string)
+            case .calledOff: return .calledOff
             }
         }
 
@@ -379,6 +386,7 @@ extension SeasonListViewModel {
             case live
             case upcoming(String)
             case finished(String)
+            case calledOff
         }
 
         func hash(into hasher: inout Hasher) {
@@ -400,15 +408,8 @@ extension SeasonListViewModel {
 
     enum State: Equatable {
 
-        static func == (
-            lhs: SeasonListViewModel.State,
-            rhs: SeasonListViewModel.State
-        ) -> Bool {
-            lhs.id == rhs.id
-        }
-
         case error(String)
-        case results([Cell])
+        case results(cells: [Cell], indexFirstToAppear: Int)
         case loading
 
         enum Identifier: String {
@@ -426,18 +427,19 @@ extension SeasonListViewModel {
             case .error: return .error
             }
         }
+
+        static func == (
+            lhs: Self,
+            rhs: Self
+        ) -> Bool {
+            lhs.id == rhs.id
+        }
     }
 
     enum Route: Hashable {
 
+        // TODO: Remove from here and add it to AppNavigation
         case sessionStandings // SessionStandingsViewModel
-
-        static func == (
-            lhs: SeasonListViewModel.Route,
-            rhs: SeasonListViewModel.Route
-        ) -> Bool {
-            lhs.id == rhs.id
-        }
 
         func hash(into hasher: inout Hasher) {
             hasher.combine(id)
@@ -447,6 +449,13 @@ extension SeasonListViewModel {
             switch self {
             case .sessionStandings: return "sessionStandings"
             }
+        }
+
+        static func == (
+            lhs: Self,
+            rhs: Self
+        ) -> Bool {
+            lhs.id == rhs.id
         }
     }
 }
