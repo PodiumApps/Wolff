@@ -4,12 +4,10 @@ struct LiveDriverStandingCellView<ViewModel: LiveDriverStandingCellViewModelRepr
 
     @ObservedObject private var viewModel: ViewModel
     private var constructorStyler: ConstructorStylerRepresentable
-    private let position: Int
 
-    init(viewModel: ViewModel, position: Int) {
+    init(viewModel: ViewModel) {
         self.viewModel = viewModel
         self.constructorStyler = ConstructorStyler(constructor: viewModel.constructor.id)
-        self.position = position
     }
 
     var body: some View {
@@ -17,7 +15,7 @@ struct LiveDriverStandingCellView<ViewModel: LiveDriverStandingCellViewModelRepr
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {
                     HStack(alignment: .center) {
-                        Text(Localization.Podium.ordinalComponent(position))
+                        Text(Localization.Podium.ordinalComponent(viewModel.position))
                         Text(viewModel.firstName)
 
                         Spacer()
