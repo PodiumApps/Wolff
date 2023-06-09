@@ -21,6 +21,7 @@ final class NewsService: NewsServiceRepresentable {
     init(networkManager: NetworkManagerRepresentable) {
 
         self.networkManager = networkManager
+        self.setUpBindings()
     }
 
     private func setUpBindings() {

@@ -28,6 +28,7 @@ final class NewsListViewModel: NewsListViewModelRepresentable {
         self.news = []
 
         self.setUpNavigation()
+        self.setUpServices()
     }
 
     private func setUpNavigation() {
@@ -47,7 +48,6 @@ final class NewsListViewModel: NewsListViewModelRepresentable {
                 self.route.append(navigation)
             }
             .store(in: &subscriptions)
-
     }
 
     private func setUpServices() {
@@ -68,11 +68,8 @@ final class NewsListViewModel: NewsListViewModelRepresentable {
                 case .refreshed(let news):
 
                     self.news = news
-
                     return self.buildNewsCells()
                 }
-
-
             }
             .assign(to: &$state)
     }
@@ -81,7 +78,7 @@ final class NewsListViewModel: NewsListViewModelRepresentable {
 
         let cells: [NewsCellViewModel] = news.compactMap { news in
 
-            return NewsCellViewModel(news: news)
+            NewsCellViewModel(news: news, navigation: navigation)
         }
 
         return .results(cells)

@@ -11,9 +11,14 @@ struct NewsCellView<ViewModel: NewsCellViewModelRepresentable>: View {
 
     var body: some View {
 
-        VStack {
-            Text(viewModel.news.title)
-                .font(.Caption.medium)
+        Button(action: {
+            viewModel.action.send(.openDetails)
+        }) {
+            VStack(alignment: .leading) {
+                Text(viewModel.news.title)
+                    .font(.Body.semibold)
+            }
         }
+        .buttonStyle(.plain)
     }
 }

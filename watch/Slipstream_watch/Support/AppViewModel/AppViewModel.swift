@@ -26,8 +26,8 @@ final class AppViewModel: AppViewModelRepresentable {
         driverAndConstructorService.action.send(.fetchAll)
 
         let seasonListViewModel = SeasonListViewModel.make()
-        let newsListViewModel = NewsListViewModel.make()
         let standingsViewModel = StandingsViewModel.make()
+        let newsListViewModel = NewsListViewModel.make()
 
         state = .results(seasonListViewModel, standingsViewModel, newsListViewModel)
     }

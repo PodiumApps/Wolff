@@ -2,10 +2,10 @@ import Foundation
 
 struct News: Decodable, Hashable, Identifiable {
 
-    let id: String
+    let id: Int
     let title: String
     let body: String
-    let date: String
+    let date: Date
 }
 
 extension News {

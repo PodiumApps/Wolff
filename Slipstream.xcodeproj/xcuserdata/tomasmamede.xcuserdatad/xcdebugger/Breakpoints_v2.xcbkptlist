@@ -3,4 +3,134 @@
    uuid = "6C846384-64FD-40F1-809C-42E89AF91827"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BB654DFF-6374-4D0A-BBF0-EAEE04611288"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "watch/Slipstream_watch/Screens/News/NewsListViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "setUpServices()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BB654DFF-6374-4D0A-BBF0-EAEE04611288 - dd5efc34be0a9c6b"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Slipstream.NewsListViewModel.setUpServices() -&gt; ()"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Screens/News/NewsListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "304">
+               </Location>
+               <Location
+                  uuid = "BB654DFF-6374-4D0A-BBF0-EAEE04611288 - dd5efc34be0a9c0c"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Slipstream.NewsListViewModel.setUpServices() -&gt; ()"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Screens/News/NewsListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "304">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ECB33032-F1AD-4CE6-B61A-F019DA2D08E0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Shared/Services/NewsService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "setUpBindings()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "ECB33032-F1AD-4CE6-B61A-F019DA2D08E0 - e4376869904f3cc3"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async -&gt; () in closure #1 (Slipstream.NewsService.Action) -&gt; () in Slipstream.NewsService.setUpBindings() -&gt; ()"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Shared/Services/NewsService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "216">
+               </Location>
+               <Location
+                  uuid = "ECB33032-F1AD-4CE6-B61A-F019DA2D08E0 - 5fbc248da46bc3d5"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for closure #1 @Sendable () async -&gt; () in closure #1 (Slipstream.NewsService.Action) -&gt; () in Slipstream.NewsService.setUpBindings() -&gt; ()"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Shared/Services/NewsService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "56">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "18E10360-0A09-43DC-A5BE-10E33856CC80"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Shared/Services/NewsService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "fetchAll()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3C233183-0A7E-4C2B-B864-82253E894D17"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "watch/Slipstream_watch/Screens/News/NewsListViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "setUpServices()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

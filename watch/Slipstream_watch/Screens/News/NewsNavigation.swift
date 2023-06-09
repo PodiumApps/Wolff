@@ -13,7 +13,6 @@ class NewsNavigation: NewsNavigationRepresentable {
     var routePublisher: Published<Route?>.Publisher { $route }
 
     var action = PassthroughSubject<Action, Never>()
-
     private var subscriptions = Set<AnyCancellable>()
 
     init() {
@@ -46,7 +45,7 @@ extension NewsNavigation {
 
     enum Route: Hashable {
 
-        case newsDetails
+        case newsDetails(NewsDetailsViewModel)
 
         var id: String {
             switch self {

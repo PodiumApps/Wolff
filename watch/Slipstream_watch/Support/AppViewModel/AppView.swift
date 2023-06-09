@@ -19,8 +19,9 @@ struct AppView<ViewModel: AppViewModelRepresentable>: View {
         case .results(let seasonViewModel, let standingsViewModel, let newsListViewModel):
             TabView {
                 SeasonListView(viewModel: seasonViewModel)
-                StandingsView(viewModel: standingsViewModel)
                 NewsListView(viewModel: newsListViewModel)
+                StandingsView(viewModel: standingsViewModel)
+                Text("Settings")
             }
         }
     }
