@@ -421,29 +421,6 @@ extension SeasonListViewModel {
             lhs.id == rhs.id
         }
     }
-
-    enum Route: Hashable {
-
-        // TODO: Remove from here and add it to AppNavigation
-        case sessionStandings // SessionStandingsViewModel
-
-        func hash(into hasher: inout Hasher) {
-            hasher.combine(id)
-        }
-
-        var id: String {
-            switch self {
-            case .sessionStandings: return "sessionStandings"
-            }
-        }
-
-        static func == (
-            lhs: Self,
-            rhs: Self
-        ) -> Bool {
-            lhs.id == rhs.id
-        }
-    }
 }
 
 extension SeasonListViewModel {
