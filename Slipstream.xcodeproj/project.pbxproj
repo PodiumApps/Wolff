@@ -123,7 +123,6 @@
 		CF233DE029A8DB7C00A8D1CD /* GrandPrixSchedulePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DDF29A8DB7C00A8D1CD /* GrandPrixSchedulePickerView.swift */; };
 		CF233DE529ABE17B00A8D1CD /* SessionDriverRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DE429ABE17B00A8D1CD /* SessionDriverRowView.swift */; };
 		CF233DED29ADFA9900A8D1CD /* LiveSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DEC29ADFA9900A8D1CD /* LiveSession.swift */; };
-		CF2504182A11050400F0290E /* StandingsNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2504172A11050400F0290E /* StandingsNavigation.swift */; };
 		CF277A1E297017C50048DE75 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A1D297017C50048DE75 /* Fonts.swift */; };
 		CF277A1F297017C50048DE75 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A1D297017C50048DE75 /* Fonts.swift */; };
 		CF277A21297303430048DE75 /* StandingsCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF277A20297303430048DE75 /* StandingsCarouselView.swift */; };
@@ -132,6 +131,8 @@
 		CF37156E29F131C000AF14AA /* SessionStandingsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF37156D29F131C000AF14AA /* SessionStandingsListView.swift */; };
 		CF37157129F1341500AF14AA /* LiveDriverStandingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF37157029F1341500AF14AA /* LiveDriverStandingCellView.swift */; };
 		CF37157329F1343200AF14AA /* LiveDriverStandingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF37157229F1343200AF14AA /* LiveDriverStandingCellViewModel.swift */; };
+		CF3F870D2A37692900A4E90C /* StoreKitSandbox.storekit in Resources */ = {isa = PBXBuildFile; fileRef = CF3F870C2A37692900A4E90C /* StoreKitSandbox.storekit */; };
+		CF3F870E2A37692900A4E90C /* StoreKitSandbox.storekit in Resources */ = {isa = PBXBuildFile; fileRef = CF3F870C2A37692900A4E90C /* StoreKitSandbox.storekit */; };
 		CF5F07772996CC3D00E79996 /* ScheduleCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5F07762996CC3D00E79996 /* ScheduleCarouselView.swift */; };
 		CF6804062A28DD3500B24AA0 /* ConstructorStandingsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6804052A28DD3500B24AA0 /* ConstructorStandingsDetailsView.swift */; };
 		CF6804092A29FA1400B24AA0 /* CalledOffEventCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6804082A29FA1400B24AA0 /* CalledOffEventCardViewModel.swift */; };
@@ -286,7 +287,6 @@
 		CF233DE729ABEF7600A8D1CD /* SessionStandingsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStandingsListViewModel.swift; sourceTree = "<group>"; };
 		CF233DE929ABF08100A8D1CD /* SessionStandingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStandingsListView.swift; sourceTree = "<group>"; };
 		CF233DEC29ADFA9900A8D1CD /* LiveSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveSession.swift; sourceTree = "<group>"; };
-		CF2504172A11050400F0290E /* StandingsNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsNavigation.swift; sourceTree = "<group>"; };
 		CF277A1D297017C50048DE75 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		CF277A20297303430048DE75 /* StandingsCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsCarouselView.swift; sourceTree = "<group>"; };
 		CF277A22297313260048DE75 /* StandingsCarouselViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsCarouselViewModel.swift; sourceTree = "<group>"; };
@@ -294,6 +294,7 @@
 		CF37156D29F131C000AF14AA /* SessionStandingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStandingsListView.swift; sourceTree = "<group>"; };
 		CF37157029F1341500AF14AA /* LiveDriverStandingCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDriverStandingCellView.swift; sourceTree = "<group>"; };
 		CF37157229F1343200AF14AA /* LiveDriverStandingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDriverStandingCellViewModel.swift; sourceTree = "<group>"; };
+		CF3F870C2A37692900A4E90C /* StoreKitSandbox.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreKitSandbox.storekit; sourceTree = "<group>"; };
 		CF5F07762996CC3D00E79996 /* ScheduleCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCarouselView.swift; sourceTree = "<group>"; };
 		CF6804052A28DD3500B24AA0 /* ConstructorStandingsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorStandingsDetailsView.swift; sourceTree = "<group>"; };
 		CF6804082A29FA1400B24AA0 /* CalledOffEventCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalledOffEventCardViewModel.swift; sourceTree = "<group>"; };
@@ -910,6 +911,7 @@
 				CFE23F542982EDBA00412DB6 /* swiftgen.yml */,
 				42521CA929B0F9FF00000586 /* Global.swift */,
 				42BCAD6129BBD7F10089B46A /* Identifier.swift */,
+				CF3F870C2A37692900A4E90C /* StoreKitSandbox.storekit */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1149,6 +1151,7 @@
 				420967FB294C9A8F0075D75E /* Preview Assets.xcassets in Resources */,
 				CFE23F4F2982EBF200412DB6 /* Localizable.strings in Resources */,
 				CFE23F552982EDBA00412DB6 /* swiftgen.yml in Resources */,
+				CF3F870D2A37692900A4E90C /* StoreKitSandbox.storekit in Resources */,
 				420967F8294C9A8F0075D75E /* Assets.xcassets in Resources */,
 				4245E81329B7E9E800843B02 /* Assets.xcassets in Resources */,
 			);
@@ -1166,6 +1169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4209683B295378A20075D75E /* Preview Assets.xcassets in Resources */,
+				CF3F870E2A37692900A4E90C /* StoreKitSandbox.storekit in Resources */,
 				CFE23F502982EBF200412DB6 /* Localizable.strings in Resources */,
 				42096838295378A20075D75E /* Assets.xcassets in Resources */,
 				CFE23F562982EDBA00412DB6 /* swiftgen.yml in Resources */,
