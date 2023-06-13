@@ -12,8 +12,6 @@ final class NewsListViewModel: NewsListViewModelRepresentable {
     @Published var state: NewsListViewModel.State
     @Published var route: [NewsNavigation.Route]
 
-    private var news: [News]
-
     private var navigation: NewsNavigation
     private var subscriptions = Set<AnyCancellable>()
     private let newsService: NewsServiceRepresentable
@@ -25,7 +23,6 @@ final class NewsListViewModel: NewsListViewModelRepresentable {
 
         self.state = .loading
         self.newsService = newsService
-        self.news = []
 
         self.setUpNavigation()
         self.setUpServices()
@@ -67,18 +64,17 @@ final class NewsListViewModel: NewsListViewModelRepresentable {
                     return .loading
                 case .refreshed(let news):
 
-                    self.news = news
-                    return self.buildNewsCells()
+                    return self.buildNewsCells(news: news)
                 }
             }
             .assign(to: &$state)
     }
 
-    private func buildNewsCells() -> NewsListViewModel.State {
+    private func buildNewsCells(news: [News]) -> NewsListViewModel.State {
 
-        let cells: [NewsCellViewModel] = news.enumerated().compactMap { index, news in
+        let cells: [NewsCellViewModel] = news.enumerated().compactMap { index, article in
 
-            NewsCellViewModel(news: news, enumeration: "\(index + 1) of \(self.news.count)", navigation: navigation)
+            NewsCellViewModel(news: article, enumeration: "\(index + 1) of \(news.count)", navigation: navigation)
         }
 
         return .results(cells)

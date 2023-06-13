@@ -19,19 +19,19 @@ struct NewsListView<ViewModel: NewsListViewModelRepresentable>: View {
                 case .error(let error):
                     Text(error)
                 case .results(let news):
-                    ScrollView(showsIndicators: true) {
-                        VStack(alignment: .leading) {
+                    ScrollView {
+                        LazyVStack(alignment: .leading) {
                             ForEach(0 ..< news.count, id: \.self) { index in
                                 NewsCellView(viewModel: news[index])
                                 Divider()
-                                    .padding(.vertical, Constants.Divider.verticalPadding)
+                                    .padding(.vertical, .Spacing.default)
                             }
 
                             Text(Localization.NewsListView.sourceLabel)
                                 .font(.Caption2.regular)
-                                .padding(.top, Constants.Source.topPadding)
+                                .padding(.top, .Spacing.default)
                         }
-                        .padding(.horizontal, Constants.Title.horizontalPadding)
+                        .padding(.horizontal, .Spacing.default)
                     }
                 }
             }
@@ -44,23 +44,5 @@ struct NewsListView<ViewModel: NewsListViewModelRepresentable>: View {
                 }
             }
         }
-    }
-}
-
-fileprivate enum Constants {
-
-    enum Divider {
-
-        static let verticalPadding: CGFloat = 5
-    }
-
-    enum Title {
-
-        static let horizontalPadding: CGFloat = 5
-    }
-
-    enum Source {
-
-        static let topPadding: CGFloat = 5
     }
 }

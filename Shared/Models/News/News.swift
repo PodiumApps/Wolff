@@ -1,6 +1,6 @@
 import Foundation
 
-struct News: Decodable, Hashable, Identifiable {
+struct News: Identifiable, Decodable {
 
     let id: Int
     let title: String
