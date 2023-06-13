@@ -124,6 +124,12 @@ internal enum Localization {
       }
     }
   }
+  internal enum NewsListView {
+    /// News
+    internal static let screenTitle = Localization.tr("Localizable", "news_list_view.screen_title", fallback: "News")
+    /// Source: fia.com
+    internal static let sourceLabel = Localization.tr("Localizable", "news_list_view.source_label", fallback: "Source: fia.com")
+  }
   internal enum Podium {
     /// %@.
     internal static func ordinalComponent(_ p1: Any) -> String {

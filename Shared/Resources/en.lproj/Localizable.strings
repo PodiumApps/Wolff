@@ -78,7 +78,6 @@
 "standings_list_view.screen_title" = "Standings";
 "standings_list_view.selection_label" = "Selection";
 
-
 // MARK: - InAppPurchaseView
 "in_app_purchase_view.title" = "Slipstream Premium";
 "in_app_purchase_view.body" = "Unlock full access to live information during the race and navigate the app freely for more exclusive content.";
@@ -93,3 +92,7 @@
 "in_app_purchase_view.subscription_period.month" = "Month";
 "in_app_purchase_view.subscription_period.months" = "Months";
 "in_app_purchase_view.subscription_period.year" = "Year";
+
+// MARK: - NewsListView
+"news_list_view.screen_title" = "News";
+"news_list_view.source_label" = "Source: fia.com";

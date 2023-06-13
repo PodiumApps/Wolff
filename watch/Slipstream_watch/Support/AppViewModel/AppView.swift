@@ -20,6 +20,7 @@ struct AppView<ViewModel: AppViewModelRepresentable>: View {
             NavigationStack(path: $viewModel.route) {
                 TabView {
                     SeasonListView(viewModel: seasonViewModel)
+                    NewsListView(viewModel: newsListViewModel)
                     StandingsView(viewModel: standingsViewModel)
                     Text("Settings")
                 }
