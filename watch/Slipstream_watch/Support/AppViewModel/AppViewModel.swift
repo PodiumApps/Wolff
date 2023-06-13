@@ -94,9 +94,9 @@ final class AppViewModel: AppViewModelRepresentable {
                 case .refreshing:
                     return nil
                 case .error:
-                    return true
-                case .refreshed(let isPremium):
-                    return !isPremium
+                    return nil
+                case .refreshed(let isPremium, let showSheet):
+                    return !isPremium && showSheet
                 case .dismissed:
                     navigation.action.send(.removeLast)
                     return nil

@@ -58,6 +58,40 @@ internal enum Localization {
       }
     }
   }
+  internal enum InAppPurchaseView {
+    /// Unlock full access to live information during the race and navigate the app freely for more exclusive content.
+    internal static let body = Localization.tr("Localizable", "in_app_purchase_view.body", fallback: "Unlock full access to live information during the race and navigate the app freely for more exclusive content.")
+    /// Slipstream Premium
+    internal static let title = Localization.tr("Localizable", "in_app_purchase_view.title", fallback: "Slipstream Premium")
+    internal enum Body {
+      /// Something went wrong. Please try again to access all live information and get more exclusive content.
+      internal static let error = Localization.tr("Localizable", "in_app_purchase_view.body.error", fallback: "Something went wrong. Please try again to access all live information and get more exclusive content.")
+      /// We are loading your amazing subscription. Thanks for trusting us!
+      internal static let loading = Localization.tr("Localizable", "in_app_purchase_view.body.loading", fallback: "We are loading your amazing subscription. Thanks for trusting us!")
+      /// Thanks for trusting us! We hope you enjoy your subscription.
+      internal static let success = Localization.tr("Localizable", "in_app_purchase_view.body.success", fallback: "Thanks for trusting us! We hope you enjoy your subscription.")
+    }
+    internal enum Button {
+      /// Restore Purchases
+      internal static let restore = Localization.tr("Localizable", "in_app_purchase_view.button.restore", fallback: "Restore Purchases")
+    }
+    internal enum SubscriptionPeriod {
+      /// Day
+      internal static let day = Localization.tr("Localizable", "in_app_purchase_view.subscription_period.day", fallback: "Day")
+      /// Days
+      internal static let days = Localization.tr("Localizable", "in_app_purchase_view.subscription_period.days", fallback: "Days")
+      /// Month
+      internal static let month = Localization.tr("Localizable", "in_app_purchase_view.subscription_period.month", fallback: "Month")
+      /// Months
+      internal static let months = Localization.tr("Localizable", "in_app_purchase_view.subscription_period.months", fallback: "Months")
+      /// Week
+      internal static let week = Localization.tr("Localizable", "in_app_purchase_view.subscription_period.week", fallback: "Week")
+      /// Weeks
+      internal static let weeks = Localization.tr("Localizable", "in_app_purchase_view.subscription_period.weeks", fallback: "Weeks")
+      /// Year
+      internal static let year = Localization.tr("Localizable", "in_app_purchase_view.subscription_period.year", fallback: "Year")
+    }
+  }
   internal enum LiveCardCell {
     /// About to Start
     internal static let aboutToStart = Localization.tr("Localizable", "live_card_cell.about_to_start", fallback: "About to Start")

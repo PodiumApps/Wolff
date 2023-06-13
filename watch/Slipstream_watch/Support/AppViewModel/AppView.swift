@@ -32,7 +32,7 @@ struct AppView<ViewModel: AppViewModelRepresentable>: View {
                     }
                 }
                 .sheet(isPresented: $viewModel.presentPremiumSheet) {
-                    Text("Give me your money motherfucker")
+                    InAppPurchaseView(viewModel: InAppPurchaseViewModel.make())
                 }
             }
             

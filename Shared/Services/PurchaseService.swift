@@ -6,6 +6,7 @@ import OSLog
 protocol PurchaseServiceRepresentable {
     
     var statePublisher: Published<PurchaseService.State>.Publisher { get }
+    var productsPublisher: Published<[Package]>.Publisher { get }
     var action: PassthroughSubject<PurchaseService.Action, Never> { get }
 }
 
@@ -18,6 +19,9 @@ class PurchaseService: PurchaseServiceRepresentable {
     
     private let networkManager: NetworkManagerRepresentable
     private var subscriptions = Set<AnyCancellable>()
+    
+    var productsPublisher: Published<[Package]>.Publisher { $products }
+    @Published private var products: [Package] = []
     
     @AppStorage(UserDefaultsKeys.user.rawValue) private var persistedUserId: String?
     @AppStorage(UserDefaultsKeys.countErrors.rawValue) private var countErrors = 0
@@ -50,7 +54,7 @@ class PurchaseService: PurchaseServiceRepresentable {
                     
                 case .checkPremium:
                     state = .refreshing
-                    checkIfUserIsPremium()
+                    checkIfUserIsPremium(showSheet: true)
                     
                 case .dismissed:
                     state = .dismissed
@@ -76,6 +80,9 @@ class PurchaseService: PurchaseServiceRepresentable {
         #else
         Purchases.configure(withAPIKey: "appl_QDMRCBOEVDmTcSOvyHSUzTXdQOg", appUserID: persistedUserId ?? userId)
         #endif
+        
+        checkIfUserIsPremium(showSheet: false)
+        getProducts()
     }
     
     private func registerUser(isPremium: Bool) async {
@@ -100,7 +107,7 @@ class PurchaseService: PurchaseServiceRepresentable {
                 return
             }
             
-            checkIfUserIsPremium()
+            checkIfUserIsPremium(showSheet: true)
         }
     }
     
@@ -110,23 +117,22 @@ class PurchaseService: PurchaseServiceRepresentable {
             
             guard let self else { return }
             
-            if error != nil {
+            if error != nil && error?.localizedDescription.contains("Purchase was cancelled") == nil {
                 state = .error(error?.localizedDescription ?? "Error while subscribing")
                 Logger.userService.error("\(persistedUserId ?? "") - Error while subscribing")
+                return
             }
             
             if userCancelled {
                 Logger.userService.info("\(persistedUserId ?? "") canceled subscription")
-                state = .refreshed(isPremium: false)
-                return
             }
             
-            checkIfUserIsPremium()
+            checkIfUserIsPremium(showSheet: true)
         }
         
     }
     
-    private func checkIfUserIsPremium() {
+    private func checkIfUserIsPremium(showSheet: Bool) {
         
         Purchases.shared.getCustomerInfo { [weak self] (customerInfo, error) in
             
@@ -142,13 +148,25 @@ class PurchaseService: PurchaseServiceRepresentable {
             let isPremium = customerInfo?.entitlements.all[Entitlements.premium.rawValue]?.isActive == true
             
             Logger.userService.info("\(persistedUserId ?? "") premium is \(isPremium)")
-            state = .refreshed(isPremium: isPremium)
+            state = .refreshed(isPremium: isPremium, showSheet: showSheet)
             
             Task { [weak self] in
                 
                 guard let self else { return }
                 await registerUser(isPremium: isPremium)
             }
+        }
+    }
+    
+    private func getProducts() {
+        
+        Purchases.shared.getOfferings { [weak self] offerings, error in
+            
+            guard let self else { return }
+            
+            if let offerings = offerings?.current {
+                products = offerings.availablePackages
+              }
         }
     }
 }
@@ -166,7 +184,7 @@ extension PurchaseService {
     enum State: Equatable {
         
         case dismissed
-        case refreshed(isPremium: Bool)
+        case refreshed(isPremium: Bool, showSheet: Bool)
         case refreshing
         case error(String)
     }

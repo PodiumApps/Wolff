@@ -77,3 +77,19 @@
 // MARK: - StandingsListView
 "standings_list_view.screen_title" = "Standings";
 "standings_list_view.selection_label" = "Selection";
+
+
+// MARK: - InAppPurchaseView
+"in_app_purchase_view.title" = "Slipstream Premium";
+"in_app_purchase_view.body" = "Unlock full access to live information during the race and navigate the app freely for more exclusive content.";
+"in_app_purchase_view.body.loading" = "We are loading your amazing subscription. Thanks for trusting us!";
+"in_app_purchase_view.body.success" = "Thanks for trusting us! We hope you enjoy your subscription.";
+"in_app_purchase_view.body.error" = "Something went wrong. Please try again to access all live information and get more exclusive content.";
+"in_app_purchase_view.button.restore" = "Restore Purchases";
+"in_app_purchase_view.subscription_period.day" = "Day";
+"in_app_purchase_view.subscription_period.days" = "Days";
+"in_app_purchase_view.subscription_period.week" = "Week";
+"in_app_purchase_view.subscription_period.weeks" = "Weeks";
+"in_app_purchase_view.subscription_period.month" = "Month";
+"in_app_purchase_view.subscription_period.months" = "Months";
+"in_app_purchase_view.subscription_period.year" = "Year";

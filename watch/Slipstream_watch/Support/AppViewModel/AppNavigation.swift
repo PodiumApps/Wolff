@@ -50,7 +50,7 @@ class AppNavigation: AppNavigationRepresentable {
     
     private func checkForPremiumRoute() -> Bool {
         
-        return route.contains(where: { $0.id == .sessionStandingsList })
+        route.contains(where: \.isPremium)
     }
 }
 
@@ -88,6 +88,8 @@ extension AppNavigation {
             case .sessionStandingsList: return .sessionStandingsList
             }
         }
+        
+        var isPremium: Bool { id != .sessionsList }
 
         static func == (lhs: Self, rhs: Self) -> Bool {
             lhs.id == rhs.id
