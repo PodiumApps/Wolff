@@ -76,9 +76,9 @@ final class NewsListViewModel: NewsListViewModelRepresentable {
 
     private func buildNewsCells() -> NewsListViewModel.State {
 
-        let cells: [NewsCellViewModel] = news.compactMap { news in
+        let cells: [NewsCellViewModel] = news.enumerated().compactMap { index, news in
 
-            NewsCellViewModel(news: news, navigation: navigation)
+            NewsCellViewModel(news: news, enumeration: "\(index + 1) of \(self.news.count)", navigation: navigation)
         }
 
         return .results(cells)

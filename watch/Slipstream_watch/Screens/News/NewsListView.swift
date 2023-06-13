@@ -56,7 +56,7 @@ fileprivate enum Constants {
 
     enum Title {
 
-        static let horizontalPadding: CGFloat = 2
+        static let horizontalPadding: CGFloat = 5
     }
 
     enum Source {
