@@ -77,3 +77,7 @@
 // MARK: - StandingsListView
 "standings_list_view.screen_title" = "Standings";
 "standings_list_view.selection_label" = "Selection";
+
+// MARK: - NewsListView
+"news_list_view.screen_title" = "News";
+"news_list_view.source_label" = "Source: fia.com";

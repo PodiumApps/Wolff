@@ -61,4 +61,14 @@ extension DateFormatter {
 
         return dateFormatter
     }()
+
+    static let newsDate: DateFormatter = {
+        var timeZone = TimeZone.current
+
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+        dateFormatter.timeZone = timeZone
+
+        return dateFormatter
+    }()
 }

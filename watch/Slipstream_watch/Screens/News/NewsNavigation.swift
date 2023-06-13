@@ -1,33 +1,31 @@
 import Foundation
 import Combine
 
-protocol SeasonNavigationProtocol: ObservableObject {
-    
-    var routePublisher: Published<SeasonNavigation.Route?>.Publisher { get }
-    var action: PassthroughSubject<SeasonNavigation.Action, Never> { get }
+protocol NewsNavigationRepresentable: ObservableObject {
+
+    var routePublisher: Published<NewsNavigation.Route?>.Publisher { get }
+    var action: PassthroughSubject<NewsNavigation.Action, Never> { get }
 }
 
-class SeasonNavigation: SeasonNavigationProtocol {
-    
-    var routePublisher: Published<SeasonNavigation.Route?>.Publisher { $route }
-    @Published private var route: SeasonNavigation.Route? = nil
-    
+class NewsNavigation: NewsNavigationRepresentable {
+
+    @Published private var route: Route? = nil
+    var routePublisher: Published<Route?>.Publisher { $route }
+
     var action = PassthroughSubject<Action, Never>()
-    
     private var subscriptions = Set<AnyCancellable>()
-    
-    
+
     init() {
-        
-        setupBindings()
+
+        self.setUpBindings()
     }
-    
-    // MARK: - Private
-    private func setupBindings() {
-        
+
+    private func setUpBindings() {
+
         action
             .receive(on: DispatchQueue.main)
             .sink { [weak self] action in
+
                 guard let self else { return }
                 switch action {
                 case .goTo(let route):
@@ -38,22 +36,20 @@ class SeasonNavigation: SeasonNavigationProtocol {
     }
 }
 
-extension SeasonNavigation {
-    
+extension NewsNavigation {
+
     enum Action {
-        
+
         case goTo(route: Route?)
     }
-    
+
     enum Route: Hashable {
 
-        case sessionsList(SessionListViewModel)
-        case sessionStandingsList(SessionStandingsListViewModel)
+        case newsDetails(NewsDetailsViewModel)
 
         var id: String {
             switch self {
-            case .sessionsList: return "sessionList"
-            case .sessionStandingsList: return "sessionStandingsList"
+            case .newsDetails: return "newsDetails"
             }
         }
 
