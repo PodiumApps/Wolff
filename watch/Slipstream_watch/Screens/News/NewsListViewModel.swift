@@ -4,47 +4,23 @@ import Combine
 protocol NewsListViewModelRepresentable: ObservableObject {
 
     var state: NewsListViewModel.State { get }
-    var route: [NewsNavigation.Route] { get set }
 }
 
 final class NewsListViewModel: NewsListViewModelRepresentable {
 
     @Published var state: NewsListViewModel.State
-    @Published var route: [NewsNavigation.Route]
 
-    private var navigation: NewsNavigation
+    private var navigation: AppNavigationRepresentable
     private var subscriptions = Set<AnyCancellable>()
     private let newsService: NewsServiceRepresentable
 
-    init(navigation: NewsNavigation, newsService: NewsServiceRepresentable) {
+    init(navigation: AppNavigationRepresentable, newsService: NewsServiceRepresentable) {
 
         self.navigation = navigation
-        self.route = []
 
         self.state = .loading
         self.newsService = newsService
-
-        self.setUpNavigation()
         self.setUpServices()
-    }
-
-    private func setUpNavigation() {
-
-        navigation.routePublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] navigation in
-
-                guard let self else { return }
-
-                guard let navigation else {
-
-                    self.route = []
-                    return
-                }
-
-                self.route.append(navigation)
-            }
-            .store(in: &subscriptions)
     }
 
     private func setUpServices() {
@@ -72,9 +48,11 @@ final class NewsListViewModel: NewsListViewModelRepresentable {
 
     private func buildNewsCells(news: [News]) -> NewsListViewModel.State {
 
-        let cells: [NewsCellViewModel] = news.enumerated().compactMap { index, article in
+        let cells: [NewsCellViewModel] = news.enumerated().compactMap { [weak self] index, article in
+            
+            guard let self else { return nil }
 
-            NewsCellViewModel(news: article, enumeration: "\(index + 1) of \(news.count)", navigation: navigation)
+            return .init(news: article, enumeration: "\(index + 1) of \(news.count)", navigation: navigation)
         }
 
         return .results(cells)
@@ -112,8 +90,8 @@ extension NewsListViewModel {
 
 extension NewsListViewModel {
 
-    static func make() -> NewsListViewModel {
+    static func make(navigation: AppNavigationRepresentable) -> NewsListViewModel {
 
-        .init(navigation: NewsNavigation(), newsService: ServiceLocator.shared.newsService)
+        .init(navigation: navigation, newsService: ServiceLocator.shared.newsService)
     }
 }

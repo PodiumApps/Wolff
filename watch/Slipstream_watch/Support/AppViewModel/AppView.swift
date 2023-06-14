@@ -16,7 +16,7 @@ struct AppView<ViewModel: AppViewModelRepresentable>: View {
             Text(error)
         case .loading:
             ProgressView()
-        case .results(let seasonViewModel, let standingsViewModel):
+        case .results(let seasonViewModel, let standingsViewModel, let newsListViewModel):
             NavigationStack(path: $viewModel.route) {
                 TabView {
                     SeasonListView(viewModel: seasonViewModel)
@@ -30,6 +30,8 @@ struct AppView<ViewModel: AppViewModelRepresentable>: View {
                         SessionListView(viewModel: viewModel)
                     case .sessionStandingsList(let viewModel):
                         SessionStandingsListView(viewModel: viewModel)
+                    case .newsDetails(let viewModel):
+                        NewsDetailsView(viewModel: viewModel)
                     }
                 }
                 .sheet(isPresented: $viewModel.presentPremiumSheet) {

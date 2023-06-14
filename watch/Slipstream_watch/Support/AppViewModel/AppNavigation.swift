@@ -75,21 +75,29 @@ extension AppNavigation {
 
         case sessionsList(SessionListViewModel)
         case sessionStandingsList(SessionStandingsListViewModel)
+        case newsDetails(NewsDetailsViewModel)
         
         enum Identifier {
             
             case sessionsList
             case sessionStandingsList
+            case newsDetails
         }
 
         var id: Identifier {
             switch self {
             case .sessionsList: return .sessionsList
             case .sessionStandingsList: return .sessionStandingsList
+            case .newsDetails: return .newsDetails
             }
         }
         
-        var isPremium: Bool { id != .sessionsList }
+        var isPremium: Bool {
+            switch id {
+            case .newsDetails, .sessionStandingsList: return true
+            case .sessionsList: return false
+            }
+        }
 
         static func == (lhs: Self, rhs: Self) -> Bool {
             lhs.id == rhs.id

@@ -5,7 +5,6 @@ protocol NewsCellViewModelRepresentable {
 
     var news: News { get }
     var enumeration: String { get }
-    var navigation: NewsNavigation { get }
     var action: PassthroughSubject<NewsDetailsViewModel.Action, Never> { get }
 }
 
@@ -13,12 +12,12 @@ final class NewsCellViewModel: NewsCellViewModelRepresentable {
 
     var news: News
     var enumeration: String
-    var navigation: NewsNavigation
+    var navigation: AppNavigationRepresentable
 
     var action = PassthroughSubject<NewsDetailsViewModel.Action, Never>()
     var subscriptions = Set<AnyCancellable>()
 
-    init(news: News, enumeration: String, navigation: NewsNavigation) {
+    init(news: News, enumeration: String, navigation: AppNavigationRepresentable) {
 
         self.news = news
         self.enumeration = enumeration
@@ -36,7 +35,7 @@ final class NewsCellViewModel: NewsCellViewModelRepresentable {
                 guard let self else { return }
                 switch action {
                 case .openDetails:
-                    navigation.action.send(.goTo(route: .newsDetails(NewsDetailsViewModel(news: news))))
+                    navigation.action.send(.append(route: .newsDetails(NewsDetailsViewModel(news: news))))
                 }
             }
             .store(in: &subscriptions)

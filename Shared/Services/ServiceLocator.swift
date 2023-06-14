@@ -14,7 +14,7 @@ final class ServiceLocator {
         driverAndConstructorService: DriverAndConstructorServiceRepresentable = DriverAndConstructorService.make(),
         liveSessionService: LiveSessionServiceRepresentable = LiveSessionService.make(),
         eventService: EventServiceRepresentable = EventService.make(),
-        purchaseService: PurchaseServiceRepresentable = PurchaseService.make()
+        purchaseService: PurchaseServiceRepresentable = PurchaseService.make(),
         newsService: NewsServiceRepresentable = NewsService.make()
     ) {
         

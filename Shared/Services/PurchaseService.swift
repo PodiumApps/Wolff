@@ -41,6 +41,16 @@ class PurchaseService: PurchaseServiceRepresentable {
             .receive(on: DispatchQueue.global())
             .sink { [weak self] action in
                 
+                guard let self, case .checkPremium = action else { return }
+                state = .refreshing
+                checkIfUserIsPremium(showSheet: true)
+            }
+            .store(in: &subscriptions)
+        
+        action
+            .receive(on: DispatchQueue.global())
+            .sink { [weak self] action in
+                
                 guard let self else { return }
                 
                 switch action {
@@ -53,8 +63,7 @@ class PurchaseService: PurchaseServiceRepresentable {
                     restorePurchases()
                     
                 case .checkPremium:
-                    state = .refreshing
-                    checkIfUserIsPremium(showSheet: true)
+                    return
                     
                 case .dismissed:
                     state = .dismissed
