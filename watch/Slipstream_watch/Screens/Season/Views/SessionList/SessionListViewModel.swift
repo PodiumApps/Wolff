@@ -16,6 +16,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
     private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
     private let liveEventService: LiveSessionServiceRepresentable
     private let navigation: AppNavigationRepresentable
+    private var subscriptions = Set<AnyCancellable>()
 
     @Published var state: State
     @Published private var sessionCells: [Cell]
@@ -191,15 +192,27 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
             sessionID: sessionID,
             sessionName: sessionName.label
         )
-
-        return LiveSessionCellViewModel(
-            navigation: navigation,
+        
+        let viewModel: LiveSessionCellViewModel = .init(
             sessionName: sessionName.label,
             sessionID: sessionID,
             podium: Driver.getPodiumDriverTickers(podium: podium, drivers: drivers),
-            state: setUpLiveSessionState(podium: podium, date: sessionDate, timeInterval: timeInterval),
-            sessionStandingsListViewModel: sessionStandingsListViewModel
+            state: setUpLiveSessionState(podium: podium, date: sessionDate, timeInterval: timeInterval)
         )
+        
+        viewModel.action
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                guard let self else { return }
+
+                switch action {
+                case .tapSession:
+                    navigation.action.send(.append(route: .sessionStandingsList(sessionStandingsListViewModel)))
+                }
+            }
+            .store(in: &subscriptions)
+
+        return viewModel
     }
 
     private func buildFinishedSessionCellViewModel(
@@ -213,13 +226,25 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
             sessionName: sessionName.label
         )
         
-        return FinishedSessionCellViewModel(
-            navigation: navigation,
+        let viewModel: FinishedSessionCellViewModel = .init(
             sessionID: sessionID,
             session: sessionName.label,
-            winners: Driver.getPodiumDriverFullName(podium: podium, drivers: drivers),
-            sessionStandingsListViewModel: sessionStandingsListViewModel
+            winners: Driver.getPodiumDriverFullName(podium: podium, drivers: drivers)
         )
+        
+        viewModel.action
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                guard let self else { return }
+
+                switch action {
+                case .tapSession:
+                    navigation.action.send(.append(route: .sessionStandingsList(sessionStandingsListViewModel)))
+                }
+            }
+            .store(in: &subscriptions)
+
+        return viewModel
     }
 
     private func setUpLiveSessionState(

@@ -48,11 +48,25 @@ final class NewsListViewModel: NewsListViewModelRepresentable {
 
     private func buildNewsCells(news: [News]) -> NewsListViewModel.State {
 
-        let cells: [NewsCellViewModel] = news.enumerated().compactMap { [weak self] index, article in
+        let cells: [NewsCellViewModel] = news.enumerated().compactMap { [weak self] index, article -> NewsCellViewModel? in
             
             guard let self else { return nil }
+            
+            let viewModel = NewsCellViewModel(news: article, enumeration: "\(index + 1) of \(news.count)")
+            
+            viewModel.action
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] action in
 
-            return .init(news: article, enumeration: "\(index + 1) of \(news.count)", navigation: navigation)
+                    guard let self else { return }
+                    switch action {
+                    case .openDetails:
+                        navigation.action.send(.append(route: .newsDetails(NewsDetailsViewModel(news: article))))
+                    }
+                }
+                .store(in: &subscriptions)
+
+            return viewModel
         }
 
         return .results(cells)

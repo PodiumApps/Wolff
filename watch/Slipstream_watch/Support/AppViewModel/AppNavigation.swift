@@ -33,24 +33,19 @@ class AppNavigation: AppNavigationRepresentable {
                 switch action {
                 case .append(let newRoute):
                     route += [newRoute]
-                    return .update(routes: route, containsPremium: checkForPremiumRoute())
+                    return .update(routes: route, containsPremium: route.contains(where: \.isPremium))
                 case .remove(let newRoute):
                     route.removeAll(where: { $0 == newRoute } )
-                    return .update(routes: route, containsPremium: checkForPremiumRoute())
+                    return .update(routes: route, containsPremium: route.contains(where: \.isPremium))
                 case .removeLast:
                     route.removeLast()
-                    return .update(routes: route, containsPremium: checkForPremiumRoute())
+                    return .update(routes: route, containsPremium: route.contains(where: \.isPremium))
                 case .update(let newRoutes):
                     route = newRoutes
                     return nil
                 }
             }
             .assign(to: &$state)
-    }
-    
-    private func checkForPremiumRoute() -> Bool {
-        
-        route.contains(where: \.isPremium)
     }
 }
 
@@ -76,12 +71,16 @@ extension AppNavigation {
         case sessionsList(SessionListViewModel)
         case sessionStandingsList(SessionStandingsListViewModel)
         case newsDetails(NewsDetailsViewModel)
+        case driverStandingDetails(DriverStandingsDetailsViewModel)
+        case constructorStandingDetails(ConstructorStandingsDetailsViewModel)
         
         enum Identifier {
             
             case sessionsList
             case sessionStandingsList
             case newsDetails
+            case driverStandingDetails
+            case constructorStandingDetails
         }
 
         var id: Identifier {
@@ -89,13 +88,20 @@ extension AppNavigation {
             case .sessionsList: return .sessionsList
             case .sessionStandingsList: return .sessionStandingsList
             case .newsDetails: return .newsDetails
+            case .driverStandingDetails: return .driverStandingDetails
+            case .constructorStandingDetails: return .constructorStandingDetails
             }
         }
         
         var isPremium: Bool {
             switch id {
-            case .newsDetails, .sessionStandingsList: return true
-            case .sessionsList: return false
+            case .newsDetails,
+                 .sessionStandingsList,
+                 .driverStandingDetails,
+                 .constructorStandingDetails:
+                return true
+            case .sessionsList:
+                return false
             }
         }
 

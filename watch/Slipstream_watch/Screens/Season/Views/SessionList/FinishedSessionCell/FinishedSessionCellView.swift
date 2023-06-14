@@ -12,7 +12,7 @@ struct FinishedSessionCellView<ViewModel: FinishedSessionCellViewModelRepresenta
     var body: some View {
 
         Button(action: {
-            viewModel.tapSession()
+            viewModel.action.send(.tapSession)
         }) {
             HStack {
                 VStack(alignment: .leading, spacing: Constants.Cell.verticalSpacing) {

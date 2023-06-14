@@ -175,7 +175,7 @@ class PurchaseService: PurchaseServiceRepresentable {
             
             if let offerings = offerings?.current {
                 products = offerings.availablePackages
-              }
+            }
         }
     }
 }

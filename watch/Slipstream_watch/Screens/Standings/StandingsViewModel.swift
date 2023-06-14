@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 protocol StandingsViewModelRepresentable: ObservableObject {
 
@@ -12,12 +13,18 @@ final class StandingsViewModel: StandingsViewModelRepresentable {
     private var drivers: [Driver]
 
     private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
+    private let navigation: AppNavigationRepresentable
+    private var subscribers = Set<AnyCancellable>()
 
     @Published var state: StandingsViewModel.State
     @Published var selection: StandingsViewModel.Selection
 
-    init(driverAndConstructorService: DriverAndConstructorServiceRepresentable) {
+    init(
+        navigation: AppNavigationRepresentable,
+        driverAndConstructorService: DriverAndConstructorServiceRepresentable
+    ) {
 
+        self.navigation = navigation
         self.selection = .drivers
         self.state = .loading
         self.drivers = []
@@ -45,29 +52,78 @@ final class StandingsViewModel: StandingsViewModelRepresentable {
                     self.drivers = drivers
                     self.constructors = constructors
 
-                    let driverCells: [DriverStandingsCellViewModel] = drivers.enumerated().compactMap { index, driver in
-
-                        guard let constructor = constructors.first(where: { $0.id == driver.constructorId}) else {
-                            return nil
-                        }
-
-                        return DriverStandingsCellViewModel(
-                            driver: driver,
-                            constructor: constructor,
-                            position: index + 1
-                        )
-                    }
-
-                    let constructorCells: [ConstructorStandingsCellViewModel] = constructors.enumerated()
-                        .compactMap { index, constructor in
-
-                            return ConstructorStandingsCellViewModel(constructor: constructor, position: index + 1)
-                        }
-
+                    let driverCells = buildDriverCells()
+                    let constructorCells = buildConstructorCells()
+                    
                     return .results(driverCells, constructorCells)
                 }
             }
             .assign(to: &$state)
+    }
+    
+    private func buildDriverCells() -> [DriverStandingsCellViewModel] {
+        
+        return drivers.enumerated().compactMap { [weak self] index, driver in
+
+            guard let self, let constructor = constructors.first(where: { $0.id == driver.constructorId}) else {
+                return nil
+            }
+            
+            let viewModel = DriverStandingsCellViewModel(
+                driver: driver,
+                constructor: constructor,
+                position: index + 1
+            )
+            
+            viewModel.action
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] action in
+                    guard let self else { return }
+                    
+                    let driverDetailsViewModel = DriverStandingsDetailsViewModel.make(
+                        driverName: "\(viewModel.firstName) \(viewModel.lastName)",
+                        driverID: viewModel.driverID,
+                        constructorID: viewModel.constructor.id
+                    )
+
+                    switch action {
+                    case .openDetailsView:
+                        navigation.action.send(.append(route: .driverStandingDetails(driverDetailsViewModel)))
+                    }
+                }
+                .store(in: &subscribers)
+
+            return viewModel
+        }
+    }
+    
+    private func buildConstructorCells() -> [ConstructorStandingsCellViewModel] {
+        
+        constructors.enumerated()
+            .compactMap { index, constructor in
+                
+                let viewModel: ConstructorStandingsCellViewModel = .init(constructor: constructor, position: index + 1)
+                
+                viewModel.action
+                    .receive(on: DispatchQueue.main)
+                    .sink { [weak self] action in
+                        guard let self else { return }
+                        
+                        let constructorDriverDetailsViewModel: ConstructorStandingsDetailsViewModel =
+                            .make(constructorID: viewModel.constructorID, constructorName: viewModel.name)
+
+                        switch action {
+                        case .openDetailsView:
+                            navigation.action.send(.append(
+                                route: .constructorStandingDetails(constructorDriverDetailsViewModel))
+                            )
+                        }
+                    }
+                    .store(in: &subscribers)
+
+                return viewModel
+            }
+
     }
 }
 
@@ -111,8 +167,11 @@ extension StandingsViewModel {
 
 extension StandingsViewModel {
 
-    static func make() -> StandingsViewModel {
+    static func make(navigation: AppNavigationRepresentable) -> StandingsViewModel {
 
-        .init(driverAndConstructorService: ServiceLocator.shared.driverAndConstructorService)
+        .init(
+            navigation: navigation,
+            driverAndConstructorService: ServiceLocator.shared.driverAndConstructorService
+        )
     }
 }

@@ -268,9 +268,8 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         podium: [String],
         sessionListViewModel: SessionListViewModel
     ) -> LiveEventCardViewModel {
-
-        LiveEventCardViewModel(
-            navigation: navigation,
+        
+        let viewModel: LiveEventCardViewModel = .init(
             id: event.id,
             title: event.title,
             country: event.country,
@@ -278,9 +277,22 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
             timeInterval: timeInterval,
             sessionName: sessionName,
             podium: podium,
-            state: setUpLiveEventState(podium: podium, timeInterval: timeInterval),
-            sessionListViewModel: sessionListViewModel
+            state: setUpLiveEventState(podium: podium, timeInterval: timeInterval)
         )
+        
+        viewModel.action
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                guard let self else { return }
+
+                switch action {
+                case .tapEvent:
+                    navigation.action.send(.append(route: .sessionsList(sessionListViewModel)))
+                }
+            }
+            .store(in: &subscriptions)
+        
+        return viewModel
     }
 
     private func buildUpcomingViewModel(
@@ -291,9 +303,8 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         timeInterval: TimeInterval?,
         sessionListViewModel: SessionListViewModel
     ) -> UpcomingEventCardViewModel {
-
-        UpcomingEventCardViewModel(
-            navigation: navigation,
+        
+        let viewModel: UpcomingEventCardViewModel = .init(
             id: event.id,
             title: event.title,
             country: event.country,
@@ -301,9 +312,22 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
             start: start,
             end: end,
             sessionName: sessionName,
-            timeInterval: timeInterval,
-            sessionListViewModel: sessionListViewModel
+            timeInterval: timeInterval
         )
+        
+        viewModel.action
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                guard let self else { return }
+
+                switch action {
+                case .tapEvent:
+                    navigation.action.send(.append(route: .sessionsList(sessionListViewModel)))
+                }
+            }
+            .store(in: &subscriptions)
+
+        return viewModel
     }
 
     private func buildFinishedCardViewModel(
@@ -311,16 +335,28 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         podium: [String],
         sessionListViewModel: SessionListViewModel
     ) -> FinishedEventCardViewModel {
-
-        FinishedEventCardViewModel(
-            navigation: navigation,
+        
+        let viewModel: FinishedEventCardViewModel = .init(
             id: event.id,
             title: event.title,
             country: event.country,
             round: event.round,
-            podium: podium,
-            sessionListViewModel: sessionListViewModel
+            podium: podium
         )
+        
+        viewModel.action
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                guard let self else { return }
+
+                switch action {
+                case .tapEvent:
+                    navigation.action.send(.append(route: .sessionsList(sessionListViewModel)))
+                }
+            }
+            .store(in: &subscriptions)
+        
+        return viewModel
     }
 
     private func buildCalledOffCardViewModel(event: Event) -> CalledOffEventCardViewModel {

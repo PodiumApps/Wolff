@@ -11,14 +11,10 @@ protocol LiveEventCardViewModelRepresentable: ObservableObject {
     var sessionName: String { get }
     var podium: [String]? { get }
     var state: LiveEventCardViewModel.State { get }
-    var sessionListViewModel: SessionListViewModel { get }
     var action: PassthroughSubject<LiveEventCardViewModel.Action, Never> { get }
 }
 
 final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
-
-    private let navigation: AppNavigationRepresentable
-    private var subscriptions = Set<AnyCancellable>()
 
     var id: Event.ID
     var title: String
@@ -31,10 +27,7 @@ final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
     var state: State
     var action = PassthroughSubject<Action, Never>()
 
-    var sessionListViewModel: SessionListViewModel
-
     init(
-        navigation: AppNavigationRepresentable,
         id: Event.ID,
         title: String,
         country: String,
@@ -42,11 +35,8 @@ final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
         timeInterval: TimeInterval,
         sessionName: String,
         podium: [String]? = nil,
-        state: State,
-        sessionListViewModel: SessionListViewModel
+        state: State
     ) {
-
-        self.navigation = navigation
 
         self.id = id
         self.title = title
@@ -56,24 +46,6 @@ final class LiveEventCardViewModel: LiveEventCardViewModelRepresentable {
         self.sessionName = sessionName
         self.podium = podium
         self.state = state
-        self.sessionListViewModel = sessionListViewModel
-
-        self.setUpBindings()
-    }
-
-    private func setUpBindings() {
-
-        action
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] action in
-                guard let self else { return }
-
-                switch action {
-                case .tapEvent:
-                    navigation.action.send(.append(route: .sessionsList(sessionListViewModel)))
-                }
-            }
-            .store(in: &subscriptions)
     }
 }
 

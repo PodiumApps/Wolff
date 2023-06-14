@@ -32,9 +32,13 @@ struct AppView<ViewModel: AppViewModelRepresentable>: View {
                         SessionStandingsListView(viewModel: viewModel)
                     case .newsDetails(let viewModel):
                         NewsDetailsView(viewModel: viewModel)
+                    case .driverStandingDetails(let viewModel):
+                        DriverStandingsDetailsView(viewModel: viewModel)
+                    case .constructorStandingDetails(let viewModel):
+                        ConstructorStandingsDetailsView(viewModel: viewModel)
                     }
                 }
-                .sheet(isPresented: $viewModel.presentPremiumSheet) {
+                .fullScreenCover(isPresented: $viewModel.presentPremiumSheet) {
                     InAppPurchaseView(viewModel: InAppPurchaseViewModel.make())
                 }
             }

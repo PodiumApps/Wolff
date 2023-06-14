@@ -37,7 +37,7 @@ struct DriverStandingsCellView<ViewModel: DriverStandingsCellViewModelRepresenta
                 Button(action: {
                     viewModel.action.send(.openDetailsView)
                 }) {
-                    Image(systemName: "ellipsis.circle.fill")
+                    Image(systemName: "arrow.right.circle.fill")
                         .padding(5)
                 }
             }
@@ -66,13 +66,13 @@ struct DriverStandingsCellView<ViewModel: DriverStandingsCellViewModelRepresenta
             RoundedRectangle(cornerRadius: Constants.Card.cornerRadius)
                 .fill(constructorStyler.constructor.color.opacity(Constants.Card.backgroundOpacity))
         )
-        .fullScreenCover(isPresented: $viewModel.showDriverDetailsSheet) {
-            DriverStandingsDetailsView(viewModel: DriverStandingsDetailsViewModel.make(
-                driverName: "\(viewModel.firstName) \(viewModel.lastName)",
-                driverID: viewModel.driverID,
-                constructorID: viewModel.constructor.id
-            ))
-        }
+//        .fullScreenCover(isPresented: $viewModel.showDriverDetailsSheet) {
+//            DriverStandingsDetailsView(viewModel: DriverStandingsDetailsViewModel.make(
+//                driverName: "\(viewModel.firstName) \(viewModel.lastName)",
+//                driverID: viewModel.driverID,
+//                constructorID: viewModel.constructor.id
+//            ))
+//        }
     }
 }
 
