@@ -155,6 +155,8 @@
 		CF895A042A263D1F007A0C55 /* ConstructorStandingsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF895A032A263D1F007A0C55 /* ConstructorStandingsCellView.swift */; };
 		CF895A072A264E3C007A0C55 /* ConstructorStandingsDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF895A062A264E3C007A0C55 /* ConstructorStandingsDetailsViewModel.swift */; };
 		CF8EB9D429A77AA700F38158 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8EB9D229A77AA700F38158 /* Event.swift */; };
+		CF98E79F2A3B7AC200FA1703 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98E79E2A3B7AC200FA1703 /* AppDelegate.swift */; };
+		CF98E7A12A3B7AFF00FA1703 /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98E7A02A3B7AFF00FA1703 /* NotificationCenter.swift */; };
 		CFA9339E29F7DC0F007F645E /* TrackInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA9339D29F7DC0F007F645E /* TrackInfoView.swift */; };
 		CFA933A029F7DC1F007F645E /* TrackInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA9339F29F7DC1F007F645E /* TrackInfoViewModel.swift */; };
 		CFA933A229F7DCD8007F645E /* TrackInfoCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA933A129F7DCD8007F645E /* TrackInfoCellView.swift */; };
@@ -325,6 +327,8 @@
 		CF895A032A263D1F007A0C55 /* ConstructorStandingsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorStandingsCellView.swift; sourceTree = "<group>"; };
 		CF895A062A264E3C007A0C55 /* ConstructorStandingsDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorStandingsDetailsViewModel.swift; sourceTree = "<group>"; };
 		CF8EB9D229A77AA700F38158 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		CF98E79E2A3B7AC200FA1703 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CF98E7A02A3B7AFF00FA1703 /* NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
 		CFA9339D29F7DC0F007F645E /* TrackInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfoView.swift; sourceTree = "<group>"; };
 		CFA9339F29F7DC1F007F645E /* TrackInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfoViewModel.swift; sourceTree = "<group>"; };
 		CFA933A129F7DCD8007F645E /* TrackInfoCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfoCellView.swift; sourceTree = "<group>"; };
@@ -480,7 +484,9 @@
 			children = (
 				CFE46F9B29C909D60063805A /* AppViewModel */,
 				420967F3294C9A8D0075D75E /* SlipstreamWatchApp.swift */,
+				CF98E79E2A3B7AC200FA1703 /* AppDelegate.swift */,
 				420967F7294C9A8F0075D75E /* Assets.xcassets */,
+				CF98E7A02A3B7AFF00FA1703 /* NotificationCenter.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -1377,6 +1383,7 @@
 				CF054422294CECCD00A39FE3 /* Driver.swift in Sources */,
 				CFCD655D29DA4E6B0079BE9F /* FinishedSessionCellViewModel.swift in Sources */,
 				422D3D1C2A38736400B60C80 /* InAppPurchaseView.swift in Sources */,
+				CF98E79F2A3B7AC200FA1703 /* AppDelegate.swift in Sources */,
 				CFE46FA529C9B4AD0063805A /* ButtonStyle.swift in Sources */,
 				42BCAD6229BBD7F10089B46A /* Identifier.swift in Sources */,
 				CFE46FA429C9B4A80063805A /* Colors.swift in Sources */,
@@ -1389,6 +1396,7 @@
 				CF4190C22A333EBC008A507A /* NewsDetailsView.swift in Sources */,
 				CF05443C29507D3A00A39FE3 /* News.swift in Sources */,
 				4212E4CC2A2DEAA300456B68 /* PurchaseService.swift in Sources */,
+				CF98E7A12A3B7AFF00FA1703 /* NotificationCenter.swift in Sources */,
 				CF895A042A263D1F007A0C55 /* ConstructorStandingsCellView.swift in Sources */,
 				CF4190C42A333EC9008A507A /* NewsDetailsViewModel.swift in Sources */,
 				CFE46FA129C9B49D0063805A /* ConstructorStyler.swift in Sources */,
