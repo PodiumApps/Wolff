@@ -72,6 +72,7 @@
 		42521D1E29B79D6800000586 /* LiveSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF233DEC29ADFA9900A8D1CD /* LiveSession.swift */; };
 		42521D1F29B79DED00000586 /* ResultCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBD88D6296C1FB50068AB54 /* ResultCardViewModel.swift */; };
 		42521D2029B79E1400000586 /* SessionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2196D295D9EFB00515097 /* SessionResult.swift */; };
+		42759E522A3B2817001679A4 /* InAppPurchaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42759E512A3B2817001679A4 /* InAppPurchaseViewModel.swift */; };
 		42B2196E295D9EFB00515097 /* SessionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2196D295D9EFB00515097 /* SessionResult.swift */; };
 		42B21970295DA4D400515097 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B2196F295DA4D400515097 /* Session.swift */; };
 		42B21972295DDBAB00515097 /* DriverDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B21971295DDBAB00515097 /* DriverDetails.swift */; };
@@ -257,6 +258,7 @@
 		42521D0629B799C700000586 /* SessionStandingsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionStandingsListViewModel.swift; sourceTree = "<group>"; };
 		42521D0729B799C700000586 /* LiveSessionDriverDetailsSheetViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveSessionDriverDetailsSheetViewModel.swift; sourceTree = "<group>"; };
 		42521D0E29B79A3400000586 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		42759E512A3B2817001679A4 /* InAppPurchaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseViewModel.swift; sourceTree = "<group>"; };
 		42B2196D295D9EFB00515097 /* SessionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionResult.swift; sourceTree = "<group>"; };
 		42B2196F295DA4D400515097 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		42B21971295DDBAB00515097 /* DriverDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverDetails.swift; sourceTree = "<group>"; };
@@ -566,6 +568,7 @@
 			isa = PBXGroup;
 			children = (
 				422D3D1B2A38736400B60C80 /* InAppPurchaseView.swift */,
+				42759E512A3B2817001679A4 /* InAppPurchaseViewModel.swift */,
 			);
 			path = IAPs;
 			sourceTree = "<group>";
@@ -1348,6 +1351,7 @@
 				42B219A0295F426200515097 /* Images.swift in Sources */,
 				CF6804062A28DD3500B24AA0 /* ConstructorStandingsDetailsView.swift in Sources */,
 				CFEBC07F29D32D33000A2472 /* TimeIntervalExtension.swift in Sources */,
+				42759E522A3B2817001679A4 /* InAppPurchaseViewModel.swift in Sources */,
 				CFCD655529DA40490079BE9F /* SessionListViewModel.swift in Sources */,
 				42BCAD5C29BB7B000089B46A /* EventService.swift in Sources */,
 				CFE46F9F29C90D0F0063805A /* AppView.swift in Sources */,

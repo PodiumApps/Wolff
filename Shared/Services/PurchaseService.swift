@@ -67,7 +67,6 @@ class PurchaseService: PurchaseServiceRepresentable {
                     
                 case .dismissed:
                     state = .dismissed
-                
                 }
             }
             .store(in: &subscriptions)
@@ -138,7 +137,6 @@ class PurchaseService: PurchaseServiceRepresentable {
             
             checkIfUserIsPremium(showSheet: true)
         }
-        
     }
     
     private func checkIfUserIsPremium(showSheet: Bool) {

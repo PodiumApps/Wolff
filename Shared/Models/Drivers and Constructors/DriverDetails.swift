@@ -2,7 +2,6 @@ import Foundation
 
 struct DriverDetails: Decodable {
 
-
     let placeOfBirth: String
     let podiums: Int
     let allTimePoints: Int
