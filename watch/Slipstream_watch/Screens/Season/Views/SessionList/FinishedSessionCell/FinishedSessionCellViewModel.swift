@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 protocol FinishedSessionCellViewModelRepresentable {
 
@@ -6,36 +7,33 @@ protocol FinishedSessionCellViewModelRepresentable {
     var sessionName: String { get }
     var winners: [String] { get }
 
-    func tapSession() -> Void
+    var action: PassthroughSubject<FinishedSessionCellViewModel.Action, Never> { get }
 }
 
 final class FinishedSessionCellViewModel: FinishedSessionCellViewModelRepresentable {
 
-    private let navigation: SeasonNavigation
-    private let sessionStandingsListViewModel: SessionStandingsListViewModel
-
     var sessionID: Session.ID
     var sessionName: String
     var winners: [String]
+    
+    var action = PassthroughSubject<FinishedSessionCellViewModel.Action, Never>()
 
     init(
-        navigation: SeasonNavigation,
         sessionID: Session.ID,
         session: String,
-        winners: [String],
-        sessionStandingsListViewModel: SessionStandingsListViewModel
+        winners: [String]
     ) {
-
-        self.navigation = navigation
-        self.sessionStandingsListViewModel = sessionStandingsListViewModel
 
         self.sessionID = sessionID
         self.sessionName = session
         self.winners = winners
     }
+}
 
-    func tapSession() {
-
-        navigation.action.send(.goTo(route: .sessionStandingsList(sessionStandingsListViewModel)))
+extension FinishedSessionCellViewModel {
+    
+    enum Action {
+        
+        case tapSession
     }
 }

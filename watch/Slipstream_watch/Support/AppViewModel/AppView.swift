@@ -17,12 +17,32 @@ struct AppView<ViewModel: AppViewModelRepresentable>: View {
         case .loading:
             ProgressView()
         case .results(let seasonViewModel, let standingsViewModel, let newsListViewModel):
-            TabView {
-                SeasonListView(viewModel: seasonViewModel)
-                NewsListView(viewModel: newsListViewModel)
-                StandingsView(viewModel: standingsViewModel)
-                Text("Settings")
+            NavigationStack(path: $viewModel.route) {
+                TabView {
+                    SeasonListView(viewModel: seasonViewModel)
+                    NewsListView(viewModel: newsListViewModel)
+                    StandingsView(viewModel: standingsViewModel)
+                    Text("Settings")
+                }
+                .navigationDestination(for: AppNavigation.Route.self) { route in
+                    switch route {
+                    case .sessionsList(let viewModel):
+                        SessionListView(viewModel: viewModel)
+                    case .sessionStandingsList(let viewModel):
+                        SessionStandingsListView(viewModel: viewModel)
+                    case .newsDetails(let viewModel):
+                        NewsDetailsView(viewModel: viewModel)
+                    case .driverStandingDetails(let viewModel):
+                        DriverStandingsDetailsView(viewModel: viewModel)
+                    case .constructorStandingDetails(let viewModel):
+                        ConstructorStandingsDetailsView(viewModel: viewModel)
+                    }
+                }
+                .fullScreenCover(isPresented: $viewModel.presentPremiumSheet) {
+                    InAppPurchaseView(viewModel: InAppPurchaseViewModel.make())
+                }
             }
+            
         }
     }
 }

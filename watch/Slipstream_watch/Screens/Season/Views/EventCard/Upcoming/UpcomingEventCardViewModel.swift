@@ -13,12 +13,10 @@ protocol UpcomingEventCardViewModelRepresentable: ObservableObject {
     var timeInterval: TimeInterval? { get }
     var state: UpcomingEventCardViewModel.State { get }
     var action: PassthroughSubject<UpcomingEventCardViewModel.Action, Never> { get }
-    var sessionListViewModel: SessionListViewModel { get }
 }
 
 final class UpcomingEventCardViewModel: UpcomingEventCardViewModelRepresentable {
 
-    private let navigation: SeasonNavigation
     private var subscriptions = Set<AnyCancellable>()
 
     var id: Event.ID
@@ -32,11 +30,8 @@ final class UpcomingEventCardViewModel: UpcomingEventCardViewModelRepresentable 
 
     var state: State { setUpUpcomingEventsState() }
     var action = PassthroughSubject<Action, Never>()
-    
-    var sessionListViewModel: SessionListViewModel
 
     init(
-        navigation: SeasonNavigation,
         id: Event.ID,
         title: String,
         country: String,
@@ -44,10 +39,8 @@ final class UpcomingEventCardViewModel: UpcomingEventCardViewModelRepresentable 
         start: String,
         end: String,
         sessionName: String,
-        timeInterval: TimeInterval? = nil,
-        sessionListViewModel: SessionListViewModel
+        timeInterval: TimeInterval? = nil
     ) {
-        self.navigation = navigation
 
         self.id = id
         self.title = title
@@ -57,24 +50,6 @@ final class UpcomingEventCardViewModel: UpcomingEventCardViewModelRepresentable 
         self.end = end
         self.sessionName = sessionName
         self.timeInterval = timeInterval
-        self.sessionListViewModel = sessionListViewModel
-
-        self.setUpBindings()
-    }
-
-    private func setUpBindings() {
-
-        action
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] action in
-                guard let self else { return }
-
-                switch action {
-                case .tapEvent:
-                    navigation.action.send(.goTo(route: .sessionsList(sessionListViewModel)))
-                }
-            }
-            .store(in: &subscriptions)
     }
 
     private func setUpUpcomingEventsState() -> State {

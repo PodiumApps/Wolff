@@ -30,7 +30,7 @@ struct ConstructorStandingsCellView<ViewModel: ConstructorStandingsCellViewModel
                 Button(action: {
                     viewModel.action.send(.openDetailsView)
                 }) {
-                    Image(systemName: "ellipsis.circle.fill")
+                    Image(systemName: "arrow.right.circle.fill")
                 }
             }
 
@@ -58,12 +58,6 @@ struct ConstructorStandingsCellView<ViewModel: ConstructorStandingsCellViewModel
             RoundedRectangle(cornerRadius: Constants.Card.cornerRadius)
                 .fill(constructorStyler.constructor.color.opacity(Constants.Card.backgroundOpacity))
         )
-        .fullScreenCover(isPresented: $viewModel.showConstructorDetailsSheet) {
-            ConstructorStandingsDetailsView(viewModel: ConstructorStandingsDetailsViewModel.make(
-                constructorID: viewModel.constructorID,
-                constructorName: viewModel.fullName
-            ))
-        }
     }
 }
 

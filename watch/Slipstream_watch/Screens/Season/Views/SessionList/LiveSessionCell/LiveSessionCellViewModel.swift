@@ -12,10 +12,6 @@ protocol LiveSessionCellViewModelRepresentable {
 
 final class LiveSessionCellViewModel: LiveSessionCellViewModelRepresentable {
 
-    private let navigation: SeasonNavigation
-    private let sessionStandingsListViewModel: SessionStandingsListViewModel
-    private var subscriptions = Set<AnyCancellable>()
-
     var sessionName: String
     var sessionID: Session.ID
     var podium: [String]
@@ -23,37 +19,16 @@ final class LiveSessionCellViewModel: LiveSessionCellViewModelRepresentable {
     var action = PassthroughSubject<Action, Never>()
 
     init(
-        navigation: SeasonNavigation,
         sessionName: String,
         sessionID: Session.ID,
         podium: [String],
-        state: LiveSessionCellViewModel.State,
-        sessionStandingsListViewModel: SessionStandingsListViewModel
+        state: LiveSessionCellViewModel.State
     ) {
 
-        self.navigation = navigation
         self.sessionName = sessionName
         self.sessionID = sessionID
         self.podium = podium
         self.state = state
-        self.sessionStandingsListViewModel = sessionStandingsListViewModel
-
-        self.setUpBindings()
-    }
-
-    private func setUpBindings() {
-
-        action
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] action in
-                guard let self else { return }
-
-                switch action {
-                case .tapSession:
-                    navigation.action.send(.goTo(route: .sessionStandingsList(sessionStandingsListViewModel)))
-                }
-            }
-            .store(in: &subscriptions)
     }
 }
 

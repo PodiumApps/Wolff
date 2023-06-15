@@ -95,6 +95,9 @@ class UpcomingAndStandingsEventCellViewModel: UpcomingAndStandingsEventCellViewM
                         nextSession: nil
                     )
                 )
+                
+            case .calledOff:
+                break
             case .live:
                 break
             }

@@ -11,38 +11,29 @@ struct NewsListView<ViewModel: NewsListViewModelRepresentable>: View {
 
     var body: some View {
 
-        NavigationStack(path: $viewModel.route) {
-            Group {
-                switch viewModel.state {
-                case .loading:
-                    ProgressView()
-                case .error(let error):
-                    Text(error)
-                case .results(let news):
-                    ScrollView {
-                        LazyVStack(alignment: .leading) {
-                            ForEach(0 ..< news.count, id: \.self) { index in
-                                NewsCellView(viewModel: news[index])
-                                Divider()
-                                    .padding(.vertical, .Spacing.default)
-                            }
-
-                            Text(Localization.NewsListView.sourceLabel)
-                                .font(.Caption2.regular)
-                                .padding(.top, .Spacing.default)
+        Group {
+            switch viewModel.state {
+            case .loading:
+                ProgressView()
+            case .error(let error):
+                Text(error)
+            case .results(let news):
+                ScrollView {
+                    LazyVStack(alignment: .leading) {
+                        ForEach(0 ..< news.count, id: \.self) { index in
+                            NewsCellView(viewModel: news[index])
+                            Divider()
+                                .padding(.vertical, .Spacing.default)
                         }
-                        .padding(.horizontal, .Spacing.default)
+
+                        Text(Localization.NewsListView.sourceLabel)
+                            .font(.Caption2.regular)
+                            .padding(.top, .Spacing.default)
                     }
-                }
-            }
-            .navigationTitle(Localization.NewsListView.screenTitle)
-            .navigationBarTitleDisplayMode(.large)
-            .navigationDestination(for: NewsNavigation.Route.self) { route in
-                switch route {
-                case .newsDetails(let viewModel):
-                    NewsDetailsView(viewModel: viewModel)
+                    .padding(.horizontal, .Spacing.default)
                 }
             }
         }
+        .navigationTitle(Localization.NewsListView.screenTitle)
     }
 }
