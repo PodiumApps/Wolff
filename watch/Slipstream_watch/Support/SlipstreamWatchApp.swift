@@ -1,11 +1,11 @@
 import SwiftUI
+import WatchKit
 import UserNotifications
 
 @main
 struct SlipstreamWatch_Watch_AppApp: App {
 
-    @StateObject var notificationCenter = NotificationCenter()
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @WKExtensionDelegateAdaptor(AppDelegate.self) private var appDelegate
 
     var body: some Scene {
         WindowGroup {

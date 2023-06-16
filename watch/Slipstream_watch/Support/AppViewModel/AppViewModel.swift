@@ -32,19 +32,22 @@ final class AppViewModel: AppViewModelRepresentable {
     private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
     private let purchaseService: PurchaseServiceRepresentable
     private let navigation: AppNavigationRepresentable
+    private let notificationCenter: NotificationCenter
     
     private var subscriptions = Set<AnyCancellable>()
 
     init(
         navigation: AppNavigationRepresentable,
         driverAndConstructorService: DriverAndConstructorServiceRepresentable,
-        purchaseService: PurchaseServiceRepresentable
+        purchaseService: PurchaseServiceRepresentable,
+        notificationCenter: NotificationCenter
     ) {
 
         self.driverAndConstructorService = driverAndConstructorService
         self.purchaseService = purchaseService
         self.navigation = navigation
         self.route = []
+        self.notificationCenter = notificationCenter
 
         load()
     }
@@ -124,7 +127,8 @@ extension AppViewModel {
         .init(
             navigation: AppNavigation(),
             driverAndConstructorService: ServiceLocator.shared.driverAndConstructorService,
-            purchaseService: ServiceLocator.shared.purchaseService
+            purchaseService: ServiceLocator.shared.purchaseService,
+            notificationCenter: NotificationCenter()
         )
     }
 }

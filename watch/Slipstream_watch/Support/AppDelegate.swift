@@ -1,24 +1,31 @@
 import Foundation
-import SwiftUI
+import WatchKit
+import UserNotifications
 
-class AppDelegate: NSObject, UIApplicationDelegate {
+class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelegate {
 
-    func application(
-        _ application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
-    ) -> Bool {
+    func applicationDidFinishLaunching() {
 
-        return true
+        WKExtension.shared().registerForRemoteNotifications()
     }
 
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    func didRegisterForRemoteNotifications(withDeviceToken deviceToken: Data) {
 
-        print(deviceToken)
+        print(deviceToken.description)
     }
 
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithError error: Error) {
+    func didFailToRegisterForRemoteNotificationsWithError(_ error: Error) {
 
         print(error.localizedDescription)
     }
-}
 
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+
+        completionHandler([.badge, .sound, .banner])
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+
+        completionHandler()
+    }
+}
