@@ -6,6 +6,7 @@ class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelega
 
     func applicationDidFinishLaunching() {
 
+        UNUserNotificationCenter.current().delegate = self
         WKExtension.shared().registerForRemoteNotifications()
     }
 
