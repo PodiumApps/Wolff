@@ -73,6 +73,7 @@ extension AppNavigation {
         case newsDetails(NewsDetailsViewModel)
         case driverStandingDetails(DriverStandingsDetailsViewModel)
         case constructorStandingDetails(ConstructorStandingsDetailsViewModel)
+        case activatePremium(InAppPurchaseViewModel)
         
         enum Identifier {
             
@@ -81,6 +82,7 @@ extension AppNavigation {
             case newsDetails
             case driverStandingDetails
             case constructorStandingDetails
+            case activatePremium
         }
 
         var id: Identifier {
@@ -90,17 +92,19 @@ extension AppNavigation {
             case .newsDetails: return .newsDetails
             case .driverStandingDetails: return .driverStandingDetails
             case .constructorStandingDetails: return .constructorStandingDetails
+            case .activatePremium: return .activatePremium
             }
         }
         
         var isPremium: Bool {
             switch id {
             case .newsDetails,
-                 .sessionStandingsList,
                  .driverStandingDetails,
                  .constructorStandingDetails:
                 return false
-            case .sessionsList:
+            case .sessionsList,
+                 .activatePremium,
+                 .sessionStandingsList:
                 return false
             }
         }

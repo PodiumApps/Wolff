@@ -118,6 +118,8 @@
 		CF0834872A1E239500FA61E4 /* DriverStandingsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0834862A1E239500FA61E4 /* DriverStandingsCellView.swift */; };
 		CF08348A2A1E592F00FA61E4 /* DriverStandingsDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0834892A1E592F00FA61E4 /* DriverStandingsDetailsViewModel.swift */; };
 		CF08348C2A1E594000FA61E4 /* DriverStandingsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF08348B2A1E594000FA61E4 /* DriverStandingsDetailsView.swift */; };
+		CF2052322A41F6D8000236F9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2052312A41F6D8000236F9 /* SettingsView.swift */; };
+		CF2052342A41F6E3000236F9 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2052332A41F6E3000236F9 /* SettingsViewModel.swift */; };
 		CF20D362297577D80038A860 /* ConstructorStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D360297577D80038A860 /* ConstructorStyler.swift */; };
 		CF20D36629760C300038A860 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36429760C300038A860 /* Colors.swift */; };
 		CF20D372297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D370297818EE0038A860 /* EventStatusBackgroundStyler.swift */; };
@@ -288,6 +290,8 @@
 		CF0834862A1E239500FA61E4 /* DriverStandingsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverStandingsCellView.swift; sourceTree = "<group>"; };
 		CF0834892A1E592F00FA61E4 /* DriverStandingsDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverStandingsDetailsViewModel.swift; sourceTree = "<group>"; };
 		CF08348B2A1E594000FA61E4 /* DriverStandingsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverStandingsDetailsView.swift; sourceTree = "<group>"; };
+		CF2052312A41F6D8000236F9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		CF2052332A41F6E3000236F9 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		CF20D360297577D80038A860 /* ConstructorStyler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorStyler.swift; sourceTree = "<group>"; };
 		CF20D36429760C300038A860 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandPrixCardViewModel.swift; sourceTree = "<group>"; };
@@ -786,6 +790,15 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		CF2052302A41F659000236F9 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				CF2052312A41F6D8000236F9 /* SettingsView.swift */,
+				CF2052332A41F6E3000236F9 /* SettingsViewModel.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		CF20D3632975DDC60038A860 /* Stylers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1006,10 +1019,11 @@
 		CFE46F9A29C908640063805A /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				422D3D1A2A38735600B60C80 /* IAPs */,
+				CFE46FA929CA07DF0063805A /* Season */,
 				CF68040F2A2B9C1800B24AA0 /* News */,
 				CFE8219F29F9D2BE003334F9 /* Standings */,
-				CFE46FA929CA07DF0063805A /* Season */,
+				CF2052302A41F659000236F9 /* Settings */,
+				422D3D1A2A38735600B60C80 /* IAPs */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1334,6 +1348,7 @@
 				CF233DED29ADFA9900A8D1CD /* LiveSession.swift in Sources */,
 				CF68041C2A2CD8A100B24AA0 /* NewsCellView.swift in Sources */,
 				CF68040B2A29FA2700B24AA0 /* CalledOffEventCardView.swift in Sources */,
+				CF2052342A41F6E3000236F9 /* SettingsViewModel.swift in Sources */,
 				42B21970295DA4D400515097 /* Session.swift in Sources */,
 				CF05443A29507C1000A39FE3 /* Circuit.swift in Sources */,
 				CF37156E29F131C000AF14AA /* SessionStandingsListView.swift in Sources */,
@@ -1402,6 +1417,7 @@
 				CF895A042A263D1F007A0C55 /* ConstructorStandingsCellView.swift in Sources */,
 				CF4190C42A333EC9008A507A /* NewsDetailsViewModel.swift in Sources */,
 				CFE46FA129C9B49D0063805A /* ConstructorStyler.swift in Sources */,
+				CF2052322A41F6D8000236F9 /* SettingsView.swift in Sources */,
 				CF68041A2A2CD88900B24AA0 /* NewsCellViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

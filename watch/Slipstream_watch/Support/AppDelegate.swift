@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 import WatchKit
 import UserNotifications
 
@@ -7,6 +8,33 @@ class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelega
     func applicationDidFinishLaunching() {
 
         UNUserNotificationCenter.current().delegate = self
+
+        let authOptions: UNAuthorizationOptions = [.alert, .sound, .badge]
+
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: authOptions,
+            completionHandler: { authorised, error in
+
+                guard error == nil else { return }
+                
+                if authorised {
+
+                    @AppStorage(UserDefaultsKeys.isActiveSessionStartedNotification.rawValue)
+                    var isActiveSessionStartedNotification: Bool = true
+
+                    @AppStorage(UserDefaultsKeys.isActiveSessionEndedNotification.rawValue)
+                    var isActiveSessionEndedNotification: Bool = true
+                } else {
+
+                    @AppStorage(UserDefaultsKeys.isActiveSessionStartedNotification.rawValue)
+                    var isActiveSessionStartedNotification: Bool = false
+
+                    @AppStorage(UserDefaultsKeys.isActiveSessionEndedNotification.rawValue)
+                    var isActiveSessionEndedNotification: Bool = false
+                }
+            }
+        )
+
         WKExtension.shared().registerForRemoteNotifications()
     }
 

@@ -60,8 +60,9 @@ final class AppViewModel: AppViewModelRepresentable {
         let seasonListViewModel = SeasonListViewModel.make(navigation: navigation)
         let standingsViewModel = StandingsViewModel.make(navigation: navigation)
         let newsListViewModel = NewsListViewModel.make(navigation: navigation)
+        let settingsViewModel = SettingsViewModel.make(navigation: navigation)
 
-        state = .results(seasonListViewModel, standingsViewModel, newsListViewModel)
+        state = .results(seasonListViewModel, standingsViewModel, newsListViewModel, settingsViewModel)
         
         setupBindings()
     }
@@ -116,7 +117,7 @@ extension AppViewModel {
 
         case loading
         case error(String)
-        case results(SeasonListViewModel, StandingsViewModel, NewsListViewModel)
+        case results(SeasonListViewModel, StandingsViewModel, NewsListViewModel, SettingsViewModel)
     }
 }
 
