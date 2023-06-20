@@ -312,6 +312,7 @@
 		CF4190C12A333EBC008A507A /* NewsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailsView.swift; sourceTree = "<group>"; };
 		CF4190C32A333EC9008A507A /* NewsDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailsViewModel.swift; sourceTree = "<group>"; };
 		CF5F07762996CC3D00E79996 /* ScheduleCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCarouselView.swift; sourceTree = "<group>"; };
+		CF64B45F2A41F18300A1CA45 /* Slipstream_watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Slipstream_watch.entitlements; sourceTree = "<group>"; };
 		CF6804052A28DD3500B24AA0 /* ConstructorStandingsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorStandingsDetailsView.swift; sourceTree = "<group>"; };
 		CF6804082A29FA1400B24AA0 /* CalledOffEventCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalledOffEventCardViewModel.swift; sourceTree = "<group>"; };
 		CF68040A2A29FA2700B24AA0 /* CalledOffEventCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalledOffEventCardView.swift; sourceTree = "<group>"; };
@@ -957,6 +958,7 @@
 		CFCEF3FF28380C160063CD47 = {
 			isa = PBXGroup;
 			children = (
+				CF64B45F2A41F18300A1CA45 /* Slipstream_watch.entitlements */,
 				4209685B29537AB60075D75E /* Shared */,
 				4209686D2954CB500075D75E /* iOS */,
 				4209686C2954CB4B0075D75E /* watch */,
@@ -1539,6 +1541,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = Slipstream_watch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"watch/Slipstream_watch/Preview Content\"";
@@ -1569,6 +1572,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = Slipstream_watch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"watch/Slipstream_watch/Preview Content\"";
