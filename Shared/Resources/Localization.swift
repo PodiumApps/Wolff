@@ -174,6 +174,24 @@ internal enum Localization {
       return Localization.tr("Localizable", "session_time.tomorrow", String(describing: p1), fallback: "Tomorrow at %@")
     }
   }
+  internal enum Settings {
+    /// Notifications
+    internal static let notificationsSectionTitle = Localization.tr("Localizable", "settings.notifications_section_title", fallback: "Notifications")
+    /// Premium
+    internal static let premiumSectionTitle = Localization.tr("Localizable", "settings.premium_section_title", fallback: "Premium")
+    /// Purchase Premium
+    internal static let purchasePremiumButtonTitle = Localization.tr("Localizable", "settings.purchase_premium_button_title", fallback: "Purchase Premium")
+    /// Settings
+    internal static let screenTitle = Localization.tr("Localizable", "settings.screen_title", fallback: "Settings")
+    internal enum NotificationLabel {
+      /// Latest News
+      internal static let latestNews = Localization.tr("Localizable", "settings.notification_label.latest_news", fallback: "Latest News")
+      /// Session End
+      internal static let sessionEnd = Localization.tr("Localizable", "settings.notification_label.session_end", fallback: "Session End")
+      /// Session Start
+      internal static let sessionStart = Localization.tr("Localizable", "settings.notification_label.session_start", fallback: "Session Start")
+    }
+  }
   internal enum StandingsListView {
     /// Standings
     internal static let screenTitle = Localization.tr("Localizable", "standings_list_view.screen_title", fallback: "Standings")

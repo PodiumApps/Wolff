@@ -32,13 +32,6 @@ struct LiveDriverStandingCellView<ViewModel: LiveDriverStandingCellViewModelRepr
                             .foregroundColor(constructorStyler.constructor.color)
                     }
                 }
-
-                Button(action: {
-                    viewModel.action.send(.showLiveDriverDetails)
-                }) {
-                    Image(systemName: "ellipsis.circle.fill")
-                        .padding(5)
-                }
             }
 
             HStack {
@@ -67,9 +60,6 @@ struct LiveDriverStandingCellView<ViewModel: LiveDriverStandingCellViewModelRepr
             RoundedRectangle(cornerRadius: Constants.Card.cornerRadius)
                 .fill(constructorStyler.constructor.color.opacity(Constants.Card.backgroundOpacity))
         )
-        .sheet(isPresented: $viewModel.showDriverSessionDetails) {
-            Text("Driver details for session")
-        }
     }
 }
 

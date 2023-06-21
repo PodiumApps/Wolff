@@ -11,26 +11,44 @@ struct SettingsView<ViewModel: SettingsViewModelRepresentable>: View {
 
     var body: some View {
         Form {
-            Section(header: Text("Notifications")) {
-                Toggle("Session Start", isOn: $viewModel.isActiveSessionStartedNotification)
-                Toggle("Session End", isOn: $viewModel.isActiveSessionEndedNotification)
-            }
-
+            
             if !viewModel.isPremium {
-                Section {
+                Section(header: Text(Localization.Settings.premiumSectionTitle)) {
 
                     Button(action: {
                         viewModel.action.send(.showInAppPurchaseView)
                     }) {
                         HStack(alignment: .center) {
                             Spacer()
-                            Text("Purchase Premium").bold()
+                            Text(Localization.Settings.purchasePremiumButtonTitle).bold()
                             Spacer()
                         }
                     }
                 }
             }
+
+            Section(header: Text(Localization.Settings.notificationsSectionTitle)) {
+                Toggle(
+                    Localization.Settings.NotificationLabel.sessionStart,
+                    isOn: $viewModel.isActiveSessionStartedNotification
+                )
+
+                Toggle(
+                    Localization.Settings.NotificationLabel.sessionEnd,
+                    isOn: $viewModel.isActiveSessionEndedNotification
+                )
+
+                Toggle(
+                    Localization.Settings.NotificationLabel.latestNews,
+                    isOn: $viewModel.isActiveLatestNewsNotification
+                )
+            }
         }
-        .navigationTitle("Settings")
+        .navigationTitle(Localization.Settings.screenTitle)
+        .onAppear {
+
+            viewModel.action.send(.registerForRemoteNotifications)
+            print(viewModel.isActiveSessionStartedNotification)
+        }
     }
 }

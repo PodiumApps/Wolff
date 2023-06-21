@@ -5,7 +5,7 @@ import UserNotifications
 
 class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelegate {
 
-    func applicationDidFinishLaunching() {
+    func registerForRemoteNotifications() {
 
         UNUserNotificationCenter.current().delegate = self
 
@@ -16,21 +16,26 @@ class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelega
             completionHandler: { authorised, error in
 
                 guard error == nil else { return }
-                
+
                 if authorised {
 
-                    @AppStorage(UserDefaultsKeys.isActiveSessionStartedNotification.rawValue)
-                    var isActiveSessionStartedNotification: Bool = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 
-                    @AppStorage(UserDefaultsKeys.isActiveSessionEndedNotification.rawValue)
-                    var isActiveSessionEndedNotification: Bool = true
-                } else {
+                        UserDefaults.standard.set(
+                            true,
+                            forKey: UserDefaultsKeys.isActiveSessionStartedNotification.rawValue
+                        )
 
-                    @AppStorage(UserDefaultsKeys.isActiveSessionStartedNotification.rawValue)
-                    var isActiveSessionStartedNotification: Bool = false
+                        UserDefaults.standard.set(
+                            true,
+                            forKey: UserDefaultsKeys.isActiveSessionEndedNotification.rawValue
+                        )
 
-                    @AppStorage(UserDefaultsKeys.isActiveSessionEndedNotification.rawValue)
-                    var isActiveSessionEndedNotification: Bool = false
+                        UserDefaults.standard.set(
+                            true,
+                            forKey: UserDefaultsKeys.isActiveLatestNewsNotification.rawValue
+                        )
+                    }
                 }
             }
         )
@@ -48,7 +53,10 @@ class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelega
         print(error.localizedDescription)
     }
 
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
 
         completionHandler([.badge, .sound, .banner])
     }

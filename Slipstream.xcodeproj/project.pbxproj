@@ -120,6 +120,8 @@
 		CF08348C2A1E594000FA61E4 /* DriverStandingsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF08348B2A1E594000FA61E4 /* DriverStandingsDetailsView.swift */; };
 		CF2052322A41F6D8000236F9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2052312A41F6D8000236F9 /* SettingsView.swift */; };
 		CF2052342A41F6E3000236F9 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2052332A41F6E3000236F9 /* SettingsViewModel.swift */; };
+		CF2052362A42FEE2000236F9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF2052352A42FEE2000236F9 /* StoreKit.framework */; };
+		CF20523A2A433423000236F9 /* LatestNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2052392A433423000236F9 /* LatestNews.swift */; };
 		CF20D362297577D80038A860 /* ConstructorStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D360297577D80038A860 /* ConstructorStyler.swift */; };
 		CF20D36629760C300038A860 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36429760C300038A860 /* Colors.swift */; };
 		CF20D372297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D370297818EE0038A860 /* EventStatusBackgroundStyler.swift */; };
@@ -157,7 +159,6 @@
 		CF895A042A263D1F007A0C55 /* ConstructorStandingsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF895A032A263D1F007A0C55 /* ConstructorStandingsCellView.swift */; };
 		CF895A072A264E3C007A0C55 /* ConstructorStandingsDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF895A062A264E3C007A0C55 /* ConstructorStandingsDetailsViewModel.swift */; };
 		CF8EB9D429A77AA700F38158 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8EB9D229A77AA700F38158 /* Event.swift */; };
-		CF98E7A12A3B7AFF00FA1703 /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98E7A02A3B7AFF00FA1703 /* NotificationCenter.swift */; };
 		CF98E7A42A3CB37F00FA1703 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98E7A32A3CB37F00FA1703 /* AppDelegate.swift */; };
 		CFA9339E29F7DC0F007F645E /* TrackInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA9339D29F7DC0F007F645E /* TrackInfoView.swift */; };
 		CFA933A029F7DC1F007F645E /* TrackInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA9339F29F7DC1F007F645E /* TrackInfoViewModel.swift */; };
@@ -292,6 +293,8 @@
 		CF08348B2A1E594000FA61E4 /* DriverStandingsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverStandingsDetailsView.swift; sourceTree = "<group>"; };
 		CF2052312A41F6D8000236F9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		CF2052332A41F6E3000236F9 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		CF2052352A42FEE2000236F9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS9.4.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
+		CF2052392A433423000236F9 /* LatestNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestNews.swift; sourceTree = "<group>"; };
 		CF20D360297577D80038A860 /* ConstructorStyler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorStyler.swift; sourceTree = "<group>"; };
 		CF20D36429760C300038A860 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandPrixCardViewModel.swift; sourceTree = "<group>"; };
@@ -332,7 +335,6 @@
 		CF895A032A263D1F007A0C55 /* ConstructorStandingsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorStandingsCellView.swift; sourceTree = "<group>"; };
 		CF895A062A264E3C007A0C55 /* ConstructorStandingsDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorStandingsDetailsViewModel.swift; sourceTree = "<group>"; };
 		CF8EB9D229A77AA700F38158 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		CF98E7A02A3B7AFF00FA1703 /* NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
 		CF98E7A32A3CB37F00FA1703 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFA9339D29F7DC0F007F645E /* TrackInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfoView.swift; sourceTree = "<group>"; };
 		CFA9339F29F7DC1F007F645E /* TrackInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfoViewModel.swift; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4212E4CA2A2DEA8600456B68 /* RevenueCat in Frameworks */,
+				CF2052362A42FEE2000236F9 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +464,7 @@
 		420967F2294C9A8D0075D75E /* Slipstream_watch */ = {
 			isa = PBXGroup;
 			children = (
+				CF2052372A43339F000236F9 /* Notifications */,
 				CFE46F9A29C908640063805A /* Screens */,
 				4209681F294C9AA40075D75E /* Support */,
 				420967F9294C9A8F0075D75E /* Preview Content */,
@@ -490,7 +494,6 @@
 				CFE46F9B29C909D60063805A /* AppViewModel */,
 				420967F3294C9A8D0075D75E /* SlipstreamWatchApp.swift */,
 				420967F7294C9A8F0075D75E /* Assets.xcassets */,
-				CF98E7A02A3B7AFF00FA1703 /* NotificationCenter.swift */,
 				CF98E7A32A3CB37F00FA1703 /* AppDelegate.swift */,
 			);
 			path = Support;
@@ -571,6 +574,7 @@
 		4212E4D12A2E38B200456B68 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CF2052352A42FEE2000236F9 /* StoreKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -797,6 +801,14 @@
 				CF2052332A41F6E3000236F9 /* SettingsViewModel.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		CF2052372A43339F000236F9 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				CF2052392A433423000236F9 /* LatestNews.swift */,
+			);
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 		CF20D3632975DDC60038A860 /* Stylers */ = {
@@ -1340,6 +1352,7 @@
 				CF68040D2A2B968D00B24AA0 /* NewsService.swift in Sources */,
 				CF0544462951CB8D00A39FE3 /* DateExtension.swift in Sources */,
 				CF08348A2A1E592F00FA61E4 /* DriverStandingsDetailsViewModel.swift in Sources */,
+				CF20523A2A433423000236F9 /* LatestNews.swift in Sources */,
 				CFA9339E29F7DC0F007F645E /* TrackInfoView.swift in Sources */,
 				42521CA429B0ECBD00000586 /* LiveSessionService.swift in Sources */,
 				42B21982295EEA2600515097 /* SessionResultMock.swift in Sources */,
@@ -1413,7 +1426,6 @@
 				CF4190C22A333EBC008A507A /* NewsDetailsView.swift in Sources */,
 				CF05443C29507D3A00A39FE3 /* News.swift in Sources */,
 				4212E4CC2A2DEAA300456B68 /* PurchaseService.swift in Sources */,
-				CF98E7A12A3B7AFF00FA1703 /* NotificationCenter.swift in Sources */,
 				CF895A042A263D1F007A0C55 /* ConstructorStandingsCellView.swift in Sources */,
 				CF4190C42A333EC9008A507A /* NewsDetailsViewModel.swift in Sources */,
 				CFE46FA129C9B49D0063805A /* ConstructorStyler.swift in Sources */,

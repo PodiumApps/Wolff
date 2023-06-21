@@ -9,6 +9,7 @@ enum UserDefaultsKeys: String {
     case countErrors = "com.tomasmamede.slipstream-count-error"
     case isActiveSessionStartedNotification = "com.tomasmamede.slipstream-session-start-notification"
     case isActiveSessionEndedNotification = "com.tomasmamede.slipstream-session-ended-notification"
+    case isActiveLatestNewsNotification = "com.tomasmamede.slipstream-latest-news-notifications"
 }
 
 @propertyWrapper
