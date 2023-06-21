@@ -45,7 +45,9 @@ class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelega
 
     func didRegisterForRemoteNotifications(withDeviceToken deviceToken: Data) {
 
-        print(deviceToken.description)
+        let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
+        let token = tokenParts.joined()
+        print("Token: \(token)")
     }
 
     func didFailToRegisterForRemoteNotificationsWithError(_ error: Error) {
