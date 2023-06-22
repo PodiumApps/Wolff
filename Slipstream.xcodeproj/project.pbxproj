@@ -164,6 +164,8 @@
 		CFA933A029F7DC1F007F645E /* TrackInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA9339F29F7DC1F007F645E /* TrackInfoViewModel.swift */; };
 		CFA933A229F7DCD8007F645E /* TrackInfoCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA933A129F7DCD8007F645E /* TrackInfoCellView.swift */; };
 		CFA933A529F7DD65007F645E /* TrackInfoCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA933A429F7DD65007F645E /* TrackInfoCellViewModel.swift */; };
+		CFC74A652A4465CA00E04B25 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC74A622A445C0600E04B25 /* NotificationService.swift */; };
+		CFC74A662A44666700E04B25 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC74A622A445C0600E04B25 /* NotificationService.swift */; };
 		CFCD655529DA40490079BE9F /* SessionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCD655429DA40490079BE9F /* SessionListViewModel.swift */; };
 		CFCD655929DA4B390079BE9F /* UpcomingSessionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCD655829DA4B390079BE9F /* UpcomingSessionCellViewModel.swift */; };
 		CFCD655B29DA4BCC0079BE9F /* UpcomingSessionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCD655A29DA4BCC0079BE9F /* UpcomingSessionCellView.swift */; };
@@ -341,6 +343,7 @@
 		CFA933A129F7DCD8007F645E /* TrackInfoCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfoCellView.swift; sourceTree = "<group>"; };
 		CFA933A429F7DD65007F645E /* TrackInfoCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfoCellViewModel.swift; sourceTree = "<group>"; };
 		CFBD88D6296C1FB50068AB54 /* ResultCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCardViewModel.swift; sourceTree = "<group>"; };
+		CFC74A622A445C0600E04B25 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		CFCD655429DA40490079BE9F /* SessionListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListViewModel.swift; sourceTree = "<group>"; };
 		CFCD655829DA4B390079BE9F /* UpcomingSessionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSessionCellViewModel.swift; sourceTree = "<group>"; };
 		CFCD655A29DA4BCC0079BE9F /* UpcomingSessionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSessionCellView.swift; sourceTree = "<group>"; };
@@ -597,6 +600,7 @@
 				42BCAD5B29BB7B000089B46A /* EventService.swift */,
 				4212E4CB2A2DEAA300456B68 /* PurchaseService.swift */,
 				CF68040C2A2B968D00B24AA0 /* NewsService.swift */,
+				CFC74A622A445C0600E04B25 /* NotificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1400,6 +1404,7 @@
 				CF6804132A2BA0FB00B24AA0 /* NewsListViewModel.swift in Sources */,
 				CFE821A129F9D2F0003334F9 /* StandingsViewModel.swift in Sources */,
 				42521CB529B1033600000586 /* LoggerExtension.swift in Sources */,
+				CFC74A652A4465CA00E04B25 /* NotificationService.swift in Sources */,
 				42B21995295EEAC600515097 /* StandingsMock.swift in Sources */,
 				CF277A1E297017C50048DE75 /* Fonts.swift in Sources */,
 				CFEBC07329CCBE58000A2472 /* LiveEventCardView.swift in Sources */,
@@ -1512,6 +1517,7 @@
 				4212E4D02A2E29CC00456B68 /* CombineExtension.swift in Sources */,
 				4207B44E29C216E900AA4758 /* StandingsCellViewModel.swift in Sources */,
 				4207B44929C215F100AA4758 /* CarWithNumberView.swift in Sources */,
+				CFC74A662A44666700E04B25 /* NotificationService.swift in Sources */,
 				42B21986295EEA7200515097 /* DriverMock.swift in Sources */,
 				4207B43B29C18D0200AA4758 /* GrandPrixCardView.swift in Sources */,
 				CF20D372297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */,

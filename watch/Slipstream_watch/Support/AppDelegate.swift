@@ -21,20 +21,7 @@ class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelega
 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 
-                        UserDefaults.standard.set(
-                            true,
-                            forKey: UserDefaultsKeys.isActiveSessionStartedNotification.rawValue
-                        )
-
-                        UserDefaults.standard.set(
-                            true,
-                            forKey: UserDefaultsKeys.isActiveSessionEndedNotification.rawValue
-                        )
-
-                        UserDefaults.standard.set(
-                            true,
-                            forKey: UserDefaultsKeys.isActiveLatestNewsNotification.rawValue
-                        )
+                        ServiceLocator.shared.notificationService.enableAll()
                     }
                 }
             }
@@ -60,10 +47,21 @@ class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelega
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
 
+        let category = NotificationCategory(rawValue: notification.request.content.categoryIdentifier)
+        let activeNotifications = ServiceLocator.shared.notificationService.getNotifications()
+
+        guard activeNotifications != nil else { return }
+
+        if !activeNotifications.contains(category) { return }
+
         completionHandler([.badge, .sound, .banner])
     }
 
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
 
         completionHandler()
     }

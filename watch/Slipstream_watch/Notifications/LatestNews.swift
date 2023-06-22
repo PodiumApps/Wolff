@@ -17,7 +17,6 @@ class LatestNewsNotificationController: WKUserNotificationHostingController<Late
 
 struct LatestNewsNotificationView: View {
 
-    @AppStorage(UserDefaultsKeys.isActiveLatestNewsNotification.rawValue)
     var isActiveLatestNewsNotification: Bool = false
 
     var title: String
