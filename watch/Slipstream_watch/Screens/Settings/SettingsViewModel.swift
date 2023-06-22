@@ -5,22 +5,11 @@ import Combine
 protocol SettingsViewModelRepresentable: ObservableObject {
 
     var action: PassthroughSubject<SettingsViewModel.Action, Never> { get }
-    var isActiveSessionStartedNotification: Bool { get set }
-    var isActiveSessionEndedNotification: Bool { get set }
-    var isActiveLatestNewsNotification: Bool { get set }
+    var notificationCells: [NotificationService.Notification] { get }
     var isPremium: Bool { get }
 }
 
 final class SettingsViewModel: SettingsViewModelRepresentable {
-
-    @AppStorage(UserDefaultsKeys.isActiveSessionStartedNotification.rawValue)
-    var isActiveSessionStartedNotification: Bool = false
-
-    @AppStorage(UserDefaultsKeys.isActiveSessionEndedNotification.rawValue)
-    var isActiveSessionEndedNotification: Bool = false
-
-    @AppStorage(UserDefaultsKeys.isActiveLatestNewsNotification.rawValue)
-    var isActiveLatestNewsNotification: Bool = false
 
     var action = PassthroughSubject<Action, Never>()
     var subscribers = Set<AnyCancellable>()
@@ -30,23 +19,43 @@ final class SettingsViewModel: SettingsViewModelRepresentable {
     private var navigation: AppNavigationRepresentable
 
     private let purchaseService: PurchaseServiceRepresentable
+    private let notificationService: NotificationServiceRepresentable
 
     @Published var isPremium: Bool
+    @Published var notificationCells: [NotificationService.Notification]
 
     init(
         appDelegate: AppDelegate,
         navigation: AppNavigationRepresentable,
-        purchaseService: PurchaseServiceRepresentable
+        purchaseService: PurchaseServiceRepresentable,
+        notificationService: NotificationServiceRepresentable
     ) {
         self.appDelegate = appDelegate
         self.navigation = navigation
+
         self.isPremium = false
+        self.notificationCells = []
+
         self.purchaseService = purchaseService
+        self.notificationService = notificationService
 
         self.setUpBindings()
     }
 
     private func setUpBindings() {
+
+        notificationService.statePublisher
+            .receive(on: DispatchQueue.main)
+            .compactMap { [weak self] notificationService in
+
+                switch notificationService {
+                case .refreshed(let notifications):
+                    return notifications
+                case .refreshing, .error:
+                    return []
+                }
+            }
+            .assign(to: &$notificationCells)
 
         purchaseService.statePublisher
             .receive(on: DispatchQueue.main)
@@ -97,7 +106,8 @@ extension SettingsViewModel {
         SettingsViewModel(
             appDelegate: appDelegate,
             navigation: navigation,
-            purchaseService: ServiceLocator.shared.purchaseService
+            purchaseService: ServiceLocator.shared.purchaseService,
+            notificationService: ServiceLocator.shared.notificationService
         )
     }
 }

@@ -47,12 +47,19 @@ class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelega
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
 
-        let category = NotificationCategory(rawValue: notification.request.content.categoryIdentifier)
-        let activeNotifications = ServiceLocator.shared.notificationService.getNotifications()
+        let category = NotificationService.NotificationCategory(rawValue: notification.request.content.categoryIdentifier)
+        let activeNotifications = ServiceLocator.shared.notificationService.getNotifications()?.compactMap {
+            $0.category
+        }
 
-        guard activeNotifications != nil else { return }
+        guard
+            let activeNotifications = activeNotifications,
+            let category = category
+        else {
+            return
+        }
 
-        if !activeNotifications.contains(category) { return }
+        if activeNotifications.contains(category) { return }
 
         completionHandler([.badge, .sound, .banner])
     }

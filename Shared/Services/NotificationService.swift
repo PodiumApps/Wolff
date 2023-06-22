@@ -1,67 +1,98 @@
 import Foundation
+import OSLog
+import Combine
 
-enum NotificationCategory: String, Codable, CaseIterable {
+protocol NotificationServiceRepresentable: ObservableObject {
 
-    case latestNews = "latest-news"
-    case sessionStart = "session-start"
-    case sessionEnd = "session-end"
+    var statePublisher: Published<NotificationService.State>.Publisher { get }
+    var action: PassthroughSubject<NotificationService.Action, Never> { get }
 }
 
-class NotificationService {
+class NotificationService: NotificationServiceRepresentable {
 
     struct Notification: Codable {
 
         let category: NotificationCategory
+        var isOn: Bool
     }
+
+    var statePublisher: Published<State>.Publisher { $state }
+    @Published var state: State = .refreshing
+
+    var action = PassthroughSubject<Action, Never>()
+    var subscribers = Set<AnyCancellable>()
 
     @UserDefaultsWrapper(key: .notifications)
     private var notifications: [Notification]?
 
-    func getNotifications() -> [Notification]? {
-
-        return notifications
+    init() {
+        
+        setUpBindings()
     }
 
-    func enableAll() {
+    private func setUpBindings() {
 
-        guard notifications == nil else { return }
+        action
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
 
-        var createdNotifications = [Notification]()
+                guard let self else { return }
 
-        for category in NotificationCategory.allCases {
+                switch action {
+                case .fetchAll:
+                    state = .refreshed(getNotifications())
+                }
+            }
+            .store(in: &subscribers)
+    }
 
-           createdNotifications += [
-                .init(category: category),
-                .init(category: category),
-                .init(category: category)
+    private func getNotifications() -> [Notification] {
+
+        guard let persistedNotifications = notifications else {
+
+            let updatedNotifications: [Notification] = [
+                .init(category: .latestNews, isOn: false),
+                .init(category: .sessionStart, isOn: false),
+                .init(category: .sessionEnd, isOn: false)
             ]
-        }
 
-        self.notifications = createdNotifications
-    }
+            notifications = updatedNotifications
 
-    func disable(for category: NotificationCategory) {
+            if updatedNotifications.count == NotificationCategory.allCases.count {
 
-        guard let notifications else { return }
+                return updatedNotifications
+            } else {
 
-        var updatedNotifications = [Notification]()
+                Logger.notificationsService.info("Number of cells does not match number of notification categories.")
+                state = .error
 
-        for notification in notifications {
-
-            if notification.category != category {
-
-                updatedNotifications.append(notification)
+                return []
             }
         }
 
-        self.notifications = updatedNotifications
+        return persistedNotifications
+    }
+}
+
+extension NotificationService {
+
+    enum Action {
+
+        case fetchAll
     }
 
-    func enable(for category: NotificationCategory) {
+    enum State {
 
-        guard let notifications else { return }
+        case refreshing
+        case refreshed([Notification])
+        case error
+    }
 
-        self.notifications?.append(.init(category: category))
+    enum NotificationCategory: String, Codable, CaseIterable {
+
+        case latestNews = "latest-news"
+        case sessionStart = "session-start"
+        case sessionEnd = "session-end"
     }
 }
 

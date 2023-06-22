@@ -28,20 +28,11 @@ struct SettingsView<ViewModel: SettingsViewModelRepresentable>: View {
             }
 
             Section(header: Text(Localization.Settings.notificationsSectionTitle)) {
-                Toggle(
-                    Localization.Settings.NotificationLabel.sessionStart,
-                    isOn: $viewModel.isActiveSessionStartedNotification
-                )
 
-                Toggle(
-                    Localization.Settings.NotificationLabel.sessionEnd,
-                    isOn: $viewModel.isActiveSessionEndedNotification
-                )
+                ForEach(0 ..< $viewModel.notifications.count, id: \.self) { $notification in
 
-                Toggle(
-                    Localization.Settings.NotificationLabel.latestNews,
-                    isOn: $viewModel.isActiveLatestNewsNotification
-                )
+                    Toggle(notification.category, isOn: $notification.isOn)
+                }
             }
         }
         .navigationTitle(Localization.Settings.screenTitle)
