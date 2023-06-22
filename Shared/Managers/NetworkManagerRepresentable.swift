@@ -13,6 +13,7 @@ enum HttpMethod {
     
     case get([URLQueryItem] = [], accessToken: String? = nil)
     case post(body: Encodable, accessToken: String? = nil)
+    case put(body: Encodable, accessToken: String? = nil)
 
     var name: String {
         switch self {
@@ -20,6 +21,8 @@ enum HttpMethod {
             return "GET"
         case .post:
             return "POST"
+        case .put:
+            return "PUT"
         }
     }
 }

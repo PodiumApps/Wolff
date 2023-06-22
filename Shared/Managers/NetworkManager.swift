@@ -10,7 +10,7 @@ final class NetworkManager: NetworkManagerRepresentable {
 
         switch resource.method {
 
-        case .post(let body, let token):
+        case .post(let body, let token), .put(let body, let token):
             request.httpMethod = resource.method.name
             
             do {

@@ -97,9 +97,9 @@ class PurchaseService: PurchaseServiceRepresentable {
         
         do {
             let user = try await networkManager.load(User.createOrUpdate(isPremium: isPremium))
-            Logger.userService.info("\(user.id.string) successfully created or updated")
+            Logger.userService.info("\(user.id.string) with premium \(isPremium) successfully updated")
         } catch {
-            Logger.userService.error("Something went wrong when creating \(self.persistedUserId ?? "")")
+            Logger.userService.error("Something went wrong when creating this user")
         }
     }
     
