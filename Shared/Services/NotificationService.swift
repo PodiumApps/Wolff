@@ -2,7 +2,7 @@ import Foundation
 import OSLog
 import Combine
 
-protocol NotificationServiceRepresentable: ObservableObject {
+protocol NotificationServiceRepresentable {
 
     var statePublisher: Published<NotificationService.State>.Publisher { get }
     var action: PassthroughSubject<NotificationService.Action, Never> { get }

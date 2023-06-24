@@ -1,9 +1,44 @@
 import Foundation
+import Combine
 import SwiftUI
 import WatchKit
 import UserNotifications
 
 class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelegate {
+
+    private var notificationService: NotificationServiceRepresentable
+
+    private var notificationCategories: [NotificationService.NotificationCategory]
+    
+    private var subscribers = Set<AnyCancellable>()
+
+    init(notificationService: NotificationServiceRepresentable = ServiceLocator.shared.notificationService) {
+
+        self.notificationService = notificationService
+        self.notificationCategories = []
+
+        self.setUpBindings()
+    }
+
+    private func setUpBindings() {
+
+        notificationService.statePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] notificationService in
+
+                guard let self else { return }
+
+                switch notificationService {
+                case .refreshed(let notifications):
+
+                    let categories = notifications.compactMap { $0.category }
+                    self.notificationCategories = categories
+                case .refreshing, error:
+                    return
+                }
+            }
+            .assign(to: &subscribers)
+    }
 
     func registerForRemoteNotifications() {
 
@@ -13,15 +48,15 @@ class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelega
 
         UNUserNotificationCenter.current().requestAuthorization(
             options: authOptions,
-            completionHandler: { authorised, error in
+            completionHandler: { [weak self] authorised, error in
 
-                guard error == nil else { return }
+                guard let self, error == nil else { return }
 
                 if authorised {
 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 
-                        ServiceLocator.shared.notificationService.enableAll()
+                        self.notificationService.action.send(.fetchAll)
                     }
                 }
             }
@@ -47,19 +82,13 @@ class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelega
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
 
-        let category = NotificationService.NotificationCategory(rawValue: notification.request.content.categoryIdentifier)
-        let activeNotifications = ServiceLocator.shared.notificationService.getNotifications()?.compactMap {
-            $0.category
-        }
+        let notificationCategory = NotificationService.NotificationCategory(
+            rawValue: notification.request.content.categoryIdentifier
+        )
 
-        guard
-            let activeNotifications = activeNotifications,
-            let category = category
-        else {
-            return
-        }
+        guard let allCategories = notificationCategory else { return }
 
-        if activeNotifications.contains(category) { return }
+        if allCategories.contains(category) { return }
 
         completionHandler([.badge, .sound, .banner])
     }
