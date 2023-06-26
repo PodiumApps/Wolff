@@ -44,6 +44,8 @@ class NotificationService: NotificationServiceRepresentable {
                 switch action {
                 case .registerNotification:
                     registerForRemoteNotifications()
+                case .checkPushNotificationsAuthorizationStatus:
+                    checkPushNotificationStatus()
                 case .fetchAll:
                     state = .refreshed(getNotifications())
                 }
@@ -63,10 +65,10 @@ class NotificationService: NotificationServiceRepresentable {
 
                 if authorised {
 
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.state = .refreshed(self.toggleAllNotifications(to: true))
+                } else {
 
-                        self.notificationService.action.send(.fetchAll)
-                    }
+                    self.state = .refreshed(self.toggleAllNotifications())
                 }
             }
         )
@@ -74,31 +76,57 @@ class NotificationService: NotificationServiceRepresentable {
         WKExtension.shared().registerForRemoteNotifications()
     }
 
+    private func checkPushNotificationStatus() {
+
+        var status: UNAuthorizationStatus = .notDetermined
+
+        let current = UNUserNotificationCenter.current()
+
+        current.getNotificationSettings { [weak self] settings in
+
+            guard let self else { return }
+
+            status = settings.authorizationStatus
+
+            if status == .notDetermined {
+
+                self.registerForRemoteNotifications()
+            } else if status == .denied {
+
+//                self.state = 
+            }
+        }
+    }
+
     private func getNotifications() -> [Notification] {
 
         guard let persistedNotifications = notifications else {
 
-            let updatedNotifications: [Notification] = [
-                .init(category: .latestNews, isOn: false),
-                .init(category: .sessionStart, isOn: false),
-                .init(category: .sessionEnd, isOn: false)
-            ]
-
-            notifications = updatedNotifications
-
-            if updatedNotifications.count == NotificationCategory.allCases.count {
-
-                return updatedNotifications
-            } else {
-
-                Logger.notificationsService.info("Number of cells does not match number of notification categories.")
-                state = .error
-
-                return []
-            }
+            return toggleAllNotifications()
         }
 
         return persistedNotifications
+    }
+
+    private func toggleAllNotifications(to newValue: Bool = false) -> [Notification] {
+
+        let updatedNotifications: [Notification] = [
+            .init(category: .latestNews, isOn: newValue),
+            .init(category: .sessionStart, isOn: newValue),
+            .init(category: .sessionEnd, isOn: newValue)
+        ]
+
+        notifications = updatedNotifications
+
+        if updatedNotifications.count != NotificationCategory.allCases.count {
+
+            Logger.notificationsService.info("Number of cells does not match number of notification categories.")
+            state = .error
+
+            return []
+        }
+
+        return updatedNotifications
     }
 }
 
@@ -108,6 +136,7 @@ extension NotificationService {
 
         case fetchAll
         case registerNotification
+        case checkPushNotificationsAuthorizationStatus
     }
 
     enum State {
@@ -122,6 +151,14 @@ extension NotificationService {
         case latestNews = "latest-news"
         case sessionStart = "session-start"
         case sessionEnd = "session-end"
+
+        var label: String {
+            switch self {
+            case .latestNews: return "Latest News"
+            case .sessionStart: return "Session Start"
+            case .sessionEnd: return "Session End"
+            }
+        }
     }
 }
 

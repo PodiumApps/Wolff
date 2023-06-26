@@ -33,7 +33,7 @@ struct SettingsView<ViewModel: SettingsViewModelRepresentable>: View {
                 ForEach(0 ..< $viewModel.notificationCells.count, id: \.self) { index in
 
                     Toggle(
-                        viewModel.notificationCells[index].category.rawValue,
+                        viewModel.notificationCells[index].category.label,
                         isOn: $viewModel.notificationCells[index].isOn
                     )
                 }

@@ -76,7 +76,7 @@ final class AppViewModel: AppViewModelRepresentable {
         let seasonListViewModel = SeasonListViewModel.make(navigation: navigation)
         let standingsViewModel = StandingsViewModel.make(navigation: navigation)
         let newsListViewModel = NewsListViewModel.make(navigation: navigation)
-        let settingsViewModel = SettingsViewModel.make(appDelegate: appDelegate, navigation: navigation)
+        let settingsViewModel = SettingsViewModel.make(navigation: navigation)
 
         state = .results(seasonListViewModel, standingsViewModel, newsListViewModel, settingsViewModel)
         

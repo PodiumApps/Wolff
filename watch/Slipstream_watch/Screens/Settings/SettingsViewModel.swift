@@ -14,8 +14,6 @@ final class SettingsViewModel: SettingsViewModelRepresentable {
     var action = PassthroughSubject<Action, Never>()
     var subscribers = Set<AnyCancellable>()
 
-    private var appDelegate: AppDelegate
-
     private var navigation: AppNavigationRepresentable
 
     private let purchaseService: PurchaseServiceRepresentable
@@ -24,17 +22,16 @@ final class SettingsViewModel: SettingsViewModelRepresentable {
     @Published var isPremium: Bool
     @Published var notificationCells: [NotificationService.Notification] {
         didSet {
-            
+
+            notificationService.action.send(.checkPushNotificationsAuthorizationStatus)
         }
     }
-
+    
     init(
-        appDelegate: AppDelegate,
         navigation: AppNavigationRepresentable,
         purchaseService: PurchaseServiceRepresentable,
         notificationService: NotificationServiceRepresentable
     ) {
-        self.appDelegate = appDelegate
         self.navigation = navigation
 
         self.isPremium = false
@@ -86,10 +83,8 @@ final class SettingsViewModel: SettingsViewModelRepresentable {
                     let inAppPurchaseViewModel = InAppPurchaseViewModel.make()
                     navigation.action.send(.append(route: .activatePremium(inAppPurchaseViewModel)))
                 case .registerForRemoteNotifications:
-
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                        self.notificationService.registerForRemoteNotifications()
-                    }
+                    
+                    notificationService.action.send(.registerNotification)
                 }
             }
             .store(in: &subscribers)
@@ -107,10 +102,9 @@ extension SettingsViewModel {
 
 extension SettingsViewModel {
 
-    static func make(appDelegate: AppDelegate, navigation: AppNavigationRepresentable) -> SettingsViewModel {
+    static func make(navigation: AppNavigationRepresentable) -> SettingsViewModel {
 
         SettingsViewModel(
-            appDelegate: appDelegate,
             navigation: navigation,
             purchaseService: ServiceLocator.shared.purchaseService,
             notificationService: ServiceLocator.shared.notificationService
