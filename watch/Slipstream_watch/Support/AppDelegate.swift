@@ -6,19 +6,11 @@ import UserNotifications
 
 class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelegate {
 
-    private var notificationService: NotificationServiceRepresentable
+    private var notificationService: NotificationServiceRepresentable = ServiceLocator.shared.notificationService
 
-    private var notificationCategories: [NotificationService.NotificationCategory]
+    private var notificationCategories: [NotificationService.NotificationCategory] = []
     
     private var subscribers = Set<AnyCancellable>()
-
-    init(notificationService: NotificationServiceRepresentable = ServiceLocator.shared.notificationService) {
-
-        self.notificationService = notificationService
-        self.notificationCategories = []
-
-        self.setUpBindings()
-    }
 
     private func setUpBindings() {
 
@@ -33,36 +25,11 @@ class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelega
 
                     let categories = notifications.compactMap { $0.category }
                     self.notificationCategories = categories
-                case .refreshing, error:
+                case .refreshing, .error:
                     return
                 }
             }
-            .assign(to: &subscribers)
-    }
-
-    func registerForRemoteNotifications() {
-
-        UNUserNotificationCenter.current().delegate = self
-
-        let authOptions: UNAuthorizationOptions = [.alert, .sound, .badge]
-
-        UNUserNotificationCenter.current().requestAuthorization(
-            options: authOptions,
-            completionHandler: { [weak self] authorised, error in
-
-                guard let self, error == nil else { return }
-
-                if authorised {
-
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-
-                        self.notificationService.action.send(.fetchAll)
-                    }
-                }
-            }
-        )
-
-        WKExtension.shared().registerForRemoteNotifications()
+            .store(in: &subscribers)
     }
 
     func didRegisterForRemoteNotifications(withDeviceToken deviceToken: Data) {
@@ -86,10 +53,11 @@ class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelega
             rawValue: notification.request.content.categoryIdentifier
         )
 
-        guard let allCategories = notificationCategory else { return }
+        guard let category = notificationCategory else { return }
 
-        if allCategories.contains(category) { return }
+        if notificationCategories.contains(category) { return }
 
+        self.setUpBindings()
         completionHandler([.badge, .sound, .banner])
     }
 

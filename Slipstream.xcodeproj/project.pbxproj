@@ -165,7 +165,6 @@
 		CFA933A229F7DCD8007F645E /* TrackInfoCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA933A129F7DCD8007F645E /* TrackInfoCellView.swift */; };
 		CFA933A529F7DD65007F645E /* TrackInfoCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA933A429F7DD65007F645E /* TrackInfoCellViewModel.swift */; };
 		CFC74A652A4465CA00E04B25 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC74A622A445C0600E04B25 /* NotificationService.swift */; };
-		CFC74A662A44666700E04B25 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC74A622A445C0600E04B25 /* NotificationService.swift */; };
 		CFCD655529DA40490079BE9F /* SessionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCD655429DA40490079BE9F /* SessionListViewModel.swift */; };
 		CFCD655929DA4B390079BE9F /* UpcomingSessionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCD655829DA4B390079BE9F /* UpcomingSessionCellViewModel.swift */; };
 		CFCD655B29DA4BCC0079BE9F /* UpcomingSessionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCD655A29DA4BCC0079BE9F /* UpcomingSessionCellView.swift */; };
@@ -1517,7 +1516,6 @@
 				4212E4D02A2E29CC00456B68 /* CombineExtension.swift in Sources */,
 				4207B44E29C216E900AA4758 /* StandingsCellViewModel.swift in Sources */,
 				4207B44929C215F100AA4758 /* CarWithNumberView.swift in Sources */,
-				CFC74A662A44666700E04B25 /* NotificationService.swift in Sources */,
 				42B21986295EEA7200515097 /* DriverMock.swift in Sources */,
 				4207B43B29C18D0200AA4758 /* GrandPrixCardView.swift in Sources */,
 				CF20D372297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */,

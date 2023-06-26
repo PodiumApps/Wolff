@@ -1,9 +1,12 @@
 import Foundation
 import OSLog
 import Combine
+import WatchKit
+import UserNotifications
 
 protocol NotificationServiceRepresentable {
 
+    var state: NotificationService.State { get }
     var statePublisher: Published<NotificationService.State>.Publisher { get }
     var action: PassthroughSubject<NotificationService.Action, Never> { get }
 }
@@ -39,11 +42,36 @@ class NotificationService: NotificationServiceRepresentable {
                 guard let self else { return }
 
                 switch action {
+                case .registerNotification:
+                    registerForRemoteNotifications()
                 case .fetchAll:
                     state = .refreshed(getNotifications())
                 }
             }
             .store(in: &subscribers)
+    }
+
+    private func registerForRemoteNotifications() {
+
+        let authOptions: UNAuthorizationOptions = [.alert, .sound, .badge]
+
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: authOptions,
+            completionHandler: { [weak self] authorised, error in
+
+                guard let self, error == nil else { return }
+
+                if authorised {
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+
+                        self.notificationService.action.send(.fetchAll)
+                    }
+                }
+            }
+        )
+
+        WKExtension.shared().registerForRemoteNotifications()
     }
 
     private func getNotifications() -> [Notification] {
@@ -79,6 +107,7 @@ extension NotificationService {
     enum Action {
 
         case fetchAll
+        case registerNotification
     }
 
     enum State {

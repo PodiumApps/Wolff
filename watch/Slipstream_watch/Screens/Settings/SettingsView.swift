@@ -3,6 +3,7 @@ import SwiftUI
 struct SettingsView<ViewModel: SettingsViewModelRepresentable>: View {
 
     @ObservedObject private var viewModel: ViewModel
+    @State private var isOn = false
 
     init(viewModel: ViewModel) {
 
@@ -11,7 +12,7 @@ struct SettingsView<ViewModel: SettingsViewModelRepresentable>: View {
 
     var body: some View {
         Form {
-            
+        
             if !viewModel.isPremium {
                 Section(header: Text(Localization.Settings.premiumSectionTitle)) {
 
@@ -29,17 +30,15 @@ struct SettingsView<ViewModel: SettingsViewModelRepresentable>: View {
 
             Section(header: Text(Localization.Settings.notificationsSectionTitle)) {
 
-                ForEach(0 ..< $viewModel.notifications.count, id: \.self) { $notification in
+                ForEach(0 ..< $viewModel.notificationCells.count, id: \.self) { index in
 
-                    Toggle(notification.category, isOn: $notification.isOn)
+                    Toggle(
+                        viewModel.notificationCells[index].category.rawValue,
+                        isOn: $viewModel.notificationCells[index].isOn
+                    )
                 }
             }
         }
         .navigationTitle(Localization.Settings.screenTitle)
-        .onAppear {
-
-            viewModel.action.send(.registerForRemoteNotifications)
-            print(viewModel.isActiveSessionStartedNotification)
-        }
     }
 }

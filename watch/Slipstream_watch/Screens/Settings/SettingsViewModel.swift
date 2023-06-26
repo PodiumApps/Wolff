@@ -5,7 +5,7 @@ import Combine
 protocol SettingsViewModelRepresentable: ObservableObject {
 
     var action: PassthroughSubject<SettingsViewModel.Action, Never> { get }
-    var notificationCells: [NotificationService.Notification] { get }
+    var notificationCells: [NotificationService.Notification] { get set }
     var isPremium: Bool { get }
 }
 
@@ -22,7 +22,11 @@ final class SettingsViewModel: SettingsViewModelRepresentable {
     private let notificationService: NotificationServiceRepresentable
 
     @Published var isPremium: Bool
-    @Published var notificationCells: [NotificationService.Notification]
+    @Published var notificationCells: [NotificationService.Notification] {
+        didSet {
+            
+        }
+    }
 
     init(
         appDelegate: AppDelegate,
@@ -44,9 +48,11 @@ final class SettingsViewModel: SettingsViewModelRepresentable {
 
     private func setUpBindings() {
 
+        notificationService.action.send(.fetchAll)
+
         notificationService.statePublisher
             .receive(on: DispatchQueue.main)
-            .compactMap { [weak self] notificationService in
+            .compactMap { notificationService in
 
                 switch notificationService {
                 case .refreshed(let notifications):
@@ -59,7 +65,7 @@ final class SettingsViewModel: SettingsViewModelRepresentable {
 
         purchaseService.statePublisher
             .receive(on: DispatchQueue.main)
-            .compactMap { [weak self] purchaseService in
+            .compactMap { purchaseService in
 
                 switch purchaseService {
                 case .refreshed(let isPremium, _):
@@ -82,7 +88,7 @@ final class SettingsViewModel: SettingsViewModelRepresentable {
                 case .registerForRemoteNotifications:
 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                        self.appDelegate.registerForRemoteNotifications()
+                        self.notificationService.registerForRemoteNotifications()
                     }
                 }
             }
