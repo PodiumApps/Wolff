@@ -47,7 +47,10 @@ class NotificationService: NotificationServiceRepresentable {
                 case .checkPushNotificationsAuthorizationStatus:
                     checkPushNotificationStatus()
                 case .fetchAll:
-                    state = .refreshed(getNotifications())
+                    state = .refreshed(getNotifications(), false)
+                case .update(let notifications):
+                    self.notifications = notifications
+                    print(notifications)
                 }
             }
             .store(in: &subscribers)
@@ -65,10 +68,10 @@ class NotificationService: NotificationServiceRepresentable {
 
                 if authorised {
 
-                    self.state = .refreshed(self.toggleAllNotifications(to: true))
+                    self.state = .refreshed(self.toggleAllNotifications(to: true), false)
                 } else {
 
-                    self.state = .refreshed(self.toggleAllNotifications())
+                    self.state = .refreshed(self.toggleAllNotifications(), false)
                 }
             }
         )
@@ -88,12 +91,14 @@ class NotificationService: NotificationServiceRepresentable {
 
             status = settings.authorizationStatus
 
-            if status == .notDetermined {
-
+            switch status {
+            case .notDetermined:
                 self.registerForRemoteNotifications()
-            } else if status == .denied {
-
-//                self.state = 
+            case .denied:
+                self.toggleAllNotifications()
+                self.state = .refreshed(getNotifications(), true)
+            case .authorized, .provisional:
+                return
             }
         }
     }
@@ -137,12 +142,13 @@ extension NotificationService {
         case fetchAll
         case registerNotification
         case checkPushNotificationsAuthorizationStatus
+        case update([Notification])
     }
 
     enum State {
 
         case refreshing
-        case refreshed([Notification])
+        case refreshed([Notification], Bool)
         case error
     }
 

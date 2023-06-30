@@ -7,6 +7,7 @@ protocol SettingsViewModelRepresentable: ObservableObject {
     var action: PassthroughSubject<SettingsViewModel.Action, Never> { get }
     var notificationCells: [NotificationService.Notification] { get set }
     var isPremium: Bool { get }
+    var activateNotificationsActionSheet: Bool { get set } 
 }
 
 final class SettingsViewModel: SettingsViewModelRepresentable {
@@ -20,9 +21,11 @@ final class SettingsViewModel: SettingsViewModelRepresentable {
     private let notificationService: NotificationServiceRepresentable
 
     @Published var isPremium: Bool
+    @Published var activateNotificationsActionSheet: Bool
     @Published var notificationCells: [NotificationService.Notification] {
         didSet {
 
+            notificationService.action.send(.update(notificationCells))
             notificationService.action.send(.checkPushNotificationsAuthorizationStatus)
         }
     }
@@ -35,6 +38,7 @@ final class SettingsViewModel: SettingsViewModelRepresentable {
         self.navigation = navigation
 
         self.isPremium = false
+        self.activateNotificationsActionSheet = false
         self.notificationCells = []
 
         self.purchaseService = purchaseService
@@ -52,7 +56,8 @@ final class SettingsViewModel: SettingsViewModelRepresentable {
             .compactMap { notificationService in
 
                 switch notificationService {
-                case .refreshed(let notifications):
+                case .refreshed(let notifications, let showActivateNotificationActionSheet):
+                    self.activateNotificationsActionSheet = showActivateNotificationActionSheet
                     return notifications
                 case .refreshing, .error:
                     return []

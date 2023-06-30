@@ -40,5 +40,9 @@ struct SettingsView<ViewModel: SettingsViewModelRepresentable>: View {
             }
         }
         .navigationTitle(Localization.Settings.screenTitle)
+        .fullScreenCover(isPresented: $viewModel.activateNotificationsActionSheet) {
+            Text("Please activate notifications in the Watch app on your iPhone.")
+                .font(.Body.regular)
+        }
     }
 }

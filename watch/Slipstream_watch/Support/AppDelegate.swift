@@ -21,7 +21,7 @@ class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelega
                 guard let self else { return }
 
                 switch notificationService {
-                case .refreshed(let notifications):
+                case .refreshed(let notifications, _):
 
                     let categories = notifications.compactMap { $0.category }
                     self.notificationCategories = categories
