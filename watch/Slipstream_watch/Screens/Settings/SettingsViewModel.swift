@@ -25,8 +25,8 @@ final class SettingsViewModel: SettingsViewModelRepresentable {
     @Published var notificationCells: [NotificationService.Notification] {
         didSet {
 
-            notificationService.action.send(.update(notificationCells))
             notificationService.action.send(.checkPushNotificationsAuthorizationStatus)
+            notificationService.action.send(.update(notificationCells))
         }
     }
     

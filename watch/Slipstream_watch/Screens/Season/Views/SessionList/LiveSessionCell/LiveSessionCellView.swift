@@ -84,7 +84,7 @@ struct LiveSessionCellView<ViewModel: LiveSessionCellViewModelRepresentable>: Vi
                         .font(.Caption.medium)
                         .lineLimit(Constants.Podium.DriverTicker.lineLimit)
 
-                        Text(podium.count > 0 ? podium[index] : "-")
+                        Text(podium.count == 3 ? podium[index] : "-")
                             .font(.Caption.semibold)
                             .lineLimit(Constants.Podium.DriverTicker.lineLimit)
                     }

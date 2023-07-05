@@ -134,10 +134,10 @@ final class AppViewModel: AppViewModelRepresentable {
                 switch action {
                 case .reloadServices:
 
-                    eventService.action.send(.fetchAll)
-                    driverAndConstructorService.action.send(.fetchAll)
-                    liveSessionService.action.send(.fetchPositions)
-                    newsService.action.send(.fetchAll)
+                    eventService.action.send(.updateAll)
+//                    driverAndConstructorService.action.send(.fetchAll)
+                    liveSessionService.action.send(.updatePositions)
+                    newsService.action.send(.updateAll)
                 }
             }
             .store(in: &subscriptions)

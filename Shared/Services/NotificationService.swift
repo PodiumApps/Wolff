@@ -29,7 +29,7 @@ class NotificationService: NotificationServiceRepresentable {
     private var notifications: [Notification]?
 
     init() {
-        
+
         setUpBindings()
     }
 
@@ -47,10 +47,10 @@ class NotificationService: NotificationServiceRepresentable {
                 case .checkPushNotificationsAuthorizationStatus:
                     checkPushNotificationStatus()
                 case .fetchAll:
-                    state = .refreshed(getNotifications(), false)
+                    state = .refreshed(getNotifications(), showWarning: false)
                 case .update(let notifications):
-                    self.notifications = notifications
-                    print(notifications)
+                    updateNotifications(notifications: notifications)
+                    state = .refreshed(notifications, showWarning: false)
                 }
             }
             .store(in: &subscribers)
@@ -68,20 +68,18 @@ class NotificationService: NotificationServiceRepresentable {
 
                 if authorised {
 
-                    self.state = .refreshed(self.toggleAllNotifications(to: true), false)
+                    self.state = .refreshed(self.toggleAllNotifications(to: true), showWarning: false)
                 } else {
 
-                    self.state = .refreshed(self.toggleAllNotifications(), false)
+                    self.state = .refreshed(self.toggleAllNotifications(), showWarning: false)
                 }
+
+                WKExtension.shared().registerForRemoteNotifications()
             }
         )
-
-        WKExtension.shared().registerForRemoteNotifications()
     }
 
-    private func checkPushNotificationStatus() {
-
-        var status: UNAuthorizationStatus = .notDetermined
+    private func checkPushNotificationStatus() -> Void {
 
         let current = UNUserNotificationCenter.current()
 
@@ -89,14 +87,14 @@ class NotificationService: NotificationServiceRepresentable {
 
             guard let self else { return }
 
-            status = settings.authorizationStatus
+            let status: UNAuthorizationStatus = settings.authorizationStatus
 
             switch status {
             case .notDetermined:
                 self.registerForRemoteNotifications()
             case .denied:
                 self.toggleAllNotifications()
-                self.state = .refreshed(getNotifications(), true)
+                self.state = .refreshed(getNotifications(), showWarning: true)
             case .authorized, .provisional:
                 return
             }
@@ -111,6 +109,13 @@ class NotificationService: NotificationServiceRepresentable {
         }
 
         return persistedNotifications
+    }
+
+    private func updateNotifications(notifications: [Notification]) {
+
+        self.notifications = notifications
+
+        // Post to server.
     }
 
     private func toggleAllNotifications(to newValue: Bool = false) -> [Notification] {
@@ -131,6 +136,9 @@ class NotificationService: NotificationServiceRepresentable {
             return []
         }
 
+
+        updateNotifications(notifications: updatedNotifications)
+
         return updatedNotifications
     }
 }
@@ -148,7 +156,7 @@ extension NotificationService {
     enum State {
 
         case refreshing
-        case refreshed([Notification], Bool)
+        case refreshed([Notification], showWarning: Bool)
         case error
     }
 

@@ -183,6 +183,8 @@ internal enum Localization {
     internal static let purchasePremiumButtonTitle = Localization.tr("Localizable", "settings.purchase_premium_button_title", fallback: "Purchase Premium")
     /// Settings
     internal static let screenTitle = Localization.tr("Localizable", "settings.screen_title", fallback: "Settings")
+    /// Please activate notifications in the Watch app on your iPhone.
+    internal static let warningActivateNotificationsIphone = Localization.tr("Localizable", "settings.warning_activate_notifications_iphone", fallback: "Please activate notifications in the Watch app on your iPhone.")
     internal enum NotificationLabel {
       /// Latest News
       internal static let latestNews = Localization.tr("Localizable", "settings.notification_label.latest_news", fallback: "Latest News")

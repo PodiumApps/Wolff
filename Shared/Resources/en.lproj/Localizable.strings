@@ -105,4 +105,5 @@
 "settings.notification_label.session_start" = "Session Start";
 "settings.notification_label.session_end" = "Session End";
 "settings.notification_label.latest_news" = "Latest News";
+"settings.warning_activate_notifications_iphone" = "Please activate notifications in the Watch app on your iPhone.";
 

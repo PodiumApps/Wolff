@@ -41,6 +41,8 @@ extension User {
     }
     
     static func update(deviceToken: String) -> Resource<Self> {
+
+        print("APNS token: \(deviceToken)")
         
         guard let url = URL(string: "\(Global.url)/v1/user") else { fatalError("URL not found.") }
         
