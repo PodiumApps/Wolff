@@ -130,11 +130,23 @@ internal enum Localization {
     /// Source: fia.com
     internal static let sourceLabel = Localization.tr("Localizable", "news_list_view.source_label", fallback: "Source: fia.com")
   }
+  internal enum Notifications {
+    internal enum Labels {
+      /// Latest News
+      internal static let latestNews = Localization.tr("Localizable", "notifications.labels.latest_news", fallback: "Latest News")
+      /// Session End
+      internal static let sessionEnd = Localization.tr("Localizable", "notifications.labels.session_end", fallback: "Session End")
+      /// Session Start
+      internal static let sessionStart = Localization.tr("Localizable", "notifications.labels.session_start", fallback: "Session Start")
+    }
+  }
   internal enum Podium {
     /// %@.
     internal static func ordinalComponent(_ p1: Any) -> String {
       return Localization.tr("Localizable", "podium.ordinal_component", String(describing: p1), fallback: "%@.")
     }
+    /// Red Flag
+    internal static let redFlag = Localization.tr("Localizable", "podium.red_flag", fallback: "Red Flag")
   }
   internal enum SeasonConstructorStandings {
     /// Team Principle

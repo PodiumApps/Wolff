@@ -137,8 +137,6 @@
 		CF37156E29F131C000AF14AA /* SessionStandingsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF37156D29F131C000AF14AA /* SessionStandingsListView.swift */; };
 		CF37157129F1341500AF14AA /* LiveDriverStandingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF37157029F1341500AF14AA /* LiveDriverStandingCellView.swift */; };
 		CF37157329F1343200AF14AA /* LiveDriverStandingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF37157229F1343200AF14AA /* LiveDriverStandingCellViewModel.swift */; };
-		CF3F870D2A37692900A4E90C /* StoreKitSandbox.storekit in Resources */ = {isa = PBXBuildFile; fileRef = CF3F870C2A37692900A4E90C /* StoreKitSandbox.storekit */; };
-		CF3F870E2A37692900A4E90C /* StoreKitSandbox.storekit in Resources */ = {isa = PBXBuildFile; fileRef = CF3F870C2A37692900A4E90C /* StoreKitSandbox.storekit */; };
 		CF4190C22A333EBC008A507A /* NewsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4190C12A333EBC008A507A /* NewsDetailsView.swift */; };
 		CF4190C42A333EC9008A507A /* NewsDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4190C32A333EC9008A507A /* NewsDetailsViewModel.swift */; };
 		CF5F07772996CC3D00E79996 /* ScheduleCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5F07762996CC3D00E79996 /* ScheduleCarouselView.swift */; };
@@ -159,6 +157,7 @@
 		CF895A042A263D1F007A0C55 /* ConstructorStandingsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF895A032A263D1F007A0C55 /* ConstructorStandingsCellView.swift */; };
 		CF895A072A264E3C007A0C55 /* ConstructorStandingsDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF895A062A264E3C007A0C55 /* ConstructorStandingsDetailsViewModel.swift */; };
 		CF8EB9D429A77AA700F38158 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8EB9D229A77AA700F38158 /* Event.swift */; };
+		CF9073A22A5C1D1B00683389 /* StoreKitSandbox.storekit in Resources */ = {isa = PBXBuildFile; fileRef = CF9073A12A5C1D1B00683389 /* StoreKitSandbox.storekit */; };
 		CF98E7A42A3CB37F00FA1703 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98E7A32A3CB37F00FA1703 /* AppDelegate.swift */; };
 		CFA9339E29F7DC0F007F645E /* TrackInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA9339D29F7DC0F007F645E /* TrackInfoView.swift */; };
 		CFA933A029F7DC1F007F645E /* TrackInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA9339F29F7DC1F007F645E /* TrackInfoViewModel.swift */; };
@@ -316,7 +315,6 @@
 		CF37156D29F131C000AF14AA /* SessionStandingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStandingsListView.swift; sourceTree = "<group>"; };
 		CF37157029F1341500AF14AA /* LiveDriverStandingCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDriverStandingCellView.swift; sourceTree = "<group>"; };
 		CF37157229F1343200AF14AA /* LiveDriverStandingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDriverStandingCellViewModel.swift; sourceTree = "<group>"; };
-		CF3F870C2A37692900A4E90C /* StoreKitSandbox.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreKitSandbox.storekit; sourceTree = "<group>"; };
 		CF4190C12A333EBC008A507A /* NewsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailsView.swift; sourceTree = "<group>"; };
 		CF4190C32A333EC9008A507A /* NewsDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailsViewModel.swift; sourceTree = "<group>"; };
 		CF5F07762996CC3D00E79996 /* ScheduleCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCarouselView.swift; sourceTree = "<group>"; };
@@ -336,6 +334,8 @@
 		CF895A032A263D1F007A0C55 /* ConstructorStandingsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorStandingsCellView.swift; sourceTree = "<group>"; };
 		CF895A062A264E3C007A0C55 /* ConstructorStandingsDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorStandingsDetailsViewModel.swift; sourceTree = "<group>"; };
 		CF8EB9D229A77AA700F38158 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		CF9073A12A5C1D1B00683389 /* StoreKitSandbox.storekit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = StoreKitSandbox.storekit; sourceTree = "<group>"; };
+		CF9073A32A603E9700683389 /* Slipstream-watch-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Slipstream-watch-Info.plist"; sourceTree = "<group>"; };
 		CF98E7A32A3CB37F00FA1703 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFA9339D29F7DC0F007F645E /* TrackInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfoView.swift; sourceTree = "<group>"; };
 		CFA9339F29F7DC1F007F645E /* TrackInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfoViewModel.swift; sourceTree = "<group>"; };
@@ -986,6 +986,7 @@
 		CFCEF3FF28380C160063CD47 = {
 			isa = PBXGroup;
 			children = (
+				CF9073A32A603E9700683389 /* Slipstream-watch-Info.plist */,
 				CF64B45F2A41F18300A1CA45 /* Slipstream_watch.entitlements */,
 				4209685B29537AB60075D75E /* Shared */,
 				4209686D2954CB500075D75E /* iOS */,
@@ -1012,10 +1013,10 @@
 			children = (
 				CFE23F522982EBF200412DB6 /* Localizable.strings */,
 				CFE23F4C2982EB9400412DB6 /* Localization.swift */,
+				CF9073A12A5C1D1B00683389 /* StoreKitSandbox.storekit */,
 				CFE23F542982EDBA00412DB6 /* swiftgen.yml */,
 				42521CA929B0F9FF00000586 /* Global.swift */,
 				42BCAD6129BBD7F10089B46A /* Identifier.swift */,
-				CF3F870C2A37692900A4E90C /* StoreKitSandbox.storekit */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1258,7 +1259,7 @@
 				420967FB294C9A8F0075D75E /* Preview Assets.xcassets in Resources */,
 				CFE23F4F2982EBF200412DB6 /* Localizable.strings in Resources */,
 				CFE23F552982EDBA00412DB6 /* swiftgen.yml in Resources */,
-				CF3F870D2A37692900A4E90C /* StoreKitSandbox.storekit in Resources */,
+				CF9073A22A5C1D1B00683389 /* StoreKitSandbox.storekit in Resources */,
 				420967F8294C9A8F0075D75E /* Assets.xcassets in Resources */,
 				4245E81329B7E9E800843B02 /* Assets.xcassets in Resources */,
 			);
@@ -1276,7 +1277,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4209683B295378A20075D75E /* Preview Assets.xcassets in Resources */,
-				CF3F870E2A37692900A4E90C /* StoreKitSandbox.storekit in Resources */,
 				42096838295378A20075D75E /* Assets.xcassets in Resources */,
 				CFE23F562982EDBA00412DB6 /* swiftgen.yml in Resources */,
 			);
@@ -1580,6 +1580,8 @@
 				DEVELOPMENT_TEAM = Y4642869FB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Slipstream-watch-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1611,6 +1613,8 @@
 				DEVELOPMENT_TEAM = Y4642869FB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Slipstream-watch-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (

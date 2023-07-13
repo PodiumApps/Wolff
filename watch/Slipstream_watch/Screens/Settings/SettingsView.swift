@@ -2,6 +2,8 @@ import SwiftUI
 
 struct SettingsView<ViewModel: SettingsViewModelRepresentable>: View {
 
+    @AppStorage(UserDefaultsKeys.user.rawValue) private var persistedUserId: String?
+
     @ObservedObject private var viewModel: ViewModel
     @State private var isOn = false
 
@@ -36,6 +38,16 @@ struct SettingsView<ViewModel: SettingsViewModelRepresentable>: View {
                         viewModel.notificationCells[index].category.label,
                         isOn: $viewModel.notificationCells[index].isOn
                     )
+                }
+            }
+
+            if let userID = persistedUserId {
+
+                Section(header: Text("User ID")) {
+
+                    Text(userID)
+                        .font(.Caption.regular)
+                        .listRowBackground(Color.clear)
                 }
             }
         }

@@ -6,12 +6,23 @@ import UserNotifications
 
 class AppDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelegate {
 
+    private let networkManager = NetworkManager.shared
+
     func didRegisterForRemoteNotifications(withDeviceToken deviceToken: Data) {
+
+        UNUserNotificationCenter.current().delegate = self
 
         let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
         let token = tokenParts.joined()
 
-        User.update(deviceToken: token)
+        print("APNS Token: \(token)")
+
+        Task { [weak self] in
+
+            guard let self else { return }
+
+            try await networkManager.load(User.update(deviceToken: token))
+        }
     }
 
     func didFailToRegisterForRemoteNotificationsWithError(_ error: Error) {

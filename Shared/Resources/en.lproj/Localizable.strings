@@ -40,6 +40,7 @@
 
 // MARK: - Podium
 "podium.ordinal_component" = "%@.";
+"podium.red_flag" = "Red Flag";
 
 // MARK: - Session
 "session.screen_title" = "Sessions";
@@ -106,4 +107,9 @@
 "settings.notification_label.session_end" = "Session End";
 "settings.notification_label.latest_news" = "Latest News";
 "settings.warning_activate_notifications_iphone" = "Please activate notifications in the Watch app on your iPhone.";
+
+// MARK: - NotificationsLabels
+"notifications.labels.latest_news" = "Latest News";
+"notifications.labels.session_start" = "Session Start";
+"notifications.labels.session_end" = "Session End";
 

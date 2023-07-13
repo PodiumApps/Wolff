@@ -37,24 +37,17 @@ final class AppViewModel: AppViewModelRepresentable {
 
     private let navigation: AppNavigationRepresentable
 
-    private let notificationCenter: NotificationCenter
-
-    private let appDelegate: AppDelegate
-
     var action = PassthroughSubject<Action, Never>()
     private var subscriptions = Set<AnyCancellable>()
 
     init(
-        appDelegate: AppDelegate,
         navigation: AppNavigationRepresentable,
         eventService: EventServiceRepresentable,
         driverAndConstructorService: DriverAndConstructorServiceRepresentable,
         liveSessionService: LiveSessionServiceRepresentable,
         newsService: NewsServiceRepresentable,
-        purchaseService: PurchaseServiceRepresentable,
-        notificationCenter: NotificationCenter
+        purchaseService: PurchaseServiceRepresentable
     ) {
-        self.appDelegate = appDelegate
 
         self.eventService = eventService
         self.driverAndConstructorService = driverAndConstructorService
@@ -63,7 +56,6 @@ final class AppViewModel: AppViewModelRepresentable {
         self.purchaseService = purchaseService
         self.navigation = navigation
         self.route = []
-        self.notificationCenter = notificationCenter
 
         load()
     }
@@ -134,8 +126,6 @@ final class AppViewModel: AppViewModelRepresentable {
                 switch action {
                 case .reloadServices:
 
-                    eventService.action.send(.updateAll)
-//                    driverAndConstructorService.action.send(.fetchAll)
                     liveSessionService.action.send(.updatePositions)
                     newsService.action.send(.updateAll)
                 }
@@ -161,17 +151,15 @@ extension AppViewModel {
 
 extension AppViewModel {
 
-    static func make(appDelegate: AppDelegate) -> AppViewModel {
+    static func make() -> AppViewModel {
 
         .init(
-            appDelegate: appDelegate,
             navigation: AppNavigation(),
             eventService: ServiceLocator.shared.eventService,
             driverAndConstructorService: ServiceLocator.shared.driverAndConstructorService,
             liveSessionService: ServiceLocator.shared.liveSessionService,
             newsService: ServiceLocator.shared.newsService,
-            purchaseService: ServiceLocator.shared.purchaseService,
-            notificationCenter: NotificationCenter()
+            purchaseService: ServiceLocator.shared.purchaseService
         )
     }
 }

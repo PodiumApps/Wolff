@@ -132,5 +132,459 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5A6A9599-EB7C-4574-9ECF-D5CE6CB186F1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Shared/Managers/NetworkManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "load(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4F815C87-0089-4416-9EAC-FF8F7E5A5112"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "watch/Slipstream_watch/Screens/Season/Views/SessionStandingsList/SessionStandingsListViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "buildLiveStandingsCells(standings:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4F815C87-0089-4416-9EAC-FF8F7E5A5112 - f809679ab8cea466"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Slipstream.LiveSession.Position) -&gt; Swift.Optional&lt;Slipstream.LiveDriverStandingCellViewModel&gt; in Slipstream.SessionStandingsListViewModel.buildLiveStandingsCells(standings: Swift.Array&lt;Slipstream.LiveSession.Position&gt;) -&gt; Slipstream.SessionStandingsListViewModel.State"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Screens/Season/Views/SessionStandingsList/SessionStandingsListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "137"
+                  endingLineNumber = "137"
+                  offsetFromSymbolStart = "1024">
+               </Location>
+               <Location
+                  uuid = "4F815C87-0089-4416-9EAC-FF8F7E5A5112 - f809679ab8cea466"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Slipstream.LiveSession.Position) -&gt; Swift.Optional&lt;Slipstream.LiveDriverStandingCellViewModel&gt; in Slipstream.SessionStandingsListViewModel.buildLiveStandingsCells(standings: Swift.Array&lt;Slipstream.LiveSession.Position&gt;) -&gt; Slipstream.SessionStandingsListViewModel.State"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Screens/Season/Views/SessionStandingsList/SessionStandingsListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "137"
+                  endingLineNumber = "137"
+                  offsetFromSymbolStart = "788">
+               </Location>
+               <Location
+                  uuid = "4F815C87-0089-4416-9EAC-FF8F7E5A5112 - f809679ab8cea466"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Slipstream.LiveSession.Position) -&gt; Swift.Optional&lt;Slipstream.LiveDriverStandingCellViewModel&gt; in Slipstream.SessionStandingsListViewModel.buildLiveStandingsCells(standings: Swift.Array&lt;Slipstream.LiveSession.Position&gt;) -&gt; Slipstream.SessionStandingsListViewModel.State"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Screens/Season/Views/SessionStandingsList/SessionStandingsListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "137"
+                  endingLineNumber = "137"
+                  offsetFromSymbolStart = "1300">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D58BFDBE-133B-438E-AE4C-DCE90BB31BA7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "watch/Slipstream_watch/Screens/Season/Views/SessionStandingsList/SessionStandingsListViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "buildFinishedSessionCells(standings:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D58BFDBE-133B-438E-AE4C-DCE90BB31BA7 - f8395c33dbaca330"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Slipstream.SessionStandingsListViewModel.buildFinishedSessionCells(standings: Swift.Array&lt;Slipstream.SessionDetail&gt;) -&gt; Slipstream.SessionStandingsListViewModel.State"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Screens/Season/Views/SessionStandingsList/SessionStandingsListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "153"
+                  endingLineNumber = "153"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  uuid = "D58BFDBE-133B-438E-AE4C-DCE90BB31BA7 - 5a593c7dbabf5c89"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Slipstream.SessionDetail) -&gt; Swift.Optional&lt;Slipstream.LiveDriverStandingCellViewModel&gt; in Slipstream.SessionStandingsListViewModel.buildFinishedSessionCells(standings: Swift.Array&lt;Slipstream.SessionDetail&gt;) -&gt; Slipstream.SessionStandingsListViewModel.State"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Screens/Season/Views/SessionStandingsList/SessionStandingsListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "155"
+                  endingLineNumber = "155"
+                  offsetFromSymbolStart = "100">
+               </Location>
+               <Location
+                  uuid = "D58BFDBE-133B-438E-AE4C-DCE90BB31BA7 - 5a593c7dbabf5c89"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Slipstream.SessionDetail) -&gt; Swift.Optional&lt;Slipstream.LiveDriverStandingCellViewModel&gt; in Slipstream.SessionStandingsListViewModel.buildFinishedSessionCells(standings: Swift.Array&lt;Slipstream.SessionDetail&gt;) -&gt; Slipstream.SessionStandingsListViewModel.State"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Screens/Season/Views/SessionStandingsList/SessionStandingsListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "155"
+                  endingLineNumber = "155"
+                  offsetFromSymbolStart = "52">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4CEC43FD-3CC5-4174-9441-A6BAAE778258"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "watch/Slipstream_watch/Support/AppDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "didRegisterForRemoteNotifications(withDeviceToken:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4CEC43FD-3CC5-4174-9441-A6BAAE778258 - a1c8de466708a66d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Slipstream.AppDelegate.didRegisterForRemoteNotifications(withDeviceToken: Foundation.Data) -&gt; ()"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Support/AppDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "616">
+               </Location>
+               <Location
+                  uuid = "4CEC43FD-3CC5-4174-9441-A6BAAE778258 - a1c8de466708a72b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Slipstream.AppDelegate.didRegisterForRemoteNotifications(withDeviceToken: Foundation.Data) -&gt; ()"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Support/AppDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "496">
+               </Location>
+               <Location
+                  uuid = "4CEC43FD-3CC5-4174-9441-A6BAAE778258 - a1c8de466708a72b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Slipstream.AppDelegate.didRegisterForRemoteNotifications(withDeviceToken: Foundation.Data) -&gt; ()"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Support/AppDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "404">
+               </Location>
+               <Location
+                  uuid = "4CEC43FD-3CC5-4174-9441-A6BAAE778258 - a1c8de466708a72b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Slipstream.AppDelegate.didRegisterForRemoteNotifications(withDeviceToken: Foundation.Data) -&gt; ()"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Support/AppDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "540">
+               </Location>
+               <Location
+                  uuid = "4CEC43FD-3CC5-4174-9441-A6BAAE778258 - a1c8de466708a72b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Slipstream.AppDelegate.didRegisterForRemoteNotifications(withDeviceToken: Foundation.Data) -&gt; ()"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Support/AppDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "316">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DBE0B127-8368-4B9B-AF3F-5FAE8C9650D3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Shared/Services/NotificationService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "checkPushNotificationStatus()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "DBE0B127-8368-4B9B-AF3F-5FAE8C9650D3 - 6ffeecad2485662f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.UNNotificationSettings) -&gt; () in Slipstream.NotificationService.checkPushNotificationStatus() -&gt; ()"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Shared/Services/NotificationService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "97"
+                  endingLineNumber = "97"
+                  offsetFromSymbolStart = "208">
+               </Location>
+               <Location
+                  uuid = "DBE0B127-8368-4B9B-AF3F-5FAE8C9650D3 - 6ffeecad2485662f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.UNNotificationSettings) -&gt; () in Slipstream.NotificationService.checkPushNotificationStatus() -&gt; ()"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Shared/Services/NotificationService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "97"
+                  endingLineNumber = "97"
+                  offsetFromSymbolStart = "260">
+               </Location>
+               <Location
+                  uuid = "DBE0B127-8368-4B9B-AF3F-5FAE8C9650D3 - 6ffeecad2485662f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.UNNotificationSettings) -&gt; () in Slipstream.NotificationService.checkPushNotificationStatus() -&gt; ()"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Shared/Services/NotificationService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "97"
+                  endingLineNumber = "97"
+                  offsetFromSymbolStart = "360">
+               </Location>
+               <Location
+                  uuid = "DBE0B127-8368-4B9B-AF3F-5FAE8C9650D3 - 6ffeecad2485662f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.UNNotificationSettings) -&gt; () in Slipstream.NotificationService.checkPushNotificationStatus() -&gt; ()"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Shared/Services/NotificationService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "97"
+                  endingLineNumber = "97"
+                  offsetFromSymbolStart = "268">
+               </Location>
+               <Location
+                  uuid = "DBE0B127-8368-4B9B-AF3F-5FAE8C9650D3 - 6ffeecad248566a3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.UNNotificationSettings) -&gt; () in Slipstream.NotificationService.checkPushNotificationStatus() -&gt; ()"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Shared/Services/NotificationService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "101"
+                  endingLineNumber = "101"
+                  offsetFromSymbolStart = "628">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "95F132BC-9A75-4D58-8CC4-65DA807A513D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "watch/Slipstream_watch/Support/AppDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "didFailToRegisterForRemoteNotificationsWithError(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "95F132BC-9A75-4D58-8CC4-65DA807A513D - f685e92b0398d292"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Slipstream.AppDelegate.didFailToRegisterForRemoteNotificationsWithError(Swift.Error) -&gt; ()"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Support/AppDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "292">
+               </Location>
+               <Location
+                  uuid = "95F132BC-9A75-4D58-8CC4-65DA807A513D - f685e92b0398d2b3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Slipstream.AppDelegate.didFailToRegisterForRemoteNotificationsWithError(Swift.Error) -&gt; ()"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Support/AppDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "60">
+               </Location>
+               <Location
+                  uuid = "95F132BC-9A75-4D58-8CC4-65DA807A513D - f685e92b0398d2b3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Slipstream.AppDelegate.didFailToRegisterForRemoteNotificationsWithError(Swift.Error) -&gt; ()"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Support/AppDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "95F132BC-9A75-4D58-8CC4-65DA807A513D - a42c292d04c8dfab"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "@objc Slipstream.AppDelegate.didFailToRegisterForRemoteNotificationsWithError(Swift.Error) -&gt; ()"
+                  moduleName = "Slipstream"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/watch/Slipstream_watch/Support/AppDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "76">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5A73905E-1F68-4E7A-844D-2DF3ECC7A16A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "watch/Slipstream_watch/Screens/Season/Views/SessionStandingsList/LiveDriverStandingCell/LiveDriverStandingCellView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "723DF9F2-E48D-43E0-9C28-2908006F8945"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "watch/Slipstream_watch/Screens/Season/Views/SessionList/LiveSessionCell/LiveSessionCellView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "createPodiumSection(podium:status:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7C7B0C37-45A3-466A-A0C3-C6B6EE0357F1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "watch/Slipstream_watch/Screens/Season/SeasonListViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "loadEvents()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

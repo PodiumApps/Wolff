@@ -170,9 +170,10 @@ class PurchaseService: PurchaseServiceRepresentable {
         Purchases.shared.getOfferings { [weak self] offerings, error in
             
             guard let self else { return }
-            
-            if let offerings = offerings?.current {
-                products = offerings.availablePackages
+
+            if let packages = offerings?.offering(identifier: "com.tomasmamede.slipstream.offerings-premium")?
+                .availablePackages {
+                    products = packages
             }
         }
     }

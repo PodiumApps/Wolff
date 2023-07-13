@@ -46,8 +46,8 @@ struct LiveSessionCellView<ViewModel: LiveSessionCellViewModelRepresentable>: Vi
                         Text(Localization.LiveCardCell.aboutToStart.uppercased())
                             .font(.Caption.regular)
                             .foregroundColor(.red)
-                    case .happeningNow(let podium):
-                        createPodiumSection(podium: podium)
+                    case .happeningNow(let podium, let status):
+                        createPodiumSection(podium: podium, status: status)
                     case .betweenOneMinuteAndFourHoursToGo(let date):
                         createDateSection(date: date)
                     }
@@ -70,7 +70,7 @@ struct LiveSessionCellView<ViewModel: LiveSessionCellViewModelRepresentable>: Vi
         }
     }
 
-    private func createPodiumSection(podium: [String]) -> some View {
+    private func createPodiumSection(podium: [String], status: LiveSession.Status) -> some View {
 
         VStack(alignment: .leading, spacing: .Spacing.default) {
 
@@ -89,6 +89,17 @@ struct LiveSessionCellView<ViewModel: LiveSessionCellViewModelRepresentable>: Vi
                             .lineLimit(Constants.Podium.DriverTicker.lineLimit)
                     }
                 }
+            }
+
+            if status.redFlag {
+                Text("Red Flag")
+                    .font(.Caption.semibold)
+                    .foregroundColor(Color.red)
+            }
+
+            if !status.state.isEmpty {
+                Text(status.state)
+                    .font(.Caption.regular)
             }
         }
     }

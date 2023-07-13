@@ -139,8 +139,8 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
             Logger.liveSessionService.info("Refreshing positions list")
             self.liveSessionService.action.send(.updatePositions)
         }
-        
     }
+
     private func buildRowsViewModel(for livePositions: [LiveSession.Position]) -> State {
         
         let standings: [SessionDriverRowViewModel] = livePositions

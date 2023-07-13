@@ -9,9 +9,9 @@ struct SlipstreamWatch_Watch_AppApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AppView(viewModel: AppViewModel.make(appDelegate: appDelegate))
+            AppView(viewModel: AppViewModel.make())
         }
 
-        WKNotificationScene(controller: LatestNewsNotificationController.self, category: "latest-news")
+//        WKNotificationScene(controller: LatestNewsNotificationController.self, category: "latest-news")
     }
 }

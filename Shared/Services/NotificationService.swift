@@ -28,7 +28,11 @@ class NotificationService: NotificationServiceRepresentable {
     @UserDefaultsWrapper(key: .notifications)
     private var notifications: [Notification]?
 
-    init() {
+    private let networkManager: NetworkManagerRepresentable
+
+    init(networkManager: NetworkManagerRepresentable) {
+
+        self.networkManager = networkManager
 
         setUpBindings()
     }
@@ -69,12 +73,11 @@ class NotificationService: NotificationServiceRepresentable {
                 if authorised {
 
                     self.state = .refreshed(self.toggleAllNotifications(to: true), showWarning: false)
+                    WKExtension.shared().registerForRemoteNotifications()
                 } else {
 
                     self.state = .refreshed(self.toggleAllNotifications(), showWarning: false)
                 }
-
-                WKExtension.shared().registerForRemoteNotifications()
             }
         )
     }
@@ -115,7 +118,25 @@ class NotificationService: NotificationServiceRepresentable {
 
         self.notifications = notifications
 
-        // Post to server.
+        guard
+            let latestNews = notifications.first(where: { $0.category == .latestNews }),
+            let sessionStart = notifications.first(where: { $0.category == .sessionStart }),
+            let sessionEnd = notifications.first(where: { $0.category == .sessionEnd })
+        else {
+            return
+        }
+
+
+        Task { [weak self] in
+
+            guard let self else { return }
+
+            try await networkManager.load(User.update(
+                latestNews: latestNews.isOn,
+                sessionStart: sessionStart.isOn,
+                sessionEnd: sessionEnd.isOn
+            ))
+        }
     }
 
     private func toggleAllNotifications(to newValue: Bool = false) -> [Notification] {
@@ -126,8 +147,6 @@ class NotificationService: NotificationServiceRepresentable {
             .init(category: .sessionEnd, isOn: newValue)
         ]
 
-        notifications = updatedNotifications
-
         if updatedNotifications.count != NotificationCategory.allCases.count {
 
             Logger.notificationsService.info("Number of cells does not match number of notification categories.")
@@ -135,7 +154,6 @@ class NotificationService: NotificationServiceRepresentable {
 
             return []
         }
-
 
         updateNotifications(notifications: updatedNotifications)
 
@@ -168,9 +186,9 @@ extension NotificationService {
 
         var label: String {
             switch self {
-            case .latestNews: return "Latest News"
-            case .sessionStart: return "Session Start"
-            case .sessionEnd: return "Session End"
+            case .latestNews: return Localization.Notifications.Labels.latestNews
+            case .sessionStart: return Localization.Notifications.Labels.sessionStart
+            case .sessionEnd: return Localization.Notifications.Labels.sessionEnd
             }
         }
     }
@@ -180,6 +198,6 @@ extension NotificationService {
 
     static func make() -> NotificationService {
 
-        .init()
+        .init(networkManager: NetworkManager.shared)
     }
 }
