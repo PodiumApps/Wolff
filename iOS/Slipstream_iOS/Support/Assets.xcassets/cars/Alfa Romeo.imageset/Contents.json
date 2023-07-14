@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Alfa Romeo.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

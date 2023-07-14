@@ -1,0 +1,7 @@
+strings:
+  inputs: ${PROJECT_DIR}/Shared/Resources/en.lproj
+  outputs:
+    - templateName: structured-swift5
+      output: ${PROJECT_DIR}/Shared/Resources/Localization.swift
+      params:
+        enumName: Localization

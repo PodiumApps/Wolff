@@ -1,0 +1,115 @@
+// MARK: - GrandPrixCard
+"grand_prix_card.top.round" = "Round %@";
+"grand_prix_card.label.time" = "in %@";
+
+// MARK: - SessionDriverList
+"session_driver_list.error.text" = "Something went wrong";
+"session_driver_list.error.cta" = "Refresh";
+
+// MARK: - LiveCardCell
+"live_card_cell.title.now" = "HAPPENING NOW";
+"live_card_cell.title.soon" = "HAPPENING SOON";
+"live_card_cell.top.round" = "Round %@";
+"live_card_cell.about_to_start" = "About to Start";
+"live_card_cell.time.hours" = "HOURS";
+"live_card_cell.time.hour" = "HOUR";
+"live_card_cell.time.minutes" = "MINUTES";
+"live_card_cell.time.minute" = "MINUTE";
+"live_card_cell.time.seconds" = "SECONDS";
+"live_card_cell.time.left" = "left";
+"live_card_cell.to" = "TO";
+
+// MARK: - FinishedCard
+"finished_card_cell.finished" = "FINISHED";
+
+// MARK: - SeasonListView
+"season_list_view.navigation.title" = "Season 2023";
+
+
+// MARK: - UpcomingAndStandingsCell
+"upcoming_and_standings_cell.segment.upcoming" = "Upcoming";
+"upcoming_and_standings_cell.segment.past" = "Past";
+"upcoming_and_standings_cell.standings.title" = "Current Standings";
+
+// MARK: - FinishedSessionCell
+"finished_session_cell.winner" = "Winner:";
+
+// MARK: - SessionTime
+"session_time.today" = "Today at %@";
+"session_time.tomorrow" = "Tomorrow at %@";
+
+// MARK: - Podium
+"podium.ordinal_component" = "%@.";
+"podium.red_flag" = "Red Flag";
+
+// MARK: - Session
+"session.screen_title" = "Sessions";
+
+// MARK: - LiveDriverStandingsCell
+"driver_standings_cell.time_gap" = "Time / Gap";
+"driver_standings_cell.leader" = "Leader";
+"driver_standings_cell.tyre" = "Tyre";
+"driver_standings_cell.car_number" = "Car %@";
+
+// MARK: - SeasonDriverStandingsCell
+"season_driver_standings.points" = "Points";
+"season_driver_standings.car_no" = "Car";
+
+// MARK: - SeasonConstructorStandingsCell
+"season_constructor_standings.team_principle" = "Team Principle";
+
+// MARK: - TrackInfo
+"track_info.screen_title" = "Track Info";
+"track_info.first_grand_prix" = "First Grand Prix";
+"track_info.lap_record" = "Lap Record";
+"track_info.track_length" = "Track Length";
+"track_info.track_length_value" = "%@ km";
+"track_info.race_distance" = "Race Distance";
+"track_info.race_distance_value" = "%@ km";
+
+// MARK: - DriverDetails
+"driver_details.place_of_birth" = "Place of Birth";
+"driver_details.championships" = "Championships";
+"driver_details.number_of_podiums" = "Number of Podiums";
+"driver_details.grand_prix_entered" = "Grand Prix Entered";
+"driver_details.highest_grid_position" = "Highest Grid Position";
+"driver_details.all_time_points" = "All Time Points";
+
+// MARK: - StandingsListView
+"standings_list_view.screen_title" = "Standings";
+"standings_list_view.selection_label" = "Selection";
+
+// MARK: - InAppPurchaseView
+"in_app_purchase_view.title" = "Slipstream Premium";
+"in_app_purchase_view.body" = "Unlock full access to live information during the race and navigate the app freely for more exclusive content.";
+"in_app_purchase_view.body.loading" = "We are loading your amazing subscription. Thanks for trusting us!";
+"in_app_purchase_view.body.success" = "Thanks for trusting us! We hope you enjoy your subscription.";
+"in_app_purchase_view.body.error" = "Something went wrong. Please try again to access all live information and get more exclusive content.";
+"in_app_purchase_view.button.restore" = "Restore Purchases";
+"in_app_purchase_view.subscription_period.day" = "Day";
+"in_app_purchase_view.subscription_period.days" = "Days";
+"in_app_purchase_view.subscription_period.week" = "Week";
+"in_app_purchase_view.subscription_period.weeks" = "Weeks";
+"in_app_purchase_view.subscription_period.month" = "Month";
+"in_app_purchase_view.subscription_period.months" = "Months";
+"in_app_purchase_view.subscription_period.year" = "Year";
+
+// MARK: - NewsListView
+"news_list_view.screen_title" = "News";
+"news_list_view.source_label" = "Source: fia.com";
+
+// MARK: - SettingsView
+"settings.screen_title" = "Settings";
+"settings.purchase_premium_button_title" = "Purchase Premium";
+"settings.notifications_section_title" = "Notifications";
+"settings.premium_section_title" = "Premium";
+"settings.notification_label.session_start" = "Session Start";
+"settings.notification_label.session_end" = "Session End";
+"settings.notification_label.latest_news" = "Latest News";
+"settings.warning_activate_notifications_iphone" = "Please activate notifications in the Watch app on your iPhone.";
+
+// MARK: - NotificationsLabels
+"notifications.labels.latest_news" = "Latest News";
+"notifications.labels.session_start" = "Session Start";
+"notifications.labels.session_end" = "Session End";
+
