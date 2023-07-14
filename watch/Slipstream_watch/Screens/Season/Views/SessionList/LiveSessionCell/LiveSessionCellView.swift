@@ -46,8 +46,8 @@ struct LiveSessionCellView<ViewModel: LiveSessionCellViewModelRepresentable>: Vi
                         Text(Localization.LiveCardCell.aboutToStart.uppercased())
                             .font(.Caption.regular)
                             .foregroundColor(.red)
-                    case .happeningNow(let podium):
-                        createPodiumSection(podium: podium)
+                    case .happeningNow(let podium, let status):
+                        createPodiumSection(podium: podium, status: status)
                     case .betweenOneMinuteAndFourHoursToGo(let date):
                         createDateSection(date: date)
                     }
@@ -70,12 +70,12 @@ struct LiveSessionCellView<ViewModel: LiveSessionCellViewModelRepresentable>: Vi
         }
     }
 
-    private func createPodiumSection(podium: [String]) -> some View {
+    private func createPodiumSection(podium: [String], status: LiveSession.Status) -> some View {
 
         VStack(alignment: .leading, spacing: .Spacing.default) {
 
             HStack(alignment: .bottom, spacing: .Spacing.default2) {
-                ForEach(0 ..< podium.count, id: \.self) { index in
+                ForEach(0 ..< 3, id: \.self) { index in
                     HStack(alignment: .bottom, spacing: .Spacing.default) {
                         HStack(spacing: .zero) {
                             Text(Localization.Podium.ordinalComponent(index + 1))
@@ -84,11 +84,22 @@ struct LiveSessionCellView<ViewModel: LiveSessionCellViewModelRepresentable>: Vi
                         .font(.Caption.medium)
                         .lineLimit(Constants.Podium.DriverTicker.lineLimit)
 
-                        Text(podium[index])
+                        Text(podium.count == 3 ? podium[index] : "-")
                             .font(.Caption.semibold)
                             .lineLimit(Constants.Podium.DriverTicker.lineLimit)
                     }
                 }
+            }
+
+            if status.redFlag {
+                Text("Red Flag")
+                    .font(.Caption.semibold)
+                    .foregroundColor(Color.red)
+            }
+
+            if !status.state.isEmpty {
+                Text(status.state)
+                    .font(.Caption.regular)
             }
         }
     }

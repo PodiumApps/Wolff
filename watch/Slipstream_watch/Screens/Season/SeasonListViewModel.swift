@@ -160,35 +160,35 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
         liveEventTimer =
         Timer.scheduledTimer(withTimeInterval: triggerInterval, repeats: true) { [weak self, timeInterval] _ in
 
-                guard let self else { return }
+            guard let self else { return }
 
-                if timeInterval < .minuteInterval {
-                    self.liveEventService.action.send(.updatePositions)
-                    liveEventTimer?.invalidate()
-                } else {
+            if timeInterval < .minuteInterval {
 
-                    guard
-                        case .results(var cells, let indexFirstToAppear) = self.state,
-                        let index = cells.firstIndex(where: { $0.id == .live }),
-                        case .live(let timeInterval, let sessionName) = events[index].status
-                    else {
-                        return
-                    }
+                self.liveEventService.action.send(.updatePositions)
+            } else {
 
-                    let sessionListViewModel = SessionListViewModel.make(event: events[index], navigation: navigation)
-
-                    cells[index] = .live(
-                        buildLiveViewModel(
-                            event: events[index],
-                            timeInterval: timeInterval,
-                            sessionName: sessionName,
-                            podium: [],
-                            sessionListViewModel: sessionListViewModel
-                        )
-                    )
-
-                    state = .results(cells: cells, indexFirstToAppear: indexFirstToAppear)
+                guard
+                    case .results(var cells, let indexFirstToAppear) = self.state,
+                    let index = cells.firstIndex(where: { $0.id == .live }),
+                    case .live(let timeInterval, let sessionName) = events[index].status
+                else {
+                    return
                 }
+
+                let sessionListViewModel = SessionListViewModel.make(event: events[index], navigation: navigation)
+
+                cells[index] = .live(
+                    buildLiveViewModel(
+                        event: events[index],
+                        timeInterval: timeInterval,
+                        sessionName: sessionName,
+                        podium: [],
+                        sessionListViewModel: sessionListViewModel
+                    )
+                )
+
+                state = .results(cells: cells, indexFirstToAppear: indexFirstToAppear)
+            }
         }
     }
 

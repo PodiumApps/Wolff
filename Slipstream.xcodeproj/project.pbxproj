@@ -118,6 +118,10 @@
 		CF0834872A1E239500FA61E4 /* DriverStandingsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0834862A1E239500FA61E4 /* DriverStandingsCellView.swift */; };
 		CF08348A2A1E592F00FA61E4 /* DriverStandingsDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0834892A1E592F00FA61E4 /* DriverStandingsDetailsViewModel.swift */; };
 		CF08348C2A1E594000FA61E4 /* DriverStandingsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF08348B2A1E594000FA61E4 /* DriverStandingsDetailsView.swift */; };
+		CF2052322A41F6D8000236F9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2052312A41F6D8000236F9 /* SettingsView.swift */; };
+		CF2052342A41F6E3000236F9 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2052332A41F6E3000236F9 /* SettingsViewModel.swift */; };
+		CF2052362A42FEE2000236F9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF2052352A42FEE2000236F9 /* StoreKit.framework */; };
+		CF20523A2A433423000236F9 /* LatestNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2052392A433423000236F9 /* LatestNews.swift */; };
 		CF20D362297577D80038A860 /* ConstructorStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D360297577D80038A860 /* ConstructorStyler.swift */; };
 		CF20D36629760C300038A860 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D36429760C300038A860 /* Colors.swift */; };
 		CF20D372297818EE0038A860 /* EventStatusBackgroundStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF20D370297818EE0038A860 /* EventStatusBackgroundStyler.swift */; };
@@ -133,8 +137,6 @@
 		CF37156E29F131C000AF14AA /* SessionStandingsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF37156D29F131C000AF14AA /* SessionStandingsListView.swift */; };
 		CF37157129F1341500AF14AA /* LiveDriverStandingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF37157029F1341500AF14AA /* LiveDriverStandingCellView.swift */; };
 		CF37157329F1343200AF14AA /* LiveDriverStandingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF37157229F1343200AF14AA /* LiveDriverStandingCellViewModel.swift */; };
-		CF3F870D2A37692900A4E90C /* StoreKitSandbox.storekit in Resources */ = {isa = PBXBuildFile; fileRef = CF3F870C2A37692900A4E90C /* StoreKitSandbox.storekit */; };
-		CF3F870E2A37692900A4E90C /* StoreKitSandbox.storekit in Resources */ = {isa = PBXBuildFile; fileRef = CF3F870C2A37692900A4E90C /* StoreKitSandbox.storekit */; };
 		CF4190C22A333EBC008A507A /* NewsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4190C12A333EBC008A507A /* NewsDetailsView.swift */; };
 		CF4190C42A333EC9008A507A /* NewsDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4190C32A333EC9008A507A /* NewsDetailsViewModel.swift */; };
 		CF5F07772996CC3D00E79996 /* ScheduleCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5F07762996CC3D00E79996 /* ScheduleCarouselView.swift */; };
@@ -155,10 +157,13 @@
 		CF895A042A263D1F007A0C55 /* ConstructorStandingsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF895A032A263D1F007A0C55 /* ConstructorStandingsCellView.swift */; };
 		CF895A072A264E3C007A0C55 /* ConstructorStandingsDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF895A062A264E3C007A0C55 /* ConstructorStandingsDetailsViewModel.swift */; };
 		CF8EB9D429A77AA700F38158 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8EB9D229A77AA700F38158 /* Event.swift */; };
+		CF9073A22A5C1D1B00683389 /* StoreKitSandbox.storekit in Resources */ = {isa = PBXBuildFile; fileRef = CF9073A12A5C1D1B00683389 /* StoreKitSandbox.storekit */; };
+		CF98E7A42A3CB37F00FA1703 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98E7A32A3CB37F00FA1703 /* AppDelegate.swift */; };
 		CFA9339E29F7DC0F007F645E /* TrackInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA9339D29F7DC0F007F645E /* TrackInfoView.swift */; };
 		CFA933A029F7DC1F007F645E /* TrackInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA9339F29F7DC1F007F645E /* TrackInfoViewModel.swift */; };
 		CFA933A229F7DCD8007F645E /* TrackInfoCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA933A129F7DCD8007F645E /* TrackInfoCellView.swift */; };
 		CFA933A529F7DD65007F645E /* TrackInfoCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA933A429F7DD65007F645E /* TrackInfoCellViewModel.swift */; };
+		CFC74A652A4465CA00E04B25 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC74A622A445C0600E04B25 /* NotificationService.swift */; };
 		CFCD655529DA40490079BE9F /* SessionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCD655429DA40490079BE9F /* SessionListViewModel.swift */; };
 		CFCD655929DA4B390079BE9F /* UpcomingSessionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCD655829DA4B390079BE9F /* UpcomingSessionCellViewModel.swift */; };
 		CFCD655B29DA4BCC0079BE9F /* UpcomingSessionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCD655A29DA4BCC0079BE9F /* UpcomingSessionCellView.swift */; };
@@ -286,6 +291,10 @@
 		CF0834862A1E239500FA61E4 /* DriverStandingsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverStandingsCellView.swift; sourceTree = "<group>"; };
 		CF0834892A1E592F00FA61E4 /* DriverStandingsDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverStandingsDetailsViewModel.swift; sourceTree = "<group>"; };
 		CF08348B2A1E594000FA61E4 /* DriverStandingsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverStandingsDetailsView.swift; sourceTree = "<group>"; };
+		CF2052312A41F6D8000236F9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		CF2052332A41F6E3000236F9 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		CF2052352A42FEE2000236F9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS9.4.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
+		CF2052392A433423000236F9 /* LatestNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestNews.swift; sourceTree = "<group>"; };
 		CF20D360297577D80038A860 /* ConstructorStyler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorStyler.swift; sourceTree = "<group>"; };
 		CF20D36429760C300038A860 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		CF20D3672976FBD50038A860 /* GrandPrixCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrandPrixCardViewModel.swift; sourceTree = "<group>"; };
@@ -306,10 +315,10 @@
 		CF37156D29F131C000AF14AA /* SessionStandingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStandingsListView.swift; sourceTree = "<group>"; };
 		CF37157029F1341500AF14AA /* LiveDriverStandingCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDriverStandingCellView.swift; sourceTree = "<group>"; };
 		CF37157229F1343200AF14AA /* LiveDriverStandingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDriverStandingCellViewModel.swift; sourceTree = "<group>"; };
-		CF3F870C2A37692900A4E90C /* StoreKitSandbox.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreKitSandbox.storekit; sourceTree = "<group>"; };
 		CF4190C12A333EBC008A507A /* NewsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailsView.swift; sourceTree = "<group>"; };
 		CF4190C32A333EC9008A507A /* NewsDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailsViewModel.swift; sourceTree = "<group>"; };
 		CF5F07762996CC3D00E79996 /* ScheduleCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCarouselView.swift; sourceTree = "<group>"; };
+		CF64B45F2A41F18300A1CA45 /* Slipstream_watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Slipstream_watch.entitlements; sourceTree = "<group>"; };
 		CF6804052A28DD3500B24AA0 /* ConstructorStandingsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorStandingsDetailsView.swift; sourceTree = "<group>"; };
 		CF6804082A29FA1400B24AA0 /* CalledOffEventCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalledOffEventCardViewModel.swift; sourceTree = "<group>"; };
 		CF68040A2A29FA2700B24AA0 /* CalledOffEventCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalledOffEventCardView.swift; sourceTree = "<group>"; };
@@ -325,11 +334,15 @@
 		CF895A032A263D1F007A0C55 /* ConstructorStandingsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorStandingsCellView.swift; sourceTree = "<group>"; };
 		CF895A062A264E3C007A0C55 /* ConstructorStandingsDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorStandingsDetailsViewModel.swift; sourceTree = "<group>"; };
 		CF8EB9D229A77AA700F38158 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		CF9073A12A5C1D1B00683389 /* StoreKitSandbox.storekit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = StoreKitSandbox.storekit; sourceTree = "<group>"; };
+		CF9073A32A603E9700683389 /* Slipstream-watch-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Slipstream-watch-Info.plist"; sourceTree = "<group>"; };
+		CF98E7A32A3CB37F00FA1703 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFA9339D29F7DC0F007F645E /* TrackInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfoView.swift; sourceTree = "<group>"; };
 		CFA9339F29F7DC1F007F645E /* TrackInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfoViewModel.swift; sourceTree = "<group>"; };
 		CFA933A129F7DCD8007F645E /* TrackInfoCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfoCellView.swift; sourceTree = "<group>"; };
 		CFA933A429F7DD65007F645E /* TrackInfoCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfoCellViewModel.swift; sourceTree = "<group>"; };
 		CFBD88D6296C1FB50068AB54 /* ResultCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCardViewModel.swift; sourceTree = "<group>"; };
+		CFC74A622A445C0600E04B25 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		CFCD655429DA40490079BE9F /* SessionListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListViewModel.swift; sourceTree = "<group>"; };
 		CFCD655829DA4B390079BE9F /* UpcomingSessionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSessionCellViewModel.swift; sourceTree = "<group>"; };
 		CFCD655A29DA4BCC0079BE9F /* UpcomingSessionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSessionCellView.swift; sourceTree = "<group>"; };
@@ -363,6 +376,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4212E4CA2A2DEA8600456B68 /* RevenueCat in Frameworks */,
+				CF2052362A42FEE2000236F9 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +466,7 @@
 		420967F2294C9A8D0075D75E /* Slipstream_watch */ = {
 			isa = PBXGroup;
 			children = (
+				CF2052372A43339F000236F9 /* Notifications */,
 				CFE46F9A29C908640063805A /* Screens */,
 				4209681F294C9AA40075D75E /* Support */,
 				420967F9294C9A8F0075D75E /* Preview Content */,
@@ -481,6 +496,7 @@
 				CFE46F9B29C909D60063805A /* AppViewModel */,
 				420967F3294C9A8D0075D75E /* SlipstreamWatchApp.swift */,
 				420967F7294C9A8F0075D75E /* Assets.xcassets */,
+				CF98E7A32A3CB37F00FA1703 /* AppDelegate.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -560,6 +576,7 @@
 		4212E4D12A2E38B200456B68 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CF2052352A42FEE2000236F9 /* StoreKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -582,6 +599,7 @@
 				42BCAD5B29BB7B000089B46A /* EventService.swift */,
 				4212E4CB2A2DEAA300456B68 /* PurchaseService.swift */,
 				CF68040C2A2B968D00B24AA0 /* NewsService.swift */,
+				CFC74A622A445C0600E04B25 /* NotificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -779,6 +797,23 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		CF2052302A41F659000236F9 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				CF2052312A41F6D8000236F9 /* SettingsView.swift */,
+				CF2052332A41F6E3000236F9 /* SettingsViewModel.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		CF2052372A43339F000236F9 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				CF2052392A433423000236F9 /* LatestNews.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 		CF20D3632975DDC60038A860 /* Stylers */ = {
 			isa = PBXGroup;
 			children = (
@@ -951,6 +986,8 @@
 		CFCEF3FF28380C160063CD47 = {
 			isa = PBXGroup;
 			children = (
+				CF9073A32A603E9700683389 /* Slipstream-watch-Info.plist */,
+				CF64B45F2A41F18300A1CA45 /* Slipstream_watch.entitlements */,
 				4209685B29537AB60075D75E /* Shared */,
 				4209686D2954CB500075D75E /* iOS */,
 				4209686C2954CB4B0075D75E /* watch */,
@@ -976,10 +1013,10 @@
 			children = (
 				CFE23F522982EBF200412DB6 /* Localizable.strings */,
 				CFE23F4C2982EB9400412DB6 /* Localization.swift */,
+				CF9073A12A5C1D1B00683389 /* StoreKitSandbox.storekit */,
 				CFE23F542982EDBA00412DB6 /* swiftgen.yml */,
 				42521CA929B0F9FF00000586 /* Global.swift */,
 				42BCAD6129BBD7F10089B46A /* Identifier.swift */,
-				CF3F870C2A37692900A4E90C /* StoreKitSandbox.storekit */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -998,10 +1035,11 @@
 		CFE46F9A29C908640063805A /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				422D3D1A2A38735600B60C80 /* IAPs */,
+				CFE46FA929CA07DF0063805A /* Season */,
 				CF68040F2A2B9C1800B24AA0 /* News */,
 				CFE8219F29F9D2BE003334F9 /* Standings */,
-				CFE46FA929CA07DF0063805A /* Season */,
+				CF2052302A41F659000236F9 /* Settings */,
+				422D3D1A2A38735600B60C80 /* IAPs */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1221,7 +1259,7 @@
 				420967FB294C9A8F0075D75E /* Preview Assets.xcassets in Resources */,
 				CFE23F4F2982EBF200412DB6 /* Localizable.strings in Resources */,
 				CFE23F552982EDBA00412DB6 /* swiftgen.yml in Resources */,
-				CF3F870D2A37692900A4E90C /* StoreKitSandbox.storekit in Resources */,
+				CF9073A22A5C1D1B00683389 /* StoreKitSandbox.storekit in Resources */,
 				420967F8294C9A8F0075D75E /* Assets.xcassets in Resources */,
 				4245E81329B7E9E800843B02 /* Assets.xcassets in Resources */,
 			);
@@ -1239,7 +1277,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4209683B295378A20075D75E /* Preview Assets.xcassets in Resources */,
-				CF3F870E2A37692900A4E90C /* StoreKitSandbox.storekit in Resources */,
 				42096838295378A20075D75E /* Assets.xcassets in Resources */,
 				CFE23F562982EDBA00412DB6 /* swiftgen.yml in Resources */,
 			);
@@ -1318,6 +1355,7 @@
 				CF68040D2A2B968D00B24AA0 /* NewsService.swift in Sources */,
 				CF0544462951CB8D00A39FE3 /* DateExtension.swift in Sources */,
 				CF08348A2A1E592F00FA61E4 /* DriverStandingsDetailsViewModel.swift in Sources */,
+				CF20523A2A433423000236F9 /* LatestNews.swift in Sources */,
 				CFA9339E29F7DC0F007F645E /* TrackInfoView.swift in Sources */,
 				42521CA429B0ECBD00000586 /* LiveSessionService.swift in Sources */,
 				42B21982295EEA2600515097 /* SessionResultMock.swift in Sources */,
@@ -1326,6 +1364,7 @@
 				CF233DED29ADFA9900A8D1CD /* LiveSession.swift in Sources */,
 				CF68041C2A2CD8A100B24AA0 /* NewsCellView.swift in Sources */,
 				CF68040B2A29FA2700B24AA0 /* CalledOffEventCardView.swift in Sources */,
+				CF2052342A41F6E3000236F9 /* SettingsViewModel.swift in Sources */,
 				42B21970295DA4D400515097 /* Session.swift in Sources */,
 				CF05443A29507C1000A39FE3 /* Circuit.swift in Sources */,
 				CF37156E29F131C000AF14AA /* SessionStandingsListView.swift in Sources */,
@@ -1364,6 +1403,7 @@
 				CF6804132A2BA0FB00B24AA0 /* NewsListViewModel.swift in Sources */,
 				CFE821A129F9D2F0003334F9 /* StandingsViewModel.swift in Sources */,
 				42521CB529B1033600000586 /* LoggerExtension.swift in Sources */,
+				CFC74A652A4465CA00E04B25 /* NotificationService.swift in Sources */,
 				42B21995295EEAC600515097 /* StandingsMock.swift in Sources */,
 				CF277A1E297017C50048DE75 /* Fonts.swift in Sources */,
 				CFEBC07329CCBE58000A2472 /* LiveEventCardView.swift in Sources */,
@@ -1371,6 +1411,7 @@
 				42521CA029B0EB9500000586 /* NetworkManagerRepresentable.swift in Sources */,
 				CFE23F4D2982EB9400412DB6 /* Localization.swift in Sources */,
 				CFEBC07B29CD144B000A2472 /* FinishedEventCardViewModel.swift in Sources */,
+				CF98E7A42A3CB37F00FA1703 /* AppDelegate.swift in Sources */,
 				CFCD655929DA4B390079BE9F /* UpcomingSessionCellViewModel.swift in Sources */,
 				CFA933A229F7DCD8007F645E /* TrackInfoCellView.swift in Sources */,
 				CF895A022A260B9A007A0C55 /* ConstructorStandingsCellViewModel.swift in Sources */,
@@ -1392,6 +1433,7 @@
 				CF895A042A263D1F007A0C55 /* ConstructorStandingsCellView.swift in Sources */,
 				CF4190C42A333EC9008A507A /* NewsDetailsViewModel.swift in Sources */,
 				CFE46FA129C9B49D0063805A /* ConstructorStyler.swift in Sources */,
+				CF2052322A41F6D8000236F9 /* SettingsView.swift in Sources */,
 				CF68041A2A2CD88900B24AA0 /* NewsCellViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1531,12 +1573,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = Slipstream_watch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"watch/Slipstream_watch/Preview Content\"";
-				DEVELOPMENT_TEAM = U5QL3W6RAW;
+				DEVELOPMENT_TEAM = Y4642869FB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Slipstream-watch-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1561,12 +1606,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = Slipstream_watch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"watch/Slipstream_watch/Preview Content\"";
-				DEVELOPMENT_TEAM = U5QL3W6RAW;
+				DEVELOPMENT_TEAM = Y4642869FB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Slipstream-watch-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (

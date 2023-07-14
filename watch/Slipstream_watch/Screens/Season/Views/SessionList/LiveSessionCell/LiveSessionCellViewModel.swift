@@ -41,7 +41,7 @@ extension LiveSessionCellViewModel {
 
     enum State {
         case aboutToStart
-        case happeningNow(podium: [String])
+        case happeningNow(podium: [String], status: LiveSession.Status)
         case betweenOneMinuteAndFourHoursToGo(date: Date)
     }
 }

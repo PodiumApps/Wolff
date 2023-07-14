@@ -8,4 +8,5 @@ extension Logger {
     static let eventService = Logger(subsystem: subsystem, category: "eventService")
     static let userService = Logger(subsystem: subsystem, category: "userService")
     static let newsService = Logger(subsystem: subsystem, category: "newsService")
+    static let notificationsService = Logger(subsystem: subsystem, category: "notificationService")
 }

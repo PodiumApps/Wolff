@@ -40,6 +40,7 @@
 
 // MARK: - Podium
 "podium.ordinal_component" = "%@.";
+"podium.red_flag" = "Red Flag";
 
 // MARK: - Session
 "session.screen_title" = "Sessions";
@@ -96,3 +97,19 @@
 // MARK: - NewsListView
 "news_list_view.screen_title" = "News";
 "news_list_view.source_label" = "Source: fia.com";
+
+// MARK: - SettingsView
+"settings.screen_title" = "Settings";
+"settings.purchase_premium_button_title" = "Purchase Premium";
+"settings.notifications_section_title" = "Notifications";
+"settings.premium_section_title" = "Premium";
+"settings.notification_label.session_start" = "Session Start";
+"settings.notification_label.session_end" = "Session End";
+"settings.notification_label.latest_news" = "Latest News";
+"settings.warning_activate_notifications_iphone" = "Please activate notifications in the Watch app on your iPhone.";
+
+// MARK: - NotificationsLabels
+"notifications.labels.latest_news" = "Latest News";
+"notifications.labels.session_start" = "Session Start";
+"notifications.labels.session_end" = "Session End";
+

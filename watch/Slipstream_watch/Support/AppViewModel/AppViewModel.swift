@@ -5,7 +5,7 @@ protocol AppViewModelRepresentable: ObservableObject {
 
     var state: AppViewModel.State { get }
     var route: [AppNavigation.Route] { get set }
-    
+    var action: PassthroughSubject<AppViewModel.Action, Never> { get }
     var presentPremiumSheet: Bool { get set }
 }
 
@@ -29,19 +29,30 @@ final class AppViewModel: AppViewModelRepresentable {
         }
     }
 
+    private let eventService: EventServiceRepresentable
     private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
+    private let liveSessionService: LiveSessionServiceRepresentable
+    private let newsService: NewsServiceRepresentable
     private let purchaseService: PurchaseServiceRepresentable
+
     private let navigation: AppNavigationRepresentable
-    
+
+    var action = PassthroughSubject<Action, Never>()
     private var subscriptions = Set<AnyCancellable>()
 
     init(
         navigation: AppNavigationRepresentable,
+        eventService: EventServiceRepresentable,
         driverAndConstructorService: DriverAndConstructorServiceRepresentable,
+        liveSessionService: LiveSessionServiceRepresentable,
+        newsService: NewsServiceRepresentable,
         purchaseService: PurchaseServiceRepresentable
     ) {
 
+        self.eventService = eventService
         self.driverAndConstructorService = driverAndConstructorService
+        self.liveSessionService = liveSessionService
+        self.newsService = newsService
         self.purchaseService = purchaseService
         self.navigation = navigation
         self.route = []
@@ -57,8 +68,9 @@ final class AppViewModel: AppViewModelRepresentable {
         let seasonListViewModel = SeasonListViewModel.make(navigation: navigation)
         let standingsViewModel = StandingsViewModel.make(navigation: navigation)
         let newsListViewModel = NewsListViewModel.make(navigation: navigation)
+        let settingsViewModel = SettingsViewModel.make(navigation: navigation)
 
-        state = .results(seasonListViewModel, standingsViewModel, newsListViewModel)
+        state = .results(seasonListViewModel, standingsViewModel, newsListViewModel, settingsViewModel)
         
         setupBindings()
     }
@@ -104,6 +116,21 @@ final class AppViewModel: AppViewModelRepresentable {
                 }
             }
             .assign(to: &$presentPremiumSheet)
+
+        action
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+
+                guard let self else { return }
+
+                switch action {
+                case .reloadServices:
+
+                    liveSessionService.action.send(.updatePositions)
+                    newsService.action.send(.updateAll)
+                }
+            }
+            .store(in: &subscriptions)
     }
 }
 
@@ -113,7 +140,12 @@ extension AppViewModel {
 
         case loading
         case error(String)
-        case results(SeasonListViewModel, StandingsViewModel, NewsListViewModel)
+        case results(SeasonListViewModel, StandingsViewModel, NewsListViewModel, SettingsViewModel)
+    }
+
+    enum Action {
+
+        case reloadServices
     }
 }
 
@@ -123,7 +155,10 @@ extension AppViewModel {
 
         .init(
             navigation: AppNavigation(),
+            eventService: ServiceLocator.shared.eventService,
             driverAndConstructorService: ServiceLocator.shared.driverAndConstructorService,
+            liveSessionService: ServiceLocator.shared.liveSessionService,
+            newsService: ServiceLocator.shared.newsService,
             purchaseService: ServiceLocator.shared.purchaseService
         )
     }

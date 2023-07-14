@@ -7,6 +7,11 @@ enum UserDefaultsKeys: String {
     case user = "com.tomasmamede.slipstream-user"
     case firstTime = "com.tomasmamede.slipstream-first-time"
     case countErrors = "com.tomasmamede.slipstream-count-error"
+    case hasSeenNotificationPrompt = "com.tomasmamede.slipstream-has-seen-notification-prompt"
+    case isActiveSessionStartedNotification = "com.tomasmamede.slipstream-session-start-notification"
+    case isActiveSessionEndedNotification = "com.tomasmamede.slipstream-session-ended-notification"
+    case isActiveLatestNewsNotification = "com.tomasmamede.slipstream-latest-news-notifications"
+    case notifications = "com.tomasmamede.slipstream-notifications"
 }
 
 @propertyWrapper

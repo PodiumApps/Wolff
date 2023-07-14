@@ -9,7 +9,7 @@
   "settings" : {
     "_applicationInternalID" : "6447980484",
     "_developerTeamID" : "Y4642869FB",
-    "_lastSynchronizedDate" : 708274478.33490098
+    "_lastSynchronizedDate" : 710679845.92133296
   },
   "subscriptionGroups" : [
     {
@@ -19,6 +19,31 @@
       ],
       "name" : "Subscriptions",
       "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "7.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "6451108162",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Unlock all features of the app for one year.",
+              "displayName" : "Annual Subscription",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.tomasmamede.SlipstreamWatch.subscription_annually",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Annually",
+          "subscriptionGroupID" : "21346333",
+          "type" : "RecurringSubscription"
+        },
         {
           "adHocOffers" : [
 

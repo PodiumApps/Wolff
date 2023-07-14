@@ -30,7 +30,7 @@ struct ConstructorStandingsCellView<ViewModel: ConstructorStandingsCellViewModel
                 Button(action: {
                     viewModel.action.send(.openDetailsView)
                 }) {
-                    Image(systemName: "arrow.right.circle.fill")
+                    Image(systemName: "chevron.right.circle.fill")
                 }
             }
 

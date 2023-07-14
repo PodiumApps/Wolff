@@ -10,8 +10,6 @@ protocol LiveDriverStandingCellViewModelRepresentable: ObservableObject {
     var position: Int { get }
     var time: [String] { get }
     var tyre: SessionResult.Tyre? { get }
-    var showDriverSessionDetails: Bool { get set }
-    var action: PassthroughSubject<LiveDriverStandingCellViewModel.Action, Never> { get }
 }
 
 final class LiveDriverStandingCellViewModel: LiveDriverStandingCellViewModelRepresentable {
@@ -23,11 +21,6 @@ final class LiveDriverStandingCellViewModel: LiveDriverStandingCellViewModelRepr
     let position: Int
     let time: [String]
     let tyre: SessionResult.Tyre?
-
-    @Published var showDriverSessionDetails: Bool = false
-
-    var action = PassthroughSubject<Action, Never>()
-    private var subscribers = Set<AnyCancellable>()
 
     init(
         driverID: Driver.ID,
@@ -46,31 +39,5 @@ final class LiveDriverStandingCellViewModel: LiveDriverStandingCellViewModelRepr
         self.position = position
         self.time = time
         self.tyre = tyre
-
-        self.setUpBindings()
-    }
-
-    private func setUpBindings() {
-
-        action
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] action in
-                guard let self else { return }
-
-                switch action {
-                case .showLiveDriverDetails:
-                    showDriverSessionDetails = true
-                }
-            }
-            .store(in: &subscribers)
     }
 }
-
-extension LiveDriverStandingCellViewModel {
-
-    enum Action {
-
-        case showLiveDriverDetails
-    }
-}
-

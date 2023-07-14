@@ -107,6 +107,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                             sessionDate: event.sessions[index].date,
                             sessionID: event.sessions[index].id,
                             podium: podium,
+                            status: liveSession.status,
                             timeInterval: timeInterval
                         )
                     )
@@ -122,6 +123,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                             sessionDate: event.sessions[index].date,
                             sessionID: event.sessions[index].id,
                             podium: [],
+                            status: LiveSession.Status(redFlag: false, state: ""),
                             timeInterval: timeInterval
                         )
                     )
@@ -151,6 +153,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
                             sessionDate: session.date,
                             sessionID: session.id,
                             podium: [],
+                            status: LiveSession.Status(redFlag: false, state: ""),
                             timeInterval: timeInterval
                         )
                     )
@@ -185,6 +188,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
         sessionDate: Date,
         sessionID: Session.ID,
         podium: [Driver.ID],
+        status: LiveSession.Status,
         timeInterval: TimeInterval
     ) -> LiveSessionCellViewModel {
 
@@ -197,7 +201,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
             sessionName: sessionName.label,
             sessionID: sessionID,
             podium: Driver.getPodiumDriverTickers(podium: podium, drivers: drivers),
-            state: setUpLiveSessionState(podium: podium, date: sessionDate, timeInterval: timeInterval)
+            state: setUpLiveSessionState(podium: podium, date: sessionDate, timeInterval: timeInterval, status: status)
         )
         
         viewModel.action
@@ -250,7 +254,8 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
     private func setUpLiveSessionState(
         podium: [Driver.ID]?,
         date: Date,
-        timeInterval: TimeInterval
+        timeInterval: TimeInterval,
+        status: LiveSession.Status
     ) -> LiveSessionCellViewModel.State {
 
         guard let podium, timeInterval <= 0 else {
@@ -261,7 +266,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
         }
 
         let driverTickers = Driver.getPodiumDriverTickers(podium: podium, drivers: drivers)
-        return .happeningNow(podium: driverTickers)
+        return .happeningNow(podium: driverTickers, status: status)
     }
 }
 

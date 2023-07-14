@@ -16,6 +16,14 @@ extension User {
         let isPremium: Bool
         let deviceToken: String?
     }
+
+    struct Notification: Encodable {
+
+        let id: User.ID
+        let latestNews: Bool
+        let sessionStart: Bool
+        let sessionEnd: Bool
+    }
 }
 
 extension User {
@@ -44,7 +52,7 @@ extension User {
         
         guard let url = URL(string: "\(Global.url)/v1/user") else { fatalError("URL not found.") }
         
-        guard let persistedUserId  = UserDefaults.standard.string(forKey: UserDefaultsKeys.user.rawValue) else {
+        guard let persistedUserId = UserDefaults.standard.string(forKey: UserDefaultsKeys.user.rawValue) else {
             return .init(url: url, method: .get(accessToken: nil))
         }
         
@@ -57,6 +65,28 @@ extension User {
             deviceToken: deviceToken
         )
         
-        return Resource(url: url, method: .post(body: user, accessToken: Date().tokenString))
+        return Resource(url: url, method: .put(body: user, accessToken: Date().tokenString))
+    }
+
+    static func update(
+        latestNews: Bool = false,
+        sessionStart: Bool = false,
+        sessionEnd: Bool = false
+    ) -> Resource<Self>{
+
+        guard let url = URL(string: "\(Global.url)/v1/user-notification") else { fatalError("URL not found.") }
+
+        guard let persistedUserId = UserDefaults.standard.string(forKey: UserDefaultsKeys.user.rawValue) else {
+            return .init(url: url, method: .get(accessToken: nil))
+        }
+
+        let updatedNotifications = Notification(
+            id: .init(persistedUserId),
+            latestNews: latestNews,
+            sessionStart: sessionStart,
+            sessionEnd: sessionEnd
+        )
+
+        return Resource(url: url, method: .put(body: updatedNotifications, accessToken: Date().tokenString))
     }
 }

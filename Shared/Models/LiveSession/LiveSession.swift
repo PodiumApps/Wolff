@@ -7,6 +7,7 @@ struct LiveSession: Decodable, Identifiable {
 
     let id: ID
     let standings: [Position]
+    let status: Status
 
     struct Position: Decodable, Identifiable {
 
@@ -15,6 +16,12 @@ struct LiveSession: Decodable, Identifiable {
         let time: String?
         let tyre: SessionResult.Tyre
         let tyrePitCount: Int
+    }
+
+    struct Status: Decodable {
+
+        let redFlag: Bool
+        let state: String
     }
 }
 

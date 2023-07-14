@@ -9,13 +9,15 @@ final class ServiceLocator {
     @Published var eventService: EventServiceRepresentable
     @Published var purchaseService: PurchaseServiceRepresentable
     @Published var newsService: NewsServiceRepresentable
+    @Published var notificationService: NotificationServiceRepresentable
     
     init(
         driverAndConstructorService: DriverAndConstructorServiceRepresentable = DriverAndConstructorService.make(),
         liveSessionService: LiveSessionServiceRepresentable = LiveSessionService.make(),
         eventService: EventServiceRepresentable = EventService.make(),
         purchaseService: PurchaseServiceRepresentable = PurchaseService.make(),
-        newsService: NewsServiceRepresentable = NewsService.make()
+        newsService: NewsServiceRepresentable = NewsService.make(),
+        notificationService: NotificationServiceRepresentable = NotificationService.make()
     ) {
         
         self.driverAndConstructorService = driverAndConstructorService
@@ -23,5 +25,6 @@ final class ServiceLocator {
         self.eventService = eventService
         self.purchaseService = purchaseService
         self.newsService = newsService
+        self.notificationService = notificationService
     }
 }

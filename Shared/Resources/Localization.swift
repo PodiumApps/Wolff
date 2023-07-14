@@ -130,11 +130,23 @@ internal enum Localization {
     /// Source: fia.com
     internal static let sourceLabel = Localization.tr("Localizable", "news_list_view.source_label", fallback: "Source: fia.com")
   }
+  internal enum Notifications {
+    internal enum Labels {
+      /// Latest News
+      internal static let latestNews = Localization.tr("Localizable", "notifications.labels.latest_news", fallback: "Latest News")
+      /// Session End
+      internal static let sessionEnd = Localization.tr("Localizable", "notifications.labels.session_end", fallback: "Session End")
+      /// Session Start
+      internal static let sessionStart = Localization.tr("Localizable", "notifications.labels.session_start", fallback: "Session Start")
+    }
+  }
   internal enum Podium {
     /// %@.
     internal static func ordinalComponent(_ p1: Any) -> String {
       return Localization.tr("Localizable", "podium.ordinal_component", String(describing: p1), fallback: "%@.")
     }
+    /// Red Flag
+    internal static let redFlag = Localization.tr("Localizable", "podium.red_flag", fallback: "Red Flag")
   }
   internal enum SeasonConstructorStandings {
     /// Team Principle
@@ -172,6 +184,26 @@ internal enum Localization {
     /// Tomorrow at %@
     internal static func tomorrow(_ p1: Any) -> String {
       return Localization.tr("Localizable", "session_time.tomorrow", String(describing: p1), fallback: "Tomorrow at %@")
+    }
+  }
+  internal enum Settings {
+    /// Notifications
+    internal static let notificationsSectionTitle = Localization.tr("Localizable", "settings.notifications_section_title", fallback: "Notifications")
+    /// Premium
+    internal static let premiumSectionTitle = Localization.tr("Localizable", "settings.premium_section_title", fallback: "Premium")
+    /// Purchase Premium
+    internal static let purchasePremiumButtonTitle = Localization.tr("Localizable", "settings.purchase_premium_button_title", fallback: "Purchase Premium")
+    /// Settings
+    internal static let screenTitle = Localization.tr("Localizable", "settings.screen_title", fallback: "Settings")
+    /// Please activate notifications in the Watch app on your iPhone.
+    internal static let warningActivateNotificationsIphone = Localization.tr("Localizable", "settings.warning_activate_notifications_iphone", fallback: "Please activate notifications in the Watch app on your iPhone.")
+    internal enum NotificationLabel {
+      /// Latest News
+      internal static let latestNews = Localization.tr("Localizable", "settings.notification_label.latest_news", fallback: "Latest News")
+      /// Session End
+      internal static let sessionEnd = Localization.tr("Localizable", "settings.notification_label.session_end", fallback: "Session End")
+      /// Session Start
+      internal static let sessionStart = Localization.tr("Localizable", "settings.notification_label.session_start", fallback: "Session Start")
     }
   }
   internal enum StandingsListView {
