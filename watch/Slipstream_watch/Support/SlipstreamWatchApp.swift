@@ -3,7 +3,7 @@ import WatchKit
 import UserNotifications
 
 @main
-struct SlipstreamWatch_Watch_AppApp: App {
+struct Slipstream: App {
 
     @WKExtensionDelegateAdaptor(AppDelegate.self) private var appDelegate
 

@@ -100,11 +100,11 @@ extension AppNavigation {
             switch id {
             case .newsDetails,
                  .driverStandingDetails,
-                 .constructorStandingDetails:
+                 .constructorStandingDetails,
+                 .sessionStandingsList:
                 return true
             case .sessionsList,
-                 .activatePremium,
-                 .sessionStandingsList:
+                 .activatePremium:
                 return false
             }
         }
