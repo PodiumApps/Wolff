@@ -101,7 +101,7 @@ extension AppNavigation {
             case .newsDetails,
                  .driverStandingDetails,
                  .constructorStandingDetails:
-                return false
+                return true
             case .sessionsList,
                  .activatePremium,
                  .sessionStandingsList:
