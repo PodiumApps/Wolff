@@ -211,7 +211,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
 
                 switch action {
                 case .tapSession:
-                    navigation.action.send(.append(route: .sessionStandingsList(sessionStandingsListViewModel)))
+                    navigation.action.send(.append(route: .liveSessionStandingsList(sessionStandingsListViewModel)))
                 }
             }
             .store(in: &subscriptions)
@@ -243,7 +243,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
 
                 switch action {
                 case .tapSession:
-                    navigation.action.send(.append(route: .sessionStandingsList(sessionStandingsListViewModel)))
+                    navigation.action.send(.append(route: .finishedSessionStandingsList(sessionStandingsListViewModel)))
                 }
             }
             .store(in: &subscriptions)

@@ -69,7 +69,8 @@ extension AppNavigation {
     enum Route: Hashable {
 
         case sessionsList(SessionListViewModel)
-        case sessionStandingsList(SessionStandingsListViewModel)
+        case finishedSessionStandingsList(SessionStandingsListViewModel)
+        case liveSessionStandingsList(SessionStandingsListViewModel)
         case newsDetails(NewsDetailsViewModel)
         case driverStandingDetails(DriverStandingsDetailsViewModel)
         case constructorStandingDetails(ConstructorStandingsDetailsViewModel)
@@ -78,7 +79,8 @@ extension AppNavigation {
         enum Identifier {
             
             case sessionsList
-            case sessionStandingsList
+            case finishedSessionStandingsList
+            case liveSessionStandingsList
             case newsDetails
             case driverStandingDetails
             case constructorStandingDetails
@@ -88,7 +90,8 @@ extension AppNavigation {
         var id: Identifier {
             switch self {
             case .sessionsList: return .sessionsList
-            case .sessionStandingsList: return .sessionStandingsList
+            case .finishedSessionStandingsList: return .finishedSessionStandingsList
+            case .liveSessionStandingsList: return .liveSessionStandingsList
             case .newsDetails: return .newsDetails
             case .driverStandingDetails: return .driverStandingDetails
             case .constructorStandingDetails: return .constructorStandingDetails
@@ -101,9 +104,10 @@ extension AppNavigation {
             case .newsDetails,
                  .driverStandingDetails,
                  .constructorStandingDetails,
-                 .sessionStandingsList:
+                 .liveSessionStandingsList:
                 return true
             case .sessionsList,
+                 .finishedSessionStandingsList,
                  .activatePremium:
                 return false
             }

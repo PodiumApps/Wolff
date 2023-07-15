@@ -31,7 +31,7 @@ struct AppView<ViewModel: AppViewModelRepresentable>: View {
                         switch route {
                         case .sessionsList(let viewModel):
                             SessionListView(viewModel: viewModel)
-                        case .sessionStandingsList(let viewModel):
+                        case .finishedSessionStandingsList(let viewModel), .liveSessionStandingsList(let viewModel):
                             SessionStandingsListView(viewModel: viewModel)
                         case .newsDetails(let viewModel):
                             NewsDetailsView(viewModel: viewModel)

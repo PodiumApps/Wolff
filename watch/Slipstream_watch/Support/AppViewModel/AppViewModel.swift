@@ -118,16 +118,27 @@ final class AppViewModel: AppViewModelRepresentable {
             .assign(to: &$presentPremiumSheet)
 
         action
+            .combineLatest(liveSessionService.statePublisher)
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] action in
+            .sink { [weak self] action, liveSessionService in
 
                 guard let self else { return }
 
-                switch action {
-                case .reloadServices:
+                switch (action, liveSessionService) {
+                case (.reloadServices, .refreshed(let liveSession)):
 
-                    liveSessionService.action.send(.updatePositions)
-                    newsService.action.send(.updateAll)
+                    let eventIsLive = !liveSession.standings.isEmpty
+
+                    if eventIsLive {
+
+                        self.liveSessionService.action.send(.updatePositions)
+                    } else {
+
+                        eventService.action.send(.updateAll)
+                        newsService.action.send(.updateAll)
+                    }
+                default:
+                    return
                 }
             }
             .store(in: &subscriptions)
