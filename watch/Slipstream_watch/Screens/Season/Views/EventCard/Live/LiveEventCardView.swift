@@ -149,23 +149,6 @@ struct LiveEventCardView<ViewModel: LiveEventCardViewModelRepresentable>: View {
                 Text(viewModel.sessionName)
                     .font(.Caption.bold)
             }
-
-            HStack(alignment: .bottom, spacing: .Spacing.default2) {
-                ForEach(0 ..< podium.count, id: \.self) { index in
-                    HStack(alignment: .bottom, spacing: .Spacing.default) {
-                        HStack(spacing: .zero) {
-                            Text(Localization.Podium.ordinalComponent(index + 1))
-                                .opacity(Constants.Podium.OrdinalComponent.opacity)
-                        }
-                        .font(.Caption.medium)
-                        .lineLimit(Constants.Podium.DriverTicker.lineLimit)
-
-                        Text(podium[index])
-                            .font(.Caption.semibold)
-                            .lineLimit(Constants.Podium.DriverTicker.lineLimit)
-                    }
-                }
-            }
         }
     }
 }

@@ -81,7 +81,7 @@
 
 // MARK: - InAppPurchaseView
 "in_app_purchase_view.title" = "Slipstream Premium";
-"in_app_purchase_view.body" = "Unlock full access to live information during the race and navigate the app freely for more exclusive content.";
+"in_app_purchase_view.body" = "Unlock full access navigate the app freely for more news content and driver info.";
 "in_app_purchase_view.body.loading" = "We are loading your amazing subscription. Thanks for trusting us!";
 "in_app_purchase_view.body.success" = "Thanks for trusting us! We hope you enjoy your subscription.";
 "in_app_purchase_view.body.error" = "Something went wrong. Please try again to access all live information and get more exclusive content.";

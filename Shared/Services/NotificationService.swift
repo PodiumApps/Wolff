@@ -96,9 +96,8 @@ class NotificationService: NotificationServiceRepresentable {
             case .notDetermined:
                 self.registerForRemoteNotifications()
             case .denied:
-                self.toggleAllNotifications()
-                self.state = .refreshed(getNotifications(), showWarning: true)
-            case .authorized, .provisional:
+                self.state = .refreshed(self.toggleAllNotifications(), showWarning: true)
+            default:
                 return
             }
         }

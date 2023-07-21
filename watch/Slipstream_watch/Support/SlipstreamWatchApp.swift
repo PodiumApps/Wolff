@@ -11,7 +11,5 @@ struct Slipstream: App {
         WindowGroup {
             AppView(viewModel: AppViewModel.make())
         }
-
-//        WKNotificationScene(controller: LatestNewsNotificationController.self, category: "latest-news")
     }
 }

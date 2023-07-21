@@ -31,7 +31,9 @@ class EventService: EventServiceRepresentable {
         action
             .receive(on: DispatchQueue.main)
             .sink { [weak self] action in
+
                 guard let self else { return }
+
                 Task {
                     switch action {
                     case .fetchAll:

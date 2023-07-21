@@ -174,8 +174,8 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
 
     private func buildUpcomingSessionCellViewModel(
         sessionName: Session.Name,
-        date: Date)
-    -> UpcomingSessionCellViewModel {
+        date: Date
+    ) -> UpcomingSessionCellViewModel {
 
         return UpcomingSessionCellViewModel(
             sessionName: sessionName.label,
@@ -204,17 +204,17 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
             state: setUpLiveSessionState(podium: podium, date: sessionDate, timeInterval: timeInterval, status: status)
         )
         
-        viewModel.action
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] action in
-                guard let self else { return }
-
-                switch action {
-                case .tapSession:
-                    navigation.action.send(.append(route: .liveSessionStandingsList(sessionStandingsListViewModel)))
-                }
-            }
-            .store(in: &subscriptions)
+//        viewModel.action
+//            .receive(on: DispatchQueue.main)
+//            .sink { [weak self] action in
+//                guard let self else { return }
+//
+//                switch action {
+//                case .tapSession:
+//                    navigation.action.send(.append(route: .liveSessionStandingsList(sessionStandingsListViewModel)))
+//                }
+//            }
+//            .store(in: &subscriptions)
 
         return viewModel
     }

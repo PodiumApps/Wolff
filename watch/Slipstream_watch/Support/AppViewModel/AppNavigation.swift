@@ -104,10 +104,10 @@ extension AppNavigation {
             case .newsDetails,
                  .driverStandingDetails,
                  .constructorStandingDetails,
-                 .liveSessionStandingsList:
+                 .finishedSessionStandingsList:
                 return true
             case .sessionsList,
-                 .finishedSessionStandingsList,
+                 .liveSessionStandingsList,
                  .activatePremium:
                 return false
             }
