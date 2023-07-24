@@ -149,8 +149,6 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                 }
             }
             .assign(to: &$state)
-
-//        liveEventService.action.send(.fetchPositions)
     }
 
     private func setUpBindings() {
@@ -167,7 +165,9 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                     _ = buildAllEventCells()
                 case .stopTimers:
                     self.liveEventTimer?.invalidate()
-                default:
+                case .reloadService:
+                    reloadServices()
+                case .tap, .verifyPremium:
                     return
                 }
             }
@@ -402,6 +402,12 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
 
         return .happeningNow(podium: podium)
     }
+
+    private func reloadServices() {
+
+        self.eventService.action.send(.fetchAll)
+        self.driversAndConstructorService.action.send(.fetchAll)
+    }
 }
 
 extension SeasonListViewModel {
@@ -447,6 +453,7 @@ extension SeasonListViewModel {
 
         case resumeTimers
         case stopTimers
+        case reloadService
         case verifyPremium
         case tap(index: Int)
     }

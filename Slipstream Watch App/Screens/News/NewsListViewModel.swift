@@ -3,6 +3,7 @@ import Combine
 
 protocol NewsListViewModelRepresentable: ObservableObject {
 
+    var action: PassthroughSubject<NewsListViewModel.Action, Never> { get }
     var state: NewsListViewModel.State { get }
 }
 
@@ -14,13 +15,18 @@ final class NewsListViewModel: NewsListViewModelRepresentable {
     private var subscriptions = Set<AnyCancellable>()
     private let newsService: NewsServiceRepresentable
 
+    var action = PassthroughSubject<Action, Never>()
+    private var subscribers = Set<AnyCancellable>()
+
     init(navigation: AppNavigationRepresentable, newsService: NewsServiceRepresentable) {
 
         self.navigation = navigation
 
         self.state = .loading
         self.newsService = newsService
+
         self.setUpServices()
+        self.setUpBindings()
     }
 
     private func setUpServices() {
@@ -44,6 +50,23 @@ final class NewsListViewModel: NewsListViewModelRepresentable {
                 }
             }
             .assign(to: &$state)
+    }
+
+    private func setUpBindings() {
+
+        action
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+
+                guard let self else { return }
+
+                switch action {
+                case .reloadService:
+                    newsService.action.send(.fetchAll)
+                }
+
+            }
+            .store(in: &subscribers)
     }
 
     private func buildNewsCells(news: [News]) -> NewsListViewModel.State {
@@ -74,6 +97,11 @@ final class NewsListViewModel: NewsListViewModelRepresentable {
 }
 
 extension NewsListViewModel {
+
+    enum Action {
+
+        case reloadService
+    }
 
     enum State: Equatable {
 

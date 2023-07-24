@@ -40,6 +40,8 @@ final class AppViewModel: AppViewModelRepresentable {
     var action = PassthroughSubject<Action, Never>()
     private var subscriptions = Set<AnyCancellable>()
 
+    private var lastDataReload: Date = Date()
+
     init(
         navigation: AppNavigationRepresentable,
         eventService: EventServiceRepresentable,
@@ -58,6 +60,7 @@ final class AppViewModel: AppViewModelRepresentable {
         self.route = []
         
         setupBindings()
+        load()
     }
 
     // MARK: - Private
@@ -122,10 +125,27 @@ final class AppViewModel: AppViewModelRepresentable {
 
                 guard let self else { return }
 
-                switch (action) {
-                case (.reloadServices):
+                switch (action, liveSessionService) {
+                case (.reloadServices, .refreshed(let liveSession)):
 
-                    load()
+                    let currentDate = Date()
+                    let delta = Calendar.current.dateComponents(
+                        [.minute],
+                        from: lastDataReload,
+                        to: currentDate
+                    ).minute
+
+                    guard let delta else { return }
+
+                    if delta > 5 && liveSession.standings.isEmpty {
+
+                        self.eventService.action.send(.updateAll)
+                        self.newsService.action.send(.updateAll)
+
+                        lastDataReload = currentDate
+                    }
+                default:
+                    return
                 }
             }
             .store(in: &subscriptions)

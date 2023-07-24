@@ -61,14 +61,16 @@ class InAppPurchaseViewModel: InAppPurchaseViewModelRepresentable {
         action
             .receive(on: DispatchQueue.main)
             .sink { [weak self] action in
+
+                guard let self else { return }
                 
-                self?.state = .loading
+                self.state = .loading
                 
                 switch action {
                 case .restore:
-                    self?.purchaseService.action.send(.restorePurchases)
+                    self.purchaseService.action.send(.restorePurchases)
                 case .purchase(let productId):
-                    self?.buyProduct(id: productId)
+                    self.buyProduct(id: productId)
                 }
             }
             .store(in: &subscriptions)

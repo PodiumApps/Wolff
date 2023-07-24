@@ -38,7 +38,7 @@ class PurchaseService: PurchaseServiceRepresentable {
         
         action
             .debounce(for: 1.5, scheduler: DispatchQueue.main)
-            .receive(on: DispatchQueue.global())
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] action in
                 
                 guard let self, case .checkPremium = action else { return }
@@ -48,7 +48,7 @@ class PurchaseService: PurchaseServiceRepresentable {
             .store(in: &subscriptions)
         
         action
-            .receive(on: DispatchQueue.global())
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] action in
                 
                 guard let self else { return }
@@ -83,11 +83,7 @@ class PurchaseService: PurchaseServiceRepresentable {
         }
             
         Purchases.logLevel = .error
-        #if DEBUG
         Purchases.configure(withAPIKey: "appl_QDMRCBOEVDmTcSOvyHSUzTXdQOg", appUserID: persistedUserId ?? userId)
-        #else
-        Purchases.configure(withAPIKey: "appl_QDMRCBOEVDmTcSOvyHSUzTXdQOg", appUserID: persistedUserId ?? userId)
-        #endif
         
         checkIfUserIsPremium(showSheet: false)
     }

@@ -16,7 +16,15 @@ struct NewsListView<ViewModel: NewsListViewModelRepresentable>: View {
             case .loading:
                 ProgressView()
             case .error(let error):
-                Text(error)
+                VStack {
+                    Spacer()
+                    Text(error)
+                        .font(.caption)
+                    Spacer()
+                    Button("Try again") {
+                        viewModel.action.send(.reloadService)
+                    }
+                }
             case .results(let news):
                 ScrollView {
                     LazyVStack(alignment: .leading) {

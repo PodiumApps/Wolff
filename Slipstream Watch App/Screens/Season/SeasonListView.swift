@@ -10,13 +10,21 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
     }
-    
+
     var body: some View {
         
         Group {
             switch viewModel.state {
             case .error(let error):
-                Text(error)
+                VStack {
+                    Spacer()
+                    Text(error)
+                        .font(.caption)
+                    Spacer()
+                    Button("Try again") {
+                        viewModel.action.send(.reloadService)
+                    }
+                }
             case .results(let cells, let indexFirstToAppear):
                 ScrollViewReader { proxy in
                     List(0 ..< cells.count, id: \.self) { index in

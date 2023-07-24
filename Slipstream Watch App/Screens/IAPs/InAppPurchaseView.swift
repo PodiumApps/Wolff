@@ -11,6 +11,7 @@ struct InAppPurchaseView<ViewModel: InAppPurchaseViewModelRepresentable>: View {
     var body: some View {
         
         ScrollView {
+
             VStack(spacing: .Spacing.default2) {
                 Text(Localization.InAppPurchaseView.title)
                     .font(.Title4.regular)
@@ -29,6 +30,7 @@ struct InAppPurchaseView<ViewModel: InAppPurchaseViewModelRepresentable>: View {
                         .foregroundColor(.white)
                         .buttonStyle(BorderedButtonStyle(tint: .accentColor.opacity(255)))
                     }
+                    
                     Button(action: {
                         viewModel.action.send(.restore)
                     }) {
@@ -41,11 +43,5 @@ struct InAppPurchaseView<ViewModel: InAppPurchaseViewModelRepresentable>: View {
             }
             .padding()
         }
-    }
-}
-
-struct InAppPurchaseView_Previews: PreviewProvider {
-    static var previews: some View {
-        InAppPurchaseView(viewModel: InAppPurchaseViewModel.make())
     }
 }
