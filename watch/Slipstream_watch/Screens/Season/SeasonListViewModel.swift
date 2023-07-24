@@ -23,7 +23,6 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
     private let purchaseService: PurchaseServiceRepresentable
 
     private let fiveMinutesInSeconds: Double = 5 * 60
-    private var updateAllEventsTimer: Timer? = nil
 
     private let oneMinuteInSeconds: Double = 60
     private var liveEventTimer: Timer? = nil
@@ -60,6 +59,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
 
         self.eventCells = []
 
+        self.setUpBindings()
         self.loadEvents()
     }
 
@@ -150,7 +150,28 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
             }
             .assign(to: &$state)
 
-        liveEventService.action.send(.fetchPositions)
+//        liveEventService.action.send(.fetchPositions)
+    }
+
+    private func setUpBindings() {
+
+        action
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+
+                guard let self else { return }
+
+                switch action {
+                case .resumeTimers:
+                    liveEventService.action.send(.fetchPositions)
+                    _ = buildAllEventCells()
+                case .stopTimers:
+                    self.liveEventTimer?.invalidate()
+                default:
+                    return
+                }
+            }
+            .store(in: &subscriptions)
     }
 
     private func updateLiveEventTimer(timeInterval: TimeInterval, triggerInterval: Double) {
@@ -201,7 +222,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
             switch event.status {
             case .live(let timeInterval, let sessionName):
 
-                updateLiveEventTimer(timeInterval: timeInterval, triggerInterval: 10)
+                updateLiveEventTimer(timeInterval: timeInterval, triggerInterval: 15)
 
                 return .live(
                     buildLiveViewModel(
@@ -424,6 +445,8 @@ extension SeasonListViewModel {
 
     enum Action {
 
+        case resumeTimers
+        case stopTimers
         case verifyPremium
         case tap(index: Int)
     }

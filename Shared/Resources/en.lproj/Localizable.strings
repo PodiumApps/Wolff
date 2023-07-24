@@ -23,7 +23,7 @@
 "finished_card_cell.finished" = "FINISHED";
 
 // MARK: - SeasonListView
-"season_list_view.navigation.title" = "Season 2023";
+"season_list_view.navigation.title" = "Season";
 
 
 // MARK: - UpcomingAndStandingsCell

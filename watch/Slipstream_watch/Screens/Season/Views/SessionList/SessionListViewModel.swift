@@ -117,17 +117,6 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
 
                 case .refreshing, .error:
 
-                    sessionCells[index] = .live(
-                        buildLiveSessionCellViewModel(
-                            sessionName: event.sessions[index].name,
-                            sessionDate: event.sessions[index].date,
-                            sessionID: event.sessions[index].id,
-                            podium: [],
-                            status: LiveSession.Status(redFlag: false, state: ""),
-                            timeInterval: timeInterval
-                        )
-                    )
-
                     sections[sectionIndex] = .cells(sessionCells)
                     return .results(sections)
                 }
@@ -191,11 +180,6 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
         status: LiveSession.Status,
         timeInterval: TimeInterval
     ) -> LiveSessionCellViewModel {
-
-        let sessionStandingsListViewModel = SessionStandingsListViewModel.make(
-            sessionID: sessionID,
-            sessionName: sessionName.label
-        )
         
         let viewModel: LiveSessionCellViewModel = .init(
             sessionName: sessionName.label,
@@ -203,18 +187,6 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
             podium: Driver.getPodiumDriverTickers(podium: podium, drivers: drivers),
             state: setUpLiveSessionState(podium: podium, date: sessionDate, timeInterval: timeInterval, status: status)
         )
-        
-//        viewModel.action
-//            .receive(on: DispatchQueue.main)
-//            .sink { [weak self] action in
-//                guard let self else { return }
-//
-//                switch action {
-//                case .tapSession:
-//                    navigation.action.send(.append(route: .liveSessionStandingsList(sessionStandingsListViewModel)))
-//                }
-//            }
-//            .store(in: &subscriptions)
 
         return viewModel
     }

@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
+
+    @Environment(\.scenePhase) private var scenePhase
     
     @ObservedObject private var viewModel: ViewModel
     @State private var listHasAlreadyScrolled = false
@@ -52,7 +54,17 @@ struct SeasonListView<ViewModel: SeasonListViewModelRepresentable>: View {
                 ProgressView()
             }
         }
-        .navigationTitle("Season")
+        .navigationTitle(Localization.SeasonListView.Navigation.title)
+        .onChange(of: scenePhase) { scenePhase in
+            switch scenePhase {
+            case .background:
+                viewModel.action.send(.stopTimers)
+            case .active:
+                viewModel.action.send(.resumeTimers)
+            default:
+                return
+            }
+        }
     }
 }
 

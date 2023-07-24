@@ -129,11 +129,7 @@ final class AppViewModel: AppViewModelRepresentable {
 
                     let eventIsLive = !liveSession.standings.isEmpty
 
-                    if eventIsLive {
-
-                        self.liveSessionService.action.send(.updatePositions)
-                    } else {
-
+                    if !eventIsLive {
                         eventService.action.send(.updateAll)
                         newsService.action.send(.updateAll)
                     }

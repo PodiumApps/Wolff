@@ -52,10 +52,8 @@ struct AppView<ViewModel: AppViewModelRepresentable>: View {
         .onChange(of: scenePhase) { phase in
 
             switch phase {
-            case .inactive:
-                DispatchQueue.global(qos: .userInteractive).asyncAfter(deadline: .now() + 1) {
-                    viewModel.action.send(.reloadServices)
-                }
+            case .active:
+                viewModel.action.send(.reloadServices)
             default:
                 return
             }
