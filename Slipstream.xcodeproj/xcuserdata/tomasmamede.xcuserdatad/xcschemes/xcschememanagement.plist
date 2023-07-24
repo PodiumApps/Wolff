@@ -4,86 +4,20 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Promises (Playground) 1.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
-		</dict>
-		<key>Promises (Playground) 2.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>6</integer>
-		</dict>
-		<key>Promises (Playground).xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
-		</dict>
-		<key>Slipstream WatchKit App (Complication).xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
-		</dict>
-		<key>Slipstream WatchKit App (Notification).xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
-		</dict>
-		<key>Slipstream WatchKit App.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
-		</dict>
-		<key>SlipstreamWatch Watch App (Notification).xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
-		</dict>
-		<key>SlipstreamWatch Watch App.xcscheme_^#shared#^_</key>
+		<key>Slipstream Watch App.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
-		</dict>
-		<key>Slipstream_iOS.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
-		</dict>
-		<key>Slipstream_watch.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>0</integer>
-		</dict>
-		<key>Slipstream_watch_StoreKit.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>CFCEF40528380C160063CD47</key>
+		<key>CFAFFD872A619DF900BA7B51</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CFCEF40928380C170063CD47</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CFCEF42E28380C180063CD47</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CFCEF43828380C180063CD47</key>
+		<key>CFAFFD8D2A619DF900BA7B51</key>
 		<dict>
 			<key>primary</key>
 			<true/>
