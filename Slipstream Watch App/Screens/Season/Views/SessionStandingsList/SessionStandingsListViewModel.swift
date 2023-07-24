@@ -129,7 +129,7 @@ final class SessionStandingsListViewModel: SessionStandingsListViewModelRepresen
 
         cells = standings.compactMap { position in
 
-            let driver = self.drivers.first(where: { $0.id == position.id })
+            let driver = self.drivers.first(where: { $0.id == position.driverId })
             let constructor = self.constructors.first(where: { $0.id == driver?.constructorId })
 
             guard let driver, let constructor else { return nil }

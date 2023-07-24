@@ -119,7 +119,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                         return nil
                     }
 
-                    let podium: [Driver.ID] = positions.map { $0.id }
+                    let podium: [Driver.ID] = positions.map { $0.driverId }
 
                     cells[index] = .live(
                         self.buildLiveViewModel(

@@ -11,7 +11,10 @@ struct LiveSession: Decodable, Identifiable {
 
     struct Position: Decodable, Identifiable {
 
-        let id: Identifier<Driver>
+        typealias ID = Identifier<Position>
+        
+        let id: Identifier<Position>
+        let driverId: Identifier<Driver>
         let position: Int
         let time: String?
         let tyre: SessionResult.Tyre

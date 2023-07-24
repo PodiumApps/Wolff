@@ -97,7 +97,7 @@ final class SessionListViewModel: SessionListViewModelRepresentable {
 
                         guard let self else { return nil }
 
-                        guard let driver = self.drivers.first(where: { $0.id == position.id }) else { return nil }
+                        guard let driver = self.drivers.first(where: { $0.id == position.driverId }) else { return nil }
                         return driver.id
                     }
 
