@@ -53,11 +53,13 @@ final class SettingsViewModel: SettingsViewModelRepresentable {
 
         notificationService.statePublisher
             .receive(on: DispatchQueue.main)
-            .compactMap { notificationService in
+            .compactMap { [weak self] notificationService in
 
+                guard let self else { return nil }
+                
                 switch notificationService {
                 case .refreshed(let notifications, let showActivateNotificationActionSheet):
-                    self.activateNotificationsActionSheet = showActivateNotificationActionSheet
+                    activateNotificationsActionSheet = showActivateNotificationActionSheet
                     return notifications
                 case .refreshing, .error:
                     return []
@@ -71,8 +73,9 @@ final class SettingsViewModel: SettingsViewModelRepresentable {
 
                 switch purchaseService {
                 case .refreshed(let isPremium, _):
-                    return isPremium ? true : false
-                default: return false
+                    return isPremium
+                default:
+                    return nil
                 }
             }
             .assign(to: &$isPremium)

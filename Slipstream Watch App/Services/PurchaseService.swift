@@ -90,7 +90,6 @@ class PurchaseService: PurchaseServiceRepresentable {
         #endif
         
         checkIfUserIsPremium(showSheet: false)
-        getProducts()
     }
     
     private func registerUser(isPremium: Bool) async {
@@ -157,6 +156,8 @@ class PurchaseService: PurchaseServiceRepresentable {
             Logger.userService.info("\(persistedUserId ?? "") premium is \(isPremium)")
             state = .refreshed(isPremium: isPremium, showSheet: showSheet)
             
+            if !isPremium { getProducts() }
+            
             Task { [weak self] in
                 
                 guard let self else { return }
@@ -171,7 +172,7 @@ class PurchaseService: PurchaseServiceRepresentable {
             
             guard let self else { return }
 
-            if let packages = offerings?.offering(identifier: "com.tomasmamede.slipstream.offerings-premium")?
+            if let packages = offerings?.offering(identifier: Entitlements.offering.rawValue)?
                 .availablePackages {
                     products = packages
             }
@@ -200,6 +201,7 @@ extension PurchaseService {
     enum Entitlements: String {
         
         case premium = "com.tomasmamede.slipstream.premium"
+        case offering = "com.tomasmamede.slipstream.offerings-premium"
     }
 
 }

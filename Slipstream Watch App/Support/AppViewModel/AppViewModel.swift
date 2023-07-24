@@ -56,8 +56,8 @@ final class AppViewModel: AppViewModelRepresentable {
         self.purchaseService = purchaseService
         self.navigation = navigation
         self.route = []
-
-        load()
+        
+        setupBindings()
     }
 
     // MARK: - Private
@@ -71,8 +71,6 @@ final class AppViewModel: AppViewModelRepresentable {
         let settingsViewModel = SettingsViewModel.make(navigation: navigation)
 
         state = .results(seasonListViewModel, standingsViewModel, newsListViewModel, settingsViewModel)
-        
-        setupBindings()
     }
     
     private func setupBindings() {
@@ -124,17 +122,10 @@ final class AppViewModel: AppViewModelRepresentable {
 
                 guard let self else { return }
 
-                switch (action, liveSessionService) {
-                case (.reloadServices, .refreshed(let liveSession)):
+                switch (action) {
+                case (.reloadServices):
 
-                    let eventIsLive = !liveSession.standings.isEmpty
-
-                    if !eventIsLive {
-                        eventService.action.send(.updateAll)
-                        newsService.action.send(.updateAll)
-                    }
-                default:
-                    return
+                    load()
                 }
             }
             .store(in: &subscriptions)
