@@ -21,7 +21,11 @@ class InAppPurchaseViewModel: InAppPurchaseViewModelRepresentable {
     
     @Published var products: [Product] = []
     var action = PassthroughSubject<InAppPurchaseViewModel.Action, Never>()
-    @Published var state: InAppPurchaseViewModel.State = .results(isPremium: false)
+
+    @Published var state: InAppPurchaseViewModel.State = .results(
+        isPremium: false,
+        label: Localization.InAppPurchaseView.body
+    )
     
     
     private var purchaseService: PurchaseServiceRepresentable
@@ -64,13 +68,15 @@ class InAppPurchaseViewModel: InAppPurchaseViewModelRepresentable {
 
                 guard let self else { return }
                 
-                self.state = .loading
+                self.state = .loading(label: Localization.InAppPurchaseView.Body.loading)
                 
                 switch action {
                 case .restore:
                     self.purchaseService.action.send(.restorePurchases)
                 case .purchase(let productId):
                     self.buyProduct(id: productId)
+                case .reload:
+                    self.purchaseService.action.send(.reloadProducts)
                 }
             }
             .store(in: &subscriptions)
@@ -83,11 +89,14 @@ class InAppPurchaseViewModel: InAppPurchaseViewModelRepresentable {
                 
                 switch state {
                 case .refreshed(let isPremium, _):
-                    return .results(isPremium: isPremium)
+                    let messageLabel = isPremium
+                    ? Localization.InAppPurchaseView.Body.success
+                    : Localization.InAppPurchaseView.body
+                    return .results(isPremium: isPremium, label: messageLabel)
                 case .refreshing:
-                    return .loading
+                    return .loading(label: Localization.InAppPurchaseView.Body.loading)
                 case .error:
-                    return .error
+                    return .error(label: Localization.InAppPurchaseView.Body.error)
                 case .dismissed:
                     return nil
                 }
@@ -101,7 +110,7 @@ class InAppPurchaseViewModel: InAppPurchaseViewModelRepresentable {
             let package = packages
                 .first(where: { $0.storeProduct.productIdentifier == id.string })
         else {
-            state = .error
+            state = .error(label: Localization.InAppPurchaseView.Body.error)
             return
         }
         
@@ -115,24 +124,14 @@ extension InAppPurchaseViewModel {
         
         case purchase(Product.ID)
         case restore
+        case reload
     }
     
     enum State: Equatable {
         
-        case loading
-        case results(isPremium: Bool)
-        case error
-        
-        var label: String {
-            switch self {
-            case .loading:
-                return Localization.InAppPurchaseView.Body.loading
-            case .results(let isPremium):
-                return isPremium ? Localization.InAppPurchaseView.Body.success : Localization.InAppPurchaseView.body
-            case .error:
-                return Localization.InAppPurchaseView.Body.error
-            }
-        }
+        case loading(label: String)
+        case results(isPremium: Bool, label: String)
+        case error(label: String)
     }
 }
 

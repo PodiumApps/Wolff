@@ -61,6 +61,10 @@ class PurchaseService: PurchaseServiceRepresentable {
                 case .restorePurchases:
                     state = .refreshing
                     restorePurchases()
+
+                case .reloadProducts:
+                    state = .refreshing
+                    checkIfUserIsPremium(showSheet: false)
                     
                 case .checkPremium:
                     return
@@ -110,7 +114,7 @@ class PurchaseService: PurchaseServiceRepresentable {
                 return
             }
             
-            checkIfUserIsPremium(showSheet: true)
+            checkIfUserIsPremium(showSheet: false)
         }
     }
     
@@ -130,7 +134,7 @@ class PurchaseService: PurchaseServiceRepresentable {
                 Logger.userService.info("\(persistedUserId ?? "") canceled subscription")
             }
             
-            checkIfUserIsPremium(showSheet: true)
+            checkIfUserIsPremium(showSheet: false)
         }
     }
     
@@ -183,6 +187,7 @@ extension PurchaseService {
         case dismissed
         case purchase(Package)
         case restorePurchases
+        case reloadProducts
         case checkPremium
     }
     

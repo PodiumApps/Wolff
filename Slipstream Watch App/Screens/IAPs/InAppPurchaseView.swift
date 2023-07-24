@@ -16,32 +16,53 @@ struct InAppPurchaseView<ViewModel: InAppPurchaseViewModelRepresentable>: View {
                 Text(Localization.InAppPurchaseView.title)
                     .font(.Title4.regular)
                     .foregroundColor(.accentColor)
-                
-                Text(viewModel.state.label)
-                    .font(viewModel.state == .error ? .Body.semibold : .Body.regular)
-                
-                VStack(spacing: .Spacing.default3) {
-                    
-                    ForEach(viewModel.products) { product in
-                        
-                        Button(product.label) {
-                            viewModel.action.send(.purchase(product.id))
+
+                switch viewModel.state {
+                case .error(let error):
+                    VStack {
+                        Spacer()
+                        Text(error)
+                            .font(.caption)
+                        Spacer()
+                        Button("Try again") {
+                            viewModel.action.send(.reload)
                         }
-                        .foregroundColor(.white)
-                        .buttonStyle(BorderedButtonStyle(tint: .accentColor.opacity(255)))
                     }
-                    
-                    Button(action: {
-                        viewModel.action.send(.restore)
-                    }) {
-                        Text(Localization.InAppPurchaseView.Button.restore)
-                            .font(.Caption.regular)
+                case .loading(let label):
+                    VStack(spacing: .Spacing.default2) {
+                        Spacer()
+                        ProgressView()
+                        Text(label)
+                            .font(.Body.regular)
+                        Spacer()
+                    }
+                case .results(let isPremium, let label):
+                    Text(label)
+                        .font(.Body.regular)
+
+                    if !isPremium {
+                        VStack(spacing: .Spacing.default3) {
+
+                            ForEach(viewModel.products) { product in
+
+                                Button(product.label) {
+                                    viewModel.action.send(.purchase(product.id))
+                                }
+                                .foregroundColor(.white)
+                                .buttonStyle(BorderedButtonStyle(tint: .accentColor.opacity(255)))
+                            }
+
+                            Button(action: {
+                                viewModel.action.send(.restore)
+                            }) {
+                                Text(Localization.InAppPurchaseView.Button.restore)
+                                    .font(.Caption.regular)
+                            }
+                        }
                     }
                 }
-                .disabled(viewModel.state == .loading)
-                .opacity( viewModel.state == .results(isPremium: true) ? 0 : viewModel.state == .loading ? 0.2 : 1)
             }
-            .padding()
+            .padding(5)
         }
     }
 }
