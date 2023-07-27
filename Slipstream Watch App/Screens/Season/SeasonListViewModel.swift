@@ -19,7 +19,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
 
     private let eventService: EventServiceRepresentable
     private let driversAndConstructorService: DriverAndConstructorServiceRepresentable
-    private let liveEventService: LiveSessionServiceRepresentable
+    private let liveSessionService: LiveSessionServiceRepresentable
     private let purchaseService: PurchaseServiceRepresentable
 
     private let fiveMinutesInSeconds: Double = 5 * 60
@@ -52,7 +52,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
 
         self.eventService = eventService
         self.driversAndConstructorService = driversAndConstructorService
-        self.liveEventService = liveEventService
+        self.liveSessionService = liveEventService
         self.purchaseService = purchaseService
 
         self.state = .loading
@@ -92,7 +92,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
             }
             .assign(to: &$state)
 
-        liveEventService.statePublisher
+        liveSessionService.statePublisher
             .receive(on: DispatchQueue.main)
             .compactMap { [weak self] liveEventService in
 
@@ -159,7 +159,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
 
                 switch action {
                 case .resumeTimers:
-                    liveEventService.action.send(.fetchPositions)
+                    liveSessionService.action.send(.fetchPositions)
                     _ = buildAllEventCells()
                 case .stopTimers:
                     self.liveEventTimer?.invalidate()
@@ -181,7 +181,7 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
 
             if timeInterval < .minuteInterval {
 
-                self.liveEventService.action.send(.updatePositions)
+                self.liveSessionService.action.send(.updatePositions)
             } else {
 
                 guard

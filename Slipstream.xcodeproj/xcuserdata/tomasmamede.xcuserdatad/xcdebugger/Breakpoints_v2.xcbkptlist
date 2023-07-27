@@ -14,25 +14,25 @@
             filePath = "Slipstream Watch App/Support/AppViewModel/AppViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "setupBindings()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "942230AE-270B-4F4E-AD66-92E775DA183D - 233379ae558c858b"
+                  uuid = "942230AE-270B-4F4E-AD66-92E775DA183D - 1a1f8c044804f899"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "function signature specialization &lt;Arg[2] = [Constant Propagated Function : closure #1 (Slipstream_Watch_App.EventService.State, Slipstream_Watch_App.NewsService.State, Slipstream_Watch_App.DriverAndConstructorService.State, Slipstream_Watch_App.LiveSessionService.State) -&gt; Swift.Optional&lt;Slipstream_Watch_App.AppViewModel.State&gt; in Slipstream_Watch_App.AppViewModel.(setupBindings in _0828EE5DCF6065E08AFE0346F76E6CDD)() -&gt; ()]&gt; of reabstraction thunk helper from @escaping @callee_guaranteed (@guaranteed Slipstream_Watch_App.EventService.State, @guaranteed Slipstream_Watch_App.NewsService.State, @guaranteed Slipstream_Watch_App.DriverAndConstructorService.State, @guaranteed Slipstream_Watch_App.LiveSessionService.State) -&gt; (@owned Swift.Optional&lt;Slipstream_Watch_App.AppViewModel.State&gt;) to @escaping @callee_guaranteed (@in_guaranteed (Slipstream_Watch_App.EventService.State, Slipstream_Watch_App.NewsService.State, Slipstream_Watch_App.DriverAndConstructorService.State, Slipstream_Watch_App.LiveSessionService.State)) -&gt; (@out Swift.Optional&lt;Slipstream_Watch_App.AppViewModel.State&gt;)"
+                  symbolName = "Slipstream_Watch_App.AppViewModel.setupBindings() -&gt; ()"
                   moduleName = "Slipstream Watch App"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Slipstream%20Watch%20App/Support/AppViewModel/AppViewModel.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "98"
-                  endingLineNumber = "98"
-                  offsetFromSymbolStart = "80">
+                  startingLineNumber = "100"
+                  endingLineNumber = "100"
+                  offsetFromSymbolStart = "2728">
                </Location>
                <Location
                   uuid = "942230AE-270B-4F4E-AD66-92E775DA183D - 233379ae558c854d"
@@ -50,6 +50,22 @@
                   offsetFromSymbolStart = "80">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CE346301-0C3E-4A2A-A437-43A2DEACB4E3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Slipstream Watch App/Support/AppViewModel/AppViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "setupBindings()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

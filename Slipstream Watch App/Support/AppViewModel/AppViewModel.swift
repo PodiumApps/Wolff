@@ -71,6 +71,7 @@ final class AppViewModel: AppViewModelRepresentable {
         driverAndConstructorService.action.send(.fetchAll)
         eventService.action.send(.fetchAll)
         newsService.action.send(.fetchAll)
+        liveSessionService.action.send(.fetchPositions)
 
         purchaseService.action.send(.reloadProducts)
 
