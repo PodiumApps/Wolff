@@ -111,6 +111,13 @@
 		4239968B2A6E71FB00F6F712 /* TrackInfoCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423996232A6E71FB00F6F712 /* TrackInfoCellView.swift */; };
 		4239968C2A6E71FB00F6F712 /* TrackInfoCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423996242A6E71FB00F6F712 /* TrackInfoCellViewModel.swift */; };
 		4239968D2A6E71FB00F6F712 /* SessionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423996252A6E71FB00F6F712 /* SessionListView.swift */; };
+		CF11DC992A726D2800E89705 /* PrivacyPolicyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF11DC982A726D2800E89705 /* PrivacyPolicyViewModel.swift */; };
+		CF96972B2A727984008158C6 /* privacy_policy.json in Resources */ = {isa = PBXBuildFile; fileRef = CF96972A2A727984008158C6 /* privacy_policy.json */; };
+		CF96972D2A727C13008158C6 /* terms_and_conditions.json in Resources */ = {isa = PBXBuildFile; fileRef = CF96972C2A727C13008158C6 /* terms_and_conditions.json */; };
+		CF96972F2A727C22008158C6 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF96972E2A727C22008158C6 /* Document.swift */; };
+		CF9697312A72824F008158C6 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9697302A72824F008158C6 /* PrivacyPolicyView.swift */; };
+		CF9697342A729C80008158C6 /* TermsAndConditionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9697332A729C80008158C6 /* TermsAndConditionsViewModel.swift */; };
+		CF9697362A729D19008158C6 /* TermsAndConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9697352A729D19008158C6 /* TermsAndConditionsView.swift */; };
 		CFAFFD8F2A619DF900BA7B51 /* Slipstream Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = CFAFFD8E2A619DF900BA7B51 /* Slipstream Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CFAFFD9B2A619DFA00BA7B51 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFAFFD9A2A619DFA00BA7B51 /* Preview Assets.xcassets */; };
 		CFAFFEA82A619F0E00BA7B51 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = CFAFFEA72A619F0E00BA7B51 /* RevenueCat */; };
@@ -247,6 +254,13 @@
 		423996232A6E71FB00F6F712 /* TrackInfoCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackInfoCellView.swift; sourceTree = "<group>"; };
 		423996242A6E71FB00F6F712 /* TrackInfoCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackInfoCellViewModel.swift; sourceTree = "<group>"; };
 		423996252A6E71FB00F6F712 /* SessionListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionListView.swift; sourceTree = "<group>"; };
+		CF11DC982A726D2800E89705 /* PrivacyPolicyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewModel.swift; sourceTree = "<group>"; };
+		CF96972A2A727984008158C6 /* privacy_policy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = privacy_policy.json; sourceTree = "<group>"; };
+		CF96972C2A727C13008158C6 /* terms_and_conditions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = terms_and_conditions.json; sourceTree = "<group>"; };
+		CF96972E2A727C22008158C6 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		CF9697302A72824F008158C6 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
+		CF9697332A729C80008158C6 /* TermsAndConditionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewModel.swift; sourceTree = "<group>"; };
+		CF9697352A729D19008158C6 /* TermsAndConditionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsView.swift; sourceTree = "<group>"; };
 		CFAFFD882A619DF900BA7B51 /* Slipstream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Slipstream.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFAFFD8E2A619DF900BA7B51 /* Slipstream Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Slipstream Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFAFFD9A2A619DFA00BA7B51 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -302,12 +316,15 @@
 		423995992A6E71FA00F6F712 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CF96972A2A727984008158C6 /* privacy_policy.json */,
+				CF96972C2A727C13008158C6 /* terms_and_conditions.json */,
 				4239959A2A6E71FA00F6F712 /* Localizable.strings */,
 				4239959C2A6E71FA00F6F712 /* Global.swift */,
 				4239959D2A6E71FA00F6F712 /* Localization.swift */,
 				4239959E2A6E71FA00F6F712 /* swiftgen.yml */,
 				4239959F2A6E71FA00F6F712 /* Identifier.swift */,
 				423995A02A6E71FA00F6F712 /* StoreKitSandbox.storekit */,
+				CF96972E2A727C22008158C6 /* Document.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -481,6 +498,8 @@
 		423995DA2A6E71FB00F6F712 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				CF9697322A728A55008158C6 /* TermsAndConditions */,
+				CF11DC972A726CFB00E89705 /* PrivacyPolicy */,
 				423995DB2A6E71FB00F6F712 /* SettingsView.swift */,
 				423995DC2A6E71FB00F6F712 /* SettingsViewModel.swift */,
 			);
@@ -745,6 +764,24 @@
 			path = TrackInfoCell;
 			sourceTree = "<group>";
 		};
+		CF11DC972A726CFB00E89705 /* PrivacyPolicy */ = {
+			isa = PBXGroup;
+			children = (
+				CF11DC982A726D2800E89705 /* PrivacyPolicyViewModel.swift */,
+				CF9697302A72824F008158C6 /* PrivacyPolicyView.swift */,
+			);
+			path = PrivacyPolicy;
+			sourceTree = "<group>";
+		};
+		CF9697322A728A55008158C6 /* TermsAndConditions */ = {
+			isa = PBXGroup;
+			children = (
+				CF9697332A729C80008158C6 /* TermsAndConditionsViewModel.swift */,
+				CF9697352A729D19008158C6 /* TermsAndConditionsView.swift */,
+			);
+			path = TermsAndConditions;
+			sourceTree = "<group>";
+		};
 		CFAFFD812A619DF900BA7B51 = {
 			isa = PBXGroup;
 			children = (
@@ -808,6 +845,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CFAFFDA22A619DFA00BA7B51 /* Build configuration list for PBXNativeTarget "Slipstream" */;
 			buildPhases = (
+				CF9697292A727433008158C6 /* ShellScript */,
 				CFAFFD862A619DF900BA7B51 /* Resources */,
 				CFAFFDA12A619DFA00BA7B51 /* Embed Watch Content */,
 			);
@@ -895,6 +933,8 @@
 			files = (
 				CFAFFD9B2A619DFA00BA7B51 /* Preview Assets.xcassets in Resources */,
 				4239962F2A6E71FB00F6F712 /* Localizable.strings in Resources */,
+				CF96972B2A727984008158C6 /* privacy_policy.json in Resources */,
+				CF96972D2A727C13008158C6 /* terms_and_conditions.json in Resources */,
 				423996322A6E71FB00F6F712 /* swiftgen.yml in Resources */,
 				423996342A6E71FB00F6F712 /* StoreKitSandbox.storekit in Resources */,
 				423996552A6E71FB00F6F712 /* Assets.xcassets in Resources */,
@@ -902,6 +942,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CF9697292A727433008158C6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ -z $CI ]]; then\n    swiftgen config run --config \"$SRCROOT/Slipstream Watch App/Resources/swiftgen.yml\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CFAFFD8A2A619DF900BA7B51 /* Sources */ = {
@@ -924,6 +984,7 @@
 				4239968A2A6E71FB00F6F712 /* LiveSessionCellView.swift in Sources */,
 				4239964E2A6E71FB00F6F712 /* DateExtension.swift in Sources */,
 				4239965D2A6E71FB00F6F712 /* ConstructorMock.swift in Sources */,
+				CF9697342A729C80008158C6 /* TermsAndConditionsViewModel.swift in Sources */,
 				4239965C2A6E71FB00F6F712 /* SessionMock.swift in Sources */,
 				423996312A6E71FB00F6F712 /* Localization.swift in Sources */,
 				4239963C2A6E71FB00F6F712 /* LiveSession.swift in Sources */,
@@ -963,8 +1024,10 @@
 				423996482A6E71FB00F6F712 /* SessionResult.swift in Sources */,
 				423996862A6E71FB00F6F712 /* FinishedSessionCellViewModel.swift in Sources */,
 				423996362A6E71FB00F6F712 /* ServiceLocator.swift in Sources */,
+				CF11DC992A726D2800E89705 /* PrivacyPolicyViewModel.swift in Sources */,
 				423996732A6E71FB00F6F712 /* NewsListView.swift in Sources */,
 				4239963B2A6E71FB00F6F712 /* LiveSessionService.swift in Sources */,
+				CF9697362A729D19008158C6 /* TermsAndConditionsView.swift in Sources */,
 				423996472A6E71FB00F6F712 /* Session.swift in Sources */,
 				4239966D2A6E71FB00F6F712 /* NewsListViewModel.swift in Sources */,
 				423996832A6E71FB00F6F712 /* UpcomingEventCardViewModel.swift in Sources */,
@@ -973,6 +1036,7 @@
 				423996542A6E71FB00F6F712 /* AppViewModel.swift in Sources */,
 				423996562A6E71FB00F6F712 /* SlipstreamWatchApp.swift in Sources */,
 				423996462A6E71FB00F6F712 /* SessionDetail.swift in Sources */,
+				CF9697312A72824F008158C6 /* PrivacyPolicyView.swift in Sources */,
 				423996512A6E71FB00F6F712 /* NetworkManagerRepresentable.swift in Sources */,
 				423996662A6E71FB00F6F712 /* DriverStandingsDetailsViewModel.swift in Sources */,
 				423996722A6E71FB00F6F712 /* NewsCellView.swift in Sources */,
@@ -1005,6 +1069,7 @@
 				4239964A2A6E71FB00F6F712 /* TimeIntervalExtension.swift in Sources */,
 				4239965A2A6E71FB00F6F712 /* DriverMock.swift in Sources */,
 				4239967E2A6E71FB00F6F712 /* LiveEventCardViewModel.swift in Sources */,
+				CF96972F2A727C22008158C6 /* Document.swift in Sources */,
 				423996592A6E71FB00F6F712 /* SessionResultMock.swift in Sources */,
 				4239965F2A6E71FB00F6F712 /* SettingsViewModel.swift in Sources */,
 				423996752A6E71FB00F6F712 /* SeasonListView.swift in Sources */,

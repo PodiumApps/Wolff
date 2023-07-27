@@ -52,7 +52,7 @@ class EventService: EventServiceRepresentable {
         
         do {
             let events = try await self.networkManager.load(Event.getEvents())
-            Logger.eventService.info("Got \(events.count) events")
+            Logger.eventService.info("Fetched \(events.count) events")
             
             state = .refreshed(events)
         } catch {

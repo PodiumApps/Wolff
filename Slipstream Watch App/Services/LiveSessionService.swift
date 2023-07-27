@@ -50,7 +50,7 @@ class LiveSessionService: LiveSessionServiceRepresentable {
         
         do {
             let liveSession = try await networkManager.load(LiveSession.getLiveSession())
-            Logger.liveSessionService.info("Got \(liveSession.standings.count) positions")
+            Logger.liveSessionService.info("Fetched \(liveSession.standings.count) positions")
             state = .refreshed(liveSession)
         } catch {
             Logger.liveSessionService.error("Fetch failed with \(error)")

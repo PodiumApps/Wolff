@@ -28,6 +28,10 @@ struct SettingsView<ViewModel: SettingsViewModelRepresentable>: View {
                         }
                     }
                 }
+            } else {
+
+                Text("Your Premium subscription is active.")
+                    .font(.Caption2.medium)
             }
 
             Section(header: Text(Localization.Settings.notificationsSectionTitle)) {
@@ -38,6 +42,29 @@ struct SettingsView<ViewModel: SettingsViewModelRepresentable>: View {
                         viewModel.notificationCells[index].category.label,
                         isOn: $viewModel.notificationCells[index].isOn
                     )
+                }
+            }
+
+            Section {
+
+                Button(action: {
+                    viewModel.action.send(.showPrivacyPolicyView)
+                }) {
+                    HStack(alignment: .center) {
+                        Spacer()
+                        Text("Privacy Policy")
+                        Spacer()
+                    }
+                }
+
+                Button(action: {
+                    viewModel.action.send(.showTermsAndConditionsView)
+                }) {
+                    HStack(alignment: .center) {
+                        Spacer()
+                        Text("Terms & Conditions")
+                        Spacer()
+                    }
                 }
             }
 

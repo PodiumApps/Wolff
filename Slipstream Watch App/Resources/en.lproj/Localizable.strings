@@ -81,9 +81,9 @@
 
 // MARK: - InAppPurchaseView
 "in_app_purchase_view.title" = "Slipstream Premium";
-"in_app_purchase_view.body" = "Unlock full access navigate the app freely for more news content and driver info.";
+"in_app_purchase_view.body" = "Unlock full access to navigate the app freely for more news content and driver info.";
 "in_app_purchase_view.body.loading" = "We are loading your subscription. Thanks for trusting us!";
-"in_app_purchase_view.body.success" = "Thanks for trusting us! We hope you enjoy your subscription.";
+"in_app_purchase_view.body.success" = "Thank you for trusting us! We hope you enjoy your subscription.";
 "in_app_purchase_view.body.error" = "Something went wrong. Please try again to access all live information and get more exclusive content.";
 "in_app_purchase_view.button.restore" = "Restore Purchases";
 "in_app_purchase_view.subscription_period.day" = "Day";
@@ -108,13 +108,18 @@
 "settings.notification_label.latest_news" = "Latest News";
 "settings.warning_activate_notifications_iphone" = "Please activate notifications in the Watch app on your iPhone.";
 
+// MARK: - Error
+"error_button.try_again" = "Try again";
+"error_screen.label" = "There was a problem loading the information. Please make sure you have an internet connection and try again.";
+"error_screen.subscriptions.label" = "We were unable to load subscription offers. Check you Internet connection and try again.";
+
+// MARK: - General App
+"app.name" = "Slipstream";
+
 // MARK: - NotificationsLabels
 "notifications.labels.latest_news" = "Latest News";
 "notifications.labels.session_start" = "Session Start";
 "notifications.labels.session_end" = "Session End";
-
-// MARK: - Error
-"error_button.try_again" = "Try again";
 
 
 

@@ -19,12 +19,12 @@ struct InAppPurchaseView<ViewModel: InAppPurchaseViewModelRepresentable>: View {
 
                 switch viewModel.state {
                 case .error(let error):
-                    VStack {
+                    VStack(spacing: .Spacing.default) {
                         Spacer()
                         Text(error)
                             .font(.caption)
                         Spacer()
-                        Button("Try again") {
+                        Button(Localization.ErrorButton.tryAgain) {
                             viewModel.action.send(.reload)
                         }
                     }
@@ -62,7 +62,7 @@ struct InAppPurchaseView<ViewModel: InAppPurchaseViewModelRepresentable>: View {
                     }
                 }
             }
-            .padding(5)
+            .padding(2)
         }
     }
 }

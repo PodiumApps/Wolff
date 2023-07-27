@@ -46,10 +46,12 @@ class InAppPurchaseViewModel: InAppPurchaseViewModelRepresentable {
             .productsPublisher
             .receive(on: DispatchQueue.main)
             .compactMap { [weak self] packages in
+
+                guard let self else { return nil }
                 
-                self?.packages = packages
+                self.packages = packages
                 
-                return packages.reduce([], { partialResult, package in
+                let products: [Product] = packages.reduce([], { partialResult, package in
                     guard let period =  package.storeProduct.subscriptionPeriod else { return partialResult }
                     
                     return partialResult + [
@@ -59,6 +61,14 @@ class InAppPurchaseViewModel: InAppPurchaseViewModelRepresentable {
                         )
                     ]
                 })
+
+                if products.isEmpty {
+
+                    state = .error(label: Localization.ErrorScreen.Subscriptions.label)
+                    return nil
+                }
+
+                return products
             }
             .assign(to: &$products)
         

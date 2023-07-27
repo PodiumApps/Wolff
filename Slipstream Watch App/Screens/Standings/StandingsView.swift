@@ -13,8 +13,6 @@ struct StandingsView<ViewModel: StandingsViewModelRepresentable>: View {
 
         Group {
             switch viewModel.state {
-            case .error(let error):
-                Text(error)
             case .loading:
                 ProgressView()
             case .results(let driverCells, let constructorCells):

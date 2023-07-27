@@ -58,15 +58,21 @@ final class AppViewModel: AppViewModelRepresentable {
         self.purchaseService = purchaseService
         self.navigation = navigation
         self.route = []
-        
-        setupBindings()
+
         load()
     }
 
     // MARK: - Private
     private func load() {
 
+        subscriptions.removeAll()
+        setupBindings()
+
         driverAndConstructorService.action.send(.fetchAll)
+        eventService.action.send(.fetchAll)
+        newsService.action.send(.fetchAll)
+
+        purchaseService.action.send(.reloadProducts)
 
         let seasonListViewModel = SeasonListViewModel.make(navigation: navigation)
         let standingsViewModel = StandingsViewModel.make(navigation: navigation)
@@ -77,6 +83,21 @@ final class AppViewModel: AppViewModelRepresentable {
     }
     
     private func setupBindings() {
+
+        eventService.statePublisher
+            .zip(newsService.statePublisher, driverAndConstructorService.statePublisher, liveSessionService.statePublisher)
+            .receive(on: DispatchQueue.main)
+            .delay(for: 1, scheduler: DispatchQueue.main)
+            .compactMap { eventService, newsService, driverAndConstructorService, liveSessionService in
+
+                switch (eventService, newsService, driverAndConstructorService, liveSessionService) {
+                case (.error, _, _, _), (_, .error, _, _), (_, _, .error, _), (_, _, _, .error):
+                    return .error(Localization.ErrorScreen.label)
+                default:
+                    return nil
+                }
+            }
+            .assign(to: &$state)
         
         navigation
             .statePublisher
@@ -108,6 +129,7 @@ final class AppViewModel: AppViewModelRepresentable {
                 case .refreshing:
                     return nil
                 case .error:
+                    self.state = .error(Localization.ErrorScreen.label)
                     return nil
                 case .refreshed(let isPremium, let showSheet):
                     return !isPremium && showSheet
@@ -144,6 +166,9 @@ final class AppViewModel: AppViewModelRepresentable {
 
                         lastDataReload = currentDate
                     }
+                case (.restoreFromError, _):
+                    self.state = .loading
+                    self.load()
                 default:
                     return
                 }
@@ -164,6 +189,7 @@ extension AppViewModel {
     enum Action {
 
         case reloadServices
+        case restoreFromError
     }
 }
 

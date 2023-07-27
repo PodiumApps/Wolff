@@ -3,7 +3,6 @@ import Combine
 
 protocol NewsListViewModelRepresentable: ObservableObject {
 
-    var action: PassthroughSubject<NewsListViewModel.Action, Never> { get }
     var state: NewsListViewModel.State { get }
 }
 
@@ -15,9 +14,6 @@ final class NewsListViewModel: NewsListViewModelRepresentable {
     private var subscriptions = Set<AnyCancellable>()
     private let newsService: NewsServiceRepresentable
 
-    var action = PassthroughSubject<Action, Never>()
-    private var subscribers = Set<AnyCancellable>()
-
     init(navigation: AppNavigationRepresentable, newsService: NewsServiceRepresentable) {
 
         self.navigation = navigation
@@ -26,12 +22,9 @@ final class NewsListViewModel: NewsListViewModelRepresentable {
         self.newsService = newsService
 
         self.setUpServices()
-        self.setUpBindings()
     }
 
     private func setUpServices() {
-
-        newsService.action.send(.fetchAll)
 
         newsService.statePublisher
             .receive(on: DispatchQueue.main)
@@ -40,8 +33,8 @@ final class NewsListViewModel: NewsListViewModelRepresentable {
                 guard let self else { return nil }
 
                 switch newsService {
-                case .error(let error):
-                    return .error(error.localizedDescription)
+                case .error(_):
+                    return nil
                 case .refreshing:
                     return .loading
                 case .refreshed(let news):
@@ -50,23 +43,6 @@ final class NewsListViewModel: NewsListViewModelRepresentable {
                 }
             }
             .assign(to: &$state)
-    }
-
-    private func setUpBindings() {
-
-        action
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] action in
-
-                guard let self else { return }
-
-                switch action {
-                case .reloadService:
-                    newsService.action.send(.fetchAll)
-                }
-
-            }
-            .store(in: &subscribers)
     }
 
     private func buildNewsCells(news: [News]) -> NewsListViewModel.State {
@@ -98,20 +74,13 @@ final class NewsListViewModel: NewsListViewModelRepresentable {
 
 extension NewsListViewModel {
 
-    enum Action {
-
-        case reloadService
-    }
-
     enum State: Equatable {
 
-        case error(String)
         case results([NewsCellViewModel])
         case loading
 
         enum Identifier: String {
 
-            case error
             case loading
             case results
         }
@@ -120,7 +89,6 @@ extension NewsListViewModel {
             switch self {
             case .loading: return .loading
             case .results: return .results
-            case .error: return .error
             }
         }
 

@@ -63,7 +63,7 @@ class PurchaseService: PurchaseServiceRepresentable {
                     restorePurchases()
 
                 case .reloadProducts:
-                    state = .refreshing
+                    getProducts()
                     checkIfUserIsPremium(showSheet: false)
                     
                 case .checkPremium:
@@ -154,15 +154,14 @@ class PurchaseService: PurchaseServiceRepresentable {
             let isPremium = customerInfo?.entitlements.all[Entitlements.premium.rawValue]?.isActive == true
             
             Logger.userService.info("\(persistedUserId ?? "") premium is \(isPremium)")
-            state = .refreshed(isPremium: isPremium, showSheet: showSheet)
-            
-            if !isPremium { getProducts() }
             
             Task { [weak self] in
                 
                 guard let self else { return }
                 await registerUser(isPremium: isPremium)
             }
+
+            state = .refreshed(isPremium: isPremium, showSheet: false)
         }
     }
     
@@ -177,6 +176,8 @@ class PurchaseService: PurchaseServiceRepresentable {
                     products = packages
             }
         }
+
+        state = .refreshed(isPremium: false, showSheet: false)
     }
 }
 

@@ -16,9 +16,23 @@ struct AppView<ViewModel: AppViewModelRepresentable>: View {
         Group {
             switch viewModel.state {
             case .error(let error):
-                Text(error)
+                NavigationView {
+                    ScrollView {
+                        Spacer()
+                        Text(error)
+                            .font(.caption)
+                        Spacer()
+                        Button(Localization.ErrorButton.tryAgain) {
+                            viewModel.action.send(.restoreFromError)
+                        }
+                    }
+                    .navigationTitle(Localization.App.name)
+                }
             case .loading:
-                ProgressView()
+                NavigationView {
+                    ProgressView()
+                }
+                .navigationTitle(Localization.App.name)
             case .results(let seasonViewModel, let standingsViewModel, let newsListViewModel, let settingsViewModel):
                 NavigationStack(path: $viewModel.route) {
                     TabView {
@@ -41,6 +55,10 @@ struct AppView<ViewModel: AppViewModelRepresentable>: View {
                             ConstructorStandingsDetailsView(viewModel: viewModel)
                         case .activatePremium(let viewModel):
                             InAppPurchaseView(viewModel: viewModel)
+                        case .privacyPolicy(let viewModel):
+                            PrivacyPolicyView(viewModel: viewModel)
+                        case .termsAndConditions(let viewModel):
+                            TermsAndConditionsView(viewModel: viewModel)
                         }
                     }
                     .fullScreenCover(isPresented: $viewModel.presentPremiumSheet) {

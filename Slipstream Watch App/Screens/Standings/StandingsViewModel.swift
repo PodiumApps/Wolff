@@ -14,6 +14,7 @@ final class StandingsViewModel: StandingsViewModelRepresentable {
 
     private let driverAndConstructorService: DriverAndConstructorServiceRepresentable
     private let navigation: AppNavigationRepresentable
+
     private var subscribers = Set<AnyCancellable>()
 
     @Published var state: StandingsViewModel.State
@@ -43,8 +44,8 @@ final class StandingsViewModel: StandingsViewModelRepresentable {
                 guard let self else { return nil }
 
                 switch driverAndConstructorService {
-                case .error(let error):
-                    return .error(error.localizedDescription)
+                case .error:
+                    return nil
                 case .refreshing:
                     return .loading
                 case .refreshed(let drivers, let constructors):
@@ -132,7 +133,6 @@ extension StandingsViewModel {
     enum State: Equatable {
 
         case loading
-        case error(String)
         case results([DriverStandingsCellViewModel], [ConstructorStandingsCellViewModel])
 
         enum Identifier: String {
@@ -146,7 +146,6 @@ extension StandingsViewModel {
 
             switch self {
             case .loading: return .loading
-            case .error: return .error
             case .results: return .results
             }
         }

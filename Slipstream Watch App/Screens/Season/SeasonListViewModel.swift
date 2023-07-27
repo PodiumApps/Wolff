@@ -67,8 +67,6 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
 
     private func loadEvents() {
 
-        eventService.action.send(.fetchAll)
-
         eventService.statePublisher
             .combineLatest(driversAndConstructorService.statePublisher)
             .receive(on: DispatchQueue.main)
@@ -77,8 +75,8 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                 guard let self else { return nil }
 
                 switch (eventService, driversAndConstructorService) {
-                case (.error(let error), _), (_, .error(let error)):
-                    return .error(error.localizedDescription)
+                case (.error(_), _), (_, .error(_)):
+                    return nil
 
                 case (.refreshed(let events), .refreshed(let drivers, let constructors)):
 
@@ -165,8 +163,6 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
                     _ = buildAllEventCells()
                 case .stopTimers:
                     self.liveEventTimer?.invalidate()
-                case .reloadService:
-                    reloadServices()
                 case .tap, .verifyPremium:
                     return
                 }
@@ -402,12 +398,6 @@ final class SeasonListViewModel: SeasonListViewModelRepresentable {
 
         return .happeningNow(podium: podium)
     }
-
-    private func reloadServices() {
-
-        self.eventService.action.send(.fetchAll)
-        self.driversAndConstructorService.action.send(.fetchAll)
-    }
 }
 
 extension SeasonListViewModel {
@@ -453,20 +443,17 @@ extension SeasonListViewModel {
 
         case resumeTimers
         case stopTimers
-        case reloadService
         case verifyPremium
         case tap(index: Int)
     }
 
     enum State: Equatable {
 
-        case error(String)
         case results(cells: [Cell], indexFirstToAppear: Int)
         case loading
 
         enum Identifier: String {
 
-            case error
             case loading
             case results
         }
@@ -476,7 +463,6 @@ extension SeasonListViewModel {
             switch self {
             case .loading: return .loading
             case .results: return .results
-            case .error: return .error
             }
         }
 

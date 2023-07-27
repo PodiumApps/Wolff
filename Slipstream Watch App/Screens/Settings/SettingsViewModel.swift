@@ -90,6 +90,14 @@ final class SettingsViewModel: SettingsViewModelRepresentable {
 
                     let inAppPurchaseViewModel = InAppPurchaseViewModel.make()
                     navigation.action.send(.append(route: .activatePremium(inAppPurchaseViewModel)))
+                case .showPrivacyPolicyView:
+
+                    let privacyPolicyViewModel = PrivacyPolicyViewModel()
+                    navigation.action.send(.append(route: .privacyPolicy(privacyPolicyViewModel)))
+                case .showTermsAndConditionsView:
+
+                    let termsAndConditionsViewModel = TermsAndConditionsViewModel()
+                    navigation.action.send(.append(route: .termsAndConditions(termsAndConditionsViewModel)))
                 case .registerForRemoteNotifications:
                     
                     notificationService.action.send(.registerNotification)
@@ -103,6 +111,8 @@ extension SettingsViewModel {
 
     enum Action {
 
+        case showPrivacyPolicyView
+        case showTermsAndConditionsView
         case showInAppPurchaseView
         case registerForRemoteNotifications
     }

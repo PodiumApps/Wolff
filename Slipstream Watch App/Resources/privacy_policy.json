@@ -1,0 +1,29 @@
+{
+    "sections": [
+        {
+            "title": "General",
+            "paragraphs": [
+                "I care about your privacy and I take it very seriously. I don’t want nor need to know anything about you or your personal data. Your personal data is yours and I have designed Slipstream Racing to use as little of your personal data as possible and to ensure that the data used remains yours and under your control. I don’t want the responsibility of managing and protecting your data, so I avoid collecting it.",
+                "For the app to work as intended I collect a device ID generated when you install the app, your device token to send push notifications and whether you want to receive a certain notification category."
+            ]
+        },
+        {
+            "title": "Personally Identifying Information",
+            "paragraphs": [
+                "The device ID, the device token for push notifications and the value for the different notification categories stored on the server are not tied to you in any way and can not be linked to your identity."
+            ]
+        },
+        {
+            "title": "Privacy Policy changes",
+            "paragraphs": [
+                "Although most changes are likely to be minor, Slipstream Racing may change its Privacy Polity from time to time at its sole discretion. Your continued use of this app after any change in its Privacy Policy will constitute your acceptance of such change."
+            ]
+        },
+        {
+            "title": "Indemnity",
+            "paragraphs": [
+                "You hereby indemnify me, Tomás Santiago Mamede, creator of Slipstream Racing, and undertake to keep me indemnified against any losses, damages, costs, liabilities and expenses incurred or suffered by you arising out of use of this app or any breach by you of any provision of these terms of use, or arising out of any claim that you have breached any provision of these terms of use."
+            ]
+        }
+    ]
+}

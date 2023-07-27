@@ -48,7 +48,7 @@ final class NewsService: NewsServiceRepresentable {
 
         do {
             let news = try await self.networkManager.load(News.getNews())
-            Logger.newsService.info("Got \(news.count) news")
+            Logger.newsService.info("Fetched \(news.count) news")
 
             state = .refreshed(news)
         } catch {

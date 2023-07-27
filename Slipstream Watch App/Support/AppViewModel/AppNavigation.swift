@@ -75,6 +75,8 @@ extension AppNavigation {
         case driverStandingDetails(DriverStandingsDetailsViewModel)
         case constructorStandingDetails(ConstructorStandingsDetailsViewModel)
         case activatePremium(InAppPurchaseViewModel)
+        case privacyPolicy(PrivacyPolicyViewModel)
+        case termsAndConditions(TermsAndConditionsViewModel)
         
         enum Identifier {
             
@@ -85,6 +87,8 @@ extension AppNavigation {
             case driverStandingDetails
             case constructorStandingDetails
             case activatePremium
+            case privacyPolicy
+            case termsAndConditions
         }
 
         var id: Identifier {
@@ -96,6 +100,8 @@ extension AppNavigation {
             case .driverStandingDetails: return .driverStandingDetails
             case .constructorStandingDetails: return .constructorStandingDetails
             case .activatePremium: return .activatePremium
+            case .privacyPolicy: return .privacyPolicy
+            case .termsAndConditions: return .termsAndConditions
             }
         }
         
@@ -108,6 +114,8 @@ extension AppNavigation {
                 return true
             case .sessionsList,
                  .liveSessionStandingsList,
+                 .privacyPolicy,
+                 .termsAndConditions,
                  .activatePremium:
                 return false
             }

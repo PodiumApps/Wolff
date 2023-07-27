@@ -10,6 +10,10 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum Localization {
+  internal enum App {
+    /// Slipstream
+    internal static let name = Localization.tr("Localizable", "app.name", fallback: "Slipstream")
+  }
   internal enum DriverDetails {
     /// All Time Points
     internal static let allTimePoints = Localization.tr("Localizable", "driver_details.all_time_points", fallback: "All Time Points")
@@ -36,6 +40,18 @@ internal enum Localization {
     /// Tyre
     internal static let tyre = Localization.tr("Localizable", "driver_standings_cell.tyre", fallback: "Tyre")
   }
+  internal enum ErrorButton {
+    /// Try again
+    internal static let tryAgain = Localization.tr("Localizable", "error_button.try_again", fallback: "Try again")
+  }
+  internal enum ErrorScreen {
+    /// There was a problem loading the information. Please make sure you have an internet connection and try again.
+    internal static let label = Localization.tr("Localizable", "error_screen.label", fallback: "There was a problem loading the information. Please make sure you have an internet connection and try again.")
+    internal enum Subscriptions {
+      /// We were unable to load subscription offers. Check you Internet connection and try again.
+      internal static let label = Localization.tr("Localizable", "error_screen.subscriptions.label", fallback: "We were unable to load subscription offers. Check you Internet connection and try again.")
+    }
+  }
   internal enum FinishedCardCell {
     /// FINISHED
     internal static let finished = Localization.tr("Localizable", "finished_card_cell.finished", fallback: "FINISHED")
@@ -59,17 +75,17 @@ internal enum Localization {
     }
   }
   internal enum InAppPurchaseView {
-    /// Unlock full access to live information during the race and navigate the app freely for more exclusive content.
-    internal static let body = Localization.tr("Localizable", "in_app_purchase_view.body", fallback: "Unlock full access to live information during the race and navigate the app freely for more exclusive content.")
+    /// Unlock full access to navigate the app freely for more news content and driver info.
+    internal static let body = Localization.tr("Localizable", "in_app_purchase_view.body", fallback: "Unlock full access to navigate the app freely for more news content and driver info.")
     /// Slipstream Premium
     internal static let title = Localization.tr("Localizable", "in_app_purchase_view.title", fallback: "Slipstream Premium")
     internal enum Body {
       /// Something went wrong. Please try again to access all live information and get more exclusive content.
       internal static let error = Localization.tr("Localizable", "in_app_purchase_view.body.error", fallback: "Something went wrong. Please try again to access all live information and get more exclusive content.")
-      /// We are loading your amazing subscription. Thanks for trusting us!
-      internal static let loading = Localization.tr("Localizable", "in_app_purchase_view.body.loading", fallback: "We are loading your amazing subscription. Thanks for trusting us!")
-      /// Thanks for trusting us! We hope you enjoy your subscription.
-      internal static let success = Localization.tr("Localizable", "in_app_purchase_view.body.success", fallback: "Thanks for trusting us! We hope you enjoy your subscription.")
+      /// We are loading your subscription. Thanks for trusting us!
+      internal static let loading = Localization.tr("Localizable", "in_app_purchase_view.body.loading", fallback: "We are loading your subscription. Thanks for trusting us!")
+      /// Thank you for trusting us! We hope you enjoy your subscription.
+      internal static let success = Localization.tr("Localizable", "in_app_purchase_view.body.success", fallback: "Thank you for trusting us! We hope you enjoy your subscription.")
     }
     internal enum Button {
       /// Restore Purchases
@@ -160,8 +176,8 @@ internal enum Localization {
   }
   internal enum SeasonListView {
     internal enum Navigation {
-      /// Season 2023
-      internal static let title = Localization.tr("Localizable", "season_list_view.navigation.title", fallback: "Season 2023")
+      /// Season
+      internal static let title = Localization.tr("Localizable", "season_list_view.navigation.title", fallback: "Season")
     }
   }
   internal enum Session {
