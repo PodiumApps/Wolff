@@ -64,7 +64,6 @@ class PurchaseService: PurchaseServiceRepresentable {
 
                 case .reloadProducts:
                     getProducts()
-                    checkIfUserIsPremium(showSheet: false)
                     
                 case .checkPremium:
                     return
@@ -134,7 +133,7 @@ class PurchaseService: PurchaseServiceRepresentable {
                 Logger.userService.info("\(persistedUserId ?? "") canceled subscription")
             }
             
-            checkIfUserIsPremium(showSheet: false)
+            checkIfUserIsPremium(showSheet: true)
         }
     }
     
@@ -161,7 +160,7 @@ class PurchaseService: PurchaseServiceRepresentable {
                 await registerUser(isPremium: isPremium)
             }
 
-            state = .refreshed(isPremium: isPremium, showSheet: false)
+            state = .refreshed(isPremium: isPremium, showSheet: showSheet)
         }
     }
     
@@ -176,8 +175,6 @@ class PurchaseService: PurchaseServiceRepresentable {
                     products = packages
             }
         }
-
-        state = .refreshed(isPremium: false, showSheet: false)
     }
 }
 
