@@ -72,7 +72,7 @@ final class SettingsViewModel: SettingsViewModelRepresentable {
             .compactMap { purchaseService in
 
                 switch purchaseService {
-                case .refreshed(let isPremium, _):
+                case .refreshed(let isPremium, _, _):
                     return isPremium
                 default:
                     return nil

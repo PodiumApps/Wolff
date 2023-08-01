@@ -3,4 +3,367 @@
    uuid = "FDE9B8F8-A302-4A21-A67C-87C91E1A1112"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "76C6DB61-FB26-4F59-AD20-732BBC9259D1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Slipstream Watch App/Screens/IAPs/InAppPurchaseViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "setupBindings()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6BAA511D-E4DA-414E-85B9-FABF3E6C8AB1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Slipstream Watch App/Screens/IAPs/InAppPurchaseViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "setupBindings()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AC3C569F-8534-4610-81FC-DCE1AA415254"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Slipstream Watch App/Services/PurchaseService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "purchasedProducts"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "AC3C569F-8534-4610-81FC-DCE1AA415254 - 880652a5b49ececc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Slipstream_Watch_App.PurchaseService.refreshPurchasedProducts() async -&gt; ()"
+                  moduleName = "Slipstream Watch App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Slipstream%20Watch%20App/Services/PurchaseService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "892">
+               </Location>
+               <Location
+                  uuid = "AC3C569F-8534-4610-81FC-DCE1AA415254 - 880652a5b49eceed"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Slipstream_Watch_App.PurchaseService.refreshPurchasedProducts() async -&gt; ()"
+                  moduleName = "Slipstream Watch App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Slipstream%20Watch%20App/Services/PurchaseService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "872">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BAFB5CB2-D93F-46D6-AD84-865EE6F94C82"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Slipstream Watch App/Services/PurchaseService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "purchasedProducts"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "324BFC11-3C6C-437D-B17F-8DE62124A2B9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Slipstream Watch App/Services/PurchaseService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "registerUser()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "324BFC11-3C6C-437D-B17F-8DE62124A2B9 - 3645288148b44995"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Slipstream_Watch_App.PurchaseService.registerUser() async -&gt; ()"
+                  moduleName = "Slipstream Watch App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Slipstream%20Watch%20App/Services/PurchaseService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "212">
+               </Location>
+               <Location
+                  uuid = "324BFC11-3C6C-437D-B17F-8DE62124A2B9 - 69878ddf134a47b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Slipstream_Watch_App.PurchaseService.registerUser() async -&gt; ()"
+                  moduleName = "Slipstream Watch App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Slipstream%20Watch%20App/Extensions/LoggerExtension.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "9"
+                  endingLineNumber = "9"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "324BFC11-3C6C-437D-B17F-8DE62124A2B9 - 7b8a5b50b639b497"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Slipstream_Watch_App.PurchaseService.registerUser() async -&gt; ()"
+                  moduleName = "Slipstream Watch App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Slipstream%20Watch%20App/Services/PurchaseService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "152">
+               </Location>
+               <Location
+                  uuid = "324BFC11-3C6C-437D-B17F-8DE62124A2B9 - dc7cf7f5abf246fc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Slipstream_Watch_App.PurchaseService.registerUser() async -&gt; ()"
+                  moduleName = "Slipstream Watch App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Slipstream%20Watch%20App/Extensions/LoggerExtension.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "9"
+                  endingLineNumber = "9"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  uuid = "324BFC11-3C6C-437D-B17F-8DE62124A2B9 - a16ed478ecff5610"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Slipstream_Watch_App.PurchaseService.registerUser() async -&gt; ()"
+                  moduleName = "Slipstream Watch App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Slipstream%20Watch%20App/Services/PurchaseService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "172">
+               </Location>
+               <Location
+                  uuid = "324BFC11-3C6C-437D-B17F-8DE62124A2B9 - 3645288148b449b2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Slipstream_Watch_App.PurchaseService.registerUser() async -&gt; ()"
+                  moduleName = "Slipstream Watch App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Slipstream%20Watch%20App/Services/PurchaseService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "252">
+               </Location>
+               <Location
+                  uuid = "324BFC11-3C6C-437D-B17F-8DE62124A2B9 - 7b8a5b50b639b4b0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Slipstream_Watch_App.PurchaseService.registerUser() async -&gt; ()"
+                  moduleName = "Slipstream Watch App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Slipstream%20Watch%20App/Services/PurchaseService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "152">
+               </Location>
+               <Location
+                  uuid = "324BFC11-3C6C-437D-B17F-8DE62124A2B9 - a16ed478ecff5637"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Slipstream_Watch_App.PurchaseService.registerUser() async -&gt; ()"
+                  moduleName = "Slipstream Watch App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Slipstream%20Watch%20App/Services/PurchaseService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "172">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B1872ADE-1E29-4A58-9C0A-6D1A0A72161C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Slipstream Watch App/Models/User/User.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "createOrUpdate(isPremium:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B1872ADE-1E29-4A58-9C0A-6D1A0A72161C - 8d40254d0cdb117b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Slipstream_Watch_App.User.createOrUpdate(isPremium: Swift.Bool) -&gt; Slipstream_Watch_App.Resource&lt;Slipstream_Watch_App.User&gt;"
+                  moduleName = "Slipstream Watch App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Slipstream%20Watch%20App/Models/User/User.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "468">
+               </Location>
+               <Location
+                  uuid = "B1872ADE-1E29-4A58-9C0A-6D1A0A72161C - 8d40254d0cdb117b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Slipstream_Watch_App.User.createOrUpdate(isPremium: Swift.Bool) -&gt; Slipstream_Watch_App.Resource&lt;Slipstream_Watch_App.User&gt;"
+                  moduleName = "Slipstream Watch App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Slipstream%20Watch%20App/Models/User/User.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "584">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AF0D350B-DD40-4728-8733-46660D4A8285"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Slipstream Watch App/Models/User/User.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "createOrUpdate(isPremium:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "41D099B7-7E3E-461A-A865-6B996D53E686"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Slipstream Watch App/Services/PurchaseService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "registerUser()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "41D099B7-7E3E-461A-A865-6B996D53E686 - 3645288148b44a4f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Slipstream_Watch_App.PurchaseService.registerUser() async -&gt; ()"
+                  moduleName = "Slipstream Watch App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Slipstream%20Watch%20App/Services/PurchaseService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "120">
+               </Location>
+               <Location
+                  uuid = "41D099B7-7E3E-461A-A865-6B996D53E686 - 3645288148b44a4f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Slipstream_Watch_App.PurchaseService.registerUser() async -&gt; ()"
+                  moduleName = "Slipstream Watch App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Slipstream%20Watch%20App/Services/PurchaseService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "41D099B7-7E3E-461A-A865-6B996D53E686 - 3645288148b44a4f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Slipstream_Watch_App.PurchaseService.registerUser() async -&gt; ()"
+                  moduleName = "Slipstream Watch App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomasmamede/Developer/Pessoal/Wolff/Slipstream%20Watch%20App/Services/PurchaseService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

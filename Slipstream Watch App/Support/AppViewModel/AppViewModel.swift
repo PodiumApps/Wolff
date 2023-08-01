@@ -24,7 +24,7 @@ final class AppViewModel: AppViewModelRepresentable {
     @Published var presentPremiumSheet: Bool = false {
         didSet {
             if oldValue {
-                purchaseService.action.send(.dismissed)
+                purchaseService.action.send(.dismiss)
             }
         }
     }
@@ -73,7 +73,7 @@ final class AppViewModel: AppViewModelRepresentable {
         newsService.action.send(.fetchAll)
         liveSessionService.action.send(.fetchPositions)
 
-        purchaseService.action.send(.reloadProducts)
+        purchaseService.action.send(.loadProducts)
 
         let seasonListViewModel = SeasonListViewModel.make(navigation: navigation)
         let standingsViewModel = StandingsViewModel.make(navigation: navigation)
@@ -124,19 +124,19 @@ final class AppViewModel: AppViewModelRepresentable {
             .receive(on: DispatchQueue.main)
             .compactMap { [weak self] state in
                 
-                guard let self else { return nil }
+                guard let self else { return false }
                 
                 switch state {
                 case .refreshing:
-                    return nil
+                    return false
                 case .error:
                     self.state = .error(Localization.ErrorScreen.label)
-                    return nil
-                case .refreshed(let isPremium, let showSheet):
+                    return false
+                case .refreshed(let isPremium, _, let showSheet):
                     return !isPremium && showSheet
                 case .dismissed:
                     navigation.action.send(.removeLast)
-                    return nil
+                    return false
                 }
             }
             .assign(to: &$presentPremiumSheet)

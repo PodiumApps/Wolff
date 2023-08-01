@@ -45,7 +45,7 @@ struct InAppPurchaseView<ViewModel: InAppPurchaseViewModelRepresentable>: View {
 
                             ForEach(viewModel.products) { product in
 
-                                Button(product.label) {
+                                Button("\(product.displayPrice) / \(product.subscription!.subscriptionPeriod.unit.localizedDescription)") {
                                     viewModel.action.send(.purchase(product.id))
                                 }
                                 .foregroundColor(.white)

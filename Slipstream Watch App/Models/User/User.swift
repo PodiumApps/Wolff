@@ -32,7 +32,7 @@ extension User {
         
         guard let url = URL(string: "\(Global.url)/v1/user") else { fatalError("URL not found.") }
         
-        guard let persistedUserId  = UserDefaults.standard.string(forKey: UserDefaultsKeys.user.rawValue) else {
+        guard let persistedUserId = UserDefaults.standard.string(forKey: UserDefaultsKeys.user.rawValue) else {
             return .init(url: url, method: .get(accessToken: nil))
         }
         

@@ -1,24 +1,16 @@
 import Foundation
 import Combine
-import RevenueCat
+import StoreKit
 
 protocol InAppPurchaseViewModelRepresentable: ObservableObject {
     
-    var products: [InAppPurchaseViewModel.Product] { get }
+    var products: [Product] { get }
     var action: PassthroughSubject<InAppPurchaseViewModel.Action, Never> { get }
     var state: InAppPurchaseViewModel.State { get }
 }
 
 class InAppPurchaseViewModel: InAppPurchaseViewModelRepresentable {
-    
-    struct Product: Identifiable, Hashable {
-        
-        typealias ID = Identifier<Product>
-        
-        let id: ID
-        let label: String
-    }
-    
+
     @Published var products: [Product] = []
     var action = PassthroughSubject<InAppPurchaseViewModel.Action, Never>()
 
@@ -26,11 +18,9 @@ class InAppPurchaseViewModel: InAppPurchaseViewModelRepresentable {
         isPremium: false,
         label: Localization.InAppPurchaseView.body
     )
-    
-    
+
     private var purchaseService: PurchaseServiceRepresentable
     private var subscriptions = Set<AnyCancellable>()
-    private var packages = [Package]()
     
     init(purchaseService: PurchaseServiceRepresentable) {
         
@@ -42,35 +32,27 @@ class InAppPurchaseViewModel: InAppPurchaseViewModelRepresentable {
     // MARK: - Private
     private func setupBindings() {
         
-        purchaseService
-            .productsPublisher
+        purchaseService.statePublisher
             .receive(on: DispatchQueue.main)
-            .compactMap { [weak self] packages in
+            .compactMap { [weak self] purchaseService -> InAppPurchaseViewModel.State? in
 
                 guard let self else { return nil }
-                
-                self.packages = packages
-                
-                let products: [Product] = packages.reduce([], { partialResult, package in
-                    guard let period =  package.storeProduct.subscriptionPeriod else { return partialResult }
-                    
-                    return partialResult + [
-                        .init(
-                            id: .init(package.storeProduct.productIdentifier),
-                            label: "\(package.localizedPriceString) / \(period.localizedDescription)"
-                        )
-                    ]
-                })
 
-                if products.isEmpty {
+                switch purchaseService {
+                case .refreshed(let isPremium, let products, _):
 
-                    state = .error(label: Localization.ErrorScreen.Subscriptions.label)
+                    self.products = products
+                    return .results(isPremium: isPremium, label: Localization.InAppPurchaseView.body)
+                case .refreshing:
+                    return .loading(label: Localization.InAppPurchaseView.Body.loading)
+                case .error:
+                    return .error(label: Localization.InAppPurchaseView.Body.error)
+                case .dismissed:
                     return nil
                 }
-
-                return products
             }
-            .assign(to: &$products)
+            .assign(to: &$state)
+
         
         action
             .receive(on: DispatchQueue.main)
@@ -82,11 +64,11 @@ class InAppPurchaseViewModel: InAppPurchaseViewModelRepresentable {
                 
                 switch action {
                 case .restore:
-                    self.purchaseService.action.send(.restorePurchases)
+                    self.purchaseService.action.send(.restorePurchase)
                 case .purchase(let productId):
                     self.buyProduct(id: productId)
                 case .reload:
-                    self.purchaseService.action.send(.reloadProducts)
+                    self.purchaseService.action.send(.loadProducts)
                 }
             }
             .store(in: &subscriptions)
@@ -98,7 +80,7 @@ class InAppPurchaseViewModel: InAppPurchaseViewModelRepresentable {
             .compactMap { state in
                 
                 switch state {
-                case .refreshed(let isPremium, _):
+                case .refreshed(let isPremium, _, _):
                     let messageLabel = isPremium
                     ? Localization.InAppPurchaseView.Body.success
                     : Localization.InAppPurchaseView.body
@@ -114,17 +96,9 @@ class InAppPurchaseViewModel: InAppPurchaseViewModelRepresentable {
             .assign(to: &$state)
     }
     
-    private func buyProduct(id: Product.ID) {
-        
-        guard
-            let package = packages
-                .first(where: { $0.storeProduct.productIdentifier == id.string })
-        else {
-            state = .error(label: Localization.InAppPurchaseView.Body.error)
-            return
-        }
-        
-        purchaseService.action.send(.purchase(package))
+    private func buyProduct(id: String) {
+
+        purchaseService.action.send(.purchase(productID: id))
     }
 }
 
@@ -150,20 +124,5 @@ extension InAppPurchaseViewModel {
     static func make() -> InAppPurchaseViewModel {
         
         .init(purchaseService: ServiceLocator.shared.purchaseService)
-    }
-}
-
-fileprivate extension SubscriptionPeriod {
-    
-    var localizedDescription: String {
-        
-        let localization = Localization.InAppPurchaseView.SubscriptionPeriod.self
-        
-        switch unit {
-        case .day: return value > 1 ? localization.days : localization.day
-        case .week: return value > 1 ? localization.weeks : localization.week
-        case .month: return value > 1 ? localization.months : localization.month
-        case .year: return localization.year
-        }
     }
 }
